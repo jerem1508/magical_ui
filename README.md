@@ -6,6 +6,7 @@ sudo apt-get install apache2
 sudo apt-get install php
 
 ### CUrl module
+sudo apt-get install php-curl
 
 ## Database
 ### MySQL
@@ -21,5 +22,5 @@ sudo gedit /etc/apache2/apache2.conf
 sudo /etc/init.d/apache2 restart
 
 	Access : http://localhost/phpmyadmin
-	
+
 ### First script
