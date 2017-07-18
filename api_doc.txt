@@ -1,0 +1,26 @@
+GET
+api/metaparameters ???????? dans doc ?????
+
+---------------------------
+POST
+api/new/[normalize/link]
+description
+display_name
+internal
+
+---------------------------
+GET : 
+api/metadata/[normalize/link]/project_id
+
+---------------------------
+GET => DELETE
+api/delete/[normalize/link]/project_id
+
+---------------------------
+POST : upload un fichier
+api/normalize/upload/project_id
+file
+
+---------------------------
+GET : liste tous les projets
+api/projects/[normalize/link]

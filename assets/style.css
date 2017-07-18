@@ -1,0 +1,427 @@
+ 
+/*
+vert
+#A7CA48
+
+bleu
+#6097AC
+
+gris foncé
+#72817E
+
+gris clair
+#AFC5C3
+
+corail
+#FA5D58
+*/
+h1{
+  color: #222;
+  font-size: 50px;
+}
+hr{
+  border-bottom-color: #333;
+}
+.poudre{
+  position: fixed;
+  width: 100%;
+  top: -250px;
+  left: 0;
+  z-index: -1;  
+}
+.poudre_pos_home{
+  top: 0px;
+}
+
+.steps{
+	display: inline-block;
+}
+.steps .step{
+  display: inline-block;
+  background-color: #f5f5f5;
+  width: 200px;
+  height: 80px;
+  float: left;
+  padding-left: 10px;
+  border-bottom: 5px solid #aaa;
+}
+.steps .active{
+  border-color: #FA5D58;
+}
+.steps .title{
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #777;
+}
+.steps .accueil{
+  border-radius: 5px 0 0 5px; 
+  border-right: 1px solid #aaa;
+  border-bottom: 0;
+  width: 170px;
+
+}
+
+
+.menu{
+  background-color: #222;
+  min-height: 100vh;
+}
+
+
+.check_ok{
+  left: 10px;
+  color: green;
+}
+
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+/* Surcharge bootstrap */
+
+.navbar{
+  border-radius: 0 0 4px 0 ;
+  margin-bottom: 0;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #FA5D58;
+  border-color: #FA5D58;
+}
+.btn-success:focus,
+.btn-success.focus {
+  color: #fff;
+  background-color: #FA5D58;
+  border-color: #122b40;
+}
+.btn-success:hover {
+  color: #fff;
+  background-color: #FA5D58;
+  border-color: #204d74;
+}
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: #FA5D58;
+  border-color: #204d74;
+}
+.btn-success:active:hover,
+.btn-success.active:hover,
+.open > .dropdown-toggle.btn-success:hover,
+.btn-success:active:focus,
+.btn-success.active:focus,
+.open > .dropdown-toggle.btn-success:focus,
+.btn-success:active.focus,
+.btn-success.active.focus,
+.open > .dropdown-toggle.btn-success.focus {
+  color: #fff;
+  background-color: #FA5D58;
+  border-color: #122b40;
+}
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+  background-image: none;
+}
+.btn-success.disabled,
+.btn-success[disabled],
+fieldset[disabled] .btn-success,
+.btn-success.disabled:hover,
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success:hover,
+.btn-success.disabled:focus,
+.btn-success[disabled]:focus,
+fieldset[disabled] .btn-success:focus,
+.btn-success.disabled.focus,
+.btn-success[disabled].focus,
+fieldset[disabled] .btn-success.focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+fieldset[disabled] .btn-success:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active,
+fieldset[disabled] .btn-success.active {
+  background-color: #2B2F32;
+  border-color: #000;
+}
+.btn-success .badge {
+  color: #2B2F32;
+  background-color: #fff;
+}
+
+
+.progress-bar-success2{
+  background-color: #6097AC;
+}
+.btn-success2 {
+  color: #fff;
+  background-color: #6097AC;
+  border-color: #6097AC;
+}
+.btn-success2:focus,
+.btn-success2.focus {
+  color: #fff;
+  background-color: #6097AC;
+  border-color: #122b40;
+}
+.btn-success2:hover {
+  color: #fff;
+  background-color: #6097AC;
+  border-color: #204d74;
+}
+.btn-success2:active,
+.btn-success2.active,
+.open > .dropdown-toggle.btn-success2 {
+  color: #fff;
+  background-color: #6097AC;
+  border-color: #204d74;
+}
+.btn-success2:active:hover,
+.btn-success2.active:hover,
+.open > .dropdown-toggle.btn-success2:hover,
+.btn-success2:active:focus,
+.btn-success2.active:focus,
+.open > .dropdown-toggle.btn-success2:focus,
+.btn-success2:active.focus,
+.btn-success2.active.focus,
+.open > .dropdown-toggle.btn-success2.focus {
+  color: #fff;
+  background-color: #6097AC;
+  border-color: #122b40;
+}
+.btn-success2:active,
+.btn-success2.active,
+.open > .dropdown-toggle.btn-success2 {
+  background-image: none;
+}
+.btn-success2.disabled,
+.btn-success2[disabled],
+fieldset[disabled] .btn-success2,
+.btn-success2.disabled:hover,
+.btn-success2[disabled]:hover,
+fieldset[disabled] .btn-success2:hover,
+.btn-success2.disabled:focus,
+.btn-success2[disabled]:focus,
+fieldset[disabled] .btn-success2:focus,
+.btn-success2.disabled.focus,
+.btn-success2[disabled].focus,
+fieldset[disabled] .btn-success2.focus,
+.btn-success2.disabled:active,
+.btn-success2[disabled]:active,
+fieldset[disabled] .btn-success2:active,
+.btn-success2.disabled.active,
+.btn-success2[disabled].active,
+fieldset[disabled] .btn-success2.active {
+  background-color: #2B2F32;
+  border-color: #000;
+}
+.btn-success2 .badge {
+  color: #2B2F32;
+  background-color: #fff;
+}
+
+.btn-success3 {
+  color: #fff;
+  background-color: #A7CA48;
+  border-color: #A7CA48;
+}
+.btn-success3:focus,
+.btn-success3.focus {
+  color: #fff;
+  background-color: #A7CA48;
+  border-color: #122b40;
+}
+.btn-success3:hover {
+  color: #fff;
+  background-color: #A7CA48;
+  border-color: #204d74;
+}
+.btn-success3:active,
+.btn-success3.active,
+.open > .dropdown-toggle.btn-success2 {
+  color: #fff;
+  background-color: #A7CA48;
+  border-color: #204d74;
+}
+.btn-success3:active:hover,
+.btn-success3.active:hover,
+.open > .dropdown-toggle.btn-success2:hover,
+.btn-success3:active:focus,
+.btn-success3.active:focus,
+.open > .dropdown-toggle.btn-success2:focus,
+.btn-success3:active.focus,
+.btn-success3.active.focus,
+.open > .dropdown-toggle.btn-success2.focus {
+  color: #fff;
+  background-color: #A7CA48;
+  border-color: #122b40;
+}
+.btn-success3:active,
+.btn-success3.active,
+.open > .dropdown-toggle.btn-success2 {
+  background-image: none;
+}
+.btn-success3.disabled,
+.btn-success3[disabled],
+fieldset[disabled] .btn-success2,
+.btn-success3.disabled:hover,
+.btn-success3[disabled]:hover,
+fieldset[disabled] .btn-success2:hover,
+.btn-success3.disabled:focus,
+.btn-success3[disabled]:focus,
+fieldset[disabled] .btn-success2:focus,
+.btn-success3.disabled.focus,
+.btn-success3[disabled].focus,
+fieldset[disabled] .btn-success2.focus,
+.btn-success3.disabled:active,
+.btn-success3[disabled]:active,
+fieldset[disabled] .btn-success2:active,
+.btn-success3.disabled.active,
+.btn-success3[disabled].active,
+fieldset[disabled] .btn-success2.active {
+  background-color: #2B2F32;
+  border-color: #000;
+}
+.btn-success3 .badge {
+  color: #2B2F32;
+  background-color: #fff;
+}
+
+
+
+
+
+
+.breadcrumb {
+  text-align: center;
+  /*centering*/
+  display: inline-block;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  border-radius: 5px;
+  /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+  counter-reset: flag; 
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  outline: none;
+  display: block;
+  float: left;
+  font-size: 12px;
+  line-height: 36px;
+  color: white;
+  /*need more margin on the left of links to accomodate the numbers*/
+  padding: 0 10px 0 60px;
+  background: #666;
+  background: linear-gradient(#666, #333);
+  position: relative;
+}
+/*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+.breadcrumb a:first-child {
+  padding-left: 46px;
+  border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+}
+.breadcrumb a:first-child:before {
+  left: 14px;
+}
+.breadcrumb a:last-child {
+  border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+  padding-right: 20px;
+}
+
+/*hover/active styles*/
+.breadcrumb a.active, .breadcrumb a:hover{
+  background: #333;
+  background: linear-gradient(#333, #000);
+  color: black;
+}
+.breadcrumb a.active:after, .breadcrumb a:hover:after {
+  background: #333;
+  background: linear-gradient(135deg, #333, #000);
+}
+
+/*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+.breadcrumb a:after {
+  content: '';
+  position: absolute;
+  top: 0; 
+  right: -18px; /*half of square's length*/
+  /*same dimension as the line-height of .breadcrumb a */
+  width: 36px; 
+  height: 36px;
+  /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's: 
+  length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+  if diagonal required = 1; length = 1/1.414 = 0.707*/
+  transform: scale(0.707) rotate(45deg);
+  /*we need to prevent the arrows from getting buried under the next link*/
+  z-index: 1;
+  /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+  background: #666;
+  background: linear-gradient(135deg, #666, #333);
+  /*stylish arrow design using box shadow*/
+  box-shadow: 
+    2px -2px 0 2px rgba(0, 0, 0, 0.4), 
+    3px -3px 0 2px rgba(255, 255, 255, 0.1);
+  /*
+    5px - for rounded arrows and 
+    50px - to prevent hover glitches on the border created using shadows*/
+  border-radius: 0 5px 0 50px;
+}
+/*we dont need an arrow after the last link*/
+.breadcrumb a:last-child:after {
+  content: none;
+}
+/*we will use the :before element to show numbers*/
+.breadcrumb a:before {
+  content: counter(flag);
+  counter-increment: flag;
+  /*some styles now*/
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin: 8px 0;
+  position: absolute;
+  top: 0;
+  left: 30px;
+  background-color: #444;
+  background: linear-gradient(#444, #222);
+  font-weight: bold;
+}
+
+
+.flat a, .flat a:after {
+  background: #fff;
+  color: #777;
+  transition: all 0.5s;
+}
+.flat a:before {
+  background: #eee;
+  box-shadow: 0 0 0 1px #ccc;
+}
+.flat .active:before {
+  background: #FA5D58;
+  color: black;
+}
+
+.flat .done:before {
+  background: #A7CA48;
+}
+.flat .done {
+  color: black;
+}
+.flat .todo:before {
+  background: #eee;
+}
+
+
+.flat a:hover, .flat a.active, 
+.flat a:hover:after, .flat a.active:after{
+  background: #fff;
+}
