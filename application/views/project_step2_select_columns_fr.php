@@ -139,6 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
 	
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
 <script type="text/javascript">
 

@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="well">
         <div class="row">
             <div class="col-md-4">
-                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
+                <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
             </div>
             <div class="col-md-4">
                 <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
@@ -132,7 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         {
         ?>
             <div class="col-md-4 text-right">
-                <button class="btn btn-success" id="bt_next" disabled>Voir mon tableau de bord >></button>
+                <button class="btn btn-success" id="bt_next">Voir mon tableau de bord >></button>
             </div>
         <?php
         }
@@ -150,9 +150,91 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
 <script type="text/javascript">
+    function write_reports(module_name) {
+        // Download config
+        //MINI__source_1.csv__run_info.json
+        //MINI__source_1.csv
+        var tparams = {
+            "data_params": {
+                "module_name": module_name,
+                "file_name": file_name + "__run_info.json"
+            }
+        }
+
+        $.ajax({
+            type: 'post',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: '<?php echo BASE_API_URL;?>' + '/api/download_config/normalize/<?php echo $_SESSION["project_id"];?>/',
+            data: JSON.stringify(tparams),
+            success: function (result) {
+
+                if(result.error){
+                    console.log("API error - download_config");
+                    console.log(result.error);
+                }
+                else{
+                    console.log("success - download_config");
+                    console.dir(result);
+
+                    $('#report').css('display', 'inherit');
+                    write_report_html(result.result.mod_count, "report_" + module_name, true);
+                }
+            },
+            error: function (result, status, error){
+                console.log("error");
+                console.log(result);
+                err = true;
+            }
+        });// /ajax - Download config
+    }
     
 // Init - Ready
     $(function() {
+
+
+
+        $("#dl_file").click(function(){
+            tparams = {
+                "data_params": {
+                    "module_name": "concat_with_init",
+                    "file_name": file_name
+                }
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '<?php echo BASE_API_URL;?>' + '/api/download/normalize/<?php echo $_SESSION['project_id'];?>',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(tparams),
+                success: function (result_dl) {
+                    if(result_dl.error){
+                        console.log("API error - dl");
+                        console.dir(result_dl);
+                    }
+                    else{
+                        console.log("success - dl");
+                        console.dir(result_dl);
+
+                        // DL du fichier
+                        var blob=new Blob([result_dl]);
+                        var link=document.createElement('a');
+                        link.href=window.URL.createObjectURL(blob);
+                        link.download=file_name;
+                        link.click();
+
+                    }
+                },
+                error: function (result_dl, status, error){
+                    console.log("error");
+                    console.log(result_dl);
+                    err = true;
+                    clearInterval(handle);
+                }
+            });// /ajax
+
+
+        });
 
         $.ajax({
             type: 'get',

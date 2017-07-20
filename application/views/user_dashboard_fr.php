@@ -157,6 +157,7 @@ $result = preg_grep('~' . $input . '~', $data);
 
 						function get_progress_html($bs_color, $ratio, $step, $project_id)
 						{
+
 							$html = '<div 
 										class="progress-bar progress-bar-'.$bs_color.' step '.$step.'" 
 										role="progressbar" 
@@ -178,17 +179,21 @@ $result = preg_grep('~' . $input . '~', $data);
 								$lib_todo = "Poursuivre";
 															 
 								$html = '<button 
-											class="btn btn-xs btn-success btn_tdb" 
+											class="btn btn-xs btn-warning btn_tdb" 
 											onclick="load_step(\''.$step_todo.'\', \''.$project_id.'\');">
 											Poursuivre
 										</button>';
 							}
 							else{
-								$html = '<button class="btn btn-xs btn-success btn_tdb">Rapport</button>';	
+								$html = '<button 
+											class="btn btn-xs btn-success3 btn_tdb" 
+											onclick="load_step(\'concat_with_init\', \''.$project_id.'\');">
+											Rapport
+										</button>';
 							}
 
 							return $html;
-						}
+						} // /get_lien_html()
 						
 						$tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];
 						$nb_steps = count($tab_steps);
@@ -197,14 +202,14 @@ $result = preg_grep('~' . $input . '~', $data);
 						foreach ($normalized_projects as $project) {
 							$steps_html = '<div class="progress">';
 							$found_step_todo = false;
-							$step_toto = "";
+							$step_todo = "";
 							foreach ($tab_steps as $step) {
 								$bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?"success2":"warning";
 								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
 
 								if(!$found_step_todo){
 									if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){
-										$step_toto = $step;
+										$step_todo = $step;
 										$found_step_todo = true;
 									}
 								}
@@ -221,7 +226,7 @@ $result = preg_grep('~' . $input . '~', $data);
 							echo '<td>'.get_status($project['public_status']).'</td>';
 							echo '<td>'.$project['file'].'</td>';							
 							echo '<td class="text-center">'.$steps_html.'</td>';
-							echo '<td class="text-center">'.get_lien_html($step_toto, $project['project_id']).'</td>';
+							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id']).'</td>';
 							echo '</tr>';
 						}
 						?>
@@ -284,8 +289,13 @@ $result = preg_grep('~' . $input . '~', $data);
 	
 </div><!--/container-->
 
+
 <script type="text/javascript">
+
+
 	$(function() {
+
+
 		<?php
 		if(count($normalized_projects) > 0){
 		?>

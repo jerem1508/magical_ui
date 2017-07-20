@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
     <style type="text/css">
         #result, #msg_danger, #create_project_ok, #upload_file_progress, #report{
@@ -497,8 +498,7 @@ $(function () {
                     $('#report').css('display', 'inherit');
                     $('#show_report_ok').css('visibility', 'visible');
 
-                    //$('#steps').slideToggle(600);
-
+                    go_to('report');
                     
                 },
                 progressall: function (e, data) {
