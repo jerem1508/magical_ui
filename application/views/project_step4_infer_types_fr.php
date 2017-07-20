@@ -21,6 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
     <style type="text/css">
         #msg_danger, #result, #report, #steps, #wait{
@@ -179,35 +180,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
         </ul>
     </div>
+
     <div class="well" id="report">
         <h2>Rapport : </h2>
         <div class="row">
             <div class="col-md-3 text-center">
                 <img src="<?php echo base_url('assets/img/report.png');?>" style="height: 150px;">
             </div>
-            <div class="col-md-3">
-                <div class="panel panel-info">
-                	<div class="panel-heading">
-                		Temps de traitement
-                	</div>
-                  <div class="panel-body text-center">
-                    <h2 style="display: inline;"><span id="elapsed_time"></span></h2> <i>millisecondes</i>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-            	<div id="tab_report"></div>
+            <div class="col-md-9">
+            	<h3>Modifications effectuées</h3>
+            	<div id="tab_reports"></div>
+            	<!--
             	<a id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier</a>
+            	-->
             </div>
-
         </div><!-- /row-->
-
 	    <div class="row">
 	        <div class="col-md-12 text-right">
 	            <button class="btn btn btn-success" id="bt_next" disabled>Etape suivante : Traitement et téléchargement >></button>
 	        </div>
 	    </div><!-- /row-->
     </div><!-- /well /report-->
+
 </div><!--/container-->
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Sélection des types" id="modal_types_select">
@@ -757,39 +751,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								                    $('#report').css('display', 'inherit');
 								                    $("#bt_next").prop("disabled", false);
 
-								                    var modified_columns = result2.result.modified_columns;
-
-								                    var html = '<table class="table table-responsive table-condensed table-striped">';
-								                    var t_lignes = new Array();
-
-								                    for (var i = 0; i < modified_columns.length; i++) {
-								                    	var liste_values = result2.result.replace_num.columns[modified_columns[i]];
-								                    	
-								                    	console.log(modified_columns[i]);
-
-								                    	var total = 0;
-								                    	var t_lib_values = new Array();
-								                    	for (value_name in liste_values) {
-								                    		console.log(value_name);
-								                    		t_lib_values.push(value_name);
-								                    		total += result2.result.replace_num.columns[modified_columns[i]][value_name];
-
-								                    		console.log(result2.result.replace_num.columns[modified_columns[i]][value_name]);
-								                    	}
-								                    	var ligne_html = '<tr>';
-								                    	ligne_html += '<td>'+modified_columns[i]+'</td>';
-								                    	ligne_html += '<td>'+total+' lignes modifiées ('+t_lib_values.join(",")+')</td>';
-								                    	ligne_html += '</tr>';
-								                    	t_lignes.push(ligne_html);
-								                    }
-
-								                    for (var i = 0; i < t_lignes.length; i++) {
-								                    	html += t_lignes[i];
-								                    }
-
-								                    html += '</table>';
-								                    $("#tab_report").html(html);
-
+                                					write_report_html(result2.result.mod_count, "tab_reports", true);
 													
 												}
 												else{
@@ -797,12 +759,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								                }
 
-
-
-
-
-
-					                
 					            },
 					            error: function (result2, status, error){
 					                console.log("error");

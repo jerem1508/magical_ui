@@ -1,3 +1,4 @@
+/*
 function set_sample_html(nb_rows=10, random=false, filter=null, module_name="INIT", div) {
 	var obj_rows = null;
 
@@ -24,13 +25,6 @@ function set_sample_html(nb_rows=10, random=false, filter=null, module_name="INI
 			else{
                 console.log("success");
                 console.dir(result);
-				/*
-				Object
-				file_name:"ref.csv"
-				module_name:"INIT"
-				project_id:"0899384fa6f44c0afb7d38e0c07f89df"
-				project_type:"normalize"
-				*/
 
 	            tparams = {
 	            	"data_params": {
@@ -94,4 +88,65 @@ function set_sample_html(nb_rows=10, random=false, filter=null, module_name="INI
     });// /ajax
 
 	return obj_rows;	
+}
+*/
+
+function write_report_html(modified_columns, cible, auto_scroll)
+{
+	var html = '<div><table class="table table-responsive table-condensed table-striped">';
+	console.log(modified_columns);
+	console.dir(modified_columns);
+	for(element in modified_columns){
+		html += '<tr>';
+		html += '<td>' + element + '</td>';
+		html += '<td>' + modified_columns[element] + '</td>';
+		html += '</tr>';
+	}
+	html += '</table></div>';
+
+	$("#" + cible).html($("#" + cible).html() + html);
+
+	// Gestion du scroll
+	// TODO
+}
+
+
+function write_reports(module_name) {
+    // Download config
+    //MINI__source_1.csv__run_info.json
+    //MINI__source_1.csv
+    var tparams = {
+        "data_params": {
+            "module_name": module_name,
+            "file_name": file_name + "__run_info.json"
+        }
+    }
+    console.dir(tparams);
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/normalize/<?php echo $_SESSION['project_id'];?>/',
+        data: JSON.stringify(tparams),
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - download_config");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - download_config");
+                console.dir(result);
+
+                $('#report').css('display', 'inherit');
+                write_report_html(result.result.mod_count, "report_" + module_name, true);
+            }
+        },
+        error: function (result, status, error){
+            console.log("error");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - Download config
 }

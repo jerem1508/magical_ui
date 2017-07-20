@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Normalisation</title>
+    <title>Normalisation</title>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/jquery.dataTables.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/jquery.dataTables.min.css');?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
 
     <link rel="stylesheet" href="<?php echo base_url('assets/style_fu.css');?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/jquery.fileupload.css');?>">
@@ -21,11 +21,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         #show_report_ok, #upload_file_ok, #check_file_ok{
             visibility: hidden;
         }
-		@media (min-width: 992px) {
-		    .modal-lg {
-		        width: 1100px;
-		    }
-		}
+        @media (min-width: 992px) {
+            .modal-lg {
+                width: 1100px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -33,14 +33,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container">
-	<div class="row">
-		<div class="col-xs-2" style="margin-top: 20px;">
-			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.png');?>" class="img-responsive">
-		</div>
-		<div class="col-xs-8 text-center">
-			<h1>Magical_ui</h1>
-		</div>
-		<div class="col-xs-2 text-right" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-xs-2" style="margin-top: 20px;">
+            <img src="<?php echo base_url('assets/img/logo-RF-3@2x.png');?>" class="img-responsive">
+        </div>
+        <div class="col-xs-8 text-center">
+            <h1>Magical_ui</h1>
+        </div>
+        <div class="col-xs-2 text-right" style="margin-top: 20px;">
             <div class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 22px; color: #000;">
                     <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
@@ -61,35 +61,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <li><a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;&nbsp;English</a></li>
                 </ul>
             </div><!-- /dropdown-->
-		</div>
-	</div>
+        </div>
+    </div>
 
-	<hr>
+    <hr>
 
     <div class="text-center">
         <div class="breadcrumb flat">
             <!--<a href="#" class="done">Sélection du fichier</a>-->
             <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
-            <a href="#" class="active">Sélection des colonnes</a>
-            <a href="#" class="todo">Valeurs manquantes</a>
-            <a href="#" class="todo">Détection des types</a>
+            <a href="<?php echo base_url("index.php/Project/load_step2_select_columns");?>" class="done">Sélection des colonnes</a>
+            <a href="<?php echo base_url("index.php/Project/load_step3_missing_values");?>" class="done">Valeurs manquantes</a>
+            <a href="#" class="active">Détection des types</a>
             <a href="#" class="todo">Téléchargement</a>
         </div>
     </div>
 
-	<div class="well">
-		<h2><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>
-
-		<div class="row">
-			<div class="col-xs-12 well" style="background-color: #fff">
-				<h3>Affichage du rapport</h3>
-
-			</div>
-		</div>
+    <div class="well">
+        <h2><span id="project_name"></span> : <i>Recherche des valeurs manquantes</i></h2>
     </div><!-- /well-->
+
+    <div class="well" id="report">
+        <h2>Rapport : </h2>
+        <div class="row">
+            <div class="col-md-3 text-center">
+                <img src="<?php echo base_url('assets/img/report.png');?>" style="height: 150px;">
+            </div>
+            <div class="col-md-9">
+                <h3>Modifications effectuées</h3>
+                <div id="tab_reports"></div>
+                <!--
+                <a id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier</a>
+                -->
+            </div>
+
+        </div><!-- /row-->
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button class="btn btn btn-success" id="bt_next">Etape suivante : Traitement et téléchargement >></button>
+            </div>
+        </div><!-- /row-->
+    </div><!-- /well /report-->
 </div><!--/container-->
-
-
 
 <script type="text/javascript" src="<?php echo base_url('assets/jquery-3.2.1.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js');?>"></script>
@@ -97,3 +111,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
+
+<script type="text/javascript">
+    
+// Init - Ready
+    $(function() {
+    
+        $("#bt_next").click(function(){
+            window.location.href = "<?php echo base_url('index.php/Project/concat_with_init/'.$_SESSION['project_id']);?>";
+        });
+
+        $.ajax({
+            type: 'get',
+            url: '<?php echo BASE_API_URL;?>' + '/api/metadata/normalize/<?php echo $_SESSION['project_id'];?>',
+            success: function (result) {
+
+                if(result.error){
+                    console.log("API error");
+                    console.log(result.error);
+                }
+                else{
+                    console.log("success - metadata");
+                    console.dir(result);
+
+                    metadata = result.metadata;
+
+                    $("#project_name").html(metadata.display_name);
+                }
+            },
+            error: function (result, status, error){
+                console.log(result);
+                console.log(status);
+                console.log(error);
+                err = true;
+            }
+        });// /ajax metadata
+
+
+        var tparams = {
+            "module_name": "recode_types"
+        }
+
+        $.ajax({
+            type: 'post',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/<?php echo $_SESSION['project_id'];?>',
+            data: JSON.stringify(tparams),
+            success: function (result) {
+
+                if(result.error){
+                    console.log("API error - last_written");
+                    console.log(result.error);
+                }
+                else{
+                    console.log("success - last_written");
+                    console.dir(result);
+
+                    // Download config
+                    //MINI__source_1.csv__run_info.json
+                    //MINI__source_1.csv
+                    var tparams = {
+                        "data_params": {
+                            "module_name": "recode_types",
+                            "file_name": result.file_name + "__run_info.json"
+                        }
+                    }
+                    console.dir(tparams);
+
+                    $.ajax({
+                        type: 'post',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/normalize/<?php echo $_SESSION['project_id'];?>/',
+                        data: JSON.stringify(tparams),
+                        success: function (result) {
+
+                            if(result.error){
+                                console.log("API error - download_config");
+                                console.log(result.error);
+                            }
+                            else{
+                                console.log("success - download_config");
+                                console.dir(result);
+
+                                $('#report').css('display', 'inherit');
+                                write_report_html(result.result.mod_count, "tab_reports", true);
+                            }
+                        },
+                        error: function (result, status, error){
+                            console.log("error");
+                            console.log(result);
+                            err = true;
+                        }
+                    });// /ajax - Download config
+                }
+            },
+            error: function (result, status, error){
+                console.log("error");
+                console.log(result);
+                err = true;
+            }
+        });// /ajax - last_written
+
+
+
+    }); // /ready
+
+</script>

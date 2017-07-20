@@ -106,6 +106,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <span>Sélection du fichier</span>
                 <input id="fileupload" type="file" name="file">
             </span>
+
             <span id="file_name"></span>
             <button id="envoyer" style="display: none;"></button>
 
@@ -119,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn btn-success" id="bt_normalizer">Créer le projet</button>
+                    <button class="btn btn btn-success" id="bt_normalizer" disabled="disabled">Créer le projet</button>
                 </div>
             </div>
 		</form>
@@ -450,6 +451,13 @@ $(function () {
             });
 
 
+            $(".fileinput-button").click(function(){
+                $(".fileinput-button").prop("disabled", true);
+
+                $("#bt_normalizer").prop("disabled", false);
+            });
+
+
 			$("#bt_next").click(function(e){
 				valid_project();// maj du statut + affichage de l'etape suivante
 			});
@@ -475,6 +483,7 @@ $(function () {
                     console.log("data");
                     console.log(data);
 
+                    $('#progress').css('display', 'none');
                     $('#upload_file_ok').css('visibility', 'visible');
                     $('#check_file_ok').css('visibility', 'visible');
 

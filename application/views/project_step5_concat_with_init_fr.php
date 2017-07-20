@@ -21,9 +21,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
     <style type="text/css">
-        #msg_danger, #result, #report, #steps, #wait{
+        #msg_danger, #result, #reports, #steps, #wait{
             /*On masque par défaut*/
             display: none;
         }
@@ -94,11 +95,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="text-center">
         <div class="breadcrumb flat">
             <!--<a href="#" class="done">Sélection du fichier</a>-->
-            <a href="<?php echo base_url("index.php/Project/normalize/".$_SESSION['project_id']);?>" class="done">Sélection du fichier</a>
-            <a href="<?php echo base_url("index.php/Project/load_step2_select_columns");?>" class="done">Sélection des colonnes</a>
-            <a href="<?php echo base_url("index.php/Project/load_step3_missing_values");?>" class="done">Valeurs manquantes</a>
-            <a href="#" class="done">Détection des types</a>
-            <a href="#" class="active">Traitement & Téléchargement</a>
+            <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
+            <a href="<?php echo base_url("index.php/Project/add_selected_columns");?>" class="done">Sélection des colonnes</a>
+            <a href="<?php echo base_url("index.php/Project/replace_mvs");?>" class="done">Valeurs manquantes</a>
+            <a href="<?php echo base_url("index.php/Project/recode_types");?>" class="done">Détection des types</a>
+            <a href="#" class="active">Téléchargement</a>
         </div>
     </div>
 
@@ -120,11 +121,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 
 		<script type="text/javascript">
-
-		
-
-
-
 
 			$("#bt_concat_with_init").click(function(){
 				// affichage de la div de "chargement" + trt des bt
@@ -184,60 +180,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
         </ul>
     </div>
-
-    <div class="well" id="report_no_mini">
-        <h2>Rapports : </h2>
-        <div class="row">
-            <div class="col-md-12">
-          		<h4>Etape 1 : Sélection des colonnes</h4>
-            </div>
-            <div class="row">
-            	<div class="col-md-6"><b>Colonnes initiales</b></div>
-            	<div class="col-md-6"><b>Colonnes sélectionnées</b></div>
-            </div>
-            <div class="row">
-            	<div class="col-md-6" id="report_original_columns"></div>
-            	<div class="col-md-6" id="report_selected_columns"></div>
-            </div>
-        </div><!-- /row-->
-        <div class="row">
-            <div class="col-md-12">
-          		<h4>Etape 2 : Recherche des valeurs manquantes</h4>
-            </div>
-            <div id="report_replace_mvs"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-          		<h4>Etape 3 : Détection des types</h4>
-            </div>
-            <div id="report_recode_types"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-            	<button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
-            </div>
-            <div class="col-md-12">
-            	<a id="dl_conf"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</a>
-            </div>
-        </div><!-- /row-->
-
-
-		<?php
-		if(isset($_SESSION['user']))
-		{
-		?>
-	    <div class="row">
-	        <div class="col-md-12 text-right">
-	            <button class="btn btn-success" id="bt_next" disabled>Voir mon tableau de bord >></button>
-	        </div>
-	    </div><!-- /row-->
-		<?php
-		}
-		?>
-    </div><!-- /well /report-->
 </div><!--/container-->
 
+<div class="container" id="reports">
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Etape 1 : Sélection des colonnes</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-6"><b>Colonnes initiales</b></div>
+                <div class="col-md-6"><b>Colonnes sélectionnées</b></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" id="report_original_columns"></div>
+                <div class="col-md-6" id="report_selected_columns"></div>
+            </div>
+        </div><!-- /row-->
+    </div><!-- /well /report-->
 
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Etape 2 : Recherche des valeurs manquantes - <i>Modifications effectuées</i></h4>
+            </div>
+            <div id="report_replace_mvs"></div>
+        </div><!-- /row-->
+    </div><!-- /well /report-->
+
+    <div class="well">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Etape 3 : Détection des types - <i>Modifications effectuées</i></h4>
+            </div>
+            <div id="report_recode_types"></div>
+        </div><!-- /row-->
+    </div><!-- /well /report-->
+
+    <div class="well">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+            </div>
+
+
+        <?php
+        if(isset($_SESSION['user']))
+        {
+        ?>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-success" id="bt_next" disabled>Voir mon tableau de bord >></button>
+            </div>
+        <?php
+        }
+        ?>
+        </div><!-- /row-->
+    </div><!-- /well /report-->
+</div><!--/container-->
 
 
 
@@ -281,8 +283,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         module_name = result.module_name;
                         file_name = result.file_name;
 
-
-					
+			
                         if(metadata.has_mini){
                         	// File_name sans MINI__
                         	file_name = file_name.substr(6);	
@@ -324,8 +325,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									                    console.dir(result);
 
 									                    // Arret de l'animation recherche
-									                    $("#wait").css("display","none");
+                                                        $("#wait").css("display","none");
+									                    
+                                                        $("#reports").css("display","inherit");
+
+                                                        write_reports("replace_mvs");
+
+                                                        write_reports("recode_types");
+
 									                /*    
+                                                        write_report_html(result.result.replace_mvs.mod_count, "report_replace_mvs #tab_reports", true);
+
 									                    write_report('select_columns');
 									                    write_report('replace_mvs');
 									                    write_report('recode_types');

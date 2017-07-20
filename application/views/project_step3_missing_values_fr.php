@@ -21,6 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
 
 
 
@@ -189,19 +190,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-3 text-center">
                 <img src="<?php echo base_url('assets/img/report.png');?>" style="height: 150px;">
             </div>
-            <div class="col-md-3">
-                <div class="panel panel-info">
-                	<div class="panel-heading">
-                		Temps de traitement
-                	</div>
-                  <div class="panel-body text-center">
-                    <h2 style="display: inline;"><span id="elapsed_time"></span></h2> <i>millisecondes</i>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-            	<div id="tab_report"></div>
+            <div class="col-md-9">
+            	<h3>Modifications effectuées</h3>
+            	<div id="tab_reports"></div>
+            	<!--
             	<a id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier</a>
+            	-->
             </div>
 
         </div><!-- /row-->
@@ -259,20 +253,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			valid();
 		});
 
-
-		function write_report_html(obj_to_print, auto_scroll)
-		{
-			var html = '<div><table class="table table-responsive table-condensed table-striped">';
-
-			html += "toto";
-
-			html += '</table></div>';
-
-			$("#report").html($("#report").html() + html);
-
-			// Gestion du scroll
-			// TODO
-		}
 
 		function chargement(err) {
 
@@ -709,41 +689,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						                    $('#report').css('display', 'inherit');
 						                    $("#bt_next").prop("disabled", false);
 
-write_report_html("","");
-/*
-						                    var modified_columns = result2.result.modified_columns;
 
-						                    var html = '<table class="table table-responsive table-condensed table-striped">';
-						                    var t_lignes = new Array();
-
-						                    for (var i = 0; i < modified_columns.length; i++) {
-						                    	var liste_values = result2.result.replace_num.columns[modified_columns[i]];
-						                    	
-						                    	console.log(modified_columns[i]);
-
-						                    	var total = 0;
-						                    	var t_lib_values = new Array();
-						                    	for (value_name in liste_values) {
-						                    		console.log(value_name);
-						                    		t_lib_values.push(value_name);
-						                    		total += result2.result.replace_num.columns[modified_columns[i]][value_name];
-
-						                    		console.log(result2.result.replace_num.columns[modified_columns[i]][value_name]);
-						                    	}
-						                    	var ligne_html = '<tr>';
-						                    	ligne_html += '<td>'+modified_columns[i]+'</td>';
-						                    	ligne_html += '<td>'+total+' lignes modifiées ('+t_lib_values.join(",")+')</td>';
-						                    	ligne_html += '</tr>';
-						                    	t_lignes.push(ligne_html);
-						                    }
-
-						                    for (var i = 0; i < t_lignes.length; i++) {
-						                    	html += t_lignes[i];
-						                    }
-
-						                    html += '</table>';
-						                    $("#tab_report").html(html);
-*/
+						                    var modified_columns = result2.result.mod_count;
+											
+											write_report_html(modified_columns, "tab_reports", true);
 
 						                }
 						            },
