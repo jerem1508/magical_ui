@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"onc",
+				"onclick\tAttr"
+			],
+			[
 				"fun",
 				"fun\tFunction"
 			],
@@ -548,7 +552,7 @@
 			"file": "application/views/project_step5_concat_with_init_report_fr.php",
 			"settings":
 			{
-				"buffer_size": 7966,
+				"buffer_size": 10799,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -576,16 +580,7 @@
 			"file": "application/views/user_dashboard_fr.php",
 			"settings":
 			{
-				"buffer_size": 11108,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/functions.js",
-			"settings":
-			{
-				"buffer_size": 4333,
+				"buffer_size": 11245,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -603,7 +598,7 @@
 			"file": "application/views/project_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 18859,
+				"buffer_size": 18940,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -612,7 +607,7 @@
 			"file": "application/views/project_step2_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 14163,
+				"buffer_size": 14257,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -645,15 +640,6 @@
 			}
 		},
 		{
-			"file": "application/views/project_step5_concat_with_init_fr.php",
-			"settings":
-			{
-				"buffer_size": 34110,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "application/libraries/Private_functions.php",
 			"settings":
 			{
@@ -673,10 +659,28 @@
 			}
 		},
 		{
+			"file": "assets/functions.js",
+			"settings":
+			{
+				"buffer_size": 3175,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "application/views/footer_fr.php",
 			"settings":
 			{
 				"buffer_size": 3136,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_step5_concat_with_init_fr.php",
+			"settings":
+			{
+				"buffer_size": 34042,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -689,7 +693,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 212.0,
+		"height": 172.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
@@ -867,6 +871,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"report",
+			"go_to",
+			">\n",
+			"concat",
+			"load_step",
+			"get_lien_html",
+			"dl_file",
+			"write_dl",
+			"write_reports",
 			"tab_reports",
 			"write_re",
 			"valid",
@@ -985,16 +998,7 @@
 			"bt_ne",
 			"vali",
 			"table",
-			"fileupload",
-			"data",
-			"fileupload",
-			"call_api_upload",
-			"bt_normalizer",
-			"down",
-			"tparams",
-			"disa",
-			"upload_file_ok",
-			"sch"
+			"fileupload"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1030,7 +1034,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -1088,7 +1092,7 @@
 						"translation.y": 945.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -1118,7 +1122,7 @@
 						"translation.y": 14983.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
@@ -1165,8 +1169,8 @@
 						"selection":
 						[
 							[
-								9313,
-								9313
+								1837,
+								1837
 							]
 						],
 						"settings":
@@ -1176,10 +1180,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 620.0,
+						"translation.y": 560.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1188,15 +1192,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7966,
+						"buffer_size": 10799,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7956,
-								7956
+								5873,
+								5873
 							]
 						],
 						"settings":
@@ -1206,10 +1210,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2811.0,
+						"translation.y": 1480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1278,15 +1282,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11108,
+						"buffer_size": 11245,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2389,
-								2389
+								1406,
+								1406
 							]
 						],
 						"settings":
@@ -1294,49 +1298,20 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 729.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "assets/functions.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4333,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3095,
-								3095
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1566.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "assets/style.css",
 					"semi_transient": false,
 					"settings":
@@ -1366,20 +1341,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 10,
 					"file": "application/views/project_step1_init_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18859,
+						"buffer_size": 18940,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17404,
-								17404
+								1166,
+								1166
 							]
 						],
 						"settings":
@@ -1389,27 +1364,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6875.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 11,
 					"file": "application/views/project_step2_select_columns_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14163,
+						"buffer_size": 14257,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5901,
-								5901
+								6659,
+								6659
 							]
 						],
 						"settings":
@@ -1418,14 +1393,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4473.0,
+						"translation.y": 1974.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 12,
 					"file": "application/views/project_step3_missing_values_report_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1437,8 +1412,8 @@
 						"selection":
 						[
 							[
-								8509,
-								8509
+								6434,
+								6434
 							]
 						],
 						"settings":
@@ -1448,14 +1423,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2295.0,
+						"translation.y": 2010.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 13,
 					"file": "application/views/project_step3_missing_values_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1467,8 +1442,8 @@
 						"selection":
 						[
 							[
-								22962,
-								22962
+								1287,
+								1287
 							]
 						],
 						"settings":
@@ -1476,14 +1451,14 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 9995.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 14,
 					"file": "application/views/project_step4_infer_types_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1507,40 +1482,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
-					"file": "application/views/project_step5_concat_with_init_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 34110,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16943,
-								16943
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5643.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
+					"buffer": 15,
 					"file": "application/libraries/Private_functions.php",
 					"semi_transient": false,
 					"settings":
@@ -1570,7 +1516,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 16,
 					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
 					"semi_transient": false,
 					"settings":
@@ -1600,7 +1546,36 @@
 					"type": "text"
 				},
 				{
-					"buffer": 19,
+					"buffer": 17,
+					"file": "assets/functions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3175,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
 					"file": "application/views/footer_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1625,6 +1600,41 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 19,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 19,
+					"file": "application/views/project_step5_concat_with_init_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34042,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9385,
+								9385
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4839.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1653,12 +1663,19 @@
 				0,
 				2,
 				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.411601313237,
+			0.429298754671,
+			0.801307892144,
 			1.0
 		],
 		"rows":
@@ -1714,7 +1731,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 340.0,
+	"side_bar_width": 322.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

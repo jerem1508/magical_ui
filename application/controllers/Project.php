@@ -3,6 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Project extends CI_Controller {
 
+	public $normalized_projects = [];
+	public $linked_projects = [];
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,6 +13,12 @@ class Project extends CI_Controller {
 		$this->load->model('Projects_model');
 
 		$this->load->library('Private_functions');
+
+		// test de la langue
+		// Francais par defaut
+		if(!isset($_SESSION['language'])){
+			$this->session->set_userdata('language', 'fr');
+		}
 	}
 
 	public function test_project_id()
@@ -44,7 +53,7 @@ class Project extends CI_Controller {
 		//echo $this->session->project_type;
 
 		// Chargement de la vue d'initialisation du projet
-		$this->load_step1_init();
+		$this->load_link_step1_init();
 	}
 
 	public function is_done_step($step_name)
@@ -65,6 +74,26 @@ class Project extends CI_Controller {
 	{
 
 		$this->load->view('project_step1_init_fr');
+		$this->load->view('footer_fr');
+	}
+
+	/*
+	 Chargement de la vue d'initialisation du projet
+	*/
+	public function load_link_step1_init()
+	{
+
+		// Recherche des projets de normalisation si user connecté
+		$data = [];
+		if(isset($_SESSION['user'])){
+			$this-> split_projects($_SESSION['user']['id']);
+
+			$data['normalized_projects'] = $this->normalized_projects;
+			$data['linked_projects'] = $this->linked_projects;
+		}
+
+		// Chargement des vues
+		$this->load->view('project_link_step1_init_fr', $data);
 		$this->load->view('footer_fr');
 	}
 
@@ -179,5 +208,31 @@ class Project extends CI_Controller {
 	}
 
 
+	public function split_projects($user_id) // Répartition des projets selon leur type
+	{
+		$projects_list = $this->Projects_model->get_projects($user_id);
+
+		foreach ($projects_list as $project) {
+			// Appel de l'API pour récupérer les infos de chaque projet
+			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
+			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
+			$project['display_name'] = $project_api['display_name'];
+			$project['description'] = $project_api['description'];
+			$project['has_mini'] = $project_api['has_mini'];
+			$project['file'] = key($project_api['files']);
+			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
+
+			switch ($project['project_type']) {
+				case 'normalize':
+					$this->normalized_projects[] = $project;
+					
+					break;
+				case 'link':
+					$this->linked_projects[] = $project;
+					
+					break;
+			}
+		}
+	}
 
 }

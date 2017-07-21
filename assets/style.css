@@ -15,6 +15,15 @@ gris clair
 corail
 #FA5D58
 */
+
+.color_src{
+  color: #D474BB;
+}
+
+.color_ref{
+  color: #FDDE6C;
+}
+
 h1{
   color: #222;
   font-size: 50px;
