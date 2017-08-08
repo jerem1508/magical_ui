@@ -71,7 +71,8 @@ class User extends CI_Controller {
 			redirect('/Home');
 		}
 
-		$data['msg'] = $msg;	
+		$data['msg'] = $msg;
+		$data['next'] = $next;
 		$this->load->view('user_login_'.$_SESSION['language'], $data);
 	}
 
@@ -80,6 +81,7 @@ class User extends CI_Controller {
 	{
 		$email = $this->input->post('email');
 		$pwd = $this->input->post('pwd');
+		$next = $this->input->post('next');
 
 		// test user existant
 		$ret = $this->User_model->get_user($email);
@@ -95,8 +97,25 @@ class User extends CI_Controller {
 				// log
 				$ret = $this->User_model->set_log_users($ret['id']);
 
-				// Chargement du tableau de bord
-				redirect('/User/dashboard');
+				switch ($next) {
+					case 'normalize':
+						// Chargement du tableau de bord
+						redirect('/Project/normalize');
+						break;
+					case 'link':
+						// Chargement du tableau de bord
+						redirect('/Project/link');
+						break;
+					
+					default:
+						// Chargement du tableau de bord
+						redirect('/User/dashboard');
+						break;
+				}
+
+
+
+
 			}
 			else{
 				$this->login("","Mot de passe erroné !");	
@@ -142,8 +161,8 @@ class User extends CI_Controller {
 			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
-			$project['has_mini'] = $project_api['has_mini'];
-			$project['file'] = key($project_api['files']);
+			$project['has_mini'] = @$project_api['has_mini'];
+			$project['file'] = @key($project_api['files']);
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
 			switch ($project['project_type']) {

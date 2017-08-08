@@ -119,10 +119,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="well">
         <div class="row">
+        <!--
             <div class="col-md-4">
                 <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
             </div>
-            <div class="col-md-4">
+        -->
+            <div class="col-md-8">
                 <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
             </div>
 

@@ -24,6 +24,7 @@ class Private_functions {
 	public function set_tab_steps_by_filename($log)
 	{
 		$tab = [];
+
 		foreach ($log as $filename => $steps) {
 			$t_steps = [];	
 			foreach ($steps as $step => $values) {
@@ -78,4 +79,9 @@ class Private_functions {
 				return false;
 		}
 	}
+
+
+
+
+
 }

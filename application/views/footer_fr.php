@@ -31,7 +31,8 @@
 	}
 	footer .txt{
 		color: #777;
-		font-weight: bolder;		
+		font-weight: bolder;
+		background-color: #fff;
 	}
 </style>
 

@@ -75,6 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe">
 				  </div>
 				  <div class="text-right">
+				  	<input type="hidden" name="next" value="<?php if(isset($next)){echo $next;}?>">
 				  	<button type="submit" class="btn btn-success">S'identifier</button>
 				  </div>
 				</form>

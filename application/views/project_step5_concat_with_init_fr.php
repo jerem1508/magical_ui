@@ -217,28 +217,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div><!-- /row-->
     </div><!-- /well /report-->
 
-    <div class="well">
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
-            </div>
-            <div class="col-md-4">
-                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
-            </div>
+
+	<?php
+	if(issset($_SESSION['link_project_id'])){
+	?>
+	    <div class="well">
+	        <div class="row">
+	            <div class="col-md-12 text-center">
+	            <button class="btn btn-success" id="bt_link_project">Poursuivre le projet de jointure</button>
+	            <script type="text/javascript">
+	            	$("#bt_link_project").click(function(){
+	            		window.location.href = "<?php echo base_url('index.php/Project/link/'.$_SESSION['link_project_id']);?>";
+	            	});
+	            </script>
+	            </div>
+	        </div>
+	    </div>
+	<?php
+	}
+	else{
+	?>
+	    <div class="well">
+	        <div class="row">
+	            <!---
+	            <div class="col-md-4">
+	                <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
+	            </div>
+				-->
+	            <div class="col-md-8">
+	                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+	            </div>
 
 
-        <?php
-        if(isset($_SESSION['user']))
-        {
-        ?>
-            <div class="col-md-4 text-right">
-                <button class="btn btn-success" id="bt_next">Voir mon tableau de bord >></button>
-            </div>
-        <?php
-        }
-        ?>
-        </div><!-- /row-->
-    </div><!-- /well /report-->
+	        <?php
+	        if(isset($_SESSION['user']))
+	        {
+	        ?>
+	            <div class="col-md-4 text-right">
+	                <button class="btn btn-success" id="bt_next">Voir mon tableau de bord >></button>
+	            </div>
+	        <?php
+	        }
+	        ?>
+	        </div><!-- /row-->
+	    </div><!-- /well /report-->
+	<?php
+	}
+	?>
+
+
+
+
 </div><!--/container-->
 
 

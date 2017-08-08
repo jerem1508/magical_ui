@@ -152,14 +152,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			function select_all(){
 				$( ".columns" ).each(function( index ) {
-				  //console.log( index + ": " + $( this ).val() );
+				  // console.log( index + ": " + $( this ).val() );
 				  $(this).prop('checked', true);
 				});
 			}
 
 			function unselect_all(){
 				$( ".columns" ).each(function( index ) {
-				  //console.log( index + ": " + $( this ).val() );
+				  // console.log( index + ": " + $( this ).val() );
 				  $(this).prop('checked', false);
 				});
 			}
@@ -177,6 +177,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				return tab_columns;
 			}
+
 
 			function chargement(err) {
 				console.log("chargement");
@@ -200,17 +201,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	                        $("#project_name").html(metadata.display_name);
 
-	                        var bt = "<button class='btn btn-xs btn-success2' onClick='select_all();'>&nbsp;Tout sélectionner</button>&nbsp;<button class='btn btn-xs btn-warning' onClick='unselect_all();'>&nbsp;Tout désélectionner</button>\n";
+	                        var bt = '<button class="btn btn-xs btn-success2 bt_select_all">&nbsp;Tout sélectionner</button>&nbsp;<button class="btn btn-xs btn-warning bt_unselect_all">&nbsp;Tout désélectionner</button>';
 	                        var ch = bt;
 
 	                        columns = metadata.column_tracker.original;
 							$.each(columns, function( i, name) {
-							  ch = ch + "<div class='checkbox'><label><input type='checkbox' class='columns' checked value='" + name + "'>&nbsp;" + name + "&nbsp;(<a href='#'>voir</a>)</label></div>\n";
+							  ch = ch + "<div class='checkbox'><label><input type='checkbox' class='columns' checked value='" + name + "'>&nbsp;" + name + "</label></div>\n";
 							});
 
 							ch = ch + bt;
 
 							$("#result").html(ch);
+
+							$(".bt_select_all").click(function(){
+								select_all();
+							});
+							$(".bt_unselect_all").click(function(){
+								unselect_all();
+							});
 
 
 	                    }

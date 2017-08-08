@@ -1,0 +1,35 @@
+.draggable {
+	width: 180px; 
+	height: 30px; 
+	border: #777 1px solid;
+	background-color: #eee;
+	color: #444;
+	padding-left: 5px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	/*text-align: center;*/
+	cursor: move;
+}
+
+
+
+.bloc
+{
+	height: 150px;
+	width: 400px;
+	border: #aaa 1px solid;
+	display: inline-block;
+}
+
+.target_src{
+	border: dashed 4px #D474BB;
+}
+
+.target_ref{
+	border: dashed 4px #FDDE6C;
+}
+
+.txt_src, .txt_ref{
+	font-style: italic;
+	padding-left: 5px;
+}

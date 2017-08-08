@@ -24,6 +24,10 @@ corail
   color: #FDDE6C;
 }
 
+.btn_width{
+  width: 200px;
+}
+
 h1{
   color: #222;
   font-size: 50px;
