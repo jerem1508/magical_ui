@@ -102,14 +102,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tbody>
 						<?php
 
-
-$input = preg_quote('bl', '~'); // don't forget to quote input string!
-$data = array('orange', 'blue', 'green', 'red', 'pink', 'brown', 'black');
-
-$result = preg_grep('~' . $input . '~', $data);
-
-
-
 						function get_status($status=0)
 						{
 							switch ($status) {

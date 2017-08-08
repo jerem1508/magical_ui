@@ -49,3 +49,7 @@ $(function(){
         })
     ;
 });
+
+hover_new_file_ref_target
+hover_exist_file_ref_target
+hover_exist_ref_target

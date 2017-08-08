@@ -88,7 +88,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h3>Extrait aléatoire des données</h3>
 				Vous avez la possibilité d'afficher un extrait aléatoire du fichier en cours. Cet extrait affichera un maximum de 50 lignes. A chaque clic sur le bouton ci-dessous, un nouvel extrait sera généré.
 				<br><br>
-				<button class="btn btn-success2" id="bt_view" data-toggle="modal" data-target="#modal-dataview_all"><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Apperçu aléatoire des données</button>
+				<button class="btn btn-success2 btn-xs" id="bt_view" data-toggle="modal" data-target="#modal-dataview_all"><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Voir l'extrait</button>
 
 				<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modal-dataview_all">
 				  <div class="modal-dialog modal-lg" role="document">

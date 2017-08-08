@@ -224,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
 					</div>
 					<div class="col-md-4">
-						<h3>Catégories</h3>
+						<h3 style="display: inline;">Catégories</h3><!--&nbsp;<a id="bt_toggle_cat_in_modal">Déplier tout</a>-->
 						<div id="cat_list_modal"></div>
 					</div>
 					<div class="col-md-4">
@@ -326,9 +326,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								                    
 								                    write_types(result.result);
 								                    
-								                    write_categories_types_modal(result.result.allTypes);
+								                    write_categories_types_modal(result.result.all_types);
 
-								                    write_tags_modal(result.result.typeTags);
+								                    write_tags_modal(result.result.type_tags);
 													
 												}
 												else{
@@ -478,9 +478,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         function toggle_p(normalized_cat) {
         	$('#' + normalized_cat + '_content').slideToggle();
-        	if($('#' + normalized_cat + 'chevron').hasClass("glyphicon-chevron-right")){
-        		$('#' + normalized_cat + 'chevron').removeClass("glyphicon-chevron-right");
-        		$('#' + normalized_cat + 'chevron').addClass("glyphicon-chevron-down");
+        	if($('#' + normalized_cat + '_chevron').hasClass("glyphicon-chevron-right")){
+        		$('#' + normalized_cat + '_chevron').removeClass("glyphicon-chevron-right");
+        		$('#' + normalized_cat + '_chevron').addClass("glyphicon-chevron-down");
+        	}
+        	else{
+        		$('#' + normalized_cat + '_chevron').removeClass("glyphicon-chevron-down");
+        		$('#' + normalized_cat + '_chevron').addClass("glyphicon-chevron-right");
         	}
         }
 
@@ -512,6 +516,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		function write_tags_modal(result) {
 			console.log("write_tags_modal");
 			console.dir(result);
+
+<?php
+/*
+$input = preg_quote('bl', '~'); // don't forget to quote input string!
+$data = array('orange', 'blue', 'green', 'red', 'pink', 'brown', 'black');
+
+$result = preg_grep('~' . $input . '~', $data);
+*/
+?>
 
 		}
 

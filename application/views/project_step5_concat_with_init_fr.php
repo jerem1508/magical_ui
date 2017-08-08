@@ -1014,12 +1014,6 @@ if(isset($this->session->project_type)){
 												console.log("success - job en cours");
 
 							                }
-
-
-
-
-
-
 				                
 				            },
 				            error: function (result2, status, error){
@@ -1057,6 +1051,10 @@ if(isset($this->session->project_type)){
 
 			// lancement de l'inference
 			treatment();
+		});
+
+		$("#bt_next").click(function(){
+			window.location.href = "<?php echo base_url('index.php/User/dashboard');?>";
 		});
 
 	});// /ready

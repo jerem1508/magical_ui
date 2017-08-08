@@ -166,8 +166,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="panel panel-info">
                       <div class="panel-body text-center">
                         <h2 style="display: inline;"><span id="ncols"></span></h2> <i>colonnes</i>
-                        <br>
-                        <a href="#">Visualiser les colonnes</a>
                       </div>
                     </div>
                     
