@@ -412,7 +412,7 @@ $(function () {
 
 
                 // Envoi du fichier sur le serveur
-                url = 'http://127.0.0.1:5000/api/normalize/upload/' + project_id;
+                url = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + project_id;
 
                 console.log("1:" + url)
                 $('#fileupload').fileupload(

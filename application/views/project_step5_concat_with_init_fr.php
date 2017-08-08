@@ -1,5 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+
+if(isset($this->session->project_type)){
+	$project_type = $this->session->project_type;
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -120,19 +127,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 		</div>
 
-		<script type="text/javascript">
-
-			$("#bt_concat_with_init").click(function(){
-				// affichage de la div de "chargement" + trt des bt
-				$("#wait").css("display","inherit");
-		
-				$("#bt_concat_with_init").css("display", "none");
-		
-				// lancement de l'inference
-				treatment();
-			});
-		</script>
-		
 		<div class="row">
 			<div class="col-xs-12 text-center" id="wait">
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
@@ -219,7 +213,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 	<?php
-	if(issset($_SESSION['link_project_id'])){
+	if(isset($_SESSION['link_project_id'])){
 	?>
 	    <div class="well">
 	        <div class="row">
@@ -265,20 +259,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 	?>
 
-
-
-
 </div><!--/container-->
-
-
-
-
-	<?php 
-	if(isset($this->session->project_type)){
-		$project_type = $this->session->project_type;
-	}
-	?>
-
 
 <script type="text/javascript">
 
@@ -907,8 +888,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         });
 
-
-
 		$.ajax({
 			type: 'get',
 			url: '<?php echo BASE_API_URL;?>' + '/api/metadata/normalize/<?php echo $_SESSION['project_id'];?>',
@@ -1069,7 +1048,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			delete_td_bt();
 		});
 
-	});
+
+		$("#bt_concat_with_init").click(function(){
+			// affichage de la div de "chargement" + trt des bt
+			$("#wait").css("display","inherit");
+
+			$("#bt_concat_with_init").css("display", "none");
+
+			// lancement de l'inference
+			treatment();
+		});
+
+	});// /ready
 
 </script>
 

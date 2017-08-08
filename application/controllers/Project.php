@@ -411,7 +411,6 @@ sche duler linker avec project_id
 			$this->session->set_userdata('project_id', $id);
 			$this->session->set_userdata('project_type', 'normalize');
 		}
-
 		$this->test_project_id();
 
 		// Est ce que cette étape a déjà été lancée ?

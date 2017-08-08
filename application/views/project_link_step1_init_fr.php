@@ -78,6 +78,8 @@ function get_normalized_projects_html($id, $normalized_projects)
     <script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
+    <script type="text/javascript" src="<?php echo base_url('assets/project_link_step1_init.js');?>"></script>
+
     <style type="text/css">
         #result, #msg_danger, #create_project_ok, #upload_file_progress, #report{
             /*On masque par défaut*/
@@ -187,36 +189,6 @@ function get_normalized_projects_html($id, $normalized_projects)
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
-<script type="text/javascript">
-$(function(){
-    new_file_src = false;
-    $(".hover_new_file_src")
-        .mouseover(function(){$(".hover_new_file_src_target").css("display", "inherit");})
-        .mouseout(function(){
-            if(!new_file_src){
-                $(".hover_new_file_src_target").css("display", "none");
-            }
-        })
-        .click(function(){
-            new_file_src = true;
-            //$(".hover_new_file_src_target").css("color", "#04B404");
-        })
-    ;
-    exist_file_src = false;
-    $(".hover_exist_file_src")
-        .mouseover(function(){$(".hover_exist_file_src_target").css("display", "inherit");})
-        .mouseout(function(){
-            if(!exist_file_src){
-                $(".hover_exist_file_src_target").css("display", "none");
-            }
-        })
-        .click(function(){
-            exist_file_src = true;
-            //$(".hover_exist_file_src_target").css("color", "#04B404");
-        })
-    ;
-});
-</script>
 
         <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
             <div class="row">
@@ -311,7 +283,11 @@ $(function(){
 
         <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <h3 class="hover_new_file_ref_target">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </h3>
+                </div>
                 <div class="col-md-8" id="bt_new_file_ref">
                     <div>
                         <h3>Nouveau fichier</h3>
@@ -334,7 +310,11 @@ $(function(){
             </div>
 
             <div class="row">
-                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <h3 class="hover_exist_file_ref_target">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </h3>
+                </div>
                 <?php
                 if(!isset($_SESSION['user'])){
                 ?>
@@ -376,7 +356,11 @@ $(function(){
             }
             ?>
             <div class="row">
-                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                    <h3 class="hover_exist_ref_target">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </h3>
+                </div>
                 <div class="col-md-8">
                     <div>
                         <h3>Référentiels internes</h3>
