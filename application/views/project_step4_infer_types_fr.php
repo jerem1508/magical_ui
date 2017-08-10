@@ -216,7 +216,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="col-md-4">
 						<form class="form-inline">
 							<div class="form-group">
-								<input type="text" class="form-control" id="search" placeholder="Recherche par mot clé">
+								<input type="text" class="form-control" id="in_search" placeholder="Recherche par mot clé">
 							</div>
 						</form>
 						<div id="search_result">
@@ -224,7 +224,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
 					</div>
 					<div class="col-md-4">
-						<h3 style="display: inline;">Catégories</h3><!--&nbsp;<a id="bt_toggle_cat_in_modal">Déplier tout</a>-->
+						<h3>Catégories</h3><!--&nbsp;<a id="bt_toggle_cat_in_modal">Déplier tout</a>-->
 						<div id="cat_list_modal"></div>
 					</div>
 					<div class="col-md-4">
@@ -328,7 +328,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								                    
 								                    write_categories_types_modal(result.result.all_types);
 
-								                    write_tags_modal(result.result.type_tags);
+								                    tags_modal(result.result.type_tags);
 													
 												}
 												else{
@@ -474,7 +474,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         	$("#result").css("display","inherit");
 
         	gl_columns = tab_col; // Sauvegarde des colonnes ne tableau global
-        }
+        }// write_types
 
         function toggle_p(normalized_cat) {
         	$('#' + normalized_cat + '_content').slideToggle();
@@ -486,7 +486,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         		$('#' + normalized_cat + '_chevron').removeClass("glyphicon-chevron-down");
         		$('#' + normalized_cat + '_chevron').addClass("glyphicon-chevron-right");
         	}
-        }
+        }// /toggle_p
 
 
 		function write_categories_types_modal(categories){
@@ -496,11 +496,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			var html = "";
 			for(cat in categories){
 				html += '<h5 class="category_title" onClick="toggle_p(\'' + normalize(cat) + '\');"><span id="' + normalize(cat) + '_chevron" class="glyphicon glyphicon-chevron-right"></span>' + cat + '[' + categories[cat].length + ']</h5>';
-				//console.log(cat);
 				html += '<div id="' + normalize(cat) + '_content" class="category">';
 
 				for (var i = 0; i < categories[cat].length; i++) {
-					// console.log(categories[cat][i]);
 					html += '<div><a href="#" onClick="set_value(\'' + categories[cat][i] + '\');">' + categories[cat][i] + '</a></div>';
 				}
 				html += '</div>';
@@ -510,23 +508,83 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			minimize_categories_modal();
 
-		}
+		}// /write_categories_types_modal
 
 
-		function write_tags_modal(result) {
-			console.log("write_tags_modal");
-			console.dir(result);
+		function tags_modal(tags) {
+			// Creation de tab_tags qui aura pour indices les tags associés à un ou plusieurs types
+			// tab_tags est global
 
-<?php
-/*
-$input = preg_quote('bl', '~'); // don't forget to quote input string!
-$data = array('orange', 'blue', 'green', 'red', 'pink', 'brown', 'black');
+			for(tag in tags){
+				for (var i = 0; i < tags[tag].length; i++) {
+					// Ajout de l'élément s'il n'existe pas
+					if (tab_tags.indexOf(tags[tag][i]) === -1) {
+						tab_tags.push(tags[tag][i]);
 
-$result = preg_grep('~' . $input . '~', $data);
-*/
-?>
+						tab_tags[tags[tag][i]] = new Array();
+						tab_tags[tags[tag][i]].push(tag);
+					}
+					else{
+						// todo: test de l'existence
+						tab_tags[tags[tag][i]].push(tag);	
+					}
+				}
+			}
+		} // /tags_modal
 
-		}
+
+		function filtreTexte(requete) {
+		  return tab_tags.filter(function (el) {
+		    return el.toLowerCase().indexOf(requete.toLowerCase()) > -1;
+		  })
+		}// /filtreTexte
+
+
+		function search_with_tags() {
+			var needle = $("#in_search").val();
+
+			if(needle.length < 2){
+				return false;
+			}
+			else {
+				$("#search_result").html("");
+			}
+
+			var html = "";
+			var tab_keys = filtreTexte(needle);
+
+			// Recherche des types associés
+			var tab_types_list = new Array();
+			for (var i = 0; i < tab_keys.length; i++) {
+				tab_types_list[tab_keys[i]] = tab_tags[tab_keys[i]];
+			}
+
+			var tab_final = new Array();
+			for (var tab in tab_types_list){
+				// Récupération de toutes les valeurs
+				// ! elles peuvent etre en double
+				var tab_values = tab_types_list[tab];
+
+				for (var i = 0; i < tab_values.length; i++) {
+
+					if(tab_final.indexOf(tab_values[i]) == -1){ // On retire les doublons
+						tab_final.push(tab_values[i]);
+					}
+				}
+			}
+
+			// Tri du tableau
+			tab_final.sort();
+
+			// Parcours du tableau pour affichage
+			for (var i = 0; i < tab_final.length; i++) {
+				html += '<a href="#" onClick="set_value(\'' + tab_final[i] + '\');">' + tab_final[i] + '</a><br>';
+			}
+
+			// Affichage des tags dans la modal
+			$("#search_result").html(html);
+
+		}// /search_with_tags
 
 
 		function minimize_categories_modal() {
@@ -683,8 +741,15 @@ $result = preg_grep('~' . $input . '~', $data);
 		// Init - Ready
 		$(function() {
 
+			// Globales
+			tab_tags = new Array();
+
 			$("#bt_next").click(function(){
 				valid();
+			});
+
+			$('#in_search').on('input',function(e){
+				search_with_tags()
 			});
 
 			$.ajax({
