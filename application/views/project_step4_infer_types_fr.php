@@ -391,6 +391,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         	return html;
         }
 
+
         function show_modal_types_select(id_td_bt_column) {
         	selected_column = id_td_bt_column;
 
@@ -399,36 +400,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$('#data_visualisation_modal').html(create_tab_html(tab_sample[column]));
 			$("#lib_column_modal").html(column);
         	$('#modal_types_select').modal('show');
-        }
+        }// /show_modal_types_select
+
 
         function create_button_infer_html(value, lib) {
         	var button_html = '<button class="btn btn-xs btn-success2" value="' + lib + '" onClick="show_modal_types_select(\'td_bt_' + value + '\');">';
         	button_html += rch(lib, 25);
         	button_html += '&nbsp;<span class="glyphicon glyphicon-edit"></span></button>';
         	return button_html;
-        }
+        }// /create_button_infer_html
+
 
         function create_button_no_infer_html(value) {
         	var button_html = '<button class="btn btn-xs btn-warning" value="empty" onClick="show_modal_types_select(\'td_bt_' + value + '\');">Ajout manuel&nbsp;<span class="glyphicon glyphicon-plus"></span></button>';
         	return button_html;
-        }
+        }// /create_button_no_infer_html
+
+
+		String.prototype.replaceAll = function(search, replacement) {
+		    var target = this;
+		    return target.split(search).join(replacement);
+		}; // Ajout de replaceAll
+
 
         function space_to_underscore(lib) {
-        	lib = lib.replace(" ", "_");
+        	lib = lib.replaceAll(" ", "_");
         	return lib;
-        }
+        }// /space_to_underscore
+
 
         function apos_to_underscore(lib) {
-        	lib = lib.replace("'", "_");
+        	lib = lib.replaceAll("'", "_");
         	return lib;	
-        }
+        }// /apos_to_underscore
+
 
         function normalize(lib) {
         	lib = space_to_underscore(lib);
         	lib = apos_to_underscore(lib);
 
         	return lib;
-        }
+        }// /normalize
+
 
         function write_types(result) {
         	var tab_col = new Array();
@@ -448,7 +461,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				else{
 					tab_infer[column_name] = create_button_no_infer_html(column_name);
 				}
-
 			}
 
         	var html_th = "";
@@ -475,6 +487,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         	gl_columns = tab_col; // Sauvegarde des colonnes ne tableau global
         }// write_types
+
 
         function toggle_p(normalized_cat) {
         	$('#' + normalized_cat + '_content').slideToggle();
