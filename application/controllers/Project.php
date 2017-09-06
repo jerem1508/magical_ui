@@ -120,8 +120,8 @@ class Project extends CI_Controller {
 		$tab_metadata_link_project = $this->private_functions->get_metadata_api('link', $project_id);
 
 		// Récupération des 2 ids des projets de normalisation
-		$src_project_id = $tab_metadata_link_project['current']['source']['project_id'];
-		$ref_project_id = $tab_metadata_link_project['current']['ref']['project_id'];
+		$src_project_id = $tab_metadata_link_project['files']['source']['project_id'];
+		$ref_project_id = $tab_metadata_link_project['files']['ref']['project_id'];
 
 		// Récupération des métadata des projets de normalisation
 		$tab['source'] = $this->private_functions->get_metadata_api('normalize', $src_project_id);
@@ -148,6 +148,7 @@ class Project extends CI_Controller {
 		if($project_id && $link_step == 'INIT'){
 			// tests de complétude des projets de normalisation
 			$normalized_projects = $this->get_normalization_projects($project_id);
+
 			foreach ($normalized_projects as $normalized_project) {
 				// Rechercher l'étape du projet
 				$step = $this->get_actual_step_normalization($normalized_project['project_id']);
@@ -164,59 +165,67 @@ class Project extends CI_Controller {
 			}
 		}
 
-
 		$this->load_step_linker($link_step, $project_id);
 	}
 
 	public function get_actual_step_linker($project_id='')
 	{
-		if($project_id==''){
+		if($project_id == ''){
 			return '';
 		}
 
+		// Récupération des métadata
 		$project_api = $this->private_functions->get_metadata_api('link', $project_id);
+		
+		$file_name = $project_api['files']['source']['file_name'];
+		$steps = $project_api['log'][$file_name];
 
-		if(@$project_api['log']['results']['completed']){
-			return 'results';
+	
+		if($steps['add_selected_columns']['completed']){
+			return 'add_selected_columns';
 		}
-		elseif(@$project_api['log']['restrict_ref']['completed']){
-			return 'results';
+		elseif($steps['es_train']['completed']){
+			return 'es_train';
 		}
-		elseif(@$project_api['log']['labelling']['completed']){
-			return 'restrict_ref';
+		elseif($steps['upload_es_train']['completed']){
+			return 'upload_es_train';
 		}
-		elseif(@$project_api['log']['selected_columns']['completed']){
-			return 'labelling';
+		elseif($steps['es_linker']['completed']){
+			return 'es_linker';
 		}
-		elseif(@$project_api['log']['INIT']['completed']){
-			return 'selected_columns';
+		elseif($steps['link_results_analyzer']['completed']){
+			return 'link_results_analyzer';
 		}
 
-		return 'INIT';
+		return 'INIT'; // Si project_id mais aucune étape de validée
 	}
+
 
 	public function load_step_linker($step, $project_id='')
 	{
 		switch ($step) {
 			case 'INIT':
-				//$this->load_link_step1_init();
 				$this->selected_columns($project_id);
 				break;
 
-			case 'selected_columns':
-				$this->labelling($project_id);
+			case 'add_selected_columns':
+				$this->es_train($project_id);
 				break;
 
-			case 'labelling':
-				$this->restrict_ref($project_id);
+			case 'es_train':
+				$this->es_linker($project_id);
 				break;
 
-			case 'restrict_ref':
-				$this->results($project_id);
+			case 'upload_es_train':
+				$this->es_linker($project_id);
 				break;
 
-			case 'results':
-				$this->results($project_id);
+			case 'es_linker':
+				$this->link_results_analyzer($project_id);
+				break;
+
+			case 'link_results_analyzer':
+				$this->link_results_analyzer($project_id);
 				break;
 			
 			default:
@@ -227,30 +236,30 @@ class Project extends CI_Controller {
 	public function selected_columns($id='')
 	{
 		# Mise en relation des colonnes du fichier source avec celles du fichier referentiel
-///api/link/add_column_matches/<project_id>
-//:post : 
-/*
-{'column_matches': [{'ref': ['departement'], 'source': ['departement']},
-                    {'ref': ['full_name'], 'source': ['lycees_sources']},
-                    {'ref': ['nom_rue', 'ville'] 'source': ['adresse']}
-                    ]}
-*/
 
+		$data['title'] = "Jointure";
+		$this->load->view('lib', $data);
+		$this->load->view('project_link_select_columns_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_link_select_columns_'.$_SESSION['language']);
-		$this->load->view('footer_fr');
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
-	public function labelling($id='')
+	public function es_train($id='')
 	{
 		# Apprentissage dedupe
 /*
 voir /merge_machine/templates/dedupe_training.html
 */
-		$this->load->view('project_link_labelling_'.$_SESSION['language']);
-		$this->load->view('footer_fr');
+		$data['title'] = "Jointure";
+		$this->load->view('lib', $data);
+		$this->load->view('project_link_es_train_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('project_link_es_train_'.$_SESSION['language']);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
-	public function restrict_ref($id='')
+	public function es_linker($id='')
 	{
 		# Restriction du referentiel suite à apprentissage
 /*
@@ -261,11 +270,11 @@ ne pas faire tout de suite - passer l'étape
 		$this->load->view('footer_fr');
 	}
 
-	public function results($id='')
+	public function link_results_analyzer($id='')
 	{
 		# traitement final
 /*
-sche duler linker avec project_id
+scheduler linker avec project_id
 */
 
 		$this->load->view('project_link_results_'.$_SESSION['language']);
@@ -291,15 +300,6 @@ sche duler linker avec project_id
 		return $this->private_functions->is_completed_step($step_name, $steps_by_filename, $project_api['has_mini']);
 	}
 
-
-	public function load_step1_init()
-	{
-		# Chargement de la vue d'initialisation du projet
-
-		$this->load->view('project_step1_init_fr');
-		$this->load->view('footer_fr');
-	}
-
 	
 	public function load_link_step1_init()
 	{
@@ -307,6 +307,7 @@ sche duler linker avec project_id
 
 		// Recherche des projets de normalisation si user connecté
 		$data = [];
+
 		if(isset($_SESSION['user'])){
 			$this-> split_projects($_SESSION['user']['id']);
 
@@ -315,8 +316,12 @@ sche duler linker avec project_id
 		}
 
 		// Chargement des vues
-		$this->load->view('project_link_step1_init_fr', $data);
-		$this->load->view('footer_fr');
+		$data['title'] = "Jointure";
+		$this->load->view('lib', $data);
+		$this->load->view('project_link_step1_init_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('project_link_step1_init_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 	/*
@@ -334,6 +339,20 @@ sche duler linker avec project_id
 		// Etape 2
 		//redirect('/Project/load_step2_select_columns/'.$project_id);
 		redirect('/Project/add_selected_columns/'.$project_id);
+	}
+
+
+	public function load_step1_init()
+	{
+		# Chargement de la vue d'initialisation du projet
+
+		// Chargement des vues
+		$data['title'] = "Normalisation";
+		$this->load->view('lib', $data);
+		$this->load->view('project_step1_init_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('project_step1_init_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 
@@ -436,11 +455,12 @@ sche duler linker avec project_id
 		foreach ($projects_list as $project) {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
+
 			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
 			$project['project_id'] = $project_api["project_id"];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
-			
+
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
 			switch ($project['project_type']) {

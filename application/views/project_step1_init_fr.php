@@ -1,76 +1,7 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Normalisation</title>
-
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
-
-    <link rel="stylesheet" href="<?php echo base_url('assets/style_fu.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.fileupload.css');?>">
-
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery-3.2.1.min.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js');?>"></script>
-
-
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
-
-    <style type="text/css">
-        #result, #msg_danger, #create_project_ok, #upload_file_progress, #report{
-            /*On masque par défaut*/
-            display: none;
-        }
-        #show_report_ok, #upload_file_ok, #check_file_ok{
-            visibility: hidden;
-        }
-    </style>
-</head>
-<body>
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container">
-
-
-	<div class="row">
-		<div class="col-xs-2" style="margin-top: 20px;">
-			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.png');?>" class="img-responsive">
-		</div>
-		<div class="col-xs-8 text-center">
-			<h1>Magical_ui</h1>
-		</div>
-		<div class="col-xs-2 text-right" style="margin-top: 20px;">
-            <div class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 22px; color: #000;">
-                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url("index.php/Home");?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Accueil</a></li>
-                    <li role="separator" class="divider"></li>
-                    <?php
-                    if(isset($_SESSION['user'])){
-                        echo "<li><a href='".base_url("index.php/User/dashboard")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;Tableau de bord</a></li>";
-                        echo "<li><a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a></li>";
-                    }
-                    else{
-                        echo "<li><a href='".base_url("index.php/User/login/normalize")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a></li>";
-                    }
-                    ?>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;&nbsp;English</a></li>
-                </ul>
-            </div><!-- /dropdown-->
-		</div>
-	</div>
-
-	<hr>
-
+<div class="container" style="margin-top: 20px;">
     <div class="text-center">
         <div class="breadcrumb flat">
             <!--<a href="#" class="done">Sélection du fichier</a>-->
@@ -82,13 +13,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 
-	<div class="well">
-		<h1>Normalisation d'un fichier</h1>
-		<p>
-			Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
-		</p>
+    <div class="well">
+        <h1>Normalisation d'un fichier</h1>
+        <p>
+            Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+        </p>
+    </div>
 
-		<form class="form-horizontal" name="form1" id="form1" method="post" enctype="multipart/form-data">
+	<form class="form-horizontal" name="form1" id="form1" method="post" enctype="multipart/form-data">
+    <div class="well">
+        <h2 style="display: inline;">
+            <span class="step_numbers">1</span>
+            .Identité du projet
+        </h2>
 			<div class="form-group">
 				<label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
 				<div class="col-sm-10">
@@ -101,33 +38,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
 				</div>
 			</div>
+    </div>
 
-            <span class="btn btn-success btn-xs fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
-                <span>Sélection du fichier</span>
-                <input id="fileupload" type="file" name="file">
-            </span>
-
-            <span id="file_name"></span>
-            <button id="envoyer" style="display: none;"></button>
-
-            <!-- Message box -->
-			<div class="row">
-				<div class="col-md-12">
-					<div class="alert alert-danger my_hidden" id="msg_danger"></div>
-				</div>
-			</div>
-            <!-- / Message box -->
-
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn btn-success" id="bt_normalizer" disabled="disabled">Créer le projet</button>
-                </div>
+    <div class="well">
+        <h2 style="display: inline;">
+            <span class="step_numbers">2</span>
+            .Sélection du fichier à normaliser
+        </h2>
+        <div class="row">
+            <div class="col-xs-9">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.                    
             </div>
-		</form>
+            <div class="col-xs-3 text-center">
+                <span class="btn btn-default btn-xl fileinput-button btn_2_3">
+                    <h4 class="glyphicon glyphicon-plus"></h4>
+                    <br>
+                    <h4>Nouveau</h4>
+                    <input id="fileupload" type="file" name="file">
+                </span> 
+                <span id="file_name"></span>
+                <button id="envoyer" style="display: none;"></button>
+            </div>
+        </div><!-- / row-->
     </div><!-- /well-->
-</div><!--/container-->
 
+    <!-- Message box -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger my_hidden" id="msg_danger"></div>
+        </div>
+    </div>
+    <!-- / Message box -->
+
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12 text-right">
+            <button class="btn btn btn-success" id="bt_normalizer" disabled="disabled">Créer le projet</button>
+        </div>
+    </div>
+    </form>
+</div><!--/container-->
 
 
 <div class="container" id="result">
@@ -356,16 +310,6 @@ var err = false;
         }
 
 
-$(function () {
-    //'use strict';
-    // Change this to the location of your server-side upload handler:
-    //var url = 'http://127.0.0.1/tmp/upload.php';
-    //var url = 'http://127.0.0.1:5000/api/normalize/upload/718b0bde49a2cc8986fb4a7dc1d2316f';
-
-
-      
-});
-
 
         function treatment(project_type) {
             console.log("treatment");
@@ -412,7 +356,6 @@ $(function () {
                 // Envoi du fichier sur le serveur
                 url = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + project_id;
 
-                console.log("1:" + url)
                 $('#fileupload').fileupload(
                     'option',
                     'url',
@@ -437,10 +380,12 @@ $(function () {
         }
 
 
-
-		// Init - Ready
-		$(function() {
-			// Actions sur clics
+        // Init - Ready
+        $(function() {
+            
+            //$("body").css("height", $(window).height()) ;
+            
+            // Actions sur clics
             url = "vide";
 
             $("#bt_normalizer").click(function(e){

@@ -37,7 +37,12 @@ class User extends CI_Controller {
 		}
 
 		$data['msg'] = $msg;
+		$data['title'] = "Identification";
+
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_new_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 
@@ -73,7 +78,12 @@ class User extends CI_Controller {
 
 		$data['msg'] = $msg;
 		$data['next'] = $next;
+		$data['title'] = "Identification";
+
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_login_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 
@@ -113,9 +123,6 @@ class User extends CI_Controller {
 						break;
 				}
 
-
-
-
 			}
 			else{
 				$this->login("","Mot de passe erroné !");	
@@ -145,18 +152,23 @@ class User extends CI_Controller {
 
 		$data['normalized_projects'] = $this->normalized_projects;
 		$data['linked_projects'] = $this->linked_projects;
+		$data['title'] = "Tableau de bord";
 
-		//$this->load->view('user_dashboard', $data);
+		// Chargement des vue
+		$this->load->view('lib', $data);
+		$this->load->view('user_dashboard_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_dashboard_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
-
 		foreach ($projects_list as $project) {
 			// Appel de l'API pour récupérer les infos de chaque projet
+//print_r($project);die("f");
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
 			$project['display_name'] = $project_api['display_name'];

@@ -4,6 +4,170 @@
 		"selected_items":
 		[
 			[
+				"asso",
+				"associations"
+			],
+			[
+				"te",
+				"text-right"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"non",
+				"NONE\t: const unsigned short Event"
+			],
+			[
+				"displa",
+				"display\t Style CSS"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
+				"pa",
+				"padding-left"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"i",
+				"italic"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"infer",
+				"infer_src"
+			],
+			[
+				"meta",
+				"metadata_src"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"project",
+				"project_name"
+			],
+			[
+				"vi",
+				"visibility\t = 'visible' Style CSS"
+			],
+			[
+				"sty",
+				"style"
+			],
+			[
+				"search",
+				"search_result"
+			],
+			[
+				"sea",
+				"search_with_tags"
+			],
+			[
+				"tab",
+				"tab_tags"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"displ",
+				"display\t Style CSS"
+			],
+			[
+				"text",
+				"text-right"
+			],
+			[
+				"gl",
+				"glyphicon-lock"
+			],
+			[
+				"btn",
+				"btn-success2"
+			],
+			[
+				"btn-",
+				"btn-xs"
+			],
+			[
+				"border-bo",
+				"border-bottom"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"column_sr",
+				"columns_src"
+			],
+			[
+				"console",
+				"console_log"
+			],
+			[
+				"lin",
+				"link_step"
+			],
+			[
+				"_s",
+				"_SESSION"
+			],
+			[
+				"project_lis",
+				"projects_list"
+			],
+			[
+				"file",
+				"file_role"
+			],
+			[
+				"nom",
+				"normalized_projects"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"norm",
+				"normalize"
+			],
+			[
+				"typ",
+				"type_file"
+			],
+			[
+				"cli",
+				"click"
+			],
+			[
+				"nor",
+				"normalize"
+			],
+			[
 				"des",
 				"description"
 			],
@@ -12,24 +176,12 @@
 				"display_name"
 			],
 			[
-				"for",
-				"foreach\tforeach …"
-			],
-			[
-				"btn",
-				"btn-success"
-			],
-			[
 				"us",
 				"user"
 			],
 			[
 				"bor",
 				"border-left"
-			],
-			[
-				"mar",
-				"margin-top"
 			],
 			[
 				"col-md",
@@ -100,20 +252,12 @@
 				"title"
 			],
 			[
-				"tab",
-				"tab_steps"
-			],
-			[
 				"els",
 				"else"
 			],
 			[
 				"has",
 				"has_mini"
-			],
-			[
-				"file",
-				"file_name"
 			],
 			[
 				"str_",
@@ -144,24 +288,8 @@
 				"nb_steps"
 			],
 			[
-				"re",
-				"response"
-			],
-			[
-				"norm",
-				"normalized_projects"
-			],
-			[
-				"project",
-				"project_api"
-			],
-			[
 				"li",
 				"linked_projects"
-			],
-			[
-				"nor",
-				"normalized_projects"
 			],
 			[
 				"php",
@@ -178,10 +306,6 @@
 			[
 				"col",
 				"color"
-			],
-			[
-				"in",
-				"inline"
 			],
 			[
 				"id",
@@ -216,10 +340,6 @@
 				"fun\tFunction"
 			],
 			[
-				"i",
-				"id\tAttr"
-			],
-			[
 				"tex",
 				"text-center"
 			],
@@ -230,14 +350,6 @@
 			[
 				"bol",
 				"bolder"
-			],
-			[
-				"border",
-				"border-radius"
-			],
-			[
-				"marg",
-				"margin-top"
 			],
 			[
 				"ta",
@@ -280,10 +392,6 @@
 				"add_first_value_for_all"
 			],
 			[
-				"gl",
-				"gl_columns"
-			],
-			[
 				"auto",
 				"auto_delete"
 			],
@@ -302,10 +410,6 @@
 			[
 				"btnsucce",
 				"btn-success2"
-			],
-			[
-				"non",
-				"none"
 			],
 			[
 				"co",
@@ -368,15 +472,7 @@
 				"border-bottom-left-radius"
 			],
 			[
-				"text",
-				"text-center"
-			],
-			[
 				"ma",
-				"margin-bottom"
-			],
-			[
-				"margin",
 				"margin-bottom"
 			],
 			[
@@ -418,112 +514,64 @@
 			[
 				"a",
 				"async"
-			],
-			[
-				"call",
-				"call_type"
-			],
-			[
-				"par",
-				"params"
-			],
-			[
-				"te",
-				"text-center"
-			],
-			[
-				"pa",
-				"padding-right"
-			],
-			[
-				"border-bot",
-				"border-bottom-color"
-			],
-			[
-				"fon",
-				"font-size"
-			],
-			[
-				"float",
-				"float"
-			],
-			[
-				"ac",
-				"action\tAttr"
-			],
-			[
-				"font-st",
-				"font-style"
-			],
-			[
-				"loa",
-				"load_init"
-			],
-			[
-				"fro",
-				"for\tfor (…) {…}"
-			],
-			[
-				"font-",
-				"font-size"
-			],
-			[
-				"padd",
-				"padding-left"
-			],
-			[
-				"margi",
-				"margin-left"
-			],
-			[
-				"boder-r",
-				"border-right"
-			],
-			[
-				"wi",
-				"width"
-			],
-			[
-				"ba",
-				"background-color"
-			],
-			[
-				"la",
-				"labels"
-			],
-			[
-				"ref_",
-				"ref_label"
-			],
-			[
-				"sour",
-				"source_label"
-			],
-			[
-				"n",
-				"nonce"
-			],
-			[
-				"acc",
-				"accessToken"
-			],
-			[
-				"print",
-				"print_r"
-			],
-			[
-				"acces",
-				"AccessToken"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"contents": "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\nclass Project extends CI_Controller {\n\n\tpublic $normalized_projects = [];\n\tpublic $linked_projects = [];\n\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\n\t\t$this->load->model('Projects_model');\n\n\t\t$this->load->library('Private_functions');\n\n\t\t// test de la langue\n\t\t// Francais par defaut\n\t\tif(!isset($_SESSION['language'])){\n\t\t\t$this->session->set_userdata('language', 'fr');\n\t\t}\n\t}\n\n\n\tpublic function index()\n\t{\n\t\t$this->load->view('home');\n\t}\n\n\n\tpublic function normalize($project_id='', $step='')\n\t{\n\t\t// Sauvegarde en session du type de projet\n\t\t$this->session->set_userdata('project_type', 'normalize');\n\n\t\tif(isset($project_id)){\n\t\t\t$this->session->set_userdata('project_id', $project_id);\n\t\t}\n\n\t\t// Si normalisation, on efface l'éventuel lien vers un projet de link\n\t\t$this->session->unset_userdata('link_project_id');\n\n\n\t\t// REcherche de l'étape en cours si non passée dans l'URL\n\t\tif(!$step){\n\t\t\t$step = $this->get_actual_step_normalization($_SESSION['project_id']);\n\t\t}\n\n\t\t// Chargement de l'étape\n\t\t$this->load_step_normalization($step, $project_id);\n\t}\n\n\tpublic function get_actual_step_normalization($project_id='')\n\t{\n\t\tif($project_id==''){\n\t\t\treturn 'INIT';\n\t\t}\n\n\t\t$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);\n\n\t\t$file_name = key($project_api['files']);\n\t\t$steps = $project_api['log'][$file_name];\n\n\t\tif($steps['concat_with_init']['completed']){\n\t\t\treturn 'concat_with_init';\n\t\t}\n\t\telseif($steps['recode_types']['completed']){\n\t\t\treturn 'recode_types';\n\t\t}\n\t\telseif($steps['replace_mvs']['completed']){\n\t\t\treturn 'replace_mvs';\n\t\t}\n\t\telseif($steps['add_selected_columns']['completed']){\n\t\t\treturn 'add_selected_columns';\n\t\t}\n\n\t\treturn 'INIT';\n\t}\n\n\tpublic function load_step_normalization($step, $project_id='')\n\t{\n\t\tif($project_id==''){\n\t\t\t$this->load_step1_init();\n\t\t\treturn;\t\t\n\t\t}\n\n\t\tswitch ($step) {\n\t\t\tcase 'INIT':\n\t\t\t\t$this->add_selected_columns($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'add_selected_columns':\n\t\t\t\t$this->replace_mvs($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'replace_mvs':\n\t\t\t\t$this->recode_types($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'recode_types':\n\t\t\t\t$this->concat_with_init($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'concat_with_init':\n\t\t\t\t$this->concat_with_init($project_id);\n\t\t\t\tbreak;\n\t\t\t\n\t\t\tdefault:\n\t\t\t\t$this->load_step1_init();\n\t\t}\n\t}\n\n\n\tpublic function get_normalization_projects($project_id)\n\t{\n\t\t# Récupère les projets de normalisation compris dans un projet de link\n\t\t$tab = [];\n\n\t\t// Récupération des metadata du projet de link \n\t\t$tab_metadata_link_project = $this->private_functions->get_metadata_api('link', $project_id);\n\n\t\t// Récupération des 2 ids des projets de normalisation\n\t\t$src_project_id = $tab_metadata_link_project['current']['source']['project_id'];\n\t\t$ref_project_id = $tab_metadata_link_project['current']['ref']['project_id'];\n\n\t\t// Récupération des métadata des projets de normalisation\n\t\t$tab['source'] = $this->private_functions->get_metadata_api('normalize', $src_project_id);\n\t\t$tab['ref'] = $this->private_functions->get_metadata_api('normalize', $ref_project_id);\n\n\t\t// Renvoi d'un tableau contenant les métadata par projet de normalisation\n\t\treturn $tab;\n\t}\n\n\n\tpublic function link($project_id='', $type_file='')\n\t{\n\n\t\t// MAJ du type de projet en session\n\t\t$this->session->set_userdata('project_type', 'link');\n\n\t\tif(isset($project_id)){\n\t\t\t$this->session->set_userdata('link_project_id', $project_id);\n\t\t}\n\n\t\t// REcherche de l'étape en cours\n\t\t$link_step = $this->get_actual_step_linker($project_id);\n\n\t\tif($project_id && $link_step == 'INIT'){\n\t\t\t// tests de complétude des projets de normalisation\n\t\t\t$normalized_projects = $this->get_normalization_projects($project_id);\n\t\t\tforeach ($normalized_projects as $normalized_project) {\n\t\t\t\t// Rechercher l'étape du projet\n\t\t\t\t$step = $this->get_actual_step_normalization($normalized_project['project_id']);\n\n\t\t\t\t// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation\n\t\t\t\t$this->session->set_userdata('link_project_id', $project_id);\n\t\t\t\t\n\t\t\t\t// si pas fini, redirection vers la normalisation\n\t\t\t\tif($step != 'concat_with_init'){\n\t\t\t\t\t//$this->load_step_normalization($step, $normalized_project['project_id']);\n\t\t\t\t\t$this->session->set_userdata('project_id', $normalized_project['project_id']);\n\t\t\t\t\tredirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\n\t\t$this->load_step_linker($link_step, $project_id);\n\t}\n\n\tpublic function get_actual_step_linker($project_id='')\n\t{\n\t\tif($project_id == ''){\n\t\t\treturn '';\n\t\t}\n\n\t\t$project_api = $this->private_functions->get_metadata_api('link', $project_id);\n\nprint_r($project_api);die(\"end\");\n\n/*\n\t\t$file_name = key($project_api['files']);\n\t\t$steps = $project_api['log'][$file_name];\n\n\t\tif($steps['concat_with_init']['completed']){\n\t\t\treturn 'concat_with_init';\n\t\t}\n\t\telseif($steps['recode_types']['completed']){\n\t\t\treturn 'recode_types';\n\t\t}\n\t\telseif($steps['labelling']['completed']){\n\t\t\treturn 'labelling';\n\t\t}\n\t\telseif($steps['add_selected_columns']['completed']){\n\t\t\treturn 'add_selected_columns';\n\t\t}\n\nadd_selected_columns\ndedupe_linker\ninfer_restriction\nlink_results_analyzer\nload_labeller\nperform_restriction\ntrain\nupload_train\n*/\n\n\t\tif(@$project_api['log']['results']['completed']){\n\t\t\treturn 'results';\n\t\t}\n\t\telseif(@$project_api['log']['restrict_ref']['completed']){\n\t\t\treturn 'results';\n\t\t}\n\t\telseif(@$project_api['log']['labelling']['completed']){\n\t\t\treturn 'restrict_ref';\n\t\t}\n\t\telseif(@$project_api['log']['selected_columns']['completed']){\n\t\t\treturn 'labelling';\n\t\t}\n\t\telseif(@$project_api['log']['INIT']['completed']){\n\t\t\treturn 'selected_columns';\n\t\t}\n\n\t\treturn 'INIT'; // Si project_id mais aucune étape de validée\n\t}\n\n\tpublic function load_step_linker($step, $project_id='')\n\t{\n\t\tswitch ($step) {\n\t\t\tcase 'INIT':\n\t\t\t\t//$this->load_link_step1_init();\n\t\t\t\t$this->selected_columns($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'add_selected_columns':\n\t\t\t\t$this->labelling($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'labelling':\n\t\t\t\t$this->restrict_ref($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'restrict_ref':\n\t\t\t\t$this->results($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'results':\n\t\t\t\t$this->results($project_id);\n\t\t\t\tbreak;\n\t\t\t\n\t\t\tdefault:\n\t\t\t\t$this->load_link_step1_init();\n\t\t}\n\t}\n\n\tpublic function selected_columns($id='')\n\t{\n\t\t# Mise en relation des colonnes du fichier source avec celles du fichier referentiel\n\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_select_columns_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_select_columns_'.$_SESSION['language']);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\tpublic function labelling($id='')\n\t{\n\t\t# Apprentissage dedupe\n/*\nvoir /merge_machine/templates/dedupe_training.html\n*/\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_labelling_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_labelling_'.$_SESSION['language']);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\tpublic function restrict_ref($id='')\n\t{\n\t\t# Restriction du referentiel suite à apprentissage\n/*\nne pas faire tout de suite - passer l'étape\n*/\n\n\t\t$this->load->view('project_link_restrict_'.$_SESSION['language']);\n\t\t$this->load->view('footer_fr');\n\t}\n\n\tpublic function results($id='')\n\t{\n\t\t# traitement final\n/*\nscheduler linker avec project_id\n*/\n\n\t\t$this->load->view('project_link_results_'.$_SESSION['language']);\n\t\t$this->load->view('footer_fr');\n\t}\n\n\n\n\n\tpublic function test_project_id()\n\t{\n\t\tif(!isset($_SESSION['project_id'])){\n\t\t\tredirect('/Home');\n\t\t}\n\t}\n\n\n\tpublic function is_done_step($step_name)\n\t{\n\t\t$project_api = $this->private_functions->get_metadata_api($_SESSION['project_type'], $_SESSION['project_id']);\n\t\t$steps_by_filename = $this->private_functions->set_tab_steps_by_filename($project_api['log']);\n\n\t\treturn $this->private_functions->is_completed_step($step_name, $steps_by_filename, $project_api['has_mini']);\n\t}\n\n\t\n\tpublic function load_link_step1_init()\n\t{\n\t\t# Chargement de la vue d'initialisation du projet\n\n\t\t// Recherche des projets de normalisation si user connecté\n\t\t$data = [];\n\n\t\tif(isset($_SESSION['user'])){\n\t\t\t$this-> split_projects($_SESSION['user']['id']);\n\n\t\t\t$data['normalized_projects'] = $this->normalized_projects;\n\t\t\t$data['linked_projects'] = $this->linked_projects;\n\t\t}\n\n\t\t// Chargement des vues\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_step1_init_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_step1_init_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\t/*\n\t Sauvegarde de l'initialisation du projet\n\t*/\n\tpublic function save_step1_init($project_id)\n\t{\n\t\t// MAJ du nom du projet en session\n\t\t// $this->session->set_userdata('project_name', $_POST['project_name']);\n\t\t// $this->session->set_userdata('project_description', $_POST['project_description']);\n\n\t\t// Sauvegarde bdd\n\t\t// TODO\n\n\t\t// Etape 2\n\t\t//redirect('/Project/load_step2_select_columns/'.$project_id);\n\t\tredirect('/Project/add_selected_columns/'.$project_id);\n\t}\n\n\n\tpublic function load_step1_init()\n\t{\n\t\t# Chargement de la vue d'initialisation du projet\n\n\t\t// Chargement des vues\n\t\t$data['title'] = \"Normalisation\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_step1_init_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_step1_init_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\n\t//public function load_step2_select_columns($id=\"\")\n\tpublic function add_selected_columns($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('add_selected_columns')){\n\t\t\t$this->load->view('project_step2_select_columns_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step2_select_columns_fr');\n\t\t}\n\t\t\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue de recherche des valeurs manquantes\n\t*/\n\t//public function load_step3_missing_values()\n\tpublic function replace_mvs($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\t\t\n\t\t$this->test_project_id();\n\t\t\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('replace_mvs')){\n\t\t\t$this->load->view('project_step3_missing_values_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step3_missing_values_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue de recherche des types\n\t*/\n\t//public function load_step4_infer_types($id=\"\")\n\tpublic function recode_types($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('recode_types')){\n\t\t\t$this->load->view('project_step4_infer_types_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step4_infer_types_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue finale\n\t*/\n\tpublic function concat_with_init($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('concat_with_init')){\n\t\t\t$this->load->view('project_step5_concat_with_init_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step5_concat_with_init_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\n\tpublic function split_projects($user_id) // Répartition des projets selon leur type\n\t{\n\t\t$projects_list = $this->Projects_model->get_projects($user_id);\n\n\t\tforeach ($projects_list as $project) {\n\t\t\t// Appel de l'API pour récupérer les infos de chaque projet\n\t\t\t$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);\n\n\t\t\t// $last_written = $this->last_written($project['project_type'], $project['project_id']);\n\t\t\t$project['project_id'] = $project_api[\"project_id\"];\n\t\t\t$project['display_name'] = $project_api['display_name'];\n\t\t\t$project['description'] = $project_api['description'];\n\n\t\t\t$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);\n\n\t\t\tswitch ($project['project_type']) {\n\t\t\t\tcase 'normalize':\n\t\t\t\t\t$project['has_mini'] = $project_api['has_mini'];\n\t\t\t\t\t$project['file'] = key($project_api['files']);\n\t\t\t\t\t$this->normalized_projects[] = $project;\n\t\t\t\t\t\n\t\t\t\t\tbreak;\n\t\t\t\tcase 'link':\n\t\t\t\t\t$this->linked_projects[] = $project;\n\t\t\t\t\t\n\t\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\n}\n",
+			"file": "application/controllers/Project.php",
+			"file_size": 13103,
+			"file_write_time": 131491006204313438,
+			"settings":
+			{
+				"buffer_size": 13054,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/header_en.php",
+			"settings":
+			{
+				"buffer_size": 0,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/footer_en.php",
+			"settings":
+			{
+				"buffer_size": 0,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Home.php",
+			"settings":
+			{
+				"buffer_size": 864,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "application/controllers/User.php",
 			"settings":
 			{
-				"buffer_size": 4410,
+				"buffer_size": 5352,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_select_columns_fr.php",
+			"settings":
+			{
+				"buffer_size": 12963,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -532,135 +580,30 @@
 			"file": "application/views/project_link_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 27886,
+				"buffer_size": 45778,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+			"contents": "{\n  \"module_name\": \"recode_types\",\n  \"file_name\": \"ref_copy.csv\",\n  \"mod_count\": {\n    \"patronyme_uai\": 0,\n    \"departement\": 0,\n    \"numero_uai\": 0,\n    \"full_name\": 0,\n    \"denomination_principale_uai\": 0,\n    \"adresse_uai\": 0,\n    \"code_postal_uai\": 0,\n    \"localite_acheminement_uai\": 13\n  },\n  \"params\": {\n    \"column_types\": {\n      \"departement\": \"Département\",\n      \"code_postal_uai\": \"Code Postal\",\n      \"denomination_principale_uai\": \"Entité MESR\",\n      \"numero_uai\": \"UAI\",\n      \"localite_acheminement_uai\": \"Commune\"\n    }\n  }\n}",
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
+			"file_size": 464,
+			"file_write_time": 131484785790330765,
 			"settings":
 			{
-				"buffer_size": 63235,
+				"buffer_size": 544,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/models/User_model.php",
+			"contents": "{\n  \"user_id\": \"__ NOT IMPLEMENTED\",\n  \"log\": {\n    \"source.csv\": {\n      \"add_selected_columns\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"link_results_analyzer\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"train\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"es_linker\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"upload_train\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"labelling\": {\n        \"skipped\": false,\n        \"completed\": false\n      }\n    }\n  },\n  \"display_name\": null,\n  \"files\": {\n    \"source\": {\n      \"internal\": false,\n      \"module_name\": \"concat_with_init\",\n      \"project_id\": \"90a3650ce532bf116664cf5405b18d22\",\n      \"file_name\": \"source.csv\",\n      \"restricted\": false\n    },\n    \"ref\": {\n      \"internal\": false,\n      \"module_name\": \"concat_with_init\",\n      \"project_id\": \"8f0a7fc0d37cd6f016a47cb9db1e55a1\",\n      \"file_name\": \"ref.csv\",\n      \"restricted\": false\n    }\n  },\n  \"timestamp\": 1504626722.739227,\n  \"project_id\": \"b6c34ae658ecdcb10ee2aedd77e7885c\",\n  \"description\": null\n}",
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
+			"file_size": 856,
+			"file_write_time": 131491003227729942,
 			"settings":
 			{
-				"buffer_size": 1680,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "class Blog_model extends CI_Model {"
-			}
-		},
-		{
-			"file": "application/views/project_step4_infer_types_report_fr.php",
-			"settings":
-			{
-				"buffer_size": 9313,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step5_concat_with_init_report_fr.php",
-			"settings":
-			{
-				"buffer_size": 10799,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/models/Projects_model.php",
-			"settings":
-			{
-				"buffer_size": 1743,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Save_ajax.php",
-			"settings":
-			{
-				"buffer_size": 1338,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "<?php"
-			}
-		},
-		{
-			"file": "assets/style.css",
-			"settings":
-			{
-				"buffer_size": 9601,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/user_dashboard_fr.php",
-			"settings":
-			{
-				"buffer_size": 11245,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Project.php",
-			"settings":
-			{
-				"buffer_size": 5926,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step1_init_fr.php",
-			"settings":
-			{
-				"buffer_size": 18940,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step2_select_columns_fr.php",
-			"settings":
-			{
-				"buffer_size": 14257,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step3_missing_values_report_fr.php",
-			"settings":
-			{
-				"buffer_size": 9116,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step3_missing_values_fr.php",
-			"settings":
-			{
-				"buffer_size": 23652,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_step4_infer_types_fr.php",
-			"settings":
-			{
-				"buffer_size": 27005,
-				"encoding": "UTF-8",
+				"buffer_size": 1150,
 				"line_ending": "Unix"
 			}
 		},
@@ -668,44 +611,34 @@
 			"file": "application/libraries/Private_functions.php",
 			"settings":
 			{
-				"buffer_size": 1664,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "private_functions.php"
-			}
-		},
-		{
-			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
-			"settings":
-			{
-				"buffer_size": 23269,
+				"buffer_size": 1670,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/functions.js",
+			"file": "assets/style.css",
 			"settings":
 			{
-				"buffer_size": 3175,
+				"buffer_size": 10458,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/footer_fr.php",
+			"file": "assets/project_link_labelling.css",
 			"settings":
 			{
-				"buffer_size": 3136,
+				"buffer_size": 0,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_step5_concat_with_init_fr.php",
+			"file": "assets/project_link_labelling.js",
 			"settings":
 			{
-				"buffer_size": 34042,
+				"buffer_size": 0,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -718,7 +651,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 172.0,
+		"height": 132.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
@@ -727,16 +660,20 @@
 				"View: Toggle Side Bar"
 			],
 			[
+				"",
+				"About"
+			],
+			[
+				"json",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
 				"log",
 				"Snippet: console.log"
 			],
 			[
 				"sni",
 				"Snippet: console.log"
-			],
-			[
-				"json",
-				"Pretty JSON: Format and Sort JSON"
 			],
 			[
 				"package in",
@@ -751,7 +688,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 575.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -775,6 +712,7 @@
 		"/var/www/html/projets/magical_ui/application",
 		"/var/www/html/projets/magical_ui/application/config",
 		"/var/www/html/projets/magical_ui/application/controllers",
+		"/var/www/html/projets/magical_ui/application/helpers",
 		"/var/www/html/projets/magical_ui/application/libraries",
 		"/var/www/html/projets/magical_ui/application/views",
 		"/var/www/html/projets/magical_ui/assets",
@@ -782,6 +720,64 @@
 	],
 	"file_history":
 	[
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/6e9e30266ae726504c38e79ed1c8329a/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3d88136595c7309164aa94d30c6b4447/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/4e988c0d2a74b9cd07390abafac8818e/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
+		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/application/views/lib.php",
+		"/var/www/html/projets/magical_ui/application/controllers/User.php",
+		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_step1_init.css",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
+		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
+		"/var/www/html/projets/magical_ui/application/views/project_step1_init_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
+		"/var/www/html/projets/magical_ui/application/views/project_step3_missing_values_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+		"/var/www/html/projets/magical_ui/assets/style_svg.css",
+		"/var/www/html/projets/magical_ui/application/views/home_fr_svg.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/64537e4333f89aebb5f6d30a815b2ddb/recode_types/source_1.csv__run_info.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/a8c77861a71adb99593d6d790b2b3de8/metadata.json",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step5_concat_with_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step2_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step4_infer_types_fr.php",
+		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
+		"/var/www/html/projets/magical_ui/application/models/User_model.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step4_infer_types_report_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_results_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_restrict_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_step5_concat_with_init_report_fr.php",
+		"/var/www/html/tests/fred.html",
+		"/var/www/html/tmp/fred.html",
+		"/var/www/html/tmp/test_unesco.html",
+		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example2.js",
+		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example.js",
+		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example.css",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/f18f3807855d2e1e762b3ae9d2cdba66/metadata.json",
+		"/var/www/html/projets/magical_ui/assets/functions.js",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
+		"/var/www/html/projets/magical_ui/application/views/project_step3_missing_values_report_fr.php",
+		"/home/jerem/Documents/infractions routieres/2017_07_27.txt",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/32b95a2f903a9b3fd469a5b6070ded2d/concat_with_init/source_1.csv__run_info.json",
 		"/var/www/html/projets/magical_ui/README.md",
 		"/var/www/html/projets/magical_ui/init.sql",
@@ -789,24 +785,18 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/100adb3e123ad1c92ee492d68df08453/INIT/equipe.csv",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/100adb3e123ad1c92ee492d68df08453/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_step2_select_columns_report_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_step5_concat_with_init_report_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api_queued_modules.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/preprocess_fields_v3.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
 		"/var/www/html/tmp/DataTables/index.html",
 		"/var/www/html/projets/magical_ui/application/config/constants.php",
 		"/home/jerem/Téléchargements/bootstrap-tagsinput-latest/examples/index.html",
 		"/home/jerem/Bureau/test.html",
-		"/var/www/html/projets/magical_ui/application/views/project_step3_missing_values_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_step1_init_report_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_step4_infer_types_report_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/abstract_data_project.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/9488b4fe8a6ec8b517881ee7884b9c4b/normalizeValues/infered_config.json",
 		"/var/www/html/tmp/DataTables/datatables.bootstrap.min.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/62b4c55990a1dfc207e3be762d2fe2a5/replace_mvs/run_info.json",
 		"/var/www/html/projets/atlas/application/views/contact.php",
-		"/var/www/html/projets/magical_ui/assets/functions.js",
 		"/home/jerem/.config/sublime-text-3/Packages/User/console.log.sublime-snippet",
 		"/home/jerem/.bashrc",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/templates/missing_values.html",
@@ -827,14 +817,9 @@
 		"/home/jerem/Documents/a_tester",
 		"/var/www/html/projets/magical_ui/application/views/project_step2_load_file_fr.php",
 		"/var/www/html/tmp/progress.html",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Config.php",
 		"/var/www/html/projets/magical_ui/application/views/home_en.php",
-		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
 		"/var/www/html/tmp/jQuery-File-Upload-9.18.0/jquery-ui.html",
-		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
 		"/home/jerem/work_temp/openAgenda/index.php",
 		"/home/jerem/work_temp/openAgenda/src/fic2016.csv",
 		"/var/www/html/projets/magical_ui/application/config/database.php",
@@ -862,22 +847,7 @@
 		"/media/jerem/F480-8EFB/VIDEO_TS/VIDEO_TS.IFO",
 		"/var/www/html/tests/index.php",
 		"/home/jerem/work_temp/index3.php",
-		"/home/jerem/work_temp/getToken.php",
-		"/home/jerem/work_temp/test1.php",
-		"/var/www/html/phpinfo.php",
-		"/home/jerem/work_temp/index.php",
-		"/etc/apt/sources.list",
-		"/home/jerem/work_temp/src/log_5501_fin",
-		"/home/jerem/work_temp/src/log_5001_5500",
-		"/home/jerem/work_temp/src/log_4501_5000",
-		"/home/jerem/work_temp/src/log_4001_4500",
-		"/home/jerem/work_temp/src/log_3501_4000",
-		"/home/jerem/work_temp/src/log_3001_3500",
-		"/home/jerem/work_temp/src/log_2501_3000",
-		"/home/jerem/work_temp/src/log_2101_2500",
-		"/home/jerem/work_temp/src/log2",
-		"/home/jerem/work_temp/src/fic2016_2.csv",
-		"/var/www/html/info.php"
+		"/home/jerem/work_temp/getToken.php"
 	],
 	"find":
 	{
@@ -896,134 +866,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"normalized_projects",
-			"Projects_model",
-			"report",
-			"go_to",
-			">\n",
-			"concat",
-			"load_step",
-			"get_lien_html",
-			"dl_file",
-			"write_dl",
-			"write_reports",
-			"tab_reports",
-			"write_re",
-			"valid",
+			"new",
+			"vali",
+			"bloc_analysis_",
+			"split_projects",
+			"set_tab_steps_by_filename",
+			"add_column_certain_matches_api",
+			"bloc_ref",
+			"bloc_ref_",
+			"bloc_analysis_",
+			"add_column_certain_matches",
 			"bt_next",
-			"last_wri",
-			"success - last_written",
-			"get_params",
-			"download",
-			"tab_reports",
-			"fileinput-button",
-			"Sélec",
-			"bt_normalizer",
-			"upload_file_ok",
-			"write_report_html",
-			"elapsed_time",
-			"select_checked_columns",
+			"add_column_certain_matches",
+			"link/",
+			"select_columns",
 			"columns",
-			"MODIFIED",
-			"get_metadata_api",
-			"is_done_step",
-			"test_project_id",
-			"#result",
-			"result",
-			"def concat_with",
-			"concat_with",
-			"run_all",
-			"full_",
-			"full_ru",
-			"run_all",
-			"file_name",
-			"meta",
-			"file_name",
-			"dl",
-			"report_original_columns",
-			"table",
-			"concat",
-			"valid",
-			"bt_next",
-			"valid",
-			"chargement",
-			"treatment",
-			"chargement",
-			"read_config",
-			"h3",
-			"$_SESSION[",
-			"report",
-			"show_report_ok",
-			"report",
-			"load_step",
-			"project_id",
-			"valid",
-			"vali",
-			"valii",
-			"vali",
-			"valid",
-			"set_userdata",
-			"test_project_id",
-			"load_step2_select_columns",
-			"fileupload",
-			"save_project_sync",
-			"prin",
-			"columnT",
-			"User_model",
-			"written",
-			"getlas",
-			"get_las",
-			"sample_table",
-			"dataT",
-			"Save_ajax",
-			"insert_project",
-			"metada",
-			"user_id",
-			"get_projects",
-			"schedule",
-			"report",
-			"recode",
-			"'",
-			"gl_columns",
-			"recode_types",
-			"get_params",
-			"bt_replace_mvs",
-			"prop",
-			"bt_recode_types",
-			"data_visualisation_modal",
-			"modal_types_select",
-			"generate_sample",
-			"create_button_infer_html",
-			"set_value",
-			"create_button_infer_html",
-			"rch",
-			"selected_column",
-			"write_categories_types_modal",
-			"generate_sample",
-			"tab_sample",
-			"generate_sample",
-			"sho",
-			"write_tags_modal",
-			"show_modal_types_select",
-			"td_bt",
-			"cat_list_modal",
-			"bt_",
-			"sampl",
-			"genera",
-			"data_all",
-			"treat",
-			"bt_infer_mvs",
-			"dataTables",
-			"chargement",
-			"reat",
-			"e.p",
-			"\n        <div class=\"col-md-12 text-center\">\n            footer fr\n        </div>",
-			"chargement",
-			"disabl",
-			"bt_infer_mvs",
+			"bloc_analysis_",
+			"ana",
+			"add_js_bloc",
+			"new_bloc",
+			"bt_add_bloc",
+			"load_link_step1_init",
+			"md",
+			"load_link_step1_init",
+			"footer",
+			"get_runinfo",
+			"write_reports",
+			"work",
 			"project_name",
+			"files",
+			"get_columns",
+			"src_columns",
+			"modal_ref",
+			"_project_name",
+			"target",
+			"11",
+			"gly",
+			"bloc_project",
+			"tool",
+			"modal_ref",
+			"get_normalized_projects_html",
+			"modal_ref",
+			"progress_src",
+			"progress_ref",
+			"bt_next",
+			"inherit",
+			"go_to",
+			"go",
+			"scroll",
+			"bt_next",
+			"#bt_ne",
+			"add_new_normalize_project_ref",
+			"project_id_src",
+			"file_src_no_nrz",
+			"file",
+			"upload",
+			"form1",
+			"form",
+			"#files",
+			"files",
+			"fileupload_src",
+			"fileupload",
+			"fileup",
+			"add_new_normalize_project_src",
+			"save_id_normalized_project",
+			"src_project_id",
+			"add_new_normalize_project_src",
+			"save_session_sync",
+			"save_project_sync",
+			"save_project_synch",
+			"url_src",
+			"save_id_normalized_project",
+			"hover_new_file_src",
+			"bt_new_file_src",
+			"new_file_src",
+			"call_api_sync",
+			"save_project_sync",
+			"project_id_src",
+			"call_api_sync",
+			"save_id_normalized_project",
+			"call_api_sync",
+			"fileupload_ref",
+			"progress",
+			"_src",
+			"fileupload",
+			"envoyer",
+			"fileupload",
+			"/normalize/upload/",
+			"call_api_upload",
+			"file_name",
+			"src",
+			"cat_list_modal",
+			"normalize",
+			"toggle_p",
+			"cat_list_modal",
+			"write_categories_types_modal",
+			"infer",
+			"link_project_id",
+			"bt_next",
+			"location",
 			"bt_ne",
-			"vali"
+			"is_completed_step",
+			"isss",
+			"isset",
+			"conca",
+			"treatment",
+			"trea",
+			"127",
+			"load_step_normalization",
+			"file_name",
+			"fileupload",
+			"modal",
+			"configura",
+			"select_all",
+			"voir",
+			"metada",
+			"metadata",
+			"get_actual_step_linker",
+			"load_step_linker",
+			"load_link_step1_init",
+			"\n  ",
+			"color_src",
+			"each",
+			"link",
+			"get_metadata",
+			"asyn",
+			"selected_columns",
+			"valid",
+			"load_step_normalization"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1031,6 +1001,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"xs",
+			"inline",
+			"_ref",
+			"ref",
 			"MODIFIED\"",
 			"h4",
 			"\"",
@@ -1059,24 +1033,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/controllers/User.php",
+					"file": "application/controllers/Project.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4410,
+						"buffer_size": 13054,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								393,
-								393
+								4751,
+								4751
 							]
 						],
 						"settings":
@@ -1085,498 +1059,19 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/views/project_link_step1_init_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 27886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								13478,
-								13478
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5625.0,
+						"translation.y": 2898.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+					"buffer": 1,
+					"file": "application/views/header_en.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 63235,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								41841,
-								41841
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 14983.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/models/User_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1680,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1224,
-								1224
-							]
-						],
-						"settings":
-						{
-							"auto_name": "class Blog_model extends CI_Model {",
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 19,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "application/views/project_step4_infer_types_report_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9313,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1837,
-								1837
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 560.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "application/views/project_step5_concat_with_init_report_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10799,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5873,
-								5873
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1480.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "application/models/Projects_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1743,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								693,
-								693
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "application/controllers/Save_ajax.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1338,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								459,
-								459
-							]
-						],
-						"settings":
-						{
-							"auto_name": "<?php",
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 8,
-					"file": "assets/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9601,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								153
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "application/views/user_dashboard_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11245,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								401,
-								296
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "application/controllers/Project.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5926,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2168,
-								2168
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 810.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "application/views/project_step1_init_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18940,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								18940,
-								18940
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "application/views/project_step2_select_columns_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14257,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4057,
-								4057
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1299.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "application/views/project_step3_missing_values_report_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9116,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6434,
-								6434
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2010.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "application/views/project_step3_missing_values_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23652,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1287,
-								1287
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "application/views/project_step4_infer_types_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 27005,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1287,
-								1287
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "application/libraries/Private_functions.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1664,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1662,
-								1662
-							]
-						],
-						"settings":
-						{
-							"auto_name": "private_functions.php",
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 720.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23269,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -1589,72 +1084,188 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6174.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 18,
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "assets/functions.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3175,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								462,
-								462
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 19,
-					"file": "application/views/footer_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3136,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								539,
-								539
-							]
-						],
-						"settings":
-						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 20,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/footer_en.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/controllers/Home.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 864,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								305,
+								305
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/controllers/User.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5352,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3853,
+								3853
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2646.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/views/project_link_select_columns_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9941,
+								9941
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5514.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/views/project_link_step1_init_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 45778,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								34212,
+								34212
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 14303.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								544,
+								544
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
 					"type": "text"
 				}
 			]
@@ -1664,32 +1275,146 @@
 			"sheets":
 			[
 				{
-					"buffer": 20,
-					"file": "application/views/project_step5_concat_with_init_fr.php",
+					"buffer": 8,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 34042,
+						"buffer_size": 1150,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9385,
-								9385
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "application/libraries/Private_functions.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1670,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								540,
+								540
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "assets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10458,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								968,
+								968
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1839.0,
+						"translation.y": 778.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "assets/project_link_labelling.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "assets/project_link_labelling.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1697,7 +1422,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1718,19 +1443,12 @@
 				0,
 				2,
 				1
-			],
-			[
-				2,
-				0,
-				3,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.454028714876,
-			0.801307892144,
+			0.673156077858,
 			1.0
 		],
 		"rows":
@@ -1786,7 +1504,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 322.0,
+	"side_bar_width": 382.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

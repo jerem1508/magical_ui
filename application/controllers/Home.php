@@ -11,12 +11,32 @@ class Home extends CI_Controller {
 		if(!isset($_SESSION['language'])){
 			$this->session->set_userdata('language', 'fr');
 		}
-
-		//$this->load->helper('captcha');
 	}
 
 	public function index()
 	{
+		# Chargement par défaut
+
+		$data['title'] = "Accueil";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('home_'.$_SESSION['language']);
+		$this->load->view('footer_'.$_SESSION['language']);
+	}
+
+	public function fr()
+	{
+		# Passe l'interface en français
+
+		$this->session->set_userdata('language', 'fr');
+		redirect("/Home");
+	}
+
+	public function en()
+	{
+		# Passe l'interface en français
+
+		$this->session->set_userdata('language', 'en');
+		redirect("/Home");
 	}
 }

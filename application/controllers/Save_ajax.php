@@ -53,6 +53,7 @@ class Save_ajax extends CI_Controller {
 		}
 		else{
 			$project_type = "unknown";
+			$err = true;
 		}
 
 		if(isset($_POST['public_status'])){

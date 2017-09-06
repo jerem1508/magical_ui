@@ -1,163 +1,86 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Jointure</title>
-
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
-
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/jquery.dataTables.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/project_link_select_columns.css');?>">
-
-    <link rel="stylesheet" href="<?php echo base_url('assets/style.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/style_fu.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.fileupload.css');?>">
-
-    <style type="text/css">
-        #msg_danger, #create_project_ok, #upload_file_progress, #report{
-            /*On masque par défaut*/
-            display: none;
-        }
-        #show_report_ok, #upload_file_ok, #check_file_ok{
-            visibility: hidden;
-        }
-		@media (min-width: 992px) {
-		    .modal-lg {
-		        width: 1100px;
-		    }
-		}
-        .column{
-            width: 100%;
-            height: 40px;
-
-            font-size: 1.1em;
-            color: white;
-            margin-bottom: 10px;
-            padding-left: 5px;
-            padding-top: 5px;
-            border: 1px solid #777;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container">
-	<div class="row">
-		<div class="col-xs-2" style="margin-top: 20px;">
-			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.png');?>" class="img-responsive">
-		</div>
-		<div class="col-xs-8 text-center">
-			<h1>Magical_ui</h1>
-		</div>
-		<div class="col-xs-2 text-right" style="margin-top: 20px;">
-            <div class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 22px; color: #000;">
-                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url("index.php/Home");?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Accueil</a></li>
-                    <li role="separator" class="divider"></li>
-                    <?php
-                    if(isset($_SESSION['user'])){
-                        echo "<li><a href='".base_url("index.php/User/dashboard")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;Tableau de bord</a></li>";
-                        echo "<li><a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a></li>";
-                    }
-                    else{
-                        echo "<li><a href='".base_url("index.php/User/login/normalize")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a></li>";
-                    }
-                    ?>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;&nbsp;English</a></li>
-                </ul>
-            </div><!-- /dropdown-->
-		</div>
-	</div>
-
-	<hr>
-
-    <div class="text-center">
-        <div class="breadcrumb flat">
-            <!--<a href="#" class="done">Sélection du fichier</a>-->
-            <a href="" class="done">Création du projet</a>
-            <a href="#" class="active">Correspondance des colonnes</a>
-            <a href="#" class="todo">Apprentissage</a>
-            <a href="#" class="todo">Restriction</a>
-            <a href="#" class="todo">Téléchargement</a>
-        </div>
-    </div>
-<!--
-	<div class="well">
-		<h2><span id="project_name"></span> : <i>Mise en correspondance des colonnes</i></h2>
-    </div>
--->
-</div><!--/container-->
-
-<!--
-<div class="container-fluid">
+<div class="container-fluid" id="entete" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
-            <div class="col-xs-2">
-                <h3>
-                    Fichier source
-                </h3>
-                <div id="src">init</div>
-            </div> 
-            <div class="col-xs-8 text-center">
-                <h3>
-                    Correspondance des colonnes
-                </h3>
-            </div> 
-            <div class="col-xs-2">
-                <h3>Fichier referentiel</h3>
-                <div id="ref">init</div>
-            </div> 
+            <div class="col-md-10">
+                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Association des colonnes</i></h2>
+            </div>
+            <div class="col-md-2 text-right">
+                <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
+            </div>
         </div>
+        <p>
+            Cette étape vous permet d'associer des colonnes de votre fichier source à des colonne du référentiel cible. Une bonne association améliorera considérablement les résultats de la jointure.<br>
+            Pour associer des colonnes, vous devez ajouter une nouvelle association (<button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button>) et glisser/déposer la ou les colonnes souhaitées dans la zone corespondante.
+            <br>
+            Les colonnes possédant une <span class="glyphicon glyphicon-star"></span> sont des colonnes où le type a été détecté lors de la normalisation.
+            <br>
+            <br>
+            Bien que cela soit déconseillé, vous pouvez choisir de passer cette étape.
+        </p>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success" id="bt_start">Commencer l'association des colonnes</button>
+            </div>
+        </div>
+    </div><!-- /well-->
+</div><!--/container-->
+
+<div class="container-fluid" id="work" style="margin-top: 20px;">
+    <div class="well">
+        <div class="row">
+            <div class="col-xs-2 titre">
+                <h3>
+                    Source
+                </h3>
+                <div class="filename">
+                    <span class="glyphicon glyphicon-file"></span>
+                    <span id="src_file_name"></span>
+                </div>
+                <div id="src_columns"></div>
+            </div>
+            <div class="col-xs-8">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h2 style="margin-top: 0;display: inline-block;">
+                            <span id="project_name2"></span> : <i>Association des colonnes</i>
+                        </h2>
+                        <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px">
+                            Nouvelle association&nbsp;
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <a>Aide</a>
+                        &nbsp;|&nbsp;
+                        <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-xs-12 text-center" id="blocs"></div>
+                </div>
+            </div>
+            <div class="col-xs-2 titre">
+                <h3>
+                    <span class="glyphicon glyphicon-file"></span>
+                    Référentiel
+                </h3>
+                <div id="ref_file_name" class="filename"></div>
+                <div id="ref_columns"></div>
+            </div>
+        </div>    
     </div>
 </div>
--->
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-2">
-            <h3>
-                <span class="glyphicon glyphicon-file"></span>
-                Source
-            </h3>
-            <div id="src_columns"></div>
-        </div>
-        <div class="col-xs-8">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3 style="display: inline-block;">
-                        Association des colonnes
-                    </h3>
-                    <button class="btn btn-success2" id="bt_add_bloc">
-                        Nouvelle association&nbsp;
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 text-center" id="blocs"></div>
-            </div>
-        </div>
-        <div class="col-xs-2">
-            <h3>
-                <span class="glyphicon glyphicon-file"></span>
-                Référentiel
-            </h3>
-            <div id="ref_columns"></div>
+        <div class="col-xs-12 text-right">
+            <button class="btn btn-success" id="bt_next">Etape suivante : Apprentissage >></button>
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" tabindex="-1" role="dialog" id="modal_bloc">
   <div class="modal-dialog" role="document">
@@ -178,16 +101,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div><!-- /.modal -->
 
 
-
-<script type="text/javascript" src="<?php echo base_url('assets/jquery-3.2.1.min.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-
-<script type="text/javascript" src="<?php echo base_url('assets/project_link_select_columns.js');?>"></script>
 
 <script type="text/javascript">
 
@@ -220,6 +133,48 @@ function get_metadata(project_type, project_id) {
     return metadata;
 }
 
+function get_runinfo(project_type, project_id, module_name, file_name) {
+    // Récupere le contenu d'un fichier runInfo via API
+    console.log('get_runinfo()');
+
+    var runinfo = "";
+
+    var tparams = {
+        "data_params": {
+            "module_name": module_name,
+            "file_name": file_name + "__run_info.json"
+        }
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/' + project_type + '/' + project_id + '/',
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - download_config");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - download_config");
+                console.dir(result);
+
+                return result.result.params.column_types;
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - download_config");
+            console.log(result);
+        }
+    });// /ajax - Download config
+
+}
+
+
 function get_columns(metadata) {
     // Renvoie les colonnes présentent dans les métadata
 
@@ -238,32 +193,175 @@ function write_columns_html(target, columns) {
     $("#" + target).html(html);
 }
 
-$(function(){
+function get_filename(filename) {
+    // On retire prefix "MINI__" si existant
+    if(filename.substr(0, 4) == 'MINI'){
+        filename = filename.substr(6, filename.length);
+    }
+
+    return filename;
+}
+
+function valid_associations() {
+    // Teste la validité des associations effectuées
+    // cad : au moins un champ de chaque coté
+
+    // TODO
+
+    return true;
+}
+
+function add_column_certain_matches_api() {
+    // Appel API de MAJ associations
+
+    // Récupération des associations
+    var tab_json = new Array();
+    $(".blocs_analysis").each(function( index ) {
+      tab_json.push($(this).text());
+    });
+
+    var chaine_json = tab_json.join(); // , par défaut
+
+    var tparams = {
+        "column_certain_matches": [chaine_json]
+        }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/add_column_certain_matches/' + project_id_link + '/',
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - add_column_certain_matches");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - add_column_certain_matches");
+                console.dir(result);
+
+                
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - add_column_certain_matches");
+            console.log(result);
+        }
+    });// /ajax
+
+}// /add_column_certain_matches_api
+
+
+function add_column_matches_api() {
+    // Appel API de MAJ associations
+
+    // Récupération des associations
+    var tab_json = new Array();
+    $(".blocs_analysis").each(function( index ) {
+      tab_json.push($(this).text());
+    });
+
+    var chaine_json = tab_json.join(); // , par défaut
+
+    var tparams = "{\"column_matches\": ["+chaine_json+"]}";
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/add_column_matches/' + project_id_link + '/',
+        data: tparams,
+        async: false,
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - add_column_matches");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - add_column_matches");
+                console.dir(result);
+
+                
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - add_column_matches");
+            console.log(result);
+        }
+    });// /ajax
+
+}// /add_column_matches_api
+
+function valid_step(link_project_id){
+    console.log('valid_step');
+
+    // Appel de l'étape suivante
+    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
+    
+}
+
+$(function(){// ready
+    
+    $("body").css("height", $(window).height()) ;
+
+    $("#bt_start").click(function(){
+        $("#entete").css("display", "none");
+        $("#work").fadeToggle();
+    });
+
+    $("#bt_next").click(function(){
+        // Appel de l'API pour enregistrer les associations utilisateur
+        if(valid_associations()){
+            //add_column_certain_matches_api();
+            add_column_matches_api();
+        }
+
+        valid_step('<?php echo $_SESSION['link_project_id'];?>');
+    });    
+
+    project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
     // Récupération des metadata du projet de link en cours
+    console.log('Projet de LINK');
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
-    //$("#project_name").html(metadata_link.display_name);
+    $("#project_name1").html(metadata_link.display_name);
+    $("#project_name2").html(metadata_link.display_name);
 
     // Récupération des ids des projets de normalisation
-    project_id_src = metadata_link['current']['source']['project_id'];
-    project_id_ref = metadata_link['current']['ref']['project_id'];
+    project_id_src = metadata_link['files']['source']['project_id'];
+    project_id_ref = metadata_link['files']['ref']['project_id'];
 
     // Récupérartion des métadata du fichier source
+    console.log('Projet de normalisation SOURCE');
     metadata_src = get_metadata('normalize', project_id_src);
-    
+
     // Récupérartion des métadata du fichier referentiel
+    console.log('Projet de normalisation REFERENTIEL');
     metadata_ref = get_metadata('normalize', project_id_ref);
 
     // Récupération des colonnes sources à ajouter
     columns_src = get_columns(metadata_src);
     columns_ref = get_columns(metadata_ref);
 
-    // Ajout des colonne à l'interface
-    $("#src_columns").html(get_columns_html(columns_src, "src"));
-    $("#ref_columns").html(get_columns_html(columns_ref, "ref"));
+    // Renseignement des noms de fichiers
+    var src_file_name = get_filename(metadata_src.last_written.file_name); 
+    var ref_file_name = get_filename(metadata_ref.last_written.file_name);
+    $("#src_file_name").html(src_file_name);
+    $("#ref_file_name").html(ref_file_name);
 
+    // Récupération des types inférés
+    var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name);
+    var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name);
+
+    // Ajout des colonne à l'interface
+    $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
+    $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
 
 
     cpt_bloc = 0; // Compteur de blocs

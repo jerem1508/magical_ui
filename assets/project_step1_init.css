@@ -1,0 +1,12 @@
+#result, #msg_danger, #create_project_ok, #upload_file_progress, #report{
+    /*On masque par défaut*/
+    display: none;
+}
+#show_report_ok, #upload_file_ok, #check_file_ok{
+    visibility: hidden;
+}
+
+.btn_2_3{
+  width: 120px;
+  border-radius: 10px;
+}

@@ -1,0 +1,12 @@
+.progress-bar {
+    border-right: solid 1px #FFF;
+}
+.progress-bar:last-child {
+    border: none; 
+}
+.step{
+	cursor: pointer;
+}
+.btn_tdb{
+	width: 100px;
+}

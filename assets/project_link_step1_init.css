@@ -1,0 +1,46 @@
+#result,
+#txt_create_merge_project,
+#create_merge_project_ok,
+#txt_init_nrz_src_project,
+#init_nrz_src_project_ok,
+#txt_send_src_file,
+#send_src_file_ok,
+#txt_init_nrz_ref_project,
+#init_nrz_ref_project_ok,
+#txt_send_ref_file,
+#send_ref_file_ok,
+#txt_add_src_nrz_projects,
+#add_src_nrz_projects_ok,
+#txt_add_ref_nrz_projects,
+#add_ref_nrz_projects_ok,
+#bloc_bt_next
+{
+    display: none;
+}
+
+.progress-bar {
+    border-right: solid 1px #FFF;
+}
+.progress-bar:last-child {
+    border: none; 
+}
+.chk{
+    visibility: hidden;
+    color: #999;
+}
+
+#modal_projects_body hr{
+    margin: 0;
+    margin-top: 5px;
+}
+.progress{
+    height: 5px;
+}
+.bloc_project{
+    cursor: pointer;
+}
+
+.btn_2_3{
+  width: 120px;
+  border-radius: 10px;
+}

@@ -15,39 +15,6 @@ gris clair
 corail
 #FA5D58
 */
-body{
-    background-image: radial-gradient(circle at bottom left, #eee, #777);
-    background-image: linear-gradient(to top, #eee, #777);
-}
-
-/* ENTETE ------------------------------*/
-.entete{
-  background-color: #fff; 
-  padding-bottom: 15px;
-  color: #777;
-  font-style: italic;
-}
-.entete .logo_mesri>img{
-  margin-top: 40px;
-}
-.entete .logo_site>img{
-  margin-top: 40px;
-  height: 58px;
-}
-.entete .logo_eig>img{
-  margin-top: 20px;
-}
-.entete2{
-  background-color: #262626; 
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.entete2 a{
-  color: #fff;
-}
-/* /ENTETE ------------------------------*/
-
-
 
 .color_src{
   color: #D474BB;
@@ -57,9 +24,12 @@ body{
   color: #FDDE6C;
 }
 
+.btn_width{
+  width: 200px;
+}
 
 h1{
-  color: #000;
+  color: #222;
   font-size: 50px;
 }
 hr{
@@ -68,32 +38,28 @@ hr{
 .poudre{
   position: fixed;
   width: 100%;
-  height: 100%;
-  /*top: -250px;*/
+  top: -250px;
   left: 0;
   z-index: -1;  
 }
 .poudre_pos_home{
-  top: 0;
+  top: 0px;
 }
 
 .steps{
 	display: inline-block;
-  list-style-type: none;
-  padding-left: 0;
 }
 .steps .step{
   display: inline-block;
   background-color: #f5f5f5;
-  width: 300px;
-/*  height: 30px;*/
+  width: 200px;
+  height: 80px;
   float: left;
   padding-left: 10px;
-  border-left: 5px solid #777;
-  border-bottom: 1px solid #777;
+  border-bottom: 5px solid #aaa;
 }
 .steps .active{
-  border-color: #E00612;
+  border-color: #FA5D58;
 }
 .steps .title{
   text-transform: uppercase;
@@ -106,12 +72,6 @@ hr{
   border-bottom: 0;
   width: 170px;
 
-}
-
-.step_numbers{
-  font-size: 50px;
-  font-weight: bold;
-  color: #E00612;
 }
 
 
@@ -134,43 +94,33 @@ footer{
 
 
 /* Surcharge bootstrap */
-a{
-  color: #25358c;
-}
-a:hover{
-  color: #E00612;  
-}
 
 .navbar{
   border-radius: 0 0 4px 0 ;
   margin-bottom: 0;
 }
 
-.btn{
-  border-radius: 0;
-}
-
 .btn-success {
   color: #fff;
-  background-color: #E00612;
-  border-color: #E00612;
+  background-color: #FA5D58;
+  border-color: #FA5D58;
 }
 .btn-success:focus,
 .btn-success.focus {
   color: #fff;
-  background-color: #E00612;
+  background-color: #FA5D58;
   border-color: #122b40;
 }
 .btn-success:hover {
   color: #fff;
-  background-color: #E00612;
+  background-color: #FA5D58;
   border-color: #204d74;
 }
 .btn-success:active,
 .btn-success.active,
 .open > .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #E00612;
+  background-color: #FA5D58;
   border-color: #204d74;
 }
 .btn-success:active:hover,
@@ -183,7 +133,7 @@ a:hover{
 .btn-success.active.focus,
 .open > .dropdown-toggle.btn-success.focus {
   color: #fff;
-  background-color: #E00612;
+  background-color: #FA5D58;
   border-color: #122b40;
 }
 .btn-success:active,
@@ -219,29 +169,29 @@ fieldset[disabled] .btn-success.active {
 
 
 .progress-bar-success2{
-  background-color: #25358C;
+  background-color: #6097AC;
 }
 .btn-success2 {
   color: #fff;
-  background-color: #25358C;
-  border-color: #25358C;
+  background-color: #6097AC;
+  border-color: #6097AC;
 }
 .btn-success2:focus,
 .btn-success2.focus {
   color: #fff;
-  background-color: #25358C;
+  background-color: #6097AC;
   border-color: #122b40;
 }
 .btn-success2:hover {
   color: #fff;
-  background-color: #25358C;
+  background-color: #6097AC;
   border-color: #204d74;
 }
 .btn-success2:active,
 .btn-success2.active,
 .open > .dropdown-toggle.btn-success2 {
   color: #fff;
-  background-color: #25358C;
+  background-color: #6097AC;
   border-color: #204d74;
 }
 .btn-success2:active:hover,
@@ -254,7 +204,7 @@ fieldset[disabled] .btn-success.active {
 .btn-success2.active.focus,
 .open > .dropdown-toggle.btn-success2.focus {
   color: #fff;
-  background-color: #25358C;
+  background-color: #6097AC;
   border-color: #122b40;
 }
 .btn-success2:active,

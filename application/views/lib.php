@@ -1,0 +1,23 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?php echo $title;?></title>
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
+<!--<link rel="stylesheet" href="<?php echo base_url('assets/style_fu.css');?>">-->
+<link rel="stylesheet" href="<?php echo base_url('assets/jquery.fileupload.css');?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/jquery.dataTables.min.css');?>">
+
+<script type="text/javascript" src="<?php echo base_url('assets/jquery-3.2.1.min.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js');?>"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
