@@ -12,14 +12,16 @@
 			<div class="col-xs-6" style="padding-right: 10px;">
 				<h3>Normalisation d'un fichier</h3>
 				<p>
-					Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Nullam cursus, lorem tincidunt cursus gravida, magna lacus egestas nulla, at aliquet nunc mi non est. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+					La normalisation prend un unique fichier tabulaire (csv, excel) et le nettoie automatiquement en fonction des types de données rencontrées.
 				</p>
 				<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">Commencer un projet de normalisation</button>
 			</div><!--/col-xs-6-->
 			<div class="col-xs-6" style="padding-left: 10px;border-left: 1px solid #999;">
-				<h3>Jointure de fichiers</h3>
+				<h3>Jointure magique de deux fichiers</h3>
 				<p>
-					Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Nullam cursus, lorem tincidunt cursus gravida, magna lacus egestas nulla, at aliquet nunc mi non est. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Nunc eleifend est ut erat cursus pellentesque. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+					La jointure magique permet d'apparier automatiquement les fichier sale (fautes d'ortographe, données sur ou sous renseignées) avec un fichier de référence propore. Notre methode va au delà de la jointure par clé ou d'un simple fuzzy match et utilise des faisceaux d'indices pour proposer des matchs pertinents. La jointure s'appuie en partie sur la Normalisation.
+					
+					Actuellement, ce service de jointure se limite à la jointure entre un fichier sale et un fichier de référence, ce dernier ne devant pas contenir de doublons.
 				</p>
 				<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">Commencer un projet de jointure</button>
 			</div><!--/col-xs-6-->
@@ -36,7 +38,9 @@
 			<div class="col-xs-6">
 				<h3>Pourquoi s'inscrire ?</h3>
 				<p>
-					Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+					En vous inscrivant, vous pourrez stocker vos différents projets et fichiers et vous en reservir pour dans différents projets de jointure. Par ailleurs, vos données seront conservées plus longtemps que pour les utilisateurs non inscrits.
+
+					L'inscription est totalement gratuite!
 				</p>
 
 				<a href='<?php echo base_url("index.php/User/login");?>' class="btn btn-success">Déjà inscrit</a>
