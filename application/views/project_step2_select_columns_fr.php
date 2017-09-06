@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="well">
 		<h2><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>
 		<p>
-			Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+			 Sélectionnez les colonnes à nettoyer. Dans le cadre d'un projet de jointure, nous recommendons fortement de nettoyer toutes les colonnes suceptibles de servir à la jointure de vos fichiers.
 		</p>
 
 		<div class="row">
