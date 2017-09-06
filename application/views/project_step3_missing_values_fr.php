@@ -106,7 +106,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		
 		<p>
-			Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+			Dans de nombreux systèmes d'informations ou pour des données renseignées manuellement, des valeurs manquantes sont représentées par des chaines de caratère ('non-renseigné', 'NR', 'xxxxx', etc.). Cela nuit à l'analyse de données et rend la jointure moins performante.
+
+			Dans cette étape, la machine suggère des libéllés de valeurs manquantes potentielles présentes dans votre fichier. Vous pouvez corriger ces valeurs. Elles seront ensuite remplacées par l'absence de valeur.
 		</p>
 		<div class="row">
 			<div class="col-md-12 text-center">
