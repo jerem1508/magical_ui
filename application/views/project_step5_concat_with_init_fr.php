@@ -117,8 +117,7 @@ if(isset($this->session->project_type)){
 			</div>
 		</div>
 		<p>
-			Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. <br><br>
-			Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+			Si vous avez uploadé un gros fichier, les étapes de traitement précédentes ont été faites sur un échantillon. Vous pouvez lancer le traitement sur l'ensemble du fichier sur cette page. <br><br>
 		</p>
 
 		<div class="row" id="trt_all">
