@@ -47,13 +47,12 @@
         </h2>
         <div class="row">
             <div class="col-xs-9">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.                    
-            </div>
+                Choisissez le fichier que vous voulez transformer. Celui ci peut être au format csv (séparateurs "," ou ";") ou au format excel (xls ou xlsx). La première ligne du fichier doit contenir l'entête. Nous limitons actuellement les fichiers utilisateurs à 1M de lignes.
+		    
+		Dans le cas de fichiers Excel, seule la première feuille sera prise en compte. Les données doivent être sous forme de tableau disposé en haut à gauche du fichier. La première ligne du fichier est supposée contenir l'entête. Enfin les formules ne seront pas évaluées et seront considérées comme du texte.
+		    
+		NB: Nous recommandons l'utilisation du format csv (séparteur ",") et l'encodage UTF-8 pour le stockage de vos données tabulaires sous forme de fichiers. Ceux-ci constituent des formats internationnaux et libres de droits.
+            </div>
             <div class="col-xs-3 text-center">
                 <span class="btn btn-default btn-xl fileinput-button btn_2_3">
                     <h4 class="glyphicon glyphicon-plus"></h4>

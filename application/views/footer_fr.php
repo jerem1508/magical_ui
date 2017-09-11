@@ -56,7 +56,7 @@
   <form name="form_comment">
   	<div class="row">
   		<div class="col-md-12">
-  			<span class="txt_comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+  			<span class="txt_comment">Un bug, un comportement inatendu, une suggestion...</span>
   		</div>
   	</div>
     <div class="row">
