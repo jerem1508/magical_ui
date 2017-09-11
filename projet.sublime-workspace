@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"text",
+				"text-center"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"border-",
+				"border-left"
+			],
+			[
+				"sou",
+				"source_keys"
+			],
+			[
+				"source",
+				"source_list"
+			],
+			[
+				"column_",
+				"column_matches"
+			],
+			[
+				"JSON",
+				"JSON_stringify\t( value: any, replacer?: any, space?: any ): string JSON"
+			],
+			[
+				"d",
+				"document\t: Document Window"
+			],
+			[
+				"so",
+				"socket_on_message"
+			],
+			[
 				"asso",
 				"associations"
 			],
@@ -12,20 +64,12 @@
 				"text-right"
 			],
 			[
-				"margin",
-				"margin-bottom"
-			],
-			[
 				"non",
 				"NONE\t: const unsigned short Event"
 			],
 			[
 				"displa",
 				"display\t Style CSS"
-			],
-			[
-				"border",
-				"border-bottom"
 			],
 			[
 				"pa",
@@ -38,10 +82,6 @@
 			[
 				"i",
 				"italic"
-			],
-			[
-				"padd",
-				"padding-bottom"
 			],
 			[
 				"mar",
@@ -94,10 +134,6 @@
 			[
 				"displ",
 				"display\t Style CSS"
-			],
-			[
-				"text",
-				"text-right"
 			],
 			[
 				"gl",
@@ -478,91 +514,16 @@
 			[
 				"el",
 				"else"
-			],
-			[
-				"ms",
-				"msg"
-			],
-			[
-				"lan",
-				"language"
-			],
-			[
-				"proj",
-				"project_id"
-			],
-			[
-				"va",
-				"value"
-			],
-			[
-				"base",
-				"base_url"
-			],
-			[
-				"div",
-				"div_error"
-			],
-			[
-				"col-",
-				"col-sm-10"
-			],
-			[
-				"ap",
-				"api_url"
-			],
-			[
-				"a",
-				"async"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\nclass Project extends CI_Controller {\n\n\tpublic $normalized_projects = [];\n\tpublic $linked_projects = [];\n\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\n\t\t$this->load->model('Projects_model');\n\n\t\t$this->load->library('Private_functions');\n\n\t\t// test de la langue\n\t\t// Francais par defaut\n\t\tif(!isset($_SESSION['language'])){\n\t\t\t$this->session->set_userdata('language', 'fr');\n\t\t}\n\t}\n\n\n\tpublic function index()\n\t{\n\t\t$this->load->view('home');\n\t}\n\n\n\tpublic function normalize($project_id='', $step='')\n\t{\n\t\t// Sauvegarde en session du type de projet\n\t\t$this->session->set_userdata('project_type', 'normalize');\n\n\t\tif(isset($project_id)){\n\t\t\t$this->session->set_userdata('project_id', $project_id);\n\t\t}\n\n\t\t// Si normalisation, on efface l'éventuel lien vers un projet de link\n\t\t$this->session->unset_userdata('link_project_id');\n\n\n\t\t// REcherche de l'étape en cours si non passée dans l'URL\n\t\tif(!$step){\n\t\t\t$step = $this->get_actual_step_normalization($_SESSION['project_id']);\n\t\t}\n\n\t\t// Chargement de l'étape\n\t\t$this->load_step_normalization($step, $project_id);\n\t}\n\n\tpublic function get_actual_step_normalization($project_id='')\n\t{\n\t\tif($project_id==''){\n\t\t\treturn 'INIT';\n\t\t}\n\n\t\t$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);\n\n\t\t$file_name = key($project_api['files']);\n\t\t$steps = $project_api['log'][$file_name];\n\n\t\tif($steps['concat_with_init']['completed']){\n\t\t\treturn 'concat_with_init';\n\t\t}\n\t\telseif($steps['recode_types']['completed']){\n\t\t\treturn 'recode_types';\n\t\t}\n\t\telseif($steps['replace_mvs']['completed']){\n\t\t\treturn 'replace_mvs';\n\t\t}\n\t\telseif($steps['add_selected_columns']['completed']){\n\t\t\treturn 'add_selected_columns';\n\t\t}\n\n\t\treturn 'INIT';\n\t}\n\n\tpublic function load_step_normalization($step, $project_id='')\n\t{\n\t\tif($project_id==''){\n\t\t\t$this->load_step1_init();\n\t\t\treturn;\t\t\n\t\t}\n\n\t\tswitch ($step) {\n\t\t\tcase 'INIT':\n\t\t\t\t$this->add_selected_columns($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'add_selected_columns':\n\t\t\t\t$this->replace_mvs($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'replace_mvs':\n\t\t\t\t$this->recode_types($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'recode_types':\n\t\t\t\t$this->concat_with_init($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'concat_with_init':\n\t\t\t\t$this->concat_with_init($project_id);\n\t\t\t\tbreak;\n\t\t\t\n\t\t\tdefault:\n\t\t\t\t$this->load_step1_init();\n\t\t}\n\t}\n\n\n\tpublic function get_normalization_projects($project_id)\n\t{\n\t\t# Récupère les projets de normalisation compris dans un projet de link\n\t\t$tab = [];\n\n\t\t// Récupération des metadata du projet de link \n\t\t$tab_metadata_link_project = $this->private_functions->get_metadata_api('link', $project_id);\n\n\t\t// Récupération des 2 ids des projets de normalisation\n\t\t$src_project_id = $tab_metadata_link_project['current']['source']['project_id'];\n\t\t$ref_project_id = $tab_metadata_link_project['current']['ref']['project_id'];\n\n\t\t// Récupération des métadata des projets de normalisation\n\t\t$tab['source'] = $this->private_functions->get_metadata_api('normalize', $src_project_id);\n\t\t$tab['ref'] = $this->private_functions->get_metadata_api('normalize', $ref_project_id);\n\n\t\t// Renvoi d'un tableau contenant les métadata par projet de normalisation\n\t\treturn $tab;\n\t}\n\n\n\tpublic function link($project_id='', $type_file='')\n\t{\n\n\t\t// MAJ du type de projet en session\n\t\t$this->session->set_userdata('project_type', 'link');\n\n\t\tif(isset($project_id)){\n\t\t\t$this->session->set_userdata('link_project_id', $project_id);\n\t\t}\n\n\t\t// REcherche de l'étape en cours\n\t\t$link_step = $this->get_actual_step_linker($project_id);\n\n\t\tif($project_id && $link_step == 'INIT'){\n\t\t\t// tests de complétude des projets de normalisation\n\t\t\t$normalized_projects = $this->get_normalization_projects($project_id);\n\t\t\tforeach ($normalized_projects as $normalized_project) {\n\t\t\t\t// Rechercher l'étape du projet\n\t\t\t\t$step = $this->get_actual_step_normalization($normalized_project['project_id']);\n\n\t\t\t\t// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation\n\t\t\t\t$this->session->set_userdata('link_project_id', $project_id);\n\t\t\t\t\n\t\t\t\t// si pas fini, redirection vers la normalisation\n\t\t\t\tif($step != 'concat_with_init'){\n\t\t\t\t\t//$this->load_step_normalization($step, $normalized_project['project_id']);\n\t\t\t\t\t$this->session->set_userdata('project_id', $normalized_project['project_id']);\n\t\t\t\t\tredirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\n\t\t$this->load_step_linker($link_step, $project_id);\n\t}\n\n\tpublic function get_actual_step_linker($project_id='')\n\t{\n\t\tif($project_id == ''){\n\t\t\treturn '';\n\t\t}\n\n\t\t$project_api = $this->private_functions->get_metadata_api('link', $project_id);\n\nprint_r($project_api);die(\"end\");\n\n/*\n\t\t$file_name = key($project_api['files']);\n\t\t$steps = $project_api['log'][$file_name];\n\n\t\tif($steps['concat_with_init']['completed']){\n\t\t\treturn 'concat_with_init';\n\t\t}\n\t\telseif($steps['recode_types']['completed']){\n\t\t\treturn 'recode_types';\n\t\t}\n\t\telseif($steps['labelling']['completed']){\n\t\t\treturn 'labelling';\n\t\t}\n\t\telseif($steps['add_selected_columns']['completed']){\n\t\t\treturn 'add_selected_columns';\n\t\t}\n\nadd_selected_columns\ndedupe_linker\ninfer_restriction\nlink_results_analyzer\nload_labeller\nperform_restriction\ntrain\nupload_train\n*/\n\n\t\tif(@$project_api['log']['results']['completed']){\n\t\t\treturn 'results';\n\t\t}\n\t\telseif(@$project_api['log']['restrict_ref']['completed']){\n\t\t\treturn 'results';\n\t\t}\n\t\telseif(@$project_api['log']['labelling']['completed']){\n\t\t\treturn 'restrict_ref';\n\t\t}\n\t\telseif(@$project_api['log']['selected_columns']['completed']){\n\t\t\treturn 'labelling';\n\t\t}\n\t\telseif(@$project_api['log']['INIT']['completed']){\n\t\t\treturn 'selected_columns';\n\t\t}\n\n\t\treturn 'INIT'; // Si project_id mais aucune étape de validée\n\t}\n\n\tpublic function load_step_linker($step, $project_id='')\n\t{\n\t\tswitch ($step) {\n\t\t\tcase 'INIT':\n\t\t\t\t//$this->load_link_step1_init();\n\t\t\t\t$this->selected_columns($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'add_selected_columns':\n\t\t\t\t$this->labelling($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'labelling':\n\t\t\t\t$this->restrict_ref($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'restrict_ref':\n\t\t\t\t$this->results($project_id);\n\t\t\t\tbreak;\n\n\t\t\tcase 'results':\n\t\t\t\t$this->results($project_id);\n\t\t\t\tbreak;\n\t\t\t\n\t\t\tdefault:\n\t\t\t\t$this->load_link_step1_init();\n\t\t}\n\t}\n\n\tpublic function selected_columns($id='')\n\t{\n\t\t# Mise en relation des colonnes du fichier source avec celles du fichier referentiel\n\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_select_columns_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_select_columns_'.$_SESSION['language']);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\tpublic function labelling($id='')\n\t{\n\t\t# Apprentissage dedupe\n/*\nvoir /merge_machine/templates/dedupe_training.html\n*/\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_labelling_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_labelling_'.$_SESSION['language']);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\tpublic function restrict_ref($id='')\n\t{\n\t\t# Restriction du referentiel suite à apprentissage\n/*\nne pas faire tout de suite - passer l'étape\n*/\n\n\t\t$this->load->view('project_link_restrict_'.$_SESSION['language']);\n\t\t$this->load->view('footer_fr');\n\t}\n\n\tpublic function results($id='')\n\t{\n\t\t# traitement final\n/*\nscheduler linker avec project_id\n*/\n\n\t\t$this->load->view('project_link_results_'.$_SESSION['language']);\n\t\t$this->load->view('footer_fr');\n\t}\n\n\n\n\n\tpublic function test_project_id()\n\t{\n\t\tif(!isset($_SESSION['project_id'])){\n\t\t\tredirect('/Home');\n\t\t}\n\t}\n\n\n\tpublic function is_done_step($step_name)\n\t{\n\t\t$project_api = $this->private_functions->get_metadata_api($_SESSION['project_type'], $_SESSION['project_id']);\n\t\t$steps_by_filename = $this->private_functions->set_tab_steps_by_filename($project_api['log']);\n\n\t\treturn $this->private_functions->is_completed_step($step_name, $steps_by_filename, $project_api['has_mini']);\n\t}\n\n\t\n\tpublic function load_link_step1_init()\n\t{\n\t\t# Chargement de la vue d'initialisation du projet\n\n\t\t// Recherche des projets de normalisation si user connecté\n\t\t$data = [];\n\n\t\tif(isset($_SESSION['user'])){\n\t\t\t$this-> split_projects($_SESSION['user']['id']);\n\n\t\t\t$data['normalized_projects'] = $this->normalized_projects;\n\t\t\t$data['linked_projects'] = $this->linked_projects;\n\t\t}\n\n\t\t// Chargement des vues\n\t\t$data['title'] = \"Jointure\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_link_step1_init_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_link_step1_init_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\t/*\n\t Sauvegarde de l'initialisation du projet\n\t*/\n\tpublic function save_step1_init($project_id)\n\t{\n\t\t// MAJ du nom du projet en session\n\t\t// $this->session->set_userdata('project_name', $_POST['project_name']);\n\t\t// $this->session->set_userdata('project_description', $_POST['project_description']);\n\n\t\t// Sauvegarde bdd\n\t\t// TODO\n\n\t\t// Etape 2\n\t\t//redirect('/Project/load_step2_select_columns/'.$project_id);\n\t\tredirect('/Project/add_selected_columns/'.$project_id);\n\t}\n\n\n\tpublic function load_step1_init()\n\t{\n\t\t# Chargement de la vue d'initialisation du projet\n\n\t\t// Chargement des vues\n\t\t$data['title'] = \"Normalisation\";\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('project_step1_init_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('project_step1_init_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}\n\n\n\t//public function load_step2_select_columns($id=\"\")\n\tpublic function add_selected_columns($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('add_selected_columns')){\n\t\t\t$this->load->view('project_step2_select_columns_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step2_select_columns_fr');\n\t\t}\n\t\t\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue de recherche des valeurs manquantes\n\t*/\n\t//public function load_step3_missing_values()\n\tpublic function replace_mvs($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\t\t\n\t\t$this->test_project_id();\n\t\t\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('replace_mvs')){\n\t\t\t$this->load->view('project_step3_missing_values_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step3_missing_values_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue de recherche des types\n\t*/\n\t//public function load_step4_infer_types($id=\"\")\n\tpublic function recode_types($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('recode_types')){\n\t\t\t$this->load->view('project_step4_infer_types_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step4_infer_types_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\t/*\n\t Chargement de la vue finale\n\t*/\n\tpublic function concat_with_init($id=\"\")\n\t{\n\t\tif(isset($id)){\n\t\t\t$this->session->set_userdata('project_id', $id);\n\t\t\t$this->session->set_userdata('project_type', 'normalize');\n\t\t}\n\t\t$this->test_project_id();\n\n\t\t// Est ce que cette étape a déjà été lancée ?\n\t\tif($this->is_done_step('concat_with_init')){\n\t\t\t$this->load->view('project_step5_concat_with_init_report_fr');\n\t\t}\n\t\telse{\n\t\t\t$this->load->view('project_step5_concat_with_init_fr');\n\t\t}\n\n\t\t$this->load->view('footer_fr');\n\t}\n\n\n\tpublic function split_projects($user_id) // Répartition des projets selon leur type\n\t{\n\t\t$projects_list = $this->Projects_model->get_projects($user_id);\n\n\t\tforeach ($projects_list as $project) {\n\t\t\t// Appel de l'API pour récupérer les infos de chaque projet\n\t\t\t$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);\n\n\t\t\t// $last_written = $this->last_written($project['project_type'], $project['project_id']);\n\t\t\t$project['project_id'] = $project_api[\"project_id\"];\n\t\t\t$project['display_name'] = $project_api['display_name'];\n\t\t\t$project['description'] = $project_api['description'];\n\n\t\t\t$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);\n\n\t\t\tswitch ($project['project_type']) {\n\t\t\t\tcase 'normalize':\n\t\t\t\t\t$project['has_mini'] = $project_api['has_mini'];\n\t\t\t\t\t$project['file'] = key($project_api['files']);\n\t\t\t\t\t$this->normalized_projects[] = $project;\n\t\t\t\t\t\n\t\t\t\t\tbreak;\n\t\t\t\tcase 'link':\n\t\t\t\t\t$this->linked_projects[] = $project;\n\t\t\t\t\t\n\t\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\n}\n",
 			"file": "application/controllers/Project.php",
-			"file_size": 13103,
-			"file_write_time": 131491006204313438,
 			"settings":
 			{
-				"buffer_size": 13054,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/header_en.php",
-			"settings":
-			{
-				"buffer_size": 0,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/footer_en.php",
-			"settings":
-			{
-				"buffer_size": 0,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Home.php",
-			"settings":
-			{
-				"buffer_size": 864,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/User.php",
-			"settings":
-			{
-				"buffer_size": 5352,
+				"buffer_size": 12667,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -571,7 +532,7 @@
 			"file": "application/views/project_link_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 12963,
+				"buffer_size": 12994,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -586,6 +547,35 @@
 			}
 		},
 		{
+			"file": "assets/project_link_step1_init.css",
+			"settings":
+			{
+				"buffer_size": 722,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container\" id=\"entete\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-md-10\">\n                <h2 style=\"margin-top: 0;\"><span id=\"project_name1\"></span> : <i>Apprentissage</i></h2>\n            </div>\n            <div class=\"col-md-2 text-right\">\n                <a href=\"<?php echo base_url('index.php/Project/load_step4_infer_types');?>\">Passer cette étape</a>\n            </div>\n        </div>\n        <p>\n            L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par \"OUI\" ou par \"NON\" en fonction de leur concordance.\n            <br><br>\n            Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.\n            <br>\n            Indice de pécision :\n            <br>\n            Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier\n        </p>\n        <div class=\"row\">\n            <div class=\"col-md-12 text-center\">\n                <button class=\"btn btn-success\" id=\"bt_start\">Commencer l'apprentissage</button>\n            </div>\n        </div>\n    </div><!-- /well-->\n</div><!--/container-->\n\n\n<div class=\"container\" id=\"work\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"row\">\n                    <div class=\"col-md-9\">\n                        <h2 style=\"margin-top: 0;display: inline-block;\">\n                            <span id=\"project_name2\"></span> : <i>Apprentissage</i>\n                        </h2>\n                    </div>\n                    <div class=\"col-md-3 text-right\">\n                        <a>Aide</a>\n                        &nbsp;|&nbsp;\n                        <a href=\"<?php echo base_url('index.php/Project/link');?>\">Passer cette étape</a>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">1</span>\n                            .Filtres\n                        </h2>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-offset-1 col-xs-2\" style=\"padding-top: 5px;\">\n                        Termes obligatoires\n                    </div>\n                    <div class=\"col-xs-9\">\n                        <input type=\"text\" id=\"filter_plus\" data-role=\"tagsinput\">\n                        <button class=\"btn btn-default\">\n                            <span class=\"glyphicon glyphicon-plus\"></span>\n                        </button>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-offset-1 col-xs-2\" style=\"padding-top: 5px;\">\n                        Termes à exclures\n                    </div>\n                    <div class=\"col-xs-9\">\n                        <input type=\"text\" id=\"filter_minus\" data-role=\"tagsinput\">\n                        <button class=\"btn btn-default\">\n                            <span class=\"glyphicon glyphicon-minus\"></span>\n                        </button>\n                    </div>\n                </div>\n\n\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">2</span>\n                            .Labellisation\n                        </h2>\n                        <div class=\"row\">\n                            <div class=\"col-xs-offset-1 col-xs-10\">\n                                <div id=\"message\"></div>\n                                <div class=\"q_label\">\n                                    Ces informations sont-elle identiques ?\n                                </div>\n                                <div>\n                                    <span class=\"btn btn-default btn-xl btn_2_3\" onclick=\"socket_answer('y');\" style=\"background-color: #A0BC5B\">\n                                        <h2>OUI</h2>\n                                    </span>\n                                    <span class=\"btn btn-default btn-xl btn_2_3\" onclick=\"socket_answer('n');\" style=\"background-color: #DFAE1F\">\n                                        <h2>NON</h2>\n                                    </span>\n                                </div>\n                            </div>\n                            <div class=\"col-xs-1\"></div>\n                        </div>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">3</span>\n                            .Statistiques\n                        </h2>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-xs-6\">\n                            <div class=\"stat\">\n                                <span class=\"number\" id=\"stat_estimated_precision\"></span>\n                                <span class=\"title\">Précision</span>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-6\">\n                            <div class=\"stat\">\n                                <span class=\"number\" id=\"stat_estimated_recall\"></span>\n                                <span class=\"title\">Couverture</span>\n                            </div>\n                        </div>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12 text-center\" id=\"blocs\"></div>\n                </div>\n            </div>\n        </div>    \n    </div>\n</div>\n\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-xs-12 text-right\">\n            <button class=\"btn btn-success\" id=\"bt_next\">Finir & Lancer le traitement >></button>\n        </div>\n    </div>\n</div>\n\n\n<script type=\"text/javascript\">\n\nfunction get_metadata(project_type, project_id) {\n    // Récupere les métadata via API\n\n    var metadata = \"\";\n    var ret = false;\n\n    $.ajax({\n        type: 'get',\n        async: false,\n        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error\");console.log(result.error);\n            }\n            else{\n                console.log(\"success - metadata\");console.dir(result);\n                ret = result.metadata;\n            }\n        },\n        error: function (result, status, error){\n            console.log(result);\n            console.log(status);\n            console.log(error);\n        }\n    });// /ajax metadata\n\n    return ret;\n}// / get_metadata\n\n\nfunction get_column_matches(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"column_matches.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction create_es_index_api() {\n\n    var tparams = {\n        \"module_params\": {\n            \"force\": true\n        }\n    }\n\n    $.ajax({\n        type: 'POST',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_index/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - create_es_index_api\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - create_es_index_api\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                // Chargement du labeller\n                                create_es_labeller_api();\n                               \n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction create_es_labeller_api() {\n\n    $.ajax({\n        type: 'GET',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_labeller/' + project_id_link + '/',\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - create_es_labeller_api\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - create_es_labeller_api\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n                               \n                                var answer_to_send = {'project_id': project_id_link}\n\n                                console.log('socket.emit|load_labeller');\n                                socket.emit('load_labeller', JSON.stringify(answer_to_send));\n                                console.log('done');\n\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction socket_on_message() {\n    // Message provenant du serveur\n\n    socket.on('message', function(data) {\n        show_new_proposition(JSON.parse(data));\n    });// / on\n}// / socket_on_message()\n\n\nfunction socket_answer(user_response) {\n    // Envoi de la réponse utilisateur\n    // Un nouveau message sera reçu par socket_on_message()\n\n    var response_to_send = {\n        'project_id': project_id_link,\n        'user_input': user_response\n    }\n\n    console.log('socket.emit|answer');\n    socket.emit('answer', JSON.stringify(response_to_send));\n    console.log('done'); \n} // / socket_answer()\n\n\nfunction socket_update_filters(must, must_not) {\n    // Envoi de la réponse utilisateur\n    // Un nouveau message sera reçu par socket_on_message()\n    //must = {'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}\n    var response_to_send = {\n        'project_id': project_id_link,\n        'must': must,\n        'must_not': must_not\n    }\n\n    console.log('socket.emit|update_filters');\n    socket.emit('update_filters', JSON.stringify(response_to_send));\n    console.log('done'); \n} // / socket_update_filters()\n\n\nfunction show_new_proposition(message) {\n    // Affiche les propositions en fonction du fichier column_matches\n    console.log('show_new_proposition');\n    console.dir(message);\n\n    var source = new Array();\n    var source_keys = new Array();\n    var ref = new Array();\n    var ref_keys = new Array();\n\n    for (var i = 0; i < column_matches.length; i++) {\n\n        // Retours SOURCE\n        // Liste des colonnes associées\n        var source_list = column_matches[i].source;\n\n        // Récupération de la valeur associée dans le message\n        for (var j = 0; j < source_list.length; j++) {\n            var key = source_list[j]; // ex departement\n            var value = message[\"source_item\"][\"_source\"][key];\n            source[key] = value;\n            source_keys.push(key);\n        }\n\n        // Retours REFERENTIEL\n        // Liste des colonnes associées\n        var ref_list = column_matches[i].ref;\n\n        // Récupération de la valeur associée dans le message\n        for (var k = 0; k < ref_list.length; k++) {\n            var key = ref_list[k];\n            var value = message[\"ref_item\"][\"_source\"][key];\n            ref[key] = value;\n            ref_keys.push(key);\n        }\n    }\n\n    // Affichage de la proposition\n    var lines_html = \"\";\n    for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF\n        lines_html += '<div>' + source_keys[i] + ' <i>(source)</i> : <span class=\"message\">' + source[source_keys[i]] + '</span></div>';\n        lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class=\"message\">' + ref[ref_keys[i]] + '</span></div>';\n    }\n\n    $(\"#message\").html(lines_html);\n\n    $(\"#stat_estimated_precision\").html(message.estimated_precision);\n    $(\"#estimated_recall\").html(message.estimated_recall);\n}// / show_new_proposition()\n\n\nfunction complete_training() {\n    var _to_send = {'project_id': project_id_link}\n\n    console.log('socket.emit|complete_training');\n    socket.emit('complete_training', JSON.stringify(_to_send));\n    console.log('done'); \n}// / complete_training()\n\n\nfunction valid_step() {\n    // Validation du training\n    complete_training();\n\n    // Passage à l'étape suivante\n    //window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + project_id_link;\n}// / valid_step()\n\n\n$(function(){// ready\n    \n    $(\"body\").css(\"height\", $(window).height()) ;\n\n    $(\"#bt_start\").click(function(){\n        $(\"#entete\").css(\"display\", \"none\");\n        $(\"#work\").fadeToggle();\n        $(\"#bt_next\").fadeToggle();\n    });\n\n    $(\"#bt_next\").click(function(){\n        valid_step();\n    });    \n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n    $(\"#project_name2\").html(metadata_link.display_name);\n\n    // Récupération des ids des projets de normalisation\n    project_id_src = metadata_link['files']['source']['project_id'];\n    project_id_ref = metadata_link['files']['ref']['project_id'];\n\n    // Récupérartion des métadata du fichier source\n    console.log('Projet de normalisation SOURCE');\n    metadata_src = get_metadata('normalize', project_id_src);\n\n    // Récupérartion des métadata du fichier referentiel\n    console.log('Projet de normalisation REFERENTIEL');\n    metadata_ref = get_metadata('normalize', project_id_ref);\n\n/*\n    // Récupération des colonnes sources à ajouter\n    columns_src = get_columns(metadata_src);\n    columns_ref = get_columns(metadata_ref);\n\n    // Renseignement des noms de fichiers\n    var src_file_name = get_filename(metadata_src.last_written.file_name); \n    var ref_file_name = get_filename(metadata_ref.last_written.file_name);\n  \n    $(\"#src_file_name\").html(src_file_name);\n    $(\"#ref_file_name\").html(ref_file_name);\n    \n    // Ajout des colonne à l'interface\n    $(\"#src_columns\").html(get_columns_html(columns_src, infer_src, \"src\"));\n    $(\"#ref_columns\").html(get_columns_html(columns_ref, infer_ref, \"ref\"));\n*/\n    column_matches = get_column_matches();\n\n    console.log('column_matches');\n    console.log(column_matches);\n\n    // Connect to socket\n    // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');\n    socket = io.connect('<?php echo BASE_API_URL;?>');\n\n    // Création des indexs ES\n    create_es_index_api();\n\n    socket_on_message();\n    \n\n\n});//ready\n</script>",
+			"file": "application/views/project_link_es_train_fr.php",
+			"file_size": 17850,
+			"file_write_time": 131493630256290978,
+			"settings":
+			{
+				"buffer_size": 18026,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Home.php",
+			"settings":
+			{
+				"buffer_size": 864,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"contents": "{\n  \"module_name\": \"recode_types\",\n  \"file_name\": \"ref_copy.csv\",\n  \"mod_count\": {\n    \"patronyme_uai\": 0,\n    \"departement\": 0,\n    \"numero_uai\": 0,\n    \"full_name\": 0,\n    \"denomination_principale_uai\": 0,\n    \"adresse_uai\": 0,\n    \"code_postal_uai\": 0,\n    \"localite_acheminement_uai\": 13\n  },\n  \"params\": {\n    \"column_types\": {\n      \"departement\": \"Département\",\n      \"code_postal_uai\": \"Code Postal\",\n      \"denomination_principale_uai\": \"Entité MESR\",\n      \"numero_uai\": \"UAI\",\n      \"localite_acheminement_uai\": \"Commune\"\n    }\n  }\n}",
 			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
 			"file_size": 464,
@@ -593,17 +583,6 @@
 			"settings":
 			{
 				"buffer_size": 544,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "{\n  \"user_id\": \"__ NOT IMPLEMENTED\",\n  \"log\": {\n    \"source.csv\": {\n      \"add_selected_columns\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"link_results_analyzer\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"train\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"es_linker\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"upload_train\": {\n        \"skipped\": false,\n        \"completed\": false\n      },\n      \"labelling\": {\n        \"skipped\": false,\n        \"completed\": false\n      }\n    }\n  },\n  \"display_name\": null,\n  \"files\": {\n    \"source\": {\n      \"internal\": false,\n      \"module_name\": \"concat_with_init\",\n      \"project_id\": \"90a3650ce532bf116664cf5405b18d22\",\n      \"file_name\": \"source.csv\",\n      \"restricted\": false\n    },\n    \"ref\": {\n      \"internal\": false,\n      \"module_name\": \"concat_with_init\",\n      \"project_id\": \"8f0a7fc0d37cd6f016a47cb9db1e55a1\",\n      \"file_name\": \"ref.csv\",\n      \"restricted\": false\n    }\n  },\n  \"timestamp\": 1504626722.739227,\n  \"project_id\": \"b6c34ae658ecdcb10ee2aedd77e7885c\",\n  \"description\": null\n}",
-			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
-			"file_size": 856,
-			"file_write_time": 131491003227729942,
-			"settings":
-			{
-				"buffer_size": 1150,
 				"line_ending": "Unix"
 			}
 		},
@@ -626,16 +605,16 @@
 			}
 		},
 		{
-			"file": "assets/project_link_labelling.css",
+			"file": "assets/project_link_es_train.css",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 312,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/project_link_labelling.js",
+			"file": "assets/project_link_es_train.js",
 			"settings":
 			{
 				"buffer_size": 0,
@@ -651,13 +630,17 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 132.0,
+		"height": 172.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
 			[
 				"siba",
 				"View: Toggle Side Bar"
+			],
+			[
+				"user",
+				"Preferences: Pretty JSON Settings - User"
 			],
 			[
 				"",
@@ -688,7 +671,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 467.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -720,13 +703,35 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/training.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/24734ea1a1072aa5fe959883c0ac9047/es_linker/column_matches.json",
+		"/var/www/html/projets/magical_ui/application/controllers/User.php",
+		"/home/jerem/.config/sublime-text-3/Packages/User/Pretty JSON.sublime-settings",
+		"/home/jerem/temp/application/views/changeLog_en.php",
+		"/home/jerem/temp/application/views/changeLog_fr.php",
+		"/home/jerem/temp/application/controllers/Changelog.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/90a3650ce532bf116664cf5405b18d22/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/es_linker/column_matches.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/dedupe_linker/column_matches.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/header_en.php",
+		"/var/www/html/projets/magical_ui/application/views/footer_en.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker.css",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/d7c0133d15af4824f488a8887ab93135/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/6e9e30266ae726504c38e79ed1c8329a/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3d88136595c7309164aa94d30c6b4447/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/4e988c0d2a74b9cd07390abafac8818e/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
@@ -734,7 +739,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
 		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
-		"/var/www/html/projets/magical_ui/application/controllers/User.php",
 		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_step1_init.css",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
@@ -826,28 +830,7 @@
 		"/var/www/html/projets/magical_ui/application/config/autoload.php",
 		"/home/jerem/a_voir",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/secret_key.txt",
-		"/usr/share/applications/sublime_text.desktop",
-		"/var/www/html/projets/magical_ui/api_doc.txt",
-		"/var/www/html/projets/magical_ui/application/config/routes.php",
-		"/etc/apt/sources.list.d/additional-repositories.list",
-		"/docker/deamon.json",
-		"/var/www/html/projets/magical_ui/application/config/config.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Welcome.php",
-		"/var/www/html/projets/eig/test3.php",
-		"/var/www/html/projets/eig/test2.php",
-		"/var/www/html/projets/eig/css/style.css",
-		"/var/www/html/projets/eig/test1.php",
-		"/var/www/html/tests/index2.php",
-		"/var/www/html/projets/atlas/assets/css/accueil.css",
-		"/var/www/html/projets/atlas/assets/css/style.css",
-		"/var/www/html/projets/atlas/application/config/constants.php",
-		"/var/www/html/projets/atlas/application/views/accueil.php",
-		"/var/www/html/projets/atlas/application/config/config.php",
-		"/var/www/html/Atlas_des_brevets/atlas_des_brevets/application/config/config.php",
-		"/media/jerem/F480-8EFB/VIDEO_TS/VIDEO_TS.IFO",
-		"/var/www/html/tests/index.php",
-		"/home/jerem/work_temp/index3.php",
-		"/home/jerem/work_temp/getToken.php"
+		"/usr/share/applications/sublime_text.desktop"
 	],
 	"find":
 	{
@@ -866,6 +849,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"valid_step",
+			"next",
+			"key",
+			"get_column_matches",
+			"current",
 			"new",
 			"vali",
 			"bloc_analysis_",
@@ -988,12 +976,7 @@
 			"\n  ",
 			"color_src",
 			"each",
-			"link",
-			"get_metadata",
-			"asyn",
-			"selected_columns",
-			"valid",
-			"load_step_normalization"
+			"link"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1033,7 +1016,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -1042,15 +1025,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13054,
+						"buffer_size": 12667,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4751,
-								4751
+								3620,
+								3620
 							]
 						],
 						"settings":
@@ -1059,142 +1042,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2898.0,
+						"translation.y": 2322.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "application/views/header_en.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "application/views/footer_en.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/controllers/Home.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								305,
-								305
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "application/controllers/User.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5352,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3853,
-								3853
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2646.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "application/views/project_link_select_columns_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12963,
+						"buffer_size": 12994,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9941,
-								9941
+								10044,
+								10044
 							]
 						],
 						"settings":
@@ -1204,14 +1072,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5514.0,
+						"translation.y": 5555.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 2,
 					"file": "application/views/project_link_step1_init_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1223,8 +1091,8 @@
 						"selection":
 						[
 							[
-								34212,
-								34212
+								10643,
+								10643
 							]
 						],
 						"settings":
@@ -1234,14 +1102,103 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 14303.0,
+						"translation.y": 4277.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
+					"file": "assets/project_link_step1_init.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 722,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								672,
+								672
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/views/project_link_es_train_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18026,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5351,
+								5351
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1859.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/controllers/Home.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 864,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								139,
+								139
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
 					"semi_transient": false,
 					"settings":
@@ -1259,51 +1216,25 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
-					"buffer": 8,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1150,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								95,
-								95
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 7,
 					"file": "application/libraries/Private_functions.php",
 					"semi_transient": false,
 					"settings":
@@ -1315,8 +1246,8 @@
 						"selection":
 						[
 							[
-								540,
-								540
+								1205,
+								1205
 							]
 						],
 						"settings":
@@ -1325,14 +1256,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 8,
 					"file": "assets/style.css",
 					"semi_transient": false,
 					"settings":
@@ -1358,24 +1289,24 @@
 						"translation.y": 778.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "assets/project_link_labelling.css",
+					"buffer": 9,
+					"file": "assets/project_link_es_train.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								264,
+								264
 							]
 						],
 						"settings":
@@ -1386,12 +1317,12 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "assets/project_link_labelling.js",
+					"buffer": 10,
+					"file": "assets/project_link_es_train.js",
 					"semi_transient": false,
 					"settings":
 					{
@@ -1414,7 +1345,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -1448,7 +1379,7 @@
 		"cols":
 		[
 			0.0,
-			0.673156077858,
+			0.726814102348,
 			1.0
 		],
 		"rows":
@@ -1496,14 +1427,14 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 382.0,
 	"status_bar_visible": true,
 	"template_settings":

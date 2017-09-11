@@ -168,9 +168,7 @@ class User extends CI_Controller {
 		$projects_list = $this->Projects_model->get_projects($user_id);
 		foreach ($projects_list as $project) {
 			// Appel de l'API pour récupérer les infos de chaque projet
-//print_r($project);die("f");
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
-			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
 			$project['has_mini'] = @$project_api['has_mini'];

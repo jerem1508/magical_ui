@@ -172,7 +172,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
         }
     });// /ajax - Download config
 
-}
+} // /get_runinfo
 
 
 function get_columns(metadata) {

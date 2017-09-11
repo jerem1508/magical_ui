@@ -1,3 +1,47 @@
-#work{
+#work, #bt_next{
 	display: none;
+}
+
+.btn_2_3{
+  width: 120px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bootstrap-tagsinput{
+	border-radius: 0;
+	width: 90%;
+}
+
+.q_label{
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.message{
+	font-weight: bold;
+}
+
+/* STATS ------*/
+.stat{
+	border: 1px solid #777;
+	background-color: #ddd;
+	border-radius: 6px;
+	padding: 10px;
+	text-align: center;
+}
+.stat .title{
+	font-weight: bold;	
+	display: block;
+}
+.stat .number{
+	font-weight: bold;
+	font-size: 40px;
+	display: block;
+}
+.stat .text{
+	font-weight: normal;
+	font-size: 14px;
+	font-style: italic;
+	display: block;
 }
