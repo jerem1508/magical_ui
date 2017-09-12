@@ -2,9 +2,9 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container" style="margin-top: 20px;">
+<!--
     <div class="text-center">
         <div class="breadcrumb flat">
-            <!--<a href="#" class="done">Sélection du fichier</a>-->
             <a href="#" class="active">Sélection du fichier</a>
             <a href="#" class="todo">Sélection des colonnes</a>
             <a href="#" class="todo">Valeurs manquantes</a>
@@ -12,11 +12,20 @@
             <a href="#" class="todo">Téléchargement</a>
         </div>
     </div>
-
+-->
     <div class="well">
         <h1>Normalisation d'un fichier</h1>
         <p>
-            Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+            La normalisation d'un fichier à pour but de le nettoyer. Elle améliore grandement le rendement de la jointure magique entre 2 fichiers.
+            <br>
+            <br>
+            <b>4 étapes seront nécessaires à la normalisation de votre fichier :</b>
+            <ol>
+            <li>La sélection des colonnes à normaliser</li>
+            <li>La recherche des valeurs manquantes</li>
+            <li>La détection des types de chaque colonne sélectionnée</li>
+            <li>Le téléchargement du fichier normalisé</li>
+            </ol>
         </p>
     </div>
 

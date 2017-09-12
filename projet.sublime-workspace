@@ -4,16 +4,36 @@
 		"selected_items":
 		[
 			[
+				"show",
+				"show_stats"
+			],
+			[
+				"font-s",
+				"font-style"
+			],
+			[
+				"fon",
+				"font-variant"
+			],
+			[
+				"tex",
+				"text-align"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
 				"margin",
 				"margin-top"
 			],
 			[
 				"text",
 				"text-center"
-			],
-			[
-				"padd",
-				"padding-top"
 			],
 			[
 				"wi",
@@ -76,10 +96,6 @@
 				"padding-left"
 			],
 			[
-				"fon",
-				"font-weight"
-			],
-			[
 				"i",
 				"italic"
 			],
@@ -126,10 +142,6 @@
 			[
 				"tab",
 				"tab_tags"
-			],
-			[
-				"in",
-				"inline"
 			],
 			[
 				"displ",
@@ -376,10 +388,6 @@
 				"fun\tFunction"
 			],
 			[
-				"tex",
-				"text-center"
-			],
-			[
 				"font",
 				"font-style"
 			],
@@ -506,14 +514,6 @@
 			[
 				"border-l",
 				"border-bottom-left-radius"
-			],
-			[
-				"ma",
-				"margin-bottom"
-			],
-			[
-				"el",
-				"else"
 			]
 		]
 	},
@@ -555,13 +555,10 @@
 			}
 		},
 		{
-			"contents": "<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container\" id=\"entete\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-md-10\">\n                <h2 style=\"margin-top: 0;\"><span id=\"project_name1\"></span> : <i>Apprentissage</i></h2>\n            </div>\n            <div class=\"col-md-2 text-right\">\n                <a href=\"<?php echo base_url('index.php/Project/load_step4_infer_types');?>\">Passer cette étape</a>\n            </div>\n        </div>\n        <p>\n            L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par \"OUI\" ou par \"NON\" en fonction de leur concordance.\n            <br><br>\n            Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.\n            <br>\n            Indice de pécision :\n            <br>\n            Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier\n        </p>\n        <div class=\"row\">\n            <div class=\"col-md-12 text-center\">\n                <button class=\"btn btn-success\" id=\"bt_start\">Commencer l'apprentissage</button>\n            </div>\n        </div>\n    </div><!-- /well-->\n</div><!--/container-->\n\n\n<div class=\"container\" id=\"work\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"row\">\n                    <div class=\"col-md-9\">\n                        <h2 style=\"margin-top: 0;display: inline-block;\">\n                            <span id=\"project_name2\"></span> : <i>Apprentissage</i>\n                        </h2>\n                    </div>\n                    <div class=\"col-md-3 text-right\">\n                        <a>Aide</a>\n                        &nbsp;|&nbsp;\n                        <a href=\"<?php echo base_url('index.php/Project/link');?>\">Passer cette étape</a>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">1</span>\n                            .Filtres\n                        </h2>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-offset-1 col-xs-2\" style=\"padding-top: 5px;\">\n                        Termes obligatoires\n                    </div>\n                    <div class=\"col-xs-9\">\n                        <input type=\"text\" id=\"filter_plus\" data-role=\"tagsinput\">\n                        <button class=\"btn btn-default\">\n                            <span class=\"glyphicon glyphicon-plus\"></span>\n                        </button>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-offset-1 col-xs-2\" style=\"padding-top: 5px;\">\n                        Termes à exclures\n                    </div>\n                    <div class=\"col-xs-9\">\n                        <input type=\"text\" id=\"filter_minus\" data-role=\"tagsinput\">\n                        <button class=\"btn btn-default\">\n                            <span class=\"glyphicon glyphicon-minus\"></span>\n                        </button>\n                    </div>\n                </div>\n\n\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">2</span>\n                            .Labellisation\n                        </h2>\n                        <div class=\"row\">\n                            <div class=\"col-xs-offset-1 col-xs-10\">\n                                <div id=\"message\"></div>\n                                <div class=\"q_label\">\n                                    Ces informations sont-elle identiques ?\n                                </div>\n                                <div>\n                                    <span class=\"btn btn-default btn-xl btn_2_3\" onclick=\"socket_answer('y');\" style=\"background-color: #A0BC5B\">\n                                        <h2>OUI</h2>\n                                    </span>\n                                    <span class=\"btn btn-default btn-xl btn_2_3\" onclick=\"socket_answer('n');\" style=\"background-color: #DFAE1F\">\n                                        <h2>NON</h2>\n                                    </span>\n                                </div>\n                            </div>\n                            <div class=\"col-xs-1\"></div>\n                        </div>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <h2>\n                            <span class=\"step_numbers\">3</span>\n                            .Statistiques\n                        </h2>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-xs-6\">\n                            <div class=\"stat\">\n                                <span class=\"number\" id=\"stat_estimated_precision\"></span>\n                                <span class=\"title\">Précision</span>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-6\">\n                            <div class=\"stat\">\n                                <span class=\"number\" id=\"stat_estimated_recall\"></span>\n                                <span class=\"title\">Couverture</span>\n                            </div>\n                        </div>\n                    </div>\n                </div><!-- / row-->\n\n                <div class=\"row\">\n                    <div class=\"col-xs-12 text-center\" id=\"blocs\"></div>\n                </div>\n            </div>\n        </div>    \n    </div>\n</div>\n\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-xs-12 text-right\">\n            <button class=\"btn btn-success\" id=\"bt_next\">Finir & Lancer le traitement >></button>\n        </div>\n    </div>\n</div>\n\n\n<script type=\"text/javascript\">\n\nfunction get_metadata(project_type, project_id) {\n    // Récupere les métadata via API\n\n    var metadata = \"\";\n    var ret = false;\n\n    $.ajax({\n        type: 'get',\n        async: false,\n        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error\");console.log(result.error);\n            }\n            else{\n                console.log(\"success - metadata\");console.dir(result);\n                ret = result.metadata;\n            }\n        },\n        error: function (result, status, error){\n            console.log(result);\n            console.log(status);\n            console.log(error);\n        }\n    });// /ajax metadata\n\n    return ret;\n}// / get_metadata\n\n\nfunction get_column_matches(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"column_matches.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction create_es_index_api() {\n\n    var tparams = {\n        \"module_params\": {\n            \"force\": true\n        }\n    }\n\n    $.ajax({\n        type: 'POST',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_index/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - create_es_index_api\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - create_es_index_api\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                // Chargement du labeller\n                                create_es_labeller_api();\n                               \n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction create_es_labeller_api() {\n\n    $.ajax({\n        type: 'GET',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_labeller/' + project_id_link + '/',\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - create_es_labeller_api\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - create_es_labeller_api\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n                               \n                                var answer_to_send = {'project_id': project_id_link}\n\n                                console.log('socket.emit|load_labeller');\n                                socket.emit('load_labeller', JSON.stringify(answer_to_send));\n                                console.log('done');\n\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction socket_on_message() {\n    // Message provenant du serveur\n\n    socket.on('message', function(data) {\n        show_new_proposition(JSON.parse(data));\n    });// / on\n}// / socket_on_message()\n\n\nfunction socket_answer(user_response) {\n    // Envoi de la réponse utilisateur\n    // Un nouveau message sera reçu par socket_on_message()\n\n    var response_to_send = {\n        'project_id': project_id_link,\n        'user_input': user_response\n    }\n\n    console.log('socket.emit|answer');\n    socket.emit('answer', JSON.stringify(response_to_send));\n    console.log('done'); \n} // / socket_answer()\n\n\nfunction socket_update_filters(must, must_not) {\n    // Envoi de la réponse utilisateur\n    // Un nouveau message sera reçu par socket_on_message()\n    //must = {'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}\n    var response_to_send = {\n        'project_id': project_id_link,\n        'must': must,\n        'must_not': must_not\n    }\n\n    console.log('socket.emit|update_filters');\n    socket.emit('update_filters', JSON.stringify(response_to_send));\n    console.log('done'); \n} // / socket_update_filters()\n\n\nfunction show_new_proposition(message) {\n    // Affiche les propositions en fonction du fichier column_matches\n    console.log('show_new_proposition');\n    console.dir(message);\n\n    var source = new Array();\n    var source_keys = new Array();\n    var ref = new Array();\n    var ref_keys = new Array();\n\n    for (var i = 0; i < column_matches.length; i++) {\n\n        // Retours SOURCE\n        // Liste des colonnes associées\n        var source_list = column_matches[i].source;\n\n        // Récupération de la valeur associée dans le message\n        for (var j = 0; j < source_list.length; j++) {\n            var key = source_list[j]; // ex departement\n            var value = message[\"source_item\"][\"_source\"][key];\n            source[key] = value;\n            source_keys.push(key);\n        }\n\n        // Retours REFERENTIEL\n        // Liste des colonnes associées\n        var ref_list = column_matches[i].ref;\n\n        // Récupération de la valeur associée dans le message\n        for (var k = 0; k < ref_list.length; k++) {\n            var key = ref_list[k];\n            var value = message[\"ref_item\"][\"_source\"][key];\n            ref[key] = value;\n            ref_keys.push(key);\n        }\n    }\n\n    // Affichage de la proposition\n    var lines_html = \"\";\n    for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF\n        lines_html += '<div>' + source_keys[i] + ' <i>(source)</i> : <span class=\"message\">' + source[source_keys[i]] + '</span></div>';\n        lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class=\"message\">' + ref[ref_keys[i]] + '</span></div>';\n    }\n\n    $(\"#message\").html(lines_html);\n\n    $(\"#stat_estimated_precision\").html(message.estimated_precision);\n    $(\"#estimated_recall\").html(message.estimated_recall);\n}// / show_new_proposition()\n\n\nfunction complete_training() {\n    var _to_send = {'project_id': project_id_link}\n\n    console.log('socket.emit|complete_training');\n    socket.emit('complete_training', JSON.stringify(_to_send));\n    console.log('done'); \n}// / complete_training()\n\n\nfunction valid_step() {\n    // Validation du training\n    complete_training();\n\n    // Passage à l'étape suivante\n    //window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + project_id_link;\n}// / valid_step()\n\n\n$(function(){// ready\n    \n    $(\"body\").css(\"height\", $(window).height()) ;\n\n    $(\"#bt_start\").click(function(){\n        $(\"#entete\").css(\"display\", \"none\");\n        $(\"#work\").fadeToggle();\n        $(\"#bt_next\").fadeToggle();\n    });\n\n    $(\"#bt_next\").click(function(){\n        valid_step();\n    });    \n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n    $(\"#project_name2\").html(metadata_link.display_name);\n\n    // Récupération des ids des projets de normalisation\n    project_id_src = metadata_link['files']['source']['project_id'];\n    project_id_ref = metadata_link['files']['ref']['project_id'];\n\n    // Récupérartion des métadata du fichier source\n    console.log('Projet de normalisation SOURCE');\n    metadata_src = get_metadata('normalize', project_id_src);\n\n    // Récupérartion des métadata du fichier referentiel\n    console.log('Projet de normalisation REFERENTIEL');\n    metadata_ref = get_metadata('normalize', project_id_ref);\n\n/*\n    // Récupération des colonnes sources à ajouter\n    columns_src = get_columns(metadata_src);\n    columns_ref = get_columns(metadata_ref);\n\n    // Renseignement des noms de fichiers\n    var src_file_name = get_filename(metadata_src.last_written.file_name); \n    var ref_file_name = get_filename(metadata_ref.last_written.file_name);\n  \n    $(\"#src_file_name\").html(src_file_name);\n    $(\"#ref_file_name\").html(ref_file_name);\n    \n    // Ajout des colonne à l'interface\n    $(\"#src_columns\").html(get_columns_html(columns_src, infer_src, \"src\"));\n    $(\"#ref_columns\").html(get_columns_html(columns_ref, infer_ref, \"ref\"));\n*/\n    column_matches = get_column_matches();\n\n    console.log('column_matches');\n    console.log(column_matches);\n\n    // Connect to socket\n    // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');\n    socket = io.connect('<?php echo BASE_API_URL;?>');\n\n    // Création des indexs ES\n    create_es_index_api();\n\n    socket_on_message();\n    \n\n\n});//ready\n</script>",
 			"file": "application/views/project_link_es_train_fr.php",
-			"file_size": 17850,
-			"file_write_time": 131493630256290978,
 			"settings":
 			{
-				"buffer_size": 18026,
+				"buffer_size": 18297,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -608,7 +605,7 @@
 			"file": "assets/project_link_es_train.css",
 			"settings":
 			{
-				"buffer_size": 312,
+				"buffer_size": 602,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -849,6 +846,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"estimated_recall",
+			"stat_estimated_precision",
 			"valid_step",
 			"next",
 			"key",
@@ -974,9 +973,7 @@
 			"load_step_linker",
 			"load_link_step1_init",
 			"\n  ",
-			"color_src",
-			"each",
-			"link"
+			"color_src"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1144,15 +1141,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18026,
+						"buffer_size": 18297,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5351,
-								5351
+								15094,
+								15094
 							]
 						],
 						"settings":
@@ -1162,10 +1159,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1859.0,
+						"translation.y": 6904.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1298,15 +1295,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 312,
+						"buffer_size": 602,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								264,
-								264
+								561,
+								561
 							]
 						],
 						"settings":
@@ -1317,7 +1314,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1379,7 +1376,7 @@
 		"cols":
 		[
 			0.0,
-			0.726814102348,
+			0.811189102348,
 			1.0
 		],
 		"rows":
@@ -1427,7 +1424,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

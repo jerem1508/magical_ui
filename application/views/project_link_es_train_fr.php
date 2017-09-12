@@ -415,9 +415,8 @@ function show_new_proposition(message) {
         lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class="message">' + ref[ref_keys[i]] + '</span></div>';
     }
 
+    // Affichage
     $("#message").html(lines_html);
-
-
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
 }// / show_new_proposition()
@@ -436,6 +435,7 @@ function show_stats(stat) {
     return ret;
 } // / show_stats()
 
+
 function complete_training() {
     var _to_send = {'project_id': project_id_link}
 
@@ -450,7 +450,7 @@ function valid_step() {
     complete_training();
 
     // Passage à l'étape suivante
-    //window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
+    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
 }// / valid_step()
 
 

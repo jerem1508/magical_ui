@@ -1,100 +1,9 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Normalisation</title>
-
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-tagsinput.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
-
-    <link rel="stylesheet" href="<?php echo base_url('assets/style_fu.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.fileupload.css');?>">
-
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery-3.2.1.min.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/bootstrap-3.3.7-dist/js/bootstrap.min.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/bootstrap-tagsinput.min.js');?>"></script>
-
-
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery.ui.widget.js');?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/jquery.iframe-transport.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/jquery.fileupload.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/functions.js');?>"></script>
-
-    <style type="text/css">
-        #msg_danger, #result, #report, #steps, #wait{
-            /*On masque par défaut*/
-            display: none;
-        }
-
-        #start_treatment_ok, #show_report_ok{
-        	visibility: hidden;
-        }
-        .tagsinput-perso{
-        	margin-right: 5px;
-        }
-        .tagsinput-perso-all{
-        	background-color: #5bc0de;
-        	/*background-color: #E37495;*/
-        	color: white;
-        }
-        #dl_file{
-        	cursor: pointer;
-        }
-        .category_title{
-        	cursor: pointer;
-        }
-		@media (min-width: 992px) {
-		    .modal-lg {
-		        width: 1100px;
-		    }
-		}
-    </style>
-</head>
-<body>
-
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container">
-
-	<div class="row">
-		<div class="col-xs-2" style="margin-top: 20px;">
-			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.png');?>" class="img-responsive">
-		</div>
-		<div class="col-xs-8 text-center">
-			<h1>Magical_ui</h1>
-		</div>
-		<div class="col-xs-2 text-right" style="margin-top: 20px;">
-            <div class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="font-size: 22px; color: #000;">
-                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<?php echo base_url("index.php/Home");?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Accueil</a></li>
-                    <li role="separator" class="divider"></li>
-                    <?php
-                    if(isset($_SESSION['user'])){
-                        echo "<li><a href='".base_url("index.php/User/dashboard")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;Tableau de bord</a></li>";
-                        echo "<li><a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a></li>";
-                    }
-                    else{
-                        echo "<li><a href='".base_url("index.php/User/login/normalize")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a></li>";
-                    }
-                    ?>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;&nbsp;English</a></li>
-                </ul>
-            </div><!-- /dropdown-->
-		</div>
-	</div>
-
-	<hr>
-
+<div class="container" style="margin-top: 20px;">
+<!--
     <div class="text-center">
         <div class="breadcrumb flat">
-            <!--<a href="#" class="done">Sélection du fichier</a>-->
             <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
             <a href="<?php echo base_url("index.php/Project/load_step2_select_columns");?>" class="done">Sélection des colonnes</a>
             <a href="<?php echo base_url("index.php/Project/load_step3_missing_values");?>" class="done">Valeurs manquantes</a>
@@ -102,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a href="#" class="todo">Traitement & Téléchargement</a>
         </div>
     </div>
-
+-->
 	<div class="well">
 		<div class="row">
 			<div class="col-md-10">

@@ -1,0 +1,19 @@
+#msg_danger, #result, #report, #steps, #wait{
+    /*On masque par défaut*/
+    display: none;
+}
+
+#start_treatment_ok, #show_report_ok{
+	visibility: hidden;
+}
+.tagsinput-perso{
+	margin-right: 5px;
+}
+.tagsinput-perso-all{
+	background-color: #5bc0de;
+	background-color: #E37495;
+	color: white;
+}
+#dl_file{
+	cursor: pointer;
+}

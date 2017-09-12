@@ -4,11 +4,6 @@
 	<div class="well">
 		<div class="row">
 			<div class="col-xs-12">
-				<h2 style="display: inline;">Tableau de bord</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
 				<h3 style="display: inline;">Mes projets de normalisation</h3>
 				<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">+&nbsp;Nouveau</button>
 				<p>
@@ -166,9 +161,11 @@
 			</div><!--/col-xs-6-->
 
 		</div><!--/row-->
+	</div>
+</div>
 
-		<hr>
-
+<div class="container" style="margin-top: 20px;">
+	<div class="well">
 		<div class="row">
 			<div class="col-xs-6">
 				<h3 style="display: inline;">Mes projets de jointure</h3>

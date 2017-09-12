@@ -181,20 +181,20 @@ class Project extends CI_Controller {
 		$steps = $project_api['log'][$file_name];
 
 	
-		if($steps['add_selected_columns']['completed']){
-			return 'add_selected_columns';
-		}
-		elseif($steps['es_train']['completed']){
-			return 'es_train';
-		}
-		elseif($steps['upload_es_train']['completed']){
-			return 'upload_es_train';
+		if($steps['link_results_analyzer']['completed']){
+			return 'link_results_analyzer';
 		}
 		elseif($steps['es_linker']['completed']){
 			return 'es_linker';
 		}
-		elseif($steps['link_results_analyzer']['completed']){
-			return 'link_results_analyzer';
+		elseif($steps['upload_es_train']['completed']){
+			return 'upload_es_train';
+		}
+		elseif($steps['es_train']['completed']){
+			return 'es_train';
+		}
+		elseif($steps['add_selected_columns']['completed']){
+			return 'add_selected_columns';
 		}
 
 		return 'INIT'; // Si project_id mais aucune étape de validée
@@ -213,7 +213,8 @@ class Project extends CI_Controller {
 				break;
 
 			case 'es_train':
-				$this->es_linker($project_id);
+				$this->es_train($project_id);
+				//$this->es_linker($project_id);
 				break;
 
 			case 'upload_es_train':
@@ -247,10 +248,8 @@ class Project extends CI_Controller {
 
 	public function es_train($id='')
 	{
-		# Apprentissage dedupe
-/*
-voir /merge_machine/templates/dedupe_training.html
-*/
+		# Apprentissage
+
 		$data['title'] = "Jointure";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_es_train_specifics');
@@ -261,21 +260,19 @@ voir /merge_machine/templates/dedupe_training.html
 
 	public function es_linker($id='')
 	{
-		# Restriction du referentiel suite à apprentissage
-/*
-ne pas faire tout de suite - passer l'étape
-*/
+		# Traitement final
 
-		$this->load->view('project_link_restrict_'.$_SESSION['language']);
-		$this->load->view('footer_fr');
+		$data['title'] = "Jointure";
+		$this->load->view('lib', $data);
+		$this->load->view('project_link_es_linker_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('project_link_es_linker_'.$_SESSION['language']);
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 	public function link_results_analyzer($id='')
 	{
-		# traitement final
-/*
-scheduler linker avec project_id
-*/
+		# Analyse des resultats
 
 		$this->load->view('project_link_results_'.$_SESSION['language']);
 		$this->load->view('footer_fr');
@@ -349,9 +346,9 @@ scheduler linker avec project_id
 		// Chargement des vues
 		$data['title'] = "Normalisation";
 		$this->load->view('lib', $data);
-		$this->load->view('project_step1_init_specifics');
+		$this->load->view('project_normalize_init_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
-		$this->load->view('project_step1_init_'.$_SESSION['language'], $data);
+		$this->load->view('project_normalize_init_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
@@ -366,15 +363,19 @@ scheduler linker avec project_id
 
 		$this->test_project_id();
 
+		// Chargement des vues
+		$data['title'] = "Normalisation";
+		$this->load->view('lib', $data);
+		$this->load->view('project_normalize_select_columns_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
 		// Est ce que cette étape a déjà été lancée ?
 		if($this->is_done_step('add_selected_columns')){
-			$this->load->view('project_step2_select_columns_report_fr');
+			$this->load->view('project_normalize_select_columns_report_'.$_SESSION['language'], $data);
 		}
 		else{
-			$this->load->view('project_step2_select_columns_fr');
+			$this->load->view('project_normalize_select_columns_'.$_SESSION['language'], $data);
 		}
-		
-		$this->load->view('footer_fr');
+		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 	/*
@@ -389,16 +390,20 @@ scheduler linker avec project_id
 		}
 		
 		$this->test_project_id();
-		
-		// Est ce que cette étape a déjà été lancée ?
-		if($this->is_done_step('replace_mvs')){
-			$this->load->view('project_step3_missing_values_report_fr');
+				
+		// Chargement des vues
+		$data['title'] = "Normalisation";
+		$this->load->view('lib', $data);
+		$this->load->view('project_normalize_replace_mvs_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		if($this->is_done_step('replace_mvs')){// Est ce que cette étape a déjà été lancée ?
+			$this->load->view('project_normalize_replace_mvs_report_'.$_SESSION['language'], $data);
 		}
 		else{
-			$this->load->view('project_step3_missing_values_fr');
+			$this->load->view('project_normalize_replace_mvs_'.$_SESSION['language'], $data);
 		}
+		$this->load->view('footer_'.$_SESSION['language']);
 
-		$this->load->view('footer_fr');
 	}
 
 	/*
@@ -414,15 +419,19 @@ scheduler linker avec project_id
 
 		$this->test_project_id();
 
-		// Est ce que cette étape a déjà été lancée ?
-		if($this->is_done_step('recode_types')){
-			$this->load->view('project_step4_infer_types_report_fr');
+		// Chargement des vues
+		$data['title'] = "Normalisation";
+		$this->load->view('lib', $data);
+		$this->load->view('project_normalize_infer_types_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		if($this->is_done_step('infer_types')){// Est ce que cette étape a déjà été lancée ?
+			$this->load->view('project_normalize_infer_types_report_'.$_SESSION['language'], $data);
 		}
 		else{
-			$this->load->view('project_step4_infer_types_fr');
+			$this->load->view('project_normalize_infer_types_'.$_SESSION['language'], $data);
 		}
+		$this->load->view('footer_'.$_SESSION['language']);
 
-		$this->load->view('footer_fr');
 	}
 
 	/*
@@ -436,15 +445,20 @@ scheduler linker avec project_id
 		}
 		$this->test_project_id();
 
-		// Est ce que cette étape a déjà été lancée ?
-		if($this->is_done_step('concat_with_init')){
-			$this->load->view('project_step5_concat_with_init_report_fr');
+
+		// Chargement des vues
+		$data['title'] = "Normalisation";
+		$this->load->view('lib', $data);
+		$this->load->view('project_normalize_concat_with_init_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		if($this->is_done_step('concat_with_init')){// Est ce que cette étape a déjà été lancée ?
+			$this->load->view('project_normalize_concat_with_init_report_'.$_SESSION['language'], $data);
 		}
 		else{
-			$this->load->view('project_step5_concat_with_init_fr');
+			$this->load->view('project_normalize_concat_with_init_'.$_SESSION['language'], $data);
 		}
+		$this->load->view('footer_'.$_SESSION['language']);
 
-		$this->load->view('footer_fr');
 	}
 
 

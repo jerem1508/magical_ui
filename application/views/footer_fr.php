@@ -2,9 +2,10 @@
 	#panel_comment{
 		border-radius:  5px 5px 0 0;
 		position: fixed;
-		bottom: -370px;
+		bottom: -350px;
 		right: 20px;
 		width: 350px;
+		border: 1px solid #262626;
 	}
 	#panel_comment .row{
 		margin-bottom: 10px;
@@ -25,6 +26,11 @@
 		color: #777;
 		font-weight: bolder;
 		font-style: italic;
+	}
+	#bt_comment{
+		background-color: #262626;
+
+
 	}
 	body{
 		margin-bottom: 50px;
@@ -111,7 +117,7 @@
 			.addClass("minimised")
 			.css('bottom','-20px')
 			.animate({
-			  bottom : '-370px'
+			  bottom : '-350px'
 		});
 		ch = '<span class="glyphicon glyphicon-chevron-up"></span><span class="title_comment">Commentaires ?</span><span class="glyphicon glyphicon-chevron-up"></span>';
 		$("#panel_comment .panel-title").html(ch);
@@ -121,7 +127,7 @@
 		$('#panel_comment')
 			.removeClass("minimised")
 			.addClass("maximised")
-			.css('bottom','-370px')
+			.css('bottom','-350px')
 			.animate({
 				bottom : '-20px'
 		});

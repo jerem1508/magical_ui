@@ -1,3 +1,5 @@
+<img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
+
 <div class="container" style="margin-top: 20px;">
 	<div class="well">
 		<h2>Créer un compte</h2>
