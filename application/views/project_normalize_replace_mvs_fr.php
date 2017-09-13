@@ -50,6 +50,13 @@
 			</div>
 		</div>
 		<div class="row" id="result">
+
+
+		    <div class="well">
+		        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+		    </div>
+
+
 			<div class="col-xs-12 text-center">
 			<hr>
 			</div>
@@ -286,9 +293,9 @@
 	        var ch = '<table class="table table-responsive table-condensed table-striped">';
 	        ch += "<tr>";
 			ch += "<th></th>";
-			ch += "<th>Valeurs suggérées</th>";
-			ch += "<th>Autres suggestions</th>";
-			ch += "<th>Ajout manuel</th>";
+			ch += "<th data-intro=\"Valeurs manquantes détectées automatiquement\">Valeurs suggérées</th>";
+			ch += "<th data-intro=\"Valeurs manquantes détectées automatiquement (peu probables)\">Autres suggestions</th>";
+			ch += "<th data-intro=\"Ajoutez des représentations de valeurs manquantes ou nulls\">Ajout manuel</th>";
 	        ch += "</tr>";
 	        	
 	        for (column in columns) {

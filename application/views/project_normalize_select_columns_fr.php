@@ -24,12 +24,17 @@ if(isset($this->session->project_type)){
 			 Sélectionnez les colonnes à nettoyer. Dans le cadre d'un projet de jointure, nous recommendons fortement de nettoyer toutes les colonnes suceptibles de servir à la jointure de vos fichiers.
 		</p>
 
+
+	    <div class="well">
+	        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+	    </div>
+
 		<div class="row">
 			<div class="col-xs-6 well" style="background-color: #fff">
 				<h3>Extrait aléatoire des données</h3>
 				Vous avez la possibilité d'afficher un extrait aléatoire du fichier en cours. Cet extrait affichera un maximum de 50 lignes. A chaque clic sur le bouton ci-dessous, un nouvel extrait sera généré.
 				<br><br>
-				<button class="btn btn-success2 btn-xs" id="bt_view" data-toggle="modal" data-target="#modal-dataview_all"><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Voir l'extrait</button>
+				<button class="btn btn-success2 btn-xs" id="bt_view" data-toggle="modal" data-target="#modal-dataview_all" data-intro="Regarder un échantillon de données pour la mémoire..."><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Voir l'extrait</button>
 
 				<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modal-dataview_all">
 				  <div class="modal-dialog modal-lg" role="document">
@@ -51,7 +56,7 @@ if(isset($this->session->project_type)){
 
 			</div>
 			<div class="col-xs-6">
-				<div id="result"></div>
+				<div id="result" data-intro="Sélectionnez les colonnes à nettoyer"></div>
 			</div>
 		</div>
     </div><!-- /well-->

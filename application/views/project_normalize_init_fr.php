@@ -29,19 +29,23 @@
         </p>
     </div>
 
+    <div class="well">
+        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+    </div>
+
 	<form class="form-horizontal" name="form1" id="form1" method="post" enctype="multipart/form-data">
     <div class="well">
         <h2 style="display: inline;">
             <span class="step_numbers">1</span>
             .Identité du projet
         </h2>
-			<div class="form-group">
+			<div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
 				<label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" data-intro="Ajoutez une description optionnelle">
 				<label for="project_description" class="col-sm-2 control-label">Description du projet</label>
 				<div class="col-sm-10">
 					<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
@@ -49,7 +53,7 @@
 			</div>
     </div>
 
-    <div class="well">
+    <div class="well" data-intro="Uploadez un fichier à transformer">
         <h2 style="display: inline;">
             <span class="step_numbers">2</span>
             .Sélection du fichier à normaliser
