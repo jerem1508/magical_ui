@@ -27,7 +27,6 @@
     </div><!-- /well-->
 </div><!--/container-->
 
-
 <div class="container" id="work" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
@@ -49,7 +48,7 @@
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">1</span>
-                            .Filtres
+                            &nbsp;Filtres
                         </h2>
                     </div>
                 </div><!-- / row-->
@@ -60,7 +59,7 @@
                     </div>
                     <div class="col-xs-9">
                         <input type="text" id="filter_plus" data-role="tagsinput">
-                        <button class="btn btn-default">
+                        <button class="btn btn-default" id="bt_add_filter_plus">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>
@@ -71,19 +70,17 @@
                     </div>
                     <div class="col-xs-9">
                         <input type="text" id="filter_minus" data-role="tagsinput">
-                        <button class="btn btn-default">
+                        <button class="btn btn-default" id="bt_add_filter_minus">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </div>
                 </div>
 
-
-
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">2</span>
-                            .Labellisation
+                            &nbsp;Labellisation
                         </h2>
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-10">
@@ -109,7 +106,7 @@
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">3</span>
-                            .Statistiques
+                            &nbsp;Statistiques
                         </h2>
                     </div>
                     <div class="row">
@@ -144,6 +141,33 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modal_filter" tabindex="-1" role="dialog" aria-labelledby="modal_filter_title">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal_filter_title">Ajout de filtres</h4>
+            </div>
+            <div class="modal-body">
+            <form>
+                <div class="form-group">
+                    <label for="columns_filter">Colonne sur laquelle appliquer le filtre : </label>
+                    <select class="form-control" id="columns_filter"></select>
+                </div><!-- / form-group -->
+                <div class="form-group">
+                    <label for="text_filter">Filtre : </label>
+                    <input type="text" class="form-control" placeholder="Text input" id="text_filter">
+                </div><!-- / form-group -->
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-warning" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-xs btn-success2">Ajouter la valeur</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
 
@@ -436,6 +460,14 @@ function show_stats(stat) {
 } // / show_stats()
 
 
+function get_columns(metadata) {
+    // Renvoie les colonnes présentent dans les métadata
+
+    var all_columns = metadata['column_tracker']['original'];
+    return all_columns;
+}// / get_columns()
+
+
 function complete_training() {
     var _to_send = {'project_id': project_id_link}
 
@@ -454,10 +486,34 @@ function valid_step() {
 }// / valid_step()
 
 
-$(function(){// ready
-    
-    $("body").css("height", $(window).height()) ;
+function add_columns_filter(columns) {
+    // Ajoute les colonnes du référentiel à la modal d'ajout de filtres
+    for (var i = 0; i < columns.length; i++) {
+        $('#columns_filter').append($("<option></option>")
+                            .attr("value",columns[i])
+                            .text(columns[i])); 
+    }
+}// / add_columns_filter()
 
+
+function show_modal_filter() {
+    // Affiche la modale des filtres en la personnalisant en fonction de oblig ou excl
+
+    if(modal_filter_sens == "oblig"){
+        $("#modal_filter_title").html("Ajout des termes obligatoires");
+    }
+    else{
+        $("#modal_filter_title").html("Ajout des termes à exclure");
+    }
+
+    // Affichage de la modale
+    $('#modal_filter').modal('show');
+}// / show_modal_filter()
+
+
+function add_buttons() {
+    // Ajout des boutons
+    
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
         $("#work").fadeToggle();
@@ -466,12 +522,32 @@ $(function(){// ready
 
     $("#bt_next").click(function(){
         valid_step();
+    });
+
+    $("#bt_add_filter_plus").click(function(){
+        modal_filter_sens = "oblig";
+        show_modal_filter();
+    });
+
+    $("#bt_add_filter_minus").click(function(){
+        modal_filter_sens = "excl";
+        show_modal_filter();
     });    
+}
+
+
+$(function(){// ready
+    
+    $("body").css("height", $(window).height());
+
+    modal_filter_sens = ""; // est utlisé pour savoir si l'on est en exclusion ou en label obligatoire (oblig, excl)
+
+    // Ajout des boutons
+    add_buttons();
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
     // Récupération des metadata du projet de link en cours
-    console.log('Projet de LINK');
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
@@ -483,44 +559,29 @@ $(function(){// ready
     project_id_ref = metadata_link['files']['ref']['project_id'];
 
     // Récupérartion des métadata du fichier source
-    console.log('Projet de normalisation SOURCE');
     metadata_src = get_metadata('normalize', project_id_src);
 
     // Récupérartion des métadata du fichier referentiel
-    console.log('Projet de normalisation REFERENTIEL');
     metadata_ref = get_metadata('normalize', project_id_ref);
 
-/*
-    // Récupération des colonnes sources à ajouter
-    columns_src = get_columns(metadata_src);
-    columns_ref = get_columns(metadata_ref);
+    // Récupération des colonnes référentiel
+    var columns_ref = get_columns(metadata_ref);
 
-    // Renseignement des noms de fichiers
-    var src_file_name = get_filename(metadata_src.last_written.file_name); 
-    var ref_file_name = get_filename(metadata_ref.last_written.file_name);
-  
-    $("#src_file_name").html(src_file_name);
-    $("#ref_file_name").html(ref_file_name);
+    //Ajoute les colonnes du référentiel à la modal d'ajout de filtres
+    add_columns_filter(columns_ref);
     
-    // Ajout des colonne à l'interface
-    $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
-    $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
-*/
+    // Récupération des matches
     column_matches = get_column_matches();
-
-    console.log('column_matches');
-    console.log(column_matches);
 
     // Connect to socket
     // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
     socket = io.connect('<?php echo BASE_API_URL;?>');
 
-    // Création des indexs ES
+    // Création des indexs Elastic Search
     create_es_index_api();
 
+    // Ecoute socket
     socket_on_message();
-    
-
 
 });//ready
 </script>

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"border",
+				"border"
+			],
+			[
 				"show",
 				"show_stats"
 			],
@@ -38,10 +42,6 @@
 			[
 				"wi",
 				"width"
-			],
-			[
-				"border",
-				"border-radius"
 			],
 			[
 				"min",
@@ -523,34 +523,8 @@
 			"file": "application/controllers/Project.php",
 			"settings":
 			{
-				"buffer_size": 12667,
+				"buffer_size": 13906,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_link_select_columns_fr.php",
-			"settings":
-			{
-				"buffer_size": 12994,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_link_step1_init_fr.php",
-			"settings":
-			{
-				"buffer_size": 45778,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_step1_init.css",
-			"settings":
-			{
-				"buffer_size": 722,
 				"line_ending": "Unix"
 			}
 		},
@@ -558,64 +532,64 @@
 			"file": "application/views/project_link_es_train_fr.php",
 			"settings":
 			{
-				"buffer_size": 18297,
+				"buffer_size": 18295,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/controllers/Home.php",
+			"contents": "<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container\" id=\"entete\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h2 style=\"margin-top: 0;\"><span id=\"project_name1\"></span> : <i>Traitement</i></h2>\n            </div>\n        </div>\n        <p>\n            \n        </p>\n    </div><!-- /well-->\n</div><!--/container-->\n\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-xs-12 text-right\">\n            <button class=\"btn btn-success\" id=\"bt_next\">Analyse des résultats >></button>\n        </div>\n    </div>\n</div><!--/container-->\n\n\n<script type=\"text/javascript\">\n\nfunction get_metadata(project_type, project_id) {\n    // Récupere les métadata via API\n\n    var metadata = \"\";\n    var ret = false;\n\n    $.ajax({\n        type: 'get',\n        async: false,\n        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error\");console.log(result.error);\n            }\n            else{\n                console.log(\"success - metadata\");console.dir(result);\n                ret = result.metadata;\n            }\n        },\n        error: function (result, status, error){\n            console.log(result);\n            console.log(status);\n            console.log(error);\n        }\n    });// /ajax metadata\n\n    return ret;\n}// / get_metadata\n\n\nfunction get_learned_setting(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"learned_settings.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction treatment(project_id_link, learned_setting_json) {\n\n    var tparams = {\n        \"module_params\": learned_setting_json\n    }\n    console.log('tparams:');\n    console.log(tparams);\n\n    $.ajax({\n        type: 'post',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/es_linker/' + project_id_link + '/',\n        contentType: \"application/json; charset=utf-8\",\n        traditional: true,\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - es_linker\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - es_linker\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                link_results_analyzer(); //schedule\n\n                                // Sample\n                                // es_linker. source.csv metatdata/files/source/filename\n\n\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error schedule\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction valid_step() {\n    // Validation du training\n    complete_training();\n\n    // Passage à l'étape suivante\n    window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + project_id_link;\n}// / valid_step()\n\n\n$(function(){// ready\n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n\n    // Récupération du paramétrage\n    var learned_setting_json = get_learned_setting(project_id_link);\n\n    if(learned_setting_json){\n        treatment(project_id_link, learned_setting_json);\n    }\n\n/*\n    $(\"body\").css(\"height\", $(window).height()) ;\n\n    $(\"#bt_start\").click(function(){\n        $(\"#entete\").css(\"display\", \"none\");\n        $(\"#work\").fadeToggle();\n        $(\"#bt_next\").fadeToggle();\n    });\n\n    $(\"#bt_next\").click(function(){\n        valid_step();\n    });    \n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n    $(\"#project_name2\").html(metadata_link.display_name);\n\n    // Récupération des ids des projets de normalisation\n    project_id_src = metadata_link['files']['source']['project_id'];\n    project_id_ref = metadata_link['files']['ref']['project_id'];\n\n    // Récupérartion des métadata du fichier source\n    console.log('Projet de normalisation SOURCE');\n    metadata_src = get_metadata('normalize', project_id_src);\n\n    // Récupérartion des métadata du fichier referentiel\n    console.log('Projet de normalisation REFERENTIEL');\n    metadata_ref = get_metadata('normalize', project_id_ref);\n\n    column_matches = get_column_matches();\n\n    console.log('column_matches');\n    console.log(column_matches);\n\n    // Connect to socket\n    // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');\n    socket = io.connect('<?php echo BASE_API_URL;?>');\n\n    // Création des indexs ES\n    create_es_index_api();\n\n    socket_on_message();\n    \n\n*/\n});//ready\n</script>",
+			"file": "application/views/project_link_es_linker_fr.php",
+			"file_size": 7063,
+			"file_write_time": 131496974110444564,
 			"settings":
 			{
-				"buffer_size": 864,
+				"buffer_size": 7243,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+			"settings":
+			{
+				"buffer_size": 38615,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "{\n  \"module_name\": \"recode_types\",\n  \"file_name\": \"ref_copy.csv\",\n  \"mod_count\": {\n    \"patronyme_uai\": 0,\n    \"departement\": 0,\n    \"numero_uai\": 0,\n    \"full_name\": 0,\n    \"denomination_principale_uai\": 0,\n    \"adresse_uai\": 0,\n    \"code_postal_uai\": 0,\n    \"localite_acheminement_uai\": 13\n  },\n  \"params\": {\n    \"column_types\": {\n      \"departement\": \"Département\",\n      \"code_postal_uai\": \"Code Postal\",\n      \"denomination_principale_uai\": \"Entité MESR\",\n      \"numero_uai\": \"UAI\",\n      \"localite_acheminement_uai\": \"Commune\"\n    }\n  }\n}",
-			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
-			"file_size": 464,
-			"file_write_time": 131484785790330765,
+			"file": "application/views/project_normalize_replace_mvs_fr.php",
 			"settings":
 			{
-				"buffer_size": 544,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/libraries/Private_functions.php",
-			"settings":
-			{
-				"buffer_size": 1670,
+				"buffer_size": 20012,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/style.css",
+			"contents": "{\n  \"index_name\": \"3cb182bccd901ff086b65377e475bd82\",\n  \"exact_pairs\": [\n    [\n      29,\n      \"5406\"\n    ],\n    [\n      75,\n      \"3887\"\n    ],\n    [\n      1,\n      \"2776\"\n    ],\n    [\n      34,\n      \"4626\"\n    ],\n    [\n      79,\n      \"5452\"\n    ],\n    [\n      77,\n      \"4007\"\n    ],\n    [\n      14,\n      \"1529\"\n    ],\n    [\n      37,\n      \"4303\"\n    ]\n  ],\n  \"thresh\": 0,\n  \"must_not\": {},\n  \"query_templates\": [\n    [\n      \"should\",\n      \"departement\",\n      \"departement\",\n      \".integers\",\n      1\n    ],\n    [\n      \"should\",\n      \"uai\",\n      \"numero_uai\",\n      \".integers\",\n      1\n    ]\n  ],\n  \"must\": {}\n}",
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/learned_settings.json",
+			"file_size": 250,
+			"file_write_time": 131496947818603310,
 			"settings":
 			{
-				"buffer_size": 10458,
-				"encoding": "UTF-8",
+				"buffer_size": 625,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/project_link_es_train.css",
-			"settings":
-			{
-				"buffer_size": 602,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_es_train.js",
+			"file": "assets/project_link_es_linker.css",
 			"settings":
 			{
 				"buffer_size": 0,
-				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Save_ajax.php",
+			"settings":
+			{
+				"buffer_size": 1354,
 				"line_ending": "Unix"
 			}
 		}
@@ -627,7 +601,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 172.0,
+		"height": 212.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
@@ -695,11 +669,58 @@
 		"/var/www/html/projets/magical_ui/application/helpers",
 		"/var/www/html/projets/magical_ui/application/libraries",
 		"/var/www/html/projets/magical_ui/application/views",
+		"/var/www/html/projets/magical_ui/application/views/errors",
 		"/var/www/html/projets/magical_ui/assets",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine"
 	],
 	"file_history":
 	[
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/es_linker/learned_settings.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/metadata.json",
+		"/var/www/html/projets/magical_ui/application/controllers/Comment_ajax.php",
+		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_report_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_report_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.js",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_select_columns.css",
+		"/var/www/html/projets/magical_ui/application/views/project_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/column_matches.json",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.js",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.js",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_select_columns.js",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_specifics.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
+		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/training.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
@@ -709,7 +730,6 @@
 		"/home/jerem/temp/application/views/changeLog_en.php",
 		"/home/jerem/temp/application/views/changeLog_fr.php",
 		"/home/jerem/temp/application/controllers/Changelog.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/90a3650ce532bf116664cf5405b18d22/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/metadata.json",
@@ -718,8 +738,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/header_en.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_en.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.js",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker.css",
@@ -731,23 +749,14 @@
 		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_specifics.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
-		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
 		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
-		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
-		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_step1_init.css",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_step1_init_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
-		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
 		"/var/www/html/projets/magical_ui/application/views/project_step1_init_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
 		"/var/www/html/projets/magical_ui/application/views/project_step3_missing_values_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
@@ -755,8 +764,6 @@
 		"/var/www/html/projets/magical_ui/application/views/home_fr_svg.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/64537e4333f89aebb5f6d30a815b2ddb/recode_types/source_1.csv__run_info.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/a8c77861a71adb99593d6d790b2b3de8/metadata.json",
-		"/var/www/html/projets/magical_ui/assets/style.css",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/application/views/project_step5_concat_with_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_step2_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_step4_infer_types_fr.php",
@@ -765,7 +772,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_step4_infer_types_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_results_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_restrict_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_step5_concat_with_init_report_fr.php",
 		"/var/www/html/tests/fred.html",
@@ -796,38 +802,7 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/abstract_data_project.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/9488b4fe8a6ec8b517881ee7884b9c4b/normalizeValues/infered_config.json",
 		"/var/www/html/tmp/DataTables/datatables.bootstrap.min.css",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/62b4c55990a1dfc207e3be762d2fe2a5/replace_mvs/run_info.json",
-		"/var/www/html/projets/atlas/application/views/contact.php",
-		"/home/jerem/.config/sublime-text-3/Packages/User/console.log.sublime-snippet",
-		"/home/jerem/.bashrc",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/templates/missing_values.html",
-		"/home/jerem/w/fic.csv",
-		"/home/jerem/Téléchargements/ref.csv",
-		"/var/www/html/tmp/upload/fic.csv",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/0899384fa6f44c0afb7d38e0c07f89df/replace_mvs/infered_config.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/MODULES.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/CONFIG.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/templates/select_columns_normalize.html",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/templates/select_file_normalize.html",
-		"/var/www/html/tmp/upload.php",
-		"/var/www/html/tmp/jQuery-File-Upload-9.18.0/basic-plus.html",
-		"/var/www/html/tmp/jQuery-File-Upload-9.18.0/basic.html",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/templates/select_files_linker.html",
-		"/var/www/html/tmp/jQuery-File-Upload-9.18.0/index.html",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/Dockerfile",
-		"/home/jerem/Documents/a_tester",
-		"/var/www/html/projets/magical_ui/application/views/project_step2_load_file_fr.php",
-		"/var/www/html/tmp/progress.html",
-		"/var/www/html/projets/magical_ui/application/controllers/Config.php",
-		"/var/www/html/projets/magical_ui/application/views/home_en.php",
-		"/var/www/html/tmp/jQuery-File-Upload-9.18.0/jquery-ui.html",
-		"/home/jerem/work_temp/openAgenda/index.php",
-		"/home/jerem/work_temp/openAgenda/src/fic2016.csv",
-		"/var/www/html/projets/magical_ui/application/config/database.php",
-		"/var/www/html/projets/magical_ui/application/config/autoload.php",
-		"/home/jerem/a_voir",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/secret_key.txt",
-		"/usr/share/applications/sublime_text.desktop"
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/62b4c55990a1dfc207e3be762d2fe2a5/replace_mvs/run_info.json"
 	],
 	"find":
 	{
@@ -846,6 +821,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_parse_r",
+			"schedu",
+			"get_params",
+			"modu",
+			"get_params",
+			"module_par",
+			"create_e",
+			"add_selected_columns",
 			"estimated_recall",
 			"stat_estimated_precision",
 			"valid_step",
@@ -965,15 +948,7 @@
 			"fileupload",
 			"modal",
 			"configura",
-			"select_all",
-			"voir",
-			"metada",
-			"metadata",
-			"get_actual_step_linker",
-			"load_step_linker",
-			"load_link_step1_init",
-			"\n  ",
-			"color_src"
+			"select_all"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1013,7 +988,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1022,15 +997,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12667,
+						"buffer_size": 13906,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3620,
-								3620
+								5841,
+								5841
 							]
 						],
 						"settings":
@@ -1039,97 +1014,97 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2322.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/views/project_link_select_columns_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12994,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10044,
-								10044
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5555.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "application/views/project_link_step1_init_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 45778,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10643,
-								10643
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4277.0,
+						"translation.y": 3520.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "assets/project_link_step1_init.css",
+					"buffer": 1,
+					"file": "application/views/project_link_es_train_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 722,
+						"buffer_size": 18295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								672,
-								672
+								16256,
+								16256
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4050.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/project_link_es_linker_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7243,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4042,
+								4042
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1692.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 38615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6062,
+								6062
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2862.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -1137,49 +1112,19 @@
 				},
 				{
 					"buffer": 4,
-					"file": "application/views/project_link_es_train_fr.php",
+					"file": "application/views/project_normalize_replace_mvs_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18297,
+						"buffer_size": 20012,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15094,
-								15094
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6904.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "application/controllers/Home.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								139,
-								139
+								17703,
+								17703
 							]
 						],
 						"settings":
@@ -1188,138 +1133,49 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 10018.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
+					"buffer": 5,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/learned_settings.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 544,
+						"buffer_size": 625,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								544,
-								544
+								625,
+								625
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 7,
-					"file": "application/libraries/Private_functions.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1670,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1205,
-								1205
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "assets/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10458,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								968,
-								968
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 778.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "assets/project_link_es_train.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 602,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								561,
-								561
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "assets/project_link_es_train.js",
+					"buffer": 6,
+					"file": "assets/project_link_es_linker.css",
 					"semi_transient": false,
 					"settings":
 					{
@@ -1336,13 +1192,42 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "application/controllers/Save_ajax.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1354,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1354,
+								1354
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1376,7 +1261,7 @@
 		"cols":
 		[
 			0.0,
-			0.811189102348,
+			0.681488358804,
 			1.0
 		],
 		"rows":
@@ -1432,7 +1317,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": false,
-	"side_bar_width": 382.0,
+	"side_bar_width": 408.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

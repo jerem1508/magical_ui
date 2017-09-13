@@ -127,6 +127,11 @@ function treatment(project_id_link, learned_setting_json) {
                                 console.log("success - job");
                                 console.dir(result);
 
+                                //link_results_analyzer(); //schedule
+
+                                // Sample
+                                // es_linker. source.csv metatdata/files/source/filename
+
 
                             }
                             else{
@@ -171,6 +176,9 @@ $(function(){// ready
 
     // MAJ du nom du projet
     $("#project_name1").html(metadata_link.display_name);
+
+    // Affichage PONG
+    
 
     // Récupération du paramétrage
     var learned_setting_json = get_learned_setting(project_id_link);
