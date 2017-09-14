@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"column_",
+				"column_name"
+			],
+			[
+				"inde",
+				"indexOf\t( searchElement: any, fromIndex?: int ): int Array"
+			],
+			[
+				"filter",
+				"filter_list"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"mag",
+				"margin-bottom"
+			],
+			[
+				"spl",
+				"split\t( separator: string, limit: int ): string String"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"valid",
+				"valid_filters"
+			],
+			[
+				"in",
+				"input_text"
+			],
+			[
+				"input",
+				"input_text"
+			],
+			[
+				"col",
+				"columns\t = 'initial' Style CSS"
+			],
+			[
+				"bt_",
+				"bt_add_filter_plus"
+			],
+			[
+				"modal",
+				"modal_filter"
+			],
+			[
+				"show_",
+				"show_modal_filter"
+			],
+			[
+				"add",
+				"add_columns_filter"
+			],
+			[
 				"border",
 				"border"
 			],
@@ -26,10 +86,6 @@
 			[
 				"padd",
 				"padding"
-			],
-			[
-				"in",
-				"inline-block"
 			],
 			[
 				"margin",
@@ -58,10 +114,6 @@
 			[
 				"source",
 				"source_list"
-			],
-			[
-				"column_",
-				"column_matches"
 			],
 			[
 				"JSON",
@@ -162,10 +214,6 @@
 			[
 				"border-bo",
 				"border-bottom"
-			],
-			[
-				"for",
-				"for\tfor (…) {…}"
 			],
 			[
 				"column_sr",
@@ -352,10 +400,6 @@
 				"module_name"
 			],
 			[
-				"col",
-				"color"
-			],
-			[
 				"id",
 				"id_td_bt_column"
 			],
@@ -432,10 +476,6 @@
 				"value"
 			],
 			[
-				"add",
-				"add_first_value_for_all"
-			],
-			[
 				"auto",
 				"auto_delete"
 			],
@@ -456,10 +496,6 @@
 				"btn-success2"
 			],
 			[
-				"co",
-				"column_name"
-			],
-			[
 				"b",
 				"button\tTag"
 			],
@@ -478,42 +514,6 @@
 			[
 				"btn-succ",
 				"btn-success"
-			],
-			[
-				"v",
-				"val"
-			],
-			[
-				"back",
-				"background-color"
-			],
-			[
-				"bac",
-				"background-color"
-			],
-			[
-				"var",
-				"var_test"
-			],
-			[
-				"h",
-				"hidden"
-			],
-			[
-				"user",
-				"user_id"
-			],
-			[
-				"project_",
-				"project_id"
-			],
-			[
-				"u",
-				"uppercase"
-			],
-			[
-				"border-l",
-				"border-bottom-left-radius"
 			]
 		]
 	},
@@ -532,19 +532,69 @@
 			"file": "application/views/project_link_es_train_fr.php",
 			"settings":
 			{
-				"buffer_size": 18295,
+				"buffer_size": 22897,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container\" id=\"entete\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h2 style=\"margin-top: 0;\"><span id=\"project_name1\"></span> : <i>Traitement</i></h2>\n            </div>\n        </div>\n        <p>\n            \n        </p>\n    </div><!-- /well-->\n</div><!--/container-->\n\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-xs-12 text-right\">\n            <button class=\"btn btn-success\" id=\"bt_next\">Analyse des résultats >></button>\n        </div>\n    </div>\n</div><!--/container-->\n\n\n<script type=\"text/javascript\">\n\nfunction get_metadata(project_type, project_id) {\n    // Récupere les métadata via API\n\n    var metadata = \"\";\n    var ret = false;\n\n    $.ajax({\n        type: 'get',\n        async: false,\n        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error\");console.log(result.error);\n            }\n            else{\n                console.log(\"success - metadata\");console.dir(result);\n                ret = result.metadata;\n            }\n        },\n        error: function (result, status, error){\n            console.log(result);\n            console.log(status);\n            console.log(error);\n        }\n    });// /ajax metadata\n\n    return ret;\n}// / get_metadata\n\n\nfunction get_learned_setting(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"learned_settings.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction treatment(project_id_link, learned_setting_json) {\n\n    var tparams = {\n        \"module_params\": learned_setting_json\n    }\n    console.log('tparams:');\n    console.log(tparams);\n\n    $.ajax({\n        type: 'post',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/es_linker/' + project_id_link + '/',\n        contentType: \"application/json; charset=utf-8\",\n        traditional: true,\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - es_linker\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - es_linker\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                link_results_analyzer(); //schedule\n\n                                // Sample\n                                // es_linker. source.csv metatdata/files/source/filename\n\n\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error schedule\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction valid_step() {\n    // Validation du training\n    complete_training();\n\n    // Passage à l'étape suivante\n    window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + project_id_link;\n}// / valid_step()\n\n\n$(function(){// ready\n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n\n    // Récupération du paramétrage\n    var learned_setting_json = get_learned_setting(project_id_link);\n\n    if(learned_setting_json){\n        treatment(project_id_link, learned_setting_json);\n    }\n\n/*\n    $(\"body\").css(\"height\", $(window).height()) ;\n\n    $(\"#bt_start\").click(function(){\n        $(\"#entete\").css(\"display\", \"none\");\n        $(\"#work\").fadeToggle();\n        $(\"#bt_next\").fadeToggle();\n    });\n\n    $(\"#bt_next\").click(function(){\n        valid_step();\n    });    \n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n    $(\"#project_name2\").html(metadata_link.display_name);\n\n    // Récupération des ids des projets de normalisation\n    project_id_src = metadata_link['files']['source']['project_id'];\n    project_id_ref = metadata_link['files']['ref']['project_id'];\n\n    // Récupérartion des métadata du fichier source\n    console.log('Projet de normalisation SOURCE');\n    metadata_src = get_metadata('normalize', project_id_src);\n\n    // Récupérartion des métadata du fichier referentiel\n    console.log('Projet de normalisation REFERENTIEL');\n    metadata_ref = get_metadata('normalize', project_id_ref);\n\n    column_matches = get_column_matches();\n\n    console.log('column_matches');\n    console.log(column_matches);\n\n    // Connect to socket\n    // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');\n    socket = io.connect('<?php echo BASE_API_URL;?>');\n\n    // Création des indexs ES\n    create_es_index_api();\n\n    socket_on_message();\n    \n\n*/\n});//ready\n</script>",
-			"file": "application/views/project_link_es_linker_fr.php",
-			"file_size": 7063,
-			"file_write_time": 131496974110444564,
+			"contents": "{\n  \"project_id\": \"5eea3e459992c5f8fd04a45adab62ed6\",\n  \"must\": {\"numero_uai\": [\"001\"]},\n  \"must_not\": \"\"\n}",
 			"settings":
 			{
-				"buffer_size": 7243,
+				"buffer_size": 107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
+			"settings":
+			{
+				"buffer_size": 37545,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/footer_fr.php",
+			"settings":
+			{
+				"buffer_size": 3164,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_es_train.css",
+			"settings":
+			{
+				"buffer_size": 697,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/lib.php",
+			"settings":
+			{
+				"buffer_size": 1712,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/home_fr.php",
+			"settings":
+			{
+				"buffer_size": 3495,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_es_linker_fr.php",
+			"settings":
+			{
+				"buffer_size": 7273,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -552,7 +602,7 @@
 			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
 			"settings":
 			{
-				"buffer_size": 38615,
+				"buffer_size": 38736,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -574,22 +624,6 @@
 			"settings":
 			{
 				"buffer_size": 625,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_es_linker.css",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Save_ajax.php",
-			"settings":
-			{
-				"buffer_size": 1354,
 				"line_ending": "Unix"
 			}
 		}
@@ -675,12 +709,17 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
+		"/var/www/html/projets/pong/game.keycode.js",
+		"/var/www/html/projets/pong/game.control.js",
+		"/var/www/html/projets/pong/game.display.js",
+		"/var/www/html/projets/pong/game.js",
+		"/var/www/html/projets/pong/game.html",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/metadata.json",
 		"/var/www/html/projets/magical_ui/application/controllers/Comment_ajax.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_specifics.php",
@@ -797,12 +836,7 @@
 		"/var/www/html/tmp/DataTables/index.html",
 		"/var/www/html/projets/magical_ui/application/config/constants.php",
 		"/home/jerem/Téléchargements/bootstrap-tagsinput-latest/examples/index.html",
-		"/home/jerem/Bureau/test.html",
-		"/var/www/html/projets/magical_ui/application/views/project_step1_init_report_fr.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/abstract_data_project.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/9488b4fe8a6ec8b517881ee7884b9c4b/normalizeValues/infered_config.json",
-		"/var/www/html/tmp/DataTables/datatables.bootstrap.min.css",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/62b4c55990a1dfc207e3be762d2fe2a5/replace_mvs/run_info.json"
+		"/home/jerem/Bureau/test.html"
 	],
 	"find":
 	{
@@ -821,6 +855,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"must = ",
+			"gen_bulk",
+			"gen_body",
+			"filter_oblig",
+			"work",
+			"bt_add_filter",
+			"project_name2",
+			"get_columns",
+			"treatment",
 			"_parse_r",
 			"schedu",
 			"get_params",
@@ -939,16 +982,7 @@
 			"is_completed_step",
 			"isss",
 			"isset",
-			"conca",
-			"treatment",
-			"trea",
-			"127",
-			"load_step_normalization",
-			"file_name",
-			"fileupload",
-			"modal",
-			"configura",
-			"select_all"
+			"conca"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -988,7 +1022,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1017,7 +1051,7 @@
 						"translation.y": 3520.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -1026,15 +1060,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18295,
+						"buffer_size": 22897,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16256,
-								16256
+								21157,
+								21157
 							]
 						],
 						"settings":
@@ -1044,57 +1078,54 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4050.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "application/views/project_link_es_linker_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7243,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4042,
-								4042
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1692.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 38615,
+						"buffer_size": 107,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6062,
-								6062
+								80,
+								80
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 37545,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35803,
+								35803
 							]
 						],
 						"settings":
@@ -1104,7 +1135,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": -0.0,
-						"translation.y": 2862.0,
+						"translation.y": 15678.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -1112,6 +1143,180 @@
 				},
 				{
 					"buffer": 4,
+					"file": "application/views/footer_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3164,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								268,
+								268
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1134.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "assets/project_link_es_train.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 697,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								669,
+								669
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/views/lib.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1712,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								744,
+								744
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "application/views/home_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								403,
+								403
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "application/views/project_link_es_linker_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7273,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5453,
+								5453
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2854.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 38736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29819,
+								29819
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 15184.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "application/views/project_normalize_replace_mvs_fr.php",
 					"semi_transient": false,
 					"settings":
@@ -1136,11 +1341,11 @@
 						"translation.y": 10018.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 11,
 					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/learned_settings.json",
 					"semi_transient": false,
 					"settings":
@@ -1158,76 +1363,15 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 6,
-					"file": "assets/project_link_es_linker.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "application/controllers/Save_ajax.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1354,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1354,
-								1354
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1250,18 +1394,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.681488358804,
 			1.0
 		],
 		"rows":
@@ -1316,7 +1453,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 408.0,
 	"status_bar_visible": true,
 	"template_settings":

@@ -190,9 +190,9 @@ class Project extends CI_Controller {
 		elseif($steps['upload_es_train']['completed']){
 			return 'upload_es_train';
 		}
-		elseif($steps['es_train']['completed']){
-			return 'es_train';
-		}
+		// elseif($steps['es_train']['completed']){
+		// 	return 'es_train';
+		// }
 		elseif($steps['add_selected_columns']['completed']){
 			return 'add_selected_columns';
 		}

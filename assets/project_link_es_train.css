@@ -1,4 +1,4 @@
-#work, #bt_next{
+.work, #bt_next{
 	display: none;
 }
 
@@ -44,4 +44,13 @@
 	font-size: 14px;
 	font-style: italic;
 	display: block;
+}
+
+hr{
+	margin-top: 10px;
+	margin-bottom: 0;
+	border-top-color: #ccc;
+}
+h2{
+	margin-top: 10px;
 }

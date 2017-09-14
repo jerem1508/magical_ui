@@ -3,7 +3,7 @@
 		border-radius:  5px 5px 0 0;
 		position: fixed;
 		bottom: -350px;
-		right: 20px;
+		left: 20px;
 		width: 350px;
 		border: 1px solid #262626;
 	}

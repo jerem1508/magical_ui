@@ -27,7 +27,7 @@
     </div><!-- /well-->
 </div><!--/container-->
 
-<div class="container" id="work" style="margin-top: 20px;">
+<div class="container work" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
             <div class="col-xs-12">
@@ -43,7 +43,6 @@
                         <a href="<?php echo base_url('index.php/Project/link');?>">Passer cette étape</a>
                     </div>
                 </div><!-- / row-->
-
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>
@@ -58,7 +57,7 @@
                         Termes obligatoires
                     </div>
                     <div class="col-xs-9">
-                        <input type="text" id="filter_plus" data-role="tagsinput">
+                        <input type="text" id="filter_plus" data-role="tagsinput" value="">
                         <button class="btn btn-default" id="bt_add_filter_plus">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
@@ -69,13 +68,13 @@
                         Termes à exclures
                     </div>
                     <div class="col-xs-9">
-                        <input type="text" id="filter_minus" data-role="tagsinput">
+                        <input type="text" id="filter_minus" data-role="tagsinput" value="">
                         <button class="btn btn-default" id="bt_add_filter_minus">
-                            <span class="glyphicon glyphicon-minus"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>
                 </div>
-
+<hr>
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>
@@ -101,7 +100,7 @@
                         </div>
                     </div>
                 </div><!-- / row-->
-
+<hr>
                 <div class="row">
                     <div class="col-xs-12">
                         <h2>
@@ -133,7 +132,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin-bottom: 40px;">
     <div class="row">
         <div class="col-xs-12 text-right">
             <button class="btn btn-success" id="bt_next">Finir & Lancer le traitement >></button>
@@ -163,7 +162,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-xs btn-warning" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-xs btn-success2">Ajouter la valeur</button>
+                <button type="button" class="btn btn-xs btn-success2" id="bt_add_filter">Ajouter la valeur</button>
             </div>
         </div>
     </div>
@@ -388,9 +387,11 @@ function socket_update_filters(must, must_not) {
         'must': must,
         'must_not': must_not
     }
+console.log('response_to_send');
+console.log(response_to_send);
 
     console.log('socket.emit|update_filters');
-    socket.emit('update_filters', JSON.stringify(response_to_send));
+    socket.emit('update_filters', response_to_send);
     console.log('done'); 
 } // / socket_update_filters()
 
@@ -516,7 +517,7 @@ function add_buttons() {
     
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
-        $("#work").fadeToggle();
+        $(".work").fadeToggle();
         $("#bt_next").fadeToggle();
     });
 
@@ -532,9 +533,83 @@ function add_buttons() {
     $("#bt_add_filter_minus").click(function(){
         modal_filter_sens = "excl";
         show_modal_filter();
-    });    
-}
+    });
 
+    $("#bt_add_filter").click(function(){
+        // Récupération de la colonne sélectionnée
+        var column = $('#columns_filter option:selected').val();
+
+        // Récupération du filtre
+        var filter = $("#text_filter").val();
+
+        // Ajout dans le bon tagsinput en fonction du bt cliqué initial (plus/minus)
+        if(modal_filter_sens == "oblig"){
+            sens = "plus";
+        }
+        else{
+            sens = "minus";
+        }
+
+        var input_text = column + ":" + filter;
+
+        // Ajout au tagsInput
+        $("#filter_" + sens).tagsinput('add', input_text);
+
+        // Fermeture de la modale
+        $('#modal_filter').modal('hide');
+
+        // Validation des filtres
+        valid_filters();
+    });
+} // / add_buttons()
+
+
+function valid_filters() {
+    // Traitement des termes obligatoires
+    must = get_obj_filters($("#filter_plus").val()); 
+
+    // Traitement des termes à exclures
+    must_not = get_obj_filters($("#filter_minus").val());
+
+    // Appel
+    socket_update_filters(must, must_not);
+} // / valid_filters()
+
+
+function get_obj_filters(filter_list) {
+    // Prend une liste string en entrée et retourne un objet structuré par colonne
+    //{'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}
+
+    var tab_by_columns = new Array();
+
+    // regroupement par colonne
+    var tab_input_user = filter_list.split(",");
+    for (var i = 0; i < tab_input_user.length; i++) {
+        var tab_col_val = tab_input_user[i].split(":");
+        
+        var column_name = tab_col_val[0];
+        var value = tab_col_val[1];
+
+        if( column_name in tab_by_columns){
+            tab_by_columns[column_name] = tab_by_columns[column_name] + ',' + value + '';
+        }
+        else {
+            tab_by_columns[column_name] = '' + value + '';
+        }
+    }
+
+    // Parcours du tableau pour renvoyer l'objet
+    var obj = new Object();
+    for(var key in tab_by_columns){
+        obj[key] = [tab_by_columns[key]];
+    }
+
+    if(Object.keys(obj) == ""){
+        return {};
+    }
+
+    return obj;
+}// / get_obj_filters()
 
 $(function(){// ready
     
