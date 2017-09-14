@@ -389,7 +389,7 @@
 			}
 
 
-        	var html = '<table class="table table-striped table-responsive table-condensed" style="width:100%;">';
+        	var html = '<table class="table table-striped table-responsive table-condensed" style="width:100%;" data-intro=\"Le type détecté dans vos colonnes s\'affiche et peut être modifié ici\">';
 			html += '<thead><tr>' + html_th + '</tr></thead>'; // / ligne entete
 			html += '<tr>' + html_tr + '</tr></thead>'; // / ligne entete
 			html += "</table>";

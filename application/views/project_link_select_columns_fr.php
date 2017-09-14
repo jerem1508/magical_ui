@@ -30,7 +30,7 @@
 <div class="container-fluid" id="work" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
-            <div class="col-xs-2 titre">
+            <div class="col-xs-2 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
                 <h3>
                     Source
                 </h3>
@@ -46,13 +46,13 @@
                         <h2 style="margin-top: 0;display: inline-block;">
                             <span id="project_name2"></span> : <i>Association des colonnes</i>
                         </h2>
-                        <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px">
+                        <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
                             Nouvelle association&nbsp;
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a>Aide</a>
+                         <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
                         &nbsp;|&nbsp;
                         <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="col-xs-12 text-center" id="blocs"></div>
                 </div>
             </div>
-            <div class="col-xs-2 titre">
+            <div class="col-xs-2 titre" data-intro="... puis les colonnes correspondantes du référentiel">
                 <h3>
                     <span class="glyphicon glyphicon-file"></span>
                     Référentiel
