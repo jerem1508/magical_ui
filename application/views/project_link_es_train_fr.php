@@ -38,21 +38,21 @@
                         </h2>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a>Aide</a>
+                        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
                         &nbsp;|&nbsp;
                         <a href="<?php echo base_url('index.php/Project/link');?>">Passer cette étape</a>
                     </div>
                 </div><!-- / row-->
-                <div class="row">
+                <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">1</span>
                             &nbsp;Filtres
                         </h2>
                     </div>
-                </div><!-- / row-->
+                
 
-                <div class="row">
+                <div class="row" data-intro="Spécifiez par colonne les termes obligatoires. TOUS les termes indiqués devront être présents dans les lignes du réfentiel proposées.">
                     <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
                         Termes obligatoires
                     </div>
@@ -63,7 +63,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" data-intro="Spécifiez par colonne les termes interdits. AUCUN des termes indiqués ne devront devront être présents dans les lignes du réfentiel proposées.">
                     <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
                         Termes à exclures
                     </div>
@@ -74,8 +74,9 @@
                         </button>
                     </div>
                 </div>
+                </div><!-- / row-->
 <hr>
-                <div class="row">
+                <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">2</span>
@@ -101,7 +102,7 @@
                     </div>
                 </div><!-- / row-->
 <hr>
-                <div class="row">
+                <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">3</span>
