@@ -13,14 +13,14 @@
 	<div class="well">
 		<h2>Créer un nouveau projet</h2>
 		<div class="row">
-			<div class="col-xs-6" style="padding-right: 10px;" data-intro="Ok, wasn't that fun?" data-position='right'>
+			<div class="col-xs-6" style="padding-right: 10px;" data-intro="Ici pour nettoyer un fichier" data-position='right'>
 				<h3>Normalisation d'un fichier</h3>
 				<p>
 					La normalisation prend un unique fichier tabulaire (csv, excel) et le nettoie automatiquement en fonction des types de données rencontrées.
 				</p>
 				<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">Commencer un projet de normalisation</button>
 			</div><!--/col-xs-6-->
-			<div class="col-xs-6" style="padding-left: 10px;border-left: 1px solid #999;" data-intro="More features, more fun."  data-position='left'>
+			<div class="col-xs-6" style="padding-left: 10px;border-left: 1px solid #999;" data-intro="Pour apparier deux fichiers"  data-position='left'>
 				<h3>Jointure magique de deux fichiers</h3>
 				<p>
 					La jointure magique permet d'apparier automatiquement les fichier sale (fautes d'ortographe, données sur ou sous renseignées) avec un fichier de référence propore. Notre methode va au delà de la jointure par clé ou d'un simple fuzzy match et utilise des faisceaux d'indices pour proposer des matchs pertinents. La jointure s'appuie en partie sur la Normalisation.

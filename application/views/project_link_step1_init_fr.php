@@ -183,9 +183,13 @@ function get_normalized_projects_html($id, $normalized_projects)
             <div class="well">
             	<h1>Jointure de fichiers</h1>
                 <p>
-                    Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+                    La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.    
                 </p>
             </div><!-- /well -->
+
+            <div class="well">
+                <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+            </div>
 
             <div class="row">
                 <div class="col-xs-12">
@@ -195,13 +199,13 @@ function get_normalized_projects_html($id, $normalized_projects)
                             .Identité du projet
                         </h2>
                         <form class="form-horizontal" name="form_project" id="form_project" method="post">
-                            <div class="form-group">
+                            <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
                                 <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" data-intro="Ajoutez une description optionnelle">
                                 <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
@@ -214,22 +218,17 @@ function get_normalized_projects_html($id, $normalized_projects)
 
             <div class="row">
                 <div class="col-xs-6">
-                    <div class="well"  style="height: 630px;"">
+                    <div class="well"  style="height: 630px;" data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
                         <h2 style="display: inline;">
                             <span class="step_numbers">2</span>
                             .Sélection du fichier "source"
                         </h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Sélectionnez le fichier "source", c'est à dire le fichier sale auquel on veut associer des codes de référence.
                         </div>
 
                         <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
-                            <div class="row">
+                            <div class="row" data-intro="Vous pouvez uploader un nouveau fichier ...">
                                 <div class="col-xs-1 text-right">
                                     <h3 class="hover_new_file_src_target">
                                         <span class="glyphicon glyphicon-ok"></span>
@@ -258,7 +257,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" data-intro="... ou en reprendre un que vous avez déjà uploadé">
                                 <div class="col-xs-1 text-right">
                                     <h3 class="hover_exist_file_src_target">
                                         <span class="glyphicon glyphicon-ok"></span>
@@ -300,18 +299,13 @@ function get_normalized_projects_html($id, $normalized_projects)
                     
                 </div>
                 <div class="col-xs-6">
-                    <div class="well" style="height: 630px;">
+                    <div class="well" style="height: 630px;" data-intro="Choisissez ici votre fichier de référence">
                         <h2 style="display: inline;">
                             <span class="step_numbers">3</span>
                             .Sélection du fichier "référentiel"
                         </h2>
                         <div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            Choisissez un fichier "référentiel", dans lequel nous cherchons les élements de la source. Ce fichier est sensé contenir au moins tous les éléments recherchés dans la source. Par ailleurs, il est supposé ne pas contenir de doublons.
                         </div>
 
 
@@ -380,7 +374,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                     </div>
                                 </div>
                              </div>
-                            <div class="row">
+                            <div class="row" data-intro="Vous pouvez aussi choisir un référentiel dans notre collection de référentiels publiques">
                                 <div class="col-xs-1">
                                     <h3 class="hover_exist_ref_target">
                                         <span class="glyphicon glyphicon-ok"></span>
@@ -388,8 +382,10 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 </div>
                                 <div class="col-xs-8 hover_exist_ref">
                                     <div>
-                                        <h3>Référentiels internes</h3>
-                                        Vous avez la possibilité d'utiliser des référentiels publiques. Ces référentiels ont déjà été normalizés. Une description de leur contenu est disponible pour chacun d'entre eux.
+                                        <h3>Référentiels publics</h3>
+                                        Vous avez la possibilité d'utiliser des référentiels publiques. Chacun de ces référentiels a déjà été normalisés. Une description de leur contenu est disponible pour chacun d'entre eux.
+                                        <br><br>
+                                        NB: Nous ne nous engageons pas sur la qualité des données.
                                     </div>
                                 </div>
                                 <div class="col-xs-3 hover_exist_ref">

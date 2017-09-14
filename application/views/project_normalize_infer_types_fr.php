@@ -22,8 +22,7 @@
 			</div>
 		</div>
 		<p>
-			Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. <br><br>
-			Proin vitae lectus erat. Nunc nec eros luctus, malesuada nulla quis, molestie felis. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. 
+			Dans cette étape, nous tentons de détecter automatiquement le type de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
 		</p>
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -49,6 +48,10 @@
 		</div>
 		
 		<div class="row" id="result">
+		    <div class="well">
+		        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+		    </div>
+
 			<div class="col-xs-12">
 			<!--
 				<div class="row">
