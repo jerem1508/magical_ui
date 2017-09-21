@@ -160,7 +160,7 @@ class User extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_dashboard_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /dashboard()
 
 
 	public function split_projects($user_id) // Répartition des projets selon leur type
@@ -169,25 +169,28 @@ class User extends CI_Controller {
 		foreach ($projects_list as $project) {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
+			
+			$project['project_id'] = $project_api['project_id'];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
-			$project['has_mini'] = @$project_api['has_mini'];
-			$project['file'] = @key($project_api['files']);
+			$project['project_type'] = $project_api['project_type'];
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
-			switch ($project['project_type']) {
-				case 'normalize':
-					$this->normalized_projects[] = $project;
-					
-					break;
-				case 'link':
-					$this->linked_projects[] = $project;
-					
-					break;
-			}
-		}
-	}
+			if($project_api['project_type'] == 'normalize'){
+				$project['has_mini'] = @$project_api['has_mini'];
+				$project['file'] = @key($project_api['files']);
+				$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;
 
+				$this->normalized_projects[] = $project;
+			}
+			else{
+				$project['file_src'] = $project_api['files']['source']['file_name'];
+				$project['file_ref'] = $project_api['files']['ref']['file_name'];
+
+				$this->linked_projects[] = $project;
+			}
+		}// /foreach
+	}// /split_projects()
 
 
 	public function last_written($project_type, $project_id)
@@ -210,32 +213,9 @@ class User extends CI_Controller {
 		curl_setopt_array($curl, $opts);
 		 
 		$response = json_decode(curl_exec($curl), true);
-//print_r($response);
 
 		return $response;
-	}
-
-
-
-
-	// Réservé admin -----------------------------------
-	public function show_all()
-	{
-		
-	}
-
-	public function delete()
-	{
-
-	}
-
-
-
-
-
-
-
-
+	}// /last_written()
 
 
 }

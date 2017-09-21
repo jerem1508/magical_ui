@@ -27,7 +27,7 @@ function is_completed_step($step_name, $project_steps, $has_mini)
         default :
             return false;
     }
-}
+}// /is_completed_step()
 
 function get_progress_html($bs_color, $ratio, $step, $project_id)
 {
@@ -42,7 +42,75 @@ function get_progress_html($bs_color, $ratio, $step, $project_id)
             </div>';
 
     return $html;
-}
+}// /get_progress_html()
+
+
+function get_internal_projects_html($internal_projects)
+{
+    # Renvoi un code HTML d'affichage des projets internes (publiques) dans la modale
+
+    $html = '';
+
+    // Récupération des informations depuis les métatdata des projets internes
+    foreach ($internal_projects as $project){
+        
+        // $project['display_name']
+        // $project['description']
+        // $project['project_id']
+
+        // Date de création
+        $timestamp = $project['timestamp'];
+        $created_date = date('d/m/Y', $timestamp);
+
+        // Nombre de lignes
+        $nrows = $project['files'][key($project['files'])]['nrows'];
+
+        $html .= '<div class="bloc_project" onclick="select_internal_ref(\''.$project['project_id'].'\',\''.$project['display_name'].'\');">';
+            $html .= '<div class="row">';
+                $html .= '<div class="col-md-1 chk">';
+                $html .= '<h3><span class="glyphicon glyphicon-ok"></span></h3>';
+                $html .= '</div>';
+                $html .= '<div class="col-md-11">';
+                    // Nom di projet
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-md-12">';
+                            $html .= '<h4 class="internal_ref_title">'.$project['display_name'].'<h4>';
+                        $html .= '</div>';
+                    $html .= '</div>';
+                    // Nom du fichier
+                    // $html .= '<div class="row">';
+                    //     $html .= '<div class="col-md-12">';
+                    //         $html .= $project['file'];
+                    //     $html .= '</div>';
+                    // $html .= '</div>';
+                    // Description du projet
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-md-12">';
+                            $html .= '<i>'.$project['description'].'</i>';
+                        $html .= '</div>';
+                    $html .= '</div>';
+                    // Date de création
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-md-12">';
+                            $html .= 'Création : '.$created_date;
+                        $html .= '</div>';
+                    $html .= '</div>';
+                    // Nombre de ligne
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-md-12">';
+                            $html .= 'Nombre de lignes : '.$nrows;
+                        $html .= '</div>';
+                    $html .= '</div>';
+                $html .= '</div>'; // /col-md-11
+            $html .= '</div>'; // /row
+            $html .= '<hr>';
+        $html .= '</div>';// / bloc_project
+
+
+    }// /foreach
+
+    echo $html;
+}// /get_internal_projects_html()
 
 
 function get_normalized_projects_html($id, $normalized_projects)
@@ -54,6 +122,11 @@ function get_normalized_projects_html($id, $normalized_projects)
     $ratio = 100/$nb_steps;
 
     foreach ($normalized_projects as $project){
+        // On ne veut pas afficher les projets "publics" ici 
+        if($project['public']){
+            continue;
+        }
+
         // Jauge
         $steps_html = '<div class="progress">';
         $found_step_todo = false;
@@ -125,7 +198,6 @@ function get_normalized_projects_html($id, $normalized_projects)
     }
 
     echo $html;
-
 }// /get_normalized_projects_html()
 
 ?>
@@ -134,69 +206,27 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 <div class="container-fluid" style="margin-top: 20px;">
     <div class="row">
-       <!--
-        <div class="col-xs-2">
-            <ul class="steps">
-                <li class="step active">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-menu-right"></span>
-                        Sélection des fichiers
-                    </div>
-                    <div>
-                        1. Identité du projet                        
-                    </div>
-                    <div>
-                        2. Sélection du fichier "source"
-                    </div>
-                    <div>
-                        3. Sélection du fichier "référentiel"
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-menu-right"></span>
-                        Association des colonnes
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-menu-right"></span>
-                        Apprentissage
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-menu-right"></span>
-                        Traitement
-                    </div>
-                </li>
-                <li class="step">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-menu-right"></span>
-                        Téléchargements
-                    </div>
-                </li>
-            </ul>
-        </div>
-        -->
         <div class="col-xs-12">
             <div class="well">
             	<h1>Jointure de fichiers</h1>
                 <p>
                     La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.    
                 </p>
+                <div style="width: 100%" class="text-center">
+                    <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();" class="btn btn-success2">Didacticiel</a>
+                </div>
             </div><!-- /well -->
-
+<!--
             <div class="well">
                 <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
             </div>
-
+-->
             <div class="row">
                 <div class="col-xs-12">
                     <div class="well">
                         <h2 style="display: inline;">
                             <span class="step_numbers">1</span>
-                            .Identité du projet
+                            &nbsp;Identité du projet
                         </h2>
                         <form class="form-horizontal" name="form_project" id="form_project" method="post">
                             <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
@@ -221,7 +251,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                     <div class="well"  style="height: 630px;" data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
                         <h2 style="display: inline;">
                             <span class="step_numbers">2</span>
-                            .Sélection du fichier "source"
+                            &nbsp;Sélection du fichier "source"
+                            <i class="fa fa-table" aria-hidden="true"></i>
                         </h2>
                         <div>
                             Sélectionnez le fichier "source", c'est à dire le fichier sale auquel on veut associer des codes de référence.
@@ -302,7 +333,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                     <div class="well" style="height: 630px;" data-intro="Choisissez ici votre fichier de référence">
                         <h2 style="display: inline;">
                             <span class="step_numbers">3</span>
-                            .Sélection du fichier "référentiel"
+                            &nbsp;Sélection du fichier "référentiel"
+                            <i class="fa fa-database" aria-hidden="true"></i>
                         </h2>
                         <div>
                             Choisissez un fichier "référentiel", dans lequel nous cherchons les élements de la source. Ce fichier est sensé contenir au moins tous les éléments recherchés dans la source. Par ailleurs, il est supposé ne pas contenir de doublons.
@@ -394,6 +426,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4 class="glyphicon glyphicon-list-alt"></h4>
                                             <h4>Sélectionner</h4>
                                         </a>
+                                        <div id="ref_internal_project_name"></div>
                                     </div>
                                 </div>
                             </div>
@@ -402,13 +435,11 @@ function get_normalized_projects_html($id, $normalized_projects)
                 </div>
             </div>
 
-
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
                 </div>
             </div>
-
 
             <div class="row" id="result" style="margin-top: 20px;">
                 <div class="well" id="steps">
@@ -454,7 +485,6 @@ function get_normalized_projects_html($id, $normalized_projects)
     </div><!-- / row -->
 </div><!--/container-->
 
-
 <!-- Modal des projets de normalisation de l'utilisateur-->
 <div class="modal fade" id="modal_projects" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -475,7 +505,6 @@ function get_normalized_projects_html($id, $normalized_projects)
   </div>
 </div>
 
-
 <!-- Modal des référentiels internes-->
 <div class="modal fade" id="modal_ref" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -485,7 +514,9 @@ function get_normalized_projects_html($id, $normalized_projects)
         <h4 class="modal-title" id="myModalLabel">Sélection d'un référentiel interne</h4>
       </div>
       <div class="modal-body">
-        ...
+        <?php
+            get_internal_projects_html($internal_projects);
+        ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -493,8 +524,6 @@ function get_normalized_projects_html($id, $normalized_projects)
     </div>
   </div>
 </div>
-
-
 
 
 <script type="text/javascript">
@@ -537,7 +566,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 return false;
             }
         });
-    }
+    }// /save_project_sync()
 
 
 	function save_session_sync(name, value) {
@@ -565,7 +594,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 				return false;
 			}
 		});
-	}
+	}// /save_session_sync()
 
 
     function call_api_upload(form, project_id) {
@@ -585,7 +614,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 console.log(er.statusText.concat(" (error ", er.status, ")"));
             }
         });
-    }
+    }// /call_api_upload()
 
 
     function save_id_normalized_project(file_role, project_id) {
@@ -630,7 +659,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 err = true;
             }
         });// /ajax - select_file
-    }
+    }// /save_id_normalized_project()
 
 
     function add_new_normalize_project_src(tparams) {
@@ -665,7 +694,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 console.log(error);
             }
         });// /ajax
-    }
+    }// /add_new_normalize_project_src()
 
 
     function add_new_normalize_project_ref(tparams) {
@@ -701,7 +730,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                 console.log(error);
             }
         });// /ajax
-    }
+    }// /add_new_normalize_project_ref()
+
 
     function requirements() {
         
@@ -714,7 +744,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             }
         }
 
-        if(exist_file_ref){
+        if(exist_file_ref || exist_ref){
             // recuperation de l'id du projet
             ref_project_id = $("#ref_project_id").html();
             if(ref_project_id == ''){
@@ -724,7 +754,8 @@ function get_normalized_projects_html($id, $normalized_projects)
         }
 
         return true;
-    }
+    }// /requirements()
+
 
     function treatment() {
 
@@ -900,10 +931,12 @@ function get_normalized_projects_html($id, $normalized_projects)
                     );
 
                     $("#envoyer_ref").click();
-
-
                 }
                 else if(exist_file_ref && !error){
+                    // Ajout du projet de normalisation au projet de link
+                    save_id_normalized_project("ref", ref_project_id);
+                }
+                else if(exist_ref && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("ref", ref_project_id);
                 }
@@ -915,11 +948,9 @@ function get_normalized_projects_html($id, $normalized_projects)
             // /Traitement du fichier REF
 
 
-
             $('#bloc_bt_next').css('display', 'inherit');
 
         // /Appels API ----------------------
-
     }// /treatment
 
 
@@ -929,8 +960,8 @@ function get_normalized_projects_html($id, $normalized_projects)
 
         // Appel de l'étape suivante
         window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
-        
-    }
+    }// /valid_project()
+
 
     function select_project(project_id, project_name) {
         if(target){
@@ -938,9 +969,20 @@ function get_normalized_projects_html($id, $normalized_projects)
             $("#" + target + "_project_name").html(project_name);
         }
 
-        $('#modal_projects').modal('hide');
+        $("#modal_projects").modal('hide');
+    }// /select_project()
 
-     }
+
+    function select_internal_ref(project_id, project_name) {
+        // Appelé sur validation d'un projet interne dans la modale
+        $("#ref_project_id").html(project_id);
+        $("#ref_internal_project_name").html(project_name);
+
+        exist_ref = true;
+
+        $("#modal_ref").modal('hide');
+    }// /select_internal_ref()
+
 
     // Init - Ready
     $(function() {
@@ -953,7 +995,6 @@ function get_normalized_projects_html($id, $normalized_projects)
             e.preventDefault();
             treatment();
         });
-
 
         $("#bt_modal_ref").click(function(){
             $('#modal_ref').modal('show');
@@ -1096,21 +1137,15 @@ function get_normalized_projects_html($id, $normalized_projects)
           .parent().addClass($.support.fileInput ? undefined : 'disabled');
         // /#fileupload_ref'.fileupload()
 
-
         // Tooltip des étapes
         $(".add_selected_columns").attr('title','Etape de sélection des colonnes à traiter.');
         $(".replace_mvs").attr('title','Etape de traitement des valeurs manquantes.');
         $(".recode_types").attr('title','Etape de traitement des types.');
         $(".concat_with_init").attr('title','Etape finale d\'enrichissement et de téléchargement du fichier normalisé.');
-
         $('[data-toggle="tooltip"]').tooltip(); 
-
-
-	});
+	}); // / Ready
 
 </script>
-
-
 
 </body>
 </html>

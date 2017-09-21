@@ -14,23 +14,30 @@
     </div>
 -->
     <div class="well">
-        <h1>Normalisation d'un fichier</h1>
-        <p>
-            La normalisation d'un fichier à pour but de le nettoyer. Elle améliore grandement le rendement de la jointure magique entre 2 fichiers.
-            <br>
-            <br>
-            <b>4 étapes seront nécessaires à la normalisation de votre fichier :</b>
-            <ol>
-            <li>La sélection des colonnes à normaliser</li>
-            <li>La recherche des valeurs manquantes</li>
-            <li>La détection des types de chaque colonne sélectionnée</li>
-            <li>Le téléchargement du fichier normalisé</li>
-            </ol>
-        </p>
-    </div>
-
-    <div class="well">
-        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Normalisation d'un fichier</h1>        
+            </div>
+            <div class="col-md-2 text-right">
+                <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    La normalisation d'un fichier à pour but de le nettoyer. Elle améliore grandement le rendement de la jointure magique entre 2 fichiers.
+                    <br>
+                    <br>
+                    <b>4 étapes seront nécessaires à la normalisation de votre fichier :</b>
+                    <ol>
+                    <li>La sélection des colonnes à normaliser</li>
+                    <li>La recherche des valeurs manquantes</li>
+                    <li>La détection des types de chaque colonne sélectionnée</li>
+                    <li>Le téléchargement du fichier normalisé</li>
+                    </ol>
+                </p>
+            </div>
+        </div>  
     </div>
 
 	<form class="form-horizontal" name="form1" id="form1" method="post" enctype="multipart/form-data">
@@ -60,11 +67,13 @@
         </h2>
         <div class="row">
             <div class="col-xs-9">
-                Choisissez le fichier que vous voulez transformer. Celui ci peut être au format csv (séparateurs "," ou ";") ou au format excel (xls ou xlsx). La première ligne du fichier doit contenir l'entête. Nous limitons actuellement les fichiers utilisateurs à 1M de lignes.
-		    
-		Dans le cas de fichiers Excel, seule la première feuille sera prise en compte. Les données doivent être sous forme de tableau disposé en haut à gauche du fichier. La première ligne du fichier est supposée contenir l'entête. Enfin les formules ne seront pas évaluées et seront considérées comme du texte.
-		    
-		NB: Nous recommandons l'utilisation du format csv (séparteur ",") et l'encodage UTF-8 pour le stockage de vos données tabulaires sous forme de fichiers. Ceux-ci constituent des formats internationnaux et libres de droits.
+                Choisissez le fichier que vous voulez transformer. Celui ci peut être au format <b>CSV</b> (séparateurs "," ou ";") ou au format <b>Excel</b> (xls ou xlsx). <b>La première ligne du fichier doit contenir l'entête</b>. Nous limitons actuellement les fichiers utilisateurs à <b>1 million de lignes</b>.
+                <br>
+                Dans le cas de fichiers Excel, seule la première feuille sera prise en compte. Les données doivent être sous forme de tableau disposé en haut à gauche du fichier. La première ligne du fichier est supposée contenir l'entête. Enfin les formules ne seront pas évaluées et seront considérées comme du texte.
+                <br>
+                <b>
+                NB: Nous recommandons l'utilisation du format CSV (séparteur ",") et l'encodage UTF-8 pour le stockage de vos données tabulaires sous forme de fichiers. Ceux-ci constituent des formats internationnaux et libres de droits.
+                </b>
             </div>
             <div class="col-xs-3 text-center">
                 <span class="btn btn-default btn-xl fileinput-button btn_2_3">

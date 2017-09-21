@@ -272,7 +272,7 @@ if(isset($this->session->project_type)){
 	                    err = true;
 	                }
 	            });// /ajax
-	        }
+	        }// / generate_sample()
 
 
 	        function treatment(project_type) {

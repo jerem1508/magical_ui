@@ -32,10 +32,13 @@
         <div class="row">
             <div class="col-xs-2 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
                 <h3>
+                    <i class="fa fa-table" aria-hidden="true"></i>
+                    &nbsp;
                     Source
+                    &nbsp;
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                 </h3>
                 <div class="filename">
-                    <span class="glyphicon glyphicon-file"></span>
                     <span id="src_file_name"></span>
                 </div>
                 <div id="src_columns"></div>
@@ -64,10 +67,24 @@
             </div>
             <div class="col-xs-2 titre" data-intro="... puis les colonnes correspondantes du référentiel">
                 <h3>
-                    <span class="glyphicon glyphicon-file"></span>
+                    <i class="fa fa-database" aria-hidden="true"></i>
+                    &nbsp;
                     Référentiel
+                    &nbsp;
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                 </h3>
-                <div id="ref_file_name" class="filename"></div>
+                <div>
+                    <div>
+                        Fichier : <span id="ref_file_name" class="filename"></span>                        
+                    </div>
+                    <div>
+                        Nombre de lignes : <b>1 004 784</b>                        
+                    </div>
+                    <div>
+                        Nombre de colonnes : <b>12</b>                        
+                    </div>
+                    <hr>
+                </div>
                 <div id="ref_columns"></div>
             </div>
         </div>    

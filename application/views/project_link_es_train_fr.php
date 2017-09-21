@@ -435,12 +435,19 @@ function show_new_proposition(message) {
     }
 
     // Affichage de la proposition
-    var lines_html = "";
+    //var lines_html = "";
+    var lines_html = "<table>";
     for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF
-        lines_html += '<div>' + source_keys[i] + ' <i>(source)</i> : <span class="message">' + source[source_keys[i]] + '</span></div>';
-        lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class="message">' + ref[ref_keys[i]] + '</span></div>';
+        // lines_html += '<div>' + source_keys[i] + ' <i>(source)</i> : <span class="message">' + source[source_keys[i]] + '</span></div>';
+        // lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class="message">' + ref[ref_keys[i]] + '</span></div>';
+        lines_html += '<tr>';
+        lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
+        lines_html += '</tr>';        
+        lines_html += '<tr>';
+        lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
+        lines_html += '</tr>';
     }
-
+    lines_html += "</table>";
     // Affichage
     $("#message").html(lines_html);
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));

@@ -1,16 +1,16 @@
+
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container" style="margin-top: 20px">
-	<div class="jumbotron">
+	<div class="jumbotron" style="margin-bottom: 10px;">
 		<h1>The Magical Laundry</h1> 
-		<p>The Magical Laundry est une application web permettant de normaliser et de rapprocher génériquement des fichiers CSV</p> 
+		<p>The Magical Laundry est une application web permettant de normaliser et de rapprocher génériquement des fichiers CSV</p>
+		<div style="width: 100%" class="text-center">
+			<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();" class="btn btn-success2">Didacticiel</a>
+		</div>
 	</div>
 
-	<div class="well">
-		<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
-	</div>
-
-	<div class="well">
+	<div class="well" style="margin-bottom: 10px;">
 		<h2>Créer un nouveau projet</h2>
 		<div class="row">
 			<div class="col-xs-6" style="padding-right: 10px;" data-intro="Ici pour nettoyer un fichier" data-position='right'>

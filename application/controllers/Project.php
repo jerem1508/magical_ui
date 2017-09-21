@@ -19,13 +19,13 @@ class Project extends CI_Controller {
 		if(!isset($_SESSION['language'])){
 			$this->session->set_userdata('language', 'fr');
 		}
-	}
+	}// /__construct()
 
 
 	public function index()
 	{
 		$this->load->view('home');
-	}
+	}// /index()
 
 
 	public function normalize($project_id='', $step='')
@@ -48,7 +48,8 @@ class Project extends CI_Controller {
 
 		// Chargement de l'étape
 		$this->load_step_normalization($step, $project_id);
-	}
+	}// /normalize()
+
 
 	public function get_actual_step_normalization($project_id='')
 	{
@@ -75,7 +76,8 @@ class Project extends CI_Controller {
 		}
 
 		return 'INIT';
-	}
+	}// /get_actual_step_normalization()
+
 
 	public function load_step_normalization($step, $project_id='')
 	{
@@ -108,7 +110,7 @@ class Project extends CI_Controller {
 			default:
 				$this->load_step1_init();
 		}
-	}
+	}// /load_step_normalization()
 
 
 	public function get_normalization_projects($project_id)
@@ -129,7 +131,7 @@ class Project extends CI_Controller {
 
 		// Renvoi d'un tableau contenant les métadata par projet de normalisation
 		return $tab;
-	}
+	}// /get_normalization_projects()
 
 
 	public function link($project_id='', $type_file='')
@@ -166,7 +168,8 @@ class Project extends CI_Controller {
 		}
 
 		$this->load_step_linker($link_step, $project_id);
-	}
+	}// /link()
+
 
 	public function get_actual_step_linker($project_id='')
 	{
@@ -198,7 +201,7 @@ class Project extends CI_Controller {
 		}
 
 		return 'INIT'; // Si project_id mais aucune étape de validée
-	}
+	}// /get_actual_step_linker()
 
 
 	public function load_step_linker($step, $project_id='')
@@ -232,7 +235,8 @@ class Project extends CI_Controller {
 			default:
 				$this->load_link_step1_init();
 		}
-	}
+	}// /load_step_linker()
+
 
 	public function selected_columns($id='')
 	{
@@ -244,7 +248,8 @@ class Project extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_link_select_columns_'.$_SESSION['language']);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /selected_columns()
+
 
 	public function es_train($id='')
 	{
@@ -256,7 +261,8 @@ class Project extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_link_es_train_'.$_SESSION['language']);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /es_train()
+
 
 	public function es_linker($id='')
 	{
@@ -268,7 +274,8 @@ class Project extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_link_es_linker_'.$_SESSION['language']);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /es_linker()
+
 
 	public function link_results_analyzer($id='')
 	{
@@ -276,9 +283,7 @@ class Project extends CI_Controller {
 
 		$this->load->view('project_link_results_'.$_SESSION['language']);
 		$this->load->view('footer_fr');
-	}
-
-
+	}// /link_results_analyzer()
 
 
 	public function test_project_id()
@@ -286,7 +291,7 @@ class Project extends CI_Controller {
 		if(!isset($_SESSION['project_id'])){
 			redirect('/Home');
 		}
-	}
+	}// /test_project_id()
 
 
 	public function is_done_step($step_name)
@@ -295,22 +300,25 @@ class Project extends CI_Controller {
 		$steps_by_filename = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
 		return $this->private_functions->is_completed_step($step_name, $steps_by_filename, $project_api['has_mini']);
-	}
+	}// /is_done_step()
 
 	
 	public function load_link_step1_init()
 	{
 		# Chargement de la vue d'initialisation du projet
 
-		// Recherche des projets de normalisation si user connecté
 		$data = [];
 
+		// Recherche des projets de normalisation si user connecté
 		if(isset($_SESSION['user'])){
 			$this-> split_projects($_SESSION['user']['id']);
 
 			$data['normalized_projects'] = $this->normalized_projects;
 			$data['linked_projects'] = $this->linked_projects;
 		}
+
+		// Recherche des projets internes proposés
+		$data['internal_projects'] = $this->private_functions->get_internal_projects();
 
 		// Chargement des vues
 		$data['title'] = "Jointure";
@@ -319,13 +327,12 @@ class Project extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_link_step1_init_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /load_link_step1_init()
 
-	/*
-	 Sauvegarde de l'initialisation du projet
-	*/
+	
 	public function save_step1_init($project_id)
 	{
+		# Sauvegarde de l'initialisation du projet
 		// MAJ du nom du projet en session
 		// $this->session->set_userdata('project_name', $_POST['project_name']);
 		// $this->session->set_userdata('project_description', $_POST['project_description']);
@@ -336,7 +343,7 @@ class Project extends CI_Controller {
 		// Etape 2
 		//redirect('/Project/load_step2_select_columns/'.$project_id);
 		redirect('/Project/add_selected_columns/'.$project_id);
-	}
+	}// /save_step1_init()
 
 
 	public function load_step1_init()
@@ -350,10 +357,9 @@ class Project extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('project_normalize_init_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /load_step1_init()
 
-
-	//public function load_step2_select_columns($id="")
+	
 	public function add_selected_columns($id="")
 	{
 		if(isset($id)){
@@ -376,12 +382,9 @@ class Project extends CI_Controller {
 			$this->load->view('project_normalize_select_columns_'.$_SESSION['language'], $data);
 		}
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /add_selected_columns()
 
-	/*
-	 Chargement de la vue de recherche des valeurs manquantes
-	*/
-	//public function load_step3_missing_values()
+
 	public function replace_mvs($id="")
 	{
 		if(isset($id)){
@@ -403,13 +406,9 @@ class Project extends CI_Controller {
 			$this->load->view('project_normalize_replace_mvs_'.$_SESSION['language'], $data);
 		}
 		$this->load->view('footer_'.$_SESSION['language']);
+	}// /replace_mvs()
 
-	}
 
-	/*
-	 Chargement de la vue de recherche des types
-	*/
-	//public function load_step4_infer_types($id="")
 	public function recode_types($id="")
 	{
 		if(isset($id)){
@@ -431,12 +430,9 @@ class Project extends CI_Controller {
 			$this->load->view('project_normalize_infer_types_'.$_SESSION['language'], $data);
 		}
 		$this->load->view('footer_'.$_SESSION['language']);
+	}// /recode_types()
 
-	}
 
-	/*
-	 Chargement de la vue finale
-	*/
 	public function concat_with_init($id="")
 	{
 		if(isset($id)){
@@ -458,8 +454,7 @@ class Project extends CI_Controller {
 			$this->load->view('project_normalize_concat_with_init_'.$_SESSION['language'], $data);
 		}
 		$this->load->view('footer_'.$_SESSION['language']);
-
-	}
+	}// /concat_with_init()
 
 
 	public function split_projects($user_id) // Répartition des projets selon leur type
@@ -474,6 +469,7 @@ class Project extends CI_Controller {
 			$project['project_id'] = $project_api["project_id"];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
+			$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;
 
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
@@ -488,8 +484,8 @@ class Project extends CI_Controller {
 					$this->linked_projects[] = $project;
 					
 					break;
-			}
-		}
-	}
+			}// /switch
+		}// /foreach
+	}// /split_projects()
 
-}
+}// /Class

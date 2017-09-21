@@ -157,6 +157,112 @@ function treatment(project_id_link, learned_setting_json) {
 }// create_es_labeller_api()
 
 
+function generate_sample() {
+    console.log("Sample");
+    var tparams = {
+        "module_name": "INIT"
+    }
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/<?php echo $_SESSION['project_id'];?>',
+        data: JSON.stringify(tparams),
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error");
+                console.log(result.error);
+            }
+            else{
+                console.log("success");
+                console.dir(result);
+                
+                tparams = {
+                    "data_params": {
+                        "module_name": result.module_name,
+                        "file_name": result.file_name
+                    },
+                    "module_params":{
+                        "sampler_module_name": "standard",
+                        "sample_params": {
+                            "num_rows": 20
+                        }
+                    }
+                }
+                console.log("appel sample");
+                
+                $.ajax({
+                    type: 'post',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    url: '<?php echo BASE_API_URL;?>/api/sample/normalize/<?php echo $_SESSION['project_id'];?>',
+                    data: JSON.stringify(tparams),
+                    success: function (result) {
+
+                        if(result.error){
+                            console.log("API error");
+                            console.dir(result.error);
+                        }
+                        else{
+                            console.log("success sample");
+                            console.dir(result.sample);
+
+                            // Remplissage de la modale
+                            var ch = '<table class="table table-responsive table-condensed table-striped" id="sample_table">';
+
+                            ch += "<thead><tr>";
+                            $.each(columns, function( j, name) {
+                                  ch += '<th>' + name + "</th>";
+                                });
+                            ch += "</tr></thead><tbody>";
+                            console.dir(columns);
+                            $.each(result.sample, function( i, obj) {
+                                ch += "<tr>";
+                                $.each(columns, function( j, name) {
+                                    ch += "<td>" + obj[name] + "</td>";
+                                });
+                                ch += "</tr>";
+                            });
+                            ch += "</tbody></table>";
+
+                            $("#data_all").html(ch);
+                            
+                            $("#sample_table").DataTable({
+                                                    "language": {
+                                                       "paginate": {
+                                                            "first":      "Premier",
+                                                            "last":       "Dernier",
+                                                            "next":       "Suivant",
+                                                            "previous":   "Précédent"
+                                                        },
+                                                        "search":         "Rechercher:",
+                                                        "lengthMenu":     "Voir _MENU_ enregistrements par page"
+                                                    },
+                                                    "lengthMenu": [5,20,"ALL"],
+                                                    "responsive": true
+                                                });
+                            
+
+                        }
+                    },
+                    error: function (result, status, error){
+                        console.log("error");
+                        console.log(result);
+                        err = true;
+                    }
+                });// /ajax
+            }
+        },
+        error: function (result, status, error){
+            console.log("error");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax
+}// / generate_sample()
+
+
 function valid_step() {
     // Validation du training
     complete_training();
@@ -187,56 +293,8 @@ $(function(){// ready
         treatment(project_id_link, learned_setting_json);
     }
 
-/*
-    $("body").css("height", $(window).height()) ;
+    // Récupération et affichage du fichier
+    //generate_sample();
 
-    $("#bt_start").click(function(){
-        $("#entete").css("display", "none");
-        $("#work").fadeToggle();
-        $("#bt_next").fadeToggle();
-    });
-
-    $("#bt_next").click(function(){
-        valid_step();
-    });    
-
-    project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
-
-    // Récupération des metadata du projet de link en cours
-    console.log('Projet de LINK');
-    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
-
-    // MAJ du nom du projet
-    $("#project_name1").html(metadata_link.display_name);
-    $("#project_name2").html(metadata_link.display_name);
-
-    // Récupération des ids des projets de normalisation
-    project_id_src = metadata_link['files']['source']['project_id'];
-    project_id_ref = metadata_link['files']['ref']['project_id'];
-
-    // Récupérartion des métadata du fichier source
-    console.log('Projet de normalisation SOURCE');
-    metadata_src = get_metadata('normalize', project_id_src);
-
-    // Récupérartion des métadata du fichier referentiel
-    console.log('Projet de normalisation REFERENTIEL');
-    metadata_ref = get_metadata('normalize', project_id_ref);
-
-    column_matches = get_column_matches();
-
-    console.log('column_matches');
-    console.log(column_matches);
-
-    // Connect to socket
-    // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
-    socket = io.connect('<?php echo BASE_API_URL;?>');
-
-    // Création des indexs ES
-    create_es_index_api();
-
-    socket_on_message();
-    
-
-*/
 });//ready
 </script>

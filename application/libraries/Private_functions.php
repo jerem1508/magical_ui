@@ -4,7 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Private_functions {
 
 	public function get_metadata_api($project_type, $project_id)
-	{		
+	{
+		# Récupération des métadata d'un projet
+
 		$curl = curl_init();
 		 
 		$url = BASE_API_URL.'/api/metadata/'.$project_type.'/'.$project_id;
@@ -19,7 +21,8 @@ class Private_functions {
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response['metadata'];
-	}
+	}// /get_metadata_api()
+
 
 	public function set_tab_steps_by_filename($log)
 	{
@@ -33,7 +36,8 @@ class Private_functions {
 			$tab[$filename] = $t_steps;
 		}
 		return $tab;
-	}
+	}// /set_tab_steps_by_filename()
+
 
 	public function get_status($status=0)
 	{
@@ -49,7 +53,8 @@ class Private_functions {
 			case PROJECT_ADMIN_PUBLIC_OK:
 				return 'Public';
 		}
-	}
+	}// /get_status()
+
 
 	public function is_completed_step($step_name, $project_steps, $has_mini)
 	{
@@ -78,10 +83,27 @@ class Private_functions {
 			default :
 				return false;
 		}
-	}
+	} // /is_completed_step()
 
 
+	public function get_internal_projects()
+	{
+		# Récupération des projets internes
 
+		$curl = curl_init();
 
+		$url = BASE_API_URL.'/api/public_projects/normalize';
 
-}
+		$opts = [
+		    CURLOPT_URL => $url,
+		    CURLOPT_RETURNTRANSFER => true,
+		];
+		 
+		curl_setopt_array($curl, $opts);
+		 
+		$response = json_decode(curl_exec($curl), true);
+
+		return $response;
+	}// /get_internal_projects()
+
+}// /Class

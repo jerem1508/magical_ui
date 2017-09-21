@@ -32,7 +32,8 @@ class Save_ajax extends CI_Controller {
 			print_r($_POST);
 			echo false;	
 		}
-	}
+	}// /session()
+
 
 	public function project()
 	{
@@ -72,7 +73,14 @@ class Save_ajax extends CI_Controller {
 															$public_status, 
 															$project_type);
 		}
+	}// /project()
+
+
+	public function delete_project($project_id)
+	{
+		# Suppression d'un projet en base
+
+		$ret =  $this->Projects_model->delete_project($project_id);
+		echo $ret;
 	}
-
-
 }

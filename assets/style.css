@@ -18,6 +18,7 @@ corail
 body{
     background-image: radial-gradient(circle at bottom left, #eee, #222);
     background-image: linear-gradient(to top, #eee, #262626);
+    background-image: linear-gradient(to top, #E00612, #25358C);
 }
 
 /* ENTETE ------------------------------*/
@@ -61,6 +62,7 @@ body{
 h1{
   color: #000;
   font-size: 50px;
+  margin-top: 0;
 }
 hr{
   border-bottom-color: #333;
