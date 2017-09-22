@@ -36,10 +36,18 @@
                     &nbsp;
                     Source
                     &nbsp;
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_src"></i>
                 </h3>
-                <div class="filename">
-                    <span id="src_file_name"></span>
+                <div id="info_src">
+                    <div>
+                        <span class="keys">Fichier : </span><span id="src_file_name" class="filename key_numbers"></span>                        
+                    </div>
+                    <div>
+                        <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
+                    </div>
+                    <div>
+                        <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
+                    </div>
                 </div>
                 <div id="src_columns"></div>
             </div>
@@ -71,19 +79,18 @@
                     &nbsp;
                     Référentiel
                     &nbsp;
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_ref"></i>
                 </h3>
-                <div>
+                <div id="info_ref">
                     <div>
-                        Fichier : <span id="ref_file_name" class="filename"></span>                        
+                        <span class="keys">Fichier : </span><span id="ref_file_name" class="filename key_numbers"></span>                        
                     </div>
                     <div>
-                        Nombre de lignes : <b>1 004 784</b>                        
+                        <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
                     </div>
                     <div>
-                        Nombre de colonnes : <b>12</b>                        
+                        <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
                     </div>
-                    <hr>
                 </div>
                 <div id="ref_columns"></div>
             </div>
@@ -150,6 +157,7 @@ function get_metadata(project_type, project_id) {
     return metadata;
 }
 
+
 function get_runinfo(project_type, project_id, module_name, file_name) {
     // Récupere le contenu d'un fichier runInfo via API
     console.log('get_runinfo()');
@@ -188,8 +196,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             console.log(result);
         }
     });// /ajax - Download config
-
-} // /get_runinfo
+} // /get_runinfo()
 
 
 function get_columns(metadata) {
@@ -198,6 +205,7 @@ function get_columns(metadata) {
     var all_columns = metadata['column_tracker']['original'];
     return all_columns;
 }
+
 
 function write_columns_html(target, columns) {
     // Ajoute les colonnes à l'interface
@@ -210,6 +218,7 @@ function write_columns_html(target, columns) {
     $("#" + target).html(html);
 }
 
+
 function get_filename(filename) {
     // On retire prefix "MINI__" si existant
     if(filename.substr(0, 4) == 'MINI'){
@@ -219,6 +228,7 @@ function get_filename(filename) {
     return filename;
 }
 
+
 function valid_associations() {
     // Teste la validité des associations effectuées
     // cad : au moins un champ de chaque coté
@@ -227,6 +237,7 @@ function valid_associations() {
 
     return true;
 }
+
 
 function add_column_certain_matches_api() {
     // Appel API de MAJ associations
@@ -268,8 +279,7 @@ function add_column_certain_matches_api() {
             console.log(result);
         }
     });// /ajax
-
-}// /add_column_certain_matches_api
+}// /add_column_certain_matches_api()
 
 
 function add_column_matches_api() {
@@ -310,21 +320,18 @@ function add_column_matches_api() {
             console.log(result);
         }
     });// /ajax
+}// /add_column_matches_api()
 
-}// /add_column_matches_api
 
 function valid_step(link_project_id){
     console.log('valid_step');
 
     // Appel de l'étape suivante
     window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
-    
 }
 
-$(function(){// ready
-    
-    $("body").css("height", $(window).height()) ;
 
+function get_buttons_actions() {
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
         $("#work").fadeToggle();
@@ -338,7 +345,42 @@ $(function(){// ready
         }
 
         valid_step('<?php echo $_SESSION['link_project_id'];?>');
-    });    
+    });
+
+    $("#bt_info_ref").click(function(){
+        $("#info_ref").slideToggle();
+    });
+
+    $("#bt_info_src").click(function(){
+        $("#info_src").slideToggle();
+    });
+
+    $("#bt_add_bloc").click(function(){
+        // Incrementation du numéro de bloc
+        cpt_bloc++;
+        // Création du nouveau bloc
+        new_bloc(cpt_bloc);
+    });
+
+    $("#bt_valid_add_bloc").click(function(){
+        $('#modal_bloc').modal('hide');
+
+        // Changement du libellé du bloc en cours
+        $("#lib_bloc_" + id_bloc_to_change).html($("#lib_bloc").val());
+    });
+}// /get_buttons_actions()
+
+$(function(){// ready
+    
+    $("body").css("height", $(window).height()) ;
+
+    // Chargement des actions des boutons
+    get_buttons_actions();
+
+    // Valeurs par défaut
+    $("#info_ref").toggle();
+    $("#info_src").toggle();
+
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
@@ -372,6 +414,14 @@ $(function(){// ready
     $("#src_file_name").html(src_file_name);
     $("#ref_file_name").html(ref_file_name);
 
+    // Nombre de lignes
+    $("#src_nrows").html(metadata_src.files[Object.keys(metadata_src.files)].nrows);
+    $("#ref_nrows").html(metadata_ref.files[Object.keys(metadata_ref.files)].nrows);
+
+    // Nombre de colonnes
+    $("#src_ncols").html(columns_src.length);
+    $("#ref_ncols").html(columns_ref.length);
+
     // Récupération des types inférés
     var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name);
     var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name);
@@ -383,21 +433,6 @@ $(function(){// ready
 
     cpt_bloc = 0; // Compteur de blocs
     id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
-
-    $("#bt_add_bloc").click(function(){
-        // Incrementation du numéro de bloc
-        cpt_bloc++;
-        // Création du nouveau bloc
-        new_bloc(cpt_bloc);
-    });
-
-    $("#bt_valid_add_bloc").click(function(){
-        $('#modal_bloc').modal('hide');
-
-        // Changement du libellé du bloc en cours
-        $("#lib_bloc_" + id_bloc_to_change).html($("#lib_bloc").val());
-
-    });
 
 
 });//ready

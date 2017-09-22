@@ -127,10 +127,20 @@ function treatment(project_id_link, learned_setting_json) {
                                 console.log("success - job");
                                 console.dir(result);
 
-                                //link_results_analyzer(); //schedule
+                                // Permettre le téléchargement du fichier
 
-                                // Sample
-                                // es_linker. source.csv metatdata/files/source/filename
+
+
+                                // Création de l'index ElasticSearch
+                                //create_es_index();
+
+
+                                // Récupération du seuil
+                                //tresh = get_tresh();
+
+
+                                // Récupération des données paginées + affichage
+
 
 
                             }

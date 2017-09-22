@@ -84,17 +84,25 @@
                         </h2>
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-10">
-                                <div id="message"></div>
+                                <div id="message">
+                                    <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+                                </div>
                                 <div class="q_label">
                                     Ces informations sont-elle identiques ?
                                 </div>
                                 <div>
-                                    <span class="btn btn-default btn-xl btn_2_3" onclick="socket_answer('y');" style="background-color: #A0BC5B">
+                                    <button class="btn btn-default btn-xl btn_2_3" 
+                                            onclick="socket_answer('y');" 
+                                            style="background-color: #A0BC5B"
+                                            id="bt_yes">
                                         <h2>OUI</h2>
-                                    </span>
-                                    <span class="btn btn-default btn-xl btn_2_3" onclick="socket_answer('n');" style="background-color: #DFAE1F">
+                                    </button>
+                                    <button class="btn btn-default btn-xl btn_2_3" 
+                                            onclick="socket_answer('n');" 
+                                            style="background-color: #DFAE1F"
+                                            id="bt_no">
                                         <h2>NON</h2>
-                                    </span>
+                                    </button>
                                 </div>
                             </div>
                             <div class="col-xs-1"></div>
@@ -113,13 +121,13 @@
                         <div class="col-xs-2">
                             <div class="stat">
                                 <span class="title">Précision</span>
-                                <span class="number" id="stat_estimated_precision">100%</span>
+                                <span class="number" id="stat_estimated_precision"></span>
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="stat">
                                 <span class="title">Couverture</span>
-                                <span class="number" id="stat_estimated_recall">100%</span>
+                                <span class="number" id="stat_estimated_recall"></span>
                             </div>
                         </div>
                     </div>
@@ -355,6 +363,18 @@ function create_es_labeller_api() {
 }// create_es_labeller_api()
 
 
+function disabeled_buttons() {
+    $("#bt_yes").attr("disabeled","disabeled");
+    $("#bt_no").attr("disabeled","disabeled");
+}// /disabeled_buttons()
+
+
+function enabeled_buttons() {
+    $("#bt_yes").removeAttr('disabled');
+    $("#bt_no").removeAttr('disabled');
+}// /enabeled_buttons()
+
+
 function socket_on_message() {
     // Message provenant du serveur
 
@@ -368,6 +388,9 @@ function socket_answer(user_response) {
     // Envoi de la réponse utilisateur
     // Un nouveau message sera reçu par socket_on_message()
 
+    disabeled_buttons();
+    $("#message").html("<br><br>");
+
     var response_to_send = {
         'project_id': project_id_link,
         'user_input': user_response
@@ -375,7 +398,7 @@ function socket_answer(user_response) {
 
     console.log('socket.emit|answer');
     socket.emit('answer', JSON.stringify(response_to_send));
-    console.log('done'); 
+    console.log('done');
 } // / socket_answer()
 
 
@@ -388,8 +411,6 @@ function socket_update_filters(must, must_not) {
         'must': must,
         'must_not': must_not
     }
-console.log('response_to_send');
-console.log(response_to_send);
 
     console.log('socket.emit|update_filters');
     socket.emit('update_filters', response_to_send);
@@ -402,10 +423,7 @@ function show_new_proposition(message) {
     console.log('show_new_proposition');
     console.dir(message);
 
-    var source = new Array();
-    var source_keys = new Array();
-    var ref = new Array();
-    var ref_keys = new Array();
+    var lines_html = "<table>";
 
     for (var i = 0; i < column_matches.length; i++) {
 
@@ -413,33 +431,57 @@ function show_new_proposition(message) {
         // Liste des colonnes associées
         var source_list = column_matches[i].source;
 
+        var source = new Array();
+        var source_keys = new Array();
         // Récupération de la valeur associée dans le message
         for (var j = 0; j < source_list.length; j++) {
             var key = source_list[j]; // ex departement
             var value = message["source_item"]["_source"][key];
-            source[key] = value;
+            source.push(value);
             source_keys.push(key);
         }
+
+        // Concatenation des libellés
+        var lib_source_keys = source_keys.join(" | ");
+        var lib_source_values = source.join(" | ");
+        
+        // Ecriture de la ligne Source
+        lines_html += '<tr>';
+        //lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
+        lines_html += '<td class="title">' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
+        lines_html += '</tr>'; 
+
 
         // Retours REFERENTIEL
         // Liste des colonnes associées
         var ref_list = column_matches[i].ref;
 
+        var ref = new Array();
+        var ref_keys = new Array();
         // Récupération de la valeur associée dans le message
         for (var k = 0; k < ref_list.length; k++) {
             var key = ref_list[k];
             var value = message["ref_item"]["_source"][key];
-            ref[key] = value;
+            ref.push(value);
             ref_keys.push(key);
         }
+
+        // Concatenation des libellés
+        var lib_ref_keys = ref_keys.join(" | ");
+        var lib_ref_values = ref.join(" | ");
+
+        // Ecriture de la ligne Ref
+        lines_html += '<tr>';
+        //lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
+        lines_html += '<td class="title">' + lib_ref_keys + ' <i>(referentiel)</i> :</td><td class="message">' + lib_ref_values + '</td>';
+        lines_html += '</tr>';
+        lines_html += '<tr><td colspan="2" class="hr"></td></tr>';
+
     }
 
     // Affichage de la proposition
-    //var lines_html = "";
-    var lines_html = "<table>";
+    /*
     for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF
-        // lines_html += '<div>' + source_keys[i] + ' <i>(source)</i> : <span class="message">' + source[source_keys[i]] + '</span></div>';
-        // lines_html += '<div>' + ref_keys[i] + ' <i>(referentiel)</i> : <span class="message">' + ref[ref_keys[i]] + '</span></div>';
         lines_html += '<tr>';
         lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
         lines_html += '</tr>';        
@@ -447,11 +489,15 @@ function show_new_proposition(message) {
         lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
         lines_html += '</tr>';
     }
+    */
     lines_html += "</table>";
+
     // Affichage
     $("#message").html(lines_html);
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
+
+    enabeled_buttons();
 }// / show_new_proposition()
 
 
@@ -461,7 +507,7 @@ function show_stats(stat) {
         ret = '<span class="text">non estimée</span>';
     }
     else {
-        ret = stat * 100;
+        ret = Math.round(stat) * 100;
         ret += "%";
     }
 

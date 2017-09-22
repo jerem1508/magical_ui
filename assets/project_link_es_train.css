@@ -54,3 +54,7 @@ hr{
 h2{
 	margin-top: 10px;
 }
+.hr{
+	border-bottom: 1px solid #aaa;
+	height: 5px;
+}

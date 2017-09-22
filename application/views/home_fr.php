@@ -50,16 +50,16 @@
 				<a href='<?php echo base_url("index.php/User/login");?>' class="btn btn-success">Déjà inscrit</a>
 			</div><!--/col-xs-6-->
 			<div class="col-xs-6">
-				<form>
+				<form name="my_form" method="post" action="<?php echo base_url("index.php/User/new_save");?>">
 				  <div class="form-group">
-				    <label for="exampleInputEmail1">Adresse email</label>
-				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				    <label for="email">Adresse email</label>
+				    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 				  </div>
 				  <div class="form-group">
-				    <label for="exampleInputPassword1">Mot de passe</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
-				    <label for="exampleInputPassword1">Confirmation</label>
-				    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+				    <label for="pwd">Mot de passe</label>
+				    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe">
+				    <label for="pwd_àconf">Confirmation</label>
+				    <input type="password" class="form-control" id="pwd_conf" placeholder="Mot de passe">
 				  </div>
 				  <div class="text-right">
 				  	<button type="submit" class="btn btn-success">S'inscrire</button>

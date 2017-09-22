@@ -143,7 +143,6 @@ class Project extends CI_Controller {
 		if(isset($project_id)){
 			$this->session->set_userdata('link_project_id', $project_id);
 		}
-
 		// REcherche de l'étape en cours
 		$link_step = $this->get_actual_step_linker($project_id);
 
