@@ -8,8 +8,9 @@
             </div>
         </div>
         <p>
-            
+            <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
         </p>
+        <div id="result"></div>
     </div><!-- /well-->
 </div><!--/container-->
 
@@ -54,6 +55,44 @@ function get_metadata(project_type, project_id) {
 }// / get_metadata
 
 
+function get_column_matches(project_id) {
+    var ret = false;
+
+    var tparams = {
+        "data_params": {
+            "module_name": "es_linker",
+            "file_name": "column_matches.json"
+        }
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+            if(result.error){
+                console.log("API error - download_config");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - download_config");
+                console.dir(result);
+                ret = result.result;
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - download_config");
+            console.log(result);
+        }
+    });// /ajax - Download config
+
+    return ret;
+} // /get_column_matches()
+
+
 function get_learned_setting(project_id) {
     var ret = false;
 
@@ -90,6 +129,234 @@ function get_learned_setting(project_id) {
 
     return ret;
 } // /get_column_matches()
+
+
+function get_tresh(project_id) {
+    // Récupere le contenu d'un fichier runInfo via API
+    console.log('get_learned_settings()');
+
+    var ret = 0;
+
+    var tparams = {
+        "data_params": {
+            "module_name": "es_linker",
+            "file_name": "learned_settings.json"
+        }
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id + '/',
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - download_config");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - download_config");
+                console.dir(result);
+
+                ret = result.result.tresh;
+                ret = 14;
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - download_config");
+            console.log(result);
+        }
+    });// /ajax - Download config
+    return ret;
+} // /get_runinfo()
+
+
+function get_data(from, size) {
+    var ret = "get_data()";
+    var tparams = {
+        "module_params": {
+            "size": size,
+            "from": from
+        }
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/es_fetch_by_id/link/' + project_id_link,
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+            if(result.error){
+                console.log("API error - get_data");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - get_data");
+                console.dir(result);
+                ret = result.responses;
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - get_data");
+            console.log(result);
+        }
+    });// /ajax
+    return ret;
+}// /get_data()
+
+
+function show_data(data, start) {
+    var html = '<div class="table-responsive">';
+        html += '<table class="table table-bordered ">';
+
+    // Entete
+    html += '<tr>';
+    html += '    <th>SOURCE</th>';
+
+    for (var i = 0; i < column_matches.length; i++) {
+        var source_list = column_matches[i].source;
+        html += '    <th>' + source_list + '</th>';
+    }
+
+    html += '    <th rowspan="2">Confiance</th>';
+    html += '    <th rowspan="2">Action</th>';
+    html += '</tr>';
+    html += '<tr>';
+    html += '    <th>REF</th>';
+    
+    for (var i = 0; i < column_matches.length; i++) {
+        var ref_list = column_matches[i].ref;
+        html += '    <th>' + ref_list + '</th>';
+    }
+    html += '</tr>';
+
+
+    for (var i = 0; i < data.length; i++) {
+        html += '<tr>';
+        var no_line = start + i + 1;
+        html += '    <td rowspan="2">' + no_line + '</td>';
+
+        // Récupération de l'indice de confiance
+        var confidence = Math.round(data[i].hits.hits[0]['_source']['__CONFIDENCE']);
+
+        // Parcours des termes SOURCE ---------------------------------------------
+        for (var j = 0; j < column_matches.length; j++) {
+            var ch = column_matches[j].source.toString();
+            var tab_termes = ch.split(",");
+            
+            var tab_values = new Array();
+
+            for (var k = 0; k < tab_termes.length; k++) {
+                tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k]]);
+            }
+
+            var values = tab_values.join(", ");
+            html += '    <td>' + values + '</td>';
+        }
+
+        html += '    <td rowspan="2">' + confidence + '</td>';
+
+        // Affichage du bouton
+        if(confidence < tresh){
+            html += '    <td rowspan="2">faux</td>';            
+        }
+        else{
+            html += '    <td rowspan="2">vrai</td>';
+        }
+
+        html += '</tr>';
+        html += '<tr>';
+
+        // Parcours des termes du REF --------------------------------------------
+        for (var j = 0; j < column_matches.length; j++) {
+            var ch = column_matches[j].ref.toString();
+            var tab_termes = ch.split(",");
+            
+            var tab_values = new Array();
+
+            for (var k = 0; k < tab_termes.length; k++) {
+                tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k] + '__REF']);
+            }
+
+            var values = tab_values.join(", ");
+            html += '    <td>' + values + '</td>';
+        }
+           
+        html += '</tr>';
+
+    }// /for - parcours data
+
+    html += '</table>';
+    html += '</div>';
+
+    $("#result").html(html);
+}// /show_data()
+
+
+function create_es_index_api() {
+    var tparams = {
+        "module_params": {
+            "for_linking": false
+        }
+    }
+
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_index/' + project_id_link + '/',
+        data: JSON.stringify(tparams),
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - create_es_index_api");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - create_es_index_api");
+                console.dir(result);
+
+                // Appel 
+                var handle = setInterval(function(){
+                    $.ajax({
+                        type: 'get',
+                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,
+                        success: function (result) {
+                            if(result.completed){
+                                clearInterval(handle);
+                                console.log("success - job");
+                                console.dir(result);
+
+                                // Récupération des données paginées + affichage
+                                var start = 0;
+                                show_data(get_data(start, 50), start);
+                            }
+                            else{
+                                console.log("success - job en cours");
+                            }
+                        },
+                        error: function (result, status, error){
+                            console.log("error");
+                            console.log(result);
+                            err = true;
+                            clearInterval(handle);
+                        }
+                    });// /ajax - job
+                }, 1000);
+            }
+        },
+        error: function (result, status, error){
+            console.log("error");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - create_es_labeller
+}// create_es_labeller_api()
 
 
 function treatment(project_id_link, learned_setting_json) {
@@ -129,19 +396,11 @@ function treatment(project_id_link, learned_setting_json) {
 
                                 // Permettre le téléchargement du fichier
 
-
-
-                                // Création de l'index ElasticSearch
-                                //create_es_index();
-
-
                                 // Récupération du seuil
-                                //tresh = get_tresh();
+                                tresh = get_tresh(project_id_link);
 
-
-                                // Récupération des données paginées + affichage
-
-
+                                // Création de l'index ElasticSearch + Affichage
+                                create_es_index_api();
 
                             }
                             else{
@@ -167,112 +426,6 @@ function treatment(project_id_link, learned_setting_json) {
 }// create_es_labeller_api()
 
 
-function generate_sample() {
-    console.log("Sample");
-    var tparams = {
-        "module_name": "INIT"
-    }
-    $.ajax({
-        type: 'post',
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/<?php echo $_SESSION['project_id'];?>',
-        data: JSON.stringify(tparams),
-        success: function (result) {
-
-            if(result.error){
-                console.log("API error");
-                console.log(result.error);
-            }
-            else{
-                console.log("success");
-                console.dir(result);
-                
-                tparams = {
-                    "data_params": {
-                        "module_name": result.module_name,
-                        "file_name": result.file_name
-                    },
-                    "module_params":{
-                        "sampler_module_name": "standard",
-                        "sample_params": {
-                            "num_rows": 20
-                        }
-                    }
-                }
-                console.log("appel sample");
-                
-                $.ajax({
-                    type: 'post',
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    url: '<?php echo BASE_API_URL;?>/api/sample/normalize/<?php echo $_SESSION['project_id'];?>',
-                    data: JSON.stringify(tparams),
-                    success: function (result) {
-
-                        if(result.error){
-                            console.log("API error");
-                            console.dir(result.error);
-                        }
-                        else{
-                            console.log("success sample");
-                            console.dir(result.sample);
-
-                            // Remplissage de la modale
-                            var ch = '<table class="table table-responsive table-condensed table-striped" id="sample_table">';
-
-                            ch += "<thead><tr>";
-                            $.each(columns, function( j, name) {
-                                  ch += '<th>' + name + "</th>";
-                                });
-                            ch += "</tr></thead><tbody>";
-                            console.dir(columns);
-                            $.each(result.sample, function( i, obj) {
-                                ch += "<tr>";
-                                $.each(columns, function( j, name) {
-                                    ch += "<td>" + obj[name] + "</td>";
-                                });
-                                ch += "</tr>";
-                            });
-                            ch += "</tbody></table>";
-
-                            $("#data_all").html(ch);
-                            
-                            $("#sample_table").DataTable({
-                                                    "language": {
-                                                       "paginate": {
-                                                            "first":      "Premier",
-                                                            "last":       "Dernier",
-                                                            "next":       "Suivant",
-                                                            "previous":   "Précédent"
-                                                        },
-                                                        "search":         "Rechercher:",
-                                                        "lengthMenu":     "Voir _MENU_ enregistrements par page"
-                                                    },
-                                                    "lengthMenu": [5,20,"ALL"],
-                                                    "responsive": true
-                                                });
-                            
-
-                        }
-                    },
-                    error: function (result, status, error){
-                        console.log("error");
-                        console.log(result);
-                        err = true;
-                    }
-                });// /ajax
-            }
-        },
-        error: function (result, status, error){
-            console.log("error");
-            console.log(result);
-            err = true;
-        }
-    });// /ajax
-}// / generate_sample()
-
-
 function valid_step() {
     // Validation du training
     complete_training();
@@ -293,8 +446,8 @@ $(function(){// ready
     // MAJ du nom du projet
     $("#project_name1").html(metadata_link.display_name);
 
-    // Affichage PONG
-    
+    // Récupération des matches
+    column_matches = get_column_matches();
 
     // Récupération du paramétrage
     var learned_setting_json = get_learned_setting(project_id_link);
@@ -303,8 +456,6 @@ $(function(){// ready
         treatment(project_id_link, learned_setting_json);
     }
 
-    // Récupération et affichage du fichier
-    //generate_sample();
 
 });//ready
 </script>

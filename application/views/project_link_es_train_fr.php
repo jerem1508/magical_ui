@@ -447,7 +447,6 @@ function show_new_proposition(message) {
         
         // Ecriture de la ligne Source
         lines_html += '<tr>';
-        //lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
         lines_html += '<td class="title">' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
         lines_html += '</tr>'; 
 
@@ -472,7 +471,6 @@ function show_new_proposition(message) {
 
         // Ecriture de la ligne Ref
         lines_html += '<tr>';
-        //lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
         lines_html += '<td class="title">' + lib_ref_keys + ' <i>(referentiel)</i> :</td><td class="message">' + lib_ref_values + '</td>';
         lines_html += '</tr>';
         lines_html += '<tr><td colspan="2" class="hr"></td></tr>';
