@@ -46,6 +46,10 @@ body{
 .entete2 a{
   color: #fff;
 }
+
+.my_alert{
+  border-radius: 0;
+}
 /* /ENTETE ------------------------------*/
 
 

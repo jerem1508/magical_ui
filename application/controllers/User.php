@@ -21,13 +21,13 @@ class User extends CI_Controller {
 		if(!isset($_SESSION['language'])){
 			$this->session->set_userdata('language', 'fr');
 		}
-	}
+	}// /__construct()
 
 
 	public function index()
 	{
 		$this->load->view('home_'.$_SESSION['language']);
-	}
+	}// /index()
 
 
 	public function new($msg='')
@@ -43,35 +43,49 @@ class User extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_new_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /new()
 
 
 	public function new_save()
 	{
+		try{
+			$email = $this->input->post('email');
+			$pwd = $this->input->post('pwd');
 
-		$email = $this->input->post('email');
-		$pwd = $this->input->post('pwd');
+			// test user existant
+			$ret = $this->User_model->exist_user($email);
 
-		// test user existant
-		$ret = $this->User_model->exist_user($email);
-
-		if($ret->result_id->num_rows > 0){
-			// email deja existant
-			$this->new("Cet email existe déjà !");
+			if($ret->result_id->num_rows > 0){
+				// email deja existant
+				$this->new("Cet email existe déjà !");
+			}
+			else{
+				// insertion du user
+				$ret = $this->User_model->insert_user($email, $pwd);
+			}
+			$error = '';
 		}
-		else{
-			// insertion du user
-			$ret = $this->User_model->insert_user($email, $pwd);
+		catch(Exception $e){
+			switch ($_SESSION['language']) {
+				case 'en':
+					$error = INTERNAL_ERROR_EN;
+					break;
+				case 'fr':
+					$error = INTERNAL_ERROR_FR;
+					break;
+				default:
+					$error = INTERNAL_ERROR_EN;
+					break;
+			}
 		}
 
 		// Chargement du tableau de bord
-		$this->dashboard();
-	}
+		$this->dashboard($error);
+	}// /new_save()
 
 
 	public function login($next='', $msg='')
 	{
-	
 		if(isset($_SESSION['user'])){
 			redirect('/Home');
 		}
@@ -84,7 +98,7 @@ class User extends CI_Controller {
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('user_login_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
-	}
+	}// /login()
 
 
 	public function login_validation($msg='')
@@ -131,7 +145,7 @@ class User extends CI_Controller {
 		else{
 			$this->login("","Email erroné !");
 		}
-	}
+	}// /login_validation()
 
 
 	public function logout()
@@ -139,17 +153,25 @@ class User extends CI_Controller {
 		$this->session->unset_userdata('user');
 
 		redirect('/Home');
-	}
+	}// /logout()
 
 
-	public function dashboard()
+	public function dashboard($error='')
 	{
 		if(!isset($_SESSION['user'])){
 			redirect('/Home');
 		}
 
-		$this-> split_projects($_SESSION['user']['id']);
+		try{
+			// Récupération des projets
+			$this-> split_projects($_SESSION['user']['id']);
+		}
+		catch(Exception $e){
+			$error = $e->getMessage();
+			$this->log_error($error);
+		}
 
+		$data['server_error'] = $error;
 		$data['normalized_projects'] = $this->normalized_projects;
 		$data['linked_projects'] = $this->linked_projects;
 		$data['title'] = "Tableau de bord";
@@ -166,14 +188,21 @@ class User extends CI_Controller {
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
+
 		foreach ($projects_list as $project) {
+
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
-			
+
+			if(!$project_api){
+				throw new Exception("An internal synchronization error occurred on our server", 1);
+			}
+
 			$project['project_id'] = $project_api['project_id'];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
 			$project['project_type'] = $project_api['project_type'];
+
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
 			if($project_api['project_type'] == 'normalize'){
@@ -217,5 +246,18 @@ class User extends CI_Controller {
 		return $response;
 	}// /last_written()
 
+
+	public function log_error($comment)
+	{
+		# Enregistrement des erreurs en base
+		$data_to_write['comment'] = $comment;
+		$data_to_write['user_id'] = "0";
+
+		// Chargement du modèle
+		$this->load->model('Comments_model');
+
+		// Insertion
+		$this->Comments_model->insert_comment($data_to_write);
+	}// /log_error()
 
 }

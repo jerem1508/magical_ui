@@ -7,18 +7,6 @@ function get_status($public=0)
 	else{
 		return '<i class="fa fa-lock"></i>';
 	}
-	// switch ($status) {
-	// 	case PROJECT_INACTIVE:
-	// 		return 'Inactif';
-	// 	case PROJECT_USER_PRIVATE:
-	// 		return 'Privé';
-	// 	case PROJECT_USER_PUBLIC:
-	// 		return 'Public demandé';
-	// 	case PROJECT_ADMIN_PUBLIC_KO:
-	// 		return 'En cours';
-	// 	case PROJECT_ADMIN_PUBLIC_OK:
-	// 		return 'Public';
-	// }
 }// /get_status()
 
 
@@ -351,15 +339,17 @@ function get_lien_supp_html($project_type, $project_id)
 
 
 	function delete_project(project_type, project_id) {
-		// Suppression d'un projet
+		// Suppression du projet en base
 		var ret = delete_project_bdd(project_id);
 
-		// Suppression par API
+		// Suppression su repertoire API
 		if(ret){
 			delete_project_API(project_type, project_id)			
 		}
 
 		// Refresh
+		window.location.reload();
+
 	}// /delete_project()
 
 

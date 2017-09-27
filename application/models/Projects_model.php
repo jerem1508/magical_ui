@@ -59,17 +59,11 @@ class Projects_model extends CI_Model {
     }
 
 
-    public function delete_project($project_id=0)
+    public function delete_project($project_id)
     {
         # Suppression d'un projet
 
-        if($project_id != 0){
-            $this->db->where('project_id', $project_id);
-            $this->db->delete('projects');
-
-            return true;
-        }
-        return false;
-
+        $this->db->where('project_id', $project_id);
+        return $this->db->delete('projects');
     }// /delete_project()
 }

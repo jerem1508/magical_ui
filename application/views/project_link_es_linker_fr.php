@@ -1,20 +1,20 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" id="entete" style="margin-top: 20px;">
+<div class="container-fluid" id="entete" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
             <div class="col-md-12">
-                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Traitement</i></h2>
+                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Résultats</i></h2>
             </div>
         </div>
         <p>
-            <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+
         </p>
         <div id="result"></div>
     </div><!-- /well-->
 </div><!--/container-->
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 text-right">
             <button class="btn btn-success" id="bt_next">Analyse des résultats >></button>
@@ -212,10 +212,10 @@ function get_data(from, size) {
 
 function show_data(data, start) {
     var html = '<div class="table-responsive">';
-        html += '<table class="table table-bordered ">';
+        html += '<table class="table table-bordered table-condensed">';
 
     // Entete
-    html += '<tr>';
+    html += '<tr >';
     html += '    <th>SOURCE</th>';
 
     for (var i = 0; i < column_matches.length; i++) {
@@ -239,7 +239,7 @@ function show_data(data, start) {
     for (var i = 0; i < data.length; i++) {
         html += '<tr>';
         var no_line = start + i + 1;
-        html += '    <td rowspan="2">' + no_line + '</td>';
+        html += '    <td rowspan="2" class="text-center no_line"><h3>' + no_line + '</h3></td>';
 
         // Récupération de l'indice de confiance
         var confidence = Math.round(data[i].hits.hits[0]['_source']['__CONFIDENCE']);
@@ -259,14 +259,14 @@ function show_data(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        html += '    <td rowspan="2">' + confidence + '</td>';
+        html += '    <td rowspan="2" class="text-center"><h3>' + confidence + '<h3></td>';
 
         // Affichage du bouton
         if(confidence < tresh){
-            html += '    <td rowspan="2">faux</td>';            
+            html += '    <td rowspan="2"><h3><input type="checkbox" id="chk_' + no_line + '"></h3></td>';            
         }
         else{
-            html += '    <td rowspan="2">vrai</td>';
+            html += '    <td rowspan="2"><h3><input type="checkbox" checked id="chk_' + no_line + '"></h3></td>';
         }
 
         html += '</tr>';
@@ -334,7 +334,31 @@ function create_es_index_api() {
 
                                 // Récupération des données paginées + affichage
                                 var start = 0;
-                                show_data(get_data(start, 50), start);
+                                var data = get_data(start, 50);
+                                show_data(data, start);
+
+                                // MAJ des boutons on/off
+                                for (var i = 0; i < data.length; i++) {
+                                    var no_line = start + i + 1;
+                                    $('#chk_' + no_line).bootstrapToggle({
+                                      on: 'Vrai',
+                                      off: 'Faux',
+                                      onstyle: 'success3',
+                                      offstyle: 'danger',
+                                      size: 'small'
+                                    });
+                                }// /for
+
+                                // Alterance des couleurs
+                                var cpt = 0;
+                                $("tr").each(function(){
+                                    if(Math.floor(cpt/2)%2){
+                                        $(this).addClass("active");
+                                        $(this).css("background-color","#777");
+                                    }
+                                    cpt ++;
+                                });
+
                             }
                             else{
                                 console.log("success - job en cours");

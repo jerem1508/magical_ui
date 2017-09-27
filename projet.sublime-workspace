@@ -4,12 +4,24 @@
 		"selected_items":
 		[
 			[
-				"border",
-				"border-bottom"
+				"add",
+				"addClass\t( className: String ): jQuery jQuery - Attributes | Manipulation > Class Attribute | CSS"
+			],
+			[
+				"floor",
+				"Math_floor\t( x: number ): number Math"
 			],
 			[
 				"cla",
-				"class=\"text"
+				"class"
+			],
+			[
+				"tab",
+				"tab_values"
+			],
+			[
+				"border",
+				"border-bottom"
 			],
 			[
 				"paddin",
@@ -120,10 +132,6 @@
 				"show_modal_filter"
 			],
 			[
-				"add",
-				"add_columns_filter"
-			],
-			[
 				"show",
 				"show_stats"
 			],
@@ -230,10 +238,6 @@
 			[
 				"sea",
 				"search_with_tags"
-			],
-			[
-				"tab",
-				"tab_tags"
 			],
 			[
 				"displ",
@@ -510,10 +514,6 @@
 			[
 				"on",
 				"onclick"
-			],
-			[
-				"tags",
-				"tagsinput-perso"
 			]
 		]
 	},
@@ -529,13 +529,54 @@
 			}
 		},
 		{
-			"contents": "<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container\" id=\"entete\" style=\"margin-top: 20px;\">\n    <div class=\"well\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h2 style=\"margin-top: 0;\"><span id=\"project_name1\"></span> : <i>Traitement</i></h2>\n            </div>\n        </div>\n        <p>\n            <input type=\"checkbox\" data-toggle=\"toggle\" data-on=\"Enabled\" data-off=\"Disabled\">\n        </p>\n        <div id=\"result\"></div>\n    </div><!-- /well-->\n</div><!--/container-->\n\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-xs-12 text-right\">\n            <button class=\"btn btn-success\" id=\"bt_next\">Analyse des résultats >></button>\n        </div>\n    </div>\n</div><!--/container-->\n\n\n<script type=\"text/javascript\">\n\nfunction get_metadata(project_type, project_id) {\n    // Récupere les métadata via API\n\n    var metadata = \"\";\n    var ret = false;\n\n    $.ajax({\n        type: 'get',\n        async: false,\n        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error\");console.log(result.error);\n            }\n            else{\n                console.log(\"success - metadata\");console.dir(result);\n                ret = result.metadata;\n            }\n        },\n        error: function (result, status, error){\n            console.log(result);\n            console.log(status);\n            console.log(error);\n        }\n    });// /ajax metadata\n\n    return ret;\n}// / get_metadata\n\n\nfunction get_column_matches(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"column_matches.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction get_learned_setting(project_id) {\n    var ret = false;\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"learned_settings.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n                ret = result.result;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n\n    return ret;\n} // /get_column_matches()\n\n\nfunction get_tresh(project_id) {\n    // Récupere le contenu d'un fichier runInfo via API\n    console.log('get_learned_settings()');\n\n    var runinfo = \"\";\n\n    var tparams = {\n        \"data_params\": {\n            \"module_name\": \"es_linker\",\n            \"file_name\": \"learned_settings.json\"\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/download_config/link/' + project_id + '/',\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - download_config\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - download_config\");\n                console.dir(result);\n\n                return result.result.tresh;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - download_config\");\n            console.log(result);\n        }\n    });// /ajax - Download config\n} // /get_runinfo()\n\n\nfunction get_data(from, size) {\n    var ret = \"get_data()\";\n    var tparams = {\n        \"module_params\": {\n            \"size\": size,\n            \"from\": from\n        }\n    }\n\n    $.ajax({\n        type: 'post',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/es_fetch_by_id/link/' + project_id_link,\n        data: JSON.stringify(tparams),\n        async: false,\n        success: function (result) {\n            if(result.error){\n                console.log(\"API error - get_data\");\n                console.log(result.error);\n            }\n            else{\n                console.log(\"success - get_data\");\n                console.dir(result);\n                ret = result.responses;\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error - get_data\");\n            console.log(result);\n        }\n    });// /ajax\n    return ret;\n}// /get_data()\n\n\nfunction show_data(data, start) {\n    console.log('column_matches');\n    console.log(column_matches);\n\n    var html = '<div class=\"table-responsive\">';\n        html += '<table class=\"table table-bordered \">';\n\n    // Entete\n    html += '<tr>';\n    html += '    <th>SOURCE&nbsp;<i class=\"fa fa-long-arrow-right\" aria-hidden=\"true\"></i></th>';\n\n    for (var i = 0; i < column_matches.length; i++) {\n        var source_list = column_matches[i].source;\n        html += '    <th>' + source_list + '</th>';\n    }\n\n    html += '    <th rowspan=\"2\">Confiance</th>';\n    html += '    <th rowspan=\"2\">Action</th>';\n    html += '</tr>';\n    html += '<tr>';\n    html += '    <th>REF&nbsp;<i class=\"fa fa-long-arrow-right\" aria-hidden=\"true\"></i></th>';\n    \n    for (var i = 0; i < column_matches.length; i++) {\n        var ref_list = column_matches[i].ref;\n        html += '    <th>' + ref_list + '</th>';\n    }\n    html += '</tr>';\n\n\n    for (var i = 0; i < data.length; i++) {\n        console.log(data[i]);\n        \n        html += '<tr>';\n        html += '    <td rowspan=\"2\">1</td>';\n\n        // Parcours des termes SOURCE\n        for (var i = 0; i < column_matches.length; i++) {\n            var source_list = column_matches[i].source;\n            var tab_termes = source_list.join(',');\n            \n            var values = \"\";\n\n            for (var j = 0; j < tab_termes.length; j++) {\n                //values = data[i].hits.hits['_source'][tab_termes[i]];\n                values += tab_termes[i];\n            }\n            html += '    <td>' + values + '</td>';\n        }\n\n        html += '    <td rowspan=\"2\">0.3</td>';\n        html += '    <td rowspan=\"2\">bt</td>';\n        html += '</tr>';\n        html += '<tr>';\n\n// Parcours des termes du REF\n        //<td>Oise</td>\n\n\n            \n        html += '</tr>';\n\n    }// /for - parcours data\n\n\n\n    \n\n    // html += '</table>';\n    // html += '</div>';\n\n    $(\"#result\").html(html);\n}// /show_data()\n\n\nfunction create_es_index_api() {\n    var tparams = {\n        \"module_params\": {\n            \"for_linking\": false\n        }\n    }\n\n    $.ajax({\n        type: 'POST',\n        dataType: \"json\",\n        contentType: \"application/json; charset=utf-8\",\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_index/' + project_id_link + '/',\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - create_es_index_api\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - create_es_index_api\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                // Récupération des données paginées + affichage\n                                var start = 0;\n                                show_data(get_data(start, 50), start);\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction treatment(project_id_link, learned_setting_json) {\n\n    var tparams = {\n        \"module_params\": learned_setting_json\n    }\n    console.log('tparams:');\n    console.log(tparams);\n\n    $.ajax({\n        type: 'post',\n        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/es_linker/' + project_id_link + '/',\n        contentType: \"application/json; charset=utf-8\",\n        traditional: true,\n        data: JSON.stringify(tparams),\n        success: function (result) {\n\n            if(result.error){\n                console.log(\"API error - es_linker\");\n                console.dir(result.error);\n            }\n            else{\n                console.log(\"success - es_linker\");\n                console.dir(result);\n\n                // Appel \n                var handle = setInterval(function(){\n                    $.ajax({\n                        type: 'get',\n                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,\n                        success: function (result) {\n                            if(result.completed){\n                                clearInterval(handle);\n                                console.log(\"success - job\");\n                                console.dir(result);\n\n                                // Permettre le téléchargement du fichier\n\n                                // Récupération du seuil\n                                tresh = get_tresh(project_id_link);\n\n\n                                // Création de l'index ElasticSearch + Affichage\n                                create_es_index_api();\n\n                            }\n                            else{\n                                console.log(\"success - job en cours\");\n                            }\n                        },\n                        error: function (result, status, error){\n                            console.log(\"error\");\n                            console.log(result);\n                            err = true;\n                            clearInterval(handle);\n                        }\n                    });// /ajax - job\n                }, 1000);\n            }\n        },\n        error: function (result, status, error){\n            console.log(\"error schedule\");\n            console.log(result);\n            err = true;\n        }\n    });// /ajax - create_es_labeller\n}// create_es_labeller_api()\n\n\nfunction valid_step() {\n    // Validation du training\n    complete_training();\n\n    // Passage à l'étape suivante\n    window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + project_id_link;\n}// / valid_step()\n\n\n$(function(){// ready\n\n    project_id_link = \"<?php echo $_SESSION['link_project_id'];?>\";\n\n    // Récupération des metadata du projet de link en cours\n    console.log('Projet de LINK');\n    metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');\n\n    // MAJ du nom du projet\n    $(\"#project_name1\").html(metadata_link.display_name);\n\n    // Récupération des matches\n    column_matches = get_column_matches();\n\n    // Récupération du paramétrage\n    var learned_setting_json = get_learned_setting(project_id_link);\n\n    if(learned_setting_json){\n        treatment(project_id_link, learned_setting_json);\n    }\n\n\n});//ready\n</script>",
 			"file": "application/views/project_link_es_linker_fr.php",
-			"file_size": 13314,
-			"file_write_time": 131508220197182714,
 			"settings":
 			{
-				"buffer_size": 13306,
+				"buffer_size": 15319,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/Projects_model.php",
+			"settings":
+			{
+				"buffer_size": 2050,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Save_ajax.php",
+			"settings":
+			{
+				"buffer_size": 1544,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/user_dashboard_fr.php",
+			"settings":
+			{
+				"buffer_size": 12690,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_es_linker.css",
+			"settings":
+			{
+				"buffer_size": 28,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_es_linker_specifics.php",
+			"settings":
+			{
+				"buffer_size": 422,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -548,7 +589,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 304.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
@@ -589,7 +630,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 533.0
+		"width": 587.0
 	},
 	"console":
 	{
@@ -622,13 +663,14 @@
 	"file_history":
 	[
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bbc476a2424479eb7bab1d97656938c2/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/a933ae3163e6031b0c9fb85249a4706a/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bbc476a2424479eb7bab1d97656938c2/es_linker/learned_settings.json",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/abstract_data_project.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/normalizer.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api_queued_modules.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bbc476a2424479eb7bab1d97656938c2/es_linker/learned_settings.json",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
@@ -747,8 +789,7 @@
 		"/var/www/html/tmp/test_unesco.html",
 		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example2.js",
 		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example.js",
-		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example.css",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/f18f3807855d2e1e762b3ae9d2cdba66/metadata.json"
+		"/var/www/html/projets/test_dragula/node_modules/dragula/example/example.css"
 	],
 	"find":
 	{
@@ -767,6 +808,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dele",
+			"show_data",
+			"get_tresh",
 			"show_data",
 			"false",
 			"column_matches",
@@ -891,10 +935,7 @@
 			"gly",
 			"bloc_project",
 			"tool",
-			"modal_ref",
-			"get_normalized_projects_html",
-			"modal_ref",
-			"progress_src"
+			"modal_ref"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -934,7 +975,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -964,7 +1005,7 @@
 						"translation.y": 7501.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -973,15 +1014,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13306,
+						"buffer_size": 15319,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7690,
-								7690
+								6681,
+								6681
 							]
 						],
 						"settings":
@@ -991,10 +1032,154 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1111.0,
+						"translation.y": 1026.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/models/Projects_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2050,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1834,
+								1834
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 702.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/controllers/Save_ajax.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1498,
+								1512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/views/user_dashboard_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "assets/project_link_es_linker.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28,
+								28
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/views/project_link_es_linker_specifics.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								422,
+								422
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]

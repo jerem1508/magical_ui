@@ -307,14 +307,23 @@ class Project extends CI_Controller {
 		# Chargement de la vue d'initialisation du projet
 
 		$data = [];
+		$error = '';
 
 		// Recherche des projets de normalisation si user connecté
 		if(isset($_SESSION['user'])){
-			$this-> split_projects($_SESSION['user']['id']);
+			try{
+				$this-> split_projects($_SESSION['user']['id']);
+			}
+			catch(Exception $e){
+				$error = $e->getMessage();
+				$this->log_error($error);
+			}
 
 			$data['normalized_projects'] = $this->normalized_projects;
 			$data['linked_projects'] = $this->linked_projects;
 		}
+
+		$data['server_error'] = $error;
 
 		// Recherche des projets internes proposés
 		$data['internal_projects'] = $this->private_functions->get_internal_projects();
@@ -464,7 +473,10 @@ class Project extends CI_Controller {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
-			// $last_written = $this->last_written($project['project_type'], $project['project_id']);
+			if(!$project_api){
+				throw new Exception("An internal synchronization error occurred on our server", 1);
+			}
+
 			$project['project_id'] = $project_api["project_id"];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
@@ -486,5 +498,18 @@ class Project extends CI_Controller {
 			}// /switch
 		}// /foreach
 	}// /split_projects()
+
+	public function log_error($comment)
+	{
+		# Enregistrement des erreurs en base
+		$data_to_write['comment'] = $comment;
+		$data_to_write['user_id'] = "0";
+
+		// Chargement du modèle
+		$this->load->model('Comments_model');
+
+		// Insertion
+		$this->Comments_model->insert_comment($data_to_write);
+	}// /log_error()
 
 }// /Class

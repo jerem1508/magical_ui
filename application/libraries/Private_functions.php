@@ -3,10 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Private_functions {
 
+	public function __construct()
+	{
+	    $this->CI =& get_instance();
+	}
+
 	public function get_metadata_api($project_type, $project_id)
 	{
 		# Récupération des métadata d'un projet
-
 		$curl = curl_init();
 		 
 		$url = BASE_API_URL.'/api/metadata/'.$project_type.'/'.$project_id;
@@ -35,6 +39,7 @@ class Private_functions {
 			}
 			$tab[$filename] = $t_steps;
 		}
+
 		return $tab;
 	}// /set_tab_steps_by_filename()
 

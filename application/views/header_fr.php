@@ -45,3 +45,15 @@
 	</div>
 </div>
 <!-- /ENTETE -->
+	
+<?php
+// Affichage eventuel d'un message d'erreur
+if(@$server_error){
+?>
+<div class="container-fluid">
+	<div class="alert alert-danger my_alert" role="alert"><?php echo $server_error; ?></div>
+</div>
+<?php
+}
+?>
+
