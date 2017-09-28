@@ -25,3 +25,8 @@
         width: 1100px;
     }
 }
+
+#didacticiel{
+	visibility: hidden;
+	display: inline;
+}

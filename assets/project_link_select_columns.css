@@ -84,3 +84,12 @@
 #src_columns, #ref_columns{
 	margin-top: 10px;
 }
+
+#didacticiel{
+	visibility: hidden;
+	display: inline;
+}
+
+#bt_info_ref, #bt_info_ref{
+	cursor: pointer;
+}

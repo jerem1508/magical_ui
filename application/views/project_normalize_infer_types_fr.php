@@ -14,16 +14,24 @@
 -->
 	<div class="well">
 		<div class="row">
-			<div class="col-md-10">
-				<h2 style="margin-top: 0;"><span id="project_name"></span> : <i>Détection des types</i></h2>
+			<div class="col-sm-8">
+				<h2 class="page_title"><span id="project_name"></span> : <i>Détection des types</i></h2>
 			</div>
-			<div class="col-md-2 text-right">
+			<div class="col-sm-4 text-right">
+				<div id="didacticiel">
+					<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
+					&nbsp;|&nbsp;
+				</div>
 				<a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
 			</div>
 		</div>
-		<p>
-			Dans cette étape, nous tentons de détecter automatiquement le type de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
-		</p>
+		<div class="row">
+			<div class="col-sm-12 page_explain">
+				Dans cette étape, nous tentons de <strong>détecter automatiquement le type</strong> de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
+			</div>
+		</div>
+
+
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<button class="btn btn-success" id="bt_infer_types">Lancer la détection des types</button>
@@ -33,8 +41,8 @@
 			$("#bt_infer_types").click(function(){
 				// affichage de la div de "chargement" + trt des bt
 				$("#wait").css("display","inherit");
-				//$("#bt_infer_types").prop("disabled", true);
 				$("#bt_infer_types").css("display", "none");
+				$("#didacticiel").css("visibility","visible");
 
 				// lancement de l'inference
 				treatment();
@@ -46,20 +54,8 @@
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 			</div>
 		</div>
-		
 		<div class="row" id="result">
-		    <div class="well">
-		        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
-		    </div>
-
 			<div class="col-xs-12">
-			<!--
-				<div class="row">
-					<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-						<button class="btn btn-success2"><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Aperçu des données</button>
-					</div>
-				</div>
-			-->
 				<div class="row">
 					<div class="col-xs-12">
 						<hr>

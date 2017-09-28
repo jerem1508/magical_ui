@@ -25,10 +25,13 @@
 /* STATS ------*/
 .stat{
 	border: 1px solid #777;
-	background-color: #ddd;
+	background-color: #262626;
 	border-radius: 6px;
 	padding: 10px;
+	padding-left: 0;
+	padding-right: 0;
 	text-align: center;
+	color: #eee;
 }
 .stat .title{
 	font-weight: bold;	
@@ -45,6 +48,9 @@
 	font-style: italic;
 	display: block;
 }
+.stat .history{
+	height: 57px;
+}
 
 hr{
 	margin-top: 10px;
@@ -57,4 +63,37 @@ h2{
 .hr{
 	border-bottom: 1px solid #aaa;
 	height: 5px;
+}
+
+.forgot_color{
+	background-color: #D9534F;
+}
+.yes_color{
+	background-color: #A0BC5B;
+}
+.history_yes{
+	color: #A0BC5B;
+}
+.history_yes .title{
+	color: #eee;
+}
+
+.no_color{
+	background-color: #DFAE1F;
+}
+.history_no{
+	color: #DFAE1F;
+}
+.history_no .title{
+	color: #eee;
+}
+
+.history_all{
+	color: #eee;
+	font-size: 40px;
+	padding-right: 2px;
+}
+
+.history td{
+	width: 28px;
 }

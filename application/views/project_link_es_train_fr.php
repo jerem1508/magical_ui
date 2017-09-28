@@ -3,22 +3,24 @@
 <div class="container" id="entete" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
-            <div class="col-md-10">
-                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Apprentissage</i></h2>
+            <div class="col-sm-8">
+                <h2 class="page_title"><span id="project_name1"></span> : <i>Apprentissage</i></h2>
             </div>
-            <div class="col-md-2 text-right">
+            <div class="col-sm-4 text-right">
                 <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
             </div>
         </div>
-        <p>
-            L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
-            <br><br>
-            Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.
-            <br>
-            Indice de pécision :
-            <br>
-            Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier
-        </p>
+        <div class="row">
+            <div class="col-sm-12 page_explain">
+                L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
+                <br><br>
+                Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.
+                <br>
+                Indice de pécision :
+                <br>
+                Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 text-center">
                 <button class="btn btn-success" id="bt_start">Commencer l'apprentissage</button>
@@ -38,7 +40,7 @@
                         </h2>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+                        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
                         &nbsp;|&nbsp;
                         <a href="<?php echo base_url('index.php/Project/link');?>">Passer cette étape</a>
                     </div>
@@ -50,8 +52,7 @@
                             &nbsp;Filtres
                         </h2>
                     </div>
-                
-
+                </div>
                 <div class="row" data-intro="Spécifiez par colonne les termes obligatoires. TOUS les termes indiqués devront être présents dans les lignes du réfentiel proposées.">
                     <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
                         Termes obligatoires
@@ -73,7 +74,6 @@
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </div>
-                </div>
                 </div><!-- / row-->
 <hr>
                 <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
@@ -83,7 +83,18 @@
                             &nbsp;Labellisation
                         </h2>
                         <div class="row">
-                            <div class="col-xs-offset-1 col-xs-10">
+                            <div class="col-xs-offset-1 col-xs-5 well">
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                                <div>
+                                    Taux de précision souhaité : 
+                                    <select>
+                                        <option>Normal</option>
+                                        <option>Réduite</option>
+                                        <option>Maximum</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
                                 <div id="message">
                                     <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
                                 </div>
@@ -91,21 +102,24 @@
                                     Ces informations sont-elle identiques ?
                                 </div>
                                 <div>
-                                    <button class="btn btn-default btn-xl btn_2_3" 
+                                    <button class="btn btn-default btn-xl btn_2_3 yes_color" 
                                             onclick="socket_answer('y');" 
-                                            style="background-color: #A0BC5B"
                                             id="bt_yes">
                                         <h2>OUI</h2>
                                     </button>
-                                    <button class="btn btn-default btn-xl btn_2_3" 
+                                    <button class="btn btn-default btn-xl btn_2_3 no_color" 
                                             onclick="socket_answer('n');" 
-                                            style="background-color: #DFAE1F"
                                             id="bt_no">
                                         <h2>NON</h2>
                                     </button>
+                                    <button class="btn btn-default btn-xl btn_2_3 forgot_color" 
+                                            onclick="socket_answer('n');" 
+                                            id="bt_no">
+                                        <h2>Oublier</h2>
+                                    </button>
+                                    
                                 </div>
                             </div>
-                            <div class="col-xs-1"></div>
                         </div>
                     </div>
                 </div><!-- / row-->
@@ -121,15 +135,87 @@
                         <div class="col-xs-2">
                             <div class="stat">
                                 <span class="title">Précision</span>
-                                <span class="number" id="stat_estimated_precision"></span>
+                                <span class="number" id="stat_estimated_precision">0 %</span>
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="stat">
                                 <span class="title">Couverture</span>
-                                <span class="number" id="stat_estimated_recall"></span>
+                                <span class="number" id="stat_estimated_recall">0 %</span>
                             </div>
                         </div>
+                        <div class="col-xs-2">
+                            <div class="stat">
+                                <span class="title">Avancement</span>
+                                <span class="number" id="stat_real_ratio">0</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="stat">
+                                <span class="title">Historique des réponses</span>
+                                <div class="history" id="stat_history">
+                                    <table class="table">
+                                        <tr class="history_yes">
+                                            <th class="title">OUI</th>
+
+                                            <td id="yes_1"></td>
+                                            <td id="yes_2"></td>
+                                            <td id="yes_3"></td>
+                                            <td id="yes_4"></td>
+                                            <td id="yes_5"></td>
+                                            <td id="yes_6"></td>
+                                            <td id="yes_7"></td>
+                                            <td id="yes_8"></td>
+                                            <td id="yes_9"></td>
+                                            <td id="yes_10"></td>
+                                            <td id="yes_11"></td>
+                                            <td id="yes_12"></td>
+                                            <td id="yes_13"></td>
+                                            <td id="yes_14"></td>
+                                            <td id="yes_15"></td>
+                                            <th class="total" id="stat_yes">0</th>
+
+                                            <th rowspan="2" class="history_all" id="stat_all">0</th>                                        
+                                        </tr>
+                                        <tr class="history_no">
+                                            <th class="title">NON</th>
+
+                                            <td id="no_1"></td>
+                                            <td id="no_2"></td>
+                                            <td id="no_3"></td>
+                                            <td id="no_4"></td>
+                                            <td id="no_5"></td>
+                                            <td id="no_6"></td>
+                                            <td id="no_7"></td>
+                                            <td id="no_8"></td>
+                                            <td id="no_9"></td>
+                                            <td id="no_10"></td>
+                                            <td id="no_11"></td>
+                                            <td id="no_12"></td>
+                                            <td id="no_13"></td>
+                                            <td id="no_14"></td>
+                                            <td id="no_15"></td>
+                                            <th class="total" id="stat_no">0</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+<!--
+                        <div class="col-xs-2">
+                            <div class="stat">
+                                <span class="title">Labellisation <span class="glyphicon glyphicon-plus"></span></span>
+                                <span class="number" id="stat_yes">0</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="stat">
+                                <span class="title">Labellisation <span class="glyphicon glyphicon-minus"></span></span>
+                                <span class="number" id="stat_no">0</span>
+                            </div>
+                        </div>
+-->
                     </div>
                 </div><!-- / row-->
 
@@ -389,7 +475,7 @@ function socket_answer(user_response) {
     // Un nouveau message sera reçu par socket_on_message()
 
     disabeled_buttons();
-    $("#message").html("<br><br>");
+    $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
     var response_to_send = {
         'project_id': project_id_link,
@@ -502,11 +588,11 @@ function show_new_proposition(message) {
 function show_stats(stat) {
     var ret = "";
     if(!stat){
-        ret = '<span class="text">non estimée</span>';
+       ret = '<span class="text">0 %</span>';
     }
     else {
-        ret = Math.round(stat) * 100;
-        ret += "%";
+        ret = Math.round(stat * 100);
+        ret += " %";
     }
 
     return ret;
@@ -613,8 +699,57 @@ function add_buttons() {
         // Validation des filtres
         valid_filters();
     });
+
+    $("#bt_yes").click(function(){
+        stat_yes += 1;
+        stat_all += 1;
+
+        tab_stat_yes.push(1);
+        tab_stat_no.push(0);
+
+        update_stat();
+    });
+    $("#bt_no").click(function(){
+        stat_no += 1;
+        stat_all += 1;
+
+        tab_stat_yes.push(0);
+        tab_stat_no.push(1);
+
+        update_stat();
+    });
 } // / add_buttons()
 
+function update_stat() {
+    // Compteurs
+    $("#stat_yes").html(stat_yes);
+    $("#stat_no").html(stat_no);
+    $("#stat_all").html(stat_all);
+
+    // Historiques
+    // Yes
+    var max = tab_stat_yes.length;
+    if(max >= 15){
+        max = 15;
+    }
+    var first = tab_stat_yes.length - max;
+    max = first + max;
+    var cpt = 1;
+    for (var i = first; i < max; i++) {
+
+        if(tab_stat_yes[i] == 1){
+            $("#yes_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');
+            $("#no_" + cpt).html('&nbsp;');
+        }
+        else{
+            html = '';
+            $("#no_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');   
+            $("#yes_" + cpt).html('&nbsp;');
+        }
+        
+        cpt ++;
+    }
+}// /update_stat()
 
 function valid_filters() {
     // Traitement des termes obligatoires
@@ -664,7 +799,15 @@ function get_obj_filters(filter_list) {
 }// / get_obj_filters()
 
 $(function(){// ready
-    
+    // Compteurs
+    stat_yes = 0;
+    stat_no = 0;
+    stat_all = 0;
+
+    // Historiques
+    tab_stat_yes = new Array();
+    tab_stat_no = new Array();
+
     $("body").css("height", $(window).height());
 
     modal_filter_sens = ""; // est utlisé pour savoir si l'on est en exclusion ou en label obligatoire (oblig, excl)

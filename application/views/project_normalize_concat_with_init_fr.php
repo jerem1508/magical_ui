@@ -25,10 +25,11 @@ if(isset($this->session->project_type)){
 				<h2 style="margin-top: 0;"><span id="project_name"></span> : <i>Traitement & téléchargements</i></h2>
 			</div>
 		</div>
-		<p>
-			Si vous avez uploadé un gros fichier, les étapes de traitement précédentes ont été faites sur un échantillon. Vous pouvez lancer le traitement sur l'ensemble du fichier sur cette page. <br><br>
-		</p>
-
+		<div class="row">
+			<div class="col-sm-12 page_explain">
+				Si vous avez uploadé un gros fichier, les étapes de traitement précédentes ont été faites sur un échantillon. Vous pouvez lancer le traitement sur l'ensemble du fichier sur cette page.
+			</div>
+		</div>
 		<div class="row" id="trt_all">
 			<div class="col-md-12 text-center">
 				<button class="btn btn-success" id="bt_concat_with_init">Lancer le traitement sur l'ensemble du fichier</button>
@@ -85,6 +86,7 @@ if(isset($this->session->project_type)){
 </div><!--/container-->
 
 <div class="container" id="reports">
+	<!--
     <div class="well">
         <div class="row">
             <div class="col-md-12">
@@ -98,13 +100,13 @@ if(isset($this->session->project_type)){
                 <div class="col-md-6" id="report_original_columns"></div>
                 <div class="col-md-6" id="report_selected_columns"></div>
             </div>
-        </div><!-- /row-->
-    </div><!-- /well /report-->
-
+        </div>
+    </div>
+	-->
     <div class="well">
         <div class="row">
             <div class="col-md-12">
-                <h4>Etape 2 : Recherche des valeurs manquantes - <i>Modifications effectuées</i></h4>
+                <h4>Recherche des valeurs manquantes - <i>Modifications effectuées</i></h4>
             </div>
             <div id="report_replace_mvs"></div>
         </div><!-- /row-->
@@ -113,7 +115,7 @@ if(isset($this->session->project_type)){
     <div class="well">
         <div class="row">
             <div class="col-md-12">
-                <h4>Etape 3 : Détection des types - <i>Modifications effectuées</i></h4>
+                <h4>Détection des types - <i>Modifications effectuées</i></h4>
             </div>
             <div id="report_recode_types"></div>
         </div><!-- /row-->

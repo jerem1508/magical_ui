@@ -15,6 +15,15 @@ gris clair
 corail
 #FA5D58
 */
+.color_src{
+  color: #D474BB;
+}
+
+.color_ref{
+  color: #FDDE6C;
+}
+
+
 body{
     background-image: radial-gradient(circle at bottom left, #eee, #222);
     background-image: linear-gradient(to top, #eee, #262626);
@@ -54,14 +63,6 @@ body{
 
 
 
-.color_src{
-  color: #D474BB;
-}
-
-.color_ref{
-  color: #FDDE6C;
-}
-
 
 h1{
   color: #000;
@@ -71,6 +72,19 @@ h1{
 hr{
   border-bottom-color: #333;
 }
+
+.page_title{
+  margin-top: 0;
+}
+
+.page_explain{
+  margin-left: 15px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border-left: 4px solid #bbb;
+}
+
+
 .poudre{
   position: fixed;
   width: 100%;

@@ -3,22 +3,28 @@
 <div class="container-fluid" id="entete" style="margin-top: 20px;">
     <div class="well">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Association des colonnes</i></h2>
             </div>
-            <div class="col-md-2 text-right">
+            <div class="col-md-4 text-right">
+                <div id="didacticiel">
+                    <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
+                    &nbsp;|&nbsp;
+                </div>
                 <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
             </div>
         </div>
-        <p>
-            Cette étape vous permet d'associer des colonnes de votre fichier source à des colonne du référentiel cible. Une bonne association améliorera considérablement les résultats de la jointure.<br>
-            Pour associer des colonnes, vous devez ajouter une nouvelle association (<button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button>) et glisser/déposer la ou les colonnes souhaitées dans la zone corespondante.
-            <br>
-            Les colonnes possédant une <span class="glyphicon glyphicon-star"></span> sont des colonnes où le type a été détecté lors de la normalisation.
-            <br>
-            <br>
-            Bien que cela soit déconseillé, vous pouvez choisir de passer cette étape.
-        </p>
+        <div class="row">
+            <div class="col-sm-12 page_explain">
+                Cette étape vous <strong>permet d'associer</strong> des colonnes de votre fichier <strong>source</strong> à des colonne du <strong>référentiel</strong> cible. Une bonne association améliorera considérablement les résultats de la jointure.<br>
+                Pour associer des colonnes, vous devez ajouter une nouvelle association (<button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button>) et glisser/déposer la ou les colonnes souhaitées dans la zone corespondante.
+                <br>
+                Les colonnes possédant une <span class="glyphicon glyphicon-star"></span> sont des colonnes où le type a été détecté lors de la normalisation.
+                <br>
+                <br>
+                Bien que cela soit déconseillé, vous pouvez choisir de passer cette étape.
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 text-center">
                 <button class="btn btn-success" id="bt_start">Commencer l'association des colonnes</button>
@@ -63,7 +69,7 @@
                         </button>
                     </div>
                     <div class="col-md-3 text-right">
-                         <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+                         <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
                         &nbsp;|&nbsp;
                         <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
                     </div>
@@ -335,6 +341,9 @@ function get_buttons_actions() {
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
         $("#work").fadeToggle();
+
+        // Association vide par défaut
+        $("#bt_add_bloc").click();
     });
 
     $("#bt_next").click(function(){

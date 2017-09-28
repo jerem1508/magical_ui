@@ -16,19 +16,24 @@
 -->
 	<div class="well">
 		<div class="row">
-			<div class="col-md-10">
-				<h2 style="margin-top: 0;"><span id="project_name"></span> : <i>Recherche des valeurs manquantes</i></h2>
+			<div class="col-sm-8">
+				<h2 class="page_title"><span id="project_name"></span> : <i>Recherche des valeurs manquantes</i></h2>
 			</div>
-			<div class="col-md-2 text-right">
+			<div class="col-sm-4 text-right">
+				<div id="didacticiel">
+					<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
+					&nbsp;|&nbsp;
+				</div>
 				<a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
 			</div>
 		</div>
-		
-		<p>
-			Dans de nombreux systèmes d'informations ou pour des données renseignées manuellement, des valeurs manquantes sont représentées par des chaines de caratère ('non-renseigné', 'NR', 'xxxxx', etc.). Cela nuit à l'analyse de données et rend la jointure moins performante.
-
-			Dans cette étape, la machine suggère des libéllés de valeurs manquantes potentielles présentes dans votre fichier. Vous pouvez corriger ces valeurs. Elles seront ensuite remplacées par l'absence de valeur.
-		</p>
+		<div class="row">
+			<div class="col-sm-12 page_explain">
+				Dans de nombreux systèmes d'informations ou pour des données renseignées manuellement, des valeurs manquantes sont représentées par des chaines de caratère ('non-renseigné', 'NR', 'xxxxx', etc.). <strong>Cela nuit à l'analyse de données</strong> et rend la jointure moins performante.
+				<br><br>
+				Dans cette étape, la machine suggère des libéllés de <strong>valeurs manquantes potentielles</strong> présentes dans votre fichier. Vous pouvez corriger ces valeurs. <strong>Elles seront ensuite remplacées par l'absence de valeur</strong>.
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<button class="btn btn-success" id="bt_infer_mvs">Lancer la recherche des valeurs manquantes sur l'échantillon</button>
@@ -39,6 +44,8 @@
 				// affichage de la div de "chargement" + trt des bt
 				$("#wait").css("display","inherit");
 				$("#bt_infer_mvs").prop("disabled", true);
+				$("#bt_infer_mvs").css("display", "none");
+				$("#didacticiel").css("visibility","visible");
 
 				// lancement de l'inference
 				treatment();
@@ -50,24 +57,7 @@
 			</div>
 		</div>
 		<div class="row" id="result">
-
-
-		    <div class="well">
-		        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
-		    </div>
-
-
-			<div class="col-xs-12 text-center">
-			<hr>
-			</div>
 			<div class="col-xs-12">
-			<!--
-				<div class="row">
-					<div class="col-xs-12 text-center" style="margin-bottom: 20px;">
-						<button class="btn btn-success2"><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Aperçu des données</button>
-					</div>
-				</div>
-			-->
 				<div class="row">
 					<div class="col-xs-12" id="columns">
 						<hr>

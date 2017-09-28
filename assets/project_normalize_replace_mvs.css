@@ -17,3 +17,8 @@
 #dl_file{
 	cursor: pointer;
 }
+
+#didacticiel{
+	visibility: hidden;
+	display: inline;
+}
