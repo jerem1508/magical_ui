@@ -794,9 +794,7 @@ if(isset($this->session->project_type)){
 			        clearInterval(handle);
 			    }
 			});// /ajax
-
-
-        });
+        }); // /dl_file.click()
 
 		$.ajax({
 			type: 'get',

@@ -17,7 +17,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 text-right">
-            <button class="btn btn-success" id="bt_next">Analyse des résultats >></button>
+            <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
         </div>
     </div>
 </div><!--/container-->
@@ -131,7 +131,7 @@ function get_learned_setting(project_id) {
 } // /get_column_matches()
 
 
-function get_tresh(project_id) {
+function get_thresh(project_id) {
     // Récupere le contenu d'un fichier runInfo via API
     console.log('get_learned_settings()');
 
@@ -161,8 +161,8 @@ function get_tresh(project_id) {
                 console.log("success - download_config");
                 console.dir(result);
 
-                ret = result.result.tresh;
-                ret = 14;
+                ret = result.result.best_thresh;
+                //ret = 14;
             }
         },
         error: function (result, status, error){
@@ -171,7 +171,7 @@ function get_tresh(project_id) {
         }
     });// /ajax - Download config
     return ret;
-} // /get_runinfo()
+} // /get_thresh()
 
 
 function get_data(from, size) {
@@ -421,7 +421,7 @@ function treatment(project_id_link, learned_setting_json) {
                                 // Permettre le téléchargement du fichier
 
                                 // Récupération du seuil
-                                tresh = get_tresh(project_id_link);
+                                tresh = get_thresh(project_id_link);
 
                                 // Création de l'index ElasticSearch + Affichage
                                 create_es_index_api();
@@ -459,12 +459,98 @@ function valid_step() {
 }// / valid_step()
 
 
+function get_file_name(project_id) {
+    console.log('get_file_name()');
+    var ret = "";
+
+    var tparams = {
+        "module-name": "es_linker"
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/last_written/link/' + project_id,
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+            if(result.error){
+                console.log("API error - last_written");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - last_written");
+                console.dir(result);
+
+                ret = result.file_name;
+            }// / lastwritten - success
+        },
+        error: function (result, status, error){
+            console.log("error");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - last_written
+    console.log('retour get_file_name()');
+    return ret;
+}// /get_file_name()
+
+function add_buttons() {
+    // Ajout des actions sur les boutons
+
+    $("#dl_file").click(function(){
+        tparams = {
+            "data_params": {
+                "module_name": "es_linker",
+                "file_name": file_name
+            }
+        }
+console.log('dl_file.click()');
+console.log(project_id_link);
+console.log(tparams);
+
+        $.ajax({
+            type: 'post',
+            url: '<?php echo BASE_API_URL;?>' + '/api/download/link/' + project_id_link,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(tparams),
+            success: function (result_dl) {
+                if(result_dl.error){
+                    console.log("API error - dl");
+                    console.dir(result_dl);
+                }
+                else{
+                    console.log("success - dl");
+                    console.dir(result_dl);
+
+                    // DL du fichier
+                    var blob=new Blob([result_dl]);
+                    var link=document.createElement('a');
+                    link.href=window.URL.createObjectURL(blob);
+                    link.download=file_name;
+                    link.click();
+                }
+            },
+            error: function (result_dl, status, error){
+                console.log("error");
+                console.log(result_dl);
+                err = true;
+                clearInterval(handle);
+            }
+        });// /ajax
+    }); // /dl_file.click()
+}// /add_buttons()
+
+
 $(function(){// ready
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
+    // Récupération du nom de fichier à DL
+    file_name = get_file_name(project_id_link);
+
     // Récupération des metadata du projet de link en cours
-    console.log('Projet de LINK');
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
@@ -475,11 +561,12 @@ $(function(){// ready
 
     // Récupération du paramétrage
     var learned_setting_json = get_learned_setting(project_id_link);
-
     if(learned_setting_json){
         treatment(project_id_link, learned_setting_json);
     }
 
+    // Actions des boutons
+    add_buttons();
 
 });//ready
 </script>
