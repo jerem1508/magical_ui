@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int(7) UNSIGNED NOT NULL,
   `comment` text NOT NULL,
-  `user_id` int(7) UNSIGNED NOT NULL,
+  `user_id` int(7) UNSIGNED DEFAULT NULL,
   `created_tmp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
