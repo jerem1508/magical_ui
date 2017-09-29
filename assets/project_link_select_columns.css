@@ -93,3 +93,7 @@
 #bt_info_ref, #bt_info_ref{
 	cursor: pointer;
 }
+
+#bt_next{
+	margin-bottom: 30px;
+}
