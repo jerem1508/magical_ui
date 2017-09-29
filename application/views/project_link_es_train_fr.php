@@ -49,7 +49,7 @@
                     <div class="col-xs-12">
                         <h2>
                             <span class="step_numbers">1</span>
-                            &nbsp;Filtres
+                            &nbsp;Filtres sur le référentiel
                         </h2>
                     </div>
                 </div>
@@ -84,13 +84,13 @@
                         </h2>
                         <div class="row">
                             <div class="col-xs-offset-1 col-xs-5 well">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. 
+                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
                                 <div>
                                     Taux de précision souhaité : 
                                     <select>
-                                        <option>Normal</option>
-                                        <option>Réduite</option>
-                                        <option>Maximum</option>
+                                        <option>Tout apparier</option>
+                                        <option>Précision élevée (plus de résultats)</option>
+                                        <option>Précision 100% (moins de résultats)</option>
                                     </select>
                                 </div>
                             </div>
@@ -134,13 +134,13 @@
                     <div class="row">
                         <div class="col-xs-2">
                             <div class="stat">
-                                <span class="title">Précision</span>
+                                <span class="title">Précision estimée</span>
                                 <span class="number" id="stat_estimated_precision">0 %</span>
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="stat">
-                                <span class="title">Couverture</span>
+                                <span class="title">Couverture estimée</span>
                                 <span class="number" id="stat_estimated_recall">0 %</span>
                             </div>
                         </div>
