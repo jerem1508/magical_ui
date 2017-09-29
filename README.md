@@ -6,6 +6,7 @@ sudo apt-get install apache2
 ## PHP
 ```
 sudo apt-get install php
+sudo apt-get install libapache2-mod-php7.0
 ```
 ### CUrl module
 ```

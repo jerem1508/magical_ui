@@ -476,25 +476,25 @@ function get_file_name(project_id) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - last_written");
+                console.log("API error - get_file_name");
                 console.log(result.error);
             }
             else{
-                console.log("success - last_written");
+                console.log("success - get_file_name");
                 console.dir(result);
 
                 ret = result.file_name;
             }// / lastwritten - success
         },
         error: function (result, status, error){
-            console.log("error");
+            console.log("error - get_file_name");
             console.log(result);
             err = true;
         }
     });// /ajax - last_written
-    console.log('retour get_file_name()');
     return ret;
 }// /get_file_name()
+
 
 function add_buttons() {
     // Ajout des actions sur les boutons
@@ -506,10 +506,6 @@ function add_buttons() {
                 "file_name": file_name
             }
         }
-console.log('dl_file.click()');
-console.log(project_id_link);
-console.log(tparams);
-
         $.ajax({
             type: 'post',
             url: '<?php echo BASE_API_URL;?>' + '/api/download/link/' + project_id_link,
@@ -543,6 +539,46 @@ console.log(tparams);
 }// /add_buttons()
 
 
+function set_pagination_html(nrows, pas) {
+    // MAJ de la pagination
+    console.log('nrows:');
+    console.log(nrows);
+
+    var niterations = Math.ceil(nrows / pas);
+
+    if(niterations > 6){
+        // On prend les 3 premiers et les 3 derniers
+        // En fonction de l'indice courant
+
+
+    }
+    else {
+        
+    }
+
+// <nav aria-label="Page navigation">
+//   <ul class="pagination">
+//     <li>
+//       <a href="#" aria-label="Previous">
+//         <span aria-hidden="true">&laquo;</span>
+//       </a>
+//     </li>
+//     <li><a href="#">1</a></li>
+//     <li><a href="#">2</a></li>
+//     <li><a href="#">3</a></li>
+//     <li><a href="#">4</a></li>
+//     <li><a href="#">5</a></li>
+//     <li>
+//       <a href="#" aria-label="Next">
+//         <span aria-hidden="true">&raquo;</span>
+//       </a>
+//     </li>
+//   </ul>
+// </nav>
+
+
+}
+
 $(function(){// ready
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
@@ -567,6 +603,21 @@ $(function(){// ready
 
     // Actions des boutons
     add_buttons();
+
+    // Récupération du nombre total de lignes -------------------------
+        // Id du fichier source
+        project_id_src = metadata_link['files']['source']['project_id'];
+
+        // Récupérartion des métadata du fichier source
+        console.log('Projet de normalisation SOURCE');
+        metadata_src = get_metadata('normalize', project_id_src);
+
+        src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;
+    // ----------------------------------------------------------------
+
+    // Pagination
+    var pas = 50;
+    set_pagination_html(src_nrows, pas);
 
 });//ready
 </script>

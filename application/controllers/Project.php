@@ -187,7 +187,7 @@ class Project extends CI_Controller {
 		if($steps['link_results_analyzer']['completed']){
 			return 'link_results_analyzer';
 		}
-		elseif($steps['es_linker']['completed']){
+		if($steps['es_linker']['completed']){
 			return 'es_linker';
 		}
 		elseif($steps['upload_es_train']['completed']){
@@ -225,11 +225,13 @@ class Project extends CI_Controller {
 				break;
 
 			case 'es_linker':
-				$this->link_results_analyzer($project_id);
+				//$this->link_results_analyzer($project_id);
+				$this->es_linker($project_id);
 				break;
 
 			case 'link_results_analyzer':
-				$this->link_results_analyzer($project_id);
+				//$this->link_results_analyzer($project_id);
+				$this->es_linker($project_id);
 				break;
 			
 			default:

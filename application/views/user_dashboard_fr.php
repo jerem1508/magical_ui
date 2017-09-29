@@ -230,6 +230,7 @@ function get_lien_supp_html($project_type, $project_id)
 					<tbody>
 						<?php
 						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
+						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
 						$nb_steps = count($tab_steps);
 						$ratio = 100/$nb_steps;
 						foreach ($linked_projects as $project) {
