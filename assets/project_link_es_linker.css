@@ -4,3 +4,6 @@
 .pagination{
 	cursor: pointer;
 }
+#chk_{
+	border-radius: 3px;
+}
