@@ -115,7 +115,7 @@
                                     <button class="btn btn-default btn-xl btn_2_3 forgot_color" 
                                             onclick="socket_answer('n');" 
                                             id="bt_no">
-                                        <h2>Oublier cette ligne (source)</h2>
+                                        <h2>Oublier</h2>
                                     </button>
                                     
                                 </div>
