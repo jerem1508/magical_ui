@@ -1,25 +1,50 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" id="entete" style="margin-top: 20px;">
-    <div class="well">
+<div class="container-fluid" id="entete" style="margin: 10px;">
+    <div class="well" style="margin: 0;">
         <div class="row">
-            <div class="col-md-12">
-                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Résultats</i></h2>
+            <div class="col-md-8">
+                <h2>
+                    <span class="step_numbers">1</span>
+                    &nbsp;Présentation du fichier
+                </h2>
             </div>
+            <div class="col-md-4 text-right" id="pagination"></div>
         </div>
-        <p>
-
-        </p>
         <div id="result"></div>
     </div><!-- /well-->
 </div><!--/container-->
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 text-right">
-            <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+<div class="container-fluid" style="margin: 10px;">
+    <div class="well" style="margin: 0;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    <span class="step_numbers">2</span>
+                    &nbsp;Statistiques
+                </h2>
+            </div>
         </div>
-    </div>
+        <div class="row" id="stats"></div>
+    </div><!-- /well-->
+</div><!--/container-->
+
+<div class="container-fluid" style="margin: 10px;">
+    <div class="well" style="margin: 0;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    <span class="step_numbers">3</span>
+                    &nbsp;Télechargement
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+            </div>
+        </div>
+    </div><!-- /well-->
 </div><!--/container-->
 
 
@@ -211,12 +236,12 @@ function get_data(from, size) {
 
 
 function show_data(data, start) {
-    var html = '<div class="table-responsive">';
-        html += '<table class="table table-bordered table-condensed">';
+    //var html = '<div class="table-responsive">';
+    var html = '<table class="table table-bordered table-condensed">';
 
     // Entete
     html += '<tr >';
-    html += '    <th>SOURCE</th>';
+    html += '    <td colspan="2"><i class="fa fa-table" aria-hidden="true"></i> (<i>Source</i>)</td>';
 
     for (var i = 0; i < column_matches.length; i++) {
         var source_list = column_matches[i].source;
@@ -227,7 +252,7 @@ function show_data(data, start) {
     html += '    <th rowspan="2">Action</th>';
     html += '</tr>';
     html += '<tr>';
-    html += '    <th>REF</th>';
+    html += '    <td colspan="2"><i class="fa fa-database" aria-hidden="true"></i> (<i>Référentiel</i>)</td>';
     
     for (var i = 0; i < column_matches.length; i++) {
         var ref_list = column_matches[i].ref;
@@ -237,12 +262,14 @@ function show_data(data, start) {
 
 
     for (var i = 0; i < data.length; i++) {
-        html += '<tr>';
+        html += '<tr class="line">';
         var no_line = start + i + 1;
-        html += '    <td rowspan="2" class="text-center no_line"><h3>' + no_line + '</h3></td>';
+        html += '    <td rowspan="2" class="text-center no_line"><h4>' + no_line + '</h4></td>';
 
         // Récupération de l'indice de confiance
         var confidence = Math.round(data[i].hits.hits[0]['_source']['__CONFIDENCE']);
+        html += '    <td><i class="fa fa-table" aria-hidden="true"></i></td>';
+
 
         // Parcours des termes SOURCE ---------------------------------------------
         for (var j = 0; j < column_matches.length; j++) {
@@ -259,20 +286,21 @@ function show_data(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        html += '    <td rowspan="2" class="text-center"><h3>' + confidence + '<h3></td>';
+        html += '    <td rowspan="2" class="text-center"><h4>' + confidence + '<h4></td>';
 
         // Affichage du bouton
         if(confidence < tresh){
-            html += '    <td rowspan="2"><h3><input type="checkbox" id="chk_' + no_line + '"></h3></td>';            
+            html += '    <td rowspan="2"><h4><input type="checkbox" id="chk_' + no_line + '"></h4></td>';            
         }
         else{
-            html += '    <td rowspan="2"><h3><input type="checkbox" checked id="chk_' + no_line + '"></h3></td>';
+            html += '    <td rowspan="2"><h4><input type="checkbox" checked id="chk_' + no_line + '"></h4></td>';
         }
 
         html += '</tr>';
         html += '<tr>';
 
         // Parcours des termes du REF --------------------------------------------
+        html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
         for (var j = 0; j < column_matches.length; j++) {
             var ch = column_matches[j].ref.toString();
             var tab_termes = ch.split(",");
@@ -292,9 +320,36 @@ function show_data(data, start) {
     }// /for - parcours data
 
     html += '</table>';
-    html += '</div>';
+    //html += '</div>';
 
+    // Affichage des données
     $("#result").html(html);
+
+    // MAJ des boutons on/off
+    for (var i = 0; i < data.length; i++) {
+        var no_line = start + i + 1;
+        $('#chk_' + no_line).bootstrapToggle({
+          on: 'Vrai',
+          off: 'Faux',
+          onstyle: 'success3',
+          offstyle: 'danger',
+          size: 'small'
+        });
+    }// /for
+
+    // Alterance des couleurs
+    var cpt = 0;
+    $("tr").each(function(){
+        if(Math.floor(cpt/2)%2){
+            $(this).addClass("active");
+            $(this).css("background-color","#777");
+        }
+        cpt ++;
+    });
+
+    // Séparation visuelle des lignes
+    $(".line").css("border-top","2px solid #ccc");
+
 }// /show_data()
 
 
@@ -334,31 +389,9 @@ function create_es_index_api() {
 
                                 // Récupération des données paginées + affichage
                                 var start = 0;
-                                var data = get_data(start, 50);
+                                var data = get_data(start, 20);
+
                                 show_data(data, start);
-
-                                // MAJ des boutons on/off
-                                for (var i = 0; i < data.length; i++) {
-                                    var no_line = start + i + 1;
-                                    $('#chk_' + no_line).bootstrapToggle({
-                                      on: 'Vrai',
-                                      off: 'Faux',
-                                      onstyle: 'success3',
-                                      offstyle: 'danger',
-                                      size: 'small'
-                                    });
-                                }// /for
-
-                                // Alterance des couleurs
-                                var cpt = 0;
-                                $("tr").each(function(){
-                                    if(Math.floor(cpt/2)%2){
-                                        $(this).addClass("active");
-                                        $(this).css("background-color","#777");
-                                    }
-                                    cpt ++;
-                                });
-
                             }
                             else{
                                 console.log("success - job en cours");
@@ -539,47 +572,87 @@ function add_buttons() {
 }// /add_buttons()
 
 
-function set_pagination_html(nrows, pas) {
+function set_pagination_html(nrows, pas, current_page) {
     // MAJ de la pagination
-    console.log('nrows:');
-    console.log(nrows);
+    npages = Math.ceil(nrows / pas);
 
-    var niterations = Math.ceil(nrows / pas);
+    var html = '';
+    html += '<nav aria-label="Page navigation">';
+    html += '  <ul class="pagination">';
 
-    if(niterations > 6){
-        // On prend les 3 premiers et les 3 derniers
-        // En fonction de l'indice courant
+    // Bouton précédent ------------------
+    if(current_page == 1){
+        // On desable le bouton précédent
+        html += '    <li class="disabled">';
+        html += '      <a href="#">';
+        html += '        <span>&laquo;</span>';
+        html += '      </a>';
+        html += '    </li>';
+    }
+    else{
+        var previous = current_page - 1;
+        html += '    <li>';
+        html += '      <a onclick="load_data(' + nrows + ',' + pas + ',' + previous + ');">';
+        html += '        <span>&laquo;</span>';
+        html += '      </a>';
+        html += '    </li>';
+    }
 
+    if(current_page > 1 && current_page < npages){
+        // Milieu
 
     }
-    else {
-        
+
+    // Bouton suivant -------------------------
+    if(current_page == npages){
+        // On desable le bouton suivant
+        html += '    <li class="disabled">';
+        html += '      <a href="#">';
+        html += '        <span>&raquo;</span>';
+        html += '      </a>';
+        html += '    </li>';
     }
+    else{
+        var next = current_page + 1;
+        html += '    <li>';
+        html += '      <a onclick="load_data(' + nrows + ',' + pas + ',' + next + ');">';
+        html += '        <span>&raquo;</span>';
+        html += '      </a>';
+        html += '    </li>';
+    }
+    
+    html += '  </ul>';
+    html += '</nav>';
+    
+    var start = (current_page - 1) * pas + 1;
+    var end = start + pas -1;
+    html += '<div>De ' + start + ' à ' + end + ' sur ' + nrows + ' lignes</div>';
 
-// <nav aria-label="Page navigation">
-//   <ul class="pagination">
-//     <li>
-//       <a href="#" aria-label="Previous">
-//         <span aria-hidden="true">&laquo;</span>
-//       </a>
-//     </li>
-//     <li><a href="#">1</a></li>
-//     <li><a href="#">2</a></li>
-//     <li><a href="#">3</a></li>
-//     <li><a href="#">4</a></li>
-//     <li><a href="#">5</a></li>
-//     <li>
-//       <a href="#" aria-label="Next">
-//         <span aria-hidden="true">&raquo;</span>
-//       </a>
-//     </li>
-//   </ul>
-// </nav>
+    $("#pagination").html(html);
+}// /set_pagination_html()
 
 
-}
+function load_data(nrows, pas, current_page) {
+    console.log('load_data()');
+    console.log('nrows:' + nrows);
+    console.log('pas:' + pas);
+    console.log('current_page:' + current_page);
+
+    var start = (current_page - 1) * pas;
+    console.log('start:' + start);
+
+    var data = get_data(start, pas);
+
+    show_data(data, start);
+
+    // MAJ de la pagination
+    set_pagination_html(nrows, pas, current_page);
+}// /load_data()
+
 
 $(function(){// ready
+
+    npages = 0;
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
@@ -616,8 +689,8 @@ $(function(){// ready
     // ----------------------------------------------------------------
 
     // Pagination
-    var pas = 50;
-    set_pagination_html(src_nrows, pas);
+    var pas = 20;
+    set_pagination_html(src_nrows, pas, 1);
 
 });//ready
 </script>
