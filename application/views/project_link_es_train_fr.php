@@ -450,12 +450,14 @@ function create_es_labeller_api() {
 
 
 function disabeled_buttons() {
-    $("#bt_yes").attr("disabeled","disabeled");
-    $("#bt_no").attr("disabeled","disabeled");
+console.log('Boutons desactivés');
+    $("#bt_yes").attr("disabled","disabled");
+    $("#bt_no").attr("disabled","disabled");
 }// /disabeled_buttons()
 
 
 function enabeled_buttons() {
+console.log('Boutons réactivés');    
     $("#bt_yes").removeAttr('disabled');
     $("#bt_no").removeAttr('disabled');
 }// /enabeled_buttons()
@@ -715,10 +717,6 @@ function add_buttons() {
         event.preventDefault();
         add_filter();        
     });
-    
-    // $("#bt_add_filter").click(function(){
-    //     add_filter();
-    // });
 
     $("#bt_yes").click(function(){
         stat_yes += 1;
