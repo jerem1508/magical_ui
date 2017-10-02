@@ -113,6 +113,8 @@
                                         <h2>NON</h2>
                                     </button>
                                     <button class="btn btn-default btn-xl btn_2_3 forgot_color" 
+                                            data-toggle="tooltip"
+                                            title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
                                             onclick="socket_answer('n');" 
                                             id="bt_no">
                                         <h2>Oublier</h2>
@@ -133,21 +135,27 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-2">
-                            <div class="stat">
+                            <div class="stat" 
+                                data-toggle="tooltip"
+                                title="Informations sur la précision">
                                 <span class="title">Précision estimée</span>
                                 <span class="number" id="stat_estimated_precision">0 %</span>
                             </div>
                         </div>
                         <div class="col-xs-2">
-                            <div class="stat">
+                            <div class="stat" 
+                                data-toggle="tooltip"
+                                title="Informations sur la couverture">
                                 <span class="title">Couverture estimée</span>
                                 <span class="number" id="stat_estimated_recall">0 %</span>
                             </div>
                         </div>
                         <div class="col-xs-2">
-                            <div class="stat">
+                            <div class="stat" 
+                                data-toggle="tooltip"
+                                title="L'avancement correspond au pourcentage du fichier déjà traité par la labellisation utilisateur.">
                                 <span class="title">Avancement</span>
-                                <span class="number" id="stat_real_ratio">0</span>
+                                <span class="number" id="stat_real_ratio">0 %</span>
                             </div>
                         </div>
 
@@ -450,14 +458,12 @@ function create_es_labeller_api() {
 
 
 function disabeled_buttons() {
-console.log('Boutons desactivés');
     $("#bt_yes").attr("disabled","disabled");
     $("#bt_no").attr("disabled","disabled");
 }// /disabeled_buttons()
 
 
 function enabeled_buttons() {
-console.log('Boutons réactivés');    
     $("#bt_yes").removeAttr('disabled');
     $("#bt_no").removeAttr('disabled');
 }// /enabeled_buttons()
@@ -738,11 +744,17 @@ function add_buttons() {
     });
 } // / add_buttons()
 
+
 function update_stat() {
     // Compteurs
     $("#stat_yes").html(stat_yes);
     $("#stat_no").html(stat_no);
     $("#stat_all").html(stat_all);
+
+    // Avancement
+    var ret = Math.round(stat_all / src_nrows);
+        ret += " %";
+    $("#stat_real_ratio").html(ret);
 
     // Historiques
     // Yes
@@ -760,7 +772,6 @@ function update_stat() {
             $("#no_" + cpt).html('&nbsp;');
         }
         else{
-            html = '';
             $("#no_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');   
             $("#yes_" + cpt).html('&nbsp;');
         }
@@ -768,6 +779,7 @@ function update_stat() {
         cpt ++;
     }
 }// /update_stat()
+
 
 function valid_filters() {
     // Traitement des termes obligatoires
@@ -858,6 +870,9 @@ $(function(){// ready
     //Ajoute les colonnes du référentiel à la modal d'ajout de filtres
     add_columns_filter(columns_ref);
     
+    // Récupération du nombre total de lignes
+    src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;    
+
     // Récupération des matches
     column_matches = get_column_matches();
 
@@ -871,5 +886,7 @@ $(function(){// ready
     // Ecoute socket
     socket_on_message();
 
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip(); 
 });//ready
 </script>
