@@ -244,7 +244,7 @@
                 <h4 class="modal-title" id="modal_filter_title">Ajout de filtres</h4>
             </div>
             <div class="modal-body">
-            <form>
+            <form id="form_words">
                 <div class="form-group">
                     <label for="columns_filter">Colonne sur laquelle appliquer le filtre : </label>
                     <select class="form-control" id="columns_filter"></select>
@@ -257,7 +257,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-xs btn-warning" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-xs btn-success2" id="bt_add_filter">Ajouter la valeur</button>
+                <button type="submit" class="btn btn-xs btn-success2" id="bt_add_filter">Ajouter la valeur</button>
             </div>
         </div>
     </div>
@@ -650,6 +650,34 @@ function show_modal_filter() {
 }// / show_modal_filter()
 
 
+function add_filter() {
+    // Récupération de la colonne sélectionnée
+    var column = $('#columns_filter option:selected').val();
+
+    // Récupération du filtre
+    var filter = $("#text_filter").val();
+
+    // Ajout dans le bon tagsinput en fonction du bt cliqué initial (plus/minus)
+    if(modal_filter_sens == "oblig"){
+        sens = "plus";
+    }
+    else{
+        sens = "minus";
+    }
+
+    var input_text = column + ":" + filter;
+
+    // Ajout au tagsInput
+    $("#filter_" + sens).tagsinput('add', input_text);
+
+    // Fermeture de la modale
+    $('#modal_filter').modal('hide');
+
+    // Validation des filtres
+    valid_filters();
+}// /add_filter()
+
+
 function add_buttons() {
     // Ajout des boutons
     
@@ -673,32 +701,24 @@ function add_buttons() {
         show_modal_filter();
     });
 
-    $("#bt_add_filter").click(function(){
-        // Récupération de la colonne sélectionnée
-        var column = $('#columns_filter option:selected').val();
+    $("#bt_add_filter")
+        .keypress(function(event) {
+            if ( event.which == 13 ) {
+                add_filter();
+            }
+        })
+        .click(function(){
+            add_filter();
+        });
 
-        // Récupération du filtre
-        var filter = $("#text_filter").val();
-
-        // Ajout dans le bon tagsinput en fonction du bt cliqué initial (plus/minus)
-        if(modal_filter_sens == "oblig"){
-            sens = "plus";
-        }
-        else{
-            sens = "minus";
-        }
-
-        var input_text = column + ":" + filter;
-
-        // Ajout au tagsInput
-        $("#filter_" + sens).tagsinput('add', input_text);
-
-        // Fermeture de la modale
-        $('#modal_filter').modal('hide');
-
-        // Validation des filtres
-        valid_filters();
+    $("#form_words").submit(function(event) {
+        event.preventDefault();
+        add_filter();        
     });
+    
+    // $("#bt_add_filter").click(function(){
+    //     add_filter();
+    // });
 
     $("#bt_yes").click(function(){
         stat_yes += 1;
