@@ -76,285 +76,354 @@ if(isset($this->session->project_type)){
 
 
 <script type="text/javascript">
+	function get_metadata(project_type, project_id) {
+	    // Récupere les métadata via API
 
-		// Init - Ready
-		$(function() {
-		
+	    var metadata = "";
+	    var ret = false;
 
-			err = false;
-
-			function select_all(){
-				$( ".columns" ).each(function( index ) {
-				  // console.log( index + ": " + $( this ).val() );
-				  $(this).prop('checked', true);
-				});
-			}
-
-			function unselect_all(){
-				$( ".columns" ).each(function( index ) {
-				  // console.log( index + ": " + $( this ).val() );
-				  $(this).prop('checked', false);
-				});
-			}
-
-			function select_checked_columns(){
-				var tab_columns = new Array();
-				$( ".columns" ).each(function( index ) {
-					if( $(this).prop('checked') == true){
-						tab_columns.push($(this).val());
-						console.log( index + ": " + $( this ).val() );
-					}
-				});
-
-				//var ch = tab_columns.join(",");
-
-				return tab_columns;
-			}
-
-
-			function chargement(err) {
-				console.log("chargement");
-				/*
-				Recupération des colonnes
-				*/
-				$.ajax({
-					type: 'get',
-					url: '<?php echo BASE_API_URL;?>' + '/api/metadata/normalize/<?php echo $_SESSION['project_id'];?>',
-					success: function (result) {
-
-						if(result.error){
-							console.log("API error");
-							console.log(result.error);
-						}
-						else{
-	                        console.log("success");
-	                        console.dir(result.metadata.column_tracker.original);
-
-							metadata = result.metadata;
-
-	                        $("#project_name").html(metadata.display_name);
-
-	                        var bt = '<button class="btn btn-xs btn-success2 bt_select_all">&nbsp;Tout sélectionner</button>&nbsp;<button class="btn btn-xs btn-warning bt_unselect_all">&nbsp;Tout désélectionner</button>';
-	                        var ch = bt;
-
-	                        columns = metadata.column_tracker.original;
-							$.each(columns, function( i, name) {
-							  ch = ch + "<div class='checkbox'><label><input type='checkbox' class='columns' checked value='" + name + "'>&nbsp;" + name + "</label></div>\n";
-							});
-
-							ch = ch + bt;
-
-							$("#result").html(ch);
-
-							$(".bt_select_all").click(function(){
-								select_all();
-							});
-							$(".bt_unselect_all").click(function(){
-								unselect_all();
-							});
-
-
-	                    }
-	                },
-	                error: function (result, status, error){
-	                    console.log(result);
-	                    console.log(status);
-	                    console.log(error);
-	                    err = true;
-	                }
-	            });// /ajax metadata
-
-
-
-				generate_sample();
-
-
-
-	        } // /Chargement
-
-
-	        function generate_sample() {
-				console.log("Sample");
-	            var tparams = {
-	                "module_name": "INIT"
+	    $.ajax({
+	        type: 'get',
+	        async: false,
+	        url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,
+	        success: function (result) {
+	            if(result.error){
+	                console.log("API error");console.log(result.error);
 	            }
-				$.ajax({
-					type: 'post',
-					dataType: "json",
-					contentType: "application/json; charset=utf-8",
-					url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/<?php echo $_SESSION['project_id'];?>',
-					data: JSON.stringify(tparams),
-					success: function (result) {
-
-						if(result.error){
-							console.log("API error");
-							console.log(result.error);
-						}
-						else{
-	                        console.log("success");
-	                        console.dir(result);
-							
-				            tparams = {
-				            	"data_params": {
-				                	"module_name": result.module_name,
-				                	"file_name": result.file_name
-				                },
-				                "module_params":{
-				                	"sampler_module_name": "standard",
-					                "sample_params": {
-					                	"num_rows": 20
-					                }
-				                }
-				            }
-							console.log("appel sample");
-							
-							$.ajax({
-								type: 'post',
-								dataType: "json",
-								contentType: "application/json; charset=utf-8",
-								url: '<?php echo BASE_API_URL;?>/api/sample/normalize/<?php echo $_SESSION['project_id'];?>',
-								data: JSON.stringify(tparams),
-								success: function (result) {
-
-									if(result.error){
-										console.log("API error");
-										console.dir(result.error);
-									}
-									else{
-				                        console.log("success sample");
-				                        console.dir(result.sample);
-
-				                        // Remplissage de la modale
-				                        var ch = '<table class="table table-responsive table-condensed table-striped" id="sample_table">';
-
-				                        ch += "<thead><tr>";
-										$.each(columns, function( j, name) {
-											  ch += '<th>' + name + "</th>";
-											});
-				                        ch += "</tr></thead><tbody>";
-				                        console.dir(columns);
-										$.each(result.sample, function( i, obj) {
-											ch += "<tr>";
-											$.each(columns, function( j, name) {
-												ch += "<td>" + obj[name] + "</td>";
-											});
-											ch += "</tr>";
-										});
-										ch += "</tbody></table>";
-
-					                    $("#data_all").html(ch);
-					                	
-					                    $("#sample_table").DataTable({
-														        "language": {
-														           "paginate": {
-																        "first":      "Premier",
-																        "last":       "Dernier",
-																        "next":       "Suivant",
-																        "previous":   "Précédent"
-														    		},
-														    		"search":         "Rechercher:",
-														    		"lengthMenu":     "Voir _MENU_ enregistrements par page"
-														        },
-														        "lengthMenu": [5,20,"ALL"],
-														        "responsive": true
-														    });
-										
-
-				                    }
-				                },
-				                error: function (result, status, error){
-				                    console.log("error");
-				                    console.log(result);
-				                    err = true;
-				                }
-				            });// /ajax
-	                    }
-	                },
-	                error: function (result, status, error){
-	                    console.log("error");
-	                    console.log(result);
-	                    err = true;
-	                }
-	            });// /ajax
-	        }// / generate_sample()
-
-
-	        function treatment(project_type) {
-	            console.log("treatment");
-
-	            // Appels API ----------------------
-	            chargement(err);
-	            // /Appels API ----------------------
-			}
-
-
-
-
-
-
-
-
-	        function valid(){
-	            // Appel de l'étape suivante
-	            window.location.href = "<?php echo base_url('index.php/Project/replace_mvs/'.$_SESSION['project_id']);?>";
+	            else{
+	                console.log("success - metadata");console.dir(result);
+	                ret = result.metadata;
+	            }
+	        },
+	        error: function (result, status, error){
+	            console.log(result);
+	            console.log(status);
+	            console.log(error);
 	        }
+	    });// /ajax metadata
+
+	    return ret;
+	}// / get_metadata
 
 
-			$("#bt_next").click(function(){
-				var columns = select_checked_columns();
+	function last_written() {
+        var tparams = {
+            "before_module": "replace_mvs"
+        }
 
-			    var tparams = {
-			        "columns": columns
-			    }
+		$.ajax({
+			type: 'post',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/' + project_id,
+			data: JSON.stringify(tparams),
+			success: function (result) {
 
-				console.log(JSON.stringify(tparams));
+				if(result.error){
+					console.log("API error - last_written");
+					console.log(result.error);
+				}
+				else{
+                    console.log("success - last_written");
+                    console.dir(result);
 
-				$.ajax({
-					type: 'post',
-					url: '<?php echo BASE_API_URL;?>' + '/api/normalize/select_columns/<?php echo $_SESSION['project_id'];?>',
-					data: JSON.stringify(tparams),
-					contentType: "application/json; charset=utf-8",
-					traditional: true,
-					async: false,
-					success: function (result) {
-						console.dir(result);
-
-						if(result.error){
-							console.log("API error");
-							
-						}
-						else{
-			                console.log("success");
-
-			                valid();
-			            }
-			        },
-			        error: function (result, status, error){
-			            console.log(result);
-			            console.log(status);
-			            console.log(error);
-			            err = true;
-			        }
-			    });// /ajax
-			});
+                    module_name = result.module_name;
+                    file_name = result.file_name;
+                }
+            },
+            error: function (result, status, error){
+                console.log("error");
+                console.log(result);
+                err = true;
+            }
+        });// /ajax - last_written
+	}// /last_written()
 
 
-			$("#bt_generate_sample").click(function(){
-				$("#data_all").html("");
-				generate_sample();
-			});
+	function skip() {
+		// Test du filename, on ne doit pas ecrire sur le MINI
+		var file_name_temp = file_name;
+		if(file_name.substr(0,6) === 'MINI__' ){
+			file_name_temp = file_name.substr(6);
+		}
+
+		// Paramètres API
+		tparams = {
+			"data_params": {
+		    	"module_name": "add_selected_columns",
+		    	"file_name": file_name_temp
+		    },
+		    "module_params": {
+		    	"skip_value": true
+		    }
+		}
+		$.ajax({
+			type: 'post',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			url: '<?php echo BASE_API_URL;?>' + '/api/set_skip/normalize/' + project_id,
+			data: JSON.stringify(tparams),
+			success: function (result) {
+
+				if(result.error){
+					console.log("API error - set_skip");
+					console.dir(result.error);
+				}
+				else{
+				    console.log("success - set_skip");
+				    console.dir(result);
+
+				    // Chargement de la page suivante (rappel du controller)
+				    location.reload();
+				   
+				}
+		    },
+		    error: function (result, status, error){
+		        console.log("error - set_skip");
+		        console.log(result);
+		        err = true;
+		    }
+		});// /ajax - set_skip
+	}// /skip()
 
 
-			treatment();
+	function select_all(){
+		$( ".columns" ).each(function( index ) {
+		  // console.log( index + ": " + $( this ).val() );
+		  $(this).prop('checked', true);
+		});
+	}// /select_all()
 
+
+	function unselect_all(){
+		$( ".columns" ).each(function( index ) {
+		  // console.log( index + ": " + $( this ).val() );
+		  $(this).prop('checked', false);
+		});
+	}// /unselect_all()
+
+
+	function select_checked_columns(){
+		var tab_columns = new Array();
+		$( ".columns" ).each(function( index ) {
+			if( $(this).prop('checked') == true){
+				tab_columns.push($(this).val());
+				console.log( index + ": " + $( this ).val() );
+			}
 		});
 
-	</script>
+		//var ch = tab_columns.join(",");
+
+		return tab_columns;
+	}// /select_checked_columns()
 
 
+	function treatment() {
+		console.log("treatment");
+		
+		//Recupération des colonnes
+        columns = metadata.column_tracker.original;
+
+        var bt = '<button class="btn btn-xs btn-success2 bt_select_all">&nbsp;Tout sélectionner</button>&nbsp;<button class="btn btn-xs btn-warning bt_unselect_all">&nbsp;Tout désélectionner</button>';
+        var ch = bt;
+
+		$.each(columns, function( i, name) {
+		  ch = ch + "<div class='checkbox'><label><input type='checkbox' class='columns' checked value='" + name + "'>&nbsp;" + name + "</label></div>\n";
+		});
+
+		ch = ch + bt;
+
+		$("#result").html(ch);
+	} // /treatment
 
 
+	function generate_sample() {
+		console.log("Sample");
+	    var tparams = {
+	        "module_name": "INIT"
+	    }
+		$.ajax({
+			type: 'post',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			url: '<?php echo BASE_API_URL;?>' + '/api/last_written/normalize/<?php echo $_SESSION['project_id'];?>',
+			data: JSON.stringify(tparams),
+			success: function (result) {
+
+				if(result.error){
+					console.log("API error");
+					console.log(result.error);
+				}
+				else{
+	                console.log("success");
+	                console.dir(result);
+					
+		            tparams = {
+		            	"data_params": {
+		                	"module_name": result.module_name,
+		                	"file_name": result.file_name
+		                },
+		                "module_params":{
+		                	"sampler_module_name": "standard",
+			                "sample_params": {
+			                	"num_rows": 20
+			                }
+		                }
+		            }
+					console.log("appel sample");
+					
+					$.ajax({
+						type: 'post',
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+						url: '<?php echo BASE_API_URL;?>/api/sample/normalize/<?php echo $_SESSION['project_id'];?>',
+						data: JSON.stringify(tparams),
+						success: function (result) {
+
+							if(result.error){
+								console.log("API error");
+								console.dir(result.error);
+							}
+							else{
+		                        console.log("success sample");
+		                        console.dir(result.sample);
+
+		                        // Remplissage de la modale
+		                        var ch = '<table class="table table-responsive table-condensed table-striped" id="sample_table">';
+
+		                        ch += "<thead><tr>";
+								$.each(columns, function( j, name) {
+									  ch += '<th>' + name + "</th>";
+									});
+		                        ch += "</tr></thead><tbody>";
+		                        console.dir(columns);
+								$.each(result.sample, function( i, obj) {
+									ch += "<tr>";
+									$.each(columns, function( j, name) {
+										ch += "<td>" + obj[name] + "</td>";
+									});
+									ch += "</tr>";
+								});
+								ch += "</tbody></table>";
+
+			                    $("#data_all").html(ch);
+			                	
+			                    $("#sample_table").DataTable({
+												        "language": {
+												           "paginate": {
+														        "first":      "Premier",
+														        "last":       "Dernier",
+														        "next":       "Suivant",
+														        "previous":   "Précédent"
+												    		},
+												    		"search":         "Rechercher:",
+												    		"lengthMenu":     "Voir _MENU_ enregistrements par page"
+												        },
+												        "lengthMenu": [5,20,"ALL"],
+												        "responsive": true
+												    });
+								
+
+		                    }
+		                },
+		                error: function (result, status, error){
+		                    console.log("error");
+		                    console.log(result);
+		                    err = true;
+		                }
+		            });// /ajax
+	            }
+	        },
+	        error: function (result, status, error){
+	            console.log("error");
+	            console.log(result);
+	            err = true;
+	        }
+	    });// /ajax
+	}// / enerate_sample()
 
 
+	function valid(){
+	    // Appel de l'étape suivante
+	    //window.location.href = "<?php echo base_url('index.php/Project/replace_mvs/'.$_SESSION['project_id']);?>";
+	    window.location.href = "<?php echo base_url('index.php/Project/normalize/'.$_SESSION['project_id']);?>";
+	}// /valid()
+
+
+	function add_actions_buttons() {
+		$("#bt_next").click(function(){
+			var columns = select_checked_columns();
+
+		    var tparams = {
+		        "columns": columns
+		    }
+
+			console.log(JSON.stringify(tparams));
+
+			$.ajax({
+				type: 'post',
+				url: '<?php echo BASE_API_URL;?>' + '/api/normalize/select_columns/<?php echo $_SESSION['project_id'];?>',
+				data: JSON.stringify(tparams),
+				contentType: "application/json; charset=utf-8",
+				traditional: true,
+				async: false,
+				success: function (result) {
+					console.dir(result);
+
+					if(result.error){
+						console.log("API error");
+						
+					}
+					else{
+		                console.log("success");
+
+		                valid();
+		            }
+		        },
+		        error: function (result, status, error){
+		            console.log(result);
+		            console.log(status);
+		            console.log(error);
+		            err = true;
+		        }
+		    });// /ajax
+		});
+
+		$("#bt_generate_sample").click(function(){
+			$("#data_all").html("");
+			generate_sample();
+		});
+
+		$(".bt_select_all").click(function(){
+			select_all();
+		});
+		$(".bt_unselect_all").click(function(){
+			unselect_all();
+		});
+	}// /add_actions_buttons()
+
+	// Init - Ready
+	$(function() {
+		err = false;
+
+		project_id = '<?php echo $_SESSION['project_id'];?>';
+
+		// Métadata du projet
+		metadata = get_metadata('normalize', project_id);
+
+		// MAJ du nom du projet
+		$("#project_name").html(metadata.display_name);
+
+		// Lancement du traitement
+		treatment();
+
+		// Génération du sample
+		generate_sample();
+
+		// Ajout des actions boutons
+		add_actions_buttons()
+	});// /ready
+
+</script>
 </body>
 </html>

@@ -62,16 +62,16 @@ class Project extends CI_Controller {
 		$file_name = key($project_api['files']);
 		$steps = $project_api['log'][$file_name];
 
-		if($steps['concat_with_init']['completed']){
+		if($steps['concat_with_init']['completed'] || $steps['concat_with_init']['skipped']){
 			return 'concat_with_init';
 		}
-		elseif($steps['recode_types']['completed']){
+		elseif($steps['recode_types']['completed'] || $steps['recode_types']['skipped']){
 			return 'recode_types';
 		}
-		elseif($steps['replace_mvs']['completed']){
+		elseif($steps['replace_mvs']['completed'] || $steps['replace_mvs']['skipped']){
 			return 'replace_mvs';
 		}
-		elseif($steps['add_selected_columns']['completed']){
+		elseif($steps['add_selected_columns']['completed'] || $steps['add_selected_columns']['skipped']){
 			return 'add_selected_columns';
 		}
 
@@ -183,20 +183,16 @@ class Project extends CI_Controller {
 		$file_name = $project_api['files']['source']['file_name'];
 		$steps = $project_api['log'][$file_name];
 
-	
-		if($steps['link_results_analyzer']['completed']){
+		if($steps['link_results_analyzer']['completed'] || $steps['link_results_analyzer']['skipped']){
 			return 'link_results_analyzer';
 		}
-		if($steps['es_linker']['completed']){
+		if($steps['es_linker']['completed'] || $steps['es_linker']['skipped']){
 			return 'es_linker';
 		}
-		elseif($steps['upload_es_train']['completed']){
+		elseif($steps['upload_es_train']['completed'] || $steps['upload_es_train']['skipped']){
 			return 'upload_es_train';
 		}
-		// elseif($steps['es_train']['completed']){
-		// 	return 'es_train';
-		// }
-		elseif($steps['add_selected_columns']['completed']){
+		elseif($steps['add_selected_columns']['completed'] || $steps['add_selected_columns']['skipped']){
 			return 'add_selected_columns';
 		}
 

@@ -65,6 +65,10 @@ body{
 /* /ENTETE ------------------------------*/
 
 
+#bt_skip{
+  cursor: pointer;
+}
+
 
 
 h1{

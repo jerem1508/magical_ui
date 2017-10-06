@@ -1,123 +1,117 @@
 <?php
-function get_status($public=0)
-{
-	if($public){
-		return '<i class="fa fa-unlock"></i>';
-	}
-	else{
-		return '<i class="fa fa-lock"></i>';
-	}
-}// /get_status()
+	function get_status($public=0){
+		if($public){
+			return '<i class="fa fa-unlock"></i>';
+		}
+		else{
+			return '<i class="fa fa-lock"></i>';
+		}
+	}// /get_status()
 
 
-function is_completed_step($step_name, $project_steps, $has_mini)
-{
-	$filename = str_replace('MINI__', '', key($project_steps));
+	function is_completed_step($step_name, $project_steps, $has_mini){
+		$filename = str_replace('MINI__', '', key($project_steps));
 
-    if($project_steps[$filename]['concat_with_init']==1){
-      	return true;
-    }
+	    if(@$project_steps[$filename]['concat_with_init']==1){
+	      	return true;
+	    }
 
-	switch ($step_name) {
-		case 'INIT':
-			return true;
-			break;
+		switch ($step_name) {
+			case 'INIT':
+				return true;
+				break;
 
-		case 'add_selected_columns':
-		case 'replace_mvs':
-		case 'recode_types':
-			if($has_mini){
-				return $project_steps['MINI__'.$filename][$step_name];
-			}
-			else{
+			case 'add_selected_columns':
+			case 'replace_mvs':
+			case 'recode_types':
+				if($has_mini){
+					return $project_steps['MINI__'.$filename][$step_name];
+				}
+				else{
+					return $project_steps[$filename][$step_name];
+				}
+
+				break;
+			default :
+				return false;
+		}
+	}// /is_completed_step()
+
+
+	function is_completed_link_step($step_name, $project_steps){
+		$filename = str_replace('MINI__', '', key($project_steps));
+
+	    if($project_steps[$filename]['link_results_analyzer']==1){
+	      	return true;
+	    }
+
+		switch ($step_name) {
+			case 'INIT':
+				return true;
+				break;
+
+			case 'add_selected_columns':
+			case 'upload_es_train':
+			case 'es_linker':
 				return $project_steps[$filename][$step_name];
-			}
 
-			break;
-		default :
-			return false;
-	}
-}// /is_completed_step()
-
-
-function is_completed_link_step($step_name, $project_steps)
-{
-	$filename = str_replace('MINI__', '', key($project_steps));
-
-    if($project_steps[$filename]['link_results_analyzer']==1){
-      	return true;
-    }
-
-	switch ($step_name) {
-		case 'INIT':
-			return true;
-			break;
-
-		case 'add_selected_columns':
-		case 'upload_es_train':
-		case 'es_linker':
-			return $project_steps[$filename][$step_name];
-
-			break;
-		default :
-			return false;
-	}
-}// /is_completed_link_step()
+				break;
+			default :
+				return false;
+		}
+	}// /is_completed_link_step()
 
 
-function get_progress_html($bs_color, $ratio, $step, $project_id)
-{
+	function get_progress_html($bs_color, $ratio, $step, $project_id){
 
-	$html = '<div 
-				class="progress-bar progress-bar-'.$bs_color.' step '.$step.'" 
-				role="progressbar" 
-				aria-valuenow="25" 
-				aria-valuemin="0" 
-				aria-valuemax="100" 
-				data-toggle="tooltip" 
-				onclick="load_step(\''.$step.'\', \''.$project_id.'\');" 
-				style="width: '.$ratio.'%;">
-			</div>';
+		$html = '<div 
+					class="progress-bar progress-bar-'.$bs_color.' step '.$step.'" 
+					role="progressbar" 
+					aria-valuenow="25" 
+					aria-valuemin="0" 
+					aria-valuemax="100" 
+					data-toggle="tooltip" 
+					onclick="load_step(\''.$step.'\', \''.$project_id.'\');" 
+					style="width: '.$ratio.'%;">
+				</div>';
 
-	return $html;
-}// /get_progress_html()
-
-
-function get_lien_html($step_todo, $project_id, $project_type)
-{
-
-	if($step_todo){
-		$lib_todo = "Poursuivre";
-									 
-		$html = '<button 
-					class="btn btn-xs btn-warning btn_tdb" 
-					onclick="load_step(\''.$step_todo.'\', \''.$project_id.'\', \''.$project_type.'\');">
-					Poursuivre
-				</button>';
-	}
-	else{
-		$html = '<button 
-					class="btn btn-xs btn-success3 btn_tdb" 
-					onclick="load_step(\'concat_with_init\', \''.$project_id.'\', \''.$project_type.'\');">
-					Rapport
-				</button>';
-	}
+		return $html;
+	}// /get_progress_html()
 
 
-	return $html;
-} // /get_lien_html()
+	function get_lien_html($step_todo, $project_id, $project_type){
+
+		if($step_todo){
+			$lib_todo = "Poursuivre";
+										 
+			$html = '<button 
+						class="btn btn-xs btn-warning btn_tdb" 
+						onclick="load_step(\''.$step_todo.'\', \''.$project_id.'\', \''.$project_type.'\');">
+						Poursuivre
+					</button>';
+		}
+		else{
+			$html = '<button 
+						class="btn btn-xs btn-success3 btn_tdb" 
+						onclick="load_step(\'concat_with_init\', \''.$project_id.'\', \''.$project_type.'\');">
+						Rapport
+					</button>';
+		}
 
 
-function get_lien_supp_html($project_type, $project_id)
-{
-	# Retour un lien html pour suppression du projet
+		return $html;
+	} // /get_lien_html()
 
-	$html = '<a href="#"
-				onclick="delete_project(\''.$project_type.'\', \''.$project_id.'\');">
-				<span class="glyphicon glyphicon-trash"></span>
-			</a>';
-	return $html;
-}// /get_lien_supp_html()
+
+	function get_lien_supp_html($project_type, $project_id){
+		# Retour un lien html pour suppression du projet
+
+		$html = '<a href="#"
+					onclick="delete_project(\''.$project_type.'\', \''.$project_id.'\');">
+					<span class="glyphicon glyphicon-trash"></span>
+				</a>';
+		return $html;
+	}// /get_lien_supp_html()
 ?>
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
@@ -172,7 +166,6 @@ function get_lien_supp_html($project_type, $project_id)
 								}
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
-						
 							echo '<tr>';
 							echo '<td>'.$project['display_name'].'</td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
@@ -182,7 +175,6 @@ function get_lien_supp_html($project_type, $project_id)
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
-
 						} // /foreach $normalized_projects
 						?>
 					</tbody>
@@ -250,10 +242,7 @@ function get_lien_supp_html($project_type, $project_id)
 									}
 								}
 							}// /foreach tab_steps
-
-							
 							$steps_html.= '</div>';
-						
 							echo '<tr>';
 							echo '<td>'.$project['display_name'].'</td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
@@ -263,7 +252,6 @@ function get_lien_supp_html($project_type, $project_id)
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
-
 						} // /foreach $normalized_projects
 						?>
 					</tbody>
@@ -278,12 +266,9 @@ function get_lien_supp_html($project_type, $project_id)
 
 		</div><!--/row-->
 	</div><!--/well-->
-	
 </div><!--/container-->
 
-
 <script type="text/javascript">
-
 	function delete_project_API(project_type, project_id) {
 	    // Suppression d'un projet
 
@@ -350,8 +335,19 @@ function get_lien_supp_html($project_type, $project_id)
 
 		// Refresh
 		window.location.reload();
-
 	}// /delete_project()
+
+
+	function load_step(step, project_id, project_type){
+		// if(project_type == 'normalize'){
+		// 	window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + step + "/" + project_id;
+		// }
+		// else{// link
+		// 	window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + project_type + "/" + project_id;
+		// }
+		
+		window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + project_type + "/" + project_id;
+	}// /load_step()
 
 
 	$(function() { // ready
@@ -410,24 +406,7 @@ function get_lien_supp_html($project_type, $project_id)
 		$(".link_results_analyzer").attr('title','Etape finale - Analyse');
 
 		$('[data-toggle="tooltip"]').tooltip(); 
-
-
-
-
 	}); // / ready
-
-	function load_step(step, project_id, project_type)
-	{
-		if(project_type == 'normalize'){
-			window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + step + "/" + project_id;
-		}
-		else{// link
-			window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + project_type + "/" + project_id;
-		}
-	}
-
-
 </script>
-
 </body>
 </html>

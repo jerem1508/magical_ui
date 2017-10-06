@@ -47,18 +47,31 @@
             <span class="step_numbers">1</span>
             Identité du projet
         </h2>
-			<div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
-				<label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
-				</div>
+		<div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
+			<label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
 			</div>
-			<div class="form-group" data-intro="Ajoutez une description optionnelle">
-				<label for="project_description" class="col-sm-2 control-label">Description du projet</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
-				</div>
+		</div>
+		<div class="form-group" data-intro="Ajoutez une description optionnelle">
+			<label for="project_description" class="col-sm-2 control-label">Description du projet</label>
+			<div class="col-sm-10">
+				<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
 			</div>
+		</div>
+        <?php
+        if(@$_SESSION['user']['status'] == '99'){
+        ?>
+        <div class="form-group">
+            <label for="public" class="col-sm-2 control-label">Référentiel public</label>
+            <div class="col-sm-10">
+              <input type="checkbox" id="chk_public">
+            </div>
+        </div>
+        <?php
+        }
+        ?>
+
     </div>
 </div>
 <div class="container" style="margin-top: 0px;">
@@ -181,315 +194,323 @@
 
 </div><!--/container-->
 
-
 <div id="files" class="files"></div>
 
-        <?php 
-            if(isset($this->session->project_type)){
-				$project_type = $this->session->project_type;
-			}
-		?>
+<?php 
+    if(isset($this->session->project_type)){
+		$project_type = $this->session->project_type;
+	}
+?>
 
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
-var err = false;
+    var err = false;
 
-		function my_errors(direction, my_error) {
-			var div_error = $("#msg_danger");
-			console.log(my_error);
-			switch (my_error){
-				case "project_name_undefined":
-					div_error.html("<strong>Le nom du projet doit être renseigné.</strong>");
-				break;
-                case "api_new_error":
-                    div_error.html("<strong>Création du projet impossible.</strong>");
-                break;
-			}
+    function my_errors(direction, my_error) {
+    	var div_error = $("#msg_danger");
+    	console.log(my_error);
+    	switch (my_error){
+    		case "project_name_undefined":
+    			div_error.html("<strong>Le nom du projet doit être renseigné.</strong>");
+    		break;
+            case "api_new_error":
+                div_error.html("<strong>Création du projet impossible.</strong>");
+            break;
+    	}
 
-            if(div_error.hasClass("my_hidden")){
-                div_error.removeClass("my_hidden")
-                         .addClass("my_show")
-                         .slideToggle("slow");
+        if(div_error.hasClass("my_hidden")){
+            div_error.removeClass("my_hidden")
+                     .addClass("my_show")
+                     .slideToggle("slow");
+        }
+    }
+
+
+    function save_project_sync(project_id) {
+        $.ajax({    
+            type: 'post',
+            url: '<?php echo base_url('index.php/Save_ajax/project');?>',
+            data: 'project_id=' + project_id + '&project_type=normalize',
+            async: false,
+            success: function (result) {
+                console.log("result : ",result);
+            },
+            error: function (result, status, error){
+                console.log(result);
+                console.log(status);
+                console.log(error);
+                return false;
             }
-		}
+        });
+    }
 
 
+    function save_session_sync(name, value) {
+    	$.ajax({	
+    		type: 'post',
+    		url: '<?php echo base_url('index.php/Save_ajax/session');?>',
+    		data: 'name=' + name + '&val=' + value,
+    		//contentType: "application/json; charset=utf-8",
+    		//traditional: true,
+    		async: false,
+    		success: function (result) {
+    			console.log(result);
 
-        function save_project_sync(project_id) {
-            $.ajax({    
-                type: 'post',
-                url: '<?php echo base_url('index.php/Save_ajax/project');?>',
-                data: 'project_id=' + project_id + '&project_type=normalize',
-                async: false,
-                success: function (result) {
-                    console.log("result : ",result);
-                },
-                error: function (result, status, error){
-                    console.log(result);
-                    console.log(status);
-                    console.log(error);
-                    return false;
-                }
-            });
-        }
-
-
-		function save_session_sync(name, value) {
-			$.ajax({	
-				type: 'post',
-				url: '<?php echo base_url('index.php/Save_ajax/session');?>',
-				data: 'name=' + name + '&val=' + value,
-				//contentType: "application/json; charset=utf-8",
-				//traditional: true,
-				async: false,
-				success: function (result) {
-					console.log(result);
-		
-					if(!result){
-						console.log("sauvegarde en sesion KO");
-						return false;
-					}
-					else{
-						console.log("sauvegarde en session OK");
-						return true;
-					}
-				},
-				error: function (result, status, error){
-					console.log(result);
-					console.log(status);
-					console.log(error);
-					return false;
-				}
-			});
-		}
+    			if(!result){
+    				console.log("sauvegarde en sesion KO");
+    				return false;
+    			}
+    			else{
+    				console.log("sauvegarde en session OK");
+    				return true;
+    			}
+    		},
+    		error: function (result, status, error){
+    			console.log(result);
+    			console.log(status);
+    			console.log(error);
+    			return false;
+    		}
+    	});
+    }
 
 
+    function call_api_sync(tparams, err) {
+    	console.log("call_api");console.dir(tparams);
 
-		function call_api_sync(tparams, err) {
-			console.log("call_api");console.dir(tparams);
+    	$.ajax({
+    		type: 'post',
+    		url: '<?php echo BASE_API_URL;?>' + tparams["url"],
+    		data: JSON.stringify(tparams["params"]),
+    		contentType: "application/json; charset=utf-8",
+    		traditional: true,
+    		async: false,
+    		success: function (result) {
+    			console.dir(result);
 
-			$.ajax({
-				type: 'post',
-				url: '<?php echo BASE_API_URL;?>' + tparams["url"],
-				data: JSON.stringify(tparams["params"]),
-				contentType: "application/json; charset=utf-8",
-				traditional: true,
-				async: false,
-				success: function (result) {
-					console.dir(result);
+    			if(result.error){
+    				console.log("API error");
+    				return false;
+    			}
+    			else{
+                    console.log("success");
 
-					if(result.error){
-						console.log("API error");
-						return false;
-					}
-					else{
-                        console.log("success");
+                    // Récupération de l'identifiant projet
+                    project_id = result.project_id;
+                    console.log("project_id" + project_id);
 
-                        // Récupération de l'identifiant projet
-                        project_id = result.project_id;
-                        console.log("project_id" + project_id);
-
-                        var result_save = "";
+                    var result_save = "";
+                
+                    console.log("treatment/save_session_synch");
+                    result_save = save_session_sync("project_id", result.project_id);
                     
-                        console.log("treatment/save_session_synch");
-                        result_save = save_session_sync("project_id", result.project_id);
-                        
-                        // Sauvegarde du projet
-                        console.log("treatment/save_project_synch");
-                        save_project_sync(result.project_id);
+                    // Sauvegarde du projet
+                    console.log("treatment/save_project_synch");
+                    save_project_sync(result.project_id);
 
-                        $("#create_project_ok").slideToggle();
-                    }
-                },
-                error: function (result, status, error){
-                    console.log(result);
-                    console.log(status);
-                    console.log(error);
-                    err = true;
+                    $("#create_project_ok").slideToggle();
                 }
-            });// /ajax
+            },
+            error: function (result, status, error){
+                console.log(result);
+                console.log(status);
+                console.log(error);
+                err = true;
+            }
+        });// /ajax
+    }
 
-        }
+
+    function call_api_upload(form, project_id) {
+        $.ajax({
+            url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,
+            type: "POST",
+            data: form,
+            crossDomain: true,
+            processData: false,
+            contentType: false,
+            async: true, // TODO: check this (to avoid next page before uplload)
+            success: function(result){
+                file_name = form.get('file').name;
+                console.log("Uploaded file ".concat(file_name));
+            },
+            error: function(er){
+                console.log(er.statusText.concat(" (error ", er.status, ")"));
+            }
+        });
+    }
 
 
-        function call_api_upload(form, project_id) {
-            $.ajax({
-                url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,
-                type: "POST",
-                data: form,
-                crossDomain: true,
-                processData: false,
-                contentType: false,
-                async: true, // TODO: check this (to avoid next page before uplload)
-                success: function(result){
-                    file_name = form.get('file').name;
-                    console.log("Uploaded file ".concat(file_name));
-                },
-                error: function(er){
-                    console.log(er.statusText.concat(" (error ", er.status, ")"));
+    function treatment(project_type) {
+        console.log("treatment");
+        // desactivation du bouton
+        $("#bt_normalizer").prop("disabled", true);
+
+        // Controles ----------------------
+            // Récupération des valeurs
+            var project_name = $("#project_name").val();
+            var project_description = $("#project_description").val();
+
+            // Le champ project_name doit être renseigné
+            if(project_name == ""){
+                console.log("project_name not defined");
+                // Message utilisateur
+                my_errors("show", "project_name_undefined");
+
+                return false;
+            }
+
+            // TODO : Tester la sélection du fichier
+
+        // /Controles ----------------------
+        
+        $(".fileinput-button").attr("disabled", "disabled");
+
+        // Appels API ----------------------
+            $("#result").fadeToggle();
+
+            if(public){
+                if(project_description == ''){
+                    alert("Vous devez saisir une description pour un référentiel public !");
+                    $("#bt_normalizer").prop("disabled", false);
+                    return;
                 }
-            });
-        }
+            }
 
-
-
-        function treatment(project_type) {
-            console.log("treatment");
-            // desactivation du bouton
-            $("#bt_normalizer").prop("disabled", true);
-
-            // Controles ----------------------
-                // Récupération des valeurs
-                var project_name = $("#project_name").val();
-                var project_description = $("#project_description").val();
-
-                // Le champ project_name doit être renseigné
-                if(project_name == ""){
-                    console.log("project_name not defined");
-                    // Message utilisateur
-                    my_errors("show", "project_name_undefined");
-
-                    return false;
+            // creation du projet
+            var tparams = {
+                "url": "/api/new/normalize",
+                "params": {
+                    "display_name": project_name,
+                    "description": project_description,
+                    "public": public
                 }
-
-                // TODO : Tester la sélection du fichier
-
-            // /Controles ----------------------
-            
-            $(".fileinput-button").attr("disabled", "disabled");
-
-            // Appels API ----------------------
-                $("#result").fadeToggle();
-
-                // creation du projet
-                var tparams = {
-                    "url": "/api/new/normalize",
-                    "params": {
-                        "display_name": project_name,
-                        "description": project_description,
-                        "internal": false
-                    }
-                }
-                console.log("treatment/call_api_synch");
-                err = call_api_sync(tparams, err);
-                if(err == true){console.log("Erreur de creation du projet");return false;}
+            }
+            console.log("treatment/call_api_synch");
+            err = call_api_sync(tparams, err);
+            if(err == true){console.log("Erreur de creation du projet");return false;}
 
 
-                // Envoi du fichier sur le serveur
-                url = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + project_id;
+            // Envoi du fichier sur le serveur
+            url = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + project_id;
 
-                $('#fileupload').fileupload(
-                    'option',
-                    'url',
-                    url
+            $('#fileupload').fileupload(
+                'option',
+                'url',
+                url
+            );
+
+            $("#envoyer").click();
+
+        // /Appels API ----------------------
+    }
+
+
+    function valid_project(){
+        // Appel de l'étape suivante
+        ///window.location.href = "<?php echo base_url('index.php/Project/save_step1_init/');?>" + project_id;
+        window.location.href = "<?php echo base_url('index.php/Project/normalize/');?>" + project_id;
+    }
+
+
+    // Init - Ready
+    $(function() {
+        
+        //$("body").css("height", $(window).height()) ;
+        public = false;
+
+        // Actions sur clics
+        url = "vide";
+
+        $("#bt_normalizer").click(function(e){
+            e.preventDefault();
+            var project_id = "";
+            treatment("normalizer");
+        });
+
+        $("#chk_public").change(function() {
+            public = $("#chk_public").is(':checked');
+        });
+
+
+        $(".fileinput-button").click(function(){
+            $(".fileinput-button").prop("disabled", true);
+
+            $("#bt_normalizer").prop("disabled", false);
+        });
+
+
+    	$("#bt_next").click(function(e){
+    		valid_project();// maj du statut + affichage de l'etape suivante
+    	});
+
+
+        $('#fileupload').fileupload({
+            url: url,
+            type:"POST",
+            autoUpload: false,
+            add: function (e, data) {
+                $('#file_name').html(data.files[0].name);
+                console.log(data);
+                data.context = $('#envoyer')
+                    .click(function (e) {
+                         e.preventDefault();
+                         console.log("2:" + url)
+                        $('#progress .progress-bar').css('visibility', 'visible');
+                        data.submit();
+                    });
+            },
+            done: function (e, data) {
+                console.log("upload done");
+                console.log("data");
+                console.log(data);
+
+                $('#progress').css('display', 'none');
+                $('#upload_file_ok').css('visibility', 'visible');
+                $('#check_file_ok').css('visibility', 'visible');
+
+                var run_info = data.result.run_info;
+
+                $('#ncols').html(run_info.ncols);
+                $('#nrows').html(run_info.nrows);
+                $('#separator').html(run_info.sep);
+                $('#encoding').html(run_info.encoding);
+
+                $('#report').css('display', 'inherit');
+                $('#show_report_ok').css('visibility', 'visible');
+
+                go_to('report');
+                
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
                 );
-
-                $("#envoyer").click();
-
-            // /Appels API ----------------------
-
-
-		}
-
-
-        function valid_project(){
-            // MAJ du statut
-            
-
-            // Appel de l'étape suivante
-            window.location.href = "<?php echo base_url('index.php/Project/save_step1_init/');?>" + project_id;
-            
-        }
+                console.log("upload progressall");
+            },
+            fail: function (e, data) {
+                $('#progress .progress-bar').css(
+                    'background-color', 'red'
+                );
+                console.log("upload fail");
+                console.dir(data);
+            }
+        }).prop('disabled', !$.support.fileInput)
+          .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
 
-        // Init - Ready
-        $(function() {
-            
-            //$("body").css("height", $(window).height()) ;
-            
-            // Actions sur clics
-            url = "vide";
+        $('#chk_public').bootstrapToggle({
+          on: 'Oui',
+          off: 'Non',
+          onstyle: 'success2',
+          offstyle: 'default',
+          size: 'small'
+        });
+    });
 
-            $("#bt_normalizer").click(function(e){
-                e.preventDefault();
-                var project_id = "";
-                treatment("normalizer");
-            });
-
-
-            $(".fileinput-button").click(function(){
-                $(".fileinput-button").prop("disabled", true);
-
-                $("#bt_normalizer").prop("disabled", false);
-            });
-
-
-			$("#bt_next").click(function(e){
-				valid_project();// maj du statut + affichage de l'etape suivante
-			});
-
-
-            $('#fileupload').fileupload({
-                url: url,
-                type:"POST",
-                autoUpload: false,
-                add: function (e, data) {
-                    $('#file_name').html(data.files[0].name);
-                    console.log(data);
-                    data.context = $('#envoyer')
-                        .click(function (e) {
-                             e.preventDefault();
-                             console.log("2:" + url)
-                            $('#progress .progress-bar').css('visibility', 'visible');
-                            data.submit();
-                        });
-                },
-                done: function (e, data) {
-                    console.log("upload done");
-                    console.log("data");
-                    console.log(data);
-
-                    $('#progress').css('display', 'none');
-                    $('#upload_file_ok').css('visibility', 'visible');
-                    $('#check_file_ok').css('visibility', 'visible');
-
-                    var run_info = data.result.run_info;
-
-                    $('#ncols').html(run_info.ncols);
-                    $('#nrows').html(run_info.nrows);
-                    $('#separator').html(run_info.sep);
-                    $('#encoding').html(run_info.encoding);
-
-                    $('#report').css('display', 'inherit');
-                    $('#show_report_ok').css('visibility', 'visible');
-
-                    go_to('report');
-                    
-                },
-                progressall: function (e, data) {
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    $('#progress .progress-bar').css(
-                        'width',
-                        progress + '%'
-                    );
-                    console.log("upload progressall");
-                },
-                fail: function (e, data) {
-                    $('#progress .progress-bar').css(
-                        'background-color', 'red'
-                    );
-                    console.log("upload fail");
-                    console.dir(data);
-                }
-            }).prop('disabled', !$.support.fileInput)
-              .parent().addClass($.support.fileInput ? undefined : 'disabled');
-
-		});
-
-	</script>
-
-
-
+</script>
 </body>
 </html>
