@@ -1,6 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" id="entete" style="margin-top: 20px;">
+<div class="container" id="entete" style="margin-top: 10px;">
     <div class="well">
         <div class="row">
             <div class="col-sm-8">
@@ -83,8 +83,8 @@
                             &nbsp;Labellisation
                         </h2>
                         <div class="row">
-                            <div class="col-xs-offset-1 col-xs-5 well">
-                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
+                            <div class="col-xs-5 well">
+                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
                                 <div>
                                     Taux de précision souhaité : 
                                     <select>
@@ -94,7 +94,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-xs-offset-1 col-xs-6">
                                 <div id="message">
                                     <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
                                 </div>
@@ -102,24 +102,30 @@
                                     Ces informations sont-elle identiques ?
                                 </div>
                                 <div>
-                                    <button class="btn btn-default btn-xl btn_2_3 yes_color" 
-                                            onclick="socket_answer('y');" 
+                                    <button class="btn btn-default btn-xl btn_icon btn-default" 
+                                            data-toggle="tooltip"
+                                            title="Revenir à la proposition précédente"
+                                            onclick="socket_answer('previous');" 
+                                            id="bt_previous">
+                                        <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
+                                    </button>
+                                    <button class="btn btn-default btn-xl btn_2_3 btn-yes" 
+                                            onclick="socket_answer('yes');" 
                                             id="bt_yes">
                                         <h2>OUI</h2>
                                     </button>
-                                    <button class="btn btn-default btn-xl btn_2_3 no_color" 
-                                            onclick="socket_answer('n');" 
+                                    <button class="btn btn-default btn-xl btn_2_3 btn-no" 
+                                            onclick="socket_answer('no');" 
                                             id="bt_no">
                                         <h2>NON</h2>
                                     </button>
-                                    <button class="btn btn-default btn-xl btn_2_3 forgot_color" 
+                                    <button class="btn btn-default btn-xl btn_icon btn-default" 
                                             data-toggle="tooltip"
                                             title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
-                                            onclick="socket_answer('n');" 
-                                            id="bt_no">
-                                        <h2>Oublier</h2>
+                                            onclick="socket_answer('forget_row');" 
+                                            id="bt_forget">
+                                        <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
                                     </button>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -460,12 +466,16 @@ function create_es_labeller_api() {
 function disabeled_buttons() {
     $("#bt_yes").attr("disabled","disabled");
     $("#bt_no").attr("disabled","disabled");
+    $("#bt_previous").attr("disabled","disabled");
+    $("#bt_forget").attr("disabled","disabled");
 }// /disabeled_buttons()
 
 
 function enabeled_buttons() {
     $("#bt_yes").removeAttr('disabled');
     $("#bt_no").removeAttr('disabled');
+    $("#bt_previous").removeAttr('disabled');
+    $("#bt_forget").removeAttr('disabled');
 }// /enabeled_buttons()
 
 

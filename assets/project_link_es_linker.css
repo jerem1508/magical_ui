@@ -1,9 +1,59 @@
+.value_vcentered{
+	padding-top: 8px;
+}
+
+.action_vcentered{
+	padding-top: 9px;
+}
+
 .no_line{
 	color: #25358C;
 }
+
+.icon{
+	color: #333;
+}
+
 .pagination{
 	cursor: pointer;
 }
 #chk_{
 	border-radius: 3px;
 }
+
+/* STATS ------*/
+.stat{
+	border: 1px solid #777;
+	background-color: #262626;
+	border-radius: 6px;
+	padding: 10px;
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center;
+	color: #eee;
+}
+.stat .title{
+	font-weight: bold;	
+	display: block;
+}
+.stat .number{
+	font-weight: bold;
+	font-size: 40px;
+	display: block;
+}
+.stat .text{
+	font-weight: normal;
+	font-size: 14px;
+	font-style: italic;
+	display: block;
+}
+.stat .history{
+	height: 57px;
+}
+
+.table_header{
+	background-color: #262626;
+	color: #fff;
+	border-color: #303030;
+}
+

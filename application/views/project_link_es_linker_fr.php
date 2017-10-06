@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <h2>
                     <span class="step_numbers">1</span>
-                    &nbsp;Présentation du fichier
+                    &nbsp;Présentation du résultat de la jointure
                 </h2>
             </div>
             <div class="col-md-4 text-right" id="pagination"></div>
@@ -25,7 +25,24 @@
                 </h2>
             </div>
         </div>
-        <div class="row" id="stats"></div>
+        <div class="row" id="stats">
+            <div class="col-xs-2">
+                <div class="stat" 
+                    data-toggle="tooltip"
+                    title="Nombre de lignes traitées">
+                    <span class="title">Lignes traitées</span>
+                    <span class="number" id="stat_nb_lines">0</span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="stat" 
+                    data-toggle="tooltip"
+                    title="Pourcentage de lignes traitées">
+                    <span class="title">Lignes traitées</span>
+                    <span class="number" id="stat_pct_nb_lines">0 %</span>
+                </div>
+            </div>
+        </div>
     </div><!-- /well-->
 </div><!--/container-->
 
@@ -235,12 +252,11 @@ function get_data(from, size) {
 }// /get_data()
 
 
-function show_data(data, start) {
-    //var html = '<div class="table-responsive">';
-    var html = '<table class="table table-bordered table-condensed">';
+function show_data_html(data, start) {
+    var html = '<table class="table">';
 
     // Entete
-    html += '<tr >';
+    html += '<tr class="table_header">';
     html += '    <td colspan="2"><i class="fa fa-table" aria-hidden="true"></i> (<i>Source</i>)</td>';
 
     for (var i = 0; i < column_matches.length; i++) {
@@ -248,10 +264,10 @@ function show_data(data, start) {
         html += '    <th>' + source_list + '</th>';
     }
 
-    html += '    <th rowspan="2">Confiance</th>';
-    html += '    <th rowspan="2">Action</th>';
+    html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + Math.floor(tresh) + '</i></th>';
+    html += '    <th rowspan="2" class="text-center">Correspondances<br>valides</th>';
     html += '</tr>';
-    html += '<tr>';
+    html += '<tr class="table_header">';
     html += '    <td colspan="2"><i class="fa fa-database" aria-hidden="true"></i> (<i>Référentiel</i>)</td>';
     
     for (var i = 0; i < column_matches.length; i++) {
@@ -262,9 +278,14 @@ function show_data(data, start) {
 
 
     for (var i = 0; i < data.length; i++) {
-        html += '<tr class="line">';
+        // Récupération id_source/id_ref
+        var id_source = data[i].hits.hits[0]['_id'];
+        var id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
+
+
         var no_line = start + i + 1;
-        html += '    <td rowspan="2" class="text-center no_line"><h4>' + no_line + '</h4></td>';
+        html += '<tr class="line ' + no_line + '">';
+        html += '    <td rowspan="2" class="text-center no_line"><h4 class="value_vcentered ' + no_line + '">' + no_line + '</h4></td>';
 
         // Récupération de l'indice de confiance
         var confidence = Math.round(data[i].hits.hits[0]['_source']['__CONFIDENCE']);
@@ -275,8 +296,8 @@ function show_data(data, start) {
         for (var j = 0; j < column_matches.length; j++) {
             var ch = column_matches[j].source.toString();
             var tab_termes = ch.split(",");
-            
-            var tab_values = new Array();
+           
+             var tab_values = new Array();
 
             for (var k = 0; k < tab_termes.length; k++) {
                 tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k]]);
@@ -286,18 +307,26 @@ function show_data(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        html += '    <td rowspan="2" class="text-center"><h4>' + confidence + '<h4></td>';
-
-        // Affichage du bouton
-        if(confidence < tresh){
-            html += '    <td rowspan="2"><h4><input type="checkbox" id="chk_' + no_line + '"></h4></td>';            
+        if(confidence == 999 || confidence == 0){
+            html += '<td rowspan="2" class="text-center"><h4 class="value_vcentered">';
+            html += '<i class="fa fa-user-circle" aria-hidden="true" title="Labellisation manuelle utiisateur" data-toggle="tooltip"></i>';
+            html += '<h4></td>';
         }
         else{
-            html += '    <td rowspan="2"><h4><input type="checkbox" checked id="chk_' + no_line + '"></h4></td>';
+            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">' + confidence + '<h4></td>';
         }
 
+        // Affichage du bouton
+        html += '<td rowspan="2" class="action_vcentered text-center"><h4 style="display: inline;"><input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
+        if(confidence >= tresh){
+            html += ' checked '
+        }
+        html += '>&nbsp;&nbsp;<a onclick="delete_line(\'' + no_line + '\');" class="icon" id="del_line_' + no_line + '"><i class="fa fa-times" aria-hidden="true"></i></a></h4>';
+
+        html += '</td>';
         html += '</tr>';
-        html += '<tr>';
+        html += '<tr class="' + no_line + '">';
+
 
         // Parcours des termes du REF --------------------------------------------
         html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
@@ -316,7 +345,6 @@ function show_data(data, start) {
         }
            
         html += '</tr>';
-
     }// /for - parcours data
 
     html += '</table>';
@@ -325,10 +353,11 @@ function show_data(data, start) {
     // Affichage des données
     $("#result").html(html);
 
-    // MAJ des boutons on/off
+    // MAJ des boutons on/off (boostrap-toggle)
     for (var i = 0; i < data.length; i++) {
         var no_line = start + i + 1;
-        $('#chk_' + no_line).bootstrapToggle({
+        //$('#chk_' + no_line).bootstrapToggle({
+        $('.chk').bootstrapToggle({
           on: 'Vrai',
           off: 'Faux',
           onstyle: 'success3',
@@ -337,20 +366,120 @@ function show_data(data, start) {
         });
     }// /for
 
-    // Alterance des couleurs
-    var cpt = 0;
-    $("tr").each(function(){
-        if(Math.floor(cpt/2)%2){
-            $(this).addClass("active");
-            $(this).css("background-color","#777");
-        }
-        cpt ++;
-    });
-
     // Séparation visuelle des lignes
     $(".line").css("border-top","2px solid #ccc");
 
-}// /show_data()
+    // TD plus petit
+    $("td").css("padding", "2px");
+
+    // Actions
+    $(".chk").change(function() {
+        // Récupération des ids
+        var _id = $(this);
+        var id = _id[0]["id"];
+        var id_source = $("#" + id).attr("id_source");
+        var id_ref = $("#" + id).attr("id_ref");
+
+        // Vérification de la présence de ses ids dans les exact_pairs
+        present_exact_pairs = keys_are_present(id_source, id_ref, learned_setting_json.exact_pairs);
+
+        // Vérification de la présence de ses ids dans les non_matching_pairs
+        present_non_matching_pairs = keys_are_present(id_source, id_ref, learned_setting_json.non_matching_pairs);
+
+        // Suivant le sens de la checkbox, on ajoute a non_matching_pairs ou a exact_pairs
+        if(_id[0]["checked"]){
+            if(!present_exact_pairs){
+                // Ajout
+                var exact_pairs = learned_setting_json.exact_pairs;
+                delete learned_setting_json.exact_pairs;
+                exact_pairs[exact_pairs.length] = new Array(id_source, id_ref);
+                learned_setting_json['exact_pairs'] = exact_pairs;
+            }
+            if(present_non_matching_pairs){
+                // Suppression
+                var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                var new_non_matching_pairs = new Array();
+                for (var i = 0; i < non_matching_pairs.length; i++) {
+                    if(non_matching_pairs[i][0] != id_source && non_matching_pairs[i][1] != id_ref){
+                        var item = new Array(non_matching_pairs[i][0], non_matching_pairs[i][1]);
+                        new_non_matching_pairs.push(item);
+                    }
+                }
+                delete learned_setting_json.non_matching_pairs;
+                learned_setting_json['non_matching_pairs'] = new_non_matching_pairs;
+            }
+        }
+        else{
+            if(present_exact_pairs){
+                // Suppression
+                var exact_pairs = learned_setting_json.exact_pairs;
+                var new_exact_pairs = new Array();
+                for (var i = 0; i < exact_pairs.length; i++) {
+                    if(exact_pairs[i][0] != id_source && exact_pairs[i][1] != id_ref){
+                        var item = new Array(exact_pairs[i][0], exact_pairs[i][1]);
+                        new_exact_pairs.push(item);
+                    }
+                }
+                delete learned_setting_json.exact_pairs;
+                learned_setting_json['exact_pairs'] = new_exact_pairs;
+            }
+            if(!present_non_matching_pairs){
+                // Ajout
+                var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                delete learned_setting_json.non_matching_pairs;
+                non_matching_pairs[non_matching_pairs.length] = new Array(id_source, id_ref);
+                learned_setting_json['non_matching_pairs'] = non_matching_pairs;
+            }
+        }
+
+        // Upload du fichier modifié
+        // TODO
+        console.log(learned_setting_json);
+    });
+}// /show_data_html()
+
+
+function delete_line(no_line) {
+    if($("#del_line_" + no_line).hasClass("delete_line")){
+        // undelete
+        $("#del_line_" + no_line).removeClass("delete_line");
+        $("." + no_line).css("color", "#333");
+        $("." + no_line).css("font-style", "normal");
+        $("#del_line_" + no_line).html('<i class="fa fa-times" aria-hidden="true"></i>');
+
+        // undelete de la ligne API
+        // TODO
+
+    }
+    else{
+        // delete
+        $("#del_line_" + no_line).addClass("delete_line");
+        $("." + no_line).css("color", "#ccc");
+        $("." + no_line).css("font-style", "italic");
+
+        $("#del_line_" + no_line).html('<i class="fa fa-undo" aria-hidden="true"></i>');
+
+        // Suppression de la ligne API
+        // TODO
+        
+    }
+}// /delete_line()
+
+
+function keys_are_present(id_source, id_ref, data) {
+    for (var i = 0; i < data.length; i++) {
+        if(data[i][0]==id_source && data[i][1]==id_ref){
+            return true;
+        }
+    }
+    return false;
+}// /keys_are_present()
+
+
+function action(id_source, id_ref, ele) {
+    alert(id_source + "|" + id_ref);
+    console.log('action():' + id_source + "|" + id_ref + "" + ele);
+}// /action()
 
 
 function create_es_index_api() {
@@ -391,7 +520,7 @@ function create_es_index_api() {
                                 var start = 0;
                                 var data = get_data(start, 20);
 
-                                show_data(data, start);
+                                show_data_html(data, start);
                             }
                             else{
                                 console.log("success - job en cours");
@@ -634,20 +763,86 @@ function set_pagination_html(nrows, pas, current_page) {
 
 function load_data(nrows, pas, current_page) {
     console.log('load_data()');
-    console.log('nrows:' + nrows);
-    console.log('pas:' + pas);
-    console.log('current_page:' + current_page);
 
     var start = (current_page - 1) * pas;
     console.log('start:' + start);
 
     var data = get_data(start, pas);
 
-    show_data(data, start);
+    show_data_html(data, start);
 
     // MAJ de la pagination
     set_pagination_html(nrows, pas, current_page);
 }// /load_data()
+
+
+function get_stats() {
+    console.log('get_stats()');
+    // Récupération ds stats
+    var tparams = {
+        "data_params": {
+            "module_name": "es_linker",
+            "file_name": file_name
+        }
+    }
+
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/schedule/link_results_analyzer/' + project_id_link + '/',
+        data: JSON.stringify(tparams),
+        success: function (result) {
+            if(result.error){
+                console.log("API error - link_results_analyzer_api");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - link_results_analyzer_api");
+                console.dir(result);
+
+                // Appel 
+                var handle = setInterval(function(){
+                    $.ajax({
+                        type: 'get',
+                        url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,
+                        success: function (result) {
+                            if(result.completed){
+                                clearInterval(handle);
+                                console.log("success - job");
+                                console.dir(result);
+
+                                // Récupération des données + affichage
+                                set_stats_html(result);
+                            }
+                            else{
+                                console.log("success - job en cours");
+                            }
+                        },
+                        error: function (result, status, error){
+                            console.log("error");
+                            console.log(result);
+                            err = true;
+                            clearInterval(handle);
+                        }
+                    });// /ajax - job
+                }, 1000);
+            }
+        },
+        error: function (result, status, error){
+            console.log("error");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - link_results_analyzer
+}// /get_stats()
+
+
+function set_stats_html(stats) {
+    // MAJ des stats
+    $("#stat_pct_nb_lines").html(stats.result.perc_match + " %");
+    $("#stat_nb_lines").html(stats.result.num_match);
+}// /set_stats_html()
 
 
 $(function(){// ready
@@ -669,7 +864,7 @@ $(function(){// ready
     column_matches = get_column_matches();
 
     // Récupération du paramétrage
-    var learned_setting_json = get_learned_setting(project_id_link);
+    learned_setting_json = get_learned_setting(project_id_link);
     if(learned_setting_json){
         treatment(project_id_link, learned_setting_json);
     }
@@ -692,5 +887,7 @@ $(function(){// ready
     var pas = 20;
     set_pagination_html(src_nrows, pas, 1);
 
+    // Statistiques
+    get_stats();
 });//ready
 </script>

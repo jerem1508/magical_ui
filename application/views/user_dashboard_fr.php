@@ -122,7 +122,7 @@ function get_lien_supp_html($project_type, $project_id)
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
+<div class="container" style="margin-top: 10px;">
 	<div class="well">
 		<div class="row">
 			<div class="col-xs-12">
@@ -199,7 +199,7 @@ function get_lien_supp_html($project_type, $project_id)
 	</div>
 </div>
 
-<div class="container" style="margin-top: 20px;">
+<div class="container" style="margin-top: 0px;">
 	<div class="well">
 		<div class="row">
 			<div class="col-xs-12">

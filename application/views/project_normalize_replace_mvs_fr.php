@@ -2,7 +2,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container" style="margin-top: 20px;">
-
 <!--
     <div class="text-center">
         <div class="breadcrumb flat">

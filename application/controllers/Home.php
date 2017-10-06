@@ -24,6 +24,18 @@ class Home extends CI_Controller {
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
+
+	public function error()
+	{
+		# Affiche la page d'erreur
+		$data['title'] = "Accueil";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('error_'.$_SESSION['language']);		
+		$this->load->view('footer_'.$_SESSION['language']);
+	}
+
+
 	public function fr()
 	{
 		# Passe l'interface en français

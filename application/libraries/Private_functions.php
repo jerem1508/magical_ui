@@ -8,6 +8,25 @@ class Private_functions {
 	    $this->CI =& get_instance();
 	}
 
+	public function test_server_API($value='')
+	{
+		# Test du serveur API
+		# S'il ne répond pas, affichage de la vue d'erreur
+		$ch = curl_init(BASE_API_URL.'/api/metadata/test/test');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		if(curl_exec($ch) === false){
+		    echo 'Erreur Curl : ' . curl_error($ch);
+			curl_close($ch);
+		    return false;
+		}
+		else{
+			curl_close($ch);
+			return true;
+		}
+	}// /test_server_api()
+
+
 	public function get_metadata_api($project_type, $project_id)
 	{
 		# Récupération des métadata d'un projet
@@ -21,7 +40,7 @@ class Private_functions {
 		];
 		 
 		curl_setopt_array($curl, $opts);
-		 
+		
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response['metadata'];

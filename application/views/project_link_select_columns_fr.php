@@ -1,6 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" id="entete" style="margin-top: 20px;">
+<div class="container-fluid" id="entete" style="margin-top: 10px;">
     <div class="well">
         <div class="row">
             <div class="col-md-8">
@@ -33,7 +33,7 @@
     </div><!-- /well-->
 </div><!--/container-->
 
-<div class="container-fluid" id="work" style="margin-top: 20px;">
+<div class="container-fluid" id="work" style="margin-top: 10px;">
     <div class="well">
         <div class="row">
             <div class="col-xs-2 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">

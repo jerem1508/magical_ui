@@ -269,7 +269,6 @@ class Project extends CI_Controller {
 	public function es_linker($id='')
 	{
 		# Traitement final
-
 		$data['title'] = "Jointure";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_es_linker_specifics');

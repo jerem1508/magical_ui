@@ -1,7 +1,7 @@
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
+<div class="container" style="margin-top: 10px;">
 <!--
     <div class="text-center">
         <div class="breadcrumb flat">
@@ -39,12 +39,13 @@
             </div>
         </div>  
     </div>
-
+</div>
+<div class="container" style="margin-top: 0px;">
 	<form class="form-horizontal" name="form1" id="form1" method="post" enctype="multipart/form-data">
     <div class="well">
         <h2 style="display: inline;">
             <span class="step_numbers">1</span>
-            .Identité du projet
+            Identité du projet
         </h2>
 			<div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
 				<label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
@@ -59,11 +60,12 @@
 				</div>
 			</div>
     </div>
-
+</div>
+<div class="container" style="margin-top: 0px;">
     <div class="well" data-intro="Uploadez un fichier à transformer">
         <h2 style="display: inline;">
             <span class="step_numbers">2</span>
-            .Sélection du fichier à normaliser
+            Sélection du fichier à normaliser
         </h2>
         <div class="row">
             <div class="col-xs-9">

@@ -204,7 +204,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" style="margin-top: 20px;">
+<div class="container-fluid" style="margin-top: 10px;">
     <div class="row">
         <div class="col-xs-12">
             <div class="well">
@@ -216,36 +216,38 @@ function get_normalized_projects_html($id, $normalized_projects)
                     <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();" class="btn btn-success2">Didacticiel</a>
                 </div>
             </div><!-- /well -->
-<!--
+        </div> <!-- / col-12-->
+    </div><!-- / row -->
+</div>
+<div class="container-fluid" style="margin-top: 0px;">
+    <div class="row">
+        <div class="col-xs-12">
             <div class="well">
-                <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
-            </div>
--->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="well">
-                        <h2 style="display: inline;">
-                            <span class="step_numbers">1</span>
-                            &nbsp;Identité du projet
-                        </h2>
-                        <form class="form-horizontal" name="form_project" id="form_project" method="post">
-                            <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
-                                <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
-                                </div>
-                            </div>
-                            <div class="form-group" data-intro="Ajoutez une description optionnelle">
-                                <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </form>
+                <h2 style="display: inline;">
+                    <span class="step_numbers">1</span>
+                    &nbsp;Identité du projet
+                </h2>
+                <form class="form-horizontal" name="form_project" id="form_project" method="post">
+                    <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
+                        <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group" data-intro="Ajoutez une description optionnelle">
+                        <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
             </div>
-
+        </div> <!-- / col-12-->
+    </div><!-- / row -->
+</div>
+<div class="container-fluid" style="margin-top: 0px;">
+    <div class="row">
+        <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="well"  style="height: 630px;" data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
@@ -481,7 +483,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
             <div id="files" class="files"></div>
 
-        </div> <!-- / col-10-->
+        </div> <!-- / col-12-->
     </div><!-- / row -->
 </div><!--/container-->
 

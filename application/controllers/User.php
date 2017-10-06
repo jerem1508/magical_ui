@@ -21,8 +21,15 @@ class User extends CI_Controller {
 		if(!isset($_SESSION['language'])){
 			$this->session->set_userdata('language', 'fr');
 		}
-	}// /__construct()
 
+		// test du serveur API - Affiche une vue d'erreur
+		if($this->private_functions->test_server_API() == false){
+			// TODO : Sauvegarde de l'erreur en BDD
+
+			redirect('/Home/error');
+		}
+
+	}// /__construct()
 
 	public function index()
 	{
@@ -188,9 +195,7 @@ class User extends CI_Controller {
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
-
 		foreach ($projects_list as $project) {
-
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
