@@ -177,6 +177,17 @@ a:hover{
   border-radius: 4px;
 }
 
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 2px 0 5px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 10px;
+  margin-top: 9px;
+}
+
 .btn-success {
   color: #fff;
   background-color: #E00612;

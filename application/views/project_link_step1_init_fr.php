@@ -581,11 +581,11 @@ function get_normalized_projects_html($id, $normalized_projects)
 			async: false,
 			success: function (result) {
 				if(!result){
-					console.log("sauvegarde en sesion KO");
+					console.log("sauvegarde en sesion de " + 'name=' + name + '&val=' + value + ':' + result);
 					return false;
 				}
 				else{
-					console.log("sauvegarde en session OK");
+					console.log("sauvegarde en session de " + 'name=' + name + '&val=' + value + ':' + result);
 					return true;
 				}
 			},
@@ -838,7 +838,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                         $('#txt_create_merge_project').css('display', 'inline');
                         $('#create_merge_project_ok').css('display', 'inline');
                     }
-
                 },
                 error: function (result, status, error){
                     console.log("error - new/link");
@@ -856,8 +855,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                       var tparams = {
                             "url": "/api/new/normalize",
                             "params": {
-                                "display_name": project_name + 'auto_normalize_src',
-                                "description": project_description + 'auto_normalize_src',
+                                "display_name": project_name + ' Fichier source',
+                                "description": project_description + '',
                                 "internal": false
                             }
                         }
@@ -905,8 +904,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                       var tparams = {
                             "url": "/api/new/normalize",
                             "params": {
-                                "display_name": project_name + 'auto_normalize_ref',
-                                "description": project_description + 'auto_normalize_ref',
+                                "display_name": project_name + ' Fichier référentiel',
+                                "description": project_description + '',
                                 "internal": false
                             }
                         }

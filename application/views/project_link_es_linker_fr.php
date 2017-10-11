@@ -11,7 +11,9 @@
             </div>
             <div class="col-md-4 text-right" id="pagination"></div>
         </div>
-        <div id="result"></div>
+        <div id="result">
+            <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+        </div>
     </div><!-- /well-->
 </div><!--/container-->
 
@@ -58,6 +60,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
+                <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
                 <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
             </div>
         </div>
@@ -308,25 +311,72 @@ function show_data_html(data, start) {
         }
 
         if(confidence == 999 || confidence == 0){
-            html += '<td rowspan="2" class="text-center"><h4 class="value_vcentered">';
+            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">';
             html += '<i class="fa fa-user-circle" aria-hidden="true" title="Labellisation manuelle utiisateur" data-toggle="tooltip"></i>';
             html += '<h4></td>';
         }
         else{
-            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">' + confidence + '<h4></td>';
+            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + confidence + '<h4></td>';
         }
-
         // Affichage du bouton
-        html += '<td rowspan="2" class="action_vcentered text-center"><h4 style="display: inline;"><input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
+        html += '<td rowspan="2" class="text-center padding_0"><h4 class="action_vcentered" style="display: inline;">';
+
+// 1 ---- 
+
+        html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
         if(confidence >= tresh){
             html += ' checked '
         }
-        html += '>&nbsp;&nbsp;<a onclick="delete_line(\'' + no_line + '\');" class="icon" id="del_line_' + no_line + '"><i class="fa fa-times" aria-hidden="true"></i></a></h4>';
-
+        html += '>';
+        html += '&nbsp;&nbsp;';
+        html += '<a onclick="delete_line(\'' + no_line + '\');" class="icon" id="del_line_' + no_line + '">';
+        html += '<i class="fa fa-times" aria-hidden="true"></i>';
+        html += '</a></h4>';
         html += '</td>';
         html += '</tr>';
-        html += '<tr class="' + no_line + '">';
 
+// / 1---
+
+/*
+// 2 ----
+if(confidence >= tresh){
+    html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+    html += '   <img src="<?php echo base_url('assets/img/equal_70C041.png');?>" class="img_tab">';
+    html += '</button>';
+    
+    html += '&nbsp;&nbsp;';
+    
+    html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+    html += '   <img src="<?php echo base_url('assets/img/unequal_333333.png');?>" class="img_tab">';
+    html += '</button>';
+}
+else{
+    html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+    html += '   <img src="<?php echo base_url('assets/img/equal_333333.png');?>" class="img_tab">';
+    html += '</button>';
+
+    html += '&nbsp;&nbsp;';
+
+    html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+    html += '   <img src="<?php echo base_url('assets/img/unequal_70C041.png');?>" class="img_tab">';
+    html += '</button>';
+}
+
+html += '&nbsp;&nbsp;';
+
+html += '   <button type="button" class="btn btn-circle" id="del_line_' + no_line + '" onclick="delete_line(\'' + no_line + '\');">';
+html += '       <img src="<?php echo base_url('assets/img/cross_333333.png');?>" class="img_tab">';
+html += '   </button>';
+html += '</h4>';
+html += '</td>';
+html += '</tr>';
+// / 2 ---
+*/
+
+
+
+        // Ligne REF
+        html += '<tr class="' + no_line + '">';
 
         // Parcours des termes du REF --------------------------------------------
         html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
@@ -371,6 +421,7 @@ function show_data_html(data, start) {
 
     // TD plus petit
     $("td").css("padding", "2px");
+    $(".padding_0").css("padding-top", "10px");
 
     // Actions
     $(".chk").change(function() {
@@ -432,9 +483,15 @@ function show_data_html(data, start) {
             }
         }
 
+        // Affichage du logo utilisateur
+        var id_temp = parseInt(id_source) + 1;
+        $("#confidence_" + id_temp).html('<i class="fa fa-user-circle"></i>');
+
         // Upload du fichier modifié
         // TODO
         console.log(learned_setting_json);
+        // Affichage du bouton de nouveau traitement
+        $("#bt_re_treatment").css("visibility", "visible");
     });
 }// /show_data_html()
 
@@ -445,6 +502,7 @@ function delete_line(no_line) {
         $("#del_line_" + no_line).removeClass("delete_line");
         $("." + no_line).css("color", "#333");
         $("." + no_line).css("font-style", "normal");
+        $("#chk_" + no_line).bootstrapToggle('enable');
         $("#del_line_" + no_line).html('<i class="fa fa-times" aria-hidden="true"></i>');
 
         // undelete de la ligne API
@@ -456,7 +514,7 @@ function delete_line(no_line) {
         $("#del_line_" + no_line).addClass("delete_line");
         $("." + no_line).css("color", "#ccc");
         $("." + no_line).css("font-style", "italic");
-
+        $("#chk_" + no_line).bootstrapToggle('disable');
         $("#del_line_" + no_line).html('<i class="fa fa-undo" aria-hidden="true"></i>');
 
         // Suppression de la ligne API
@@ -698,6 +756,10 @@ function add_buttons() {
             }
         });// /ajax
     }); // /dl_file.click()
+
+    $("#bt_re_treatment").click(function(){
+        window.reload();
+    });
 }// /add_buttons()
 
 

@@ -1,4 +1,3 @@
-
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container" style="margin-top: 10px;">
@@ -251,14 +250,12 @@
     		type: 'post',
     		url: '<?php echo base_url('index.php/Save_ajax/session');?>',
     		data: 'name=' + name + '&val=' + value,
-    		//contentType: "application/json; charset=utf-8",
-    		//traditional: true,
     		async: false,
     		success: function (result) {
     			console.log(result);
 
     			if(!result){
-    				console.log("sauvegarde en sesion KO");
+    				console.log("sauvegarde en session KO");
     				return false;
     			}
     			else{
@@ -273,7 +270,34 @@
     			return false;
     		}
     	});
-    }
+    }// /save_session_sync()
+
+
+    function unset_session(name) {
+        $.ajax({    
+            type: 'post',
+            url: '<?php echo base_url('index.php/Save_ajax/unsession');?>',
+            data: 'name=' + name,
+            async: false,
+            success: function (result) {
+                console.log(result);
+                if(!result){
+                    console.log("Suppression en session KO");
+                    return false;
+                }
+                else{
+                    console.log("Suppression en session OK");
+                    return true;
+                }
+            },
+            error: function (result, status, error){
+                console.log(result);
+                console.log(status);
+                console.log(error);
+                return false;
+            }
+        });
+    }// /save_session_sync()
 
 
     function call_api_sync(tparams, err) {
@@ -417,6 +441,10 @@
     // Init - Ready
     $(function() {
         
+        // Suppression de la variable de session link_project_id si elle existe
+        // cette variable est renseignée uniquement lorsque l'on vient d'un projet de LINK
+        unset_session("link_project_id");
+
         //$("body").css("height", $(window).height()) ;
         public = false;
 

@@ -858,13 +858,13 @@ if(isset($this->session->project_type)){
 		metadata = get_metadata('normalize', project_id);
 
 		// Colonnes du fichier
-        columns = metadata.column_tracker.original;
+		columns = metadata.column_tracker.original;
 
 		// Récupération du nom de fichier et tu nom de module
 		last_written()
 
-        // MAJ du nom du projet
-        $("#project_name").html(metadata.display_name);
+		// MAJ du nom du projet
+		$("#project_name").html(metadata.display_name);
 
 		// creation de l'échantillon
 		generate_sample();

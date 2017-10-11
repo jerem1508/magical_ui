@@ -38,8 +38,7 @@ class Project extends CI_Controller {
 		}
 
 		// Si normalisation, on efface l'éventuel lien vers un projet de link
-		$this->session->unset_userdata('link_project_id');
-
+		//$this->session->unset_userdata('link_project_id');
 
 		// REcherche de l'étape en cours si non passée dans l'URL
 		if(!$step){

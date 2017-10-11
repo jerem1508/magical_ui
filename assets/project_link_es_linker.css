@@ -1,9 +1,9 @@
-.value_vcentered{
-	padding-top: 8px;
+.confidence_vcentered{
+	padding-top: 6px;
 }
 
 .action_vcentered{
-	padding-top: 9px;
+	/*padding-top: 9px;*/
 }
 
 .no_line{
@@ -12,6 +12,10 @@
 
 .icon{
 	color: #333;
+}
+
+.img_tab{
+	width: 25px;
 }
 
 .pagination{

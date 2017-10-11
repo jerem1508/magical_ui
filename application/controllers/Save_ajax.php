@@ -35,6 +35,22 @@ class Save_ajax extends CI_Controller {
 	}// /session()
 
 
+	public function unsession()
+	{
+		# Suppression d'une variable de session
+		if(isset($_POST['name'])){
+			$this->session->unset_userdata($_POST['name']);
+		}
+
+		if(isset($_POST['name'])){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}// / unsession()
+
+
 	public function project()
 	{
 		$project_id = "";
