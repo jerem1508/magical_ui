@@ -1,0 +1,23 @@
+# FROM php:7.0-apache
+
+COPY . /var/www/magical_ui
+
+RUN apt-get update
+
+RUN apt-get install debconf-utils
+RUN echo 'mysql-server mysql-server/root_password password l4ndry!' | debconf-set-selections
+RUN echo 'mysql-server mysql-server/root_password_again password l4ndry!' | debconf-set-selections
+RUN apt-get -y install mysql-server
+RUN mysql --user=root --password=root < init.sql 
+
+EXPOSE 80
+RUN apt-get -y install apache2 php php-curl libapache2-mod-php
+# RUN a2enmod php7.0
+
+COPY /conf/magical_ui.conf /etc/apache2/sites-available/
+RUN echo "Include /etc/phpmyadmin/apache.conf" | cat >> /etc/apache2/apache2.conf
+RUN rm /etc/apache2/sites-enabled/*.conf
+RUN ln -s /etc/apache2/sites-available/magical_ui.conf /etc/apache2/sites-enabled/magical_ui.conf
+
+WORKDIR /var/www/magical_ui
+RUN /etc/init.d/apache2 restart
