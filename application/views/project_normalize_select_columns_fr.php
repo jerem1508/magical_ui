@@ -6,7 +6,7 @@ if(isset($this->session->project_type)){
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
+<div class="container-fluid intro">
 <!--
     <div class="text-center">
         <div class="breadcrumb flat">
@@ -18,55 +18,51 @@ if(isset($this->session->project_type)){
         </div>
     </div>
 -->
-	<div class="well">
-		<div class="row">
-			<div class="col-sm-10">
-				<h2 class="page_title"><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>
-			</div>
-			<div class="col-sm-2 text-right">
-				<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-			</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="page_title"><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>
+			<span class="cl_filename">
+				<i class="fa fa-file-text" aria-hidden="true"></i>
+				Traitement du fichier <span id="filename" class="file"></span>
+			</span>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 page_explain">
-			 	Sélectionnez les colonnes à nettoyer. Dans le cadre d'un projet de jointure, nous recommendons fortement de nettoyer toutes les colonnes suceptibles de servir à la jointure de vos fichiers.
-			</div>
+	</div>
+	<div class="row" style="padding-bottom: 20px;">
+		<div class="col-sm-6">
+			<p class="page_explain">
+		 		Sélectionnez les colonnes à nettoyer. Dans le cadre d'un projet de jointure, nous recommendons fortement de nettoyer toutes les colonnes suceptibles de servir à la jointure de vos fichiers.
+			</p>
 		</div>
+		<div class="col-sm-6 text-right">
+            <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+                <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+            </span>
+		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-xs-6 well" style="background-color: #fff">
-				<h3>Extrait aléatoire des données</h3>
-				Vous avez la possibilité d'afficher un extrait aléatoire du fichier en cours. Cet extrait affichera un maximum de 50 lignes. <br><br>A chaque clic sur le bouton ci-dessous, un nouvel extrait sera généré.
-				<br><br>
-				<button class="btn btn-success2 btn-xs" id="bt_view" data-toggle="modal" data-target="#modal-dataview_all" data-intro="Regarder un échantillon de données pour la mémoire..."><span class='glyphicon glyphicon-eye-open'></span>&nbsp;Voir l'extrait</button>
-
-				<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modal-dataview_all">
-				  <div class="modal-dialog modal-lg" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title">Aperçu des données</h4>
-				      </div>
-				      <div class="modal-body" id="data_all" style=" overflow-x:scroll">
-				        
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-success2" id="bt_generate_sample"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Regénérer</button>
-				        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
-				      </div>
-				    </div>
-				  </div>
+	<div class="row background_1">
+		<div class="col-xs-9" style="border-right: 3px dotted #aaa;">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>Extrait aléatoire des données</h3>					
 				</div>
-
+				<div class="col-md-4 text-right">
+					<h3>
+					<button type="button" class="btn btn-xs btn-success" id="bt_generate_sample"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Regénérer</button>
+					</h3>
+				</div>
 			</div>
-			<div class="col-xs-6">
-				<div id="result" data-intro="Sélectionnez les colonnes à nettoyer"></div>
-			</div>
+			<div id="data_all"></div>
 		</div>
-    </div><!-- /well-->
+		<div class="col-xs-3">
+			<h3>Colonnes détectées</h3>
+			<div id="result" data-intro="Sélectionnez les colonnes à nettoyer"></div>
+		</div>
+	</div>
+
 </div><!--/container-->
 
-<div class="container">
+<div class="container-fluid background_1" style="padding-top: 20px;padding-bottom: 20px">
     <div class="row">
         <div class="col-md-12 text-right">
             <button class="btn btn btn-success" id="bt_next">Etape suivante : Détection des valeurs manquantes >></button>
@@ -258,6 +254,8 @@ if(isset($this->session->project_type)){
 	                console.log("success");
 	                console.dir(result);
 					
+	                $("#filename").html(result.file_name);
+
 		            tparams = {
 		            	"data_params": {
 		                	"module_name": result.module_name,

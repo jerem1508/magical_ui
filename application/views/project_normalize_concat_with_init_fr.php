@@ -6,7 +6,7 @@ if(isset($this->session->project_type)){
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
+<div class="container-fluid intro">
 
 <!--
     <div class="text-center">
@@ -19,18 +19,23 @@ if(isset($this->session->project_type)){
         </div>
     </div>
 -->
-	<div class="well">
 		<div class="row">
 			<div class="col-md-12">
 				<h2 style="margin-top: 0;"><span id="project_name"></span> : <i>Traitement & téléchargements</i></h2>
+				<span class="cl_filename">
+				<i class="fa fa-file-text" aria-hidden="true"></i>
+				Traitement du fichier <span id="filename" class="file"></span>
+				</span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 page_explain">
-				Si vous avez uploadé un gros fichier, les étapes de traitement précédentes ont été faites sur un échantillon. Vous pouvez lancer le traitement sur l'ensemble du fichier sur cette page.
+		<div class="row" style="padding-bottom: 20px;">
+			<div class="col-sm-12">
+				<p class="page_explain">
+					Si vous avez uploadé un gros fichier, les étapes de traitement précédentes ont été faites sur un échantillon. Vous pouvez lancer le traitement sur l'ensemble du fichier sur cette page.
+				</p>
 			</div>
 		</div>
-		<div class="row" id="trt_all">
+		<div class="row" id="trt_all" style="padding-bottom: 20px;">
 			<div class="col-md-12 text-center">
 				<button class="btn btn-success" id="bt_concat_with_init">Lancer le traitement sur l'ensemble du fichier</button>
 			</div>
@@ -68,7 +73,6 @@ if(isset($this->session->project_type)){
 				</div>
 			</div>
 		</div>
-    </div><!-- /well-->
 </div><!--/container-->
 
 <div class="container">
@@ -85,7 +89,7 @@ if(isset($this->session->project_type)){
     </div>
 </div><!--/container-->
 
-<div class="container" id="reports">
+<div class="container-fluid background_1" id="reports">
 	<!--
     <div class="well">
         <div class="row">
@@ -103,68 +107,65 @@ if(isset($this->session->project_type)){
         </div>
     </div>
 	-->
-    <div class="well">
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Recherche des valeurs manquantes - <i>Modifications effectuées</i></h4>
-            </div>
-            <div id="report_replace_mvs"></div>
-        </div><!-- /row-->
-    </div><!-- /well /report-->
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+            	Recherche des valeurs manquantes - <i>Modifications effectuées</i>
+            </h4>
+        </div>
+        <div id="report_replace_mvs"></div>
+    </div><!-- /row-->
 
-    <div class="well">
-        <div class="row">
-            <div class="col-md-12">
-                <h4>Détection des types - <i>Modifications effectuées</i></h4>
-            </div>
-            <div id="report_recode_types"></div>
-        </div><!-- /row-->
-    </div><!-- /well /report-->
+    <div class="row">
+        <div class="col-md-12">
+            <h4>
+            	Détection des types - <i>Modifications effectuées</i>
+            </h4>
+        </div>
+        <div id="report_recode_types"></div>
+    </div><!-- /row-->
 
 
 	<?php
 	if(isset($_SESSION['link_project_id'])){
 	?>
-	    <div class="well">
-	        <div class="row">
-	            <div class="col-md-12 text-center">
-	            <button class="btn btn-success" id="bt_link_project">Poursuivre le projet de jointure</button>
-	            <script type="text/javascript">
-	            	$("#bt_link_project").click(function(){
-	            		window.location.href = "<?php echo base_url('index.php/Project/link/'.$_SESSION['link_project_id']);?>";
-	            	});
-	            </script>
-	            </div>
-	        </div>
-	    </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-md-12 text-center">
+            <button class="btn btn-success" id="bt_link_project">Poursuivre le projet de jointure</button>
+            <script type="text/javascript">
+            	$("#bt_link_project").click(function(){
+            		window.location.href = "<?php echo base_url('index.php/Project/link/'.$_SESSION['link_project_id']);?>";
+            	});
+            </script>
+            </div>
+        </div>
 	<?php
 	}
 	else{
 	?>
-	    <div class="well">
-	        <div class="row">
-	            <!---
-	            <div class="col-md-4">
-	                <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
-	            </div>
-				-->
-	            <div class="col-md-8">
-	                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
-	            </div>
-
-
-	        <?php
-	        if(isset($_SESSION['user']))
-	        {
-	        ?>
-	            <div class="col-md-4 text-right">
-	                <button class="btn btn-success" id="bt_next">Voir mon tableau de bord >></button>
-	            </div>
-	        <?php
-	        }
-	        ?>
-	        </div><!-- /row-->
-	    </div><!-- /well /report-->
+        <div class="row" style="padding-bottom: 20px;">
+            <!---
+            <div class="col-md-4">
+                <button class="btn btn-success2" id="dl_cfg_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier de configuration</button>
+            </div>
+			-->
+            <div class="col-md-4">
+                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+            </div>
+			<div class="col-md-4">
+                <a href="<?php echo base_url("index.php/Home");?>" class="btn btn-success"><span class="glyphicon glyphicon-home"></span>&nbsp;Retour accueil</a>
+            </div>
+        <?php
+        if(isset($_SESSION['user']))
+        {
+        ?>
+            <div class="col-md-4 text-right">
+                <button class="btn btn-success" id="bt_next">Voir mon tableau de bord >></button>
+            </div>
+        <?php
+        }
+        ?>
+        </div><!-- /row-->
 	<?php
 	}
 	?>
@@ -286,7 +287,7 @@ if(isset($this->session->project_type)){
 								                    // Arret de l'animation recherche
                                                     $("#wait").css("display","none");
 								                    
-                                                    $("#reports").css("display","inherit");
+                                                    $("#reports").css("visibility","visible");
 
                                                     write_reports("replace_mvs");
 
@@ -357,7 +358,7 @@ if(isset($this->session->project_type)){
 								                    // Arret de l'animation recherche
 								                    $("#wait").css("display","none");
 								                    
-                                                    $("#reports").css("display","inherit");
+                                                   	$("#reports").css("visibility","visible");
 
                                                     write_reports("replace_mvs");
 

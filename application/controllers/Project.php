@@ -59,6 +59,9 @@ class Project extends CI_Controller {
 		$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);
 
 		$file_name = key($project_api['files']);
+		if($project_api['has_mini']){
+			$file_name = 'MINI__'.$file_name;
+		}
 		$steps = $project_api['log'][$file_name];
 
 		if($steps['concat_with_init']['completed'] || $steps['concat_with_init']['skipped']){

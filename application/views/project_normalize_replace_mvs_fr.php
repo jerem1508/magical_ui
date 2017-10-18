@@ -1,7 +1,7 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
-<!--
+<div class="container-fluid intro">
+	<!--
     <div class="text-center">
         <div class="breadcrumb flat">
             <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
@@ -11,93 +11,99 @@
             <a href="#" class="todo">Téléchargement</a>
         </div>
     </div>
--->
-	<div class="well">
-		<div class="row">
-			<div class="col-sm-8">
-				<h2 class="page_title"><span id="project_name"></span> : <i>Recherche des valeurs manquantes</i></h2>
-			</div>
-			<div class="col-sm-4 text-right">
-				<div id="didacticiel">
-					<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-					&nbsp;|&nbsp;
-				</div>
-				<a id="bt_skip">Passer cette étape</a>
-			</div>
+	-->
+	<div class="row" style="padding-top: 20px;">
+		<div class="col-sm-8">
+			<h2 class="page_title"><span id="project_name"></span> : <i>Recherche des valeurs manquantes</i></h2>
+			<span class="cl_filename">
+				<i class="fa fa-file-text" aria-hidden="true"></i>
+				Traitement du fichier <span id="filename" class="file"></span>
+			</span>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 page_explain">
+		<div class="col-sm-4 text-right">
+			<a id="bt_skip" class="btn btn-xs btn-success2">Passer cette étape >></a>
+		</div>
+	</div>
+	<div class="row" style="padding-bottom: 20px;">
+		<div class="col-sm-6">
+			<p class="page_explain">
 				Dans de nombreux systèmes d'informations ou pour des données renseignées manuellement, des valeurs manquantes sont représentées par des chaines de caratère ('non-renseigné', 'NR', 'xxxxx', etc.). <strong>Cela nuit à l'analyse de données</strong> et rend la jointure moins performante.
 				<br><br>
 				Dans cette étape, la machine suggère des libéllés de <strong>valeurs manquantes potentielles</strong> présentes dans votre fichier. Vous pouvez corriger ces valeurs. <strong>Elles seront ensuite remplacées par l'absence de valeur</strong>.
+			</p>
+		</div>
+		<div class="col-sm-6 text-right">
+			<div id="didacticiel">
+            	<span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+                	<img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+	            </span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<button class="btn btn-success" id="bt_infer_mvs">Lancer la recherche des valeurs manquantes sur l'échantillon</button>
-			</div>
+	</div>
+	<div class="row" style="padding-bottom: 20px;">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-success" id="bt_infer_mvs">Lancer la recherche des valeurs manquantes sur l'échantillon</button>
 		</div>
-		<div class="row" id="wait">
-			<div class="col-xs-12 text-center">
-				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-			</div>
+	</div>
+	<div class="row" id="wait">
+		<div class="col-xs-12 text-center">
+			<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 		</div>
-		<div class="row" id="result">
-			<div class="col-xs-12">
-				<div class="row">
-					<div class="col-xs-12" id="columns">
-						<hr>
-					</div>
+	</div>
+	<div class="row background_1" id="result">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="col-xs-12" id="columns"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6" id="all_columns">
+					Ajouter pour toutes les colonnes : <input type="text" id="in_all_columns">
+					<button class="btn btn-success2 btn-xs" id="bt_all_columns">+</button>
 				</div>
-				<div class="row">
-					<div class="col-xs-6" id="all_columns">
-						Ajouter pour toutes les colonnes : <input type="text" id="in_all_columns">
-						<button class="btn btn-success2 btn-xs" id="bt_all_columns">+</button>
-					</div>
-					<div class="col-xs-6 text-right">
-						<button class="btn btn btn-success" id="bt_replace_mvs">Lancer le traitement de l'échantillon</button>
-					</div>
+				<div class="col-xs-6 text-right">
+					<button class="btn btn btn-success" id="bt_replace_mvs">Lancer le traitement de l'échantillon</button>
 				</div>
 			</div>
 		</div>
-    </div><!-- /well-->
+	</div>
 </div><!--/container-->
 
 
-<div class="container">
-    <div class="well" id="steps">
-        <ul>
-            <li>
-                Lancement du traitement <span id="start_treatment_ok" class="glyphicon glyphicon-ok check_ok"></span>
-                <div id="treatment_process">.......</div>
-            </li>
-            <li>
-                Affichage du rapport <span id="show_report_ok" class="glyphicon glyphicon-ok check_ok"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="well" id="report">
-        <h2>Rapport : </h2>
+<div class="container-fluid background_2">
+    <div id="report">
+        <h2>
+    		<i class="fa fa-flag-checkered" aria-hidden="true"></i>
+        	Rapport : 
+        </h2>
         <div class="row">
-            <div class="col-md-3 text-center">
-                <img src="<?php echo base_url('assets/img/report.png');?>" style="height: 150px;">
+            <div class="col-md-3">
+			    <div id="steps" style="color: #fff;">
+			        <ul>
+			            <li>
+			                Lancement du traitement <span id="start_treatment_ok" class="glyphicon glyphicon-ok check_ok"></span>
+			                <div id="treatment_process">.......</div>
+			            </li>
+			            <li>
+			                Affichage du rapport <span id="show_report_ok" class="glyphicon glyphicon-ok check_ok"></span>
+			            </li>
+			        </ul>
+			    </div>
             </div>
             <div class="col-md-9">
-            	<h3>Modifications effectuées</h3>
-            	<div id="tab_reports"></div>
+            	<h3 style="color: #fff;">Modifications effectuées</h3>
+            	<div id="tab_reports" class="background_1"></div>
             	<!--
             	<a id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier</a>
             	-->
             </div>
-
         </div><!-- /row-->
 
-	    <div class="row">
+	    <div class="row" style="padding-bottom: 20px;">
 	        <div class="col-md-12 text-right">
 	            <button class="btn btn btn-success" id="bt_next" disabled>Etape suivante : Détection des types >></button>
 	        </div>
 	    </div><!-- /row-->
-    </div><!-- /well /report-->
+    </div><!-- /report-->
 </div><!--/container-->
 
 
@@ -164,6 +170,7 @@ if(isset($this->session->project_type)){
 
                     module_name = result.module_name;
                     file_name = result.file_name;
+                    $("#filename").html(file_name);
                 }
             },
             error: function (result, status, error){
@@ -337,7 +344,8 @@ if(isset($this->session->project_type)){
         ch += "</table>";
 		$("#columns").html(ch);
 
-		$("#result").css("display","inherit");
+		//$("#result").css("display","inherit");
+		$("#result").css("visibility","visible");
     }// /add_value_checked()
 
 
@@ -721,7 +729,7 @@ if(isset($this->session->project_type)){
 		metadata = get_metadata('normalize', project_id);
 
 		// Récupération du nom de fichier et tu nom de module
-		last_written()
+		last_written();
 
 		// Récupération du nombre de lignes
 		// TODO

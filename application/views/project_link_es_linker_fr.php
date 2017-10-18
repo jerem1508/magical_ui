@@ -310,7 +310,7 @@ function show_data_html(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        if(confidence == 999 || confidence == 0){
+        if(confidence == 999 || confidence === 0){
             html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">';
             html += '<i class="fa fa-user-circle" aria-hidden="true" title="Labellisation manuelle utiisateur" data-toggle="tooltip"></i>';
             html += '<h4></td>';

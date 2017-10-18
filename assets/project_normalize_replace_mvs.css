@@ -1,9 +1,9 @@
-#msg_danger, #result, #report, #steps, #wait{
+#msg_danger, #report, #steps, #wait{
     /*On masque par défaut*/
     display: none;
 }
 
-#start_treatment_ok, #show_report_ok{
+#start_treatment_ok, #show_report_ok, #result{
 	visibility: hidden;
 }
 .tagsinput-perso{
@@ -21,4 +21,8 @@
 #didacticiel{
 	visibility: hidden;
 	display: inline;
+}
+
+#result{
+	min-height: 400px;
 }

@@ -4,6 +4,90 @@
 		"selected_items":
 		[
 			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"back",
+				"background_1"
+			],
+			[
+				"padding",
+				"padding-top"
+			],
+			[
+				"btn-",
+				"btn-success2"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"font-s",
+				"font-style"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"ba",
+				"background_1"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"paddi",
+				"padding-left"
+			],
+			[
+				"text",
+				"text-right"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"border-bottom-",
+				"border-bottom-width"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"sty",
+				"list-style"
+			],
+			[
+				"u",
+				"uppercase"
+			],
+			[
+				"s",
+				"style\tAttr"
+			],
+			[
+				"font-st",
+				"font-style"
+			],
+			[
+				"fun",
+				"fun\tfunction …"
+			],
+			[
 				"remo",
 				"removeAttribute\t( name: DOMString ): void Element"
 			],
@@ -20,16 +104,8 @@
 				"clic"
 			],
 			[
-				"marg",
-				"margin-top"
-			],
-			[
 				"re",
 				"reload\t(): void Location"
-			],
-			[
-				"fun",
-				"function"
 			],
 			[
 				"vis",
@@ -50,10 +126,6 @@
 			[
 				"mod",
 				"module_name"
-			],
-			[
-				"btn-",
-				"btn-default"
 			],
 			[
 				"mar",
@@ -96,10 +168,6 @@
 				"border-top"
 			],
 			[
-				"padd",
-				"padding-top"
-			],
-			[
 				"load",
 				"load_data"
 			],
@@ -128,20 +196,8 @@
 				"first\t(): jQuery jQuery - Traversing > Filtering"
 			],
 			[
-				"in",
-				"input\tTag"
-			],
-			[
-				"font-s",
-				"font-size"
-			],
-			[
 				"gl",
 				"glyphicon"
-			],
-			[
-				"text",
-				"text-center"
 			],
 			[
 				"margin",
@@ -236,10 +292,6 @@
 				"input_text"
 			],
 			[
-				"col",
-				"columns\t = 'initial' Style CSS"
-			],
-			[
 				"bt_",
 				"bt_add_filter_plus"
 			],
@@ -318,10 +370,6 @@
 			[
 				"vi",
 				"visibility\t = 'visible' Style CSS"
-			],
-			[
-				"sty",
-				"style"
 			],
 			[
 				"search",
@@ -412,10 +460,6 @@
 				"modified_columns"
 			],
 			[
-				"fil",
-				"fileName"
-			],
-			[
 				"tab_col",
 				"tab_columns"
 			],
@@ -470,87 +514,34 @@
 			[
 				"bt",
 				"bt_next"
-			],
-			[
-				"fo",
-				"for\tfor …"
-			],
-			[
-				"projec",
-				"project_type"
-			],
-			[
-				"nb",
-				"nb_steps"
-			],
-			[
-				"li",
-				"linked_projects"
-			],
-			[
-				"php",
-				"phpinfo"
-			],
-			[
-				"pu",
-				"public"
-			],
-			[
-				"module",
-				"module_name"
-			],
-			[
-				"sh",
-				"show_modal_types_select"
-			],
-			[
-				"type",
-				"types"
-			],
-			[
-				"butt",
-				"button_html"
-			],
-			[
-				"le",
-				"length"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_link_es_linker_fr.php",
-			"settings":
-			{
-				"buffer_size": 32086,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "application/views/project_link_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 48074,
+				"buffer_size": 51526,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/project_link_es_linker.css",
+			"file": "application/views/project_normalize_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 761,
+				"buffer_size": 12279,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/style.css",
+			"file": "application/views/project_normalize_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 10961,
+				"buffer_size": 24649,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -563,7 +554,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 304.0,
+		"height": 244.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -638,31 +629,45 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/150348a2f0197db054fac19f4ce81bc9/metadata.json",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
+		"/var/www/html/projets/magical_ui/application/views/cgu.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
+		"/var/www/html/projets/magical_ui/application/config/constants.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/CONFIG.py",
 		"/home/jerem/ballon d or.csv",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e5bd47a733e164e46cb29567a2603cee/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/af2abed1b6c4d321bd6eecb507b5c91f/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/a708fbc084bb36b4a31ff0f7180ceea3/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/replace_mvs/MINI__2016_10_ClinicalTrials_Recodage_EssaisAvecFrancais.csv__run_info.json",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba66c61b3d545dad359b196474dfd613/INIT/infered_config.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
 		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/User.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
 		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/admin.py",
@@ -672,7 +677,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/0e30189fd064b460c2b8bfaa3c695411/es_linker/column_matches.json",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e926e471e7f5b5161ed7dc9c756b452f/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
 		"/var/www/html/projets/magical_ui/init.sql",
 		"/var/www/html/projets/magical_ui/README.md",
 		"/var/www/html/projets/magical_ui/index.php",
@@ -682,13 +686,8 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3e43a56f2e22a145b05f7150f59094bd/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3e43a56f2e22a145b05f7150f59094bd/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3e43a56f2e22a145b05f7150f59094bd/es_linker/column_matches.json",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
-		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
 		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
 		"/var/www/html/projets/magical_ui/application/models/Comments_model.php",
-		"/var/www/html/projets/magical_ui/application/config/constants.php",
-		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bbc476a2424479eb7bab1d97656938c2/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/a933ae3163e6031b0c9fb85249a4706a/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bbc476a2424479eb7bab1d97656938c2/es_linker/learned_settings.json",
@@ -698,14 +697,12 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ed3bb3cf76c25cfc104c6afb34690687/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/961ded08fe683ad068e9cabed329e9ea/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/e046ced72c236d7e41f1d4019779fddb/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/b6ac7f74e29262e5c8992631d1eb4dea/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/1334eeb5ac3bd4b103ef7c3f9dda387b/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/224fb00efbaffa81b84fefae67944ce8/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/81f89f2169003974ff99751e5aea451f/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/60868bd87530f6493e882b7d551a4a2d/metadata.json",
@@ -723,10 +720,8 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/metadata.json",
 		"/var/www/html/projets/magical_ui/application/controllers/Comment_ajax.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_report_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.js",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
@@ -761,11 +756,7 @@
 		"/var/www/html/projets/magical_ui/application/views/footer_en.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.js",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker.css",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/d7c0133d15af4824f488a8887ab93135/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/6e9e30266ae726504c38e79ed1c8329a/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/3d88136595c7309164aa94d30c6b4447/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/4e988c0d2a74b9cd07390abafac8818e/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_labelling_specifics.php"
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/d7c0133d15af4824f488a8887ab93135/metadata.json"
 	],
 	"find":
 	{
@@ -785,6 +776,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bt_new_project",
+			"h4",
+			"#reports",
+			"bt_infer_types",
+			"#res",
+			"#file",
+			"#file_",
+			"result",
+			"#resul",
+			"generate_sample",
+			"bt_generate_sample",
+			"generate_sample",
+			"file",
+			"<h3>",
+			"h2",
+			"h3",
+			"chk_cgu",
+			"bt_normalizer",
+			"call_api_sync",
+			"position",
+			"down",
+			"<?",
+			"auto",
 			"confidence_vcentered",
 			"-",
 			")",
@@ -889,30 +903,7 @@
 			"message",
 			"fa-",
 			"bt_info_ref",
-			"socket",
-			"split_projects",
-			"spl",
-			"set_tab_steps_by_filename",
-			"split_projects",
-			"last_written",
-			"dashboard",
-			"dele",
-			"show_data",
-			"get_tresh",
-			"show_data",
-			"false",
-			"column_matches",
-			"get_column_matches",
-			"column_matches",
-			"get_data",
-			"_parse_re",
-			"_parse_req",
-			"schedu",
-			"pdb",
-			"get_data",
-			"userLinker",
-			"es_",
-			"fetch"
+			"socket"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -920,6 +911,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"<h3><i class=\"fa fa-cube\" aria-hidden=\"true\"></i> ",
+			"h3",
+			"h2",
 			",",
 			"",
 			",",
@@ -965,32 +959,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_link_es_linker_fr.php",
+					"file": "application/views/project_link_step1_init_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 32086,
+						"buffer_size": 51526,
 						"regions":
 						{
-							"bookmarks":
-							{
-								"flags": 144,
-								"icon": "bookmark",
-								"regions":
-								[
-									[
-										11183,
-										11183
-									]
-								],
-								"scope": "bookmarks"
-							}
 						},
 						"selection":
 						[
 							[
-								10395,
-								10415
+								27834,
+								27834
 							]
 						],
 						"settings":
@@ -1000,7 +981,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1453.0,
+						"translation.y": 5658.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1008,19 +989,54 @@
 				},
 				{
 					"buffer": 1,
-					"file": "application/views/project_link_step1_init_fr.php",
-					"semi_transient": false,
+					"file": "application/views/project_normalize_select_columns_fr.php",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 48074,
+						"buffer_size": 12279,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								36843,
-								36843
+								1705,
+								1721
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 517.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "application/views/project_normalize_init_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5097,
+								5097
 							]
 						],
 						"settings":
@@ -1030,69 +1046,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 14881.0,
+						"translation.y": 5544.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "assets/project_link_es_linker.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 761,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								140,
-								140
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "assets/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10961,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2369,
-								2369
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 918.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1115,11 +1072,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.794334409233,
 			1.0
 		],
 		"rows":
@@ -1174,8 +1138,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 412.0,
+	"side_bar_visible": false,
+	"side_bar_width": 324.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -5,8 +5,3 @@
 #show_report_ok, #upload_file_ok, #check_file_ok{
     visibility: hidden;
 }
-
-.btn_2_3{
-  width: 120px;
-  border-radius: 10px;
-}

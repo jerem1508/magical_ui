@@ -204,53 +204,107 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" style="margin-top: 10px;">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="well">
+<div class="container-fluid intro">
+    <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="col-lg-6">
             	<h1>Jointure de fichiers</h1>
-                <p>
+                <div class="page_explain">
                     La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.    
-                </p>
-                <div style="width: 100%" class="text-center">
-                    <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();" class="btn btn-success2">Didacticiel</a>
                 </div>
-            </div><!-- /well -->
         </div> <!-- / col-12-->
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                      </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img src="..." alt="...">
+                          <div class="carousel-caption">
+                            ...
+                          </div>
+                        </div>
+                        <div class="item">
+                          <img src="..." alt="...">
+                          <div class="carousel-caption">
+                            ...
+                          </div>
+                        </div>
+                        ...
+                      </div>
+
+                      <!-- Controls -->
+                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 text-right">
+                    <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+                        <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+                    </span>
+                </div>
+            </div>
+        </div><!-- /col-lg-6-->
     </div><!-- / row -->
 </div>
-<div class="container-fluid" style="margin-top: 0px;">
+<div class="container-fluid background_1" style="margin-top: 0px;">
     <div class="row">
         <div class="col-xs-12">
-            <div class="well">
-                <h2 style="display: inline;">
-                    <span class="step_numbers">1</span>
-                    &nbsp;Identité du projet
-                </h2>
-                <form class="form-horizontal" name="form_project" id="form_project" method="post">
-                    <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
-                        <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
-                        </div>
+            <h2 style="display: inline;">
+                <span class="step_numbers">1</span>
+                &nbsp;Identité du projet
+            </h2>
+            <form class="form-horizontal" name="form_project" id="form_project" method="post">
+                <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
+                    <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
                     </div>
-                    <div class="form-group" data-intro="Ajoutez une description optionnelle">
-                        <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
-                        </div>
+                </div>
+                <div class="form-group" data-intro="Ajoutez une description optionnelle">
+                    <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
+                        </label>
+                    </div>
+                </div>
+            </form>
         </div> <!-- / col-12-->
     </div><!-- / row -->
 </div>
-<div class="container-fluid" style="margin-top: 0px;">
+<div class="container-fluid background_1" style="margin-top: 0px;">
+    <hr>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <div class="well"  style="height: 630px;" data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
+                    <div data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
                         <h2 style="display: inline;">
                             <span class="step_numbers">2</span>
                             &nbsp;Sélection du fichier "source"
@@ -331,8 +385,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                     </div>
                     
                 </div>
-                <div class="col-xs-6">
-                    <div class="well" style="height: 630px;" data-intro="Choisissez ici votre fichier de référence">
+                <div class="col-xs-6" style="border-left: 3px dotted #ddd;">
+                    <div data-intro="Choisissez ici votre fichier de référence">
                         <h2 style="display: inline;">
                             <span class="step_numbers">3</span>
                             &nbsp;Sélection du fichier "référentiel"
@@ -437,49 +491,55 @@ function get_normalized_projects_html($id, $normalized_projects)
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" style="padding-bottom: 20px;">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
                 </div>
             </div>
 
-            <div class="row" id="result" style="margin-top: 20px;">
-                <div class="well" id="steps">
-                    <div>
-                        <span id="txt_create_merge_project">Création du projet de jointure</span><span id="create_merge_project_ok" class="glyphicon glyphicon-ok check_ok">
-                    </div>
-                    <div>
-                        <span id="txt_init_nrz_src_project">Initialisation du projet de normalisation "SOURCE"</span><span id="init_nrz_src_project_ok" class="glyphicon glyphicon-ok check_ok">
-                    </div>
-                    <div>
-                        <span id="txt_send_src_file">Envoi du fichier "SOURCE" sur le serveur</span><span id="send_src_file_ok" class="glyphicon glyphicon-ok check_ok">
-                        <div id="progress_src" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
-                            <div class="progress-bar progress-bar-success"></div>
+            <div class="row background_2">
+                <div class="col-md-12">
+                    <div class="row" id="result" style="margin-top: 20px;color: #fff;">
+                        <div id="steps">
+                            <div>
+                                <span id="txt_create_merge_project">Création du projet de jointure</span><span id="create_merge_project_ok" class="glyphicon glyphicon-ok check_ok">
+                            </div>
+                            <div>
+                                <span id="txt_init_nrz_src_project">Initialisation du projet de normalisation "SOURCE"</span><span id="init_nrz_src_project_ok" class="glyphicon glyphicon-ok check_ok">
+                            </div>
+                            <div>
+                                <span id="txt_send_src_file">Envoi du fichier "SOURCE" sur le serveur</span><span id="send_src_file_ok" class="glyphicon glyphicon-ok check_ok">
+                                <div id="progress_src" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <span id="txt_init_nrz_ref_project">Initialisation du projet de normalisation "REFERENTIEL"</span><span id="init_nrz_ref_project_ok" class="glyphicon glyphicon-ok check_ok">
+                            </div>
+                            <div>
+                                <span id="txt_send_ref_file">Envoi du fichier "REFERENTIEL" sur le serveur</span><span id="send_ref_file_ok" class="glyphicon glyphicon-ok check_ok">
+                                <div id="progress_ref" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <span id="txt_add_src_nrz_projects">Ajout du projet de normalisation "SOURCE" au projet de jointure</span><span id="add_src_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
+                            </div>
+                            <div>
+                                <span id="txt_add_ref_nrz_projects">Ajout du projet de normalisation "REFERENTIEL" au projet de jointure</span><span id="add_ref_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <span id="txt_init_nrz_ref_project">Initialisation du projet de normalisation "REFERENTIEL"</span><span id="init_nrz_ref_project_ok" class="glyphicon glyphicon-ok check_ok">
-                    </div>
-                    <div>
-                        <span id="txt_send_ref_file">Envoi du fichier "REFERENTIEL" sur le serveur</span><span id="send_ref_file_ok" class="glyphicon glyphicon-ok check_ok">
-                        <div id="progress_ref" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
-                            <div class="progress-bar progress-bar-success"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <span id="txt_add_src_nrz_projects">Ajout du projet de normalisation "SOURCE" au projet de jointure</span><span id="add_src_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
-                    </div>
-                    <div>
-                        <span id="txt_add_ref_nrz_projects">Ajout du projet de normalisation "REFERENTIEL" au projet de jointure</span><span id="add_ref_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
-                    </div>
-                </div>
-            </div><!--/container-->
+                    </div><!--/container-->
 
-            <div class="row" id="bloc_bt_next">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-success" id="bt_next">Etape suivante : Association des colonnes >></button>
+                    <div class="row" id="bloc_bt_next" style="padding-bottom: 20px;">
+                        <div class="col-md-12 text-right">
+                            <button class="btn btn-success" id="bt_next">Etape suivante : Association des colonnes >></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
 
             <div id="files" class="files"></div>
 
@@ -527,6 +587,31 @@ function get_normalized_projects_html($id, $normalized_projects)
   </div>
 </div>
 
+<!-- Modal error-->
+<div class="modal fade" id="modal_error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #262626">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="color: #ddd">Erreur(s) !</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-1">
+                <h2 style="margin-top:0;color: #E00612;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></h2>
+            </div>
+            <div class="col-xs-11" id="errors">
+
+            </div>
+        </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
 
@@ -539,6 +624,12 @@ function get_normalized_projects_html($id, $normalized_projects)
     		case "project_name_undefined":
     			div_error.html("<strong>Le nom du projet doit être renseigné.</strong>");
     		break;
+            case "no_src_project":
+                div_error.html("<strong>Veuillez seélectionner un fichier source</strong>");
+            break;
+            case "no_ref_project":
+                div_error.html("<strong>Veuillez seélectionner un fichier référentiel</strong>");
+            break;
             case "api_new_error":
                 div_error.html("<strong>Création du projet impossible.</strong>");
             break;
@@ -737,12 +828,37 @@ function get_normalized_projects_html($id, $normalized_projects)
 
     function requirements() {
         
+        error = false;
+        var tab_error = new Array();
+
+        // Récupération des valeurs
+        var project_name = $("#project_name").val();
+        var project_description = $("#project_description").val();
+
+        // Le champ project_name doit être renseigné
+        if(project_name == ""){
+            tab_error.push('Veuillez renseigner le nom du projet.');
+        }
+
+        if(!new_file_src && !exist_file_src){
+            tab_error.push('Vous devez sélectionner un fichier source.');
+        }
+
+        if(!new_file_ref && !exist_file_ref && !exist_ref){
+            tab_error.push('Vous devez sélectionner un fichier référentiel.');
+        }
+
+        //  test CGU
+        if(!$("#chk_cgu").is(':checked')){
+            // Affichage de la modale d'erreur CGU
+            tab_error.push('Vous devez valider les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d\'utilisation</a> afin de pouvoir commencer la création d\'un projet.');
+        }
+
         if(exist_file_src){
             // recuperation de l'id du projet
             src_project_id = $("#src_project_id").html();
             if(src_project_id == ''){
-                alert('Vous devez sélectionner un projet "SOURCE"');
-                return false;
+                tab_error.push('Vous devez sélectionner un fichier source.');
             }
         }
 
@@ -750,12 +866,21 @@ function get_normalized_projects_html($id, $normalized_projects)
             // recuperation de l'id du projet
             ref_project_id = $("#ref_project_id").html();
             if(ref_project_id == ''){
-                alert('Vous devez sélectionner un projet "REFERENTIEL"');
-                return false;
+                tab_error.push('Vous devez sélectionner un fichier référentiel.');
             }
         }
+        
+        $("#errors").html("");
+        if(tab_error.length > 0){
+            for (var i = 0; i < tab_error.length; i++) {
+                $("#errors").html($("#errors").html() + tab_error[i] + '<br>');
+            }
 
-        return true;
+            $("#modal_error").modal("show");
+        }
+        else{
+            return true;            
+        }
     }// /requirements()
 
 
@@ -766,28 +891,11 @@ function get_normalized_projects_html($id, $normalized_projects)
             return false;
         }
 
-        error = false;
-
-        console.log("treatment");
-        // desactivation du bouton
-        $("#bt_new_project").prop("disabled", true);
-
-        // Récupération des valeurs
         var project_name = $("#project_name").val();
         var project_description = $("#project_description").val();
-
-        // Controles ----------------------
-            // Le champ project_name doit être renseigné
-            if(project_name == ""){
-                console.log("project_name not defined");
-                // Message utilisateur
-                my_errors("show", "project_name_undefined");
-
-                return false;
-            }
-
-        // /Controles ----------------------
         
+        // desactivation du bouton
+        $("#bt_new_project").css("display", "none");
 
         // Appels API ----------------------
 
@@ -994,6 +1102,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         $("#bt_new_project").click(function(e){
             console.log("bt_new_project");
             e.preventDefault();
+
             treatment();
         });
 

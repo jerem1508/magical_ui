@@ -1,9 +1,9 @@
-#msg_danger, #result, #reports, #steps, #wait{
+#msg_danger, #result, #steps, #wait{
     /*On masque par défaut*/
     display: none;
 }
 
-#start_treatment_ok, #show_report_ok{
+#start_treatment_ok, #show_report_ok, #reports{
 	visibility: hidden;
 }
 .tagsinput-perso{
@@ -24,4 +24,15 @@
     .modal-lg {
         width: 1100px;
     }
+}
+
+#reports{
+	min-height: 400px;
+}
+
+H4{
+	color: #25358C;
+}
+H4 i{
+	color: #E00612;
 }

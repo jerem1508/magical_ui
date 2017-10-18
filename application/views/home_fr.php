@@ -14,15 +14,16 @@
 <!-- /Intro -->
 <div class="container-fluid intro" style="color: #262626">
 	<div class="row">
-		<div class="col-md-offset-2 col-md-10">
+		<div class="col-md-offset-1 col-md-10">
 			<h1 style="padding-top: 100px;padding-bottom: 100px;">
-				Application web permettant le 
+				Application web permettant la 
 				<br>
-				<span class="title">normalisation</span> et de <span class="title">rapprochement</span>
+				<span class="title">normalisation</span> et le <span class="title">rapprochement</span>
 				<br>
 				générique de fichiers <span style="color: #DF1A25">CSV</span>
 			</h1>
 		</div>
+		<div class="col-md-1"></div>
 	</div>
 </div><!-- /Intro -->
 
@@ -32,7 +33,7 @@
 		<div class="col-md-offset-2 col-md-3">
 			<h3>Normalisation d'un fichier</h3>
 			<p class="text-justify">
-				La normalisation prend un unique fichier tabulaire (csv, excel) et le nettoie automatiquement en fonction des types de données rencontrées. <a href="" style="color: #DF1A25">Plus...</a>
+				La normalisation prend un unique fichier tabulaire (csv, excel) et le nettoie automatiquement en fonction des types de données rencontrées.
 			</p>
 			<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">Commencer un projet de normalisation</button>
 		</div>

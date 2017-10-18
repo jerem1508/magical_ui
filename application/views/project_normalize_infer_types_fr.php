@@ -1,6 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 20px;">
+<div class="container-fluid intro">
 <!--
     <div class="text-center">
         <div class="breadcrumb flat">
@@ -12,22 +12,31 @@
         </div>
     </div>
 -->
-	<div class="well">
-		<div class="row">
+
+		<div class="row" style="padding-top: 20px;">
 			<div class="col-sm-8">
 				<h2 class="page_title"><span id="project_name"></span> : <i>Détection des types</i></h2>
+				<span class="cl_filename">
+				<i class="fa fa-file-text" aria-hidden="true"></i>
+				Traitement du fichier <span id="filename" class="file"></span>
+			</span>
 			</div>
 			<div class="col-sm-4 text-right">
-				<div id="didacticiel">
-					<a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-					&nbsp;|&nbsp;
-				</div>
-				<a id="bt_skip">Passer cette étape</a>
+				<a id="bt_skip" class="btn btn-xs btn-success2">Passer cette étape >></a>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 page_explain">
-				Dans cette étape, nous tentons de <strong>détecter automatiquement le type</strong> de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
+		<div class="row" style="padding-bottom: 20px;">
+			<div class="col-sm-6">
+				<p class="page_explain">
+					Dans cette étape, nous tentons de <strong>détecter automatiquement le type</strong> de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
+				</p>
+			</div>
+			<div class="col-sm-6 text-right">
+				<div id="didacticiel">
+	            	<span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+	                	<img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+		            </span>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -40,59 +49,56 @@
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 			</div>
 		</div>
-		<div class="row" id="result">
+		<div class="row background_1" id="result">
+			<h3>Résultat de la détection</h3>
 			<div class="col-xs-12">
 				<div class="row">
-					<div class="col-xs-12">
-						<hr>
-					</div>
+					<div class="col-xs-12" id="columns" style="overflow-x:scroll"></div>
 				</div>
-				<div class="row">
-					<div class="col-xs-12" id="columns" style=" overflow-x:scroll"></div>
-				</div>
-
-				<div class="row">
+				<div class="row" style="padding-top: 20px;">
 					<div class="col-xs-12 text-right">
 						<button class="btn btn btn-success" id="bt_recode_types">Lancer le traitement de l'échantillon</button>
 					</div>
 				</div>
 			</div>
 		</div>
-    </div><!-- /well-->
+
 </div><!--/container-->
 
-<div class="container">
-    <div class="well" id="steps">
-        <ul>
-            <li>
-                Lancement du traitement <span id="start_treatment_ok" class="glyphicon glyphicon-ok check_ok"></span>
-                <div id="treatment_process">.......</div>
-            </li>
-            <li>
-                Affichage du rapport <span id="show_report_ok" class="glyphicon glyphicon-ok check_ok"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="well" id="report">
-        <h2>Rapport : </h2>
+<div class="container-fluid background_2">
+    <div id="report">
+        <h2>
+        	<i class="fa fa-flag-checkered" aria-hidden="true"></i>
+        	Rapport :
+        </h2>
         <div class="row">
-            <div class="col-md-3 text-center">
-                <img src="<?php echo base_url('assets/img/report.png');?>" style="height: 150px;">
+            <div class="col-md-3">
+			    <div id="steps" style="color: #fff;">
+			        <ul>
+			            <li>
+			                Lancement du traitement <span id="start_treatment_ok" class="glyphicon glyphicon-ok check_ok"></span>
+			                <div id="treatment_process">.......</div>
+			            </li>
+			            <li>
+			                Affichage du rapport <span id="show_report_ok" class="glyphicon glyphicon-ok check_ok"></span>
+			            </li>
+			        </ul>
+			    </div>
             </div>
             <div class="col-md-9">
-            	<h3>Modifications effectuées</h3>
-            	<div id="tab_reports"></div>
+            	<h3 style="color: #fff;">Modifications effectuées</h3>
+            	<div id="tab_reports" class="background_1"></div>
             	<!--
             	<a id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier</a>
             	-->
             </div>
         </div><!-- /row-->
-	    <div class="row">
+	    <div class="row" style="padding-bottom: 20px;">
 	        <div class="col-md-12 text-right">
 	            <button class="btn btn btn-success" id="bt_next" disabled>Etape suivante : Traitement et téléchargement >></button>
 	        </div>
 	    </div><!-- /row-->
-    </div><!-- /well /report-->
+    </div><!-- /report-->
 </div><!--/container-->
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="Sélection des types" id="modal_types_select">
@@ -192,6 +198,7 @@ if(isset($this->session->project_type)){
 
                     module_name = result.module_name;
                     file_name = result.file_name;
+                    $("#filename").html(file_name)
                 }
             },
             error: function (result, status, error){
@@ -320,6 +327,8 @@ if(isset($this->session->project_type)){
 							                    write_categories_types_modal(result.result.all_types);
 
 							                    tags_modal(result.result.type_tags);
+
+							                    $("#didacticiel").css("visibility","visible");
 												
 											}
 											else{
@@ -475,7 +484,7 @@ if(isset($this->session->project_type)){
 		html += "</table>";
 
     	$("#result #columns").html(html);
-    	$("#result").css("display","inherit");
+    	$("#result").css("visibility","visible");
 
     	gl_columns = tab_col; // Sauvegarde des colonnes ne tableau global
     }// write_types
@@ -827,7 +836,6 @@ if(isset($this->session->project_type)){
 			// affichage de la div de "chargement" + trt des bt
 			$("#wait").css("display","inherit");
 			$("#bt_infer_types").css("display", "none");
-			$("#didacticiel").css("visibility","visible");
 
 			// lancement de l'inference
 			treatment_infer_types();
