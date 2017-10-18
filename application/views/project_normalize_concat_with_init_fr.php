@@ -246,7 +246,10 @@ if(isset($this->session->project_type)){
 		
                     if(metadata.has_mini){
                     	// File_name sans MINI__
-                    	file_name = file_name.substr(6);	
+                        if(file_name.indexOf("MINI__") >= 0){
+                    	   file_name = file_name.substr(6);                            
+                        }
+
 			            tparams = {
 			            	"data_params": {
 			                	"module_name": module_name,
@@ -653,9 +656,6 @@ if(isset($this->session->project_type)){
                     	file_name = file_name.substr(6);	
                     }
 
-
-
-
 		            tparams = {
 		            	"data_params": {
 		                	"module_name": result.module_name,
@@ -836,7 +836,7 @@ if(isset($this->session->project_type)){
 
 
 		// creation de l'échantillon
-		generate_sample();
+		//generate_sample();
 
 
 		$("#bt_recode_types").click(function(){
