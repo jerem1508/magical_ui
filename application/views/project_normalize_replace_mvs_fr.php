@@ -479,21 +479,21 @@ if(isset($this->session->project_type)){
 										type: 'get',
 										url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,
 										success: function (result) {
-											if(result.error){
-												console.log("API error - job");
-												console.dir(result.error);
-											}
-											else{
+											if(result.completed){
+							                    clearInterval(handle);
+
 							                    console.log("success - job");
 							                    console.dir(result);
-
-							                    clearInterval(handle);
 
 							                    // Arret de l'animation recherche
 							                    $("#wait").css("display","none");
 							                    
 							                    write_mvs(result);
+											}
+											else{
+												console.log("job en cours");
 							                }
+
 							            },
 							            error: function (result, status, error){
 							                console.log("error");
@@ -556,15 +556,11 @@ if(isset($this->session->project_type)){
 							type: 'get',
 							url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,
 							success: function (result2) {
-								if(result2.error){
-									console.log("API error - job");
-									console.dir(result2.error);
-								}
-								else{
-				                    console.log("success - job - replace_mvs");
-				                    console.dir(result2);
-
+								if(result2.completed){
 				                    clearInterval(handle);
+
+				                    console.log("success - job - replace_mvs");
+				                    console.log(result2);
 
 				                    // Affichage du rapport
 				                    $('#show_report_ok').css('visibility', 'visible');
@@ -575,11 +571,12 @@ if(isset($this->session->project_type)){
 				                    $('#report').css('display', 'inherit');
 				                    $("#bt_next").prop("disabled", false);
 
-
 				                    var modified_columns = result2.result.mod_count;
 									
 									write_report_html(modified_columns, "tab_reports", true);
-
+				                }
+				             	else{
+									console.log("job en cours");
 				                }
 				            },
 				            error: function (result2, status, error){

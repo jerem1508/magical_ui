@@ -148,7 +148,6 @@ class Project extends CI_Controller {
 
 		// Recherche de l'étape en cours
 		$link_step = $this->get_actual_step_linker($project_id);
-
 		if($project_id && $link_step == 'INIT'){
 			// tests de complétude des projets de normalisation
 			$normalized_projects = $this->get_normalization_projects($project_id);
@@ -156,6 +155,7 @@ class Project extends CI_Controller {
 			foreach ($normalized_projects as $normalized_project) {
 				// Rechercher l'étape du projet
 				$step = $this->get_actual_step_normalization($normalized_project['project_id']);
+//print_r($step);die("");
 
 				// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation
 				$this->session->set_userdata('link_project_id', $project_id);

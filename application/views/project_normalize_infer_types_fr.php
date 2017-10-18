@@ -775,8 +775,8 @@ if(isset($this->session->project_type)){
 						success: function (result2) {
 							if(result2.completed){
 		                		clearInterval(handle);
-			                    console.log("success - trt - recode_types");
 
+			                    console.log("success - trt - recode_types");
 			                    console.dir(result2);
 
 			                    // Affichage du rapport
@@ -791,8 +791,7 @@ if(isset($this->session->project_type)){
             					write_report_html(result2.result.mod_count, "tab_reports", true);
 							}
 							else{
-								console.log("success - job en cours");
-
+								console.log("job en cours");
 			                }
 			            },
 			            error: function (result2, status, error){
