@@ -598,7 +598,7 @@
                 console.log("data");
                 console.log(data);
 
-                $('#progress').css('display', 'none');
+                //$('#progress').css('display', 'none');
                 $('#upload_file_ok').css('visibility', 'visible');
                 $('#check_file_ok').css('visibility', 'visible');
 
