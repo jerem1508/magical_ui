@@ -116,156 +116,149 @@
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" style="margin-top: 10px;">
-	<div class="well">
-		<div class="row">
-			<div class="col-xs-12">
-				<h3 style="display: inline;">Mes projets de normalisation</h3>
-				<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">+&nbsp;Nouveau</button>
-				<p>
-					Ci-dessous la liste de vos projets de normalisation. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
-					L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
-				</p>
-			</div>
+<div class="container-fluid background_1" style="padding-top: 20px; padding-bottom: 20px;">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 style="display: inline;">Mes projets de normalisation</h3>
+			<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">+&nbsp;Nouveau</button>
+			<p>
+				Ci-dessous la liste de vos projets de normalisation. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
+				L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
+			</p>
 		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<?php
-				if(count($normalized_projects) > 0){
-				?>
-				<table class="table table-responsive table-condensed table-striped" id="normalized_projects">
-					<thead>
-						<tr>
-							<th>Projet</th>
-							<th>Date de création</th>
-							<th class="text-center">Statut</th>
-							<th>Fichier</th>
-							<th>Avancement</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];
-						$nb_steps = count($tab_steps);
-						$ratio = 100/$nb_steps;
-						foreach ($normalized_projects as $project) {
-							$steps_html = '<div class="progress">';
-							$found_step_todo = false;
-							$step_todo = "";
-							foreach ($tab_steps as $step) {
-								$bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?"success2":"warning";
-								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
-
-								if(!$found_step_todo){
-									if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){
-										$step_todo = $step;
-										$found_step_todo = true;
-									}
-								}
-							}// /foreach tab_steps
-							$steps_html.= '</div>';
-							echo '<tr>';
-							echo '<td>'.$project['display_name'].'</td>';
-							echo '<td>'.$project['created_tmp'].'</td>';
-							echo '<td class="text-center">'.get_status($project['public']).'</td>';
-							echo '<td>'.$project['file'].'</td>';
-							echo '<td class="text-center">'.$steps_html.'</td>';
-							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
-							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
-							echo '</tr>';
-						} // /foreach $normalized_projects
-						?>
-					</tbody>
-				</table>
-				<?php
-				}
-				else{
-					echo "Pas encore de projets";
-				}
-				?>
-			</div><!--/col-xs-12-->
-
-		</div><!--/row-->
 	</div>
-</div>
+	<div class="row">
+		<div class="col-xs-offset-1 col-xs-10">
+			<?php
+			if(count($normalized_projects) > 0){
+			?>
+			<table class="table table-responsive table-condensed table-striped" id="normalized_projects">
+				<thead>
+					<tr>
+						<th>Projet</th>
+						<th>Date de création</th>
+						<th class="text-center">Statut</th>
+						<th>Fichier</th>
+						<th>Avancement</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];
+					$nb_steps = count($tab_steps);
+					$ratio = 100/$nb_steps;
+					foreach ($normalized_projects as $project) {
+						$steps_html = '<div class="progress">';
+						$found_step_todo = false;
+						$step_todo = "";
+						foreach ($tab_steps as $step) {
+							$bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?"success2":"warning";
+							$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
 
-<div class="container" style="margin-top: 0px;">
-	<div class="well">
-		<div class="row">
-			<div class="col-xs-12">
-				<h3 style="display: inline;">Mes projets de jointure</h3>
-				<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">+&nbsp;Nouveau</button>
-				<p>
-					Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
-				</p>
-			</div><!--/col-xs-12-->
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<?php
-				if(count($linked_projects) > 0){
-				?>
-				<table class="table table-responsive table-condensed table-striped" id="linked_projects">
-					<thead>
-						<tr>
-							<th>Projet</th>
-							<th>Date de création</th>
-							<th>Source</th>
-							<th>Référentiel</th>
-							<th>Avancement</th>
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
-						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
-						$nb_steps = count($tab_steps);
-						$ratio = 100/$nb_steps;
-						foreach ($linked_projects as $project) {
-
-							$steps_html = '<div class="progress">';
-							
-							$found_step_todo = false;
-							$step_todo = "";
-							foreach ($tab_steps as $step) {
-								$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
-								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
-
-								if(!$found_step_todo){
-									if(!is_completed_link_step($step, $project['steps_by_filename'])){
-										$step_todo = $step;
-										$found_step_todo = true;
-									}
+							if(!$found_step_todo){
+								if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){
+									$step_todo = $step;
+									$found_step_todo = true;
 								}
-							}// /foreach tab_steps
-							$steps_html.= '</div>';
-							echo '<tr>';
-							echo '<td>'.$project['display_name'].'</td>';
-							echo '<td>'.$project['created_tmp'].'</td>';
-							echo '<td>'.$project['file_src'].'</td>';
-							echo '<td>'.$project['file_ref'].'</td>';
-							echo '<td class="text-center">'.$steps_html.'</td>';
-							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
-							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
-							echo '</tr>';
-						} // /foreach $normalized_projects
-						?>
-					</tbody>
-				</table>
-				<?php
-				}
-				else{
-					echo "Pas encore de projets";
-				}
-				?>
-			</div><!--/col-xs-12-->
+							}
+						}// /foreach tab_steps
+						$steps_html.= '</div>';
+						echo '<tr>';
+						echo '<td>'.$project['display_name'].'</td>';
+						echo '<td>'.$project['created_tmp'].'</td>';
+						echo '<td class="text-center">'.get_status($project['public']).'</td>';
+						echo '<td>'.$project['file'].'</td>';
+						echo '<td class="text-center">'.$steps_html.'</td>';
+						echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
+						echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
+						echo '</tr>';
+					} // /foreach $normalized_projects
+					?>
+				</tbody>
+			</table>
+			<?php
+			}
+			else{
+				echo "Pas encore de projets";
+			}
+			?>
+		</div><!--/col-xs-12-->
 
-		</div><!--/row-->
-	</div><!--/well-->
+	</div><!--/row-->
+	<hr style="border-top: 3px dotted #777;">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 style="display: inline;">Mes projets de jointure</h3>
+			<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">+&nbsp;Nouveau</button>
+			<p>
+				Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+			</p>
+		</div><!--/col-xs-12-->
+	</div>
+	<div class="row">
+		<div class="col-xs-offset-1 col-xs-10">
+			<?php
+			if(count($linked_projects) > 0){
+			?>
+			<table class="table table-responsive table-condensed table-striped" id="linked_projects">
+				<thead>
+					<tr>
+						<th>Projet</th>
+						<th>Date de création</th>
+						<th>Source</th>
+						<th>Référentiel</th>
+						<th>Avancement</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
+					$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
+					$nb_steps = count($tab_steps);
+					$ratio = 100/$nb_steps;
+					foreach ($linked_projects as $project) {
+
+						$steps_html = '<div class="progress">';
+						
+						$found_step_todo = false;
+						$step_todo = "";
+						foreach ($tab_steps as $step) {
+							$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
+							$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
+
+							if(!$found_step_todo){
+								if(!is_completed_link_step($step, $project['steps_by_filename'])){
+									$step_todo = $step;
+									$found_step_todo = true;
+								}
+							}
+						}// /foreach tab_steps
+						$steps_html.= '</div>';
+						echo '<tr>';
+						echo '<td>'.$project['display_name'].'</td>';
+						echo '<td>'.$project['created_tmp'].'</td>';
+						echo '<td>'.$project['file_src'].'</td>';
+						echo '<td>'.$project['file_ref'].'</td>';
+						echo '<td class="text-center">'.$steps_html.'</td>';
+						echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
+						echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
+						echo '</tr>';
+					} // /foreach $normalized_projects
+					?>
+				</tbody>
+			</table>
+			<?php
+			}
+			else{
+				echo "Pas encore de projets";
+			}
+			?>
+		</div><!--/col-xs-12-->
+	</div><!--/row-->
 </div><!--/container-->
 
 <script type="text/javascript">

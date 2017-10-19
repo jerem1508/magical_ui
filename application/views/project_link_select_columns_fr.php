@@ -1,21 +1,14 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" id="entete" style="margin-top: 10px;">
-    <div class="well">
-        <div class="row">
-            <div class="col-md-8">
-                <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Association des colonnes</i></h2>
-            </div>
-            <div class="col-md-4 text-right">
-                <div id="didacticiel">
-                    <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-                    &nbsp;|&nbsp;
-                </div>
-                <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
-            </div>
+<div class="container-fluid intro" id="entete">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Association des colonnes</i></h2>
         </div>
-        <div class="row">
-            <div class="col-sm-12 page_explain">
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page_explain">
                 Cette étape vous <strong>permet d'associer</strong> des colonnes de votre fichier <strong>source</strong> à des colonne du <strong>référentiel</strong> cible. Une bonne association améliorera considérablement les résultats de la jointure.<br>
                 Pour associer des colonnes, vous devez ajouter une nouvelle association (<button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button>) et glisser/déposer la ou les colonnes souhaitées dans la zone corespondante.
                 <br>
@@ -25,86 +18,83 @@
                 Bien que cela soit déconseillé, vous pouvez choisir de passer cette étape.
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-success" id="bt_start">Commencer l'association des colonnes</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-success" id="bt_start">Commencer l'association des colonnes</button>
+        </div>
+    </div>
+</div><!--/container-->
+<div id="tempo"></div>
+
+<div class="container-fluid background_1" id="work" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-xs-3 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
+            <h3>
+                <i class="fa fa-table" aria-hidden="true"></i>
+                &nbsp;
+                Source
+                &nbsp;
+                <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_src"></i>
+            </h3>
+            <div id="info_src">
+                <div>
+                    <span class="keys">Fichier : </span><span id="src_file_name" class="filename key_numbers"></span>                        
+                </div>
+                <div>
+                    <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
+                </div>
+                <div>
+                    <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
+                </div>
+            </div>
+            <div id="src_columns"></div>
+        </div>
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="col-md-9">
+                    <h2 style="margin-top: 0;display: inline-block;">
+                        <span id="project_name2"></span> : <i>Association des colonnes</i>
+                    </h2>
+                    <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
+                        Nouvelle association&nbsp;
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+                <div class="col-md-3 text-right">
+                     <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-xs-12 text-center" id="blocs"></div>
             </div>
         </div>
-    </div><!-- /well-->
-</div><!--/container-->
-
-<div class="container-fluid" id="work" style="margin-top: 10px;">
-    <div class="well">
-        <div class="row">
-            <div class="col-xs-2 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
-                <h3>
-                    <i class="fa fa-table" aria-hidden="true"></i>
-                    &nbsp;
-                    Source
-                    &nbsp;
-                    <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_src"></i>
-                </h3>
-                <div id="info_src">
-                    <div>
-                        <span class="keys">Fichier : </span><span id="src_file_name" class="filename key_numbers"></span>                        
-                    </div>
-                    <div>
-                        <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
-                    </div>
-                    <div>
-                        <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
-                    </div>
+        <div class="col-xs-3 titre" data-intro="... puis les colonnes correspondantes du référentiel">
+            <h3>
+                <i class="fa fa-database" aria-hidden="true"></i>
+                &nbsp;
+                Référentiel
+                &nbsp;
+                <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_ref"></i>
+            </h3>
+            <div id="info_ref">
+                <div>
+                    <span class="keys">Fichier : </span><span id="ref_file_name" class="filename key_numbers"></span>                        
                 </div>
-                <div id="src_columns"></div>
-            </div>
-            <div class="col-xs-8">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h2 style="margin-top: 0;display: inline-block;">
-                            <span id="project_name2"></span> : <i>Association des colonnes</i>
-                        </h2>
-                        <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
-                            Nouvelle association&nbsp;
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                    <div class="col-md-3 text-right">
-                         <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-                        &nbsp;|&nbsp;
-                        <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
-                    </div>
+                <div>
+                    <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
                 </div>
-               
-                <div class="row">
-                    <div class="col-xs-12 text-center" id="blocs"></div>
+                <div>
+                    <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
                 </div>
             </div>
-            <div class="col-xs-2 titre" data-intro="... puis les colonnes correspondantes du référentiel">
-                <h3>
-                    <i class="fa fa-database" aria-hidden="true"></i>
-                    &nbsp;
-                    Référentiel
-                    &nbsp;
-                    <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_ref"></i>
-                </h3>
-                <div id="info_ref">
-                    <div>
-                        <span class="keys">Fichier : </span><span id="ref_file_name" class="filename key_numbers"></span>                        
-                    </div>
-                    <div>
-                        <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
-                    </div>
-                    <div>
-                        <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
-                    </div>
-                </div>
-                <div id="ref_columns"></div>
-            </div>
-        </div>    
+            <div id="ref_columns"></div>
+        </div>
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 20px;min-height: 250px;">
     <div class="row">
         <div class="col-xs-12 text-right">
             <button class="btn btn-success" id="bt_next">Etape suivante : Apprentissage >></button>
@@ -161,7 +151,7 @@ function get_metadata(project_type, project_id) {
     });// /ajax metadata
 
     return metadata;
-}
+}// /get_metadata()
 
 
 function get_runinfo(project_type, project_id, module_name, file_name) {
@@ -192,9 +182,9 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             }
             else{
                 console.log("success - download_config");
-                console.dir(result);
+                console.log(result);
 
-                return result.result.params.column_types;
+                runinfo = result.result.params.column_types;
             }
         },
         error: function (result, status, error){
@@ -202,6 +192,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             console.log(result);
         }
     });// /ajax - Download config
+    return runinfo;
 } // /get_runinfo()
 
 
@@ -210,19 +201,7 @@ function get_columns(metadata) {
 
     var all_columns = metadata['column_tracker']['original'];
     return all_columns;
-}
-
-
-function write_columns_html(target, columns) {
-    // Ajoute les colonnes à l'interface
-
-    var html = "";
-    $.each(columns, function( i, name) {
-      html+= '<div class="column color_' + target + '" draggable="true">' + name + '</div>' + "\n";
-    });
-
-    $("#" + target).html(html);
-}
+}// /get_columns()
 
 
 function get_filename(filename) {
@@ -232,7 +211,7 @@ function get_filename(filename) {
     }
 
     return filename;
-}
+}// /get_filename()
 
 
 function valid_associations() {
@@ -242,7 +221,7 @@ function valid_associations() {
     // TODO
 
     return true;
-}
+}// /valid_associations()
 
 
 function add_column_certain_matches_api() {
@@ -334,12 +313,14 @@ function valid_step(link_project_id){
 
     // Appel de l'étape suivante
     window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
-}
+}// /valid_step()
 
 
 function get_buttons_actions() {
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
+        $("#tempo").css("display", "none");
+        $("#bt_next").css("visibility", "visible");
         $("#work").fadeToggle();
 
         // Association vide par défaut
@@ -378,6 +359,16 @@ function get_buttons_actions() {
         $("#lib_bloc_" + id_bloc_to_change).html($("#lib_bloc").val());
     });
 }// /get_buttons_actions()
+
+
+function set_scroll(cible, ncols, limit) {
+    if(ncols >= limit){
+        var height = 40 * limit;
+        $("#" + cible).css("height", height);
+        $("#" + cible).css("overflow", "scroll");
+    }
+}// /set_scroll()
+
 
 $(function(){// ready
     
@@ -431,6 +422,10 @@ $(function(){// ready
     $("#src_ncols").html(columns_src.length);
     $("#ref_ncols").html(columns_ref.length);
 
+    // Scrolls des colonnes si trop de données
+    set_scroll("src_columns", columns_src.length, 15);
+    set_scroll("ref_columns", columns_ref.length, 15);
+
     // Récupération des types inférés
     var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name);
     var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name);
@@ -439,10 +434,8 @@ $(function(){// ready
     $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
     $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
 
-
     cpt_bloc = 0; // Compteur de blocs
     id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
-
 
 });//ready
 </script>

@@ -1,17 +1,14 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container" id="entete" style="margin-top: 10px;">
-    <div class="well">
-        <div class="row">
-            <div class="col-sm-8">
-                <h2 class="page_title"><span id="project_name1"></span> : <i>Apprentissage</i></h2>
-            </div>
-            <div class="col-sm-4 text-right">
-                <a href="<?php echo base_url('index.php/Project/load_step4_infer_types');?>">Passer cette étape</a>
-            </div>
+<div class="container-fluid intro" id="entete" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="page_title"><span id="project_name1"></span> : <i>Apprentissage</i></h2>
         </div>
-        <div class="row">
-            <div class="col-sm-12 page_explain">
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page_explain">
                 L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
                 <br><br>
                 Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.
@@ -21,227 +18,234 @@
                 Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-success" id="bt_start">Commencer l'apprentissage</button>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-success" id="bt_start">Commencer l'apprentissage</button>
+        </div>
+    </div>
+</div><!--/container-fluid-->
+<div id="tempo" style="min-height: 400px;"></div>
+
+<div class="container-fluid work background_1" style="padding-top: 20px;padding-bottom: 20px;">
+
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="margin-top: 0;display: inline-block;">
+                        <span id="project_name2"></span> : <i>Apprentissage</i>
+                    </h2>
+                </div>
+            </div><!-- / row-->
+            <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
+                <div class="col-xs-12">
+                    <h2>
+                        <span class="step_numbers">1</span>
+                        &nbsp;Filtres sur le référentiel
+                    </h2>
+                </div>
+            </div>
+            <div class="row" data-intro="Spécifiez par colonne les termes obligatoires. TOUS les termes indiqués devront être présents dans les lignes du réfentiel proposées.">
+                <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
+                    Termes obligatoires
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" id="filter_plus" data-role="tagsinput" value="">
+                    <button class="btn btn-default" id="bt_add_filter_plus">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row" data-intro="Spécifiez par colonne les termes interdits. AUCUN des termes indiqués ne devront devront être présents dans les lignes du réfentiel proposées.">
+                <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
+                    Termes à exclures
+                </div>
+                <div class="col-xs-9">
+                    <input type="text" id="filter_minus" data-role="tagsinput" value="">
+                    <button class="btn btn-default" id="bt_add_filter_minus">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
+            </div><!-- / row-->
+        </div>
+        <div class="col-md-2 text-right">
+            <div id="didacticiel">
+                <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+                    <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+                </span>
             </div>
         </div>
-    </div><!-- /well-->
-</div><!--/container-->
+    </div>
+    
+    <hr style="border-top: 3px dotted #777;">
 
-<div class="container work" style="margin-top: 20px;">
-    <div class="well">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h2 style="margin-top: 0;display: inline-block;">
-                            <span id="project_name2"></span> : <i>Apprentissage</i>
-                        </h2>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Didacticiel</a>
-                        &nbsp;|&nbsp;
-                        <a href="<?php echo base_url('index.php/Project/link');?>">Passer cette étape</a>
-                    </div>
-                </div><!-- / row-->
-                <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
-                    <div class="col-xs-12">
-                        <h2>
-                            <span class="step_numbers">1</span>
-                            &nbsp;Filtres sur le référentiel
-                        </h2>
+    <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
+        <div class="col-xs-12">
+            <h2>
+                <span class="step_numbers">2</span>
+                &nbsp;Labellisation
+            </h2>
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-4 text-justify">
+                    La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
+                    <div style="margin-top: 20px;">
+                        Taux de précision souhaité : 
+                        <select>
+                            <option>Tout apparier</option>
+                            <option>Précision élevée (plus de résultats)</option>
+                            <option>Précision 100% (moins de résultats)</option>
+                        </select>
                     </div>
                 </div>
-                <div class="row" data-intro="Spécifiez par colonne les termes obligatoires. TOUS les termes indiqués devront être présents dans les lignes du réfentiel proposées.">
-                    <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
-                        Termes obligatoires
+                <div class="col-xs-offset-1 col-xs-6">
+                    <div id="message">
+                        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
                     </div>
-                    <div class="col-xs-9">
-                        <input type="text" id="filter_plus" data-role="tagsinput" value="">
-                        <button class="btn btn-default" id="bt_add_filter_plus">
-                            <span class="glyphicon glyphicon-plus"></span>
+                    <div class="q_label">
+                        Ces informations sont-elle identiques ?
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                                data-toggle="tooltip"
+                                title="Revenir à la proposition précédente"
+                                onclick="socket_answer('previous');" 
+                                id="bt_previous">
+                            <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
+                        </button>
+                        <button class="btn btn-default btn-xl btn_2_3 btn-yes" 
+                                onclick="socket_answer('yes');" 
+                                id="bt_yes">
+                            <h2>OUI</h2>
+                        </button>
+                        <button class="btn btn-default btn-xl btn_2_3 btn-no" 
+                                onclick="socket_answer('no');" 
+                                id="bt_no">
+                            <h2>NON</h2>
+                        </button>
+                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                                data-toggle="tooltip"
+                                title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
+                                onclick="socket_answer('forget_row');" 
+                                id="bt_forget">
+                            <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
                         </button>
                     </div>
-                </div>
-                <div class="row" data-intro="Spécifiez par colonne les termes interdits. AUCUN des termes indiqués ne devront devront être présents dans les lignes du réfentiel proposées.">
-                    <div class="col-xs-offset-1 col-xs-2" style="padding-top: 5px;">
-                        Termes à exclures
-                    </div>
-                    <div class="col-xs-9">
-                        <input type="text" id="filter_minus" data-role="tagsinput" value="">
-                        <button class="btn btn-default" id="bt_add_filter_minus">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                </div><!-- / row-->
-<hr>
-                <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
-                    <div class="col-xs-12">
-                        <h2>
-                            <span class="step_numbers">2</span>
-                            &nbsp;Labellisation
-                        </h2>
-                        <div class="row">
-                            <div class="col-xs-5 well">
-                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                                <div>
-                                    Taux de précision souhaité : 
-                                    <select>
-                                        <option>Tout apparier</option>
-                                        <option>Précision élevée (plus de résultats)</option>
-                                        <option>Précision 100% (moins de résultats)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-offset-1 col-xs-6">
-                                <div id="message">
-                                    <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-                                </div>
-                                <div class="q_label">
-                                    Ces informations sont-elle identiques ?
-                                </div>
-                                <div>
-                                    <button class="btn btn-default btn-xl btn_icon btn-default" 
-                                            data-toggle="tooltip"
-                                            title="Revenir à la proposition précédente"
-                                            onclick="socket_answer('previous');" 
-                                            id="bt_previous">
-                                        <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
-                                    </button>
-                                    <button class="btn btn-default btn-xl btn_2_3 btn-yes" 
-                                            onclick="socket_answer('yes');" 
-                                            id="bt_yes">
-                                        <h2>OUI</h2>
-                                    </button>
-                                    <button class="btn btn-default btn-xl btn_2_3 btn-no" 
-                                            onclick="socket_answer('no');" 
-                                            id="bt_no">
-                                        <h2>NON</h2>
-                                    </button>
-                                    <button class="btn btn-default btn-xl btn_icon btn-default" 
-                                            data-toggle="tooltip"
-                                            title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
-                                            onclick="socket_answer('forget_row');" 
-                                            id="bt_forget">
-                                        <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- / row-->
-<hr>
-                <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
-                    <div class="col-xs-12">
-                        <h2>
-                            <span class="step_numbers">3</span>
-                            &nbsp;Statistiques
-                        </h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2">
-                            <div class="stat" 
-                                data-toggle="tooltip"
-                                title="Informations sur la précision">
-                                <span class="title">Précision estimée</span>
-                                <span class="number" id="stat_estimated_precision">0 %</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <div class="stat" 
-                                data-toggle="tooltip"
-                                title="Informations sur la couverture">
-                                <span class="title">Couverture estimée</span>
-                                <span class="number" id="stat_estimated_recall">0 %</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <div class="stat" 
-                                data-toggle="tooltip"
-                                title="L'avancement correspond au pourcentage du fichier déjà traité par la labellisation utilisateur.">
-                                <span class="title">Avancement</span>
-                                <span class="number" id="stat_real_ratio">0 %</span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="stat">
-                                <span class="title">Historique des réponses</span>
-                                <div class="history" id="stat_history">
-                                    <table class="table">
-                                        <tr class="history_yes">
-                                            <th class="title">OUI</th>
-
-                                            <td id="yes_1"></td>
-                                            <td id="yes_2"></td>
-                                            <td id="yes_3"></td>
-                                            <td id="yes_4"></td>
-                                            <td id="yes_5"></td>
-                                            <td id="yes_6"></td>
-                                            <td id="yes_7"></td>
-                                            <td id="yes_8"></td>
-                                            <td id="yes_9"></td>
-                                            <td id="yes_10"></td>
-                                            <td id="yes_11"></td>
-                                            <td id="yes_12"></td>
-                                            <td id="yes_13"></td>
-                                            <td id="yes_14"></td>
-                                            <td id="yes_15"></td>
-                                            <th class="total" id="stat_yes">0</th>
-
-                                            <th rowspan="2" class="history_all" id="stat_all">0</th>                                        
-                                        </tr>
-                                        <tr class="history_no">
-                                            <th class="title">NON</th>
-
-                                            <td id="no_1"></td>
-                                            <td id="no_2"></td>
-                                            <td id="no_3"></td>
-                                            <td id="no_4"></td>
-                                            <td id="no_5"></td>
-                                            <td id="no_6"></td>
-                                            <td id="no_7"></td>
-                                            <td id="no_8"></td>
-                                            <td id="no_9"></td>
-                                            <td id="no_10"></td>
-                                            <td id="no_11"></td>
-                                            <td id="no_12"></td>
-                                            <td id="no_13"></td>
-                                            <td id="no_14"></td>
-                                            <td id="no_15"></td>
-                                            <th class="total" id="stat_no">0</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-<!--
-                        <div class="col-xs-2">
-                            <div class="stat">
-                                <span class="title">Labellisation <span class="glyphicon glyphicon-plus"></span></span>
-                                <span class="number" id="stat_yes">0</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <div class="stat">
-                                <span class="title">Labellisation <span class="glyphicon glyphicon-minus"></span></span>
-                                <span class="number" id="stat_no">0</span>
-                            </div>
-                        </div>
--->
-                    </div>
-                </div><!-- / row-->
-
-                <div class="row">
-                    <div class="col-xs-12 text-center" id="blocs"></div>
                 </div>
             </div>
-        </div>    
-    </div>
-</div>
+        </div>
+    </div><!-- / row-->
 
-<div class="container" style="margin-bottom: 40px;">
+    <hr style="border-top: 3px dotted #777;">
+
+    <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
+        <div class="col-xs-12">
+            <h2>
+                <span class="step_numbers">3</span>
+                &nbsp;Statistiques
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <div class="stat" 
+                    data-toggle="tooltip"
+                    title="Informations sur la précision">
+                    <span class="title">Précision estimée</span>
+                    <span class="number" id="stat_estimated_precision">0 %</span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="stat" 
+                    data-toggle="tooltip"
+                    title="Informations sur la couverture">
+                    <span class="title">Couverture estimée</span>
+                    <span class="number" id="stat_estimated_recall">0 %</span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="stat" 
+                    data-toggle="tooltip"
+                    title="L'avancement correspond au pourcentage du fichier déjà traité par la labellisation utilisateur.">
+                    <span class="title">Avancement</span>
+                    <span class="number" id="stat_real_ratio">0 %</span>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="stat">
+                    <span class="title">Historique des réponses</span>
+                    <div class="history" id="stat_history">
+                        <table class="table">
+                            <tr class="history_yes">
+                                <th class="title">OUI</th>
+
+                                <td id="yes_1"></td>
+                                <td id="yes_2"></td>
+                                <td id="yes_3"></td>
+                                <td id="yes_4"></td>
+                                <td id="yes_5"></td>
+                                <td id="yes_6"></td>
+                                <td id="yes_7"></td>
+                                <td id="yes_8"></td>
+                                <td id="yes_9"></td>
+                                <td id="yes_10"></td>
+                                <td id="yes_11"></td>
+                                <td id="yes_12"></td>
+                                <td id="yes_13"></td>
+                                <td id="yes_14"></td>
+                                <td id="yes_15"></td>
+                                <th class="total" id="stat_yes">0</th>
+
+                                <th rowspan="2" class="history_all" id="stat_all">0</th>                                        
+                            </tr>
+                            <tr class="history_no">
+                                <th class="title">NON</th>
+
+                                <td id="no_1"></td>
+                                <td id="no_2"></td>
+                                <td id="no_3"></td>
+                                <td id="no_4"></td>
+                                <td id="no_5"></td>
+                                <td id="no_6"></td>
+                                <td id="no_7"></td>
+                                <td id="no_8"></td>
+                                <td id="no_9"></td>
+                                <td id="no_10"></td>
+                                <td id="no_11"></td>
+                                <td id="no_12"></td>
+                                <td id="no_13"></td>
+                                <td id="no_14"></td>
+                                <td id="no_15"></td>
+                                <th class="total" id="stat_no">0</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+<!--
+            <div class="col-xs-2">
+                <div class="stat">
+                    <span class="title">Labellisation <span class="glyphicon glyphicon-plus"></span></span>
+                    <span class="number" id="stat_yes">0</span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="stat">
+                    <span class="title">Labellisation <span class="glyphicon glyphicon-minus"></span></span>
+                    <span class="number" id="stat_no">0</span>
+                </div>
+            </div>
+-->
+        </div>
+    </div><!-- / row-->
+
+    <div class="row">
+        <div class="col-xs-12 text-center" id="blocs"></div>
+    </div>
+
+</div><!-- container-fluid-->
+
+<div class="container-fluid background_1" style="padding-bottom: 20px;">
     <div class="row">
         <div class="col-xs-12 text-right">
             <button class="btn btn-success" id="bt_next">Finir & Lancer le traitement >></button>
@@ -253,7 +257,7 @@
 <div class="modal fade" id="modal_filter" tabindex="-1" role="dialog" aria-labelledby="modal_filter_title">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header background_2" style="color: #fff;">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modal_filter_title">Ajout de filtres</h4>
             </div>
@@ -493,6 +497,7 @@ function socket_answer(user_response) {
     // Un nouveau message sera reçu par socket_on_message()
 
     disabeled_buttons();
+    
     $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
     var response_to_send = {
@@ -510,6 +515,9 @@ function socket_update_filters(must, must_not) {
     // Envoi de la réponse utilisateur
     // Un nouveau message sera reçu par socket_on_message()
     //must = {'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}
+
+    disabeled_buttons();
+
     var response_to_send = {
         'project_id': project_id_link,
         'must': must,
@@ -701,6 +709,7 @@ function add_buttons() {
     
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
+        $("#tempo").css("display", "none");
         $(".work").fadeToggle();
         $("#bt_next").fadeToggle();
     });

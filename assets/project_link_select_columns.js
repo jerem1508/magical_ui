@@ -3,35 +3,61 @@ function get_columns_html(tab_columns, infer_columns, target) {
 
 	var html = "";
 	var li = "";
+// console.log('infer_columns:');
+// console.log(infer_columns);
+
+// console.log('columns:');
+// console.log(tab_columns)
+
+	var tab_types = [];
+	tab_types['undefined'] = new Array();
 
 	for (var i = 0; i < tab_columns.length; i++) {
+		/*
 		if(target == 'src'){
 			li = '<span class="glyphicon glyphicon-star color_src"></span>';
 		}
 		else{
 			li = '<span class="glyphicon glyphicon-star color_ref"></span>';
 		}
+		html += '<div class="draggable ' + target + '_column">' + li + tab_columns[i] + '</div>';
+		*/
 
-		//html += '<div class="draggable ' + target + '_column">' + li + tab_columns[i] + '</div>';
+		if(typeof infer_columns[tab_columns[i]] === 'undefined'){
+//console.log('1')
+			tab_types['undefined'].push(tab_columns[i]);
+		}
+		else{
+//console.log('2');
+			if(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){
+				tab_types[infer_columns[tab_columns[i]]] = new Array();
+			}
+
+			tab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);
+		}
+
 		html += '<div class="draggable ' + target + '_column">' + tab_columns[i] + '</div>';
 	}
 
+// console.log('tab_types:');
+// console.log(tab_types);
+
 	return html;
-}
+}// /get_columns_html()
 
 
 function change_target(id_bloc, target) {
 	// Change l'apparence de la cible au moment du DRAG
 
 	$(id_bloc).addClass("target_" + target);
-}
+}// /change_target()
 
 
 function unchange_target(id_bloc, target) {
 	// Change l'apparence de la cible à la fin du DRAG
 
 	$(id_bloc).removeClass("target_" + target);
-}
+}// /unchange_target()
 
 
 function analysis_bloc(id_bloc) {
@@ -81,7 +107,7 @@ function analysis_bloc(id_bloc) {
 		$("#txt_ref_" + id_bloc).css("display", "none");}
 	else{
 		$("#txt_ref_" + id_bloc).css("display", "inherit");}
-}
+}// /analysis_bloc()
 
 
 function add_js_bloc(id_bloc) {
@@ -141,14 +167,14 @@ function add_js_bloc(id_bloc) {
 			ui.helper.clone().appendTo('#bloc_ref_' + id_bloc);
 	    }
 	});
-}
+}// /add_js_bloc()
 
 
 function remove_bloc(id_bloc) {
 	// Suppression d'un bloc
 
 	$("#bloc_" + id_bloc).remove();
-}
+}// /remove_bloc()
 
 
 function change_lib_bloc(id_bloc) {
@@ -159,7 +185,7 @@ function change_lib_bloc(id_bloc) {
 
 	// Affichage de la modale
 	$('#modal_bloc').modal('show');
-}
+}// /change_lib_bloc()
 
 
 function new_bloc(id_bloc) {
@@ -202,6 +228,4 @@ function new_bloc(id_bloc) {
 
 	// Ajout du javascript
 	add_js_bloc(id_bloc);
-}
-
-
+}// /new_bloc()

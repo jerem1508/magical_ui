@@ -2,11 +2,6 @@
     /*On masque par défaut*/
     display: none;
 }
-#show_report_ok, #upload_file_ok, #check_file_ok{
+#show_report_ok, #upload_file_ok, #check_file_ok, #bt_next{
     visibility: hidden;
-}
-
-.btn_2_3{
-  width: 120px;
-  border-radius: 10px;
 }

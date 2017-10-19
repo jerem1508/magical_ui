@@ -50,17 +50,8 @@ class Project extends CI_Controller {
 	}// /normalize()
 
 
-	public function get_actual_step_normalization($project_id='')
+	public function get_step_normalization($steps)
 	{
-		if($project_id==''){
-			return 'INIT';
-		}
-
-		$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);
-
-		$file_name = key($project_api['files']);
-		$steps = $project_api['log'][$file_name];
-
 		if($steps['concat_with_init']['completed'] || $steps['concat_with_init']['skipped']){
 			return 'concat_with_init';
 		}
@@ -73,8 +64,69 @@ class Project extends CI_Controller {
 		elseif($steps['add_selected_columns']['completed'] || $steps['add_selected_columns']['skipped']){
 			return 'add_selected_columns';
 		}
+		return false;
+	}// /get_step_normalization()
 
-		return 'INIT';
+
+	public function get_step_normalization_order($step='')
+	{
+		switch ($step) {
+			case 'concat_with_init':
+				return 5;
+				break;
+			case 'recode_types':
+				return 4;
+				break;
+			case 'replace_mvs':
+				return 3;
+				break;
+			case 'add_selected_columns':
+				return 2;
+				break;
+			case 'INIT':
+				return 1;
+				break;
+			default:
+				return 0;
+		}
+	}// /get_step_normalization_order()
+
+
+	public function get_actual_step_normalization($project_id='')
+	{
+		if($project_id==''){
+			return 'INIT';
+		}
+
+		$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);
+
+		$file_name = key($project_api['files']);	
+
+		$steps = $project_api['log'][$file_name];
+
+		$actual_step = $this->get_step_normalization($steps);
+		$actual_step_order = $this->get_step_normalization_order($actual_step);
+
+		// // Si toutes les étapes du fichier non MINI sont vides, on vérifie le MINI
+		if($project_api['has_mini']){
+			$file_name = 'MINI__'.$file_name;
+		
+			$steps = $project_api['log'][$file_name];
+
+			$actual_step_mini = $this->get_step_normalization($steps);
+			$actual_step_mini_order = $this->get_step_normalization_order($actual_step_mini);
+
+			if($actual_step_mini_order > $actual_step_order){
+				$actual_step = $actual_step_mini;
+			}
+		}
+
+		if($actual_step){
+			return $actual_step;
+		}
+		else{
+			return 'INIT';
+		}
 	}// /get_actual_step_normalization()
 
 
@@ -145,7 +197,6 @@ class Project extends CI_Controller {
 
 		// Recherche de l'étape en cours
 		$link_step = $this->get_actual_step_linker($project_id);
-
 		if($project_id && $link_step == 'INIT'){
 			// tests de complétude des projets de normalisation
 			$normalized_projects = $this->get_normalization_projects($project_id);
@@ -159,6 +210,7 @@ class Project extends CI_Controller {
 				
 				// si pas fini, redirection vers la normalisation
 				if($step != 'concat_with_init'){
+
 					//$this->load_step_normalization($step, $normalized_project['project_id']);
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
@@ -178,7 +230,7 @@ class Project extends CI_Controller {
 
 		// Récupération des métadata
 		$project_api = $this->private_functions->get_metadata_api('link', $project_id);
-		
+
 		$file_name = $project_api['files']['source']['file_name'];
 		$steps = $project_api['log'][$file_name];
 

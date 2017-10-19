@@ -39,8 +39,10 @@
                 echo "<a href='".base_url("index.php/User/login")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a>";
             }
             ?>
+            <!--
 			|
 			<a href="<?php echo base_url("index.php/Config/change_language/en/Home");?>"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;&nbsp;English</a>
+			-->
 		</div>
 	</div>
 </div>
