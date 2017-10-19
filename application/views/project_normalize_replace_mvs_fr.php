@@ -45,7 +45,7 @@
 			<button class="btn btn-success" id="bt_infer_mvs">Lancer la recherche des valeurs manquantes sur l'échantillon</button>
 		</div>
 	</div>
-	<div class="row" id="wait">
+	<div class="row" id="wait" style="padding-bottom: 20px;">
 		<div class="col-xs-12 text-center">
 			<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 		</div>

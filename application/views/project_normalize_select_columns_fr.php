@@ -55,7 +55,7 @@ if(isset($this->session->project_type)){
 			<div id="data_all" style="overflow-x:scroll"></div>
 		</div>
 		<div class="col-xs-3">
-			<h3>Colonnes détectées</h3>
+			<h3>Colonnes à sélectionner</h3>
 			<div id="result" data-intro="Sélectionnez les colonnes à nettoyer" style="overflow-y:scroll; height: 400px"></div>
 		</div>
 	</div>

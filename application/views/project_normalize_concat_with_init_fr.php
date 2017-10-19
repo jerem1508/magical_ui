@@ -41,7 +41,7 @@ if(isset($this->session->project_type)){
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row" style="padding-bottom: 20px;">
 			<div class="col-xs-12 text-center" id="wait">
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 			</div>

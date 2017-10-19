@@ -211,9 +211,6 @@ class Project extends CI_Controller {
 				// si pas fini, redirection vers la normalisation
 				if($step != 'concat_with_init'){
 
-print_r($step);
-print_r($normalized_project);
-die("");
 					//$this->load_step_normalization($step, $normalized_project['project_id']);
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
