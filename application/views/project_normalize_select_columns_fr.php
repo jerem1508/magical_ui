@@ -52,7 +52,7 @@ if(isset($this->session->project_type)){
 					</h3>
 				</div>
 			</div>
-			<div id="data_all"></div>
+			<div id="data_all" style="overflow-x:scroll"></div>
 		</div>
 		<div class="col-xs-3">
 			<h3>Colonnes détectées</h3>

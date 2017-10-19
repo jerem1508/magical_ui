@@ -3,8 +3,14 @@ function get_columns_html(tab_columns, infer_columns, target) {
 
 	var html = "";
 	var li = "";
-console.log('infer_columns:');
-console.log(infer_columns);
+// console.log('infer_columns:');
+// console.log(infer_columns);
+
+// console.log('columns:');
+// console.log(tab_columns)
+
+	var tab_types = [];
+	tab_types['undefined'] = new Array();
 
 	for (var i = 0; i < tab_columns.length; i++) {
 		/*
@@ -17,8 +23,24 @@ console.log(infer_columns);
 		html += '<div class="draggable ' + target + '_column">' + li + tab_columns[i] + '</div>';
 		*/
 
+		if(typeof infer_columns[tab_columns[i]] === 'undefined'){
+console.log('1')
+			tab_types['undefined'].push(tab_columns[i]);
+		}
+		else{
+console.log('2');
+			if(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){
+				tab_types[infer_columns[tab_columns[i]]] = new Array();
+			}
+
+			tab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);
+		}
+
 		html += '<div class="draggable ' + target + '_column">' + tab_columns[i] + '</div>';
 	}
+
+console.log('tab_types:');
+console.log(tab_types);
 
 	return html;
 }// /get_columns_html()

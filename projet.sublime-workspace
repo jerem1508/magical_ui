@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"file",
+				"file_name"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"tab",
+				"tab_error"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"he",
+				"height\t = 'inherit' Style CSS"
+			],
+			[
+				"column_",
+				"columns_ref"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"bt",
+				"btn-success2"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
 				"padd",
 				"padding-bottom"
 			],
@@ -50,10 +86,6 @@
 			[
 				"text",
 				"text-right"
-			],
-			[
-				"font",
-				"font-weight"
 			],
 			[
 				"bac",
@@ -136,10 +168,6 @@
 				"maxdb_get_metadata"
 			],
 			[
-				"paddin",
-				"padding"
-			],
-			[
 				"acti",
 				"action"
 			],
@@ -216,10 +244,6 @@
 				"class"
 			],
 			[
-				"tab",
-				"tab_values"
-			],
-			[
 				"ref_",
 				"ref_nrows"
 			],
@@ -254,10 +278,6 @@
 			[
 				"inter",
 				"internal_projects"
-			],
-			[
-				"column_",
-				"column_name"
 			],
 			[
 				"inde",
@@ -412,10 +432,6 @@
 				"projects_list"
 			],
 			[
-				"file",
-				"file_role"
-			],
-			[
 				"nom",
 				"normalized_projects"
 			],
@@ -498,22 +514,6 @@
 			[
 				"has",
 				"has_mini"
-			],
-			[
-				"str_",
-				"str_replace"
-			],
-			[
-				"ste",
-				"steps_by_filename"
-			],
-			[
-				"pr",
-				"project_api"
-			],
-			[
-				"bt",
-				"bt_next"
 			]
 		]
 	},
@@ -523,25 +523,87 @@
 			"file": "application/views/project_link_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 51526,
+				"buffer_size": 53568,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_normalize_select_columns_fr.php",
+			"file": "application/views/project_link_es_linker_fr.php",
 			"settings":
 			{
-				"buffer_size": 12279,
+				"buffer_size": 32087,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_normalize_init_fr.php",
+			"file": "application/views/project_link_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 24649,
+				"buffer_size": 15122,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_select_columns.js",
+			"settings":
+			{
+				"buffer_size": 5732,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Project.php",
+			"settings":
+			{
+				"buffer_size": 15690,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_normalize_replace_mvs_fr.php",
+			"settings":
+			{
+				"buffer_size": 23116,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_normalize_infer_types_fr.php",
+			"settings":
+			{
+				"buffer_size": 27481,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
+			"settings":
+			{
+				"buffer_size": 2904,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/style.css",
+			"settings":
+			{
+				"buffer_size": 11748,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_select_columns.css",
+			"settings":
+			{
+				"buffer_size": 1439,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -554,7 +616,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 244.0,
+		"height": 392.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -599,7 +661,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 587.0
+		"width": 533.0
 	},
 	"console":
 	{
@@ -629,17 +691,23 @@
 	],
 	"file_history":
 	[
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/188e1c7b3363b138563b53ff19d05cdc/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5aa22bf82484f15784469551e9925462/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5bd45204ca8e18a2020fb9878ff406b8/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/150348a2f0197db054fac19f4ce81bc9/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/assets/style.css",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
 		"/var/www/html/projets/magical_ui/application/views/cgu.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
@@ -657,8 +725,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e5bd47a733e164e46cb29567a2603cee/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/af2abed1b6c4d321bd6eecb507b5c91f/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/a708fbc084bb36b4a31ff0f7180ceea3/metadata.json",
@@ -752,11 +818,7 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/es_linker/column_matches.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/dedupe_linker/column_matches.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/header_en.php",
-		"/var/www/html/projets/magical_ui/application/views/footer_en.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.js",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker.css",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/d7c0133d15af4824f488a8887ab93135/metadata.json"
+		"/var/www/html/projets/magical_ui/application/views/header_en.php"
 	],
 	"find":
 	{
@@ -776,6 +838,36 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"get_step_normalization",
+			"die",
+			"setInterval",
+			"recode",
+			"load_step_normalization",
+			"generate_sample",
+			"chargement",
+			"treatment",
+			"chargement",
+			"all",
+			"generate_sample",
+			"sampl",
+			"is_done_step",
+			"has_mini",
+			"add_sele",
+			"write_columns_html",
+			"get_columns_html",
+			"get_runinfo",
+			"complete_training",
+			"valid_step",
+			"todo",
+			"modal_cgu",
+			"no_src_project",
+			"exist_file_ref",
+			"msg_danger",
+			"div_error",
+			"my_errors",
+			"bt_new_project",
+			"get_runinfo",
+			"bt_start",
 			"bt_new_project",
 			"h4",
 			"#reports",
@@ -873,37 +965,7 @@
 			"btn",
 			"bt_next",
 			"fa-",
-			"get_metadata",
-			"nrows",
-			"get_data",
-			"show_data",
-			"get_file_name",
-			"last_written",
-			"file_name",
-			"dl_file",
-			"get_tresh",
-			"thresh",
-			"valid_step",
-			"comple",
-			"dl_file",
-			"down",
-			"tresh",
-			"upload_es_train",
-			"link",
-			"bt_next",
-			"nrow",
-			"stat_all",
-			"stat_yes",
-			"hist",
-			"oui",
-			"<span class=\"glyphicon glyphicon-thumbs-up\"></span>",
-			"0",
-			"bt_yes",
-			"show_stats",
-			"message",
-			"fa-",
-			"bt_info_ref",
-			"socket"
+			"get_metadata"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -954,7 +1016,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -963,15 +1025,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 51526,
+						"buffer_size": 53568,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27834,
-								27834
+								38703,
+								38703
 							]
 						],
 						"settings":
@@ -981,27 +1043,116 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5658.0,
+						"translation.y": 12109.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "application/views/project_normalize_select_columns_fr.php",
-					"semi_transient": true,
+					"file": "application/views/project_link_es_linker_fr.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12279,
+						"buffer_size": 32087,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1705,
-								1721
+								9876,
+								9876
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5233.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/project_link_select_columns_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15122,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7986,
+								7986
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2335.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "assets/project_link_select_columns.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								227,
+								227
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/controllers/Project.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2207,
+								2476
 							]
 						],
 						"settings":
@@ -1010,46 +1161,153 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 517.0,
+						"translation.y": 1068.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 2,
-					"file": "application/views/project_normalize_init_fr.php",
+					"buffer": 5,
+					"file": "application/views/project_normalize_replace_mvs_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24649,
+						"buffer_size": 23116,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5097,
-								5097
+								2588,
+								2588
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 702.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/views/project_normalize_infer_types_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								148,
+								148
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1585,
+								1585
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "assets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								123,
+								123
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5544.0,
+						"translation.y": 360.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "assets/project_link_select_columns.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								227,
+								227
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1072,18 +1330,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.794334409233,
 			1.0
 		],
 		"rows":
@@ -1101,7 +1352,7 @@
 	"project": "projet.sublime-project",
 	"replace":
 	{
-		"height": 71.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1138,8 +1389,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 324.0,
+	"side_bar_visible": true,
+	"side_bar_width": 353.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

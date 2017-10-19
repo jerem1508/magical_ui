@@ -1,6 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid intro">
+<div class="container-fluid intro" style="padding-bottom: 20px;">
 <!--
     <div class="text-center">
         <div class="breadcrumb flat">
@@ -49,6 +49,9 @@
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 			</div>
 		</div>
+</div><!--/container-->
+
+<div class="container-fluid">
 		<div class="row background_1" id="result">
 			<h3>Résultat de la détection</h3>
 			<div class="col-xs-12">
@@ -62,7 +65,6 @@
 				</div>
 			</div>
 		</div>
-
 </div><!--/container-->
 
 <div class="container-fluid background_2">

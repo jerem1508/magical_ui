@@ -50,6 +50,8 @@
 			<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 		</div>
 	</div>
+</div><!--/container-->
+<div class="container-fluid">
 	<div class="row background_1" id="result">
 		<div class="col-xs-12">
 			<div class="row">

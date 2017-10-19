@@ -27,7 +27,7 @@
 </div><!--/container-->
 <div id="tempo"></div>
 
-<div class="container-fluid background_1" id="work">
+<div class="container-fluid background_1" id="work" style="padding-bottom: 20px;">
     <div class="row">
         <div class="col-xs-3 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
             <h3>
@@ -94,7 +94,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top: 20px;min-height: 250px;">
     <div class="row">
         <div class="col-xs-12 text-right">
             <button class="btn btn-success" id="bt_next">Etape suivante : Apprentissage >></button>
@@ -184,7 +184,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
                 console.log("success - download_config");
                 console.log(result);
 
-                return result.result.params.column_types;
+                runinfo = result.result.params.column_types;
             }
         },
         error: function (result, status, error){
@@ -192,6 +192,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             console.log(result);
         }
     });// /ajax - Download config
+    return runinfo;
 } // /get_runinfo()
 
 
