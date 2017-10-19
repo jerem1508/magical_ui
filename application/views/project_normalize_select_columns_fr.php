@@ -56,7 +56,7 @@ if(isset($this->session->project_type)){
 		</div>
 		<div class="col-xs-3">
 			<h3>Colonnes détectées</h3>
-			<div id="result" data-intro="Sélectionnez les colonnes à nettoyer"></div>
+			<div id="result" data-intro="Sélectionnez les colonnes à nettoyer" style="overflow-y:scroll; height: 400px"></div>
 		</div>
 	</div>
 
@@ -320,8 +320,11 @@ if(isset($this->session->project_type)){
 												        "lengthMenu": [5,20,"ALL"],
 												        "responsive": true
 												    });
-								
 
+								// Modification de la taille de la DIV des colonnes en fonction de la taille du sample
+								var height_sample = $("#data_all").height();
+								console.log(height_sample);
+								$("#result").css("height", height_sample);
 		                    }
 		                },
 		                error: function (result, status, error){

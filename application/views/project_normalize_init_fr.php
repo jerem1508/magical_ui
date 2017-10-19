@@ -612,6 +612,8 @@
                 $('#report').css('display', 'inherit');
                 $('#show_report_ok').css('visibility', 'visible');
 
+                $("#bt_next").css("visibility", "visible");
+
                 go_to('report');
                 
             },
