@@ -5,9 +5,9 @@
 		<h2>S'identifier</h2>
 		<div class="row">
 			<div class="col-xs-6">
-				<h3>Titre</h3>
+				<h3>Pourquoi s'inscrire ?</h3>
 				<p>
-					Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+					En vous inscrivant, vous pourrez retrouver vos projets de normalisation et de jointure, les reprendre, et les réutiliser pour de nouvelles jointures.
 				</p>
 				<a href='<?php echo base_url("index.php/User/new");?>' class="btn btn-success">S'inscrire</a>
 			</div><!--/col-xs-6-->
