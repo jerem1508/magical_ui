@@ -12,7 +12,7 @@ class Private_functions {
 	{
 		# Test du serveur API
 		# S'il ne répond pas, affichage de la vue d'erreur
-		$ch = curl_init(BASE_API_URL.'/api/metadata/ping');
+		$ch = curl_init(BASE_API_URL.'/api/ping');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		if(curl_exec($ch) === false){
