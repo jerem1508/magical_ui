@@ -193,7 +193,8 @@
 			<h3 style="display: inline;">Mes projets de jointure</h3>
 			<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">+&nbsp;Nouveau</button>
 			<p>
-				Proin est neque, mattis a venenatis et, accumsan sagittis dui. Proin vitae lectus erat. Morbi iaculis non mi a lacinia. Proin eros mi, tempor in ex in, sagittis consequat urna. Pellentesque quis faucibus mi. Praesent vel leo congue, porttitor ipsum eget, euismod felis. Nullam imperdiet posuere volutpat. Fusce dolor erat, pulvinar non faucibus sit amet, faucibus vitae tellus. Suspendisse consequat tellus dui, quis fermentum urna pulvinar at. Nunc lacus eros, varius sit amet sapien vulputate, viverra vestibulum magna. Donec sed enim velit.
+				Ci-dessous la liste de vos projets de jointure. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
+				L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
 			</p>
 		</div><!--/col-xs-12-->
 	</div>
