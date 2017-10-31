@@ -6,6 +6,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<title><?php echo $title;?></title>
 
+	<link rel="icon" href="<?php echo base_url('assets/img/favicon.ico');?>" type="image/x-icon" />
+	<link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.ico');?>" type="image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">

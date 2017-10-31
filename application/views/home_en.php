@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
 <head>
 	<title>Accueil-En</title>
-
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-3.3.7-dist/css/bootstrap.min.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css');?>">
 
