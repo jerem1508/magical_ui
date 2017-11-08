@@ -150,19 +150,27 @@
   	</div>
     <div class="row">
   		<div class="col-md-12">
-  			<input type="text" class="form-control" placeholder="Votre nom">
+  			<input type="text" class="form-control" placeholder="Votre nom" id="name">
   		</div>
   	</div>
     <div class="row">
   		<div class="col-md-12">
-  			<input type="email" class="form-control" placeholder="Votre email">
+  			<input type="text" class="form-control" placeholder="Votre email" id="email2">
   		</div>
   	</div>
     <div class="row">
   		<div class="col-md-12">
-  			<textarea class="form-control" rows="4" placeholder="Votre message"></textarea>
+  			<textarea class="form-control" rows="4" placeholder="Votre message" id="message"></textarea>
   		</div>
   	</div>
+    <div class="row">
+    	<div class="col-md-12">
+    		<div class="alert alert-danger" role="alert" style="margin-bottom: 0;" id="error_box">
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span id="error_msg"></span>
+			</div>
+    	</div>
+    </div>
     <div class="row">
   		<div class="col-md-12 text-right">
   			<button type="submit" class="btn btn-success2" id="bt_submit">Envoyer</button>
@@ -173,6 +181,8 @@
 </div>
 
 <script type="text/javascript">
+	$("#error_box").toggle();
+	
 	$("#bt_comment").click(function(){
 		if($('#panel_comment').hasClass("maximised")){
 			panel_minimize();
@@ -185,14 +195,51 @@
 	$("#bt_submit").click(function(e){
 		e.preventDefault();
 		send_comment();
-
-		// on replie
-		panel_minimize();
 	});
 
 	function send_comment() {
-		alert("envoi du commentaire")
-	}
+		// Test des champs
+		var msg = "";
+
+		if($("#name").val() == ''){
+			msg +=  "Vous devez renseigner votre nom";
+		}
+		if($("#email2").val() == ''){
+			if(msg != ""){
+				msg += "<br>";
+			}
+			msg +=  "Vous devez renseigner votre email";
+		}
+		if($("#message").val() == ''){
+			if(msg != ""){
+				msg += "<br>";
+			}
+			msg +=  "Vous devez renseigner un message";
+		}
+
+		if(msg != ""){
+			$("#error_msg").html(msg);
+			if($("#error_box").is(":hidden")){
+				$("#error_box").slideToggle();
+			}
+			return false;
+		}
+
+		// Envoi du commentaire
+		send_comment_ajax($("#name").val(), $("#email2").val(), $("#message").val());
+
+		// Suppression de l'alert si existante
+		if($("#error_box").is(":visible")){
+			$("#error_box").slideToggle();
+		}
+
+		// Suppression du message, on garde les autres infos
+		$("#message").val("");
+
+		// on replie
+		panel_minimize();
+	}// /send_comment()
+
 
 	function panel_minimize() {
 		$('#panel_comment')
@@ -204,8 +251,9 @@
 		});
 		ch = '<span class="glyphicon glyphicon-chevron-up"></span><span class="title_comment">Commentaires ?</span><span class="glyphicon glyphicon-chevron-up"></span>';
 		$("#panel_comment .panel-title").html(ch);
-	}
+	}// /panel_minimize()
 
+	
 	function panel_maximize() {
 		$('#panel_comment')
 			.removeClass("minimised")
@@ -216,5 +264,25 @@
 		});
 		ch = '<span class="glyphicon glyphicon-chevron-down"></span><span class="title_comment">Commentaires ?</span><span class="glyphicon glyphicon-chevron-down"></span>';
 		$("#panel_comment .panel-title").html(ch);
+	}// /panel_maximize()
+
+
+	function send_comment_ajax(name, email, message) {
+		// Envoi du commentaire
+        $.ajax({    
+            type: 'post',
+            url: '<?php echo base_url('index.php/Save_ajax/project');?>',
+            data: 'project_id=' + project_id + '&project_type=normalize',
+            async: false,
+            success: function (result) {
+                console.log("result : ",result);
+            },
+            error: function (result, status, error){
+                console.log(result);
+                console.log(status);
+                console.log(error);
+                return false;
+            }
+        });
 	}
 </script>

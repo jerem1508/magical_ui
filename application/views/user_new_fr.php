@@ -21,11 +21,11 @@
 				<form name="my_form" method="post" action="<?php echo base_url("index.php/User/new_save");?>">
 				  <div class="form-group">
 				    <label for="email">Adresse email</label>
-				    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+				    <input type="email" class="form-control" id="email" name="usr_email" placeholder="Email">
 				  </div>
 				  <div class="form-group">
 				    <label for="pwd">Mot de passe</label>
-				    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe">
+				    <input type="password" class="form-control" id="pwd" name="usr_pwd" placeholder="Mot de passe">
 				    <label for="pwd_àconf">Confirmation</label>
 				    <input type="password" class="form-control" id="pwd_conf" placeholder="Mot de passe">
 				  </div>

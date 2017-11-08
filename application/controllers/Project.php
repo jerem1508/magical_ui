@@ -187,7 +187,6 @@ class Project extends CI_Controller {
 
 	public function link($project_id='', $type_file='')
 	{
-
 		// MAJ du type de projet en session
 		$this->session->set_userdata('project_type', 'link');
 
@@ -210,7 +209,6 @@ class Project extends CI_Controller {
 				
 				// si pas fini, redirection vers la normalisation
 				if($step != 'concat_with_init'){
-
 					//$this->load_step_normalization($step, $normalized_project['project_id']);
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);

@@ -56,8 +56,8 @@ class User extends CI_Controller {
 	public function new_save()
 	{
 		try{
-			$email = $this->input->post('email');
-			$pwd = $this->input->post('pwd');
+			$email = $this->input->post('usr_email');
+			$pwd = $this->input->post('usr_pwd');
 
 			// test user existant
 			$ret = $this->User_model->exist_user($email);

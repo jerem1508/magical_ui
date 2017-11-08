@@ -1,70 +1,60 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid" id="entete" style="margin: 10px;">
-    <div class="well" style="margin: 0;">
-        <div class="row">
-            <div class="col-md-8">
-                <h2>
-                    <span class="step_numbers">1</span>
-                    &nbsp;Présentation du résultat de la jointure
-                </h2>
-            </div>
-            <div class="col-md-4 text-right" id="pagination"></div>
+<div class="container-fluid background_1" id="entete" style="padding-top: 20px;padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>
+                <span class="step_numbers">1</span>
+                &nbsp;Présentation du résultat de la jointure
+            </h2>
         </div>
-        <div id="result">
-            <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+        <div class="col-md-4 text-right" id="pagination"></div>
+    </div>
+    <div id="result">
+        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+    </div>
+    <hr style="border-top: 3px dotted #777;">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                <span class="step_numbers">2</span>
+                &nbsp;Statistiques
+            </h2>
         </div>
-    </div><!-- /well-->
-</div><!--/container-->
-
-<div class="container-fluid" style="margin: 10px;">
-    <div class="well" style="margin: 0;">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>
-                    <span class="step_numbers">2</span>
-                    &nbsp;Statistiques
-                </h2>
-            </div>
-        </div>
-        <div class="row" id="stats">
-            <div class="col-xs-2">
-                <div class="stat" 
-                    data-toggle="tooltip"
-                    title="Nombre de lignes traitées">
-                    <span class="title">Lignes traitées</span>
-                    <span class="number" id="stat_nb_lines">0</span>
-                </div>
-            </div>
-            <div class="col-xs-2">
-                <div class="stat" 
-                    data-toggle="tooltip"
-                    title="Pourcentage de lignes traitées">
-                    <span class="title">Lignes traitées</span>
-                    <span class="number" id="stat_pct_nb_lines">0 %</span>
-                </div>
+    </div>
+    <div class="row" id="stats">
+        <div class="col-xs-2">
+            <div class="stat" 
+                data-toggle="tooltip"
+                title="Nombre de lignes traitées">
+                <span class="title">Lignes traitées</span>
+                <span class="number" id="stat_nb_lines">0</span>
             </div>
         </div>
-    </div><!-- /well-->
-</div><!--/container-->
-
-<div class="container-fluid" style="margin: 10px;">
-    <div class="well" style="margin: 0;">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>
-                    <span class="step_numbers">3</span>
-                    &nbsp;Télechargement
-                </h2>
+        <div class="col-xs-2">
+            <div class="stat" 
+                data-toggle="tooltip"
+                title="Pourcentage de lignes traitées">
+                <span class="title">Lignes traitées</span>
+                <span class="number" id="stat_pct_nb_lines">0 %</span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
-                <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
-            </div>
+    </div>
+    <hr style="border-top: 3px dotted #777;">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                <span class="step_numbers">3</span>
+                &nbsp;Télechargement
+            </h2>
         </div>
-    </div><!-- /well-->
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
+            <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+        </div>
+    </div>
 </div><!--/container-->
 
 
@@ -291,7 +281,7 @@ function show_data_html(data, start) {
         html += '    <td rowspan="2" class="text-center no_line"><h4 class="value_vcentered ' + no_line + '">' + no_line + '</h4></td>';
 
         // Récupération de l'indice de confiance
-        var confidence = Math.round(data[i].hits.hits[0]['_source']['__CONFIDENCE']);
+        var confidence = data[i].hits.hits[0]['_source']['__CONFIDENCE'];
         html += '    <td><i class="fa fa-table" aria-hidden="true"></i></td>';
 
 
@@ -310,18 +300,18 @@ function show_data_html(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        if(confidence == 999 || confidence === 0){
+        if(confidence == 999 || confidence == 0){ 
             html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">';
             html += '<i class="fa fa-user-circle" aria-hidden="true" title="Labellisation manuelle utiisateur" data-toggle="tooltip"></i>';
             html += '<h4></td>';
         }
         else{
-            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + confidence + '<h4></td>';
+            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + Math.round(confidence) + '<h4></td>';
         }
         // Affichage du bouton
         html += '<td rowspan="2" class="text-center padding_0"><h4 class="action_vcentered" style="display: inline;">';
 
-// 1 ---- 
+        // 1 ---- 
 
         html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
         if(confidence >= tresh){
@@ -335,164 +325,164 @@ function show_data_html(data, start) {
         html += '</td>';
         html += '</tr>';
 
-// / 1---
+        // / 1---
 
-/*
-// 2 ----
-if(confidence >= tresh){
-    html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-    html += '   <img src="<?php echo base_url('assets/img/equal_70C041.png');?>" class="img_tab">';
-    html += '</button>';
-    
-    html += '&nbsp;&nbsp;';
-    
-    html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-    html += '   <img src="<?php echo base_url('assets/img/unequal_333333.png');?>" class="img_tab">';
-    html += '</button>';
-}
-else{
-    html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-    html += '   <img src="<?php echo base_url('assets/img/equal_333333.png');?>" class="img_tab">';
-    html += '</button>';
-
-    html += '&nbsp;&nbsp;';
-
-    html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-    html += '   <img src="<?php echo base_url('assets/img/unequal_70C041.png');?>" class="img_tab">';
-    html += '</button>';
-}
-
-html += '&nbsp;&nbsp;';
-
-html += '   <button type="button" class="btn btn-circle" id="del_line_' + no_line + '" onclick="delete_line(\'' + no_line + '\');">';
-html += '       <img src="<?php echo base_url('assets/img/cross_333333.png');?>" class="img_tab">';
-html += '   </button>';
-html += '</h4>';
-html += '</td>';
-html += '</tr>';
-// / 2 ---
-*/
-
-
-
-        // Ligne REF
-        html += '<tr class="' + no_line + '">';
-
-        // Parcours des termes du REF --------------------------------------------
-        html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
-        for (var j = 0; j < column_matches.length; j++) {
-            var ch = column_matches[j].ref.toString();
-            var tab_termes = ch.split(",");
+        /*
+        // 2 ----
+        if(confidence >= tresh){
+            html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+            html += '   <img src="<?php echo base_url('assets/img/equal_70C041.png');?>" class="img_tab">';
+            html += '</button>';
             
-            var tab_values = new Array();
-
-            for (var k = 0; k < tab_termes.length; k++) {
-                tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k] + '__REF']);
-            }
-
-            var values = tab_values.join(", ");
-            html += '    <td>' + values + '</td>';
-        }
-           
-        html += '</tr>';
-    }// /for - parcours data
-
-    html += '</table>';
-    //html += '</div>';
-
-    // Affichage des données
-    $("#result").html(html);
-
-    // MAJ des boutons on/off (boostrap-toggle)
-    for (var i = 0; i < data.length; i++) {
-        var no_line = start + i + 1;
-        //$('#chk_' + no_line).bootstrapToggle({
-        $('.chk').bootstrapToggle({
-          on: 'Vrai',
-          off: 'Faux',
-          onstyle: 'success3',
-          offstyle: 'danger',
-          size: 'small'
-        });
-    }// /for
-
-    // Séparation visuelle des lignes
-    $(".line").css("border-top","2px solid #ccc");
-
-    // TD plus petit
-    $("td").css("padding", "2px");
-    $(".padding_0").css("padding-top", "10px");
-
-    // Actions
-    $(".chk").change(function() {
-        // Récupération des ids
-        var _id = $(this);
-        var id = _id[0]["id"];
-        var id_source = $("#" + id).attr("id_source");
-        var id_ref = $("#" + id).attr("id_ref");
-
-        // Vérification de la présence de ses ids dans les exact_pairs
-        present_exact_pairs = keys_are_present(id_source, id_ref, learned_setting_json.exact_pairs);
-
-        // Vérification de la présence de ses ids dans les non_matching_pairs
-        present_non_matching_pairs = keys_are_present(id_source, id_ref, learned_setting_json.non_matching_pairs);
-
-        // Suivant le sens de la checkbox, on ajoute a non_matching_pairs ou a exact_pairs
-        if(_id[0]["checked"]){
-            if(!present_exact_pairs){
-                // Ajout
-                var exact_pairs = learned_setting_json.exact_pairs;
-                delete learned_setting_json.exact_pairs;
-                exact_pairs[exact_pairs.length] = new Array(id_source, id_ref);
-                learned_setting_json['exact_pairs'] = exact_pairs;
-            }
-            if(present_non_matching_pairs){
-                // Suppression
-                var non_matching_pairs = learned_setting_json.non_matching_pairs;
-                var new_non_matching_pairs = new Array();
-                for (var i = 0; i < non_matching_pairs.length; i++) {
-                    if(non_matching_pairs[i][0] != id_source && non_matching_pairs[i][1] != id_ref){
-                        var item = new Array(non_matching_pairs[i][0], non_matching_pairs[i][1]);
-                        new_non_matching_pairs.push(item);
-                    }
-                }
-                delete learned_setting_json.non_matching_pairs;
-                learned_setting_json['non_matching_pairs'] = new_non_matching_pairs;
-            }
+            html += '&nbsp;&nbsp;';
+            
+            html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+            html += '   <img src="<?php echo base_url('assets/img/unequal_333333.png');?>" class="img_tab">';
+            html += '</button>';
         }
         else{
-            if(present_exact_pairs){
-                // Suppression
-                var exact_pairs = learned_setting_json.exact_pairs;
-                var new_exact_pairs = new Array();
-                for (var i = 0; i < exact_pairs.length; i++) {
-                    if(exact_pairs[i][0] != id_source && exact_pairs[i][1] != id_ref){
-                        var item = new Array(exact_pairs[i][0], exact_pairs[i][1]);
-                        new_exact_pairs.push(item);
-                    }
-                }
-                delete learned_setting_json.exact_pairs;
-                learned_setting_json['exact_pairs'] = new_exact_pairs;
-            }
-            if(!present_non_matching_pairs){
-                // Ajout
-                var non_matching_pairs = learned_setting_json.non_matching_pairs;
-                delete learned_setting_json.non_matching_pairs;
-                non_matching_pairs[non_matching_pairs.length] = new Array(id_source, id_ref);
-                learned_setting_json['non_matching_pairs'] = non_matching_pairs;
-            }
+            html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+            html += '   <img src="<?php echo base_url('assets/img/equal_333333.png');?>" class="img_tab">';
+            html += '</button>';
+
+            html += '&nbsp;&nbsp;';
+
+            html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
+            html += '   <img src="<?php echo base_url('assets/img/unequal_70C041.png');?>" class="img_tab">';
+            html += '</button>';
         }
 
-        // Affichage du logo utilisateur
-        var id_temp = parseInt(id_source) + 1;
-        $("#confidence_" + id_temp).html('<i class="fa fa-user-circle"></i>');
+        html += '&nbsp;&nbsp;';
 
-        // Upload du fichier modifié
-        // TODO
-        console.log(learned_setting_json);
-        // Affichage du bouton de nouveau traitement
-        $("#bt_re_treatment").css("visibility", "visible");
-    });
+        html += '   <button type="button" class="btn btn-circle" id="del_line_' + no_line + '" onclick="delete_line(\'' + no_line + '\');">';
+        html += '       <img src="<?php echo base_url('assets/img/cross_333333.png');?>" class="img_tab">';
+        html += '   </button>';
+        html += '</h4>';
+        html += '</td>';
+        html += '</tr>';
+        // / 2 ---
+        */
+
+
+
+                // Ligne REF
+                html += '<tr class="' + no_line + '">';
+
+                // Parcours des termes du REF --------------------------------------------
+                html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
+                for (var j = 0; j < column_matches.length; j++) {
+                    var ch = column_matches[j].ref.toString();
+                    var tab_termes = ch.split(",");
+                    
+                    var tab_values = new Array();
+
+                    for (var k = 0; k < tab_termes.length; k++) {
+                        tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k] + '__REF']);
+                    }
+
+                    var values = tab_values.join(", ");
+                    html += '    <td>' + values + '</td>';
+                }
+                   
+                html += '</tr>';
+            }// /for - parcours data
+
+            html += '</table>';
+            //html += '</div>';
+
+            // Affichage des données
+            $("#result").html(html);
+
+            // MAJ des boutons on/off (boostrap-toggle)
+            for (var i = 0; i < data.length; i++) {
+                var no_line = start + i + 1;
+                //$('#chk_' + no_line).bootstrapToggle({
+                $('.chk').bootstrapToggle({
+                  on: 'Vrai',
+                  off: 'Faux',
+                  onstyle: 'success3',
+                  offstyle: 'danger',
+                  size: 'small'
+                });
+            }// /for
+
+            // Séparation visuelle des lignes
+            $(".line").css("border-top","2px solid #ccc");
+
+            // TD plus petit
+            $("td").css("padding", "2px");
+            $(".padding_0").css("padding-top", "10px");
+
+            // Actions
+            $(".chk").change(function() {
+                // Récupération des ids
+                var _id = $(this);
+                var id = _id[0]["id"];
+                var id_source = $("#" + id).attr("id_source");
+                var id_ref = $("#" + id).attr("id_ref");
+
+                // Vérification de la présence de ses ids dans les exact_pairs
+                present_exact_pairs = keys_are_present(id_source, id_ref, learned_setting_json.exact_pairs);
+
+                // Vérification de la présence de ses ids dans les non_matching_pairs
+                present_non_matching_pairs = keys_are_present(id_source, id_ref, learned_setting_json.non_matching_pairs);
+
+                // Suivant le sens de la checkbox, on ajoute a non_matching_pairs ou a exact_pairs
+                if(_id[0]["checked"]){
+                    if(!present_exact_pairs){
+                        // Ajout
+                        var exact_pairs = learned_setting_json.exact_pairs;
+                        delete learned_setting_json.exact_pairs;
+                        exact_pairs[exact_pairs.length] = new Array(id_source, id_ref);
+                        learned_setting_json['exact_pairs'] = exact_pairs;
+                    }
+                    if(present_non_matching_pairs){
+                        // Suppression
+                        var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                        var new_non_matching_pairs = new Array();
+                        for (var i = 0; i < non_matching_pairs.length; i++) {
+                            if(non_matching_pairs[i][0] != id_source && non_matching_pairs[i][1] != id_ref){
+                                var item = new Array(non_matching_pairs[i][0], non_matching_pairs[i][1]);
+                                new_non_matching_pairs.push(item);
+                            }
+                        }
+                        delete learned_setting_json.non_matching_pairs;
+                        learned_setting_json['non_matching_pairs'] = new_non_matching_pairs;
+                    }
+                }
+                else{
+                    if(present_exact_pairs){
+                        // Suppression
+                        var exact_pairs = learned_setting_json.exact_pairs;
+                        var new_exact_pairs = new Array();
+                        for (var i = 0; i < exact_pairs.length; i++) {
+                            if(exact_pairs[i][0] != id_source && exact_pairs[i][1] != id_ref){
+                                var item = new Array(exact_pairs[i][0], exact_pairs[i][1]);
+                                new_exact_pairs.push(item);
+                            }
+                        }
+                        delete learned_setting_json.exact_pairs;
+                        learned_setting_json['exact_pairs'] = new_exact_pairs;
+                    }
+                    if(!present_non_matching_pairs){
+                        // Ajout
+                        var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                        delete learned_setting_json.non_matching_pairs;
+                        non_matching_pairs[non_matching_pairs.length] = new Array(id_source, id_ref);
+                        learned_setting_json['non_matching_pairs'] = non_matching_pairs;
+                    }
+                }
+
+                // Affichage du logo utilisateur
+                var id_temp = parseInt(id_source) + 1;
+                $("#confidence_" + id_temp).html('<i class="fa fa-user-circle"></i>');
+
+                // Upload du fichier modifié
+                // TODO
+                console.log(learned_setting_json);
+                // Affichage du bouton de nouveau traitement
+                $("#bt_re_treatment").css("visibility", "visible");
+            });
 }// /show_data_html()
 
 
@@ -541,6 +531,7 @@ function action(id_source, id_ref, ele) {
 
 
 function create_es_index_api() {
+    // Creer pour pouvoir accéder aux données de facon paginée
     var tparams = {
         "module_params": {
             "for_linking": false
@@ -646,6 +637,8 @@ function treatment(project_id_link, learned_setting_json) {
                                 // Création de l'index ElasticSearch + Affichage
                                 create_es_index_api();
 
+                                // Statistiques
+                                get_stats();
                             }
                             else{
                                 console.log("success - job en cours");
@@ -948,8 +941,5 @@ $(function(){// ready
     // Pagination
     var pas = 20;
     set_pagination_html(src_nrows, pas, 1);
-
-    // Statistiques
-    get_stats();
 });//ready
 </script>

@@ -4,16 +4,56 @@
 		"selected_items":
 		[
 			[
+				"set",
+				"setTimeout\t( handler: any, timeout?: long, arguments_..: any ): long Window"
+			],
+			[
+				"sli",
+				"slideToggle\t( duration (default: 400)?: Number or String, complete?: Function() ): jQuery jQuery - Effects > Sliding"
+			],
+			[
+				"error",
+				"error_msg"
+			],
+			[
+				"conf",
+				"confidence"
+			],
+			[
+				"pad",
+				"padding-top"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"v",
+				"visibility\t = '' Style CSS"
+			],
+			[
+				"vi",
+				"visibility\t Style CSS"
+			],
+			[
+				"tab",
+				"tab_types"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
 				"file",
 				"file_name"
 			],
 			[
 				"err",
 				"errors"
-			],
-			[
-				"tab",
-				"tab_error"
 			],
 			[
 				"font",
@@ -34,14 +74,6 @@
 			[
 				"bt",
 				"btn-success2"
-			],
-			[
-				"paddin",
-				"padding-top"
-			],
-			[
-				"padd",
-				"padding-bottom"
 			],
 			[
 				"back",
@@ -74,10 +106,6 @@
 			[
 				"marg",
 				"margin-bottom"
-			],
-			[
-				"pad",
-				"padding"
 			],
 			[
 				"paddi",
@@ -226,10 +254,6 @@
 			[
 				"gl",
 				"glyphicon"
-			],
-			[
-				"margin",
-				"margin-bottom"
 			],
 			[
 				"add",
@@ -388,10 +412,6 @@
 				"metadata_src"
 			],
 			[
-				"vi",
-				"visibility\t = 'visible' Style CSS"
-			],
-			[
 				"search",
 				"search_result"
 			],
@@ -494,117 +514,28 @@
 			[
 				"_",
 				"_SESSION"
-			],
-			[
-				"proje",
-				"project_id"
-			],
-			[
-				"hr",
-				"href"
-			],
-			[
-				"ti",
-				"title"
-			],
-			[
-				"els",
-				"else"
-			],
-			[
-				"has",
-				"has_mini"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_link_step1_init_fr.php",
+			"contents": "<style type=\"text/css\">\n\t#panel_comment{\n\t\tborder-radius:  5px 5px 0 0;\n\t\tposition: fixed;\n\t\tbottom: -350px;\n\t\tleft: 20px;\n\t\twidth: 350px;\n\t\tborder: 1px solid #777;\n\t\tbackground-color: #262626;\n\t}\n\t#panel_comment .row{\n\t\tmargin-bottom: 10px;\n\t\tmargin-top: 10px;\n\t}\n\t#panel_comment .panel-title{\n\t\tcolor: #fff;\n\t\tcursor: pointer;\n\t}\n\n\t#panel_comment .title_comment{\n\t\tfont-weight: bolder;\n\t\tdisplay: inline-block;\n\t\tmargin-right: 15px;\n\t\tmargin-left: 15px;\n\t}\n\t#panel_comment .txt_comment{\n\t\tcolor: #fff;\n\t\tfont-weight: bolder;\n\t\tfont-style: italic;\n\t}\n\t#bt_comment{\n\t\tbackground-color: #25368C;\n\t\tborder-bottom-width: 0;\n\t}\n\tbody{\n\t\theight: 100%;\n\t}\n\n\tfooter{\n\t\tbackground-color: #262626;\n\t\tpadding-top: 20px;\n\t\tpadding-bottom: 20px;\n\t\theight: 200px;\n\t}\n\t\tfooter .txt{\n\t\t\tcolor: #aaa;\n\t\t\t/*font-weight: bolder;*/\n\t\t}\n\t\tfooter .title{\n\t\t\ttext-transform: uppercase;\n\t\t\tdisplay: inline-block;\n\t\t\tpadding-bottom: 10px;\n\t\t}\n\t\tfooter li{\n\t\t\tlist-style: none;\n\t\t}\n\t\tfooter .col-right{\n\t\t\tborder-left: 1px dotted #777;\n\t\t}\n\t\tfooter a,a:hover{\n\t\t\tcolor: #aaa;\t\n\t\t\ttext-decoration: none;\t\n\t\t}\n</style>\n\n<footer class=\"container-fluid\" style=\"padding-top: 20px;\">\n    <div class=\"row\">\n\t\t<div class=\"col-md-4 txt\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-md-12 text-center\">\n\t\t\t\t\t<span class=\"title\">plan du site</span>        \t\t\t\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n        <div class=\"col-md-4 txt\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-md-12 text-center\">\n\t\t\t\t\t<span class=\"title\">partenaires</span>        \t\t\t\n\t\t\t\t</div>\n\t\t\t</div><!-- / col-md-4-->\n        \t<div class=\"row\">\n        \t\t<div class=\"col-md-6 col-left\">\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Programme EIG</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">MESRI</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">ABES</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n        \t\t</div>\n        \t\t<div class=\"col-md-6 col-right\">\n        \t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Agro</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Etalab</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">...</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n        \t\t</div>\n        \t</div>\n        </div><!-- / col-md-4-->\n\t\t<div class=\"col-md-4 txt\">\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">A propos</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"<?php echo base_url(\"index.php/Home/cgu\");?>\" target=\"_blank\">Conditions générales d'utilisation</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t<i class=\"fa fa-envelope\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\tContact\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div><!-- / col-md-4-->\n    </div><!-- / row -->\n</footer>\n\n\n\n<div class=\"panel panel-default\" id=\"panel_comment\">\n  <div class=\"panel-heading\" id=\"bt_comment\">\n    <h3 class=\"panel-title text-center\">\n\t\t<span class=\"glyphicon glyphicon-chevron-up\"></span>\n\t    <span class=\"title_comment\">Commentaires ?</span>\n\t\t<span class=\"glyphicon glyphicon-chevron-up\"></span>\n\t</h3>\n  </div>\n  <div class=\"panel-body\">\n  <form name=\"form_comment\">\n  \t<div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<span class=\"txt_comment\">Un bug, un comportement inatendu, une suggestion...</span>\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Votre nom\" id=\"name\">\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Votre email\" id=\"email2\">\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<textarea class=\"form-control\" rows=\"4\" placeholder=\"Votre message\" id=\"message\"></textarea>\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n    \t<div class=\"col-md-12\">\n    \t\t<div class=\"alert alert-danger\" role=\"alert\" style=\"margin-bottom: 0;\" id=\"error_box\">\n\t\t\t\t<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span>\n\t\t\t\t<span id=\"error_msg\"></span>\n\t\t\t</div>\n    \t</div>\n    </div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12 text-right\">\n  \t\t\t<button type=\"submit\" class=\"btn btn-success2\" id=\"bt_submit\">Envoyer</button>\n  \t\t</div>\n  \t</div>\n  \t</form>\n  </div>\n</div>\n\n<script type=\"text/javascript\">\n\t$(\"#error_box\").toggle();\n\t\n\t$(\"#bt_comment\").click(function(){\n\t\tif($('#panel_comment').hasClass(\"maximised\")){\n\t\t\tpanel_minimize();\n\t\t}\n\t\telse{\n\t\t\tpanel_maximize();\n\t\t}\n\t});\n\n\t$(\"#bt_submit\").click(function(e){\n\t\te.preventDefault();\n\t\tsend_comment();\n\t});\n\n\tfunction send_comment() {\n\t\t// Test des champs\n\t\tvar msg = \"\";\n\n\t\tif($(\"#name\").val() == ''){\n\t\t\tmsg +=  \"Vous devez renseigner votre nom\";\n\t\t}\n\t\tif($(\"#email2\").val() == ''){\n\t\t\tif(msg != \"\"){\n\t\t\t\tmsg += \"<br>\";\n\t\t\t}\n\t\t\tmsg +=  \"Vous devez renseigner votre email\";\n\t\t}\n\t\tif($(\"#message\").val() == ''){\n\t\t\tif(msg != \"\"){\n\t\t\t\tmsg += \"<br>\";\n\t\t\t}\n\t\t\tmsg +=  \"Vous devez renseigner un message\";\n\t\t}\n\n\t\tif(msg != \"\"){\n\t\t\t$(\"#error_msg\").html(msg);\n\t\t\tif($(\"#error_box\").is(\":hidden\")){\n\t\t\t\t$(\"#error_box\").slideToggle();\n\t\t\t}\n\t\t\treturn false;\n\t\t}\n\n\t\t// Envoi du commentaire\n\t\t// TODO bdd\n\t\talert(\"envoi du commentaire\")\n\n\t\t// Suppression de l'alert si existante\n\t\tif($(\"#error_box\").is(\":visible\")){\n\t\t\t$(\"#error_box\").slideToggle();\n\t\t}\n\n\t\t// Suppression du message, on garde les autres infos\n\t\t$(\"#message\").val(\"\");\n\n\t\t// on replie\n\t\tpanel_minimize();\n\t}// /send_comment()\n\n\n\tfunction panel_minimize() {\n\t\t$('#panel_comment')\n\t\t\t.removeClass(\"maximised\")\n\t\t\t.addClass(\"minimised\")\n\t\t\t.css('bottom','-20px')\n\t\t\t.animate({\n\t\t\t  bottom : '-350px'\n\t\t});\n\t\tch = '<span class=\"glyphicon glyphicon-chevron-up\"></span><span class=\"title_comment\">Commentaires ?</span><span class=\"glyphicon glyphicon-chevron-up\"></span>';\n\t\t$(\"#panel_comment .panel-title\").html(ch);\n\t}// /panel_minimize()\n\n\t\n\tfunction panel_maximize() {\n\t\t$('#panel_comment')\n\t\t\t.removeClass(\"minimised\")\n\t\t\t.addClass(\"maximised\")\n\t\t\t.css('bottom','-350px')\n\t\t\t.animate({\n\t\t\t\tbottom : '-20px'\n\t\t});\n\t\tch = '<span class=\"glyphicon glyphicon-chevron-down\"></span><span class=\"title_comment\">Commentaires ?</span><span class=\"glyphicon glyphicon-chevron-down\"></span>';\n\t\t$(\"#panel_comment .panel-title\").html(ch);\n\t}// /panel_maximize()\n\n\n\tfunction send_comment_ajax(name, email, message) {\n\t\t// body...\n\t}\n</script>\n",
+			"file": "application/views/footer_fr.php",
+			"file_size": 6009,
+			"file_write_time": 131545379932984306,
 			"settings":
 			{
-				"buffer_size": 53568,
+				"buffer_size": 6138,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_link_es_linker_fr.php",
+			"file": "/home/jerem/ssh_key.pub",
 			"settings":
 			{
-				"buffer_size": 32087,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_link_select_columns_fr.php",
-			"settings":
-			{
-				"buffer_size": 15122,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_select_columns.js",
-			"settings":
-			{
-				"buffer_size": 5732,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Project.php",
-			"settings":
-			{
-				"buffer_size": 15690,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_normalize_replace_mvs_fr.php",
-			"settings":
-			{
-				"buffer_size": 23116,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_normalize_infer_types_fr.php",
-			"settings":
-			{
-				"buffer_size": 27481,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
-			"settings":
-			{
-				"buffer_size": 2904,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/style.css",
-			"settings":
-			{
-				"buffer_size": 11748,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_select_columns.css",
-			"settings":
-			{
-				"buffer_size": 1439,
-				"encoding": "UTF-8",
+				"buffer_size": 399,
 				"line_ending": "Unix"
 			}
 		}
@@ -616,7 +547,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 244.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -661,7 +592,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 533.0
+		"width": 587.0
 	},
 	"console":
 	{
@@ -683,7 +614,6 @@
 	[
 		"/var/www/html/projets/magical_ui",
 		"/var/www/html/projets/magical_ui/application",
-		"/var/www/html/projets/magical_ui/application/config",
 		"/var/www/html/projets/magical_ui/application/controllers",
 		"/var/www/html/projets/magical_ui/application/libraries",
 		"/var/www/html/projets/magical_ui/application/views",
@@ -691,35 +621,45 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c9f789fd290ba006479f57d2b80446a6/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8e0268e49ba1b5a3388caad2fde0198a/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/cca0e205335b78ddb4e74e7ac7417854/metadata.json",
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/188e1c7b3363b138563b53ff19d05cdc/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5aa22bf82484f15784469551e9925462/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5bd45204ca8e18a2020fb9878ff406b8/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/150348a2f0197db054fac19f4ce81bc9/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
 		"/var/www/html/projets/magical_ui/application/views/cgu.php",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/config/constants.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
 		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/CONFIG.py",
 		"/home/jerem/ballon d or.csv",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e5bd47a733e164e46cb29567a2603cee/es_linker/learned_settings.json",
@@ -731,17 +671,14 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/replace_mvs/MINI__2016_10_ClinicalTrials_Recodage_EssaisAvecFrancais.csv__run_info.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba66c61b3d545dad359b196474dfd613/INIT/infered_config.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/User.php",
-		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/admin.py",
 		"/var/www/html/projets/magical_ui/application/views/errors/cli/error_general.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28268e744b111dab00127c160bb9ec99/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/0e30189fd064b460c2b8bfaa3c695411/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/0e30189fd064b460c2b8bfaa3c695411/es_linker/column_matches.json",
-		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e926e471e7f5b5161ed7dc9c756b452f/metadata.json",
 		"/var/www/html/projets/magical_ui/init.sql",
 		"/var/www/html/projets/magical_ui/README.md",
@@ -763,11 +700,9 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ed3bb3cf76c25cfc104c6afb34690687/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/961ded08fe683ad068e9cabed329e9ea/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/e046ced72c236d7e41f1d4019779fddb/metadata.json",
-		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/b6ac7f74e29262e5c8992631d1eb4dea/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
-		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/1334eeb5ac3bd4b103ef7c3f9dda387b/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/224fb00efbaffa81b84fefae67944ce8/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/81f89f2169003974ff99751e5aea451f/metadata.json",
@@ -813,12 +748,7 @@
 		"/home/jerem/temp/application/views/changeLog_fr.php",
 		"/home/jerem/temp/application/controllers/Changelog.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/90a3650ce532bf116664cf5405b18d22/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/76607bb925b75fe45ac02ad227b0a006/es_linker/column_matches.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/dedupe_linker/column_matches.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/7561ca66379fcf8816bef5dbef39d392/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/header_en.php"
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json"
 	],
 	"find":
 	{
@@ -838,6 +768,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"email",
+			"fa-user-circle",
+			"load_step",
+			"load_step_normalization/recode_types",
+			"aja",
+			"get_stats",
+			"create_es_index_api",
+			"dotted",
+			"hr",
+			"hr ",
+			"bt_start",
+			"die",
+			"prin",
+			"echo",
+			"result",
+			"bt_next",
+			"#progress",
+			"progress",
+			"upload",
 			"get_step_normalization",
 			"die",
 			"setInterval",
@@ -946,26 +895,7 @@
 			"down",
 			"module_na",
 			"tool",
-			"stat_real_ratio",
-			"real",
-			"create_es_labeller_api",
-			"create_es_index_api",
-			"show_stats",
-			"nrows",
-			"disabeled_buttons",
-			"bt_yes",
-			"bt_add_filter",
-			"add_filter",
-			"bt_add_filter",
-			"@app.route(",
-			"link_results_analyzer",
-			"analyser",
-			"radiu",
-			"chk_",
-			"btn",
-			"bt_next",
-			"fa-",
-			"get_metadata"
+			"stat_real_ratio"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1016,201 +946,24 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_link_step1_init_fr.php",
+					"file": "application/views/footer_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 53568,
+						"buffer_size": 6138,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								38703,
-								38703
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 12109.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/views/project_link_es_linker_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 32087,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9876,
-								9876
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5233.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "application/views/project_link_select_columns_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15122,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7986,
-								7986
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2335.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "assets/project_link_select_columns.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5732,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								227,
-								227
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "application/controllers/Project.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15690,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2207,
-								2476
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1068.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "application/views/project_normalize_replace_mvs_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23116,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2588,
-								2588
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 702.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "application/views/project_normalize_infer_types_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 27481,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								148,
-								148
+								5235,
+								5235
 							]
 						],
 						"settings":
@@ -1218,96 +971,38 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
+						"translation.y": 3307.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/jerem/ssh_key.pub",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 399,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2904,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1585,
-								1585
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "assets/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11748,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								123,
-								123
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "assets/project_link_select_columns.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1439,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								227,
-								227
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
 					"type": "text"
 				}
 			]

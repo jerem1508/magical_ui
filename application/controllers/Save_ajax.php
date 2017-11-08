@@ -98,5 +98,27 @@ class Save_ajax extends CI_Controller {
 
 		$ret =  $this->Projects_model->delete_project($project_id);
 		echo $ret;
-	}
+	}// /delete_project()
+
+
+	public function comment()
+	{
+		# Insertion du commentaire
+
+		if(isset($_POST['name'])){
+			$name = $_POST['name'];
+		}
+		if(isset($_POST['email'])){
+			$email = $_POST['email'];
+		}
+		if(isset($_POST['message'])){
+			$message = $_POST['message'];
+		}
+
+		// Ajout en bdd
+		$ret =  $this->Projects_model->insert_comment(	$name,
+														$email, 
+														$message);
+	}// /comment()
+
 }
