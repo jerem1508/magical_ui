@@ -520,22 +520,91 @@
 	"buffers":
 	[
 		{
-			"contents": "<style type=\"text/css\">\n\t#panel_comment{\n\t\tborder-radius:  5px 5px 0 0;\n\t\tposition: fixed;\n\t\tbottom: -350px;\n\t\tleft: 20px;\n\t\twidth: 350px;\n\t\tborder: 1px solid #777;\n\t\tbackground-color: #262626;\n\t}\n\t#panel_comment .row{\n\t\tmargin-bottom: 10px;\n\t\tmargin-top: 10px;\n\t}\n\t#panel_comment .panel-title{\n\t\tcolor: #fff;\n\t\tcursor: pointer;\n\t}\n\n\t#panel_comment .title_comment{\n\t\tfont-weight: bolder;\n\t\tdisplay: inline-block;\n\t\tmargin-right: 15px;\n\t\tmargin-left: 15px;\n\t}\n\t#panel_comment .txt_comment{\n\t\tcolor: #fff;\n\t\tfont-weight: bolder;\n\t\tfont-style: italic;\n\t}\n\t#bt_comment{\n\t\tbackground-color: #25368C;\n\t\tborder-bottom-width: 0;\n\t}\n\tbody{\n\t\theight: 100%;\n\t}\n\n\tfooter{\n\t\tbackground-color: #262626;\n\t\tpadding-top: 20px;\n\t\tpadding-bottom: 20px;\n\t\theight: 200px;\n\t}\n\t\tfooter .txt{\n\t\t\tcolor: #aaa;\n\t\t\t/*font-weight: bolder;*/\n\t\t}\n\t\tfooter .title{\n\t\t\ttext-transform: uppercase;\n\t\t\tdisplay: inline-block;\n\t\t\tpadding-bottom: 10px;\n\t\t}\n\t\tfooter li{\n\t\t\tlist-style: none;\n\t\t}\n\t\tfooter .col-right{\n\t\t\tborder-left: 1px dotted #777;\n\t\t}\n\t\tfooter a,a:hover{\n\t\t\tcolor: #aaa;\t\n\t\t\ttext-decoration: none;\t\n\t\t}\n</style>\n\n<footer class=\"container-fluid\" style=\"padding-top: 20px;\">\n    <div class=\"row\">\n\t\t<div class=\"col-md-4 txt\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-md-12 text-center\">\n\t\t\t\t\t<span class=\"title\">plan du site</span>        \t\t\t\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n        <div class=\"col-md-4 txt\">\n\t\t\t<div class=\"row\">\n\t\t\t\t<div class=\"col-md-12 text-center\">\n\t\t\t\t\t<span class=\"title\">partenaires</span>        \t\t\t\n\t\t\t\t</div>\n\t\t\t</div><!-- / col-md-4-->\n        \t<div class=\"row\">\n        \t\t<div class=\"col-md-6 col-left\">\n\t\t\t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Programme EIG</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">MESRI</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">ABES</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n        \t\t</div>\n        \t\t<div class=\"col-md-6 col-right\">\n        \t\t\t<ul>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Agro</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Etalab</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">...</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t</ul>\n        \t\t</div>\n        \t</div>\n        </div><!-- / col-md-4-->\n\t\t<div class=\"col-md-4 txt\">\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">A propos</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"<?php echo base_url(\"index.php/Home/cgu\");?>\" target=\"_blank\">Conditions générales d'utilisation</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">API</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t<i class=\"fa fa-envelope\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\tContact\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div><!-- / col-md-4-->\n    </div><!-- / row -->\n</footer>\n\n\n\n<div class=\"panel panel-default\" id=\"panel_comment\">\n  <div class=\"panel-heading\" id=\"bt_comment\">\n    <h3 class=\"panel-title text-center\">\n\t\t<span class=\"glyphicon glyphicon-chevron-up\"></span>\n\t    <span class=\"title_comment\">Commentaires ?</span>\n\t\t<span class=\"glyphicon glyphicon-chevron-up\"></span>\n\t</h3>\n  </div>\n  <div class=\"panel-body\">\n  <form name=\"form_comment\">\n  \t<div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<span class=\"txt_comment\">Un bug, un comportement inatendu, une suggestion...</span>\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Votre nom\" id=\"name\">\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<input type=\"text\" class=\"form-control\" placeholder=\"Votre email\" id=\"email2\">\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12\">\n  \t\t\t<textarea class=\"form-control\" rows=\"4\" placeholder=\"Votre message\" id=\"message\"></textarea>\n  \t\t</div>\n  \t</div>\n    <div class=\"row\">\n    \t<div class=\"col-md-12\">\n    \t\t<div class=\"alert alert-danger\" role=\"alert\" style=\"margin-bottom: 0;\" id=\"error_box\">\n\t\t\t\t<span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"></span>\n\t\t\t\t<span id=\"error_msg\"></span>\n\t\t\t</div>\n    \t</div>\n    </div>\n    <div class=\"row\">\n  \t\t<div class=\"col-md-12 text-right\">\n  \t\t\t<button type=\"submit\" class=\"btn btn-success2\" id=\"bt_submit\">Envoyer</button>\n  \t\t</div>\n  \t</div>\n  \t</form>\n  </div>\n</div>\n\n<script type=\"text/javascript\">\n\t$(\"#error_box\").toggle();\n\t\n\t$(\"#bt_comment\").click(function(){\n\t\tif($('#panel_comment').hasClass(\"maximised\")){\n\t\t\tpanel_minimize();\n\t\t}\n\t\telse{\n\t\t\tpanel_maximize();\n\t\t}\n\t});\n\n\t$(\"#bt_submit\").click(function(e){\n\t\te.preventDefault();\n\t\tsend_comment();\n\t});\n\n\tfunction send_comment() {\n\t\t// Test des champs\n\t\tvar msg = \"\";\n\n\t\tif($(\"#name\").val() == ''){\n\t\t\tmsg +=  \"Vous devez renseigner votre nom\";\n\t\t}\n\t\tif($(\"#email2\").val() == ''){\n\t\t\tif(msg != \"\"){\n\t\t\t\tmsg += \"<br>\";\n\t\t\t}\n\t\t\tmsg +=  \"Vous devez renseigner votre email\";\n\t\t}\n\t\tif($(\"#message\").val() == ''){\n\t\t\tif(msg != \"\"){\n\t\t\t\tmsg += \"<br>\";\n\t\t\t}\n\t\t\tmsg +=  \"Vous devez renseigner un message\";\n\t\t}\n\n\t\tif(msg != \"\"){\n\t\t\t$(\"#error_msg\").html(msg);\n\t\t\tif($(\"#error_box\").is(\":hidden\")){\n\t\t\t\t$(\"#error_box\").slideToggle();\n\t\t\t}\n\t\t\treturn false;\n\t\t}\n\n\t\t// Envoi du commentaire\n\t\t// TODO bdd\n\t\talert(\"envoi du commentaire\")\n\n\t\t// Suppression de l'alert si existante\n\t\tif($(\"#error_box\").is(\":visible\")){\n\t\t\t$(\"#error_box\").slideToggle();\n\t\t}\n\n\t\t// Suppression du message, on garde les autres infos\n\t\t$(\"#message\").val(\"\");\n\n\t\t// on replie\n\t\tpanel_minimize();\n\t}// /send_comment()\n\n\n\tfunction panel_minimize() {\n\t\t$('#panel_comment')\n\t\t\t.removeClass(\"maximised\")\n\t\t\t.addClass(\"minimised\")\n\t\t\t.css('bottom','-20px')\n\t\t\t.animate({\n\t\t\t  bottom : '-350px'\n\t\t});\n\t\tch = '<span class=\"glyphicon glyphicon-chevron-up\"></span><span class=\"title_comment\">Commentaires ?</span><span class=\"glyphicon glyphicon-chevron-up\"></span>';\n\t\t$(\"#panel_comment .panel-title\").html(ch);\n\t}// /panel_minimize()\n\n\t\n\tfunction panel_maximize() {\n\t\t$('#panel_comment')\n\t\t\t.removeClass(\"minimised\")\n\t\t\t.addClass(\"maximised\")\n\t\t\t.css('bottom','-350px')\n\t\t\t.animate({\n\t\t\t\tbottom : '-20px'\n\t\t});\n\t\tch = '<span class=\"glyphicon glyphicon-chevron-down\"></span><span class=\"title_comment\">Commentaires ?</span><span class=\"glyphicon glyphicon-chevron-down\"></span>';\n\t\t$(\"#panel_comment .panel-title\").html(ch);\n\t}// /panel_maximize()\n\n\n\tfunction send_comment_ajax(name, email, message) {\n\t\t// body...\n\t}\n</script>\n",
 			"file": "application/views/footer_fr.php",
-			"file_size": 6009,
-			"file_write_time": 131545379932984306,
 			"settings":
 			{
-				"buffer_size": 6138,
+				"buffer_size": 6734,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/jerem/ssh_key.pub",
+			"file": "application/views/user_new_fr.php",
 			"settings":
 			{
-				"buffer_size": 399,
+				"buffer_size": 2045,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/User.php",
+			"settings":
+			{
+				"buffer_size": 6808,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/user_dashboard_fr.php",
+			"settings":
+			{
+				"buffer_size": 12272,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/header_fr.php",
+			"settings":
+			{
+				"buffer_size": 2156,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/Comments_model.php",
+			"settings":
+			{
+				"buffer_size": 728,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/User_model.php",
+			"settings":
+			{
+				"buffer_size": 1634,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/models/Projects_model.php",
+			"settings":
+			{
+				"buffer_size": 1959,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/controllers/Save_ajax.php",
+			"settings":
+			{
+				"buffer_size": 2256,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "INSERT INTO `users`(`email`, `pwd`, `salt`, `group_id`, `status`, `created_tmp`, `modified_tmp`) VALUES ('admin@mmm.com','cedc9258e7762c89a2d39e7d21b9c4b7','5a02d6d831850',0,99,'2017-11-08 14:00:00','2017-11-08 14:00:00');",
+			"settings":
+			{
+				"buffer_size": 222,
 				"line_ending": "Unix"
 			}
 		}
@@ -547,7 +616,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 244.0,
+		"height": 392.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -592,7 +661,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 587.0
+		"width": 533.0
 	},
 	"console":
 	{
@@ -616,11 +685,14 @@
 		"/var/www/html/projets/magical_ui/application",
 		"/var/www/html/projets/magical_ui/application/controllers",
 		"/var/www/html/projets/magical_ui/application/libraries",
+		"/var/www/html/projets/magical_ui/application/models",
 		"/var/www/html/projets/magical_ui/application/views",
 		"/var/www/html/projets/magical_ui/assets"
 	],
 	"file_history":
 	[
+		"/home/jerem/Aide/mysql",
+		"/home/jerem/ssh_key.pub",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
@@ -746,13 +818,11 @@
 		"/home/jerem/.config/sublime-text-3/Packages/User/Pretty JSON.sublime-settings",
 		"/home/jerem/temp/application/views/changeLog_en.php",
 		"/home/jerem/temp/application/views/changeLog_fr.php",
-		"/home/jerem/temp/application/controllers/Changelog.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/90a3650ce532bf116664cf5405b18d22/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8f0a7fc0d37cd6f016a47cb9db1e55a1/metadata.json"
+		"/home/jerem/temp/application/controllers/Changelog.php"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -768,6 +838,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Projects_model",
+			"server_error",
+			"uniqid",
+			"send_comment_ajax",
+			"pwd",
 			"email",
 			"fa-user-circle",
 			"load_step",
@@ -890,12 +965,7 @@
 			"fa-",
 			"id_source",
 			"show_data",
-			"$.aja",
-			"stats",
-			"down",
-			"module_na",
-			"tool",
-			"stat_real_ratio"
+			"$.aja"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -946,7 +1016,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -955,15 +1025,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6138,
+						"buffer_size": 6734,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5235,
-								5235
+								6733,
+								6733
 							]
 						],
 						"settings":
@@ -971,19 +1041,77 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3307.0,
+						"translation.y": 4693.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/home/jerem/ssh_key.pub",
+					"file": "application/views/user_new_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 399,
+						"buffer_size": 2045,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/controllers/User.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6808,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4872,
+								4872
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6313.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/views/user_dashboard_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12272,
 						"regions":
 						{
 						},
@@ -996,13 +1124,194 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/views/header_fr.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2114,
+								2126
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/models/Comments_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "application/models/User_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1136,
+								1136
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1782.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "application/models/Projects_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1780,
+								1790
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "application/controllers/Save_ajax.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2256,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								630,
+								630
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 222,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								222,
+								222
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.sublime-syntax"
+						},
+						"translation.x": 918.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1025,11 +1334,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.554097864816,
 			1.0
 		],
 		"rows":
@@ -1077,7 +1393,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

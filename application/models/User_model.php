@@ -38,27 +38,25 @@ class User_model extends CI_Model {
 
     public function insert_user($email, $pwd)
     {
+        $this->email = $email;
+        $this->created_tmp = time();
+        $this->modified_tmp = time();
 
-            $this->email = $email;
-            $this->created_tmp = time();
-            $this->modified_tmp = time();
+        // MD5
+        $this->salt = uniqid();
+        $this->pwd = md5($pwd.$this->salt);
 
-            // MD5
-            $this->salt = uniqid();
-            $this->pwd = md5($pwd.$this->salt);
-
-            return $this->db->insert('users', $this);
-
+        return $this->db->insert('users', $this);
     }
 
 
     public function update_user()
     {
-            $this->title    = $_POST['title'];
-            $this->content  = $_POST['content'];
-            $this->date     = time();
+        $this->title    = $_POST['title'];
+        $this->content  = $_POST['content'];
+        $this->date     = time();
 
-            $this->db->update('entries', $this, array('id' => $_POST['id']));
+        $this->db->update('entries', $this, array('id' => $_POST['id']));
     }
 
 

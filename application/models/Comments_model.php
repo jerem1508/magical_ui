@@ -2,11 +2,13 @@
 
 class Comments_model extends CI_Model {
 
-    public function insert_comment($data_to_write)
+    public function insert_comment($name, $email, $message, $url)
     {
         # Insertion d'un commentaire en base
-        $data['comment'] = $data_to_write['comment'];
-        $data['user_id'] = $data_to_write['user_id'];
+        $data['name'] = $name;
+        $data['email'] = $email;
+        $data['message'] = $message;
+        $data['url'] = $url;
 
         return $this->db->insert('comments', $data);
     }// /insert_comment()

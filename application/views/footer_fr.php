@@ -2,7 +2,7 @@
 	#panel_comment{
 		border-radius:  5px 5px 0 0;
 		position: fixed;
-		bottom: -350px;
+		bottom: -360px;
 		left: 20px;
 		width: 350px;
 		border: 1px solid #777;
@@ -247,7 +247,7 @@
 			.addClass("minimised")
 			.css('bottom','-20px')
 			.animate({
-			  bottom : '-350px'
+			  bottom : '-360px'
 		});
 		ch = '<span class="glyphicon glyphicon-chevron-up"></span><span class="title_comment">Commentaires ?</span><span class="glyphicon glyphicon-chevron-up"></span>';
 		$("#panel_comment .panel-title").html(ch);
@@ -258,7 +258,7 @@
 		$('#panel_comment')
 			.removeClass("minimised")
 			.addClass("maximised")
-			.css('bottom','-350px')
+			.css('bottom','-360px')
 			.animate({
 				bottom : '-20px'
 		});
@@ -268,16 +268,22 @@
 
 
 	function send_comment_ajax(name, email, message) {
+		// Récupération de l'URL
+		var url = window.location.href;
+		console.log(url);
+
 		// Envoi du commentaire
         $.ajax({    
             type: 'post',
-            url: '<?php echo base_url('index.php/Save_ajax/project');?>',
-            data: 'project_id=' + project_id + '&project_type=normalize',
+            url: '<?php echo base_url('index.php/Save_ajax/comment');?>',
+            data: 'name=' + name + '&email=' + email + '&message=' + message + '&url=' + url,
             async: false,
             success: function (result) {
+            	console.log('send_comment_ajax - SUCCESS :');
                 console.log("result : ",result);
             },
             error: function (result, status, error){
+            	console.log('send_comment_ajax - ERREUR :');
                 console.log(result);
                 console.log(status);
                 console.log(error);

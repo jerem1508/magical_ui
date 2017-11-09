@@ -16,7 +16,6 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		# Chargement par défaut
-
 		$data['title'] = "Accueil";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);

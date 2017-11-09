@@ -8,6 +8,7 @@ class Save_ajax extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->model('Projects_model');
+		$this->load->model('Comments_model');
 	}
 
 	public function session()
@@ -114,11 +115,12 @@ class Save_ajax extends CI_Controller {
 		if(isset($_POST['message'])){
 			$message = $_POST['message'];
 		}
+		if(isset($_POST['url'])){
+			$url = $_POST['url'];
+		}
 
 		// Ajout en bdd
-		$ret =  $this->Projects_model->insert_comment(	$name,
-														$email, 
-														$message);
+		$ret =  $this->Comments_model->insert_comment($name, $email, $message, $url);
 	}// /comment()
 
 }

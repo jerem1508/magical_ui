@@ -15,8 +15,10 @@ USE `magical_ui`;
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int(7) UNSIGNED NOT NULL,
-  `comment` text NOT NULL,
-  `user_id` int(7) UNSIGNED DEFAULT NULL,
+  `message` text NOT NULL,
+  `email` varchar(300) NOT NULL,
+  `name` varchar(300) NOT NULL,
+  `url` text NOT NULL,
   `created_tmp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -71,7 +73,7 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`email`);
 
 --
 -- Index `log_users`

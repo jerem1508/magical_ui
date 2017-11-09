@@ -88,8 +88,12 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 // Constantes applicatives
-define('BASE_API_URL', "http://127.0.0.1:5000"); 
-// define('BASE_API_URL', "http://51.15.221.77:5000");
+if($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost'){
+	define('BASE_API_URL', "http://127.0.0.1:5000"); 
+}
+elseif($_SERVER['HTTP_HOST'] == '51.15.221.77'){
+	define('BASE_API_URL', "http://51.15.221.77:5000");
+}
 
 // user
 define('USER_STATUS_ENABLED', "1");

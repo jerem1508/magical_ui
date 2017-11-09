@@ -200,7 +200,10 @@ class User extends CI_Controller {
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
 			if(!$project_api){
-				throw new Exception("An internal synchronization error occurred on our server", 1);
+				// Suppression du projet en base car il n'exise pas sur le serveur data
+				$this->load->model('Projects_model');
+				$this->Comments_model->delete_project($project['project_id']);
+				//throw new Exception("An internal synchronization error occurred on our server", 1);
 			}
 
 			$project['project_id'] = $project_api['project_id'];
