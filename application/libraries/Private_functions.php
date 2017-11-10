@@ -50,11 +50,10 @@ class Private_functions {
 	public function set_tab_steps_by_filename($log)
 	{
 		$tab = [];
-
 		foreach ($log as $filename => $steps) {
 			$t_steps = [];	
 			foreach ($steps as $step => $values) {
-				$t_steps[$step] = $values['completed'];
+				$t_steps[$step] = ($values['completed'] || $values['skipped']);
 			}
 			$tab[$filename] = $t_steps;
 		}
