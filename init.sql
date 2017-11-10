@@ -19,6 +19,8 @@ CREATE TABLE `comments` (
   `email` varchar(300) NOT NULL,
   `name` varchar(300) NOT NULL,
   `url` text NOT NULL,
+  `project_id` varchar(200) NOT NULL,
+  `project_type` varchar(50) NOT NULL,
   `created_tmp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

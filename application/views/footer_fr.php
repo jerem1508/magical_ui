@@ -270,13 +270,19 @@
 	function send_comment_ajax(name, email, message) {
 		// Récupération de l'URL
 		var url = window.location.href;
-		console.log(url);
+
+		if (typeof project_id == "undefined") {
+			var project_id = 'NC';
+		}
+		if (typeof project_type == "undefined") {
+			var project_type = 'NC';
+		}
 
 		// Envoi du commentaire
         $.ajax({    
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/comment');?>',
-            data: 'name=' + name + '&email=' + email + '&message=' + message + '&url=' + url,
+            data: 'name=' + name + '&email=' + email + '&message=' + message + '&url=' + url + '&project_id=' + project_id + '&project_type=' + project_type,
             async: false,
             success: function (result) {
             	console.log('send_comment_ajax - SUCCESS :');

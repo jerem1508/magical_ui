@@ -270,7 +270,7 @@ if(isset($this->session->project_type)){
         var ch = '<table class="table table-responsive table-condensed table-striped">';
         ch += "<tr>";
 		ch += "<th></th>";
-		ch += "<th data-intro=\"Valeurs manquantes détectées automatiquement\">Valeurs suggérées</th>";
+		ch += "<th data-intro=\"Valeurs manquantes détectées automatiquement\">Valeurs à remplacer</th>";
 		ch += "<th data-intro=\"Valeurs manquantes détectées automatiquement (peu probables)\">Autres suggestions</th>";
 		ch += "<th data-intro=\"Ajoutez des représentations de valeurs manquantes ou nulls\">Ajout manuel</th>";
         ch += "</tr>";
@@ -723,6 +723,7 @@ if(isset($this->session->project_type)){
 		console.log("project_id : <?php echo $_SESSION['project_id'];?>");
 
 		project_id = '<?php echo $_SESSION['project_id'];?>';
+		project_type = 'normalize';
 
 		// Métadata du projet
 		metadata = get_metadata('normalize', project_id);

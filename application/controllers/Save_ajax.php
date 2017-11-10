@@ -118,9 +118,20 @@ class Save_ajax extends CI_Controller {
 		if(isset($_POST['url'])){
 			$url = $_POST['url'];
 		}
-
+		if(isset($_POST['project_id'])){
+			$project_id = $_POST['project_id'];
+		}
+		if(isset($_POST['project_type'])){
+			$project_type = $_POST['project_type'];
+		}
 		// Ajout en bdd
-		$ret =  $this->Comments_model->insert_comment($name, $email, $message, $url);
+		$ret =  $this->Comments_model->insert_comment(
+										$name, 
+										$email, 
+										$message, 
+										$url, 
+										$project_id, 
+										$project_type);
 	}// /comment()
 
 }
