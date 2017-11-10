@@ -46,7 +46,10 @@ class User_model extends CI_Model {
         $this->salt = uniqid();
         $this->pwd = md5($pwd.$this->salt);
 
-        return $this->db->insert('users', $this);
+        $ret = $this->db->insert('users', $this);
+    
+        // retour des inkfos a mettre en session
+        $this->get_user($email);
     }
 
 

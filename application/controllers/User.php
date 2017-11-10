@@ -86,8 +86,14 @@ class User extends CI_Controller {
 			}
 		}
 
-		// Chargement du tableau de bord
-		$this->dashboard($error);
+		// Enregistrement en session
+		$user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);
+		$this->session->set_userdata('user', $user);
+
+		redirect('/Home');
+
+		// // Chargement du tableau de bord
+		// $this->dashboard($error);
 	}// /new_save()
 
 
