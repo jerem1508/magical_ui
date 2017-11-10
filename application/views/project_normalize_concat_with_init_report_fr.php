@@ -187,6 +187,10 @@
         });// /ajax metadata
 
 
+
+        $("#bt_next").click(function(){
+            window.location.href = "<?php echo base_url('index.php/User/dashboard');?>";
+        });
        
 
     }); // /ready
