@@ -125,6 +125,13 @@
                         </button>
                         <button class="btn btn-default btn-xl btn_icon btn-default" 
                                 data-toggle="tooltip"
+                                title="Je ne sais pas"
+                                onclick="socket_answer('uncertain');" 
+                                id="bt_uncertain">
+                            <h2><i class="fa fa-question-circle" aria-hidden="true"></i></h2>
+                        </button>
+                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                                data-toggle="tooltip"
                                 title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
                                 onclick="socket_answer('forget_row');" 
                                 id="bt_forget">
@@ -471,6 +478,7 @@ function disabeled_buttons() {
     $("#bt_yes").attr("disabled","disabled");
     $("#bt_no").attr("disabled","disabled");
     $("#bt_previous").attr("disabled","disabled");
+    $("#bt_uncertain").attr("disabled","disabled");
     $("#bt_forget").attr("disabled","disabled");
 }// /disabeled_buttons()
 
@@ -479,6 +487,7 @@ function enabeled_buttons() {
     $("#bt_yes").removeAttr('disabled');
     $("#bt_no").removeAttr('disabled');
     $("#bt_previous").removeAttr('disabled');
+    $("#bt_uncertain").removeAttr('disabled');
     $("#bt_forget").removeAttr('disabled');
 }// /enabeled_buttons()
 
