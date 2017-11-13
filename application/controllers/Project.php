@@ -14,6 +14,13 @@ class Project extends CI_Controller {
 
 		$this->load->library('Private_functions');
 
+		// test de la session user
+		// Francais par defaut
+		if(!isset($_SESSION['user'])){
+			redirect('/Home');
+		}
+
+
 		// test de la langue
 		// Francais par defaut
 		if(!isset($_SESSION['language'])){

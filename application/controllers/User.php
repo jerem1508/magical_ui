@@ -33,7 +33,8 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home_'.$_SESSION['language']);
+		//$this->load->view('home_'.$_SESSION['language']);
+		redirect('/Home');
 	}// /index()
 
 

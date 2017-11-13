@@ -28,7 +28,10 @@
 </div><!-- /Intro -->
 
 <!-- Types de projets possibles -->
-<div class="container-fluid" style="background-color: #262626;color: #eee;padding-bottom: 25px">
+<?php
+if(isset($_SESSION['user'])){
+?>
+<div class="container-fluid" style="background-color: #262626;color: #eee;padding-bottom: 25px;border-bottom: 4px dotted #333;">
 	<div class="row">
 		<div class="col-md-offset-2 col-md-3">
 			<h3>Normalisation d'un fichier</h3>
@@ -46,9 +49,9 @@
 		</div>
 	</div>
 </div><!-- /Types de projets possibles -->
-
-<!-- Compte -->
 <?php
+}
+//<!-- Compte -->
 if(!isset($_SESSION['user'])){
 ?>
 <div class="container-fluid" style="background-color: #fff;padding-bottom: 25px">
@@ -66,7 +69,7 @@ if(!isset($_SESSION['user'])){
 				L'inscription est totalement gratuite!
 			</p>
 
-			<a href='<?php echo base_url("index.php/User/login");?>' class="btn btn-success">Déjà inscrit</a>
+			<!--<a href='<?php echo base_url("index.php/User/login");?>' class="btn btn-success">Déjà inscrit</a>-->
 		</div><!--/col-xs-6-->
 		<div class="col-xs-offset-1 col-xs-4">
 			<form name="my_form" method="post" action="<?php echo base_url("index.php/User/new_save");?>">
