@@ -29,6 +29,7 @@ function is_completed_step($step_name, $project_steps, $has_mini)
     }
 }// /is_completed_step()
 
+
 function get_progress_html($bs_color, $ratio, $step, $project_id)
 {
     $html = '<div 
@@ -996,6 +997,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                 else if(exist_file_src && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("source", src_project_id);
+
+                    // Le fichier est déjà uploadé
+                    UL_fic_src = true;
                 }
                 else{
                     error = true;
@@ -1044,10 +1048,16 @@ function get_normalized_projects_html($id, $normalized_projects)
                 else if(exist_file_ref && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("ref", ref_project_id);
+                    
+                    // Le fichier est déjà uploadé
+                    UL_fic_ref = true;
                 }
                 else if(exist_ref && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("ref", ref_project_id);
+
+                    // Le fichier est déjà uploadé
+                    UL_fic_ref = true;
                 }
                 else{
                     error = true;
@@ -1055,9 +1065,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                     alert('Veuillez sélectionner un fichier ref');
                 }
             // /Traitement du fichier REF
-
-
-            $('#bloc_bt_next').css('display', 'inherit');
 
         // /Appels API ----------------------
     }// /treatment
@@ -1097,6 +1104,8 @@ function get_normalized_projects_html($id, $normalized_projects)
     $(function() {
         url_src = '';
         url_ref = '';
+        UL_fic_src = false;
+        UL_fic_ref =  false;
         target = ''; // Utilisé pour la sélection d'un projet dans la modale
 
         $("#bt_new_project").click(function(e){
@@ -1176,6 +1185,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                 // Ajout du nouveau projet de normalisation au projet de link
                 save_id_normalized_project("source", src_project_id);
 
+                // On indique que l'upload est terminé afin d'afficher le bouton "suivant"
+                UL_fic_src = true;
+
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -1224,6 +1236,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                 // Ajout du nouveau projet de normalisation au projet de link
                 save_id_normalized_project("ref", ref_project_id);
 
+                // On indique que l'upload est terminé afin d'afficher le bouton "suivant"
+                UL_fic_ref = true;
+
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -1246,6 +1261,19 @@ function get_normalized_projects_html($id, $normalized_projects)
         }).prop('disabled', !$.support.fileInput)
           .parent().addClass($.support.fileInput ? undefined : 'disabled');
         // /#fileupload_ref'.fileupload()
+
+
+        // Test de la creation des projets pour afficher le bouton "suivant"
+        var handle = setInterval(function(){
+            console.log('Test fin de traitement ...');
+            if(UL_fic_src && UL_fic_ref){
+                console.log('Fin de traitement OK');
+                clearInterval(handle);
+                
+                // Affichage du bouton "suivant"
+                $('#bloc_bt_next').css('display', 'inherit');
+            }
+        }, 1000);
 
         // Tooltip des étapes
         $(".add_selected_columns").attr('title','Etape de sélection des colonnes à traiter.');

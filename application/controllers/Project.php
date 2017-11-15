@@ -17,7 +17,7 @@ class Project extends CI_Controller {
 		// test de la session user
 		// Francais par defaut
 		if(!isset($_SESSION['user'])){
-			redirect('/Home');
+			redirect('/User/new');
 		}
 
 

@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"tex",
+				"text-right"
+			],
+			[
+				"fon",
+				"font-style"
+			],
+			[
+				"bord",
+				"border-left"
+			],
+			[
+				"pad",
+				"padding-left"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"hei",
+				"height\t = 'inherit' Style CSS"
+			],
+			[
+				"text",
+				"text-center"
+			],
+			[
+				"border",
+				"border-bottom"
+			],
+			[
 				"get_",
 				"get_user"
 			],
@@ -26,10 +66,6 @@
 			[
 				"conf",
 				"confidence"
-			],
-			[
-				"pad",
-				"padding-top"
 			],
 			[
 				"padd",
@@ -120,20 +156,12 @@
 				"padding-left"
 			],
 			[
-				"text",
-				"text-right"
-			],
-			[
 				"bac",
 				"background-color"
 			],
 			[
 				"border-bottom-",
 				"border-bottom-width"
-			],
-			[
-				"in",
-				"inline-block"
 			],
 			[
 				"sty",
@@ -196,10 +224,6 @@
 				"module_name"
 			],
 			[
-				"mar",
-				"margin-top"
-			],
-			[
 				"get_meta",
 				"maxdb_get_metadata"
 			],
@@ -220,10 +244,6 @@
 				"submit"
 			],
 			[
-				"border",
-				"border-radius"
-			],
-			[
 				"ro",
 				"rowspan=\"2"
 			],
@@ -234,10 +254,6 @@
 			[
 				"load",
 				"load_data"
-			],
-			[
-				"tex",
-				"text-center"
 			],
 			[
 				"current",
@@ -282,10 +298,6 @@
 			[
 				"b",
 				"bold"
-			],
-			[
-				"fon",
-				"font-weight"
 			],
 			[
 				"project",
@@ -400,10 +412,6 @@
 				"display\t Style CSS"
 			],
 			[
-				"pa",
-				"padding-left"
-			],
-			[
 				"i",
 				"italic"
 			],
@@ -506,24 +514,28 @@
 			[
 				"to",
 				"to_tab_html"
-			],
-			[
-				"con",
-				"container_step"
-			],
-			[
-				"write",
-				"write_dl"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_link_es_train_fr.php",
+			"contents": "<?php\n\nfunction is_completed_step($step_name, $project_steps, $has_mini)\n{\n    $filename = str_replace('MINI__', '', key($project_steps));\n\n    if($project_steps[$filename]['concat_with_init']==1){\n        return true;\n    }\n\n    switch ($step_name) {\n        case 'INIT':\n            return true;\n            break;\n\n        case 'add_selected_columns':\n        case 'replace_mvs':\n        case 'recode_types':\n            if($has_mini){\n                return $project_steps['MINI__'.$filename][$step_name];\n            }\n            else{\n                return $project_steps[$filename][$step_name];\n            }\n\n            break;\n        default :\n            return false;\n    }\n}// /is_completed_step()\n\n\nfunction get_progress_html($bs_color, $ratio, $step, $project_id)\n{\n    $html = '<div \n                class=\"progress-bar progress-bar-'.$bs_color.' step '.$step.'\" \n                role=\"progressbar\" \n                aria-valuenow=\"25\" \n                aria-valuemin=\"0\" \n                aria-valuemax=\"100\" \n                data-toggle=\"tooltip\" \n                style=\"width: '.$ratio.'%;\">\n            </div>';\n\n    return $html;\n}// /get_progress_html()\n\n\nfunction get_internal_projects_html($internal_projects)\n{\n    # Renvoi un code HTML d'affichage des projets internes (publiques) dans la modale\n\n    $html = '';\n\n    // Récupération des informations depuis les métatdata des projets internes\n    foreach ($internal_projects as $project){\n        \n        // $project['display_name']\n        // $project['description']\n        // $project['project_id']\n\n        // Date de création\n        $timestamp = $project['timestamp'];\n        $created_date = date('d/m/Y', $timestamp);\n\n        // Nombre de lignes\n        $nrows = $project['files'][key($project['files'])]['nrows'];\n\n        $html .= '<div class=\"bloc_project\" onclick=\"select_internal_ref(\\''.$project['project_id'].'\\',\\''.$project['display_name'].'\\');\">';\n            $html .= '<div class=\"row\">';\n                $html .= '<div class=\"col-md-1 chk\">';\n                $html .= '<h3><span class=\"glyphicon glyphicon-ok\"></span></h3>';\n                $html .= '</div>';\n                $html .= '<div class=\"col-md-11\">';\n                    // Nom di projet\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= '<h4 class=\"internal_ref_title\">'.$project['display_name'].'<h4>';\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    // Nom du fichier\n                    // $html .= '<div class=\"row\">';\n                    //     $html .= '<div class=\"col-md-12\">';\n                    //         $html .= $project['file'];\n                    //     $html .= '</div>';\n                    // $html .= '</div>';\n                    // Description du projet\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= '<i>'.$project['description'].'</i>';\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    // Date de création\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= 'Création : '.$created_date;\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    // Nombre de ligne\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= 'Nombre de lignes : '.$nrows;\n                        $html .= '</div>';\n                    $html .= '</div>';\n                $html .= '</div>'; // /col-md-11\n            $html .= '</div>'; // /row\n            $html .= '<hr>';\n        $html .= '</div>';// / bloc_project\n\n\n    }// /foreach\n\n    echo $html;\n}// /get_internal_projects_html()\n\n\nfunction get_normalized_projects_html($id, $normalized_projects)\n{\n    $html = '';\n\n    $tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];\n    $nb_steps = count($tab_steps);\n    $ratio = 100/$nb_steps;\n\n    foreach ($normalized_projects as $project){\n        // On ne veut pas afficher les projets \"publics\" ici \n        if($project['public']){\n            continue;\n        }\n\n        // Jauge\n        $steps_html = '<div class=\"progress\">';\n        $found_step_todo = false;\n        $step_todo = \"\";\n        foreach ($tab_steps as $step) {\n            $bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?\"success2\":\"warning\";\n            $steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);\n\n            if(!$found_step_todo){\n                if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){\n                    $step_todo = $step;\n                    $found_step_todo = true;\n                }\n            }\n        }\n        $steps_html.= '</div>';\n        // /Jauge\n\n        // dates\n        $timestamp = strtotime($project['created_tmp']);\n        $created_date = date('d/m/Y', $timestamp);\n\n        $timestamp = strtotime($project['modified_tmp']);\n        $modified_date = date('d/m/Y h:m', $timestamp);\n        // /dates\n\n        $html .= '<div class=\"bloc_project\" onclick=\"select_project(\\''.$project['project_id'].'\\',\\''.$project['display_name'].'\\');\">';\n            $html .= '<div class=\"row\">';\n                $html .= '<div class=\"col-md-1 chk\">';\n                $html .= '<h3><span class=\"glyphicon glyphicon-ok\"></span></h3>';\n                $html .= '</div>';\n                $html .= '<div class=\"col-md-11\">';\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= '<h4>'.$project['display_name'].'<h4>';\n                        $html .= '</div>';\n                    $html .= '</div>';\n\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\" style=\"height: 5px;\">';\n                            $html .= $steps_html;\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= $project['file'];\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= '<i>'.$project['description'].'</i>';\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    \n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= 'Création : '.$created_date;\n                        $html .= '</div>';\n                    $html .= '</div>';\n                    $html .= '<div class=\"row\">';\n                        $html .= '<div class=\"col-md-12\">';\n                            $html .= 'Dernière modification : '.$modified_date;\n                        $html .= '</div>';\n                    $html .= '</div>';\n                $html .= '</div>';\n            $html .= '</div>';\n            $html .= '<hr>';\n        $html .= '</div>';\n    }\n\n    echo $html;\n}// /get_normalized_projects_html()\n\n?>\n\n<img src=\"<?php echo base_url('assets/img/poudre.png');?>\" class=\"poudre poudre_pos_home\">\n\n<div class=\"container-fluid intro\">\n    <div class=\"row\" style=\"padding-top: 20px;padding-bottom: 20px;\">\n        <div class=\"col-lg-6\">\n            \t<h1>Jointure de fichiers</h1>\n                <div class=\"page_explain\">\n                    La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.    \n                </div>\n        </div> <!-- / col-12-->\n        <div class=\"col-lg-6\">\n            <div class=\"row\">\n                <div class=\"col-lg-9\">\n                    <div id=\"carousel-example-generic\" class=\"carousel slide\" data-ride=\"carousel\">\n                      <!-- Indicators -->\n                      <ol class=\"carousel-indicators\">\n                        <li data-target=\"#carousel-example-generic\" data-slide-to=\"0\" class=\"active\"></li>\n                        <li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>\n                        <li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li>\n                      </ol>\n\n                      <!-- Wrapper for slides -->\n                      <div class=\"carousel-inner\" role=\"listbox\">\n                        <div class=\"item active\">\n                          <img src=\"...\" alt=\"...\">\n                          <div class=\"carousel-caption\">\n                            ...\n                          </div>\n                        </div>\n                        <div class=\"item\">\n                          <img src=\"...\" alt=\"...\">\n                          <div class=\"carousel-caption\">\n                            ...\n                          </div>\n                        </div>\n                        ...\n                      </div>\n\n                      <!-- Controls -->\n                      <a class=\"left carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"prev\">\n                        <span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>\n                        <span class=\"sr-only\">Previous</span>\n                      </a>\n                      <a class=\"right carousel-control\" href=\"#carousel-example-generic\" role=\"button\" data-slide=\"next\">\n                        <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>\n                        <span class=\"sr-only\">Next</span>\n                      </a>\n                    </div>\n                </div>\n                <div class=\"col-lg-3 text-right\">\n                    <span class=\"btn btn-default btn-xl fileinput-button btn_2_3\" onclick=\"javascript:introJs().setOption('showBullets', false).start();\">\n                        <img src=\"<?php echo base_url('assets/img/laptop.svg');?>\"><br>Aide\n                    </span>\n                </div>\n            </div>\n        </div><!-- /col-lg-6-->\n    </div><!-- / row -->\n</div>\n<div class=\"container-fluid background_1\" style=\"margin-top: 0px;\">\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n            <h2 style=\"display: inline;\">\n                <span class=\"step_numbers\">1</span>\n                &nbsp;Identité du projet\n            </h2>\n            <form class=\"form-horizontal\" name=\"form_project\" id=\"form_project\" method=\"post\">\n                <div class=\"form-group\" data-intro=\"Choisissez un nom pour vous y retrouver plus facilement\">\n                    <label for=\"project_name\" class=\"col-sm-2 control-label\">Nom du projet *</label>\n                    <div class=\"col-sm-10\">\n                        <input type=\"text\" class=\"form-control\" id=\"project_name\" name=\"project_name\" placeholder=\"Nom du projet\" value=\"Projet_1\">\n                    </div>\n                </div>\n                <div class=\"form-group\" data-intro=\"Ajoutez une description optionnelle\">\n                    <label for=\"project_description\" class=\"col-sm-2 control-label\">Description du projet</label>\n                    <div class=\"col-sm-10\">\n                        <textarea class=\"form-control\" id=\"project_description\" name=\"project_description\" rows=\"3\"></textarea>\n                    </div>\n                </div>\n                <div class=\"col-md-offset-2 col-md-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\" id=\"chk_cgu\"> En cochant cette case vous acceptez les <a href=\"<?php echo base_url(\"index.php/Home/cgu\");?>\" target=\"_blank\">conditions générales d'utilisation</a>\n                        </label>\n                    </div>\n                </div>\n                <div class=\"col-md-offset-2 col-md-10\">\n                    <div class=\"checkbox\">\n                        <label>\n                            <input type=\"checkbox\" id=\"chk_reuse\" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application\n                        </label>\n                    </div>\n                </div>\n            </form>\n        </div> <!-- / col-12-->\n    </div><!-- / row -->\n</div>\n<div class=\"container-fluid background_1\" style=\"margin-top: 0px;\">\n    <hr>\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n            <div class=\"row\">\n                <div class=\"col-xs-6\">\n                    <div data-intro=\"Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)\">\n                        <h2 style=\"display: inline;\">\n                            <span class=\"step_numbers\">2</span>\n                            &nbsp;Sélection du fichier \"source\"\n                            <i class=\"fa fa-table\" aria-hidden=\"true\"></i>\n                        </h2>\n                        <div>\n                            Sélectionnez le fichier \"source\", c'est à dire le fichier sale auquel on veut associer des codes de référence.\n                        </div>\n\n                        <form class=\"form-horizontal\" name=\"form_src_file\" id=\"form_src_file\" method=\"post\" enctype=\"multipart/form-data\">\n                            <div class=\"row\" data-intro=\"Vous pouvez uploader un nouveau fichier ...\">\n                                <div class=\"col-xs-1 text-right\">\n                                    <h3 class=\"hover_new_file_src_target\">\n                                        <span class=\"glyphicon glyphicon-ok\"></span>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xs-8 hover_new_file_src\" id=\"bt_new_file_src\">\n                                    <div>\n                                        <h3>Nouveau fichier</h3>\n                                        Tout nouveau fichier devra suivre au préalable un processus de normalisation afin de pouvoir être utilisé dans un projet de jointure.\n                                        La normalisation rendra la jointure plus efficace. (<a href=\"#\">Qu'est-ce que la normalisation ?</a>)\n                                    </div>\n                                </div>\n                                <div class=\"col-xs-3 hover_new_file_src\">\n                                    <div class=\"text-center\" style=\"margin-top: 40px;\">\n\n                                        <span class=\"btn btn-default btn-xl fileinput-button btn_2_3\">\n                                            <h4 class=\"glyphicon glyphicon-plus\"></h4>\n                                            <br>\n                                            <h4>Nouveau</h4>\n                                            <input id=\"fileupload_src\" type=\"file\" name=\"file\">\n                                        </span>\n\n                                        <div id=\"file_name_src\"></div>\n                                        <button id=\"envoyer_src\" style=\"display: none;\"></button>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\" data-intro=\"... ou en reprendre un que vous avez déjà uploadé\">\n                                <div class=\"col-xs-1 text-right\">\n                                    <h3 class=\"hover_exist_file_src_target\">\n                                        <span class=\"glyphicon glyphicon-ok\"></span>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xs-8 hover_exist_file_src\" id=\"bt_exist_file_src\">\n                                    <div>\n                                        <h3>Fichier déjà normalisé</h3>\n                                        Si vous possédez un compte et que vous avez déjà normalisé le fichier souhaité, vous avez la possibilité de le sélectionner. Seuls les fichiers entièrement normalisés sont disponibles.\n                                    </div>\n                                </div>\n                                <div class=\"col-xs-3 hover_exist_file_src\" style=\"margin-top: 40px;\">\n                                    <div class=\"text-center\">\n                                    <?php\n                                    if(!isset($_SESSION['user'])){\n                                    ?>\n                                    <a href=\"<?php echo base_url('index.php/User/login/link');?>\">\n                                        <span class=\"glyphicon glyphicon-lock\"></span>\n                                        M'identifier\n                                    </a>\n                                    <?php\n                                    }\n                                    else{\n                                    ?>\n                                    <a class=\"btn btn-xs btn-default btn_2_3\" id=\"bt_select_project_src\">\n                                        <h4 class=\"glyphicon glyphicon-list-alt\"></h4>\n                                        <h4>Mes fichiers</h4>\n                                    </a>\n                                    <div id=\"src_project_name\"></div>\n                                    <div id=\"src_project_id\" style=\"display: none;\"></div>\n                                    <?php\n                                    }\n                                    ?>\n                                    </div>\n                                </div>\n                            </div>\n                        </form>\n                    </div>\n                    \n                </div>\n                <div class=\"col-xs-6\" style=\"border-left: 3px dotted #ddd;\">\n                    <div data-intro=\"Choisissez ici votre fichier de référence\">\n                        <h2 style=\"display: inline;\">\n                            <span class=\"step_numbers\">3</span>\n                            &nbsp;Sélection du fichier \"référentiel\"\n                            <i class=\"fa fa-database\" aria-hidden=\"true\"></i>\n                        </h2>\n                        <div>\n                            Choisissez un fichier \"référentiel\", dans lequel nous cherchons les élements de la source. Ce fichier est sensé contenir au moins tous les éléments recherchés dans la source. Par ailleurs, il est supposé ne pas contenir de doublons.\n                        </div>\n\n\n                        <form class=\"form-horizontal\" name=\"form_ref_file\" id=\"form_ref_file\" method=\"post\" enctype=\"multipart/form-data\">\n                            <div class=\"row\">\n                                <div class=\"col-xs-1\">\n                                    <h3 class=\"hover_new_file_ref_target\">\n                                        <span class=\"glyphicon glyphicon-ok\"></span>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xs-8 hover_new_file_ref\" id=\"bt_new_file_ref\">\n                                    <div>\n                                        <h3>Nouveau fichier</h3>\n                                        Tout nouveau fichier devra suivre au préalable un processus de normalisation afin de pouvoir être utilisé dans un projet de jointure.\n                                        La normalisation rendra la jointure plus efficace. (<a href=\"#\">Qu'est-ce que la normalisation ?</a>)\n                                    </div>\n                                </div>\n                                <div class=\"col-xs-3 hover_new_file_ref\">\n                                    <div class=\"text-center\" style=\"margin-top: 40px;\">\n                                        <span class=\"btn btn-default btn-xl fileinput-button btn_2_3\">\n                                            <h4 class=\"glyphicon glyphicon-plus\"></h4>\n                                            <br>\n                                            <h4>Nouveau</h4>\n                                            <input id=\"fileupload_ref\" type=\"file\" name=\"file\">\n                                        </span>\n                                        <span id=\"file_name_ref\"></span>\n                                        <button id=\"envoyer_ref\" style=\"display: none;\"></button>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-xs-1\">\n                                    <h3 class=\"hover_exist_file_ref_target\">\n                                        <span class=\"glyphicon glyphicon-ok\"></span>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xs-8 hover_exist_file_ref\" id=\"bt_exist_file_ref\">\n                                    <div>\n                                        <h3>Fichier déjà normalisé</h3>\n                                        Si vous possédez un compte et que vous avez déjà normalisé le fichier souhaité, vous avez la possibilité de le sélectionner. Seuls les fichiers entièrement normalisés sont disponibles.\n                                    </div>\n                                </div>\n                                <div class=\"col-xs-3 hover_exist_file_ref\" style=\"margin-top: 40px;\">\n                                    <div class=\"text-center\">\n                                    <?php\n                                    if(!isset($_SESSION['user'])){\n                                    ?>\n                                    <a href=\"<?php echo base_url('index.php/User/login/link');?>\">\n                                        <span class=\"glyphicon glyphicon-lock\"></span>\n                                        M'identifier\n                                    </a>\n                                    <?php\n                                    }\n                                    else{\n                                    ?>\n                                    <a class=\"btn btn-xs btn-default btn_2_3\" id=\"bt_select_project_ref\">\n                                        <h4 class=\"glyphicon glyphicon-list-alt\"></h4>\n                                        <h4>Mes fichiers</h4>\n                                    </a>\n                                    <div id=\"ref_project_name\"></div>\n                                    <div id=\"ref_project_id\" style=\"display: none;\"></div>\n                                    <?php\n                                    }\n                                    ?>\n                                    </div>\n                                </div>\n                             </div>\n                            <div class=\"row\" data-intro=\"Vous pouvez aussi choisir un référentiel dans notre collection de référentiels publiques\">\n                                <div class=\"col-xs-1\">\n                                    <h3 class=\"hover_exist_ref_target\">\n                                        <span class=\"glyphicon glyphicon-ok\"></span>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xs-8 hover_exist_ref\">\n                                    <div>\n                                        <h3>Référentiels publics</h3>\n                                        Vous avez la possibilité d'utiliser des référentiels publiques. Chacun de ces référentiels a déjà été normalisés. Une description de leur contenu est disponible pour chacun d'entre eux.\n                                        <br><br>\n                                        NB: Nous ne nous engageons pas sur la qualité des données.\n                                    </div>\n                                </div>\n                                <div class=\"col-xs-3 hover_exist_ref\">\n                                    <div class=\"text-center\" style=\"margin-top: 40px;\">\n                                        <a class=\"btn btn-xs btn-default btn_2_3\" id=\"bt_modal_ref\">\n                                            <h4 class=\"glyphicon glyphicon-list-alt\"></h4>\n                                            <h4>Sélectionner</h4>\n                                        </a>\n                                        <div id=\"ref_internal_project_name\"></div>\n                                    </div>\n                                </div>\n                            </div>\n                        </form>\n                    </div><!-- /well-->\n                </div>\n            </div>\n\n            <div class=\"row\" style=\"padding-bottom: 20px;\">\n                <div class=\"col-md-12 text-right\">\n                    <button class=\"btn btn-success\" id=\"bt_new_project\" style=\"width: 300px;\">Créer le projet >></button>\n                </div>\n            </div>\n\n            <div class=\"row background_2\">\n                <div class=\"col-md-12\">\n                    <div class=\"row\" id=\"result\" style=\"margin-top: 20px;color: #fff;\">\n                        <div id=\"steps\">\n                            <div>\n                                <span id=\"txt_create_merge_project\">Création du projet de jointure</span><span id=\"create_merge_project_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                            </div>\n                            <div>\n                                <span id=\"txt_init_nrz_src_project\">Initialisation du projet de normalisation \"SOURCE\"</span><span id=\"init_nrz_src_project_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                            </div>\n                            <div>\n                                <span id=\"txt_send_src_file\">Envoi du fichier \"SOURCE\" sur le serveur</span><span id=\"send_src_file_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                                <div id=\"progress_src\" class=\"progress\" style=\"height: 5px;margin-bottom: 5px;width:100%\">\n                                    <div class=\"progress-bar progress-bar-success\"></div>\n                                </div>\n                            </div>\n                            <div>\n                                <span id=\"txt_init_nrz_ref_project\">Initialisation du projet de normalisation \"REFERENTIEL\"</span><span id=\"init_nrz_ref_project_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                            </div>\n                            <div>\n                                <span id=\"txt_send_ref_file\">Envoi du fichier \"REFERENTIEL\" sur le serveur</span><span id=\"send_ref_file_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                                <div id=\"progress_ref\" class=\"progress\" style=\"height: 5px;margin-bottom: 5px;width:100%\">\n                                    <div class=\"progress-bar progress-bar-success\"></div>\n                                </div>\n                            </div>\n                            <div>\n                                <span id=\"txt_add_src_nrz_projects\">Ajout du projet de normalisation \"SOURCE\" au projet de jointure</span><span id=\"add_src_nrz_projects_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                            </div>\n                            <div>\n                                <span id=\"txt_add_ref_nrz_projects\">Ajout du projet de normalisation \"REFERENTIEL\" au projet de jointure</span><span id=\"add_ref_nrz_projects_ok\" class=\"glyphicon glyphicon-ok check_ok\">\n                            </div>\n                        </div>\n                    </div><!--/container-->\n\n                    <div class=\"row\" id=\"bloc_bt_next\" style=\"padding-bottom: 20px;\">\n                        <div class=\"col-md-12 text-right\">\n                            <button class=\"btn btn-success\" id=\"bt_next\">Etape suivante : Association des colonnes >></button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n\n\n            <div id=\"files\" class=\"files\"></div>\n\n        </div> <!-- / col-12-->\n    </div><!-- / row -->\n</div><!--/container-->\n\n<!-- Modal des projets de normalisation de l'utilisateur-->\n<div class=\"modal fade\" id=\"modal_projects\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <h4 class=\"modal-title\" id=\"myModalLabel\">Sélection d'un projet de normalisation</h4>\n      </div>\n      <div class=\"modal-body\" id=\"modal_projects_body\">\n        <?php\n            get_normalized_projects_html(\"normalized_projects_ref\", $normalized_projects);\n        ?>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Fermer</button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<!-- Modal des référentiels internes-->\n<div class=\"modal fade\" id=\"modal_ref\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <h4 class=\"modal-title\" id=\"myModalLabel\">Sélection d'un référentiel interne</h4>\n      </div>\n      <div class=\"modal-body\">\n        <?php\n            get_internal_projects_html($internal_projects);\n        ?>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Fermer</button>\n      </div>\n    </div>\n  </div>\n</div>\n\n<!-- Modal error-->\n<div class=\"modal fade\" id=\"modal_error\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\" style=\"background-color: #262626\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <h4 class=\"modal-title\" id=\"myModalLabel\" style=\"color: #ddd\">Erreur(s) !</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"row\">\n            <div class=\"col-xs-1\">\n                <h2 style=\"margin-top:0;color: #E00612;\"><i class=\"fa fa-exclamation-circle\" aria-hidden=\"true\"></i></h2>\n            </div>\n            <div class=\"col-xs-11\" id=\"errors\">\n\n            </div>\n        </div>  \n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Fermer</button>\n      </div>\n    </div>\n  </div>\n</div>\n\n\n<script type=\"text/javascript\">\n\n    var err = false;\n\n    function my_errors(direction, my_error) {\n    \tvar div_error = $(\"#msg_danger\");\n    \tconsole.log(my_error);\n    \tswitch (my_error){\n    \t\tcase \"project_name_undefined\":\n    \t\t\tdiv_error.html(\"<strong>Le nom du projet doit être renseigné.</strong>\");\n    \t\tbreak;\n            case \"no_src_project\":\n                div_error.html(\"<strong>Veuillez seélectionner un fichier source</strong>\");\n            break;\n            case \"no_ref_project\":\n                div_error.html(\"<strong>Veuillez seélectionner un fichier référentiel</strong>\");\n            break;\n            case \"api_new_error\":\n                div_error.html(\"<strong>Création du projet impossible.</strong>\");\n            break;\n    \t}\n\n        if(div_error.hasClass(\"my_hidden\")){\n            div_error.removeClass(\"my_hidden\")\n                     .addClass(\"my_show\")\n                     .slideToggle(\"slow\");\n        }\n    }\n\n\n    function save_project_sync(project_id, project_type) {\n        $.ajax({    \n            type: 'post',\n            url: '<?php echo base_url('index.php/Save_ajax/project');?>',\n            data: 'project_id=' + project_id + '&project_type=' + project_type,\n            async: false,\n            success: function (result) {\n                console.log(\"result : \",result);\n            },\n            error: function (result, status, error){\n                console.log(result);\n                console.log(status);\n                console.log(error);\n                return false;\n            }\n        });\n    }// /save_project_sync()\n\n\n\tfunction save_session_sync(name, value) {\n\t\t$.ajax({\t\n\t\t\ttype: 'post',\n\t\t\turl: '<?php echo base_url('index.php/Save_ajax/session');?>',\n\t\t\tdata: 'name=' + name + '&val=' + value,\n\t\t\t//contentType: \"application/json; charset=utf-8\",\n\t\t\t//traditional: true,\n\t\t\tasync: false,\n\t\t\tsuccess: function (result) {\n\t\t\t\tif(!result){\n\t\t\t\t\tconsole.log(\"sauvegarde en sesion de \" + 'name=' + name + '&val=' + value + ':' + result);\n\t\t\t\t\treturn false;\n\t\t\t\t}\n\t\t\t\telse{\n\t\t\t\t\tconsole.log(\"sauvegarde en session de \" + 'name=' + name + '&val=' + value + ':' + result);\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\t},\n\t\t\terror: function (result, status, error){\n\t\t\t\tconsole.log(result);\n\t\t\t\tconsole.log(status);\n\t\t\t\tconsole.log(error);\n\t\t\t\treturn false;\n\t\t\t}\n\t\t});\n\t}// /save_session_sync()\n\n\n    function call_api_upload(form, project_id) {\n        $.ajax({\n            url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,\n            type: \"POST\",\n            data: form,\n            crossDomain: true,\n            processData: false,\n            contentType: false,\n            async: true, // TODO: check this (to avoid next page before uplload)\n            success: function(result){\n                file_name = form.get('file').name;\n                console.log(\"Uploaded file \".concat(file_name));\n            },\n            error: function(er){\n                console.log(er.statusText.concat(\" (error \", er.status, \")\"));\n            }\n        });\n    }// /call_api_upload()\n\n\n    function save_id_normalized_project(file_role, project_id) {\n        console.log(\"save_id_normalized_project\");\n        console.log(file_role+\"/\"+project_id);\n\n        var tparams = {\n            \"file_role\": file_role,\n            \"project_id\": project_id\n        }\n\n        $.ajax({\n            type: 'post',\n            dataType: \"json\",\n            contentType: \"application/json; charset=utf-8\",\n            url: '<?php echo BASE_API_URL;?>' + '/api/link/select_file/' + link_project_id,\n            data: JSON.stringify(tparams),\n            async: false,\n            success: function (result) {\n\n                if(result.error){\n                    console.log(\"API error - select_file\");\n                    console.log(result.error);\n                }\n                else{\n                    console.log(\"success - select_file\");\n                    console.dir(result);\n\n                    if(file_role == \"source\"){\n                        $('#txt_add_src_nrz_projects').css('display', 'inline');\n                        $('#add_src_nrz_projects_ok').css('display', 'inline');\n                    }\n                    if(file_role == \"ref\"){\n                        $('#txt_add_ref_nrz_projects').css('display', 'inline');\n                        $('#add_ref_nrz_projects_ok').css('display', 'inline');                        \n                    }\n                }\n            },\n            error: function (result, status, error){\n                console.log(\"error - select_file\");\n                console.log(result);\n                err = true;\n            }\n        });// /ajax - select_file\n    }// /save_id_normalized_project()\n\n\n    function add_new_normalize_project_src(tparams) {\n        console.log(\"add_new_normalize_project_src\");\n\n        $.ajax({\n            type: 'post',\n            url: '<?php echo BASE_API_URL;?>' + tparams[\"url\"],\n            data: JSON.stringify(tparams[\"params\"]),\n            contentType: \"application/json; charset=utf-8\",\n            traditional: true,\n            async: false,\n            success: function (result) {\n                console.dir(result);\n\n                if(result.error){\n                    console.log(\"API error\");\n                }\n                else{\n                    console.log(\"success\");\n\n                    // Récupération de l'identifiant projet\n                    src_project_id = result.project_id;\n\n                    $('#txt_init_nrz_src_project').css('display', 'inline');\n                    $('#init_nrz_src_project_ok').css('display', 'inline');\n                }\n            },\n            error: function (result, status, error){\n                console.log(result);\n                console.log(status);\n                console.log(error);\n            }\n        });// /ajax\n    }// /add_new_normalize_project_src()\n\n\n    function add_new_normalize_project_ref(tparams) {\n        console.log(\"add_new_normalize_project_ref\");\n\n        $.ajax({\n            type: 'post',\n            url: '<?php echo BASE_API_URL;?>' + tparams[\"url\"],\n            data: JSON.stringify(tparams[\"params\"]),\n            contentType: \"application/json; charset=utf-8\",\n            traditional: true,\n            async: false,\n            success: function (result) {\n                console.dir(result);\n\n                if(result.error){\n                    console.log(\"API error\");\n                }\n                else{\n                    console.log(\"success\");\n\n                    // Récupération de l'identifiant projet\n                    ref_project_id = result.project_id;\n                    \n                    //\n                    $('#txt_init_nrz_ref_project').css('display', 'inline');\n                    $('#init_nrz_ref_project_ok').css('display', 'inline');\n                }\n            },\n            error: function (result, status, error){\n                console.log(result);\n                console.log(status);\n                console.log(error);\n            }\n        });// /ajax\n    }// /add_new_normalize_project_ref()\n\n\n    function requirements() {\n        \n        error = false;\n        var tab_error = new Array();\n\n        // Récupération des valeurs\n        var project_name = $(\"#project_name\").val();\n        var project_description = $(\"#project_description\").val();\n\n        // Le champ project_name doit être renseigné\n        if(project_name == \"\"){\n            tab_error.push('Veuillez renseigner le nom du projet.');\n        }\n\n        if(!new_file_src && !exist_file_src){\n            tab_error.push('Vous devez sélectionner un fichier source.');\n        }\n\n        if(!new_file_ref && !exist_file_ref && !exist_ref){\n            tab_error.push('Vous devez sélectionner un fichier référentiel.');\n        }\n\n        //  test CGU\n        if(!$(\"#chk_cgu\").is(':checked')){\n            // Affichage de la modale d'erreur CGU\n            tab_error.push('Vous devez valider les <a href=\"<?php echo base_url(\"index.php/Home/cgu\");?>\" target=\"_blank\">conditions générales d\\'utilisation</a> afin de pouvoir commencer la création d\\'un projet.');\n        }\n\n        if(exist_file_src){\n            // recuperation de l'id du projet\n            src_project_id = $(\"#src_project_id\").html();\n            if(src_project_id == ''){\n                tab_error.push('Vous devez sélectionner un fichier source.');\n            }\n        }\n\n        if(exist_file_ref || exist_ref){\n            // recuperation de l'id du projet\n            ref_project_id = $(\"#ref_project_id\").html();\n            if(ref_project_id == ''){\n                tab_error.push('Vous devez sélectionner un fichier référentiel.');\n            }\n        }\n        \n        $(\"#errors\").html(\"\");\n        if(tab_error.length > 0){\n            for (var i = 0; i < tab_error.length; i++) {\n                $(\"#errors\").html($(\"#errors\").html() + tab_error[i] + '<br>');\n            }\n\n            $(\"#modal_error\").modal(\"show\");\n        }\n        else{\n            return true;            \n        }\n    }// /requirements()\n\n\n    function treatment() {\n\n        var ret = requirements();\n        if(!ret){\n            return false;\n        }\n\n        var project_name = $(\"#project_name\").val();\n        var project_description = $(\"#project_description\").val();\n        \n        // desactivation du bouton\n        $(\"#bt_new_project\").css(\"display\", \"none\");\n\n        // Appels API ----------------------\n\n            $('#result').css('display', 'inherit');\n            go_to('result'); // auto scroll\n\n            //$(\"#result\").fadeToggle();\n\n            // creation du projet\n            var tparams = {\n                \"url\": \"/api/new/link\",\n                \"params\": {\n                    \"display_name\": project_name,\n                    \"description\": project_description,\n                    \"internal\": false\n                }\n            }\n\n            $.ajax({\n                type: 'post',\n                url: '<?php echo BASE_API_URL;?>' + tparams[\"url\"],\n                data: JSON.stringify(tparams[\"params\"]),\n                contentType: \"application/json; charset=utf-8\",\n                traditional: true,\n                async: false,\n                success: function (result) {\n                    if(result.error){\n                        console.log(\"API error - new/link\");\n                    }\n                    else{\n                        console.log(\"success - new/link\");\n\n                        // Récupération de l'identifiant projet\n                        //project_id = result.project_id;\n                        link_project_id = result.project_id;\n                        console.log(\"project_id\" + link_project_id);\n\n                        var result_save = \"\";\n                    \n                        console.log(\"treatment/save_session_synch\");\n                        result_save = save_session_sync(\"link_project_id\", link_project_id);\n                        \n                        // Sauvegarde du projet bdd\n                        console.log(\"treatment/save_project_synch\");\n                        save_project_sync(link_project_id, 'link');\n\n                        // \n                        $('#txt_create_merge_project').css('display', 'inline');\n                        $('#create_merge_project_ok').css('display', 'inline');\n                    }\n                },\n                error: function (result, status, error){\n                    console.log(\"error - new/link\");\n                    console.log(result);\n                }\n            });// /ajax\n\n\n            // Ajout des projets de normalisation\n            // Traitement du fichier SOURCE\n                if(new_file_src && !error){\n                    console.log('Creation du projet de normalisation (SOURCE)');\n\n                    // Creation du projet de normalisation\n                      var tparams = {\n                            \"url\": \"/api/new/normalize\",\n                            \"params\": {\n                                \"display_name\": project_name + ' Fichier source',\n                                \"description\": project_description + '',\n                                \"internal\": false\n                            }\n                        }\n                        add_new_normalize_project_src(tparams);\n\n                        console.log(\"treatment/save_session_synch\");\n                        result_save = save_session_sync(\"src_project_id\", src_project_id);\n                        \n                        // Sauvegarde du projet en base si user authentifié\n                        console.log(\"treatment/save_project_synch\");\n                        save_project_sync(src_project_id, 'normalize');\n\n                        //$(\"#create_project_ok\").slideToggle();\n\n                    // Upload du fichier\n                    url_src = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + src_project_id;\n\n                    $('#txt_send_src_file').css('display', 'inline');\n                    $('#fileupload_src').fileupload(\n                        'option',\n                        'url',\n                        url_src\n                    );\n\n                    $(\"#envoyer_src\").click();\n\n\n                }\n                else if(exist_file_src && !error){\n                    // Ajout du projet de normalisation au projet de link\n                    save_id_normalized_project(\"source\", src_project_id);\n                }\n                else{\n                    error = true;\n                    console.log('Pas de sélection de fichier source');\n                    alert('Veuillez sélectionner un fichier source');\n                }\n            // /Traitement du fichier SOURCE\n\n            // Traitement du fichier REF\n                if(new_file_ref && !error){\n                    console.log('Creation du projet de normalisation (REF)');\n\n                    // Creation du projet de normalisation\n                      var tparams = {\n                            \"url\": \"/api/new/normalize\",\n                            \"params\": {\n                                \"display_name\": project_name + ' Fichier référentiel',\n                                \"description\": project_description + '',\n                                \"internal\": false\n                            }\n                        }\n                        add_new_normalize_project_ref(tparams);\n\n                        console.log(\"treatment/save_session_synch\");\n                        result_save = save_session_sync(\"ref_project_id\", ref_project_id);\n                        \n                        // Sauvegarde du projet en base si user authentifié\n                        console.log(\"treatment/save_project_synch\");\n                        save_project_sync(ref_project_id, 'normalize');\n\n                        //$(\"#create_project_ok\").slideToggle();\n\n                    // Upload du fichier\n                    url_ref = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + ref_project_id;\n\n                    $('#txt_send_ref_file').css('display', 'inline');\n                    $('#progress_ref').css('display', 'inline-bloc');\n                    $('#fileupload_ref').fileupload(\n                        'option',\n                        'url',\n                        url_ref\n                    );\n\n                    $(\"#envoyer_ref\").click();\n                }\n                else if(exist_file_ref && !error){\n                    // Ajout du projet de normalisation au projet de link\n                    save_id_normalized_project(\"ref\", ref_project_id);\n                }\n                else if(exist_ref && !error){\n                    // Ajout du projet de normalisation au projet de link\n                    save_id_normalized_project(\"ref\", ref_project_id);\n                }\n                else{\n                    error = true;\n                    console.log('Pas de sélection de fichier ref');\n                    alert('Veuillez sélectionner un fichier ref');\n                }\n            // /Traitement du fichier REF\n\n        // /Appels API ----------------------\n    }// /treatment\n\n\n    function valid_project(){\n        console.log('valid_project');\n        // MAJ du statut\n\n        // Appel de l'étape suivante\n        window.location.href = \"<?php echo base_url('index.php/Project/link/');?>\" + link_project_id;\n    }// /valid_project()\n\n\n    function select_project(project_id, project_name) {\n        if(target){\n            $(\"#\" + target + \"_project_id\").html(project_id);\n            $(\"#\" + target + \"_project_name\").html(project_name);\n        }\n\n        $(\"#modal_projects\").modal('hide');\n    }// /select_project()\n\n\n    function select_internal_ref(project_id, project_name) {\n        // Appelé sur validation d'un projet interne dans la modale\n        $(\"#ref_project_id\").html(project_id);\n        $(\"#ref_internal_project_name\").html(project_name);\n\n        exist_ref = true;\n\n        $(\"#modal_ref\").modal('hide');\n    }// /select_internal_ref()\n\n\n    // Init - Ready\n    $(function() {\n        url_src = '';\n        url_ref = '';\n        target = ''; // Utilisé pour la sélection d'un projet dans la modale\n\n        $(\"#bt_new_project\").click(function(e){\n            console.log(\"bt_new_project\");\n            e.preventDefault();\n\n            treatment();\n        });\n\n        $(\"#bt_modal_ref\").click(function(){\n            $('#modal_ref').modal('show');\n        });\n\n\n        $(\"#bt_select_project_src\").click(function(){\n            target = \"src\";\n            $('#modal_projects').modal('show');\n        });\n\n        $(\".bloc_project\").hover(\n            function(){// over\n                $(this).css(\"background\", \"#eee\");\n                $(this).find(\".chk\").css(\"visibility\", 'visible');\n            },\n            function(){// out\n                $(this).css(\"background\", \"white\");\n                $(this).find(\".chk\").css(\"visibility\", 'hidden');\n            }\n        );\n\n        $(\"#bt_select_project_ref\").click(function(){\n            target = \"ref\";\n            $('#modal_projects').modal('show');\n        });\n\n\n        $(\"#bt_modal_projects_ref\").click(function(){\n            target = \"ref\";\n            $('#modal_projects').modal('show');\n        });\n\n\n        $(\"#bt_next\").click(function(){\n            valid_project();\n        });\n\n\n        $(\".fileinput-button\").click(function(){\n            $(\".fileinput-button\").prop(\"disabled\", true);\n\n            $(\"#bt_normalizer\").prop(\"disabled\", false);\n        });\n\n\n        // Upload du fichier SOURCE\n        $('#fileupload_src').fileupload({\n            url: url_src,\n            type:\"POST\",\n            autoUpload: false,\n            add: function (e, data) {\n                $('#file_name_src').html(data.files[0].name);\n\n                data.context = $('#envoyer_src')\n                    .click(function (e) {\n                         e.preventDefault();\n                        //$('#progress .progress-bar').css('visibility', 'visible');\n                        data.submit();\n                    });\n            },\n            done: function (e, data) {\n                console.log(\"upload done\");\n\n                //\n                \n                $('#send_src_file_ok').css('display', 'inline');\n\n                // Ajout du nouveau projet de normalisation au projet de link\n                save_id_normalized_project(\"source\", src_project_id);\n\n            },\n            progressall: function (e, data) {\n                var progress = parseInt(data.loaded / data.total * 100, 10);\n                $('#progress_src .progress-bar').css(\n                    'width',\n                    progress + '%'\n                );\n\n                console.log(\"upload progressall\");\n                console.log('url_src : ' + url_src);\n            },\n            fail: function (e, data) {\n                $('#progress .progress-bar').css(\n                    'background-color', 'red'\n                );\n                console.log(\"upload fail\");\n                console.log(e);\n                console.log(data);\n            }\n        }).prop('disabled', !$.support.fileInput)\n          .parent().addClass($.support.fileInput ? undefined : 'disabled');\n        // /#fileupload_src'.fileupload()\n\n\n        // Upload du fichier REF\n        $('#fileupload_ref').fileupload({\n            url: url_ref,\n            type:\"POST\",\n            autoUpload: false,\n            add: function (e, data) {\n                $('#file_name_ref').html(data.files[0].name);\n\n                data.context = $('#envoyer_ref')\n                    .click(function (e) {\n                         e.preventDefault();\n                        //$('#progress .progress-bar').css('visibility', 'visible');\n                        data.submit();\n                    });\n            },\n            done: function (e, data) {\n                console.log(\"upload done\");\n                \n                //\n                $('#send_ref_file_ok').css('display', 'inline');\n\n                // Ajout du nouveau projet de normalisation au projet de link\n                save_id_normalized_project(\"ref\", ref_project_id);\n\n            },\n            progressall: function (e, data) {\n                var progress = parseInt(data.loaded / data.total * 100, 10);\n                $('#progress_ref .progress-bar').css(\n                    'width',\n                    progress + '%'\n                );\n                \n                console.log(\"upload progressall\");\n                console.log('url_ref : ' + url_ref);\n            },\n            fail: function (e, data) {\n                $('#progress .progress-bar').css(\n                    'background-color', 'red'\n                );\n                console.log(\"upload fail\");\n                console.log(e);\n                console.log(data);\n            }\n        }).prop('disabled', !$.support.fileInput)\n          .parent().addClass($.support.fileInput ? undefined : 'disabled');\n        // /#fileupload_ref'.fileupload()\n\n\n        // Test de la creation des projets pour afficher le bouton \"suivant\"\n            var handle = setInterval(function(){\n                console.log('Test fin de traitement ...');\n                if(){\n                    console.log('Fin de traitement OK');\n                    clearInterval(handle);\n                    \n                    // Affichage du bouton \"suivant\"\n                    $('#bloc_bt_next').css('display', 'inherit');\n                }\n\n\n            }, 1000);\n\n        // Tooltip des étapes\n        $(\".add_selected_columns\").attr('title','Etape de sélection des colonnes à traiter.');\n        $(\".replace_mvs\").attr('title','Etape de traitement des valeurs manquantes.');\n        $(\".recode_types\").attr('title','Etape de traitement des types.');\n        $(\".concat_with_init\").attr('title','Etape finale d\\'enrichissement et de téléchargement du fichier normalisé.');\n        $('[data-toggle=\"tooltip\"]').tooltip(); \n\t}); // / Ready\n\n</script>\n\n</body>\n</html>\n",
+			"file": "application/views/project_link_step1_init_fr.php",
+			"file_size": 53709,
+			"file_write_time": 131528030540419578,
 			"settings":
 			{
-				"buffer_size": 32399,
+				"buffer_size": 54000,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_normalize_infer_types_fr.php",
+			"settings":
+			{
+				"buffer_size": 27481,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -536,7 +548,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 304.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -581,7 +593,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 533.0
+		"width": 587.0
 	},
 	"console":
 	{
@@ -603,21 +615,36 @@
 	[
 		"/var/www/html/projets/magical_ui",
 		"/var/www/html/projets/magical_ui/application",
-		"/var/www/html/projets/magical_ui/application/config",
 		"/var/www/html/projets/magical_ui/application/controllers",
 		"/var/www/html/projets/magical_ui/application/libraries",
 		"/var/www/html/projets/magical_ui/application/models",
-		"/var/www/html/projets/magical_ui/application/views"
+		"/var/www/html/projets/magical_ui/application/views",
+		"/var/www/html/projets/magical_ui/assets"
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/assets/user_signin_signup.css",
+		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
+		"/var/www/html/projets/magical_ui/assets/functions.js",
+		"/var/www/html/projets/magical_ui/application/controllers/User.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_specifics.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/33101abf0c4f1231695ef469406daaaf/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6aa3d7548b69c374d4b1b673e6a2f712/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bf169398412eb5be1523be53978f3710/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/User.php",
 		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
 		"/var/www/html/projets/magical_ui/application/models/User_model.php",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
 		"/home/jerem/Aide/mysql",
@@ -631,13 +658,10 @@
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/home/jerem/ssh_key.pub",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
@@ -645,21 +669,17 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8e0268e49ba1b5a3388caad2fde0198a/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/cca0e205335b78ddb4e74e7ac7417854/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28808442e9d25745306251afd26dfbb8/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/188e1c7b3363b138563b53ff19d05cdc/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5aa22bf82484f15784469551e9925462/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/5bd45204ca8e18a2020fb9878ff406b8/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.css",
-		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/150348a2f0197db054fac19f4ce81bc9/metadata.json",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.css",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.css",
 		"/var/www/html/projets/magical_ui/application/views/cgu.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_report_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_linker.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/CONFIG.py",
 		"/home/jerem/ballon d or.csv",
@@ -699,7 +719,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/e046ced72c236d7e41f1d4019779fddb/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/b6ac7f74e29262e5c8992631d1eb4dea/metadata.json",
-		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/1334eeb5ac3bd4b103ef7c3f9dda387b/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/224fb00efbaffa81b84fefae67944ce8/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/81f89f2169003974ff99751e5aea451f/metadata.json",
@@ -731,14 +750,7 @@
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_specifics.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_select_columns.js",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_specifics.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c4f667f877ff4d157a8fe7224b0c0b79/recode_types/ref_copy.csv__run_info.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/training.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/b6c34ae658ecdcb10ee2aedd77e7885c/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/24734ea1a1072aa5fe959883c0ac9047/es_linker/column_matches.json",
-		"/home/jerem/.config/sublime-text-3/Packages/User/Pretty JSON.sublime-settings",
-		"/home/jerem/temp/application/views/changeLog_en.php"
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js"
 	],
 	"find":
 	{
@@ -758,6 +770,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bt_next",
+			"MINI__",
+			"metadata_src",
+			"get_file_name",
+			"save_id_normalized_project",
+			"src_project_id",
+			"save_project_sync",
+			"ref_project_id",
+			"add_new_normalize_project_ref",
+			"treatment",
+			"valid_project",
+			"last",
+			"file_na",
+			"defau",
+			"redir",
+			"bt_forget",
 			"show_new_proposition",
 			"bt_next",
 			"login_validation",
@@ -869,23 +897,7 @@
 			"project_type",
 			"chargement",
 			"treatment",
-			"bt_replace_mvs",
-			"get_metadata",
-			"upload",
-			"conten",
-			"es_linker",
-			"$.ajax",
-			"non_matching_pairs",
-			"yes",
-			"success",
-			"bt_yes",
-			"socket",
-			"socket_",
-			"show_new_proposition",
-			"socket_on_message",
-			"socket_answer",
-			"learned_setting_json",
-			"learned"
+			"bt_replace_mvs"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -941,19 +953,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_link_es_train_fr.php",
-					"semi_transient": true,
+					"file": "application/views/project_link_step1_init_fr.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 32399,
+						"buffer_size": 54000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21803,
-								21803
+								53087,
+								53087
 							]
 						],
 						"settings":
@@ -963,10 +975,38 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6245.0,
+						"translation.y": 8775.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "application/views/project_normalize_infer_types_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10355,
+								11631
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5611.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1049,7 +1089,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 353.0,
+	"side_bar_width": 481.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -1,0 +1,11 @@
+.well{
+	margin-bottom: 20px;	
+}
+
+.account_left{
+	border-right: 4px dotted #aaa;
+	padding-right: 100px;	
+}
+.account_right{
+	padding-left: 100px;	
+}

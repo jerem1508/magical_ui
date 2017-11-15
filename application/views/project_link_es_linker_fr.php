@@ -696,7 +696,14 @@ function get_file_name(project_id) {
                 console.log("success - get_file_name");
                 console.dir(result);
 
-                ret = result.file_name;
+                // On retire "MINI__" si ca existe
+                var res = result.file_name;
+                if(res.substring(0, 6) == 'MINI__'){
+                    ret = res.substring(6);
+                }
+                else{
+                    ret = res;                    
+                }
             }// / lastwritten - success
         },
         error: function (result, status, error){

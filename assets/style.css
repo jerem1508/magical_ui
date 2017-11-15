@@ -51,6 +51,7 @@ body{
     background-image: radial-gradient(circle at bottom left, #eee, #222);
     background-image: linear-gradient(to top, #eee, #262626);
     /*background-image: linear-gradient(to top, #E00612, #25358C);*/
+    background: #fff;
 }
 
 /* ENTETE ------------------------------*/

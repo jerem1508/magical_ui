@@ -48,8 +48,10 @@ class User extends CI_Controller {
 		$data['title'] = "Identification";
 
 		$this->load->view('lib', $data);
+		$this->load->view('user_signin_signup_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
-		$this->load->view('user_new_'.$_SESSION['language'], $data);
+		// $this->load->view('user_new_'.$_SESSION['language'], $data);
+		$this->load->view('user_signin_signup_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /new()
 

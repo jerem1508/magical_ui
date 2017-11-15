@@ -10,3 +10,28 @@
 .btn_tdb{
 	width: 100px;
 }
+
+h4{
+	display: inline;
+}
+
+.tab-pane{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.well{
+	margin-bottom: 20px;	
+}
+
+.account_left{
+	border-right: 4px dotted #aaa;
+}
+.account_right{
+	padding-left: 20px;	
+}
+
+#account_tab .email{
+	font-style: italic;
+	color: #777;
+}

@@ -113,154 +113,238 @@
 		return $html;
 	}// /get_lien_supp_html()
 ?>
-
+<!--
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
+-->
 
-<div class="container-fluid background_1" style="padding-top: 20px; padding-bottom: 20px;">
-	<div class="row">
-		<div class="col-xs-12">
-			<h3 style="display: inline;">Mes projets de normalisation</h3>
-			<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">+&nbsp;Nouveau</button>
-			<p>
-				Ci-dessous la liste de vos projets de normalisation. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
-				L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
-			</p>
+<div>
+	<ul class="nav nav-tabs">
+	  <li class="active"><a data-toggle="tab" href="#merge_tab"><h4>Mes projets de jointure</h4></a></li>
+	  <li><a data-toggle="tab" href="#normalize_tab"><h4>Mes projets de normalisation</h4></a></li>
+	  <li><a data-toggle="tab" href="#account_tab"><h4>Mon compte</h4></a></li>
+	</ul>	
+</div>
+
+<div class="tab-content">
+  <div id="merge_tab" class="tab-pane fade in active">
+  	<div class="container">
+		<div class="row text-right">
+			<div class="col-xs-12">
+				<button 
+					class="btn btn-xs btn-success" 
+					style="margin-bottom: 8px;" 
+					onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">
+						+&nbsp;Nouveau projet de jointure
+				</button>
+			</div>
+		</div><!--/row-->
+		<div class="row">
+			<div class="col-xs-12">
+				<p class="well">
+					Ci-dessous la liste de vos projets de jointure. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
+					L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
+				</p>
+			</div><!--/col-xs-12-->
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-offset-1 col-xs-10">
-			<?php
-			if(count($normalized_projects) > 0){
-			?>
-			<table class="table table-responsive table-condensed table-striped" id="normalized_projects">
-				<thead>
-					<tr>
-						<th>Projet</th>
-						<th>Date de création</th>
-						<th class="text-center">Statut</th>
-						<th>Fichier</th>
-						<th>Avancement</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];
-					$nb_steps = count($tab_steps);
-					$ratio = 100/$nb_steps;
-					foreach ($normalized_projects as $project) {
-						$steps_html = '<div class="progress">';
-						$found_step_todo = false;
-						$step_todo = "";
-						foreach ($tab_steps as $step) {
-							$bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?"success2":"warning";
-							$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
+		<div class="row">
+			<div class="col-xs-12">
+				<?php
+				if(count($linked_projects) > 0){
+				?>
+				<table class="table table-responsive table-condensed table-striped" id="linked_projects">
+					<thead>
+						<tr>
+							<th>Projet</th>
+							<th>Date de création</th>
+							<th>Source</th>
+							<th>Référentiel</th>
+							<th>Avancement</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
+						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
+						$nb_steps = count($tab_steps);
+						$ratio = 100/$nb_steps;
+						foreach ($linked_projects as $project) {
 
-							if(!$found_step_todo){
-								if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){
-									$step_todo = $step;
-									$found_step_todo = true;
+							$steps_html = '<div class="progress">';
+							
+							$found_step_todo = false;
+							$step_todo = "";
+							foreach ($tab_steps as $step) {
+								$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
+								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
+
+								if(!$found_step_todo){
+									if(!is_completed_link_step($step, $project['steps_by_filename'])){
+										$step_todo = $step;
+										$found_step_todo = true;
+									}
 								}
-							}
-						}// /foreach tab_steps
-						$steps_html.= '</div>';
-						echo '<tr>';
-						echo '<td>'.$project['display_name'].'</td>';
-						echo '<td>'.$project['created_tmp'].'</td>';
-						echo '<td class="text-center">'.get_status($project['public']).'</td>';
-						echo '<td>'.$project['file'].'</td>';
-						echo '<td class="text-center">'.$steps_html.'</td>';
-						echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
-						echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
-						echo '</tr>';
-					} // /foreach $normalized_projects
-					?>
-				</tbody>
-			</table>
-			<?php
-			}
-			else{
-				echo "Pas encore de projets";
-			}
-			?>
-		</div><!--/col-xs-12-->
+							}// /foreach tab_steps
+							$steps_html.= '</div>';
+							echo '<tr>';
+							echo '<td>'.$project['display_name'].'</td>';
+							echo '<td>'.$project['created_tmp'].'</td>';
+							echo '<td>'.$project['file_src'].'</td>';
+							echo '<td>'.$project['file_ref'].'</td>';
+							echo '<td class="text-center">'.$steps_html.'</td>';
+							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
+							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
+							echo '</tr>';
+						} // /foreach $normalized_projects
+						?>
+					</tbody>
+				</table>
+				<?php
+				}
+				else{
+					echo "Pas encore de projets";
+				}
+				?>
+			</div><!--/col-xs-12-->
+		</div><!--/row-->
+	</div><!-- /container -->
+  </div><!-- /tab-pane -->
 
-	</div><!--/row-->
-	<hr style="border-top: 3px dotted #777;">
-	<div class="row">
-		<div class="col-xs-12">
-			<h3 style="display: inline;">Mes projets de jointure</h3>
-			<button class="btn btn-xs btn-success" style="margin-bottom: 8px;" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">+&nbsp;Nouveau</button>
-			<p>
-				Ci-dessous la liste de vos projets de jointure. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
-				L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
-			</p>
-		</div><!--/col-xs-12-->
-	</div>
-	<div class="row">
-		<div class="col-xs-offset-1 col-xs-10">
-			<?php
-			if(count($linked_projects) > 0){
-			?>
-			<table class="table table-responsive table-condensed table-striped" id="linked_projects">
-				<thead>
-					<tr>
-						<th>Projet</th>
-						<th>Date de création</th>
-						<th>Source</th>
-						<th>Référentiel</th>
-						<th>Avancement</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
-					$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
-					$nb_steps = count($tab_steps);
-					$ratio = 100/$nb_steps;
-					foreach ($linked_projects as $project) {
+  <div id="normalize_tab" class="tab-pane fade">
+	<div class="container">
+		<div class="row text-right">
+			<div class="col-xs-12">
+				<button 
+					class="btn btn-xs btn-success" 
+					style="margin-bottom: 8px;" 
+					onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">
+						+&nbsp;Nouveau projet de normalisation
+				</button>
+			</div>
+		</div><!--/row-->
+		<div class="row">
+			<div class="col-xs-12">
+				<p class="well">
+					Ci-dessous la liste de vos projets de normalisation. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
+					L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<?php
+				if(count($normalized_projects) > 0){
+				?>
+				<table class="table table-responsive table-condensed table-striped" id="normalized_projects">
+					<thead>
+						<tr>
+							<th>Projet</th>
+							<th>Date de création</th>
+							<th class="text-center">Statut</th>
+							<th>Fichier</th>
+							<th>Avancement</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$tab_steps = ['add_selected_columns', 'replace_mvs', 'recode_types', 'concat_with_init'];
+						$nb_steps = count($tab_steps);
+						$ratio = 100/$nb_steps;
+						foreach ($normalized_projects as $project) {
+							$steps_html = '<div class="progress">';
+							$found_step_todo = false;
+							$step_todo = "";
+							foreach ($tab_steps as $step) {
+								$bs_color = (is_completed_step($step, $project['steps_by_filename'], $project['has_mini']))?"success2":"warning";
+								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
 
-						$steps_html = '<div class="progress">';
-						
-						$found_step_todo = false;
-						$step_todo = "";
-						foreach ($tab_steps as $step) {
-							$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
-							$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
-
-							if(!$found_step_todo){
-								if(!is_completed_link_step($step, $project['steps_by_filename'])){
-									$step_todo = $step;
-									$found_step_todo = true;
+								if(!$found_step_todo){
+									if(!is_completed_step($step, $project['steps_by_filename'], $project['has_mini'])){
+										$step_todo = $step;
+										$found_step_todo = true;
+									}
 								}
-							}
-						}// /foreach tab_steps
-						$steps_html.= '</div>';
-						echo '<tr>';
-						echo '<td>'.$project['display_name'].'</td>';
-						echo '<td>'.$project['created_tmp'].'</td>';
-						echo '<td>'.$project['file_src'].'</td>';
-						echo '<td>'.$project['file_ref'].'</td>';
-						echo '<td class="text-center">'.$steps_html.'</td>';
-						echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
-						echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
-						echo '</tr>';
-					} // /foreach $normalized_projects
-					?>
-				</tbody>
-			</table>
-			<?php
-			}
-			else{
-				echo "Pas encore de projets";
-			}
-			?>
-		</div><!--/col-xs-12-->
-	</div><!--/row-->
-</div><!--/container-->
+							}// /foreach tab_steps
+							$steps_html.= '</div>';
+							echo '<tr>';
+							echo '<td>'.$project['display_name'].'</td>';
+							echo '<td>'.$project['created_tmp'].'</td>';
+							echo '<td class="text-center">'.get_status($project['public']).'</td>';
+							echo '<td>'.$project['file'].'</td>';
+							echo '<td class="text-center">'.$steps_html.'</td>';
+							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
+							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
+							echo '</tr>';
+						} // /foreach $normalized_projects
+						?>
+					</tbody>
+				</table>
+				<?php
+				}
+				else{
+					echo "Pas encore de projets";
+				}
+				?>
+			</div><!--/col-xs-12-->
+		</div><!--/row-->
+	</div><!-- /container -->
+  </div><!-- /tab-pane -->
+
+  <div id="account_tab" class="tab-pane fade">
+  	<div class="container">
+		<div class="row">
+			<strong>Email : </strong><span class="email"><?php echo $_SESSION['user']['email'];?></span>
+		</div>
+  		<div class="row">
+  			<div class="col-md-6 account_left">
+  				<div>
+  					<h3>Modifier mon mot de passe</h3>
+					<form class="form-horizontal" name="password_change" id="password_change" method="post">
+				  	  <div class="form-group">
+					    <label for="password_old" class="col-sm-4 control-label">Mot de passe actuel</label>
+					    <div class="col-sm-8">
+					      <input type="password" class="form-control" id="password_old" placeholder="Password">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="password_new" class="col-sm-4 control-label">Nouveau mot de passe</label>
+					    <div class="col-sm-8">
+					      <input type="password" class="form-control" id="password_new" placeholder="Password">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="password_new2" class="col-sm-4 control-label">Confirmation</label>
+					    <div class="col-sm-8">
+					      <input type="password" class="form-control" id="password_new2" placeholder="Password">
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10 text-right">
+					      <button type="submit" class="btn btn-success2"><span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier</button>
+					    </div>
+					  </div>
+					</form>
+  				</div>
+  			</div><!--/col-md-6-->
+  			<div class="col-md-6 account_right">
+  				<div>
+  					<h3>Supprimer mon compte</h3>
+  					<div class="well">
+  						La suppression de votre compte est définitive et entraine la suppression de toutes vos données.
+  					</div>
+  					<div style="width: 100%;" class="text-right">
+  						<button class="btn btn-success"><span class="glyphicon glyphicon-trash"></span>&nbsp;Supprimer mon compte</button>
+  					</div>
+  				</div>
+  				
+  			</div><!--/col-md-6-->
+  		</div><!--/row-->
+  	</div><!-- /container -->
+  </div><!-- /tab-pane -->
+</div>
 
 <script type="text/javascript">
 	function delete_project_API(project_type, project_id) {
@@ -344,6 +428,51 @@
 	}// /load_step()
 
 
+	function modify_password() {
+		console.log('Modification of password');
+
+		var password_old = $("#password_old");
+		var password_new = $("#password_new");
+		var password_new2 = $("#password_new2");
+		var email = <?php echo $_SESSION['user']['email'];?>
+		var ret = false;
+
+		// Le mot de passe et la confirmation doivent etre identiques
+		if(password_new.val() != password_new.val()){
+			// TODO
+			// Afficher un message
+			
+			return false;
+		}
+
+		// Suppression en base
+		$.ajax({    
+            type: 'post',
+            url: '<?php echo base_url('index.php/Save_ajax/modify_password/');?>',
+			data: 'email=' + email + '&password_old=' + password_old.val() + '&password_new=' + password_new.val(),
+            async: false,
+            success: function (result) {
+                if(result){
+                	console.log("Suppression en base OK");
+                	ret = result;
+                }
+                else{
+                	console.log("ret : " + result);
+                }
+            },
+            error: function (result, status, error){
+                console.log("Suppression en base KO");
+            }
+        });
+        return ret;
+
+		// On vide les champs
+		$("#password_old").val("");
+		$("#password_new").val("");
+		$("#password_new2").val("");
+
+	}// /modify_password()
+
 	$(function() { // ready
 		<?php
 		if(count($normalized_projects) > 0){
@@ -359,7 +488,7 @@
 									"search":         "Rechercher:",
 									"lengthMenu":     "Voir _MENU_ enregistrements par page"
 							    },
-							    "lengthMenu": [5],
+							    "lengthMenu": [10],
 							    "responsive": true
 							});
 		<?php
@@ -378,7 +507,7 @@
 									"search":         "Rechercher:",
 									"lengthMenu":     "Voir _MENU_ enregistrements par page"
 							    },
-							    "lengthMenu": [5],
+							    "lengthMenu": [10],
 							    "responsive": true
 							});
 		<?php
@@ -388,6 +517,11 @@
 		$(".dataTables_info").css('display', 'none');
 		$(".dataTables_length").css('display', 'none');
 
+		// Action du formulaire de modification du mot de passe
+		$("#password_change").submit(function(e){
+			e.preventDefault();
+			modify_password();
+		});
 
 		// Tooltip des étapes
 		$(".add_selected_columns").attr('title','Etape de sélection des colonnes à traiter.');
@@ -399,7 +533,12 @@
 		$(".es_linker").attr('title','Lancement du traitement final.');
 		$(".link_results_analyzer").attr('title','Etape finale - Analyse');
 
-		$('[data-toggle="tooltip"]').tooltip(); 
+		$('[data-toggle="tooltip"]').tooltip();
+
+		// Hauteur de la page pour mettre le footer en bas
+		var size = set_height('merge_tab');
+		set_height('normalize_tab', size);
+		set_height('account_tab', size);
 	}); // / ready
 </script>
 </body>
