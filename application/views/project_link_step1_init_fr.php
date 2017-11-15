@@ -492,7 +492,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 </div>
             </div>
 
-            <div class="row" style="padding-bottom: 20px;">
+            <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
                 </div>

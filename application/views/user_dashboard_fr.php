@@ -434,14 +434,14 @@
 		var password_old = $("#password_old");
 		var password_new = $("#password_new");
 		var password_new2 = $("#password_new2");
-		var email = <?php echo $_SESSION['user']['email'];?>
+		var email = "<?php echo $_SESSION['user']['email'];?>";
 		var ret = false;
 
 		// Le mot de passe et la confirmation doivent etre identiques
 		if(password_new.val() != password_new.val()){
 			// TODO
 			// Afficher un message
-			
+
 			return false;
 		}
 

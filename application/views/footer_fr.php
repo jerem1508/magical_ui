@@ -55,7 +55,7 @@
 			list-style: none;
 		}
 		footer .col-right{
-			border-left: 1px dotted #777;
+			border-left: 3px dotted #333;
 		}
 		footer a,a:hover{
 			color: #aaa;	
