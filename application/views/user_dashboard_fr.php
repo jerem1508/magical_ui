@@ -322,8 +322,16 @@
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <div class="col-sm-offset-2 col-sm-10 text-right">
-					      <button type="submit" class="btn btn-success2"><span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier</button>
+					    <div class="col-sm-12 text-right">
+
+							<div class="alert alert-danger error_box" role="alert">
+								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+								<span id="error_msg"></span>
+							</div>
+
+							<button type="submit" class="btn btn-success2">
+								<span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier
+							</button>
 					    </div>
 					  </div>
 					</form>
@@ -436,41 +444,65 @@
 		var password_new2 = $("#password_new2");
 		var email = "<?php echo $_SESSION['user']['email'];?>";
 		var ret = false;
+		$("#error_msg").html("");
 
-		// Le mot de passe et la confirmation doivent etre identiques
-		if(password_new.val() != password_new.val()){
-			// TODO
-			// Afficher un message
-
-			return false;
+		// Le nouveau mot de passe ne doit pas être vide
+		if(password_new.val() == ""){
+			$("#error_msg").html("Le nouveau mot de passe ne peut pas être vide");
 		}
 
-		// Suppression en base
+		// Le mot de passe et la confirmation doivent etre identiques
+		if(password_new.val() != password_new2.val()){
+			$("#error_msg").html("Les mots de passe ne sont pas indentiques");
+		}
+
+		if($("#error_msg").html() != ""){
+			$(".error_box").css("visibility", "visible");
+			return false;
+		}
+		else{
+			$(".error_box").css("visibility", "hidden");				
+		}
+
+
+		// Modification en base
 		$.ajax({    
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/modify_password/');?>',
 			data: 'email=' + email + '&password_old=' + password_old.val() + '&password_new=' + password_new.val(),
             async: false,
             success: function (result) {
-                if(result){
-                	console.log("Suppression en base OK");
-                	ret = result;
-                }
-                else{
-                	console.log("ret : " + result);
-                }
+            	console.log("Modification en base OK");
+            	ret = result;
+
+            	$(".error_box").removeClass("alert-danger");
+            	$(".error_box").addClass("alert-info");
+
+            	$("#error_msg").html("Mot de passe changé avec succès");
+            	$(".error_box").css("visibility", "visible");
+
+
+            	window.setTimeout(function(){
+            		$(".error_box").fadeOut(100);
+
+                	$(".error_box").removeClass("alert-info");
+                	$(".error_box").addClass("alert-danger");
+            	}, 2000);
+
             },
             error: function (result, status, error){
-                console.log("Suppression en base KO");
+                console.log("Modification en base KO");
             }
         });
-        return ret;
 
 		// On vide les champs
 		$("#password_old").val("");
 		$("#password_new").val("");
 		$("#password_new2").val("");
 
+
+
+        return ret;
 	}// /modify_password()
 
 	$(function() { // ready

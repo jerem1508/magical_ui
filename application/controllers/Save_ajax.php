@@ -9,6 +9,7 @@ class Save_ajax extends CI_Controller {
 		
 		$this->load->model('Projects_model');
 		$this->load->model('Comments_model');
+		$this->load->model('User_model');
 	}
 
 	public function session()
@@ -133,5 +134,29 @@ class Save_ajax extends CI_Controller {
 										$project_id, 
 										$project_type);
 	}// /comment()
+
+
+	public function modify_password()
+	{
+		# Modification du mot de passe utilsateur
+		if(isset($_POST['email'])){
+			$email = $_POST['email'];
+		}
+		if(isset($_POST['password_old'])){
+			$password_old = $_POST['password_old'];
+		}
+		if(isset($_POST['password_new'])){
+			$password_new = $_POST['password_new'];
+		}
+
+		// L'ancien mot de passe est il ok ?
+		$pwd_ok =  $this->User_model->pwd_ok($email, $password_old);
+
+		if($pwd_ok){
+			$ret =  $this->User_model->update_pwd($email, $password_new);			
+		}
+		
+		return $ret;
+	}// /modify_password()
 
 }

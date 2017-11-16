@@ -8,12 +8,6 @@ class User_model extends CI_Model {
     public $created_tmp;
     public $modified_tmp;
 
-    // public function get_last_ten_entries()
-    // {
-    //         $query = $this->db->get('entries', 10);
-    //         return $query->result();
-    // }
-
     public function get_user($email)
     {
         //recuperation des données relative a l'email
@@ -26,14 +20,14 @@ class User_model extends CI_Model {
             $row = $query->row_array();
             return $row;
         }
-    }
+    }// /get_user()
 
 
     public function exist_user($email)
     {
         $this->db->where('email', $email);
         return $this->db->get('users');
-    }
+    }// /exist_user()
 
 
     public function insert_user($email, $pwd)
@@ -50,7 +44,7 @@ class User_model extends CI_Model {
     
         // retour des inkfos a mettre en session
         $this->get_user($email);
-    }
+    }// /insert_user()
 
 
     public function update_user()
@@ -60,7 +54,7 @@ class User_model extends CI_Model {
         $this->date     = time();
 
         $this->db->update('entries', $this, array('id' => $_POST['id']));
-    }
+    }// /update_user()
 
 
     public function set_log_users($id_user)
@@ -70,7 +64,36 @@ class User_model extends CI_Model {
         );
 
         return $this->db->insert('log_users', $data);            
-    }
+    }// /set_log_users()
 
 
+    public function pwd_ok($email, $password)
+    {# Test le password
+
+        $user = $this->get_user($email);
+        $ret = false;
+
+        // si email trouvé, on compare les mdp
+        if($user['id'] != 0){
+            $pwd = md5($password.$user['salt']);
+            if($pwd == $user['pwd']) {
+                $ret = true;
+            }
+        }
+        return $ret;
+    }// /pwd_ok()
+
+
+    public function update_pwd($email, $password)
+    {# MAJ du mot de passe
+
+        $this->email = $email;
+        $this->modified_tmp = time();
+
+        // MD5
+        $this->salt = uniqid();
+        $this->pwd = md5($password.$this->salt);
+
+        $ret = $this->db->update('users', $this);
+    }// /update_pwd()
 }
