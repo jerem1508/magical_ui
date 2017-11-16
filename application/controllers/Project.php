@@ -528,7 +528,11 @@ class Project extends CI_Controller {
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
 			if(!$project_api){
-				throw new Exception("An internal synchronization error occurred on our server", 1);
+				// Suppression en base
+				$projects_list = $this->Projects_model->delete_project($project['project_id']);
+
+				continue;
+				//throw new Exception("An internal synchronization error occurred on our server", 1);
 			}
 
 			$project['project_id'] = $project_api["project_id"];

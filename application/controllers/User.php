@@ -210,10 +210,11 @@ class User extends CI_Controller {
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
 			if($project_api == ""){
-				// todo : sup en bdd
+				// Suppression en base
+				$projects_list = $this->Projects_model->delete_project($project['project_id']);
+
 				continue;
 			}
-
 
 			if(!$project_api){
 				// Suppression du projet en base car il n'exise pas sur le serveur data
