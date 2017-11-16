@@ -36,7 +36,7 @@
                 echo "<a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a>";
             }
             else{
-                echo "<a href='".base_url("index.php/User/login")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a>";
+                echo "<a href='".base_url("index.php/User/new")."'><span class='glyphicon glyphicon-lock' aria-hidden='true'></span>&nbsp;&nbsp;S'identifier</a>";
             }
             ?>
             <!--
