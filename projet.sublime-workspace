@@ -4,16 +4,40 @@
 		"selected_items":
 		[
 			[
+				"fun",
+				"function"
+			],
+			[
+				"dele",
+				"delete_errors"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"visib",
+				"visibility\t Style CSS"
+			],
+			[
 				"alert",
-				"alert-danger"
+				"alert\t( message?: DOMString ): void Window"
+			],
+			[
+				"su",
+				"submit"
+			],
+			[
+				"si",
+				"sign_up"
 			],
 			[
 				"rem",
 				"removeClass\t( className?: String ): jQuery jQuery - Attributes | Manipulation > Class Attribute | CSS"
-			],
-			[
-				"su",
-				"substring\t( start: int, end: int ): string String"
 			],
 			[
 				"mar",
@@ -160,10 +184,6 @@
 				"background_1"
 			],
 			[
-				"marg",
-				"margin-bottom"
-			],
-			[
 				"paddi",
 				"padding-left"
 			],
@@ -190,10 +210,6 @@
 			[
 				"font-st",
 				"font-style"
-			],
-			[
-				"fun",
-				"fun\tfunction …"
 			],
 			[
 				"remo",
@@ -498,22 +514,6 @@
 			[
 				"us",
 				"user"
-			],
-			[
-				"col-md",
-				"col-md-6"
-			],
-			[
-				"onc",
-				"onclick\tAttr"
-			],
-			[
-				"cl",
-				"class\tAttr"
-			],
-			[
-				"modifi",
-				"modified_columns"
 			]
 		]
 	},
@@ -523,34 +523,7 @@
 			"file": "application/views/user_dashboard_fr.php",
 			"settings":
 			{
-				"buffer_size": 17681,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/models/User_model.php",
-			"settings":
-			{
-				"buffer_size": 2355,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/user_dashboard.css",
-			"settings":
-			{
-				"buffer_size": 533,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/controllers/Save_ajax.php",
-			"settings":
-			{
-				"buffer_size": 3128,
+				"buffer_size": 18411,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -638,35 +611,35 @@
 	],
 	"file_history":
 	[
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/var/www/html/projets/magical_ui/assets/user_signin_signup.css",
+		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
+		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_fr.php",
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/User.php",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
+		"/var/www/html/projets/magical_ui/application/models/User_model.php",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
-		"/var/www/html/projets/magical_ui/assets/user_signin_signup.css",
-		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/style.css",
-		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/assets/functions.js",
-		"/var/www/html/projets/magical_ui/application/controllers/User.php",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_specifics.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
-		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/33101abf0c4f1231695ef469406daaaf/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6aa3d7548b69c374d4b1b673e6a2f712/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bf169398412eb5be1523be53978f3710/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
-		"/var/www/html/projets/magical_ui/application/models/User_model.php",
-		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/home/jerem/Aide/mysql",
 		"/var/www/html/projets/magical_ui/application/models/Comments_model.php",
 		"/var/www/html/projets/magical_ui/init.sql",
-		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
 		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
 		"/var/www/html/projets/magical_ui/application/config/database.php",
@@ -769,7 +742,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -785,6 +758,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bt_delete_all",
+			"error_msg",
+			"panel_comment",
+			"spl",
+			"log_error",
+			"normalized_projects",
+			"error_box",
 			"create_es_labeller_api",
 			"error_msg",
 			"create_es_labeller_api",
@@ -905,14 +885,7 @@
 			"uploa",
 			"bt_re_treatment",
 			"delete_line",
-			"user",
-			"public",
-			"new",
-			"boot",
-			"replace_mvs",
-			"skipped\": t",
-			"_MINI",
-			"module_name"
+			"user"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -920,6 +893,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"error_msg_comment",
 			"<h3><i class=\"fa fa-cube\" aria-hidden=\"true\"></i> ",
 			"h3",
 			"h2",
@@ -972,15 +946,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17681,
+						"buffer_size": 18411,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15059,
-								15059
+								16007,
+								16007
 							]
 						],
 						"settings":
@@ -989,98 +963,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8361.0,
+						"translation.y": 859.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/models/User_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2355,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2232,
-								2232
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1308.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "assets/user_dashboard.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 533,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								531,
-								531
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/controllers/Save_ajax.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								667,
-								667
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1163,7 +1049,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 481.0,
+	"side_bar_width": 412.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

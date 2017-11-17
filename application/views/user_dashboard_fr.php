@@ -170,9 +170,7 @@
 						$nb_steps = count($tab_steps);
 						$ratio = 100/$nb_steps;
 						foreach ($linked_projects as $project) {
-
 							$steps_html = '<div class="progress">';
-							
 							$found_step_todo = false;
 							$step_todo = "";
 							foreach ($tab_steps as $step) {
@@ -344,7 +342,9 @@
   						La suppression de votre compte est définitive et entraine la suppression de toutes vos données.
   					</div>
   					<div style="width: 100%;" class="text-right">
-  						<button class="btn btn-success"><span class="glyphicon glyphicon-trash"></span>&nbsp;Supprimer mon compte</button>
+  						<button class="btn btn-success" id="bt_delete_all">
+  							<span class="glyphicon glyphicon-trash"></span>&nbsp;Supprimer mon compte
+  						</button>
   					</div>
   				</div>
   				
@@ -505,7 +505,32 @@
         return ret;
 	}// /modify_password()
 
+
+	function delete_all() {
+		// Suppression de toutes les informations
+		$.ajax({    
+            type: 'get',
+            url: '<?php echo base_url('index.php/Save_ajax/delete_all/');?>' + project_id,
+            async: false,
+            success: function (result) {
+                console.log("Suppression en base OK");            	
+            },
+            error: function (result, status, error){
+                console.log("Suppression en base KO");
+            }
+        });
+	}// /delete_all()
+	
+
 	$(function() { // ready
+	
+		$("#bt_delete_all").click(function(){
+			if(confirm("Etes vous certains de vouloir supprimer votre compte ? \nTous vos projets seront également supprimés.")){
+				delete_all();
+			}
+		});
+
+
 		<?php
 		if(count($normalized_projects) > 0){
 		?>

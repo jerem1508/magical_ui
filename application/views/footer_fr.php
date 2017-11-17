@@ -167,7 +167,7 @@
     	<div class="col-md-12">
     		<div class="alert alert-danger" role="alert" style="margin-bottom: 0;" id="error_box">
 				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span id="error_msg"></span>
+				<span id="error_msg_comment"></span>
 			</div>
     	</div>
     </div>
@@ -186,6 +186,7 @@
 	$("#bt_comment").click(function(){
 		if($('#panel_comment').hasClass("maximised")){
 			panel_minimize();
+			delete_errors();
 		}
 		else{
 			panel_maximize();
@@ -196,6 +197,13 @@
 		e.preventDefault();
 		send_comment();
 	});
+
+	function delete_errors() {
+		// Suppression des erreurs
+		if($("#error_box").is(":visible")){
+			$("#error_box").slideToggle();
+		}
+	}// /delete_errors()
 
 	function send_comment() {
 		// Test des champs
@@ -218,7 +226,7 @@
 		}
 
 		if(msg != ""){
-			$("#error_msg").html(msg);
+			$("#error_msg_comment").html(msg);
 			if($("#error_box").is(":hidden")){
 				$("#error_box").slideToggle();
 			}
