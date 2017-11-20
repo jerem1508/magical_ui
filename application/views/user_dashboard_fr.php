@@ -513,7 +513,7 @@
             async: false,
             success: function (result) {
                 console.log("Suppression en base OK");
-                window.location.href = "<?php echo base_url('index.php/Home');?>";
+                window.location.href = "<?php echo base_url('index.php/User/logout');?>";
             },
             error: function (result, status, error){
                 console.log("Suppression en base KO");
