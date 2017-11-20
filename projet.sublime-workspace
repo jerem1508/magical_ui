@@ -4,8 +4,12 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
 				"fun",
-				"function"
+				"fun\tfunction …"
 			],
 			[
 				"dele",
@@ -364,10 +368,6 @@
 				"split\t( separator: string, limit: int ): string String"
 			],
 			[
-				"for",
-				"for\tfor (…) {…}"
-			],
-			[
 				"valid",
 				"valid_filters"
 			],
@@ -523,8 +523,19 @@
 			"file": "application/views/user_dashboard_fr.php",
 			"settings":
 			{
-				"buffer_size": 18411,
+				"buffer_size": 18465,
 				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\nclass Save_ajax extends CI_Controller {\n\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\t\t\n\t\t$this->load->model('Projects_model');\n\t\t$this->load->model('Comments_model');\n\t\t$this->load->model('User_model');\n\t}\n\n\tpublic function session()\n\t{\n\t\t$name = \"\";\n\t\t$value = \"\";\n\n\t\tif(isset($_POST['name'])){\n\t\t\t$name = $_POST['name'];\n\t\t}\n\t\tif(isset($_POST['val'])){\n\t\t\t$value = $_POST['val'];\n\t\t}\n\n\t\t// Sauvegarde si valeurs\n\t\tif($name != \"\" && $value != \"\"){\n\t\t\t$this->session->set_userdata($name, $value);\n\n\t\t\techo true;\n\t\t}\n\t\telse{\n\t\t\tprint_r($_POST);\n\t\t\techo false;\t\n\t\t}\n\t}// /session()\n\n\n\tpublic function unsession()\n\t{\n\t\t# Suppression d'une variable de session\n\t\tif(isset($_POST['name'])){\n\t\t\t$this->session->unset_userdata($_POST['name']);\n\t\t}\n\n\t\tif(isset($_POST['name'])){\n\t\t\treturn false;\n\t\t}\n\t\telse{\n\t\t\treturn true;\n\t\t}\n\t}// / unsession()\n\n\n\tpublic function project()\n\t{\n\t\t$project_id = \"\";\n\t\t$public_status = PROJECT_USER_PRIVATE;\n\t\t$err = false;\n\n\t\tif(isset($_POST['project_id'])){\n\t\t\t$project_id = $_POST['project_id'];\n\t\t}\n\t\telse{\n\t\t\techo \"\\nNo id project\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(isset($_POST['project_type'])){\n\t\t\t$project_type = $_POST['project_type'];\n\t\t}\n\t\telse{\n\t\t\t$project_type = \"unknown\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(isset($_POST['public_status'])){\n\t\t\t$public_status = $_POST['public_status'];\n\t\t}\n\n\t\tif(!isset($_SESSION['user'])){\n\t\t\techo \"\\nNo identified user\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(!$err){\n\t\t\t// insertion du projet\n\t\t\t$ret =  $this->Projects_model->insert_project(\t$project_id,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$_SESSION['user']['id'], \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$public_status, \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$project_type);\n\t\t}\n\t}// /project()\n\n\n\tpublic function delete_project($project_id)\n\t{\n\t\t# Suppression d'un projet en base\n\n\t\t$ret =  $this->Projects_model->delete_project($project_id);\n\t\techo $ret;\n\t}// /delete_project()\n\n\n\tpublic function delete_all($user_id)\n\t{\n\t\t# Suppression de toutes les infos de l'utilisateur\n\n\t\t// Récupération des projets\n\t\t$projects = $this->Projects_model->get_projects($user_id);\n\n\t\t// Suppression des projets API\n\t\tforeach ($projects as $project) {\n\t\t\t\n\t\t}\n\n\t\t// Suppression des projets en base\n\t\t$this->Projects_model->delete_projects($user_id);\n\n\t\t// Suppression de l'utilisateur en base\n\t\t$this->User_model->delete_user($project_id);\n\n\t\t// Redirection vers accueil\n\t\tredirect('/Home');\n\n\t}// /delete_all()\n\n\tpublic function comment()\n\t{\n\t\t# Insertion du commentaire\n\n\t\tif(isset($_POST['name'])){\n\t\t\t$name = $_POST['name'];\n\t\t}\n\t\tif(isset($_POST['email'])){\n\t\t\t$email = $_POST['email'];\n\t\t}\n\t\tif(isset($_POST['message'])){\n\t\t\t$message = $_POST['message'];\n\t\t}\n\t\tif(isset($_POST['url'])){\n\t\t\t$url = $_POST['url'];\n\t\t}\n\t\tif(isset($_POST['project_id'])){\n\t\t\t$project_id = $_POST['project_id'];\n\t\t}\n\t\tif(isset($_POST['project_type'])){\n\t\t\t$project_type = $_POST['project_type'];\n\t\t}\n\t\t// Ajout en bdd\n\t\t$ret =  $this->Comments_model->insert_comment(\n\t\t\t\t\t\t\t\t\t\t$name, \n\t\t\t\t\t\t\t\t\t\t$email, \n\t\t\t\t\t\t\t\t\t\t$message, \n\t\t\t\t\t\t\t\t\t\t$url, \n\t\t\t\t\t\t\t\t\t\t$project_id, \n\t\t\t\t\t\t\t\t\t\t$project_type);\n\t}// /comment()\n\n\n\tpublic function modify_password()\n\t{\n\t\t# Modification du mot de passe utilsateur\n\t\tif(isset($_POST['email'])){\n\t\t\t$email = $_POST['email'];\n\t\t}\n\t\tif(isset($_POST['password_old'])){\n\t\t\t$password_old = $_POST['password_old'];\n\t\t}\n\t\tif(isset($_POST['password_new'])){\n\t\t\t$password_new = $_POST['password_new'];\n\t\t}\n\n\t\t// L'ancien mot de passe est il ok ?\n\t\t$pwd_ok =  $this->User_model->pwd_ok($email, $password_old);\n\n\t\tif($pwd_ok){\n\t\t\t$ret =  $this->User_model->update_pwd($email, $password_new);\t\t\t\n\t\t}\n\t\t\n\t\treturn $ret;\n\t}// /modify_password()\n\n}",
+			"file": "application/controllers/Save_ajax.php",
+			"file_size": 3128,
+			"file_write_time": 131552350908854939,
+			"settings":
+			{
+				"buffer_size": 3645,
 				"line_ending": "Unix"
 			}
 		}
@@ -611,6 +622,7 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/user_signin_signup.css",
 		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
 		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
@@ -626,7 +638,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/var/www/html/projets/magical_ui/assets/functions.js",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_specifics.php",
@@ -742,7 +753,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -758,6 +769,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"session",
 			"bt_delete_all",
 			"error_msg",
 			"panel_comment",
@@ -884,8 +896,7 @@
 			"delete_line",
 			"uploa",
 			"bt_re_treatment",
-			"delete_line",
-			"user"
+			"delete_line"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -937,7 +948,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -946,15 +957,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18411,
+						"buffer_size": 18465,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16007,
-								16007
+								15938,
+								15938
 							]
 						],
 						"settings":
@@ -963,7 +974,36 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 859.0,
+						"translation.y": 1836.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "application/controllers/Save_ajax.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2158,
+								2158
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

@@ -96,4 +96,12 @@ class User_model extends CI_Model {
 
         $ret = $this->db->update('users', $this);
     }// /update_pwd()
+
+
+    public function delete_user($user_id)
+    {# Suppression d'un utilisateur
+
+        $this->db->where('id', $user_id);
+        return $this->db->delete('users');
+    }// /delete_user()
 }

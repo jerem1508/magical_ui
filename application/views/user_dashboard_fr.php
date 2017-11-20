@@ -500,8 +500,6 @@
 		$("#password_new").val("");
 		$("#password_new2").val("");
 
-
-
         return ret;
 	}// /modify_password()
 
@@ -509,14 +507,17 @@
 	function delete_all() {
 		// Suppression de toutes les informations
 		$.ajax({    
-            type: 'get',
-            url: '<?php echo base_url('index.php/Save_ajax/delete_all/');?>' + project_id,
+            type: 'post',
+            url: '<?php echo base_url('index.php/Save_ajax/delete_all');?>',
+            data: 'user_id=' + <?php echo $_SESSION['user']['id'];?>,
             async: false,
             success: function (result) {
-                console.log("Suppression en base OK");            	
+                console.log("Suppression en base OK");
+                window.location.href = "<?php echo base_url('index.php/Home');?>";
             },
             error: function (result, status, error){
                 console.log("Suppression en base KO");
+                console.log(result);
             }
         });
 	}// /delete_all()

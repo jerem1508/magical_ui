@@ -28,8 +28,8 @@ class User extends CI_Controller {
 
 			redirect('/Home/error');
 		}
-
 	}// /__construct()
+
 
 	public function index()
 	{
@@ -284,5 +284,4 @@ class User extends CI_Controller {
 		// Insertion
 		$this->Comments_model->insert_comment($data_to_write);
 	}// /log_error()
-
 }

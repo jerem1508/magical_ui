@@ -129,4 +129,29 @@ class Private_functions {
 		return $response;
 	}// /get_internal_projects()
 
+
+	public function delete_project_API($project_type = '', $project_id = '')
+	{
+		# Suppression d'un projet
+
+		if($project_type == '' || $project_id == ''){
+			return false;
+		}
+
+		$curl = curl_init();
+		 
+		$url = BASE_API_URL.'/api/delete/'.$project_type.'/'.$project_id;
+
+		$opts = [
+		    CURLOPT_URL => $url,
+		    CURLOPT_RETURNTRANSFER => true,
+		];
+		 
+		curl_setopt_array($curl, $opts);
+		
+		$response = json_decode(curl_exec($curl), true);
+
+		return $response;
+
+	}// /delete_project_API()
 }// /Class

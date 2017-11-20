@@ -10,6 +10,8 @@ class Save_ajax extends CI_Controller {
 		$this->load->model('Projects_model');
 		$this->load->model('Comments_model');
 		$this->load->model('User_model');
+
+		$this->load->library('Private_functions');
 	}
 
 	public function session()
@@ -101,6 +103,29 @@ class Save_ajax extends CI_Controller {
 		$ret =  $this->Projects_model->delete_project($project_id);
 		echo $ret;
 	}// /delete_project()
+
+
+	public function delete_all()
+	{
+		# Suppression de toutes les infos de l'utilisateur
+
+		// Récupération des projets
+		$projects = $this->Projects_model->get_projects($_POST["user_id"]);
+
+		// Suppression des projets API
+		foreach ($projects as $project) {
+			$response = $this->private_functions->delete_project_API($project['project_type'], $project['project_id']);
+		}
+
+		// // Suppression des projets en base
+		$this->Projects_model->delete_projects($_POST["user_id"]);
+
+		// // Suppression de l'utilisateur en base
+		$this->User_model->delete_user($_POST["user_id"]);
+
+		// // Redirection vers accueil
+		return true;
+	}// /delete_all()
 
 
 	public function comment()
