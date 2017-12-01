@@ -87,23 +87,37 @@
                 &nbsp;Labellisation
             </h2>
             <div class="row">
+                <div class="col-xs-offset-1 col-xs-10 text-justify">
+                    <div class="well">
+                        La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
+                        <div style="margin-top: 20px;">
+                            Taux de précision souhaité : 
+                            <select>
+                                <option>Tout apparier</option>
+                                <option>Précision élevée (plus de résultats)</option>
+                                <option>Précision 100% (moins de résultats)</option>
+                            </select>
+                        </div>
+                    </div><!-- /well-->
+                </div>
+            </div><!-- / row-->
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
                 <div class="col-xs-offset-1 col-xs-4 text-justify">
-                    La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                    <div style="margin-top: 20px;">
-                        Taux de précision souhaité : 
-                        <select>
-                            <option>Tout apparier</option>
-                            <option>Précision élevée (plus de résultats)</option>
-                            <option>Précision 100% (moins de résultats)</option>
-                        </select>
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
+                        <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();"><i class="fa fa-trash"></i>&nbsp;Effacer</button>
+                    </div>
+
+                    <div id="user_filters">
+                        <i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d'optimiser la proposition faite.
                     </div>
                 </div>
-                <div class="col-xs-offset-1 col-xs-6">
+                <div class="col-xs-7">
                     <div id="message">
                         <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
                     </div>
                     <div class="q_label">
-                        Ces informations sont-elle identiques ?
+                        Ces informations sont-elles identiques ?
                     </div>
                     <div>
                         <button class="btn btn-default btn-xl btn_icon btn-default" 
@@ -139,7 +153,8 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div><!-- / row-->
+
         </div>
     </div><!-- / row-->
 
@@ -446,9 +461,12 @@ function create_es_labeller_api() {
                                
                                 var answer_to_send = {'project_id': project_id_link}
 
+                                load_labeller_api(project_id_link);
+                                /*
                                 console.log('socket.emit|load_labeller');
                                 socket.emit('load_labeller', JSON.stringify(answer_to_send));
                                 console.log('done');
+                                */
 
                             }
                             else{
@@ -473,6 +491,32 @@ function create_es_labeller_api() {
     });// /ajax - create_es_labeller
 }// create_es_labeller_api()
 
+
+function load_labeller_api(project_id_link) {
+    $.ajax({
+        type: 'GET',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/current/' + project_id_link + '/',
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - load_labeller_api");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - load_labeller_api");
+                console.dir(result);
+
+                show_new_proposition(JSON.parse(result.result));
+
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - load_labeller_api");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - load_labeller_api
+}// /load_labeller_api()
 
 function disabeled_buttons() {
     $("#bt_yes").attr("disabled","disabled");
@@ -509,14 +553,40 @@ function socket_answer(user_response) {
     
     $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
+    // var response_to_send = {
+    //     'project_id': project_id_link,
+    //     'user_input': user_response
+    // }
     var response_to_send = {
-        'project_id': project_id_link,
-        'user_input': user_response
+        "module_params": {
+            "project_id": project_id_link,
+            "user_input": user_response
+        }
     }
 
-    console.log('socket.emit|answer');
-    socket.emit('answer', JSON.stringify(response_to_send));
-    console.log('done');
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/update/' + project_id_link + '/',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(response_to_send),
+        success: function (result) {
+            if(result.error){
+                console.log("API error - update");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - update");
+                console.dir(result);
+
+                show_new_proposition(JSON.parse(result.result));
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - update");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - update
 } // / socket_answer()
 
 
@@ -528,14 +598,38 @@ function socket_update_filters(must, must_not) {
     disabeled_buttons();
 
     var response_to_send = {
-        'project_id': project_id_link,
-        'must': must,
-        'must_not': must_not
+        "module_params": {
+            'project_id': project_id_link,
+            'must': must,
+            'must_not': must_not
+        }
     }
 
-    console.log('socket.emit|update_filters');
-    socket.emit('update_filters', response_to_send);
-    console.log('done'); 
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/update_filters/' + project_id_link + '/',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(response_to_send),
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - update_filters");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - update_filters");
+                console.dir(result);
+
+                show_new_proposition(JSON.parse(result.result));
+
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - update_filters");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - update_filters
 } // / socket_update_filters()
 
 
@@ -551,15 +645,25 @@ function show_new_proposition(message) {
         // Retours SOURCE
         // Liste des colonnes associées
         var source_list = column_matches[i].source;
-
         var source = new Array();
         var source_keys = new Array();
+
         // Récupération de la valeur associée dans le message
         for (var j = 0; j < source_list.length; j++) {
             var key = source_list[j]; // ex departement
             var value = message["source_item"]["_source"][key];
-            source.push(value);
+
+            //source.push(value);
             source_keys.push(key);
+
+            // Séparation sur l'espace pour faire de chaque mot un lien cliquable
+            var value_tab = value.split(' ');
+            var value_temp = "";
+            for (var k = 0; k < value_tab.length; k++) {
+                
+                value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\')">' + value_tab[k] + '</a> ';
+            }
+            source.push(value_temp);
         }
 
         // Concatenation des libellés
@@ -568,9 +672,8 @@ function show_new_proposition(message) {
         
         // Ecriture de la ligne Source
         lines_html += '<tr>';
-        lines_html += '<td class="title">' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
+        lines_html += '<td class="title"><i class="fa fa-table" aria-hidden="true"></i> ' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
         lines_html += '</tr>'; 
-
 
         // Retours REFERENTIEL
         // Liste des colonnes associées
@@ -592,7 +695,7 @@ function show_new_proposition(message) {
 
         // Ecriture de la ligne Ref
         lines_html += '<tr>';
-        lines_html += '<td class="title">' + lib_ref_keys + ' <i>(referentiel)</i> :</td><td class="message">' + lib_ref_values + '</td>';
+        lines_html += '<td class="title"><i class="fa fa-database" aria-hidden="true"></i> ' + lib_ref_keys + ' <i>(referentiel)</i> :</td><td class="message">' + lib_ref_values + '</td>';
         lines_html += '</tr>';
         lines_html += '<tr><td colspan="2" class="hr"></td></tr>';
 
@@ -615,6 +718,8 @@ function show_new_proposition(message) {
     $("#message").html(lines_html);
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
+
+    $('.user_tag').awesomeCursor('plus-circle');
 
     enabeled_buttons();
 }// / show_new_proposition()
@@ -643,11 +748,32 @@ function get_columns(metadata) {
 
 
 function complete_training() {
-    var _to_send = {'project_id': project_id_link}
+    // var _to_send = {'project_id': project_id_link}
 
-    console.log('socket.emit|complete_training');
-    socket.emit('complete_training', JSON.stringify(_to_send));
-    console.log('done'); 
+    // console.log('socket.emit|complete_training');
+    // socket.emit('complete_training', JSON.stringify(_to_send));
+    // console.log('done');
+
+    $.ajax({
+        type: 'GET',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/complete_training/' + project_id_link + '/',
+        success: function (result) {
+
+            if(result.error){
+                console.log("API error - complete_training");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - complete_training");
+                console.dir(result);
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - complete_training");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - complete_training
 }// / complete_training()
 
 
@@ -656,7 +782,7 @@ function valid_step() {
     complete_training();
 
     // Passage à l'étape suivante
-    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
+    //window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
 }// / valid_step()
 
 
@@ -906,13 +1032,13 @@ $(function(){// ready
 
     // Connect to socket
     // var socket = io.connect('http://' + document.domain + ':' + location.port + '/');
-    socket = io.connect('<?php echo BASE_API_URL;?>');
+    //socket = io.connect('<?php echo BASE_API_URL;?>');
 
     // Création des indexs Elastic Search
     create_es_index_api();
 
     // Ecoute socket
-    socket_on_message();
+    //socket_on_message();
 
     // Tooltips
     $('[data-toggle="tooltip"]').tooltip(); 

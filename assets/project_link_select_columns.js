@@ -3,45 +3,136 @@ function get_columns_html(tab_columns, infer_columns, target) {
 
 	var html = "";
 	var li = "";
-// console.log('infer_columns:');
-// console.log(infer_columns);
-
-// console.log('columns:');
-// console.log(tab_columns)
 
 	var tab_types = [];
 	tab_types['undefined'] = new Array();
 
 	for (var i = 0; i < tab_columns.length; i++) {
-		/*
-		if(target == 'src'){
-			li = '<span class="glyphicon glyphicon-star color_src"></span>';
-		}
-		else{
-			li = '<span class="glyphicon glyphicon-star color_ref"></span>';
-		}
-		html += '<div class="draggable ' + target + '_column">' + li + tab_columns[i] + '</div>';
-		*/
-
+		var column_type = '';
 		if(typeof infer_columns[tab_columns[i]] === 'undefined'){
-//console.log('1')
 			tab_types['undefined'].push(tab_columns[i]);
+			column_type = 'Inconnu';
 		}
 		else{
-//console.log('2');
 			if(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){
 				tab_types[infer_columns[tab_columns[i]]] = new Array();
 			}
 
 			tab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);
+			column_type = infer_columns[tab_columns[i]];
 		}
 
-		html += '<div class="draggable ' + target + '_column">' + tab_columns[i] + '</div>';
+		// html += '<div class="box">';
+		// html += '	<div class="left">';
+		// html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+		// if(column_type == 'Inconnu'){
+		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
+		// }
+		// else {
+		// 	var tab = scale_reverse[column_type];
+		// 	tab += "['" + column_type + "']";
+		// 	var couleur = eval(tab);
+		// 	console.log(couleur);
+		// 	html += '		<div class="type">Type détecté : <span class="badge" style="color:#000; background-color:' + couleur + ';">' + column_type + '</span></div>';
+
+		// }
+		// html += '	</div>';
+		// html += '	<div class="right">';
+		// html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
+		// html += '	</div>';
+		// html += '</div>';
+
+
+		// if(column_type == 'Inconnu'){
+		// 	html += '<div class="box">';
+		// 	html += '	<div class="left">';
+		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
+		// 	html += '	</div>';
+		// 	html += '	<div class="right">';
+		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
+		// 	html += '	</div>';
+		// 	html += '</div>';
+		// }
+		// else {
+		// 	var tab = scale_reverse[column_type];
+		// 	tab += "['" + column_type + "']";
+		// 	var couleur = eval(tab);
+		// 	console.log(couleur);
+		// 	html += '<div class="box" style="color:#000; background-color:' + couleur + ';">';
+		// 	html += '	<div class="left">';
+		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+		// 	html += '		<div class="type">Type : <span class="">' + column_type + '</span></div>';
+		// 	html += '	</div>';
+		// 	html += '	<div class="right">';
+		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
+		// 	html += '	</div>';
+		// 	html += '</div>';
+		// }
+
+		// if(column_type == 'Inconnu'){
+		// 	html += '<div class="box">';
+		// 	html += '	<div class="left">';
+		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
+		// 	html += '	</div>';
+		// 	html += '	<div class="right">';
+		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
+		// 	html += '	</div>';
+		// 	html += '</div>';
+		// }
+		// else {
+		// 	var tab = scale_reverse[column_type];
+		// 	tab += "['" + column_type + "']";
+		// 	var couleur = eval(tab);
+		// 	console.log(couleur);
+		// 	html += '<div class="box">';
+		// 	html += '	<div class="left">';
+		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+		// 	html += '		<div class="type"><span class="pastille" style="background-color:' + couleur + ';"></span>&nbsp;Type : ' + column_type + '</div>';
+		// 	html += '	</div>';
+		// 	html += '	<div class="right">';
+		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
+		// 	html += '	</div>';
+		// 	html += '</div>';
+		// }
+
+		if(column_type == 'Inconnu'){
+			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
+			html += '<div class="row">';
+			html += '	<div class="col-md-1">';
+			html += '		<div style="width: 15px;margin:0;padding:0;height:40px;background-color:#ddd;"></div>'
+			html += '	</div>';
+			html += '	<div class="col-md-9">';
+			html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+			//html += '		<div class="type">Type : ' + column_type + '</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-2">';
+			html += '		<i class="fa fa-plus-circle" style="font-size: 40px; color: #fff;"></i>';
+			html += '	</div>';
+			html += '</div>';
+			html += '</div>';
+		}
+		else {
+			var tab = scale_reverse[column_type];
+			tab += "['" + column_type + "']";
+			var couleur = eval(tab);
+			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
+			html += '<div class="row">';
+			html += '	<div class="col-md-1">';
+			html += '		<div style="width: 15px;margin:0;padding:0;height:40px;background-color:' + couleur + ';"></div>'
+			html += '	</div>';
+			html += '	<div class="col-md-9">';
+			html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+			html += '		<div class="type">Type : ' + column_type + '</div>';
+			html += '	</div>';
+			html += '	<div class="col-md-2">';
+			html += '		<i class="fa fa-plus-circle" style="font-size: 40px; color: #fff;"></i>';
+			html += '	</div>';
+			html += '</div>';
+			html += '</div>';
+		}
 	}
-
-// console.log('tab_types:');
-// console.log(tab_types);
-
 	return html;
 }// /get_columns_html()
 
@@ -63,50 +154,19 @@ function unchange_target(id_bloc, target) {
 function analysis_bloc(id_bloc) {
 	// Analyse le contenu d'un bloc et écrit le résultat sous le bloc
 
-	// Compte les éléments pour affichage message
-	var cpt_src = 0;
-	var cpt_ref = 0;
+	var source = $("#input_src_" + id_bloc).val();
+	var tab_source = source.split(',');
+	source = JSON.stringify(tab_source);
+	
+	var referentiel = $("#input_ref_" + id_bloc).val();
+	var tab_referentiel = referentiel.split(',');
+	referentiel = JSON.stringify(tab_referentiel);
 
-	// Partie SOURCE
-	var tab_src = new Array();
-	$("#bloc_src_" + id_bloc + ">div").each(function(index) {
-		var libelle = $(this).text();
+	//var ch = '{"source": [' + tab_src + '],"ref": [' + tab_ref + ']}';
+	var ch = '{"source":' + source + ',"ref":' + referentiel + '}';
 
-		// Ajout au tableau si inexistant
-		if(tab_src.indexOf('"' + libelle + '"') === -1){
-			cpt_src++;
-			tab_src.push('"' + libelle + '"');
-		}
-	}); // /each
-
-	// Partie REFERENTIEL
-	var tab_ref = new Array();
-	$("#bloc_ref_" + id_bloc + ">div").each(function(index) {
-		var libelle = $(this).text();
-
-		// Ajout au tableau si inexistant
-		if(tab_ref.indexOf('"' + libelle + '"') === -1){
-			cpt_ref++;
-			tab_ref.push('"' + libelle + '"');
-		}
-	}); // /each
-
-	var name = "bloc_" + id_bloc;
-	var ch = '{"source": [' + tab_src + '],"ref": [' + tab_ref + ']}';
 	$("#bloc_analysis_" + id_bloc).html(ch);
 
-
-	// Si au moins un élément SRC, suppression du message dans la box
-	if(cpt_src > 0){
-		$("#txt_src_" + id_bloc).css("display", "none");}
-	else{
-		$("#txt_src_" + id_bloc).css("display", "inherit");}
-
-	// Si au moins un élément REF, suppression du message dans la box
-	if(cpt_ref > 0){
-		$("#txt_ref_" + id_bloc).css("display", "none");}
-	else{
-		$("#txt_ref_" + id_bloc).css("display", "inherit");}
 }// /analysis_bloc()
 
 
@@ -172,7 +232,6 @@ function add_js_bloc(id_bloc) {
 
 function remove_bloc(id_bloc) {
 	// Suppression d'un bloc
-
 	$("#bloc_" + id_bloc).remove();
 }// /remove_bloc()
 
@@ -193,12 +252,12 @@ function new_bloc(id_bloc) {
 
 	var html = "";
 
-	html += '<div id="bloc_' + id_bloc + '">';
+	html += '<div id="bloc_' + id_bloc + '" class="association association-select" onclick="set_current_association(' + id_bloc + ');">';
 
 	html += '<div class="row">';
 	html += '<div class="col-xs-11 text-left">';
 	html += '<h4>';
-	html += '<span id="lib_bloc_' + id_bloc + '">Association ' + id_bloc + '</span> ';
+	html += '<span id="lib_bloc_' + id_bloc + '" class="badge">Association ' + id_bloc + '</span> ';
 	html += '<a onclick="change_lib_bloc(' + id_bloc + ');"><span class="glyphicon glyphicon-pencil"></span></a>';
 	html += '</h4>';
 	html += '</div>';
@@ -207,25 +266,118 @@ function new_bloc(id_bloc) {
 	html += '</div>';
 	html += '</div>';
 
-	html += '<div class="row">';
-	html += '<div class="col-xs-6 text-right">';
-	html += '<div id="bloc_src_' + id_bloc + '" class="bloc text-left"><span class="txt_src" id="txt_src_' + id_bloc + '">Veuillez glisser au moins une colonne de votre fichier source</span></div>';
+	// html += '<div class="row">';
+	// html += '<div class="col-xs-6 text-right">';
+	// html += '<div id="bloc_src_' + id_bloc + '" class="bloc text-left"><span class="txt_src" id="txt_src_' + id_bloc + '">Veuillez glisser au moins une colonne de votre fichier source</span></div>';
+	// html += '</div>';
+	// html += '<div class="col-xs-6 text-left">';
+	// html += '<div id="bloc_ref_' + id_bloc + '" class="bloc text-left"><span class="txt_ref" id="txt_ref_' + id_bloc + '">Veuillez glisser au moins une colonne du référentiel</span></div>';
+	// html += '</div>';
+	// html += '</div>';
+
+	// html += '<div class="row" style="padding-bottom:5px;">';
+	// html += '	<div class="col-xs-2 text-left"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Source :</div>';
+	// html += '	<div class="col-xs-10 text-left"><input type="text" class="form-control" id="input_src_' + id_bloc + '" data-role="tagsinput"></div>';
+	// html += '</div>';
+	// html += '<div class="row" style="padding-top:5px;">';
+	// html += '	<div class="col-xs-2 text-left"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;Référentiel :</div>';
+	// html += '	<div class="col-xs-10 text-left"><input type="text" class="form-control" id="input_ref_' + id_bloc + '" data-role="tagsinput"></div>';
+	// html += '</div>';
+
+	html += '<div class="row" style="padding-bottom:5px;">';
+	html += '	<div class="col-xs-2 text-left"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Source :</div>';
+	html += '	<div class="col-xs-9 text-left">';
+	html += '		<div id="tags_src_' + id_bloc + '" class="tags"></div>';
+	html += '		<input type="hidden" class="input_src" id="input_src_' + id_bloc + '">';
+	html += '	</div>';
+	html += '	<div class="col-xs-1 text-left" style="padding-left: 0px;"">';
+	html += '		<button class="btn btn-default" onclick="reset_line(\'src\',' + id_bloc + ');"><i class="fa fa-trash"></i></button>'
+	html += '	</div>';
 	html += '</div>';
-	html += '<div class="col-xs-6 text-left">';
-	html += '<div id="bloc_ref_' + id_bloc + '" class="bloc text-left"><span class="txt_ref" id="txt_ref_' + id_bloc + '">Veuillez glisser au moins une colonne du référentiel</span></div>';
+	html += '<div class="row" style="padding-bottom:5px;">';
+	html += '	<div class="col-xs-2 text-left"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;Référentiel :</div>';
+	html += '	<div class="col-xs-9 text-left">';
+	html += '		<div id="tags_ref_' + id_bloc + '" class="tags"></div>';
+	html += '		<input type="hidden" class="input_ref" id="input_ref_' + id_bloc + '">';
+	html += '	</div>';
+	html += '	<div class="col-xs-1 text-left" style="padding-left: 0px;"">';
+	html += '		<button class="btn btn-default" onclick="reset_line(\'ref\',' + id_bloc + ');"><i class="fa fa-trash"></i></button>'
+	html += '	</div>';
+	html += '</div>';
+
+	html += '<div class="row" style="padding-bottom:5px;">';
+	html += '<div class="col-xs-12 text-left">';
+	html += '<div class="checkbox">';
+	html += '	<label>';
+	html += '		<input type="checkbox"> Association parfaite';
+	html += '	</label>';
+	html += '</div>';
 	html += '</div>';
 	html += '</div>';
 
-	html += '<div class="row">';
-	html += '<div class="col-xs-12 text-left blocs_analysis" id="bloc_analysis_' + id_bloc + '">';
-	html += '</div>';
+	html += '<div class="row text-left">';
+	html += '	<div class="col-xs-12 text-left blocs_analysis" id="bloc_analysis_' + id_bloc + '"></div>';
 	html += '</div>';
 
 	html += '</div>';
 
 	// Ajout du nouveau bloc
 	$("#blocs").html($("#blocs").html() + html);
+	//$("#input_src_" + id_bloc).tagsInput();
 
 	// Ajout du javascript
-	add_js_bloc(id_bloc);
+	//add_js_bloc(id_bloc);
+
+	// Définit le bloc association en cours
+	set_current_association(id_bloc);
 }// /new_bloc()
+
+
+function set_current_association(id_bloc) {
+	// Id de l'association sélectionnée
+	console.log('select id : ' + id_bloc);
+	id_bloc_to_change = id_bloc;
+
+	// Reset de la class css pour toutes les associations
+	reset_css_association();
+
+	// Ajout de la class css de selection sur l'association en cours
+	$("#bloc_" + id_bloc).addClass("association-select");
+	$("#lib_bloc_" + id_bloc).css("background-color", "#25358C");
+}// /set_current_association()
+
+
+function reset_css_association() {
+	for (var i = 0; i < cpt_bloc+1; i++) {
+		$("#bloc_" + i).removeClass("association-select");
+		$("#lib_bloc_" + i).css("background-color", "#777");
+	}
+}// /reset_css_association()
+
+
+function add_column(sub_target, column_name) {
+	// EX sub_target : src/ref
+	// Id de l'association sélectionnée
+	// id_bloc_to_change
+
+	// Ajout du tagsInput
+	if($("#input_" + sub_target + "_" + id_bloc_to_change).val() == ''){
+		$("#input_" + sub_target + "_" + id_bloc_to_change).val(column_name);
+	}
+	else{
+		$("#input_" + sub_target + "_" + id_bloc_to_change).val($("#input_" + sub_target + "_" + id_bloc_to_change).val() + "," + column_name);
+	}
+	
+	var html_tag = '<span class="badge my_badge">' + column_name + '<a class="cross" onclick="del_tag(\'\');">x</a></span>';
+	$("#tags_" + sub_target + "_" + id_bloc_to_change).html($("#tags_" + sub_target + "_" + id_bloc_to_change).html() + html_tag);
+
+	// Gère le json qui sera envoyé
+	analysis_bloc(id_bloc_to_change);
+
+}// /add_column()
+
+
+function reset_line(sub_target, id_bloc) {
+	$("#tags_"+ sub_target +"_" + id_bloc).val("");
+	$("#input_"+ sub_target +"_" + id_bloc).val("");
+}// /reset_line()

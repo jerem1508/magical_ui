@@ -4,12 +4,96 @@
 		"selected_items":
 		[
 			[
-				"for",
-				"foreach\tforeach …"
+				"fun",
+				"function"
 			],
 			[
-				"fun",
-				"fun\tfunction …"
+				"padd",
+				"padding-left"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"borde",
+				"border-radius"
+			],
+			[
+				"sub",
+				"sub_target"
+			],
+			[
+				"id",
+				"id_bloc"
+			],
+			[
+				"paddin",
+				"padding"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"text",
+				"text-right"
+			],
+			[
+				"class",
+				"class=\"row"
+			],
+			[
+				"te",
+				"text-center"
+			],
+			[
+				"sty",
+				"style\t Style CSS"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"border",
+				"border-left"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"onc",
+				"onclick\t: EventHandler Document"
+			],
+			[
+				"cla",
+				"class=\"fa"
+			],
+			[
+				"tet",
+				"text-decoration"
+			],
+			[
+				"font",
+				"font-style"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"tex",
+				"text-center"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
 			],
 			[
 				"dele",
@@ -44,14 +128,6 @@
 				"removeClass\t( className?: String ): jQuery jQuery - Attributes | Manipulation > Class Attribute | CSS"
 			],
 			[
-				"mar",
-				"margin-bottom"
-			],
-			[
-				"tex",
-				"text-right"
-			],
-			[
 				"fon",
 				"font-style"
 			],
@@ -68,20 +144,8 @@
 				"padding-top"
 			],
 			[
-				"in",
-				"inline"
-			],
-			[
 				"hei",
 				"height\t = 'inherit' Style CSS"
-			],
-			[
-				"text",
-				"text-center"
-			],
-			[
-				"border",
-				"border-bottom"
 			],
 			[
 				"get_",
@@ -108,14 +172,6 @@
 				"confidence"
 			],
 			[
-				"padd",
-				"padding"
-			],
-			[
-				"paddin",
-				"padding-bottom"
-			],
-			[
 				"v",
 				"visibility\t = '' Style CSS"
 			],
@@ -128,20 +184,12 @@
 				"tab_types"
 			],
 			[
-				"margin",
-				"margin-top"
-			],
-			[
 				"file",
 				"file_name"
 			],
 			[
 				"err",
 				"errors"
-			],
-			[
-				"font",
-				"font-size"
 			],
 			[
 				"he",
@@ -158,14 +206,6 @@
 			[
 				"bt",
 				"btn-success2"
-			],
-			[
-				"back",
-				"background_1"
-			],
-			[
-				"padding",
-				"padding-top"
 			],
 			[
 				"btn-",
@@ -200,10 +240,6 @@
 				"border-bottom-width"
 			],
 			[
-				"sty",
-				"list-style"
-			],
-			[
 				"u",
 				"uppercase"
 			],
@@ -222,10 +258,6 @@
 			[
 				"disa",
 				"disabled\t(): Boolean jQuery - Callbacks Object"
-			],
-			[
-				"id",
-				"id_temp"
 			],
 			[
 				"cli",
@@ -266,10 +298,6 @@
 			[
 				"st",
 				"stats"
-			],
-			[
-				"sub",
-				"submit"
 			],
 			[
 				"ro",
@@ -314,10 +342,6 @@
 			[
 				"floor",
 				"Math_floor\t( x: number ): number Math"
-			],
-			[
-				"cla",
-				"class"
 			],
 			[
 				"ref_",
@@ -424,10 +448,6 @@
 				"associations"
 			],
 			[
-				"te",
-				"text-right"
-			],
-			[
 				"non",
 				"NONE\t: const unsigned short Event"
 			],
@@ -494,48 +514,71 @@
 			[
 				"print",
 				"print_r"
-			],
-			[
-				"norm",
-				"normalize"
-			],
-			[
-				"typ",
-				"type_file"
-			],
-			[
-				"des",
-				"description"
-			],
-			[
-				"display",
-				"display_name"
-			],
-			[
-				"us",
-				"user"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/user_dashboard_fr.php",
+			"file": "application/views/project_link_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 18465,
+				"buffer_size": 18834,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\nclass Save_ajax extends CI_Controller {\n\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\t\t\n\t\t$this->load->model('Projects_model');\n\t\t$this->load->model('Comments_model');\n\t\t$this->load->model('User_model');\n\t}\n\n\tpublic function session()\n\t{\n\t\t$name = \"\";\n\t\t$value = \"\";\n\n\t\tif(isset($_POST['name'])){\n\t\t\t$name = $_POST['name'];\n\t\t}\n\t\tif(isset($_POST['val'])){\n\t\t\t$value = $_POST['val'];\n\t\t}\n\n\t\t// Sauvegarde si valeurs\n\t\tif($name != \"\" && $value != \"\"){\n\t\t\t$this->session->set_userdata($name, $value);\n\n\t\t\techo true;\n\t\t}\n\t\telse{\n\t\t\tprint_r($_POST);\n\t\t\techo false;\t\n\t\t}\n\t}// /session()\n\n\n\tpublic function unsession()\n\t{\n\t\t# Suppression d'une variable de session\n\t\tif(isset($_POST['name'])){\n\t\t\t$this->session->unset_userdata($_POST['name']);\n\t\t}\n\n\t\tif(isset($_POST['name'])){\n\t\t\treturn false;\n\t\t}\n\t\telse{\n\t\t\treturn true;\n\t\t}\n\t}// / unsession()\n\n\n\tpublic function project()\n\t{\n\t\t$project_id = \"\";\n\t\t$public_status = PROJECT_USER_PRIVATE;\n\t\t$err = false;\n\n\t\tif(isset($_POST['project_id'])){\n\t\t\t$project_id = $_POST['project_id'];\n\t\t}\n\t\telse{\n\t\t\techo \"\\nNo id project\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(isset($_POST['project_type'])){\n\t\t\t$project_type = $_POST['project_type'];\n\t\t}\n\t\telse{\n\t\t\t$project_type = \"unknown\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(isset($_POST['public_status'])){\n\t\t\t$public_status = $_POST['public_status'];\n\t\t}\n\n\t\tif(!isset($_SESSION['user'])){\n\t\t\techo \"\\nNo identified user\";\n\t\t\t$err = true;\n\t\t}\n\n\t\tif(!$err){\n\t\t\t// insertion du projet\n\t\t\t$ret =  $this->Projects_model->insert_project(\t$project_id,\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$_SESSION['user']['id'], \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$public_status, \n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t$project_type);\n\t\t}\n\t}// /project()\n\n\n\tpublic function delete_project($project_id)\n\t{\n\t\t# Suppression d'un projet en base\n\n\t\t$ret =  $this->Projects_model->delete_project($project_id);\n\t\techo $ret;\n\t}// /delete_project()\n\n\n\tpublic function delete_all($user_id)\n\t{\n\t\t# Suppression de toutes les infos de l'utilisateur\n\n\t\t// Récupération des projets\n\t\t$projects = $this->Projects_model->get_projects($user_id);\n\n\t\t// Suppression des projets API\n\t\tforeach ($projects as $project) {\n\t\t\t\n\t\t}\n\n\t\t// Suppression des projets en base\n\t\t$this->Projects_model->delete_projects($user_id);\n\n\t\t// Suppression de l'utilisateur en base\n\t\t$this->User_model->delete_user($project_id);\n\n\t\t// Redirection vers accueil\n\t\tredirect('/Home');\n\n\t}// /delete_all()\n\n\tpublic function comment()\n\t{\n\t\t# Insertion du commentaire\n\n\t\tif(isset($_POST['name'])){\n\t\t\t$name = $_POST['name'];\n\t\t}\n\t\tif(isset($_POST['email'])){\n\t\t\t$email = $_POST['email'];\n\t\t}\n\t\tif(isset($_POST['message'])){\n\t\t\t$message = $_POST['message'];\n\t\t}\n\t\tif(isset($_POST['url'])){\n\t\t\t$url = $_POST['url'];\n\t\t}\n\t\tif(isset($_POST['project_id'])){\n\t\t\t$project_id = $_POST['project_id'];\n\t\t}\n\t\tif(isset($_POST['project_type'])){\n\t\t\t$project_type = $_POST['project_type'];\n\t\t}\n\t\t// Ajout en bdd\n\t\t$ret =  $this->Comments_model->insert_comment(\n\t\t\t\t\t\t\t\t\t\t$name, \n\t\t\t\t\t\t\t\t\t\t$email, \n\t\t\t\t\t\t\t\t\t\t$message, \n\t\t\t\t\t\t\t\t\t\t$url, \n\t\t\t\t\t\t\t\t\t\t$project_id, \n\t\t\t\t\t\t\t\t\t\t$project_type);\n\t}// /comment()\n\n\n\tpublic function modify_password()\n\t{\n\t\t# Modification du mot de passe utilsateur\n\t\tif(isset($_POST['email'])){\n\t\t\t$email = $_POST['email'];\n\t\t}\n\t\tif(isset($_POST['password_old'])){\n\t\t\t$password_old = $_POST['password_old'];\n\t\t}\n\t\tif(isset($_POST['password_new'])){\n\t\t\t$password_new = $_POST['password_new'];\n\t\t}\n\n\t\t// L'ancien mot de passe est il ok ?\n\t\t$pwd_ok =  $this->User_model->pwd_ok($email, $password_old);\n\n\t\tif($pwd_ok){\n\t\t\t$ret =  $this->User_model->update_pwd($email, $password_new);\t\t\t\n\t\t}\n\t\t\n\t\treturn $ret;\n\t}// /modify_password()\n\n}",
-			"file": "application/controllers/Save_ajax.php",
-			"file_size": 3128,
-			"file_write_time": 131552350908854939,
+			"file": "assets/project_link_select_columns.js",
 			"settings":
 			{
-				"buffer_size": 3645,
+				"buffer_size": 14823,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_select_columns_specifics.php",
+			"settings":
+			{
+				"buffer_size": 223,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_select_columns.css",
+			"settings":
+			{
+				"buffer_size": 2839,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/style.css",
+			"settings":
+			{
+				"buffer_size": 11770,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/libraries/Private_functions.php",
+			"settings":
+			{
+				"buffer_size": 3213,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/functions.js",
+			"settings":
+			{
+				"buffer_size": 4949,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -547,7 +590,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 304.0,
+		"height": 184.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -592,7 +635,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 587.0
+		"width": 479.0
 	},
 	"console":
 	{
@@ -614,6 +657,7 @@
 	[
 		"/var/www/html/projets/magical_ui",
 		"/var/www/html/projets/magical_ui/application",
+		"/var/www/html/projets/magical_ui/application/config",
 		"/var/www/html/projets/magical_ui/application/controllers",
 		"/var/www/html/projets/magical_ui/application/libraries",
 		"/var/www/html/projets/magical_ui/application/models",
@@ -622,39 +666,57 @@
 	],
 	"file_history":
 	[
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/metadata.json",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/home/jerem/Aide/mysql",
+		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
+		"/var/www/html/projets/magical_ui/assets/jquery.fittext.js",
+		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
+		"/var/www/html/projets/magical_ui/application/config/config.php",
+		"/var/www/html/projets/magical_ui/application/config/constants.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/a4e5cdb106d61ebf301ef24150b1ff0b/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c190498c83f865b62fa6ff8cb77d5455/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/f27858f8706d94e2ab566c280fe21161/metadata.json",
+		"/var/www/html/projets/magical_ui/application/config/database.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr_old.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/lib.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js",
+		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
+		"/var/www/html/projets/magical_ui/assets/jquery.awesome-cursor.min.js",
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
+		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
+		"/var/www/html/projets/magical_ui/application/models/User_model.php",
+		"/var/www/html/projets/magical_ui/application/controllers/User.php",
 		"/var/www/html/projets/magical_ui/application/views/home_fr.php",
 		"/var/www/html/projets/magical_ui/assets/user_signin_signup.css",
 		"/var/www/html/projets/magical_ui/assets/user_dashboard.css",
 		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_fr.php",
-		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/User.php",
 		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
-		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
-		"/var/www/html/projets/magical_ui/application/models/User_model.php",
-		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/var/www/html/projets/magical_ui/assets/functions.js",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/33101abf0c4f1231695ef469406daaaf/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6aa3d7548b69c374d4b1b673e6a2f712/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/bf169398412eb5be1523be53978f3710/metadata.json",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_report_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_new_fr.php",
-		"/home/jerem/Aide/mysql",
 		"/var/www/html/projets/magical_ui/application/models/Comments_model.php",
 		"/var/www/html/projets/magical_ui/init.sql",
-		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
-		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
-		"/var/www/html/projets/magical_ui/application/config/database.php",
-		"/var/www/html/projets/magical_ui/application/config/constants.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/home/jerem/ssh_key.pub",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
@@ -664,7 +726,6 @@
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
-		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c9f789fd290ba006479f57d2b80446a6/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8e0268e49ba1b5a3388caad2fde0198a/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/cca0e205335b78ddb4e74e7ac7417854/metadata.json",
@@ -685,14 +746,11 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e5bd47a733e164e46cb29567a2603cee/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/api.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/af2abed1b6c4d321bd6eecb507b5c91f/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/a708fbc084bb36b4a31ff0f7180ceea3/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba2e3b02e5f9d1b3678bed39e3e52d10/replace_mvs/MINI__2016_10_ClinicalTrials_Recodage_EssaisAvecFrancais.csv__run_info.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/ba66c61b3d545dad359b196474dfd613/INIT/infered_config.json",
-		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/admin.py",
 		"/var/www/html/projets/magical_ui/application/views/errors/cli/error_general.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/28268e744b111dab00127c160bb9ec99/metadata.json",
@@ -716,7 +774,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ed3bb3cf76c25cfc104c6afb34690687/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/961ded08fe683ad068e9cabed329e9ea/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/e046ced72c236d7e41f1d4019779fddb/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/lib.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/b6ac7f74e29262e5c8992631d1eb4dea/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/1334eeb5ac3bd4b103ef7c3f9dda387b/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/224fb00efbaffa81b84fefae67944ce8/metadata.json",
@@ -736,20 +793,7 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/metadata.json",
 		"/var/www/html/projets/magical_ui/application/controllers/Comment_ajax.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_report_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_concat_with_init.js",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_concat_with_init_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_select_columns.css",
-		"/var/www/html/projets/magical_ui/application/views/project_step1_init_fr.php",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/column_matches.json",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_replace_mvs.js",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_infer_types.js",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_specifics.php",
-		"/var/www/html/projets/magical_ui/assets/project_normalize_select_columns.js",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_select_columns_specifics.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js"
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_report_fr.php"
 	],
 	"find":
 	{
@@ -769,6 +813,54 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"remove_bloc",
+			"tags",
+			"get_obj_filters",
+			"filter_plus",
+			"show_new_proposition",
+			"socket_on_message",
+			"get_internal_projects",
+			"internal_projects",
+			"get_internal_projects_html",
+			"modal_ref",
+			"bt_modal_ref",
+			"Référentiels",
+			"public",
+			"publi",
+			"publ",
+			"remove",
+			"data-role=\"rem",
+			"socket",
+			"socket_on_message",
+			"consol",
+			"id_bloc_to_change",
+			"cpt_bloc",
+			"new_bloc",
+			"add_js_bloc",
+			"src_file_name",
+			"Titre de personne",
+			"chk_public",
+			"togg",
+			"blocs",
+			"=>",
+			"]",
+			"[",
+			"\"nom",
+			"conten",
+			"info",
+			"bt_info_ref",
+			"info_ref",
+			"info_src",
+			"bt_info_src",
+			"get_columns_html",
+			"src_columns",
+			"fa ",
+			"(source)",
+			"delete_al",
+			"delete_projects",
+			"delete_project_API",
+			"private",
+			"delete_al",
 			"session",
 			"bt_delete_all",
 			"error_msg",
@@ -848,55 +940,7 @@
 			"is_done_step",
 			"has_mini",
 			"add_sele",
-			"write_columns_html",
-			"get_columns_html",
-			"get_runinfo",
-			"complete_training",
-			"valid_step",
-			"todo",
-			"modal_cgu",
-			"no_src_project",
-			"exist_file_ref",
-			"msg_danger",
-			"div_error",
-			"my_errors",
-			"bt_new_project",
-			"get_runinfo",
-			"bt_start",
-			"bt_new_project",
-			"h4",
-			"#reports",
-			"bt_infer_types",
-			"#res",
-			"#file",
-			"#file_",
-			"result",
-			"#resul",
-			"generate_sample",
-			"bt_generate_sample",
-			"generate_sample",
-			"file",
-			"<h3>",
-			"h2",
-			"h3",
-			"chk_cgu",
-			"bt_normalizer",
-			"call_api_sync",
-			"position",
-			"down",
-			"<?",
-			"auto",
-			"confidence_vcentered",
-			"-",
-			")",
-			"(",
-			"api/new",
-			"add_new_normalize_project_src",
-			"api/new",
-			"delete_line",
-			"uploa",
-			"bt_re_treatment",
-			"delete_line"
+			"write_columns_html"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -904,6 +948,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			":",
+			"}",
+			"{",
 			"error_msg_comment",
 			"<h3><i class=\"fa fa-cube\" aria-hidden=\"true\"></i> ",
 			"h3",
@@ -948,53 +995,170 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/user_dashboard_fr.php",
+					"file": "application/views/project_link_select_columns_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18465,
+						"buffer_size": 18834,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15938,
-								15938
+								5756,
+								5756
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1836.0,
+						"translation.y": 1566.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "application/controllers/Save_ajax.php",
+					"file": "assets/project_link_select_columns.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3645,
+						"buffer_size": 14823,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2158,
-								2158
+								5169,
+								5169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1711.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/project_link_select_columns_specifics.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								223,
+								223
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "assets/project_link_select_columns.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								960,
+								960
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 787.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "assets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11770,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4947,
+								4953
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4968.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/libraries/Private_functions.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3213,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2444,
+								2444
 							]
 						],
 						"settings":
@@ -1003,10 +1167,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 324.0,
+						"translation.y": 100.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "assets/functions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1785,
+								1791
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 507.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1088,8 +1281,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 412.0,
+	"side_bar_visible": false,
+	"side_bar_width": 344.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

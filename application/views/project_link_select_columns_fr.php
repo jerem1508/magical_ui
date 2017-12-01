@@ -29,69 +29,137 @@
 
 <div class="container-fluid background_1" id="work" style="padding-bottom: 20px;">
     <div class="row">
-        <div class="col-xs-3 titre" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
-            <h3>
+        <div class="col-md-5">
+            <h2 style="display: inline-block;">
+                <span id="project_name2"></span> : <i>Association des colonnes</i>
+            </h2>
+        </div>
+        <div class="col-md-4 text-right">
+            <ul class="nav nav-tabs navbar-right" style="margin-top: 5px;">
+                <li>
+                <button class="btn btn btn-success2" id="bt_add_bloc" style="margin-right: 10px" data-intro="Ajoutez une nouvelle association de colonnes ici">
+                    Ajouter une association&nbsp;
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                </li>
+                <li class="active"><a data-toggle="tab" href="#home">Informations</a></li>
+                <li><a data-toggle="tab" href="#menu1">Légende</a></li>
+            </ul>
+            <!--
+                <h2 style="display: inline-block;">
+                    <button class="btn btn btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
+                        Ajouter un association&nbsp;
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </h2>
+            -->
+        </div>
+        <div class="col-md-3 text-right">
+            <div style="padding-top: 20px;">
+                <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <h3 style="margin-top: 0;margin-bottom: 0;">
                 <i class="fa fa-table" aria-hidden="true"></i>
                 &nbsp;
                 Source
-                &nbsp;
-                <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_src"></i>
             </h3>
-            <div id="info_src">
-                <div>
-                    <span class="keys">Fichier : </span><span id="src_file_name" class="filename key_numbers"></span>                        
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-2 text-center">
+                    <i class="fa fa-info-circle info" aria-hidden="true"></i>
                 </div>
-                <div>
-                    <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
-                </div>
-                <div>
-                    <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
+                <div class="col-md-10">
+                    <div id="info_src">
+                        <div>
+                            <span class="keys"></span><span id="src_file_name" class="filename key_numbers"></span>
+                        </div>
+                        <div>
+                            <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
+                        </div>
+                        <div>
+                            <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="src_columns"></div>
         </div>
         <div class="col-xs-6">
-            <div class="row">
-                <div class="col-md-9">
-                    <h2 style="margin-top: 0;display: inline-block;">
-                        <span id="project_name2"></span> : <i>Association des colonnes</i>
-                    </h2>
-                    <button class="btn btn-xs btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
-                        Nouvelle association&nbsp;
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+
+
+            <div class="tab-content" style="background-color: #262626;color: #eee; padding: 10px;">
+                <div id="home" class="tab-pane fade in active">
+                    <strong>Pour associer des colonnes</strong>, vous devez ajouter une nouvelle association puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
+                    Répétez cette opération autant de fois que nécessaire.
                 </div>
-                <div class="col-md-3 text-right">
-                     <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
+                <div id="menu1" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #e6ccff">&nbsp;</span>&nbsp;Catégorie "<strong>personnes</strong>"
+                        </div>
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #ffcccc">&nbsp;</span>&nbsp;Catégorie "<strong>institutions</strong>"
+                        </div>
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #ffff80">&nbsp;</span>&nbsp;Catégorie "<strong>identifiants</strong>"
+                        </div>                        
+                    </div>
+                    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #ff80bf">&nbsp;</span>&nbsp;Catégorie "<strong>date</strong>"
+                        </div>  
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #66c2ff">&nbsp;</span>&nbsp;Catégorie "<strong>géographie</strong>"
+                        </div>  
+                        <div class="col-md-4">
+                            <span class="badge" style="background-color: #b3e6b3">&nbsp;</span>&nbsp;Catégorie "<strong>autres</strong>"
+                        </div>                        
+                    </div>
                 </div>
-            </div>
-           
-            <div class="row">
-                <div class="col-xs-12 text-center" id="blocs"></div>
             </div>
         </div>
-        <div class="col-xs-3 titre" data-intro="... puis les colonnes correspondantes du référentiel">
-            <h3>
+        <div class="col-xs-3">
+            <h3 style="margin-top: 0;margin-bottom: 0;">
                 <i class="fa fa-database" aria-hidden="true"></i>
                 &nbsp;
                 Référentiel
-                &nbsp;
-                <i class="fa fa-info-circle" aria-hidden="true" id="bt_info_ref"></i>
             </h3>
-            <div id="info_ref">
-                <div>
-                    <span class="keys">Fichier : </span><span id="ref_file_name" class="filename key_numbers"></span>                        
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-2 text-center">
+                    <i class="fa fa-info-circle info" aria-hidden="true"></i>
                 </div>
-                <div>
-                    <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
-                </div>
-                <div>
-                    <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
+                <div class="col-md-10">
+                    <div id="info_ref">
+                        <div>
+                            <span class="keys"></span><span id="ref_file_name" class="filename key_numbers"></span>
+                        </div>
+                        <div>
+                            <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
+                        </div>
+                        <div>
+                            <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <div class="row" id="body">
+        <div class="col-xs-3 titre left" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
+            <div id="src_columns"></div>
+        </div>
+        <div class="col-xs-6 center">
+            <div class="col-xs-12 text-center" id="blocs"></div>
+        </div>
+        <div class="col-xs-3 titre right" data-intro="... puis les colonnes correspondantes du référentiel">
             <div id="ref_columns"></div>
         </div>
     </div>
+
 </div>
 
 <div class="container-fluid" style="margin-top: 20px;min-height: 250px;">
@@ -269,17 +337,43 @@ function add_column_certain_matches_api() {
 
 function add_column_matches_api() {
     // Appel API de MAJ associations
+/*
+tparams:
+{
+  "column_matches": [
+    {
+      "source": [
+        "departement"
+      ],
+      "ref": [
+        "departement"
+      ]
+    },
+    {
+      "source": [
+        "lycees_sources"
+      ],
+      "ref": [
+        "denomination_principale_uai",
+        "patronyme_uai"
+      ]
+    }
+  ]
+}
+*/
 
     // Récupération des associations
     var tab_json = new Array();
+
     $(".blocs_analysis").each(function( index ) {
-      tab_json.push($(this).text());
+        tab_json.push($(this).text());
     });
 
     var chaine_json = tab_json.join(); // , par défaut
 
     var tparams = "{\"column_matches\": ["+chaine_json+"]}";
-
+    console.log('tparams_column_matches:');
+    console.log(tparams);
     $.ajax({
         type: 'post',
         dataType: "json",
@@ -288,7 +382,6 @@ function add_column_matches_api() {
         data: tparams,
         async: false,
         success: function (result) {
-
             if(result.error){
                 console.log("API error - add_column_matches");
                 console.log(result.error);
@@ -296,8 +389,6 @@ function add_column_matches_api() {
             else{
                 console.log("success - add_column_matches");
                 console.dir(result);
-
-                
             }
         },
         error: function (result, status, error){
@@ -312,7 +403,7 @@ function valid_step(link_project_id){
     console.log('valid_step');
 
     // Appel de l'étape suivante
-    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
+    //window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
 }// /valid_step()
 
 
@@ -336,7 +427,7 @@ function get_buttons_actions() {
 
         valid_step('<?php echo $_SESSION['link_project_id'];?>');
     });
-
+/*
     $("#bt_info_ref").click(function(){
         $("#info_ref").slideToggle();
     });
@@ -344,7 +435,7 @@ function get_buttons_actions() {
     $("#bt_info_src").click(function(){
         $("#info_src").slideToggle();
     });
-
+*/
     $("#bt_add_bloc").click(function(){
         // Incrementation du numéro de bloc
         cpt_bloc++;
@@ -378,9 +469,10 @@ $(function(){// ready
     get_buttons_actions();
 
     // Valeurs par défaut
+    /*
     $("#info_ref").toggle();
     $("#info_src").toggle();
-
+    */
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
@@ -436,6 +528,10 @@ $(function(){// ready
 
     cpt_bloc = 0; // Compteur de blocs
     id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
+
+
+//jQuery("#src_file_name").fitText(0.5);
+
 
 });//ready
 </script>

@@ -109,30 +109,45 @@ h2{
 	width: 28px;
 }
 
+.user_tag{
+  color: #000;
+  text-decoration: underline;
+}
+.user_tag:hover{
+  color: #E00612;
+}
+
+#user_filters{
+  font-style: italic;
+}
+
+#user_filters .bootstrap-tagsinput{
+  border:0;
+}
 
 /* btn YES */
 
 .btn-yes {
   color: #333;
-  background-color: #A0BC5B;
-  border-color: #A0BC5B;
+  background-color: #87E990;
+  border-color: #87E990;
 }
 .btn-yes:focus,
 .btn-yes.focus {
   color: #333;
-  background-color: #A0BC5B;
+  background-color: #87E990;
   border-color: #aaa;
 }
 .btn-yes:hover {
   color: #333;
-  background-color: #A0BC5B;
+  background-color: #87E990;
   border-color: #777;
 }
 .btn-yes:active,
 .btn-yes.active,
 .open > .dropdown-toggle.btn-yes {
   color: #333;
-  background-color: #A0BC5B;
+  background-color: #87E990;
   border-color: #777;
 }
 .btn-yes:active:hover,
@@ -145,7 +160,7 @@ h2{
 .btn-yes.active.focus,
 .open > .dropdown-toggle.btn-yes.focus {
   color: #333;
-  background-color: #A0BC5B;
+  background-color: #87E990;
   border-color: #777;
 }
 .btn-yes:active,
@@ -184,25 +199,25 @@ fieldset[disabled] .btn-yes.active {
 
 .btn-no {
   color: #333;
-  background-color: #DFAE1F;
-  border-color: #DFAE1F;
+  background-color: #FF7F00;
+  border-color: #FF7F00;
 }
 .btn-no:focus,
 .btn-no.focus {
   color: #333;
-  background-color: #DFAE1F;
+  background-color: #FF7F00;
   border-color: #aaa;
 }
 .btn-no:hover {
   color: #333;
-  background-color: #DFAE1F;
+  background-color: #FF7F00;
   border-color: #777;
 }
 .btn-no:active,
 .btn-no.active,
 .open > .dropdown-toggle.btn-no {
   color: #333;
-  background-color: #DFAE1F;
+  background-color: #FF7F00;
   border-color: #777;
 }
 .btn-no:active:hover,
@@ -215,7 +230,7 @@ fieldset[disabled] .btn-yes.active {
 .btn-no.active.focus,
 .open > .dropdown-toggle.btn-no.focus {
   color: #333;
-  background-color: #DFAE1F;
+  background-color: #FF7F00;
   border-color: #777;
 }
 .btn-no:active,
