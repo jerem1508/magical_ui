@@ -8,7 +8,7 @@
 			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.svg');?>" class="img-responsive">
 		</div>
 		<div class="col-xs-8 text-center logo_site">
-			<img src="<?php echo base_url('assets/img/The_magical_laundry.png');?>" 
+			<img src="<?php echo base_url('assets/img/logo_beta3.png');?>" 
 				 onclick="return_to_homepage();"
 				 style="cursor: pointer;">
 			<script type="text/javascript">
@@ -16,8 +16,7 @@
 					window.location.href = '<?php echo base_url("index.php/Home");?>';
 				}
 			</script>
-			<br>
-			<span>The csv merge machine V1.0</span>
+
 		</div>
 		<div class="col-xs-2 text-right logo_eig">
 			<img src="<?php echo base_url('assets/img/une-eig-300x133.png');?>" class="img-responsive">

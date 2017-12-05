@@ -780,7 +780,7 @@ function valid_step() {
     complete_training();
 
     // Passage à l'étape suivante
-    //window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
+    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
 }// / valid_step()
 
 

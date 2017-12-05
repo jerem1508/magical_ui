@@ -246,6 +246,12 @@ function get_data(from, size) {
 
 
 function show_data_html(data, start) {
+    console.log('show_data_html:data');
+    console.log('data:');
+    console.log(data);
+    console.log('start:');
+    console.log(start);
+
     var html = '<table class="table">';
 
     // Entete
@@ -275,7 +281,6 @@ function show_data_html(data, start) {
         var id_source = data[i].hits.hits[0]['_id'];
         var id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
 
-
         var no_line = start + i + 1;
         html += '<tr class="line ' + no_line + '">';
         html += '    <td rowspan="2" class="text-center no_line"><h4 class="value_vcentered ' + no_line + '">' + no_line + '</h4></td>';
@@ -283,7 +288,6 @@ function show_data_html(data, start) {
         // Récupération de l'indice de confiance
         var confidence = data[i].hits.hits[0]['_source']['__CONFIDENCE'];
         html += '    <td><i class="fa fa-table" aria-hidden="true"></i></td>';
-
 
         // Parcours des termes SOURCE ---------------------------------------------
         for (var j = 0; j < column_matches.length; j++) {
@@ -310,9 +314,6 @@ function show_data_html(data, start) {
         }
         // Affichage du bouton
         html += '<td rowspan="2" class="text-center padding_0"><h4 class="action_vcentered" style="display: inline;">';
-
-        // 1 ---- 
-
         html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
         if(confidence >= tresh){
             html += ' checked '
@@ -325,164 +326,124 @@ function show_data_html(data, start) {
         html += '</td>';
         html += '</tr>';
 
-        // / 1---
+        // Ligne REF
+        html += '<tr class="' + no_line + '">';
 
-        /*
-        // 2 ----
-        if(confidence >= tresh){
-            html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-            html += '   <img src="<?php echo base_url('assets/img/equal_70C041.png');?>" class="img_tab">';
-            html += '</button>';
+        // Parcours des termes du REF --------------------------------------------
+        html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
+        for (var j = 0; j < column_matches.length; j++) {
+            var ch = column_matches[j].ref.toString();
+            var tab_termes = ch.split(",");
             
-            html += '&nbsp;&nbsp;';
-            
-            html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-            html += '   <img src="<?php echo base_url('assets/img/unequal_333333.png');?>" class="img_tab">';
-            html += '</button>';
+            var tab_values = new Array();
+
+            for (var k = 0; k < tab_termes.length; k++) {
+                tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k] + '__REF']);
+            }
+
+            var values = tab_values.join(", ");
+            html += '    <td>' + values + '</td>';
+        }
+           
+        html += '</tr>';
+    }// /for - parcours data
+
+    html += '</table>';
+    //html += '</div>';
+
+    // Affichage des données
+    $("#result").html(html);
+
+    // MAJ des boutons on/off (boostrap-toggle)
+    for (var i = 0; i < data.length; i++) {
+        var no_line = start + i + 1;
+        //$('#chk_' + no_line).bootstrapToggle({
+        $('.chk').bootstrapToggle({
+          on: 'Vrai',
+          off: 'Faux',
+          onstyle: 'success3',
+          offstyle: 'danger',
+          size: 'small'
+        });
+    }// /for
+
+    // Séparation visuelle des lignes
+    $(".line").css("border-top","2px solid #ccc");
+
+    // TD plus petit
+    $("td").css("padding", "2px");
+    $(".padding_0").css("padding-top", "10px");
+
+    // Actions
+    $(".chk").change(function() {
+        // Récupération des ids
+        var _id = $(this);
+        var id = _id[0]["id"];
+        var id_source = $("#" + id).attr("id_source");
+        var id_ref = $("#" + id).attr("id_ref");
+
+        // Vérification de la présence de ses ids dans les exact_pairs
+        present_exact_pairs = keys_are_present(id_source, id_ref, learned_setting_json.exact_pairs);
+
+        // Vérification de la présence de ses ids dans les non_matching_pairs
+        present_non_matching_pairs = keys_are_present(id_source, id_ref, learned_setting_json.non_matching_pairs);
+
+        // Suivant le sens de la checkbox, on ajoute a non_matching_pairs ou a exact_pairs
+        if(_id[0]["checked"]){
+            if(!present_exact_pairs){
+                // Ajout
+                var exact_pairs = learned_setting_json.exact_pairs;
+                delete learned_setting_json.exact_pairs;
+                exact_pairs[exact_pairs.length] = new Array(id_source, id_ref);
+                learned_setting_json['exact_pairs'] = exact_pairs;
+            }
+            if(present_non_matching_pairs){
+                // Suppression
+                var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                var new_non_matching_pairs = new Array();
+                for (var i = 0; i < non_matching_pairs.length; i++) {
+                    if(non_matching_pairs[i][0] != id_source && non_matching_pairs[i][1] != id_ref){
+                        var item = new Array(non_matching_pairs[i][0], non_matching_pairs[i][1]);
+                        new_non_matching_pairs.push(item);
+                    }
+                }
+                delete learned_setting_json.non_matching_pairs;
+                learned_setting_json['non_matching_pairs'] = new_non_matching_pairs;
+            }
         }
         else{
-            html += '<button type="button" class="btn btn-circle" id="bt_y_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-            html += '   <img src="<?php echo base_url('assets/img/equal_333333.png');?>" class="img_tab">';
-            html += '</button>';
-
-            html += '&nbsp;&nbsp;';
-
-            html += '<button type="button" class="btn btn-circle" id="bt_n_' + no_line + '" id_source="' + id_source + '" id_ref="' + id_ref + '">';
-            html += '   <img src="<?php echo base_url('assets/img/unequal_70C041.png');?>" class="img_tab">';
-            html += '</button>';
+            if(present_exact_pairs){
+                // Suppression
+                var exact_pairs = learned_setting_json.exact_pairs;
+                var new_exact_pairs = new Array();
+                for (var i = 0; i < exact_pairs.length; i++) {
+                    if(exact_pairs[i][0] != id_source && exact_pairs[i][1] != id_ref){
+                        var item = new Array(exact_pairs[i][0], exact_pairs[i][1]);
+                        new_exact_pairs.push(item);
+                    }
+                }
+                delete learned_setting_json.exact_pairs;
+                learned_setting_json['exact_pairs'] = new_exact_pairs;
+            }
+            if(!present_non_matching_pairs){
+                // Ajout
+                var non_matching_pairs = learned_setting_json.non_matching_pairs;
+                delete learned_setting_json.non_matching_pairs;
+                non_matching_pairs[non_matching_pairs.length] = new Array(id_source, id_ref);
+                learned_setting_json['non_matching_pairs'] = non_matching_pairs;
+            }
         }
 
-        html += '&nbsp;&nbsp;';
+        // Affichage du logo utilisateur
+        var id_temp = parseInt(id_source) + 1;
+        $("#confidence_" + id_temp).html('<i class="fa fa-user-circle"></i>');
 
-        html += '   <button type="button" class="btn btn-circle" id="del_line_' + no_line + '" onclick="delete_line(\'' + no_line + '\');">';
-        html += '       <img src="<?php echo base_url('assets/img/cross_333333.png');?>" class="img_tab">';
-        html += '   </button>';
-        html += '</h4>';
-        html += '</td>';
-        html += '</tr>';
-        // / 2 ---
-        */
-
-
-
-                // Ligne REF
-                html += '<tr class="' + no_line + '">';
-
-                // Parcours des termes du REF --------------------------------------------
-                html += '    <td><i class="fa fa-database" aria-hidden="true"></i></td>';
-                for (var j = 0; j < column_matches.length; j++) {
-                    var ch = column_matches[j].ref.toString();
-                    var tab_termes = ch.split(",");
-                    
-                    var tab_values = new Array();
-
-                    for (var k = 0; k < tab_termes.length; k++) {
-                        tab_values.push(data[i].hits.hits[0]['_source'][tab_termes[k] + '__REF']);
-                    }
-
-                    var values = tab_values.join(", ");
-                    html += '    <td>' + values + '</td>';
-                }
-                   
-                html += '</tr>';
-            }// /for - parcours data
-
-            html += '</table>';
-            //html += '</div>';
-
-            // Affichage des données
-            $("#result").html(html);
-
-            // MAJ des boutons on/off (boostrap-toggle)
-            for (var i = 0; i < data.length; i++) {
-                var no_line = start + i + 1;
-                //$('#chk_' + no_line).bootstrapToggle({
-                $('.chk').bootstrapToggle({
-                  on: 'Vrai',
-                  off: 'Faux',
-                  onstyle: 'success3',
-                  offstyle: 'danger',
-                  size: 'small'
-                });
-            }// /for
-
-            // Séparation visuelle des lignes
-            $(".line").css("border-top","2px solid #ccc");
-
-            // TD plus petit
-            $("td").css("padding", "2px");
-            $(".padding_0").css("padding-top", "10px");
-
-            // Actions
-            $(".chk").change(function() {
-                // Récupération des ids
-                var _id = $(this);
-                var id = _id[0]["id"];
-                var id_source = $("#" + id).attr("id_source");
-                var id_ref = $("#" + id).attr("id_ref");
-
-                // Vérification de la présence de ses ids dans les exact_pairs
-                present_exact_pairs = keys_are_present(id_source, id_ref, learned_setting_json.exact_pairs);
-
-                // Vérification de la présence de ses ids dans les non_matching_pairs
-                present_non_matching_pairs = keys_are_present(id_source, id_ref, learned_setting_json.non_matching_pairs);
-
-                // Suivant le sens de la checkbox, on ajoute a non_matching_pairs ou a exact_pairs
-                if(_id[0]["checked"]){
-                    if(!present_exact_pairs){
-                        // Ajout
-                        var exact_pairs = learned_setting_json.exact_pairs;
-                        delete learned_setting_json.exact_pairs;
-                        exact_pairs[exact_pairs.length] = new Array(id_source, id_ref);
-                        learned_setting_json['exact_pairs'] = exact_pairs;
-                    }
-                    if(present_non_matching_pairs){
-                        // Suppression
-                        var non_matching_pairs = learned_setting_json.non_matching_pairs;
-                        var new_non_matching_pairs = new Array();
-                        for (var i = 0; i < non_matching_pairs.length; i++) {
-                            if(non_matching_pairs[i][0] != id_source && non_matching_pairs[i][1] != id_ref){
-                                var item = new Array(non_matching_pairs[i][0], non_matching_pairs[i][1]);
-                                new_non_matching_pairs.push(item);
-                            }
-                        }
-                        delete learned_setting_json.non_matching_pairs;
-                        learned_setting_json['non_matching_pairs'] = new_non_matching_pairs;
-                    }
-                }
-                else{
-                    if(present_exact_pairs){
-                        // Suppression
-                        var exact_pairs = learned_setting_json.exact_pairs;
-                        var new_exact_pairs = new Array();
-                        for (var i = 0; i < exact_pairs.length; i++) {
-                            if(exact_pairs[i][0] != id_source && exact_pairs[i][1] != id_ref){
-                                var item = new Array(exact_pairs[i][0], exact_pairs[i][1]);
-                                new_exact_pairs.push(item);
-                            }
-                        }
-                        delete learned_setting_json.exact_pairs;
-                        learned_setting_json['exact_pairs'] = new_exact_pairs;
-                    }
-                    if(!present_non_matching_pairs){
-                        // Ajout
-                        var non_matching_pairs = learned_setting_json.non_matching_pairs;
-                        delete learned_setting_json.non_matching_pairs;
-                        non_matching_pairs[non_matching_pairs.length] = new Array(id_source, id_ref);
-                        learned_setting_json['non_matching_pairs'] = non_matching_pairs;
-                    }
-                }
-
-                // Affichage du logo utilisateur
-                var id_temp = parseInt(id_source) + 1;
-                $("#confidence_" + id_temp).html('<i class="fa fa-user-circle"></i>');
-
-                // Upload du fichier modifié
-                // TODO
-                console.log(learned_setting_json);
-                // Affichage du bouton de nouveau traitement
-                $("#bt_re_treatment").css("visibility", "visible");
-            });
+        // Upload du fichier modifié
+        // TODO
+        console.log(learned_setting_json);
+        // Affichage du bouton de nouveau traitement
+        $("#bt_re_treatment").css("visibility", "visible");
+    });
 }// /show_data_html()
 
 
@@ -612,11 +573,11 @@ function treatment(project_id_link, learned_setting_json) {
 
             if(result.error){
                 console.log("API error - es_linker");
-                console.dir(result.error);
+                console.log(result.error);
             }
             else{
                 console.log("success - es_linker");
-                console.dir(result);
+                console.log(result);
 
                 // Appel 
                 var handle = setInterval(function(){
@@ -624,12 +585,16 @@ function treatment(project_id_link, learned_setting_json) {
                         type: 'get',
                         url: '<?php echo BASE_API_URL;?>' + result.job_result_api_url,
                         success: function (result) {
+                            console.log('result :');
+                            console.log(result);
+
                             if(result.completed){
                                 clearInterval(handle);
                                 console.log("success - job");
-                                console.dir(result);
+                                console.log(result);
 
                                 // Permettre le téléchargement du fichier
+                                // TODO
 
                                 // Récupération du seuil
                                 tresh = get_thresh(project_id_link);
@@ -637,11 +602,13 @@ function treatment(project_id_link, learned_setting_json) {
                                 // Création de l'index ElasticSearch + Affichage
                                 create_es_index_api();
 
+                                file_name = get_file_name(project_id_link);
+
                                 // Statistiques
                                 get_stats();
                             }
                             else{
-                                console.log("success - job en cours");
+                                console.log("es_linker - job en cours");
                             }
                         },
                         error: function (result, status, error){
@@ -840,6 +807,8 @@ function get_stats() {
             "file_name": file_name
         }
     }
+    console.log('tparams');
+    console.log(tparams);
 
     $.ajax({
         type: 'POST',
@@ -906,8 +875,6 @@ $(function(){// ready
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
-    // Récupération du nom de fichier à DL
-    file_name = get_file_name(project_id_link);
 
     // Récupération des metadata du projet de link en cours
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
@@ -918,10 +885,16 @@ $(function(){// ready
     // Récupération des matches
     column_matches = get_column_matches();
 
+    // Récupération du nom de fichier à DL
+    file_name = "";
+
     // Récupération du paramétrage
     learned_setting_json = get_learned_setting(project_id_link);
     if(learned_setting_json){
         treatment(project_id_link, learned_setting_json);
+    }
+    else{
+        console.log('pas de learned_setting_json');
     }
 
     // Actions des boutons
@@ -942,4 +915,5 @@ $(function(){// ready
     var pas = 20;
     set_pagination_html(src_nrows, pas, 1);
 });//ready
+
 </script>

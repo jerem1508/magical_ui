@@ -62,14 +62,14 @@ body{
   font-style: italic;
 }
 .entete .logo_mesri>img{
-  margin-top: 40px;
+  margin-top: 25px;
 }
 .entete .logo_site>img{
-  margin-top: 40px;
-  height: 58px;
+  margin-top: 25px;
+  width: 80%;
 }
 .entete .logo_eig>img{
-  margin-top: 20px;
+  margin-top: 5px;
 }
 .entete2{
   background-color: #262626; 
