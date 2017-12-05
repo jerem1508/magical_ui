@@ -719,8 +719,6 @@ function show_new_proposition(message) {
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
 
-    $('.user_tag').awesomeCursor('plus-circle');
-
     enabeled_buttons();
 }// / show_new_proposition()
 

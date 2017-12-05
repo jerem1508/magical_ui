@@ -403,7 +403,7 @@ function valid_step(link_project_id){
     console.log('valid_step');
 
     // Appel de l'étape suivante
-    //window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
+    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + link_project_id;
 }// /valid_step()
 
 

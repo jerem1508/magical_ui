@@ -5,7 +5,7 @@
 		[
 			[
 				"fun",
-				"function"
+				"fun\tFunction"
 			],
 			[
 				"padd",
@@ -523,16 +523,27 @@
 			"file": "application/views/project_link_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 18834,
+				"buffer_size": 19191,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/project_link_select_columns.js",
+			"contents": " <?php echo realpath('chemin.php'); ?>",
+			"file": "/var/www/html/projets/myckael/application/controllers/chemin.php",
+			"file_size": 38,
+			"file_write_time": 131568562884754308,
 			"settings":
 			{
-				"buffer_size": 14823,
+				"buffer_size": 38,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/var/www/html/projets/myckael/application/config/config.php",
+			"settings":
+			{
+				"buffer_size": 18539,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -542,15 +553,6 @@
 			"settings":
 			{
 				"buffer_size": 223,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_select_columns.css",
-			"settings":
-			{
-				"buffer_size": 2839,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -581,6 +583,33 @@
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "assets/project_link_select_columns.js",
+			"settings":
+			{
+				"buffer_size": 14408,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_es_train_fr.php",
+			"settings":
+			{
+				"buffer_size": 37780,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_select_columns.css",
+			"settings":
+			{
+				"buffer_size": 2857,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -590,7 +619,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 184.0,
+		"height": 304.0,
 		"last_filter": "SIBA",
 		"selected_items":
 		[
@@ -635,7 +664,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 479.0
+		"width": 587.0
 	},
 	"console":
 	{
@@ -666,10 +695,19 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/myckael/application/controllers/Home.php",
+		"/var/www/html/projets/myckael/application/controllers/Chemin.php",
+		"/var/www/html/projets/myckael/.htaccess",
+		"/var/www/html/projets/myckael/application/controllers/.htpasswd",
+		"/var/www/html/projets/myckael/application/controllers/.htaccess",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ac5c360ecfac8734a0f6a7bdd642c20d/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/194665d4a0014bcf8565b1bee1905510/es_linker/column_matches.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/194665d4a0014bcf8565b1bee1905510/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/metadata.json",
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/es_linker/column_matches.json",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/home/jerem/Aide/mysql",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
@@ -784,20 +822,11 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/2b0f1a02f60b6aaa0f9c9daed24d1e50/metadata.json",
 		"/var/www/html/projets/magical_ui/application/controllers/Admin.php",
-		"/var/www/html/projets/pong/game.keycode.js",
-		"/var/www/html/projets/pong/game.control.js",
-		"/var/www/html/projets/pong/game.display.js",
-		"/var/www/html/projets/pong/game.js",
-		"/var/www/html/projets/pong/game.html",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/es_linker/learned_settings.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/ae6dcda4f6d74a75df9a27c5a6411623/metadata.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/metadata.json",
-		"/var/www/html/projets/magical_ui/application/controllers/Comment_ajax.php",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_report_fr.php"
+		"/var/www/html/projets/pong/game.keycode.js"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -813,6 +842,20 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"session",
+			"show_new_proposition",
+			"complete_training",
+			"data",
+			"complete_training",
+			"load_labeller_api",
+			"sock",
+			"add_column_matches_api",
+			"analysis_bloc",
+			"add_column_matches_api",
+			"valid_step",
+			"create_es_labeller_api",
+			"create_es_index_api",
+			"analysis_bloc",
 			"remove_bloc",
 			"tags",
 			"get_obj_filters",
@@ -926,21 +969,7 @@
 			"progress",
 			"upload",
 			"get_step_normalization",
-			"die",
-			"setInterval",
-			"recode",
-			"load_step_normalization",
-			"generate_sample",
-			"chargement",
-			"treatment",
-			"chargement",
-			"all",
-			"generate_sample",
-			"sampl",
-			"is_done_step",
-			"has_mini",
-			"add_sele",
-			"write_columns_html"
+			"die"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -995,7 +1024,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1004,15 +1033,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18834,
+						"buffer_size": 19191,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5756,
-								5756
+								1151,
+								1151
 							]
 						],
 						"settings":
@@ -1022,43 +1051,70 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1566.0,
+						"translation.y": 247.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "assets/project_link_select_columns.js",
+					"file": "/var/www/html/projets/myckael/application/controllers/chemin.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14823,
+						"buffer_size": 38,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5169,
-								5169
+								38,
+								38
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1711.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/var/www/html/projets/myckael/application/config/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18539,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2058,
+								2058
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 805.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "application/views/project_link_select_columns_specifics.php",
 					"semi_transient": false,
 					"settings":
@@ -1082,36 +1138,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "assets/project_link_select_columns.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2839,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								960,
-								960
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 787.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1141,7 +1168,7 @@
 						"translation.y": 4968.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -1170,7 +1197,7 @@
 						"translation.y": 100.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1199,7 +1226,101 @@
 						"translation.y": 507.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "assets/project_link_select_columns.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6930,
+								6932
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3279.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "application/views/project_link_es_train_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 37780,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36391,
+								36398
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 730.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "assets/project_link_select_columns.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2857,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								637,
+								637
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 409.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1222,11 +1343,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.489832024349,
 			1.0
 		],
 		"rows":
@@ -1281,7 +1409,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 344.0,
 	"status_bar_visible": true,
 	"template_settings":
