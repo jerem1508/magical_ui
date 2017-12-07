@@ -62,6 +62,7 @@
 	margin-right: 3px;
 }
 
+
 .box .pastille{
 	color:#000; 
 	display: inline-block;
@@ -73,6 +74,17 @@
 
 .right2{
 	margin-top: 3px;
+}
+
+.box .add{
+	color: #fff;
+}
+.box:hover .add{
+	/*color: #25358C;*/
+/*radial-gradient(circle at bottom left, #532899, #25358C)*/
+}
+.box:hover{
+	background: radial-gradient(circle at bottom left, #efefef, #ddd);
 }
 
 /*

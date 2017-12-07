@@ -22,81 +22,6 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			column_type = infer_columns[tab_columns[i]];
 		}
 
-		// html += '<div class="box">';
-		// html += '	<div class="left">';
-		// html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
-		// if(column_type == 'Inconnu'){
-		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
-		// }
-		// else {
-		// 	var tab = scale_reverse[column_type];
-		// 	tab += "['" + column_type + "']";
-		// 	var couleur = eval(tab);
-		// 	console.log(couleur);
-		// 	html += '		<div class="type">Type détecté : <span class="badge" style="color:#000; background-color:' + couleur + ';">' + column_type + '</span></div>';
-
-		// }
-		// html += '	</div>';
-		// html += '	<div class="right">';
-		// html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
-		// html += '	</div>';
-		// html += '</div>';
-
-
-		// if(column_type == 'Inconnu'){
-		// 	html += '<div class="box">';
-		// 	html += '	<div class="left">';
-		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
-		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
-		// 	html += '	</div>';
-		// 	html += '	<div class="right">';
-		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
-		// 	html += '	</div>';
-		// 	html += '</div>';
-		// }
-		// else {
-		// 	var tab = scale_reverse[column_type];
-		// 	tab += "['" + column_type + "']";
-		// 	var couleur = eval(tab);
-		// 	console.log(couleur);
-		// 	html += '<div class="box" style="color:#000; background-color:' + couleur + ';">';
-		// 	html += '	<div class="left">';
-		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
-		// 	html += '		<div class="type">Type : <span class="">' + column_type + '</span></div>';
-		// 	html += '	</div>';
-		// 	html += '	<div class="right">';
-		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
-		// 	html += '	</div>';
-		// 	html += '</div>';
-		// }
-
-		// if(column_type == 'Inconnu'){
-		// 	html += '<div class="box">';
-		// 	html += '	<div class="left">';
-		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
-		// 	html += '		<div class="type" style="visibility:hidden;">Type : <span class="badge">' + column_type + '</span></div>';
-		// 	html += '	</div>';
-		// 	html += '	<div class="right">';
-		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
-		// 	html += '	</div>';
-		// 	html += '</div>';
-		// }
-		// else {
-		// 	var tab = scale_reverse[column_type];
-		// 	tab += "['" + column_type + "']";
-		// 	var couleur = eval(tab);
-		// 	console.log(couleur);
-		// 	html += '<div class="box">';
-		// 	html += '	<div class="left">';
-		// 	html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
-		// 	html += '		<div class="type"><span class="pastille" style="background-color:' + couleur + ';"></span>&nbsp;Type : ' + column_type + '</div>';
-		// 	html += '	</div>';
-		// 	html += '	<div class="right">';
-		// 	html += '		<button class="btn btn-xl"><i class="fa fa-plus-circle"></i></button>';
-		// 	html += '	</div>';
-		// 	html += '</div>';
-		// }
-
 		if(column_type == 'Inconnu'){
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
@@ -104,11 +29,11 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '		<div style="width: 15px;margin:0;padding:0;height:40px;background-color:#ddd;"></div>'
 			html += '	</div>';
 			html += '	<div class="col-md-9">';
-			html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '</div>';
 			//html += '		<div class="type">Type : ' + column_type + '</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-2">';
-			html += '		<i class="fa fa-plus-circle" style="font-size: 40px; color: #fff;"></i>';
+			html += '		<i class="fa fa-plus-circle add" style="font-size: 40px;"></i>';
 			html += '	</div>';
 			html += '</div>';
 			html += '</div>';
@@ -123,11 +48,11 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '		<div style="width: 15px;margin:0;padding:0;height:40px;background-color:' + couleur + ';"></div>'
 			html += '	</div>';
 			html += '	<div class="col-md-9">';
-			html += '		<div class="tag ' + target + '_column"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i>&nbsp;' + tab_columns[i] + '</div>';
+			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '</div>';
 			html += '		<div class="type">Type : ' + column_type + '</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-2">';
-			html += '		<i class="fa fa-plus-circle" style="font-size: 40px; color: #fff;"></i>';
+			html += '		<i class="fa fa-plus-circle add" style="font-size: 40px;""></i>';
 			html += '	</div>';
 			html += '</div>';
 			html += '</div>';
@@ -266,24 +191,6 @@ function new_bloc(id_bloc) {
 	html += '</div>';
 	html += '</div>';
 
-	// html += '<div class="row">';
-	// html += '<div class="col-xs-6 text-right">';
-	// html += '<div id="bloc_src_' + id_bloc + '" class="bloc text-left"><span class="txt_src" id="txt_src_' + id_bloc + '">Veuillez glisser au moins une colonne de votre fichier source</span></div>';
-	// html += '</div>';
-	// html += '<div class="col-xs-6 text-left">';
-	// html += '<div id="bloc_ref_' + id_bloc + '" class="bloc text-left"><span class="txt_ref" id="txt_ref_' + id_bloc + '">Veuillez glisser au moins une colonne du référentiel</span></div>';
-	// html += '</div>';
-	// html += '</div>';
-
-	// html += '<div class="row" style="padding-bottom:5px;">';
-	// html += '	<div class="col-xs-2 text-left"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Source :</div>';
-	// html += '	<div class="col-xs-10 text-left"><input type="text" class="form-control" id="input_src_' + id_bloc + '" data-role="tagsinput"></div>';
-	// html += '</div>';
-	// html += '<div class="row" style="padding-top:5px;">';
-	// html += '	<div class="col-xs-2 text-left"><i class="fa fa-database" aria-hidden="true"></i>&nbsp;Référentiel :</div>';
-	// html += '	<div class="col-xs-10 text-left"><input type="text" class="form-control" id="input_ref_' + id_bloc + '" data-role="tagsinput"></div>';
-	// html += '</div>';
-
 	html += '<div class="row" style="padding-bottom:5px;">';
 	html += '	<div class="col-xs-2 text-left"><i class="fa fa-table" aria-hidden="true"></i>&nbsp;Source :</div>';
 	html += '	<div class="col-xs-9 text-left">';
@@ -368,7 +275,7 @@ function add_column(sub_target, column_name) {
 		$("#input_" + sub_target + "_" + id_bloc_to_change).val($("#input_" + sub_target + "_" + id_bloc_to_change).val() + "," + column_name);
 	}
 	
-	var html_tag = '<span class="badge my_badge">' + column_name + '<a class="cross" onclick="del_tag(\'\');">x</a></span>';
+	var html_tag = '<span class="badge my_badge">' + column_name + '<a class="cross" onclick="delete_tag(this,\''+sub_target+'\', \''+id_bloc_to_change+'\');">x</a></span>';
 	$("#tags_" + sub_target + "_" + id_bloc_to_change).html($("#tags_" + sub_target + "_" + id_bloc_to_change).html() + html_tag);
 
 	// Gère le json qui sera envoyé
@@ -378,6 +285,34 @@ function add_column(sub_target, column_name) {
 
 
 function reset_line(sub_target, id_bloc) {
-	$("#tags_"+ sub_target +"_" + id_bloc).val("");
+	$("#tags_"+ sub_target +"_" + id_bloc).html("");
 	$("#input_"+ sub_target +"_" + id_bloc).val("");
+
+	analysis_bloc(id_bloc);
 }// /reset_line()
+
+
+function delete_tag(tag, sub_target, id_bloc) {
+	// Suppression du tag
+	var column_to_delete = tag.parentNode.innerHTML.substring(0, tag.parentNode.innerHTML.indexOf("<a"));
+
+	tag.parentNode.remove()
+
+	// Récupération de toutes les colonnes déjà ajoutées
+	var added_columns = $("#input_" + sub_target + "_" + id_bloc).val();
+	var tab_columns = added_columns.split(',');
+	var tab_temp = new Array();
+
+	// parcours de toutes les colonnes pour les réajouter en excluant celle à supprimer
+	for (var i = 0; i < tab_columns.length; i++) {
+		if(tab_columns[i] != column_to_delete){
+			tab_temp.push(tab_columns[i]);
+		}
+	}
+
+	// MAJ du champ caché
+	$("#input_" + sub_target + "_" + id_bloc).val(tab_temp.join(','));
+	
+	// Actualisation du json
+	analysis_bloc(id_bloc);
+}// /delete_tag()

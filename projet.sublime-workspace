@@ -523,72 +523,19 @@
 			"file": "application/views/project_link_select_columns_fr.php",
 			"settings":
 			{
-				"buffer_size": 19191,
+				"buffer_size": 19623,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": " <?php echo realpath('chemin.php'); ?>",
-			"file": "/var/www/html/projets/myckael/application/controllers/chemin.php",
-			"file_size": 38,
-			"file_write_time": 131568562884754308,
-			"settings":
-			{
-				"buffer_size": 38,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/html/projets/myckael/application/config/config.php",
-			"settings":
-			{
-				"buffer_size": 18539,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/views/project_link_select_columns_specifics.php",
-			"settings":
-			{
-				"buffer_size": 223,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/style.css",
-			"settings":
-			{
-				"buffer_size": 11770,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "application/libraries/Private_functions.php",
-			"settings":
-			{
-				"buffer_size": 3213,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/functions.js",
-			"settings":
-			{
-				"buffer_size": 4949,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
+			"contents": "function get_columns_html(tab_columns, infer_columns, target) {\n\t// Retourne au format HTML l'ensemble des colonnes passées en paramètre\n\n\tvar html = \"\";\n\tvar li = \"\";\n\n\tvar tab_types = [];\n\ttab_types['undefined'] = new Array();\n\n\tfor (var i = 0; i < tab_columns.length; i++) {\n\t\tvar column_type = '';\n\t\tif(typeof infer_columns[tab_columns[i]] === 'undefined'){\n\t\t\ttab_types['undefined'].push(tab_columns[i]);\n\t\t\tcolumn_type = 'Inconnu';\n\t\t}\n\t\telse{\n\t\t\tif(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){\n\t\t\t\ttab_types[infer_columns[tab_columns[i]]] = new Array();\n\t\t\t}\n\n\t\t\ttab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);\n\t\t\tcolumn_type = infer_columns[tab_columns[i]];\n\t\t}\n\n\t\tif(column_type == 'Inconnu'){\n\t\t\thtml += '<div class=\"box\" onclick=\"add_column(\\'' + target + '\\',\\'' + tab_columns[i] + '\\');\">';\n\t\t\thtml += '<div class=\"row\">';\n\t\t\thtml += '\t<div class=\"col-md-1\">';\n\t\t\thtml += '\t\t<div style=\"width: 15px;margin:0;padding:0;height:40px;background-color:#ddd;\"></div>'\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-9\">';\n\t\t\thtml += '\t\t<div class=\"tag ' + target + '_column\"><span class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\"></span>&nbsp;' + tab_columns[i] + '</div>';\n\t\t\t//html += '\t\t<div class=\"type\">Type : ' + column_type + '</div>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-2\">';\n\t\t\thtml += '\t\t<i class=\"fa fa-plus-circle add\" style=\"font-size: 40px;\"></i>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '</div>';\n\t\t\thtml += '</div>';\n\t\t}\n\t\telse {\n\t\t\tvar tab = scale_reverse[column_type];\n\t\t\ttab += \"['\" + column_type + \"']\";\n\t\t\tvar couleur = eval(tab);\n\t\t\thtml += '<div class=\"box\" onclick=\"add_column(\\'' + target + '\\',\\'' + tab_columns[i] + '\\');\">';\n\t\t\thtml += '<div class=\"row\">';\n\t\t\thtml += '\t<div class=\"col-md-1\">';\n\t\t\thtml += '\t\t<div style=\"width: 15px;margin:0;padding:0;height:40px;background-color:' + couleur + ';\"></div>'\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-9\">';\n\t\t\thtml += '\t\t<div class=\"tag ' + target + '_column\"><span class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\"></span>&nbsp;' + tab_columns[i] + '</div>';\n\t\t\thtml += '\t\t<div class=\"type\">Type : ' + column_type + '</div>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-2\">';\n\t\t\thtml += '\t\t<i class=\"fa fa-plus-circle add\" style=\"font-size: 40px;\"\"></i>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '</div>';\n\t\t\thtml += '</div>';\n\t\t}\n\t}\n\treturn html;\n}// /get_columns_html()\n\n\nfunction change_target(id_bloc, target) {\n\t// Change l'apparence de la cible au moment du DRAG\n\n\t$(id_bloc).addClass(\"target_\" + target);\n}// /change_target()\n\n\nfunction unchange_target(id_bloc, target) {\n\t// Change l'apparence de la cible à la fin du DRAG\n\n\t$(id_bloc).removeClass(\"target_\" + target);\n}// /unchange_target()\n\n\nfunction analysis_bloc(id_bloc) {\n\t// Analyse le contenu d'un bloc et écrit le résultat sous le bloc\n\n\tvar source = $(\"#input_src_\" + id_bloc).val();\n\tvar tab_source = source.split(',');\n\tsource = JSON.stringify(tab_source);\n\t\n\tvar referentiel = $(\"#input_ref_\" + id_bloc).val();\n\tvar tab_referentiel = referentiel.split(',');\n\treferentiel = JSON.stringify(tab_referentiel);\n\n\t//var ch = '{\"source\": [' + tab_src + '],\"ref\": [' + tab_ref + ']}';\n\tvar ch = '{\"source\":' + source + ',\"ref\":' + referentiel + '}';\n\n\t$(\"#bloc_analysis_\" + id_bloc).html(ch);\n\n}// /analysis_bloc()\n\n\nfunction add_js_bloc(id_bloc) {\n\t// Ajout du code JS de DRAG&DROp du nouveau bloc\n\n\t// SOURCE -------------------------\n\t$(\".src_column\").draggable({\n\t\tappendTo: '#bloc_src_' + id_bloc,\n\t    containment: \"window\",\n\t\tcursor: 'move',\n\t\thelper: 'clone',\n\t    start: function(){\n\t    \t// Changement apparence cible\n\t    \tchange_target('#bloc_src_' + id_bloc, \"src\");\n\t    },\n\t    stop: function(){\n\t    \t// Changement apparence cible\n\t    \tunchange_target('#bloc_src_' + id_bloc, \"src\");\n\n\t    \t// Analyse contenu\n\t    \tanalysis_bloc(id_bloc);\n\t    }\n\t});\n\n\t$(\"#bloc_src_\" + id_bloc).droppable({\n\t    accept: \".src_column\",\n\t\tdrop: function (event, ui) {\n\t\t\tui.helper.clone().appendTo('#bloc_src_' + id_bloc);\n\t    }\n\t});\n\n\t// REFERENTIEL -------------------------\n\t$(\".ref_column\").draggable({\n\t\t//grid: [ 20, 20 ],\n\t\tappendTo: '#bloc_ref_' + id_bloc,\n\t    containment: \"window\",\n\t\tcursor: 'move',\n\t\t//revertDuration: 100,\n\t\t//revert: 'invalid',\n\t\thelper: 'clone',\n\t    start: function(){\n\t    \t// Changement apparence cible\n\t    \tchange_target('#bloc_ref_' + id_bloc, \"ref\");\n\t    },\n\t    stop: function(){\n\t    \t// Changement apparence cible\n\t    \tunchange_target('#bloc_ref_' + id_bloc, \"ref\");\n\n\t    \t// Analyse contenu\n\t    \tanalysis_bloc(id_bloc);\n\t    }\n\t});\n\n\t$(\"#bloc_ref_\" + id_bloc).droppable({\n\t    accept: \".ref_column\",\n\t\tdrop: function (event, ui) {\n\t\t\tui.helper.clone().appendTo('#bloc_ref_' + id_bloc);\n\t    }\n\t});\n}// /add_js_bloc()\n\n\nfunction remove_bloc(id_bloc) {\n\t// Suppression d'un bloc\n\t$(\"#bloc_\" + id_bloc).remove();\n}// /remove_bloc()\n\n\nfunction change_lib_bloc(id_bloc) {\n\t// Modification du libellé d'un bloc via Modale\n\n\t// Sauvegarde en global de l'identifiant du bloc\n\tid_bloc_to_change = id_bloc;\n\n\t// Affichage de la modale\n\t$('#modal_bloc').modal('show');\n}// /change_lib_bloc()\n\n\nfunction new_bloc(id_bloc) {\n\t// Ajout d'un nouveau bloc au format HTML\n\n\tvar html = \"\";\n\n\thtml += '<div id=\"bloc_' + id_bloc + '\" class=\"association association-select\" onclick=\"set_current_association(' + id_bloc + ');\">';\n\n\thtml += '<div class=\"row\">';\n\thtml += '<div class=\"col-xs-11 text-left\">';\n\thtml += '<h4>';\n\thtml += '<span id=\"lib_bloc_' + id_bloc + '\" class=\"badge\">Association ' + id_bloc + '</span> ';\n\thtml += '<a onclick=\"change_lib_bloc(' + id_bloc + ');\"><span class=\"glyphicon glyphicon-pencil\"></span></a>';\n\thtml += '</h4>';\n\thtml += '</div>';\n\thtml += '<div class=\"col-xs-1 text-right\">';\n\thtml += '<a onclick=\"remove_bloc(' + id_bloc + ');\" class=\"text-danger\"><span class=\"glyphicon glyphicon-remove\"></span></a>';\n\thtml += '</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '\t<div class=\"col-xs-2 text-left\"><i class=\"fa fa-table\" aria-hidden=\"true\"></i>&nbsp;Source :</div>';\n\thtml += '\t<div class=\"col-xs-9 text-left\">';\n\thtml += '\t\t<div id=\"tags_src_' + id_bloc + '\" class=\"tags\"></div>';\n\thtml += '\t\t<input type=\"hidden\" class=\"input_src\" id=\"input_src_' + id_bloc + '\">';\n\thtml += '\t</div>';\n\thtml += '\t<div class=\"col-xs-1 text-left\" style=\"padding-left: 0px;\"\">';\n\thtml += '\t\t<button class=\"btn btn-default\" onclick=\"reset_line(\\'src\\',' + id_bloc + ');\"><i class=\"fa fa-trash\"></i></button>'\n\thtml += '\t</div>';\n\thtml += '</div>';\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '\t<div class=\"col-xs-2 text-left\"><i class=\"fa fa-database\" aria-hidden=\"true\"></i>&nbsp;Référentiel :</div>';\n\thtml += '\t<div class=\"col-xs-9 text-left\">';\n\thtml += '\t\t<div id=\"tags_ref_' + id_bloc + '\" class=\"tags\"></div>';\n\thtml += '\t\t<input type=\"hidden\" class=\"input_ref\" id=\"input_ref_' + id_bloc + '\">';\n\thtml += '\t</div>';\n\thtml += '\t<div class=\"col-xs-1 text-left\" style=\"padding-left: 0px;\"\">';\n\thtml += '\t\t<button class=\"btn btn-default\" onclick=\"reset_line(\\'ref\\',' + id_bloc + ');\"><i class=\"fa fa-trash\"></i></button>'\n\thtml += '\t</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '<div class=\"col-xs-12 text-left\">';\n\thtml += '<div class=\"checkbox\">';\n\thtml += '\t<label>';\n\thtml += '\t\t<input type=\"checkbox\"> Association parfaite';\n\thtml += '\t</label>';\n\thtml += '</div>';\n\thtml += '</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row text-left\">';\n\thtml += '\t<div class=\"col-xs-12 text-left blocs_analysis\" id=\"bloc_analysis_' + id_bloc + '\"></div>';\n\thtml += '</div>';\n\n\thtml += '</div>';\n\n\t// Ajout du nouveau bloc\n\t$(\"#blocs\").html($(\"#blocs\").html() + html);\n\t//$(\"#input_src_\" + id_bloc).tagsInput();\n\n\t// Ajout du javascript\n\t//add_js_bloc(id_bloc);\n\n\t// Définit le bloc association en cours\n\tset_current_association(id_bloc);\n}// /new_bloc()\n\n\nfunction set_current_association(id_bloc) {\n\t// Id de l'association sélectionnée\n\tconsole.log('select id : ' + id_bloc);\n\tid_bloc_to_change = id_bloc;\n\n\t// Reset de la class css pour toutes les associations\n\treset_css_association();\n\n\t// Ajout de la class css de selection sur l'association en cours\n\t$(\"#bloc_\" + id_bloc).addClass(\"association-select\");\n\t$(\"#lib_bloc_\" + id_bloc).css(\"background-color\", \"#25358C\");\n}// /set_current_association()\n\n\nfunction reset_css_association() {\n\tfor (var i = 0; i < cpt_bloc+1; i++) {\n\t\t$(\"#bloc_\" + i).removeClass(\"association-select\");\n\t\t$(\"#lib_bloc_\" + i).css(\"background-color\", \"#777\");\n\t}\n}// /reset_css_association()\n\n\nfunction add_column(sub_target, column_name) {\n\t// EX sub_target : src/ref\n\t// Id de l'association sélectionnée\n\t// id_bloc_to_change\n\n\t// Ajout du tagsInput\n\tif($(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val() == ''){\n\t\t$(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val(column_name);\n\t}\n\telse{\n\t\t$(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val($(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val() + \",\" + column_name);\n\t}\n\t\n\tvar html_tag = '<span class=\"badge my_badge\" id=\"\">' + column_name + '<a class=\"cross\" onclick=\"delete_tag(\\'\\');\">x</a></span>';\n\t$(\"#tags_\" + sub_target + \"_\" + id_bloc_to_change).html($(\"#tags_\" + sub_target + \"_\" + id_bloc_to_change).html() + html_tag);\n\n\t// Gère le json qui sera envoyé\n\tanalysis_bloc(id_bloc_to_change);\n\n}// /add_column()\n\n\nfunction reset_line(sub_target, id_bloc) {\n\t$(\"#tags_\"+ sub_target +\"_\" + id_bloc).html(\"\");\n\t$(\"#input_\"+ sub_target +\"_\" + id_bloc).val(\"\");\n\n\tanalysis_bloc(id_bloc);\n}// /reset_line()\n\n\nfunction delete_tag(tag, id_bloc, sub_target) {\n\t// body...\n}",
 			"file": "assets/project_link_select_columns.js",
+			"file_size": 9649,
+			"file_write_time": 131569627584526636,
 			"settings":
 			{
-				"buffer_size": 14408,
+				"buffer_size": 9658,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -597,7 +544,16 @@
 			"file": "application/views/project_link_es_train_fr.php",
 			"settings":
 			{
-				"buffer_size": 37780,
+				"buffer_size": 37728,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_es_linker_fr.php",
+			"settings":
+			{
+				"buffer_size": 30673,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -606,7 +562,16 @@
 			"file": "assets/project_link_select_columns.css",
 			"settings":
 			{
-				"buffer_size": 2857,
+				"buffer_size": 3069,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/style.css",
+			"settings":
+			{
+				"buffer_size": 11767,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -619,25 +584,25 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 304.0,
-		"last_filter": "SIBA",
+		"height": 124.0,
+		"last_filter": "siba",
 		"selected_items":
 		[
-			[
-				"SIBA",
-				"View: Toggle Side Bar"
-			],
 			[
 				"siba",
 				"View: Toggle Side Bar"
 			],
 			[
-				"user",
-				"Preferences: Pretty JSON Settings - User"
-			],
-			[
 				"",
 				"About"
+			],
+			[
+				"SIBA",
+				"View: Toggle Side Bar"
+			],
+			[
+				"user",
+				"Preferences: Pretty JSON Settings - User"
 			],
 			[
 				"json",
@@ -664,7 +629,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 587.0
+		"width": 461.0
 	},
 	"console":
 	{
@@ -695,6 +660,13 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
+		"/var/www/html/projets/magical_ui/assets/functions.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
+		"/var/www/html/projets/myckael/application/config/config.php",
+		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/myckael/application/controllers/chemin.php",
 		"/var/www/html/projets/myckael/application/controllers/Home.php",
 		"/var/www/html/projets/myckael/application/controllers/Chemin.php",
 		"/var/www/html/projets/myckael/.htaccess",
@@ -715,13 +687,11 @@
 		"/var/www/html/projets/magical_ui/application/controllers/Project.php",
 		"/var/www/html/projets/magical_ui/application/config/config.php",
 		"/var/www/html/projets/magical_ui/application/config/constants.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/a4e5cdb106d61ebf301ef24150b1ff0b/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c190498c83f865b62fa6ff8cb77d5455/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/f27858f8706d94e2ab566c280fe21161/metadata.json",
 		"/var/www/html/projets/magical_ui/application/config/database.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr_old.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.js",
@@ -732,7 +702,6 @@
 		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
 		"/var/www/html/projets/magical_ui/assets/jquery.awesome-cursor.min.js",
-		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/application/models/Projects_model.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Save_ajax.php",
 		"/var/www/html/projets/magical_ui/application/models/User_model.php",
@@ -743,9 +712,7 @@
 		"/var/www/html/projets/magical_ui/application/views/user_login_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/footer_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_infer_types_fr.php",
-		"/var/www/html/projets/magical_ui/assets/functions.js",
 		"/var/www/html/projets/magical_ui/application/views/user_signin_signup_specifics.php",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/33101abf0c4f1231695ef469406daaaf/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6aa3d7548b69c374d4b1b673e6a2f712/metadata.json",
@@ -820,13 +787,11 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/11bf7c4cc0c500233d3e0cff48dab439/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/learned_settings.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/2b0f1a02f60b6aaa0f9c9daed24d1e50/metadata.json",
-		"/var/www/html/projets/magical_ui/application/controllers/Admin.php",
-		"/var/www/html/projets/pong/game.keycode.js"
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/2b0f1a02f60b6aaa0f9c9daed24d1e50/metadata.json"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -842,6 +807,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"del_tag",
+			"tags_src_",
+			"reset_line",
+			"Ajouter",
+			"show_data_html",
+			"get_data",
+			"create_es_index_api",
+			"create_es_index",
+			"create_es_index_api",
+			"file_name",
+			"es_lin",
+			"get_stats",
+			"create_es_index_api",
+			"treatment",
+			"get_learned_setting",
+			"treatment",
+			"create_es_index_api",
+			"get_stats",
+			"get_file_name",
+			"last",
+			"awso",
+			"valid",
 			"session",
 			"show_new_proposition",
 			"complete_training",
@@ -947,29 +934,7 @@
 			"Projects_model",
 			"server_error",
 			"uniqid",
-			"send_comment_ajax",
-			"pwd",
-			"email",
-			"fa-user-circle",
-			"load_step",
-			"load_step_normalization/recode_types",
-			"aja",
-			"get_stats",
-			"create_es_index_api",
-			"dotted",
-			"hr",
-			"hr ",
-			"bt_start",
-			"die",
-			"prin",
-			"echo",
-			"result",
-			"bt_next",
-			"#progress",
-			"progress",
-			"upload",
-			"get_step_normalization",
-			"die"
+			"send_comment_ajax"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1024,7 +989,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1033,15 +998,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19191,
+						"buffer_size": 19623,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1151,
-								1151
+								14275,
+								14275
 							]
 						],
 						"settings":
@@ -1051,111 +1016,151 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 247.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/var/www/html/projets/myckael/application/controllers/chemin.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 38,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								38,
-								38
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 6588.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/var/www/html/projets/myckael/application/config/config.php",
+					"buffer": 1,
+					"file": "assets/project_link_select_columns.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18539,
+						"buffer_size": 9658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2058,
-								2058
+								9658,
+								9658
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 805.0,
+						"translation.y": 2883.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "application/views/project_link_es_train_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 37728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30656,
+								30656
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 17059.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "application/views/project_link_select_columns_specifics.php",
+					"file": "application/views/project_link_es_linker_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 223,
+						"buffer_size": 30673,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								223,
-								223
+								20679,
+								20605
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 9571.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "assets/style.css",
+					"file": "assets/project_link_select_columns.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11770,
+						"buffer_size": 3069,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4947,
-								4953
+								1249,
+								1249
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 864.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "assets/style.css",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 11767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4952,
+								4877
 							]
 						],
 						"settings":
@@ -1165,162 +1170,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4968.0,
+						"translation.y": 4915.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "application/libraries/Private_functions.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3213,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2444,
-								2444
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 100.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "assets/functions.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4949,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1785,
-								1791
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 507.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 7,
-					"file": "assets/project_link_select_columns.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14408,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6930,
-								6932
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3279.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "application/views/project_link_es_train_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 37780,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								36391,
-								36398
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 730.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "assets/project_link_select_columns.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2857,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								637,
-								637
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 409.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1354,7 +1207,7 @@
 		"cols":
 		[
 			0.0,
-			0.489832024349,
+			0.754930903368,
 			1.0
 		],
 		"rows":
@@ -1409,7 +1262,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 344.0,
 	"status_bar_visible": true,
 	"template_settings":

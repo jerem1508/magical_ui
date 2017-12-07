@@ -8,7 +8,7 @@
 			<img src="<?php echo base_url('assets/img/logo-RF-3@2x.svg');?>" class="img-responsive">
 		</div>
 		<div class="col-xs-8 text-center logo_site">
-			<img src="<?php echo base_url('assets/img/logo_beta3.png');?>" 
+			<img src="<?php echo base_url('assets/img/logo_beta4.png');?>" 
 				 onclick="return_to_homepage();"
 				 style="cursor: pointer;">
 			<script type="text/javascript">

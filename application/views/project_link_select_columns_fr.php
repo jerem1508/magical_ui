@@ -35,13 +35,15 @@
             </h2>
         </div>
         <div class="col-md-4 text-right">
-            <ul class="nav nav-tabs navbar-right" style="margin-top: 5px;">
+            <ul class="nav nav-tabs navbar-right" style="margin-top: 5px;margin-right: 5px;">
+            <!--
                 <li>
                 <button class="btn btn btn-success2" id="bt_add_bloc" style="margin-right: 10px" data-intro="Ajoutez une nouvelle association de colonnes ici">
                     Ajouter une association&nbsp;
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 </li>
+            -->
                 <li class="active"><a data-toggle="tab" href="#home">Informations</a></li>
                 <li><a data-toggle="tab" href="#menu1">Légende</a></li>
             </ul>
@@ -154,6 +156,13 @@
         </div>
         <div class="col-xs-6 center">
             <div class="col-xs-12 text-center" id="blocs"></div>
+            
+            <div class="col-xs-12 text-right" style="padding-right: 5px;">
+                <button class="btn btn btn-success2" id="bt_add_bloc" data-intro="Ajoutez une nouvelle association de colonnes ici">
+                    Ajouter une association&nbsp;
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
         </div>
         <div class="col-xs-3 titre right" data-intro="... puis les colonnes correspondantes du référentiel">
             <div id="ref_columns"></div>
