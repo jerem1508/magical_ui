@@ -764,6 +764,9 @@ function complete_training() {
             else{
                 console.log("success - complete_training");
                 console.dir(result);
+
+                // Passage à l'étape suivante
+                window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
             }
         },
         error: function (result, status, error){
@@ -778,9 +781,6 @@ function complete_training() {
 function valid_step() {
     // Validation du training
     complete_training();
-
-    // Passage à l'étape suivante
-    window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
 }// / valid_step()
 
 
