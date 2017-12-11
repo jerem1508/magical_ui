@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"add",
+				"added_columns"
+			],
+			[
+				"column_t",
+				"column_to_delete"
+			],
+			[
+				"inde",
+				"indexOf"
+			],
+			[
 				"fun",
 				"fun\tFunction"
 			],
@@ -336,10 +348,6 @@
 				"glyphicon"
 			],
 			[
-				"add",
-				"addClass\t( className: String ): jQuery jQuery - Attributes | Manipulation > Class Attribute | CSS"
-			],
-			[
 				"floor",
 				"Math_floor\t( x: number ): number Math"
 			],
@@ -370,10 +378,6 @@
 			[
 				"inter",
 				"internal_projects"
-			],
-			[
-				"inde",
-				"indexOf\t( searchElement: any, fromIndex?: int ): int Array"
 			],
 			[
 				"filter",
@@ -510,68 +514,25 @@
 			[
 				"nom",
 				"normalized_projects"
-			],
-			[
-				"print",
-				"print_r"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_link_select_columns_fr.php",
-			"settings":
-			{
-				"buffer_size": 19623,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "function get_columns_html(tab_columns, infer_columns, target) {\n\t// Retourne au format HTML l'ensemble des colonnes passées en paramètre\n\n\tvar html = \"\";\n\tvar li = \"\";\n\n\tvar tab_types = [];\n\ttab_types['undefined'] = new Array();\n\n\tfor (var i = 0; i < tab_columns.length; i++) {\n\t\tvar column_type = '';\n\t\tif(typeof infer_columns[tab_columns[i]] === 'undefined'){\n\t\t\ttab_types['undefined'].push(tab_columns[i]);\n\t\t\tcolumn_type = 'Inconnu';\n\t\t}\n\t\telse{\n\t\t\tif(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){\n\t\t\t\ttab_types[infer_columns[tab_columns[i]]] = new Array();\n\t\t\t}\n\n\t\t\ttab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);\n\t\t\tcolumn_type = infer_columns[tab_columns[i]];\n\t\t}\n\n\t\tif(column_type == 'Inconnu'){\n\t\t\thtml += '<div class=\"box\" onclick=\"add_column(\\'' + target + '\\',\\'' + tab_columns[i] + '\\');\">';\n\t\t\thtml += '<div class=\"row\">';\n\t\t\thtml += '\t<div class=\"col-md-1\">';\n\t\t\thtml += '\t\t<div style=\"width: 15px;margin:0;padding:0;height:40px;background-color:#ddd;\"></div>'\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-9\">';\n\t\t\thtml += '\t\t<div class=\"tag ' + target + '_column\"><span class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\"></span>&nbsp;' + tab_columns[i] + '</div>';\n\t\t\t//html += '\t\t<div class=\"type\">Type : ' + column_type + '</div>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-2\">';\n\t\t\thtml += '\t\t<i class=\"fa fa-plus-circle add\" style=\"font-size: 40px;\"></i>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '</div>';\n\t\t\thtml += '</div>';\n\t\t}\n\t\telse {\n\t\t\tvar tab = scale_reverse[column_type];\n\t\t\ttab += \"['\" + column_type + \"']\";\n\t\t\tvar couleur = eval(tab);\n\t\t\thtml += '<div class=\"box\" onclick=\"add_column(\\'' + target + '\\',\\'' + tab_columns[i] + '\\');\">';\n\t\t\thtml += '<div class=\"row\">';\n\t\t\thtml += '\t<div class=\"col-md-1\">';\n\t\t\thtml += '\t\t<div style=\"width: 15px;margin:0;padding:0;height:40px;background-color:' + couleur + ';\"></div>'\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-9\">';\n\t\t\thtml += '\t\t<div class=\"tag ' + target + '_column\"><span class=\"fa fa-arrow-circle-right\" aria-hidden=\"true\"></span>&nbsp;' + tab_columns[i] + '</div>';\n\t\t\thtml += '\t\t<div class=\"type\">Type : ' + column_type + '</div>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '\t<div class=\"col-md-2\">';\n\t\t\thtml += '\t\t<i class=\"fa fa-plus-circle add\" style=\"font-size: 40px;\"\"></i>';\n\t\t\thtml += '\t</div>';\n\t\t\thtml += '</div>';\n\t\t\thtml += '</div>';\n\t\t}\n\t}\n\treturn html;\n}// /get_columns_html()\n\n\nfunction change_target(id_bloc, target) {\n\t// Change l'apparence de la cible au moment du DRAG\n\n\t$(id_bloc).addClass(\"target_\" + target);\n}// /change_target()\n\n\nfunction unchange_target(id_bloc, target) {\n\t// Change l'apparence de la cible à la fin du DRAG\n\n\t$(id_bloc).removeClass(\"target_\" + target);\n}// /unchange_target()\n\n\nfunction analysis_bloc(id_bloc) {\n\t// Analyse le contenu d'un bloc et écrit le résultat sous le bloc\n\n\tvar source = $(\"#input_src_\" + id_bloc).val();\n\tvar tab_source = source.split(',');\n\tsource = JSON.stringify(tab_source);\n\t\n\tvar referentiel = $(\"#input_ref_\" + id_bloc).val();\n\tvar tab_referentiel = referentiel.split(',');\n\treferentiel = JSON.stringify(tab_referentiel);\n\n\t//var ch = '{\"source\": [' + tab_src + '],\"ref\": [' + tab_ref + ']}';\n\tvar ch = '{\"source\":' + source + ',\"ref\":' + referentiel + '}';\n\n\t$(\"#bloc_analysis_\" + id_bloc).html(ch);\n\n}// /analysis_bloc()\n\n\nfunction add_js_bloc(id_bloc) {\n\t// Ajout du code JS de DRAG&DROp du nouveau bloc\n\n\t// SOURCE -------------------------\n\t$(\".src_column\").draggable({\n\t\tappendTo: '#bloc_src_' + id_bloc,\n\t    containment: \"window\",\n\t\tcursor: 'move',\n\t\thelper: 'clone',\n\t    start: function(){\n\t    \t// Changement apparence cible\n\t    \tchange_target('#bloc_src_' + id_bloc, \"src\");\n\t    },\n\t    stop: function(){\n\t    \t// Changement apparence cible\n\t    \tunchange_target('#bloc_src_' + id_bloc, \"src\");\n\n\t    \t// Analyse contenu\n\t    \tanalysis_bloc(id_bloc);\n\t    }\n\t});\n\n\t$(\"#bloc_src_\" + id_bloc).droppable({\n\t    accept: \".src_column\",\n\t\tdrop: function (event, ui) {\n\t\t\tui.helper.clone().appendTo('#bloc_src_' + id_bloc);\n\t    }\n\t});\n\n\t// REFERENTIEL -------------------------\n\t$(\".ref_column\").draggable({\n\t\t//grid: [ 20, 20 ],\n\t\tappendTo: '#bloc_ref_' + id_bloc,\n\t    containment: \"window\",\n\t\tcursor: 'move',\n\t\t//revertDuration: 100,\n\t\t//revert: 'invalid',\n\t\thelper: 'clone',\n\t    start: function(){\n\t    \t// Changement apparence cible\n\t    \tchange_target('#bloc_ref_' + id_bloc, \"ref\");\n\t    },\n\t    stop: function(){\n\t    \t// Changement apparence cible\n\t    \tunchange_target('#bloc_ref_' + id_bloc, \"ref\");\n\n\t    \t// Analyse contenu\n\t    \tanalysis_bloc(id_bloc);\n\t    }\n\t});\n\n\t$(\"#bloc_ref_\" + id_bloc).droppable({\n\t    accept: \".ref_column\",\n\t\tdrop: function (event, ui) {\n\t\t\tui.helper.clone().appendTo('#bloc_ref_' + id_bloc);\n\t    }\n\t});\n}// /add_js_bloc()\n\n\nfunction remove_bloc(id_bloc) {\n\t// Suppression d'un bloc\n\t$(\"#bloc_\" + id_bloc).remove();\n}// /remove_bloc()\n\n\nfunction change_lib_bloc(id_bloc) {\n\t// Modification du libellé d'un bloc via Modale\n\n\t// Sauvegarde en global de l'identifiant du bloc\n\tid_bloc_to_change = id_bloc;\n\n\t// Affichage de la modale\n\t$('#modal_bloc').modal('show');\n}// /change_lib_bloc()\n\n\nfunction new_bloc(id_bloc) {\n\t// Ajout d'un nouveau bloc au format HTML\n\n\tvar html = \"\";\n\n\thtml += '<div id=\"bloc_' + id_bloc + '\" class=\"association association-select\" onclick=\"set_current_association(' + id_bloc + ');\">';\n\n\thtml += '<div class=\"row\">';\n\thtml += '<div class=\"col-xs-11 text-left\">';\n\thtml += '<h4>';\n\thtml += '<span id=\"lib_bloc_' + id_bloc + '\" class=\"badge\">Association ' + id_bloc + '</span> ';\n\thtml += '<a onclick=\"change_lib_bloc(' + id_bloc + ');\"><span class=\"glyphicon glyphicon-pencil\"></span></a>';\n\thtml += '</h4>';\n\thtml += '</div>';\n\thtml += '<div class=\"col-xs-1 text-right\">';\n\thtml += '<a onclick=\"remove_bloc(' + id_bloc + ');\" class=\"text-danger\"><span class=\"glyphicon glyphicon-remove\"></span></a>';\n\thtml += '</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '\t<div class=\"col-xs-2 text-left\"><i class=\"fa fa-table\" aria-hidden=\"true\"></i>&nbsp;Source :</div>';\n\thtml += '\t<div class=\"col-xs-9 text-left\">';\n\thtml += '\t\t<div id=\"tags_src_' + id_bloc + '\" class=\"tags\"></div>';\n\thtml += '\t\t<input type=\"hidden\" class=\"input_src\" id=\"input_src_' + id_bloc + '\">';\n\thtml += '\t</div>';\n\thtml += '\t<div class=\"col-xs-1 text-left\" style=\"padding-left: 0px;\"\">';\n\thtml += '\t\t<button class=\"btn btn-default\" onclick=\"reset_line(\\'src\\',' + id_bloc + ');\"><i class=\"fa fa-trash\"></i></button>'\n\thtml += '\t</div>';\n\thtml += '</div>';\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '\t<div class=\"col-xs-2 text-left\"><i class=\"fa fa-database\" aria-hidden=\"true\"></i>&nbsp;Référentiel :</div>';\n\thtml += '\t<div class=\"col-xs-9 text-left\">';\n\thtml += '\t\t<div id=\"tags_ref_' + id_bloc + '\" class=\"tags\"></div>';\n\thtml += '\t\t<input type=\"hidden\" class=\"input_ref\" id=\"input_ref_' + id_bloc + '\">';\n\thtml += '\t</div>';\n\thtml += '\t<div class=\"col-xs-1 text-left\" style=\"padding-left: 0px;\"\">';\n\thtml += '\t\t<button class=\"btn btn-default\" onclick=\"reset_line(\\'ref\\',' + id_bloc + ');\"><i class=\"fa fa-trash\"></i></button>'\n\thtml += '\t</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row\" style=\"padding-bottom:5px;\">';\n\thtml += '<div class=\"col-xs-12 text-left\">';\n\thtml += '<div class=\"checkbox\">';\n\thtml += '\t<label>';\n\thtml += '\t\t<input type=\"checkbox\"> Association parfaite';\n\thtml += '\t</label>';\n\thtml += '</div>';\n\thtml += '</div>';\n\thtml += '</div>';\n\n\thtml += '<div class=\"row text-left\">';\n\thtml += '\t<div class=\"col-xs-12 text-left blocs_analysis\" id=\"bloc_analysis_' + id_bloc + '\"></div>';\n\thtml += '</div>';\n\n\thtml += '</div>';\n\n\t// Ajout du nouveau bloc\n\t$(\"#blocs\").html($(\"#blocs\").html() + html);\n\t//$(\"#input_src_\" + id_bloc).tagsInput();\n\n\t// Ajout du javascript\n\t//add_js_bloc(id_bloc);\n\n\t// Définit le bloc association en cours\n\tset_current_association(id_bloc);\n}// /new_bloc()\n\n\nfunction set_current_association(id_bloc) {\n\t// Id de l'association sélectionnée\n\tconsole.log('select id : ' + id_bloc);\n\tid_bloc_to_change = id_bloc;\n\n\t// Reset de la class css pour toutes les associations\n\treset_css_association();\n\n\t// Ajout de la class css de selection sur l'association en cours\n\t$(\"#bloc_\" + id_bloc).addClass(\"association-select\");\n\t$(\"#lib_bloc_\" + id_bloc).css(\"background-color\", \"#25358C\");\n}// /set_current_association()\n\n\nfunction reset_css_association() {\n\tfor (var i = 0; i < cpt_bloc+1; i++) {\n\t\t$(\"#bloc_\" + i).removeClass(\"association-select\");\n\t\t$(\"#lib_bloc_\" + i).css(\"background-color\", \"#777\");\n\t}\n}// /reset_css_association()\n\n\nfunction add_column(sub_target, column_name) {\n\t// EX sub_target : src/ref\n\t// Id de l'association sélectionnée\n\t// id_bloc_to_change\n\n\t// Ajout du tagsInput\n\tif($(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val() == ''){\n\t\t$(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val(column_name);\n\t}\n\telse{\n\t\t$(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val($(\"#input_\" + sub_target + \"_\" + id_bloc_to_change).val() + \",\" + column_name);\n\t}\n\t\n\tvar html_tag = '<span class=\"badge my_badge\" id=\"\">' + column_name + '<a class=\"cross\" onclick=\"delete_tag(\\'\\');\">x</a></span>';\n\t$(\"#tags_\" + sub_target + \"_\" + id_bloc_to_change).html($(\"#tags_\" + sub_target + \"_\" + id_bloc_to_change).html() + html_tag);\n\n\t// Gère le json qui sera envoyé\n\tanalysis_bloc(id_bloc_to_change);\n\n}// /add_column()\n\n\nfunction reset_line(sub_target, id_bloc) {\n\t$(\"#tags_\"+ sub_target +\"_\" + id_bloc).html(\"\");\n\t$(\"#input_\"+ sub_target +\"_\" + id_bloc).val(\"\");\n\n\tanalysis_bloc(id_bloc);\n}// /reset_line()\n\n\nfunction delete_tag(tag, id_bloc, sub_target) {\n\t// body...\n}",
-			"file": "assets/project_link_select_columns.js",
-			"file_size": 9649,
-			"file_write_time": 131569627584526636,
-			"settings":
-			{
-				"buffer_size": 9658,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "application/views/project_link_es_train_fr.php",
 			"settings":
 			{
-				"buffer_size": 37728,
+				"buffer_size": 37752,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_link_es_linker_fr.php",
+			"file": "application/views/project_link_es_train_specifics.php",
 			"settings":
 			{
-				"buffer_size": 30673,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_select_columns.css",
-			"settings":
-			{
-				"buffer_size": 3069,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/style.css",
-			"settings":
-			{
-				"buffer_size": 11767,
+				"buffer_size": 424,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -584,7 +545,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 124.0,
+		"height": 184.0,
 		"last_filter": "siba",
 		"selected_items":
 		[
@@ -629,7 +590,7 @@
 				"Snippet: Lorem ipsum"
 			]
 		],
-		"width": 461.0
+		"width": 479.0
 	},
 	"console":
 	{
@@ -660,6 +621,13 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
+		"/var/www/html/projets/magical_ui/application/views/lib.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
 		"/var/www/html/projets/magical_ui/application/libraries/Private_functions.php",
 		"/var/www/html/projets/magical_ui/assets/functions.js",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
@@ -677,7 +645,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/194665d4a0014bcf8565b1bee1905510/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/es_linker/column_matches.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
@@ -691,13 +658,9 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c190498c83f865b62fa6ff8cb77d5455/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/f27858f8706d94e2ab566c280fe21161/metadata.json",
 		"/var/www/html/projets/magical_ui/application/config/database.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr_old.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns_old.js",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
-		"/var/www/html/projets/magical_ui/application/views/lib.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.js",
 		"/var/www/html/projets/magical_ui/application/views/error_fr.php",
 		"/var/www/html/projets/magical_ui/application/controllers/Home.php",
@@ -725,8 +688,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/home/jerem/ssh_key.pub",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
-		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
-		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
 		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
@@ -791,7 +752,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -807,6 +768,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"jquery.awesome-cursor.min.js",
+			"bt_yes",
+			"complet",
+			"valid_step",
+			"bt_next",
+			"compl",
+			"bt_next",
+			"delete_tag",
 			"del_tag",
 			"tags_src_",
 			"reset_line",
@@ -926,15 +895,7 @@
 			"show_new_proposition",
 			"bt_next",
 			"login_validation",
-			"is_completed_step",
-			"project_steps",
-			"comple",
-			"project_id",
-			"proj",
-			"Projects_model",
-			"server_error",
-			"uniqid",
-			"send_comment_ajax"
+			"is_completed_step"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -994,19 +955,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_link_select_columns_fr.php",
+					"file": "application/views/project_link_es_train_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19623,
+						"buffer_size": 37752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14275,
-								14275
+								8700,
+								8700
 							]
 						],
 						"settings":
@@ -1016,7 +977,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6588.0,
+						"translation.y": 2119.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1024,156 +985,30 @@
 				},
 				{
 					"buffer": 1,
-					"file": "assets/project_link_select_columns.js",
+					"file": "application/views/project_link_es_train_specifics.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9658,
+						"buffer_size": 424,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9658,
-								9658
+								424,
+								424
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2883.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "application/views/project_link_es_train_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 37728,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								30656,
-								30656
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 17059.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/views/project_link_es_linker_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 30673,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								20679,
-								20605
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9571.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "assets/project_link_select_columns.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3069,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1249,
-								1249
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 864.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "assets/style.css",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 11767,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4952,
-								4877
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4915.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1196,18 +1031,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.754930903368,
 			1.0
 		],
 		"rows":
@@ -1262,8 +1090,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 344.0,
+	"side_bar_visible": true,
+	"side_bar_width": 426.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

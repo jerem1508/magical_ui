@@ -597,6 +597,9 @@ function socket_update_filters(must, must_not) {
 
     disabeled_buttons();
 
+
+
+
     var response_to_send = {
         "module_params": {
             'project_id': project_id_link,
@@ -959,12 +962,11 @@ function get_obj_filters(filter_list) {
         var column_name = tab_col_val[0];
         var value = tab_col_val[1];
 
-        if( column_name in tab_by_columns){
-            tab_by_columns[column_name] = tab_by_columns[column_name] + ',' + value + '';
+        if(!(column_name in tab_by_columns)){
+            tab_by_columns[column_name] = new Array();
         }
-        else {
-            tab_by_columns[column_name] = '' + value + '';
-        }
+
+        tab_by_columns[column_name].push(tab_col_val[1]);
     }
 
     // Parcours du tableau pour renvoyer l'objet
