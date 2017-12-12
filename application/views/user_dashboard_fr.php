@@ -41,7 +41,7 @@
 	function is_completed_link_step($step_name, $project_steps){
 		$filename = str_replace('MINI__', '', key($project_steps));
 
-	    if($project_steps[$filename]['link_results_analyzer']==1){
+	    if(@$project_steps[$filename]['link_results_analyzer']==1){
 	      	return true;
 	    }
 
@@ -53,7 +53,7 @@
 			case 'add_selected_columns':
 			case 'upload_es_train':
 			case 'es_linker':
-				return $project_steps[$filename][$step_name];
+				return @$project_steps[$filename][$step_name];
 
 				break;
 			default :
