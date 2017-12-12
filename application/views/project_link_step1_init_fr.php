@@ -312,9 +312,21 @@ function get_normalized_projects_html($id, $normalized_projects)
                             <i class="fa fa-table" aria-hidden="true"></i>
                         </h2>
                         <div>
-                            Sélectionnez le fichier "source", c'est à dire le fichier sale auquel on veut associer des codes de référence.
+                            Sélectionnez le fichier "source", c'est à dire le fichier auquel on veut associer des codes de référence.
                         </div>
-
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3>
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                    &nbsp;Fichier "Source" sélectionné :
+                                </h3>
+                                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                                &nbsp;<i id="src_selection">Pas encore de sélection</i>
+                                <div id="file_name_src" class="hidden"></div>
+                                <div id="src_project_name" class="hidden"></div>                                
+                            </div><!-- /col -->
+                        </div><!-- /row -->
+                        <hr>
                         <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
                             <div class="row" data-intro="Vous pouvez uploader un nouveau fichier ...">
                                 <div class="col-xs-1 text-right">
@@ -338,8 +350,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4>Nouveau</h4>
                                             <input id="fileupload_src" type="file" name="file">
                                         </span>
-
+                                        <!--
                                         <div id="file_name_src"></div>
+                                        -->
                                         <button id="envoyer_src" style="display: none;"></button>
                                     </div>
                                 </div>
@@ -374,7 +387,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                         <h4 class="glyphicon glyphicon-list-alt"></h4>
                                         <h4>Mes fichiers</h4>
                                     </a>
-                                    <div id="src_project_name"></div>
+                                    <!--<div id="src_project_name"></div>-->
                                     <div id="src_project_id" style="display: none;"></div>
                                     <?php
                                     }
@@ -383,6 +396,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 </div>
                             </div>
                         </form>
+
                     </div>
                     
                 </div>
@@ -394,10 +408,23 @@ function get_normalized_projects_html($id, $normalized_projects)
                             <i class="fa fa-database" aria-hidden="true"></i>
                         </h2>
                         <div>
-                            Choisissez un fichier "référentiel", dans lequel nous cherchons les élements de la source. Ce fichier est sensé contenir au moins tous les éléments recherchés dans la source. Par ailleurs, il est supposé ne pas contenir de doublons.
+                            Sélectionnez un fichier "référentiel", dans lequel nous chercherons les élements de la source.
                         </div>
 
-
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3>
+                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                    &nbsp;Fichier "Référentiel" sélectionné :
+                                </h3>
+                                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                                &nbsp;<i id="ref_selection">Pas encore de sélection</i>
+                                <div id="file_name_ref" class="hidden"></div>
+                                <div id="ref_project_name" class="hidden"></div>
+                                <div id="ref_internal_project_name" class="hidden"></div>
+                            </div><!-- /col -->
+                        </div><!-- /row -->
+                        <hr>
                         <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-xs-1">
@@ -420,7 +447,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4>Nouveau</h4>
                                             <input id="fileupload_ref" type="file" name="file">
                                         </span>
-                                        <span id="file_name_ref"></span>
+                                        <!--<span id="file_name_ref"></span>-->
                                         <button id="envoyer_ref" style="display: none;"></button>
                                     </div>
                                 </div>
@@ -455,7 +482,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                         <h4 class="glyphicon glyphicon-list-alt"></h4>
                                         <h4>Mes fichiers</h4>
                                     </a>
-                                    <div id="ref_project_name"></div>
+                                    <!--<div id="ref_project_name"></div>-->
                                     <div id="ref_project_id" style="display: none;"></div>
                                     <?php
                                     }
@@ -483,7 +510,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4 class="glyphicon glyphicon-list-alt"></h4>
                                             <h4>Sélectionner</h4>
                                         </a>
-                                        <div id="ref_internal_project_name"></div>
+                                        <!--<div id="ref_internal_project_name"></div>-->
                                     </div>
                                 </div>
                             </div>
@@ -501,36 +528,62 @@ function get_normalized_projects_html($id, $normalized_projects)
             <div class="row background_2">
                 <div class="col-md-12">
                     <div class="row" id="result" style="margin-top: 20px;color: #fff;">
-                        <div id="steps">
+                        <div id="steps" style="margin-left: 10px;margin-right: 10px;">
                             <div>
-                                <span id="txt_create_merge_project">Création du projet de jointure</span><span id="create_merge_project_ok" class="glyphicon glyphicon-ok check_ok">
+                                <span id="txt_create_merge_project">Création du projet de jointure</span>
+                                <span id="create_merge_project_ok" class="glyphicon glyphicon-ok check_ok"></span>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <span id="txt_init_nrz_src_project">Initialisation du projet de normalisation "SOURCE"</span>
+                                <span id="init_nrz_src_project_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
                             <div>
-                                <span id="txt_init_nrz_src_project">Initialisation du projet de normalisation "SOURCE"</span><span id="init_nrz_src_project_ok" class="glyphicon glyphicon-ok check_ok">
-                            </div>
-                            <div>
-                                <span id="txt_send_src_file">Envoi du fichier "SOURCE" sur le serveur</span><span id="send_src_file_ok" class="glyphicon glyphicon-ok check_ok">
-                                <div id="progress_src" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
-                                    <div class="progress-bar progress-bar-success"></div>
+                                <span id="txt_send_src_file">Envoi du fichier "SOURCE" sur le serveur</span>
+                                <span id="send_src_file_ok" class="glyphicon glyphicon-ok check_ok"></span>
+
+                                <div id="progress_src" class="progress" style="margin-bottom: 5px;width:100%">
+                                    <div class="progress-bar progress-bar-success progress-bar-striped active" style="height: 5px;width:0%"></div>
                                 </div>
                             </div>
-                            <div>
-                                <span id="txt_init_nrz_ref_project">Initialisation du projet de normalisation "REFERENTIEL"</span><span id="init_nrz_ref_project_ok" class="glyphicon glyphicon-ok check_ok">
+                            <div id="send_src_analyse">
+                                <span>Analyse du fichier "SOURCE"</span>
+                                <span id="send_src_analyse_wait">
+                                    <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 20px;">
+                                </span>                                
+                                <span id="send_src_analyse_ok" class="glyphicon glyphicon-ok check_ok"></span>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <span id="txt_init_nrz_ref_project">Initialisation du projet de normalisation "REFERENTIEL"</span>
+                                <span id="init_nrz_ref_project_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
                             <div>
-                                <span id="txt_send_ref_file">Envoi du fichier "REFERENTIEL" sur le serveur</span><span id="send_ref_file_ok" class="glyphicon glyphicon-ok check_ok">
-                                <div id="progress_ref" class="progress" style="height: 5px;margin-bottom: 5px;width:100%">
-                                    <div class="progress-bar progress-bar-success"></div>
+                                <span id="txt_send_ref_file">Envoi du fichier "REFERENTIEL" sur le serveur</span>
+                                <span id="send_ref_file_ok" class="glyphicon glyphicon-ok check_ok"></span>
+
+                                <div id="progress_ref" class="progress" style="margin-bottom: 5px;width:100%">
+                                    <div class="progress-bar progress-bar-success progress-bar-striped active" style="height: 5px;width:0%"></div>
                                 </div>
                             </div>
-                            <div>
-                                <span id="txt_add_src_nrz_projects">Ajout du projet de normalisation "SOURCE" au projet de jointure</span><span id="add_src_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
+                            <div id="send_ref_analyse">
+                                <span>Analyse du fichier "REFERENTIEL"</span>
+                                <span id="send_ref_analyse_wait">
+                                    <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 20px;">
+                                </span>                                
+                                <span id="send_ref_analyse_ok" class="glyphicon glyphicon-ok check_ok"></span>
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <span id="txt_add_src_nrz_projects">Ajout du projet de normalisation "SOURCE" au projet de jointure</span>
+                                <span id="add_src_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
                             <div>
-                                <span id="txt_add_ref_nrz_projects">Ajout du projet de normalisation "REFERENTIEL" au projet de jointure</span><span id="add_ref_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok">
+                                <span id="txt_add_ref_nrz_projects">Ajout du projet de normalisation "REFERENTIEL" au projet de jointure</span>
+                                <span id="add_ref_nrz_projects_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
-                        </div>
-                    </div><!--/container-->
+                        </div> <!--/steps-->
+                    </div>
 
                     <div class="row" id="bloc_bt_next" style="padding-bottom: 20px;">
                         <div class="col-md-12 text-right">
@@ -899,11 +952,8 @@ function get_normalized_projects_html($id, $normalized_projects)
         $("#bt_new_project").css("display", "none");
 
         // Appels API ----------------------
-
             $('#result').css('display', 'inherit');
             go_to('result'); // auto scroll
-
-            //$("#result").fadeToggle();
 
             // creation du projet
             var tparams = {
@@ -1083,6 +1133,8 @@ function get_normalized_projects_html($id, $normalized_projects)
         if(target){
             $("#" + target + "_project_id").html(project_id);
             $("#" + target + "_project_name").html(project_name);
+            
+            $("#" + target + "_selection").html(project_name);
         }
 
         $("#modal_projects").modal('hide');
@@ -1093,6 +1145,8 @@ function get_normalized_projects_html($id, $normalized_projects)
         // Appelé sur validation d'un projet interne dans la modale
         $("#ref_project_id").html(project_id);
         $("#ref_internal_project_name").html(project_name);
+
+        $("#" + target + "_selection").html(project_name);
 
         exist_ref = true;
 
@@ -1167,45 +1221,44 @@ function get_normalized_projects_html($id, $normalized_projects)
             autoUpload: false,
             add: function (e, data) {
                 $('#file_name_src').html(data.files[0].name);
+                $('#src_selection').html(data.files[0].name);
 
                 data.context = $('#envoyer_src')
                     .click(function (e) {
-                         e.preventDefault();
-                        //$('#progress .progress-bar').css('visibility', 'visible');
+                        e.preventDefault();
+                        $("#progress_src").css('display', 'inline-block');
+                        $("#send_src_analyse").css('display', 'inline-block');
                         data.submit();
                     });
             },
             done: function (e, data) {
-                console.log("upload done");
-
-                //
-                
-                $('#send_src_file_ok').css('display', 'inline');
+                console.log("upload src done");
+                $('#send_src_analyse_wait').css('display', 'none');
+                $('#send_src_analyse_ok').css('display', 'inline-block');
 
                 // Ajout du nouveau projet de normalisation au projet de link
                 save_id_normalized_project("source", src_project_id);
 
                 // On indique que l'upload est terminé afin d'afficher le bouton "suivant"
                 UL_fic_src = true;
-
             },
             progressall: function (e, data) {
+                console.log("upload src progressall");
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress_src .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-
-                console.log("upload progressall");
-                console.log('url_src : ' + url_src);
+                console.log('progress src : ' + progress);
+                $('#progress_src .progress-bar').css('width', progress + '%');
+                if(progress == 100){
+                    console.log('SOURCE : analyse en cours');
+                    $("#progress_src").css('display', 'none');
+                    $('#send_src_file_ok').css('display', 'inline-block');
+                    $('#send_src_analyse_wait').css('display', 'inline-block');
+                }
             },
             fail: function (e, data) {
-                $('#progress .progress-bar').css(
-                    'background-color', 'red'
-                );
-                console.log("upload fail");
+                console.log("upload src fail");
                 console.log(e);
                 console.log(data);
+                $('#progress .progress-bar').css('background-color', 'red');
             }
         }).prop('disabled', !$.support.fileInput)
           .parent().addClass($.support.fileInput ? undefined : 'disabled');
@@ -1219,42 +1272,42 @@ function get_normalized_projects_html($id, $normalized_projects)
             autoUpload: false,
             add: function (e, data) {
                 $('#file_name_ref').html(data.files[0].name);
+                $('#ref_selection').html(data.files[0].name);
 
                 data.context = $('#envoyer_ref')
                     .click(function (e) {
                          e.preventDefault();
-                        //$('#progress .progress-bar').css('visibility', 'visible');
+                        $("#progress_ref").css('display', 'inline-block');
+                        $("#send_ref_analyse").css('display', 'inline-block');
                         data.submit();
                     });
             },
             done: function (e, data) {
-                console.log("upload done");
-                
-                //
-                $('#send_ref_file_ok').css('display', 'inline');
+                console.log("upload ref done");
+                $('#send_ref_analyse_wait').css('display', 'none');
+                $('#send_ref_analyse_ok').css('display', 'inline-block');
 
                 // Ajout du nouveau projet de normalisation au projet de link
                 save_id_normalized_project("ref", ref_project_id);
 
                 // On indique que l'upload est terminé afin d'afficher le bouton "suivant"
                 UL_fic_ref = true;
-
             },
             progressall: function (e, data) {
+                console.log("upload ref progressall");
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress_ref .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
-                
-                console.log("upload progressall");
-                console.log('url_ref : ' + url_ref);
+                console.log('progress ref : ' + progress);
+                $('#progress_ref .progress-bar').css('width', progress + '%');
+                if(progress == 100){
+                    console.log('REFERENTIEL : analyse en cours');
+                    $("#progress_ref").css('display', 'none');
+                    $('#send_ref_file_ok').css('display', 'inline-block');
+                    $('#send_ref_analyse_wait').css('display', 'inline-block');
+                }
             },
             fail: function (e, data) {
-                $('#progress .progress-bar').css(
-                    'background-color', 'red'
-                );
-                console.log("upload fail");
+                $('#progress_ref .progress-bar').css('background-color', 'red');
+                console.log("upload ref fail");
                 console.log(e);
                 console.log(data);
             }

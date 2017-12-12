@@ -23,7 +23,7 @@ $(function(){
             new_file_src = true;
             exist_file_src = false;
             $(".hover_exist_file_src_target").css("display", "none");
-            $(".hover_new_file_src_target").css("color", "#000");
+            $(".hover_new_file_src_target").css("color", "#E00612");
         })
     ;
 
@@ -45,7 +45,7 @@ $(function(){
             exist_file_src = true;
             new_file_src = false;
             $(".hover_new_file_src_target").css("display", "none");
-            $(".hover_exist_file_src_target").css("color", "#000");
+            $(".hover_exist_file_src_target").css("color", "#E00612");
         })
     ;
 // /Fichier SOURCE
@@ -72,7 +72,7 @@ $(function(){
         })
         .click(function(){
             new_file_ref = true;
-            $(".hover_new_file_ref_target").css("color", "#000");
+            $(".hover_new_file_ref_target").css("color", "#E00612");
             exist_file_ref = false;
             $(".hover_exist_file_ref_target").css("display", "none");
             exist_ref = false;
@@ -98,7 +98,7 @@ $(function(){
             new_file_ref = false;
             $(".hover_new_file_ref_target").css("display", "none");
             exist_file_ref = true;
-            $(".hover_exist_file_ref_target").css("color", "#000");
+            $(".hover_exist_file_ref_target").css("color", "#E00612");
             exist_ref = false;
             $(".hover_exist_ref_target").css("display", "none");
         })
@@ -124,7 +124,7 @@ $(function(){
             exist_file_ref = false;
             $(".hover_exist_file_ref_target").css("display", "none");
             exist_ref = true;
-            $(".hover_exist_ref_target").css("color", "#000");
+            $(".hover_exist_ref_target").css("color", "#E00612");
         })
     ;
 

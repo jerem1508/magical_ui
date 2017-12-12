@@ -201,7 +201,7 @@
                             </li>
                             <li>
                                 Envoi du fichier sur le serveur <span id="upload_file_ok" class="glyphicon glyphicon-ok check_ok"></span>
-                                <div id="progress" class="progress" style="height: 5px;margin-bottom: 5px;">
+                                <div id="progress" class="progress" style="margin-bottom: 5px;">
                                     <div class="progress-bar progress-bar-success"></div>
                                 </div>
                             </li>
@@ -617,22 +617,17 @@
                 $("#bt_next").css("visibility", "visible");
 
                 go_to('report');
-                
             },
             progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css(
-                    'width',
-                    progress + '%'
-                );
                 console.log("upload progressall");
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css('visibility', 'visible');
+                $('#progress .progress-bar').css('width', progress + '%');
             },
             fail: function (e, data) {
-                $('#progress .progress-bar').css(
-                    'background-color', 'red'
-                );
                 console.log("upload fail");
-                console.dir(data);
+                console.log(data);
+                $('#progress .progress-bar').css('background-color', 'red');
             }
         }).prop('disabled', !$.support.fileInput)
           .parent().addClass($.support.fileInput ? undefined : 'disabled');

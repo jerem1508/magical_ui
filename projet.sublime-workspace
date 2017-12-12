@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"prog",
+				"progress"
+			],
+			[
+				"str",
+				"stringify"
+			],
+			[
+				"split",
+				"split"
+			],
+			[
 				"add",
 				"added_columns"
 			],
@@ -502,37 +514,43 @@
 			[
 				"lin",
 				"link_step"
-			],
-			[
-				"_s",
-				"_SESSION"
-			],
-			[
-				"project_lis",
-				"projects_list"
-			],
-			[
-				"nom",
-				"normalized_projects"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_link_es_train_fr.php",
+			"file": "application/views/project_normalize_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 37752,
+				"buffer_size": 24608,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application/views/project_link_es_train_specifics.php",
+			"file": "application/views/project_link_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 424,
+				"buffer_size": 55117,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/style.css",
+			"settings":
+			{
+				"buffer_size": 11767,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "assets/project_link_step1_init.css",
+			"settings":
+			{
+				"buffer_size": 766,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -621,9 +639,10 @@
 	],
 	"file_history":
 	[
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
@@ -646,7 +665,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/es_linker/column_matches.json",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/home/jerem/Aide/mysql",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
@@ -752,7 +770,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -768,6 +786,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"#result",
+			"result",
+			"progress_src",
+			"result",
+			"progress",
+			"progress-bar",
+			"display",
+			"visibili",
+			"progress",
+			"progress-bar",
+			"id=\"progress",
+			"progress",
+			"fileupload",
+			"upload",
+			"call_api_upload",
+			"upload",
+			"socket_update_filters",
+			"get_obj_filters",
+			"socket_update_filters",
+			"get_obj_filters",
+			"socket_update_filters",
+			"valid_filters",
+			"bt_add_filter",
 			"jquery.awesome-cursor.min.js",
 			"bt_yes",
 			"complet",
@@ -872,30 +913,7 @@
 			"error_msg",
 			"create_es_labeller_api",
 			"insert",
-			"es_insert",
-			"set",
-			"sett",
-			"modify_password",
-			"bt_next",
-			"MINI__",
-			"metadata_src",
-			"get_file_name",
-			"save_id_normalized_project",
-			"src_project_id",
-			"save_project_sync",
-			"ref_project_id",
-			"add_new_normalize_project_ref",
-			"treatment",
-			"valid_project",
-			"last",
-			"file_na",
-			"defau",
-			"redir",
-			"bt_forget",
-			"show_new_proposition",
-			"bt_next",
-			"login_validation",
-			"is_completed_step"
+			"es_insert"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -950,24 +968,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_link_es_train_fr.php",
+					"file": "application/views/project_normalize_init_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 37752,
+						"buffer_size": 24608,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8700,
-								8700
+								22768,
+								22776
 							]
 						],
 						"settings":
@@ -977,32 +995,94 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2119.0,
+						"translation.y": 10399.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "application/views/project_link_es_train_specifics.php",
+					"file": "application/views/project_link_step1_init_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 424,
+						"buffer_size": 55117,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								424,
-								424
+								26483,
+								26483
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9193.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "assets/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11767,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4757,
+								4765
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4125.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "assets/project_link_step1_init.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1,
+								7
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1091,7 +1171,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 426.0,
+	"side_bar_width": 309.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
