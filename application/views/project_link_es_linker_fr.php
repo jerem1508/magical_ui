@@ -864,7 +864,7 @@ function get_stats() {
 
 function set_stats_html(stats) {
     // MAJ des stats
-    $("#stat_pct_nb_lines").html(stats.result.perc_match + " %");
+    $("#stat_pct_nb_lines").html(Math.round(stats.result.perc_match) + " %");
     $("#stat_nb_lines").html(stats.result.num_match);
 }// /set_stats_html()
 

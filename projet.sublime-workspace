@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"hid",
+				"hidden"
+			],
+			[
 				"prog",
 				"progress"
 			],
@@ -510,20 +514,28 @@
 			[
 				"console",
 				"console_log"
-			],
-			[
-				"lin",
-				"link_step"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "application/views/project_normalize_init_fr.php",
+			"contents": "<?php\ndefined('BASEPATH') OR exit('No direct script access allowed');\n\nclass User extends CI_Controller {\n\n\tpublic $normalized_projects = [];\n\tpublic $linked_projects = [];\n\n\tpublic function __construct()\n\t{\n\t\tparent::__construct();\n\n\t\t//$this->load->helper('captcha');\n\t\t$this->load->model('User_model');\n\t\t$this->load->model('Projects_model');\n\n\t\t$this->load->library('Private_functions');\n\n\t\t// test de la langue\n\t\t// Francais par defaut\n\t\tif(!isset($_SESSION['language'])){\n\t\t\t$this->session->set_userdata('language', 'fr');\n\t\t}\n\n\t\t// test du serveur API - Affiche une vue d'erreur\n\t\tif($this->private_functions->test_server_API() == false){\n\t\t\t// TODO : Sauvegarde de l'erreur en BDD\n\n\t\t\tredirect('/Home/error');\n\t\t}\n\t}// /__construct()\n\n\n\tpublic function index()\n\t{\n\t\t//$this->load->view('home_'.$_SESSION['language']);\n\t\tredirect('/Home');\n\t}// /index()\n\n\n\tpublic function new($msg='')\n\t{\n\t\tif(isset($_SESSION['user'])){\n\t\t\tredirect('/Home');\n\t\t}\n\n\t\t$data['msg'] = $msg;\n\t\t$data['title'] = \"Identification\";\n\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('user_signin_signup_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t// $this->load->view('user_new_'.$_SESSION['language'], $data);\n\t\t$this->load->view('user_signin_signup_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}// /new()\n\n\n\tpublic function new_save()\n\t{\n\t\ttry{\n\t\t\t$email = $this->input->post('usr_email');\n\t\t\t$pwd = $this->input->post('usr_pwd');\n\n\t\t\t// test user existant\n\t\t\t$ret = $this->User_model->exist_user($email);\n\n\t\t\tif($ret->result_id->num_rows > 0){\n\t\t\t\t// email deja existant\n\t\t\t\t$this->new(\"Cet email existe déjà !\");\n\t\t\t}\n\t\t\telse{\n\t\t\t\t// insertion du user\n\t\t\t\t$ret = $this->User_model->insert_user($email, $pwd);\n\t\t\t}\n\t\t\t$error = '';\n\t\t}\n\t\tcatch(Exception $e){\n\t\t\tswitch ($_SESSION['language']) {\n\t\t\t\tcase 'en':\n\t\t\t\t\t$error = INTERNAL_ERROR_EN;\n\t\t\t\t\tbreak;\n\t\t\t\tcase 'fr':\n\t\t\t\t\t$error = INTERNAL_ERROR_FR;\n\t\t\t\t\tbreak;\n\t\t\t\tdefault:\n\t\t\t\t\t$error = INTERNAL_ERROR_EN;\n\t\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\t\t// Enregistrement en session\n\t\t$user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);\n\t\t$this->session->set_userdata('user', $user);\n\n\t\tredirect('/Home');\n\n\t\t// // Chargement du tableau de bord\n\t\t// $this->dashboard($error);\n\t}// /new_save()\n\n\n\tpublic function login($next='', $msg='')\n\t{\n\t\tif(isset($_SESSION['user'])){\n\t\t\tredirect('/Home');\n\t\t}\n\n\t\t$data['msg'] = $msg;\n\t\t$data['next'] = $next;\n\t\t$data['title'] = \"Identification\";\n\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('user_login_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}// /login()\n\n\n\tpublic function login_validation($msg='')\n\t{\n\t\t$email = $this->input->post('email');\n\t\t$pwd = $this->input->post('pwd');\n\t\t$next = $this->input->post('next');\n\n\t\t// test user existant\n\t\t$ret = $this->User_model->get_user($email);\n\n\t\t// si email trouvé, on compare les mdp\n\t\tif($ret['id'] != 0){\n\t\t\t$pwd = md5($pwd.$ret['salt']);\n\t\t\tif ($pwd == $ret['pwd']) {\n\t\t\t\t// Sauvegarde en session\n\t\t\t\t$user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);\n\t\t\t\t$this->session->set_userdata('user', $user);\n\n\t\t\t\t// log\n\t\t\t\t$ret = $this->User_model->set_log_users($ret['id']);\n\n\t\t\t\tswitch ($next) {\n\t\t\t\t\tcase 'normalize':\n\t\t\t\t\t\t// Chargement du tableau de bord\n\t\t\t\t\t\tredirect('/Project/normalize');\n\t\t\t\t\t\tbreak;\n\t\t\t\t\tcase 'link':\n\t\t\t\t\t\t// Chargement du tableau de bord\n\t\t\t\t\t\tredirect('/Project/link');\n\t\t\t\t\t\tbreak;\n\t\t\t\t\t\n\t\t\t\t\tdefault:\n\t\t\t\t\t\t// Chargement du tableau de bord\n\t\t\t\t\t\tredirect('/User/dashboard');\n\t\t\t\t\t\tbreak;\n\t\t\t\t}\n\n\t\t\t}\n\t\t\telse{\n\t\t\t\t$this->login(\"\",\"Mot de passe erroné !\");\t\n\t\t\t}\n\t\t}\n\t\telse{\n\t\t\t$this->login(\"\",\"Email erroné !\");\n\t\t}\n\t}// /login_validation()\n\n\n\tpublic function logout()\n\t{\n\t\t$this->session->unset_userdata('user');\n\n\t\tredirect('/Home');\n\t}// /logout()\n\n\n\tpublic function dashboard($error='')\n\t{\n\t\tif(!isset($_SESSION['user'])){\n\t\t\tredirect('/Home');\n\t\t}\n\n\t\ttry{\n\t\t\t// Récupération des projets\n\t\t\t$this-> split_projects($_SESSION['user']['id']);\n\t\t}\n\t\tcatch(Exception $e){\n\t\t\t$error = $e->getMessage();\n\t\t\t$this->log_error($error);\n\t\t}\n\n\t\t$data['server_error'] = $error;\n\t\t$data['normalized_projects'] = $this->normalized_projects;\n\t\t$data['linked_projects'] = $this->linked_projects;\n\t\t$data['title'] = \"Tableau de bord\";\n\n\t\t// Chargement des vue\n\t\t$this->load->view('lib', $data);\n\t\t$this->load->view('user_dashboard_specifics');\n\t\t$this->load->view('header_'.$_SESSION['language']);\n\t\t$this->load->view('user_dashboard_'.$_SESSION['language'], $data);\n\t\t$this->load->view('footer_'.$_SESSION['language']);\n\t}// /dashboard()\n\n\n\tpublic function split_projects($user_id) // Répartition des projets selon leur type\n\t{\n\t\t$projects_list = $this->Projects_model->get_projects($user_id);\n\t\tforeach ($projects_list as $project) {\n\n\t\t\t// Appel de l'API pour récupérer les infos de chaque projet\n\t\t\t$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);\n\n\t\t\tif($project_api == \"\"){\n\t\t\t\t// Suppression en base\n\t\t\t\t$projects_list = $this->Projects_model->delete_project($project['project_id']);\n\n\t\t\t\tcontinue;\n\t\t\t}\n\n\t\t\tif(!$project_api){\n\t\t\t\t// Suppression du projet en base car il n'exise pas sur le serveur data\n\t\t\t\t$this->load->model('Projects_model');\n\t\t\t\t$this->Comments_model->delete_project($project['project_id']);\n\t\t\t\t//throw new Exception(\"An internal synchronization error occurred on our server\", 1);\n\t\t\t}\n\n\t\t\t$project['project_id'] = $project_api['project_id'];\n\t\t\t$project['display_name'] = $project_api['display_name'];\n\t\t\t$project['description'] = $project_api['description'];\n\t\t\t$project['project_type'] = $project_api['project_type'];\n\n\t\t\t$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);\n\n\t\t\tif($project_api['project_type'] == 'normalize'){\n\t\t\t\t$project['has_mini'] = @$project_api['has_mini'];\n\t\t\t\t$project['file'] = @key($project_api['files']);\n\t\t\t\t$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;\n\n\t\t\t\t$this->normalized_projects[] = $project;\n\t\t\t}\n\t\t\telse{\n\n\n\t\t\t\t\n\t\t\t\t$project['file_src'] = $project_api['files']['source']['file_name'];\n\t\t\t\t$project['file_ref'] = $project_api['files']['ref']['file_name'];\n\n\t\t\t\t$this->linked_projects[] = $project;\n\t\t\t}\n\t\t}// /foreach\n\t}// /split_projects()\n\n\n\tpublic function last_written($project_type, $project_id)\n\t{\t\n\t\t$params=['before_module'=>'recode_types'];\n\n\t\t$curl = curl_init();\n\t\t \n\t\t$url = BASE_API_URL.'/api/last_written/'.$project_type.'/'.$project_id;\n\n\t\t$opts = [\n\t\t    CURLOPT_URL => $url,\n\t\t    CURLOPT_HTTPHEADER => array( 'Content-Type: application/json'),\n\t\t    CURLOPT_RETURNTRANSFER => true,\n\t\t    CURLOPT_POST => true,\n\t\t    CURLOPT_POSTFIELDS => json_encode($params)\n\t\t];\n\n\n\t\tcurl_setopt_array($curl, $opts);\n\t\t \n\t\t$response = json_decode(curl_exec($curl), true);\n\n\t\treturn $response;\n\t}// /last_written()\n\n\n\tpublic function log_error($comment)\n\t{\n\t\t# Enregistrement des erreurs en base\n\t\t$data_to_write['comment'] = $comment;\n\t\t$data_to_write['user_id'] = \"0\";\n\n\t\t// Chargement du modèle\n\t\t$this->load->model('Comments_model');\n\n\t\t// Insertion\n\t\t$this->Comments_model->insert_comment($data_to_write);\n\t}// /log_error()\n}",
+			"file": "application/controllers/User.php",
+			"file_size": 7321,
+			"file_write_time": 131556686015297140,
 			"settings":
 			{
-				"buffer_size": 24608,
+				"buffer_size": 7317,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "application/views/project_link_es_linker_fr.php",
+			"settings":
+			{
+				"buffer_size": 30673,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -532,25 +544,16 @@
 			"file": "application/views/project_link_step1_init_fr.php",
 			"settings":
 			{
-				"buffer_size": 55117,
+				"buffer_size": 58770,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "assets/style.css",
+			"file": "application/views/user_dashboard_fr.php",
 			"settings":
 			{
-				"buffer_size": 11767,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "assets/project_link_step1_init.css",
-			"settings":
-			{
-				"buffer_size": 766,
+				"buffer_size": 18582,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -639,11 +642,17 @@
 	],
 	"file_history":
 	[
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/e443246eed65b278d827617cdf6ecac7/metadata.json",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
+		"/var/www/html/projets/magical_ui/assets/style.css",
+		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
+		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
+		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_specifics.php",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_train_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_es_train.css",
 		"/var/www/html/projets/magical_ui/application/views/lib.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.css",
 		"/var/www/html/projets/magical_ui/assets/project_link_select_columns.js",
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_fr.php",
@@ -652,7 +661,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_link_select_columns_specifics.php",
 		"/var/www/html/projets/myckael/application/config/config.php",
 		"/var/www/html/projets/magical_ui/application/views/header_fr.php",
-		"/var/www/html/projets/magical_ui/assets/style.css",
 		"/var/www/html/projets/myckael/application/controllers/chemin.php",
 		"/var/www/html/projets/myckael/application/controllers/Home.php",
 		"/var/www/html/projets/myckael/application/controllers/Chemin.php",
@@ -665,7 +673,6 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5d62b778eec7853c951c7ed67be912fa/es_linker/column_matches.json",
 		"/var/www/html/projets/magical_ui/application/views/project_link_es_linker_specifics.php",
-		"/var/www/html/projets/magical_ui/application/views/project_link_step1_init_fr.php",
 		"/home/jerem/Aide/mysql",
 		"/var/www/html/projets/magical_ui/application/views/user_dashboard_fr.php",
 		"/var/www/html/projets/magical_ui/assets/jquery.fittext.js",
@@ -706,9 +713,6 @@
 		"/var/www/html/projets/magical_ui/application/views/project_normalize_replace_mvs_fr.php",
 		"/home/jerem/ssh_key.pub",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/6ea85923ceab826945dca6239343e5ed/metadata.json",
-		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.js",
-		"/var/www/html/projets/magical_ui/assets/project_link_step1_init.css",
-		"/var/www/html/projets/magical_ui/application/views/project_normalize_init_fr.php",
 		"/var/www/html/projets/magical_ui/assets/project_normalize_init.css",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/c9f789fd290ba006479f57d2b80446a6/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/8e0268e49ba1b5a3388caad2fde0198a/metadata.json",
@@ -765,8 +769,7 @@
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/60868bd87530f6493e882b7d551a4a2d/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/normalize/11bf7c4cc0c500233d3e0cff48dab439/metadata.json",
 		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/5eea3e459992c5f8fd04a45adab62ed6/es_linker/learned_settings.json",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py",
-		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/data/link/2b0f1a02f60b6aaa0f9c9daed24d1e50/metadata.json"
+		"/home/jerem/w/Magical/the-magical-csv-merge-machine/merge_machine/es_match.py"
 	],
 	"find":
 	{
@@ -786,6 +789,36 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"add_new_normalize_project_src",
+			"linked_projects",
+			"project",
+			"file_ref",
+			"get_data",
+			"create_es_index_api",
+			"load_data",
+			"get_data",
+			"show_new_proposition",
+			"src_selection",
+			"selection",
+			"file_name_ref",
+			"f00",
+			"000",
+			"hover_exist_ref_target",
+			"select_project",
+			"select_internal",
+			"select_internal_ref",
+			"get_internal_projects_html",
+			"modal_projects",
+			"bt_select_project_src",
+			"html",
+			"src_project_name",
+			"file_name_src",
+			"nouveau",
+			"send_src_file_ok",
+			"id=\"progre",
+			"progress-bar",
+			"wait",
+			"fileup",
 			"#result",
 			"result",
 			"progress_src",
@@ -883,37 +916,7 @@
 			"togg",
 			"blocs",
 			"=>",
-			"]",
-			"[",
-			"\"nom",
-			"conten",
-			"info",
-			"bt_info_ref",
-			"info_ref",
-			"info_src",
-			"bt_info_src",
-			"get_columns_html",
-			"src_columns",
-			"fa ",
-			"(source)",
-			"delete_al",
-			"delete_projects",
-			"delete_project_API",
-			"private",
-			"delete_al",
-			"session",
-			"bt_delete_all",
-			"error_msg",
-			"panel_comment",
-			"spl",
-			"log_error",
-			"normalized_projects",
-			"error_box",
-			"create_es_labeller_api",
-			"error_msg",
-			"create_es_labeller_api",
-			"insert",
-			"es_insert"
+			"]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -921,6 +924,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"E00612",
 			":",
 			"}",
 			"{",
@@ -968,119 +972,58 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/views/project_normalize_init_fr.php",
+					"file": "application/controllers/User.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24608,
+						"buffer_size": 7317,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22768,
-								22776
+								6193,
+								6193
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 10399.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/views/project_link_step1_init_fr.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 55117,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26483,
-								26483
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9193.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "assets/style.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11767,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4757,
-								4765
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4125.0,
+						"translation.y": 3942.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "assets/project_link_step1_init.css",
+					"buffer": 1,
+					"file": "application/views/project_link_es_linker_fr.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 766,
+						"buffer_size": 30673,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1,
-								7
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -1089,6 +1032,65 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "application/views/project_link_step1_init_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 58770,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35186,
+								35186
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8778.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/views/user_dashboard_fr.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18582,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5723,
+								5723
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1255.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1133,7 +1135,7 @@
 	"project": "projet.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 71.0
 	},
 	"save_all_on_build": true,
 	"select_file":
