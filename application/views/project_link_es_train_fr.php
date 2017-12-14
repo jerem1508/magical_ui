@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-    
+
     <hr style="border-top: 3px dotted #777;">
 
     <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
@@ -91,7 +91,7 @@
                     <div class="well">
                         La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
                         <div style="margin-top: 20px;">
-                            Taux de précision souhaité : 
+                            Taux de précision souhaité :
                             <select>
                                 <option>Tout apparier</option>
                                 <option>Précision élevée (plus de résultats)</option>
@@ -105,7 +105,9 @@
                 <div class="col-xs-offset-1 col-xs-4 text-justify">
                     <div style="margin-bottom: 20px;">
                         <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
-                        <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();"><i class="fa fa-trash"></i>&nbsp;Effacer</button>
+                        <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();">
+                            <i class="fa fa-trash"></i>&nbsp;Effacer
+                        </button>
                     </div>
 
                     <div id="user_filters">
@@ -120,34 +122,34 @@
                         Ces informations sont-elles identiques ?
                     </div>
                     <div>
-                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                        <button class="btn btn-default btn-xl btn_icon btn-default"
                                 data-toggle="tooltip"
                                 title="Revenir à la proposition précédente"
-                                onclick="socket_answer('previous');" 
+                                onclick="socket_answer('previous');"
                                 id="bt_previous">
                             <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
                         </button>
-                        <button class="btn btn-default btn-xl btn_2_3 btn-yes" 
-                                onclick="socket_answer('yes');" 
+                        <button class="btn btn-default btn-xl btn_2_3 btn-yes"
+                                onclick="socket_answer('yes');"
                                 id="bt_yes">
                             <h2>OUI</h2>
                         </button>
-                        <button class="btn btn-default btn-xl btn_2_3 btn-no" 
-                                onclick="socket_answer('no');" 
+                        <button class="btn btn-default btn-xl btn_2_3 btn-no"
+                                onclick="socket_answer('no');"
                                 id="bt_no">
                             <h2>NON</h2>
                         </button>
-                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                        <button class="btn btn-default btn-xl btn_icon btn-default"
                                 data-toggle="tooltip"
                                 title="Je ne sais pas"
-                                onclick="socket_answer('uncertain');" 
+                                onclick="socket_answer('uncertain');"
                                 id="bt_uncertain">
                             <h2><i class="fa fa-question-circle" aria-hidden="true"></i></h2>
                         </button>
-                        <button class="btn btn-default btn-xl btn_icon btn-default" 
+                        <button class="btn btn-default btn-xl btn_icon btn-default"
                                 data-toggle="tooltip"
                                 title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
-                                onclick="socket_answer('forget_row');" 
+                                onclick="socket_answer('forget_row');"
                                 id="bt_forget">
                             <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
                         </button>
@@ -169,7 +171,7 @@
         </div>
         <div class="row">
             <div class="col-xs-2">
-                <div class="stat" 
+                <div class="stat"
                     data-toggle="tooltip"
                     title="Informations sur la précision">
                     <span class="title">Précision estimée</span>
@@ -177,7 +179,7 @@
                 </div>
             </div>
             <div class="col-xs-2">
-                <div class="stat" 
+                <div class="stat"
                     data-toggle="tooltip"
                     title="Informations sur la couverture">
                     <span class="title">Couverture estimée</span>
@@ -185,7 +187,7 @@
                 </div>
             </div>
             <div class="col-xs-2">
-                <div class="stat" 
+                <div class="stat"
                     data-toggle="tooltip"
                     title="L'avancement correspond au pourcentage du fichier déjà traité par la labellisation utilisateur.">
                     <span class="title">Avancement</span>
@@ -218,7 +220,7 @@
                                 <td id="yes_15"></td>
                                 <th class="total" id="stat_yes">0</th>
 
-                                <th rowspan="2" class="history_all" id="stat_all">0</th>                                        
+                                <th rowspan="2" class="history_all" id="stat_all">0</th>
                             </tr>
                             <tr class="history_no">
                                 <th class="title">NON</th>
@@ -395,7 +397,7 @@ function create_es_index_api() {
                 console.log("success - create_es_index_api");
                 console.dir(result);
 
-                // Appel 
+                // Appel
                 var handle = setInterval(function(){
                     $.ajax({
                         type: 'get',
@@ -408,7 +410,7 @@ function create_es_index_api() {
 
                                 // Chargement du labeller
                                 create_es_labeller_api();
-                               
+
                             }
                             else{
                                 console.log("success - job en cours");
@@ -448,7 +450,7 @@ function create_es_labeller_api() {
                 console.log("success - create_es_labeller_api");
                 console.dir(result);
 
-                // Appel 
+                // Appel
                 var handle = setInterval(function(){
                     $.ajax({
                         type: 'get',
@@ -458,7 +460,7 @@ function create_es_labeller_api() {
                                 clearInterval(handle);
                                 console.log("success - job");
                                 console.dir(result);
-                               
+
                                 var answer_to_send = {'project_id': project_id_link}
 
                                 load_labeller_api(project_id_link);
@@ -550,7 +552,7 @@ function socket_answer(user_response) {
     // Un nouveau message sera reçu par socket_on_message()
 
     disabeled_buttons();
-    
+
     $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
     // var response_to_send = {
@@ -596,9 +598,6 @@ function socket_update_filters(must, must_not) {
     //must = {'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}
 
     disabeled_buttons();
-
-
-
 
     var response_to_send = {
         "module_params": {
@@ -663,7 +662,7 @@ function show_new_proposition(message) {
             var value_tab = value.split(' ');
             var value_temp = "";
             for (var k = 0; k < value_tab.length; k++) {
-                
+
                 value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\')">' + value_tab[k] + '</a> ';
             }
             source.push(value_temp);
@@ -672,11 +671,11 @@ function show_new_proposition(message) {
         // Concatenation des libellés
         var lib_source_keys = source_keys.join(" | ");
         var lib_source_values = source.join(" | ");
-        
+
         // Ecriture de la ligne Source
         lines_html += '<tr>';
         lines_html += '<td class="title"><i class="fa fa-table" aria-hidden="true"></i> ' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
-        lines_html += '</tr>'; 
+        lines_html += '</tr>';
 
         // Retours REFERENTIEL
         // Liste des colonnes associées
@@ -709,7 +708,7 @@ function show_new_proposition(message) {
     for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF
         lines_html += '<tr>';
         lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
-        lines_html += '</tr>';        
+        lines_html += '</tr>';
         lines_html += '<tr>';
         lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
         lines_html += '</tr>';
@@ -792,7 +791,7 @@ function add_columns_filter(columns) {
     for (var i = 0; i < columns.length; i++) {
         $('#columns_filter').append($("<option></option>")
                             .attr("value",columns[i])
-                            .text(columns[i])); 
+                            .text(columns[i]));
     }
 }// / add_columns_filter()
 
@@ -842,7 +841,7 @@ function add_filter() {
 
 function add_buttons() {
     // Ajout des boutons
-    
+
     $("#bt_start").click(function(){
         $("#entete").css("display", "none");
         $("#tempo").css("display", "none");
@@ -876,7 +875,7 @@ function add_buttons() {
 
     $("#form_words").submit(function(event) {
         event.preventDefault();
-        add_filter();        
+        add_filter();
     });
 
     $("#bt_yes").click(function(){
@@ -927,10 +926,10 @@ function update_stat() {
             $("#no_" + cpt).html('&nbsp;');
         }
         else{
-            $("#no_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');   
+            $("#no_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');
             $("#yes_" + cpt).html('&nbsp;');
         }
-        
+
         cpt ++;
     }
 }// /update_stat()
@@ -938,7 +937,7 @@ function update_stat() {
 
 function valid_filters() {
     // Traitement des termes obligatoires
-    must = get_obj_filters($("#filter_plus").val()); 
+    must = get_obj_filters($("#filter_plus").val());
 
     // Traitement des termes à exclures
     must_not = get_obj_filters($("#filter_minus").val());
@@ -958,21 +957,19 @@ function get_obj_filters(filter_list) {
     var tab_input_user = filter_list.split(",");
     for (var i = 0; i < tab_input_user.length; i++) {
         var tab_col_val = tab_input_user[i].split(":");
-        
         var column_name = tab_col_val[0];
         var value = tab_col_val[1];
 
         if(!(column_name in tab_by_columns)){
             tab_by_columns[column_name] = new Array();
         }
-
         tab_by_columns[column_name].push(tab_col_val[1]);
     }
 
     // Parcours du tableau pour renvoyer l'objet
     var obj = new Object();
     for(var key in tab_by_columns){
-        obj[key] = [tab_by_columns[key]];
+        obj[key] = tab_by_columns[key];
     }
 
     if(Object.keys(obj) == ""){
@@ -981,6 +978,7 @@ function get_obj_filters(filter_list) {
 
     return obj;
 }// / get_obj_filters()
+
 
 $(function(){// ready
     // Compteurs
@@ -1023,9 +1021,9 @@ $(function(){// ready
 
     //Ajoute les colonnes du référentiel à la modal d'ajout de filtres
     add_columns_filter(columns_ref);
-    
+
     // Récupération du nombre total de lignes
-    src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;    
+    src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;
 
     // Récupération des matches
     column_matches = get_column_matches();
@@ -1041,6 +1039,6 @@ $(function(){// ready
     //socket_on_message();
 
     // Tooltips
-    $('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
 });//ready
 </script>
