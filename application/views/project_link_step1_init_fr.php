@@ -32,16 +32,15 @@ function is_completed_step($step_name, $project_steps, $has_mini)
 
 function get_progress_html($bs_color, $ratio, $step, $project_id)
 {
-    $html = '<div 
-                class="progress-bar progress-bar-'.$bs_color.' step '.$step.'" 
-                role="progressbar" 
-                aria-valuenow="25" 
-                aria-valuemin="0" 
-                aria-valuemax="100" 
-                data-toggle="tooltip" 
+    $html = '<div
+                class="progress-bar progress-bar-'.$bs_color.' step '.$step.'"
+                role="progressbar"
+                aria-valuenow="25"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                data-toggle="tooltip"
                 style="width: '.$ratio.'%;">
             </div>';
-
     return $html;
 }// /get_progress_html()
 
@@ -54,7 +53,7 @@ function get_internal_projects_html($internal_projects)
 
     // Récupération des informations depuis les métatdata des projets internes
     foreach ($internal_projects as $project){
-        
+
         // $project['display_name']
         // $project['description']
         // $project['project_id']
@@ -123,7 +122,7 @@ function get_normalized_projects_html($id, $normalized_projects)
     $ratio = 100/$nb_steps;
 
     foreach ($normalized_projects as $project){
-        // On ne veut pas afficher les projets "publics" ici 
+        // On ne veut pas afficher les projets "publics" ici
         if($project['public']){
             continue;
         }
@@ -181,7 +180,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                             $html .= '<i>'.$project['description'].'</i>';
                         $html .= '</div>';
                     $html .= '</div>';
-                    
+
                     $html .= '<div class="row">';
                         $html .= '<div class="col-md-12">';
                             $html .= 'Création : '.$created_date;
@@ -210,7 +209,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         <div class="col-lg-6">
             	<h1>Jointure de fichiers</h1>
                 <div class="page_explain">
-                    La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.    
+                    La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.
                 </div>
         </div> <!-- / col-12-->
         <div class="col-lg-6">
@@ -323,7 +322,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
                                 &nbsp;<i id="src_selection">Pas encore de sélection</i>
                                 <div id="file_name_src" class="hidden"></div>
-                                <div id="src_project_name" class="hidden"></div>                                
+                                <div id="src_project_name" class="hidden"></div>
                             </div><!-- /col -->
                         </div><!-- /row -->
                         <hr>
@@ -398,7 +397,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                         </form>
 
                     </div>
-                    
+
                 </div>
                 <div class="col-xs-6" style="border-left: 3px dotted #ddd;">
                     <div data-intro="Choisissez ici votre fichier de référence">
@@ -550,7 +549,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 <span>Analyse du fichier "SOURCE"</span>
                                 <span id="send_src_analyse_wait">
                                     <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 20px;">
-                                </span>                                
+                                </span>
                                 <span id="send_src_analyse_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
 
@@ -570,7 +569,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 <span>Analyse du fichier "REFERENTIEL"</span>
                                 <span id="send_ref_analyse_wait">
                                     <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 20px;">
-                                </span>                                
+                                </span>
                                 <span id="send_ref_analyse_ok" class="glyphicon glyphicon-ok check_ok"></span>
                             </div>
 
@@ -657,7 +656,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             <div class="col-xs-11" id="errors">
 
             </div>
-        </div>  
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -698,7 +697,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 
     function save_project_sync(project_id, project_type) {
-        $.ajax({    
+        $.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/project');?>',
             data: 'project_id=' + project_id + '&project_type=' + project_type,
@@ -717,7 +716,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 
 	function save_session_sync(name, value) {
-		$.ajax({	
+		$.ajax({
 			type: 'post',
 			url: '<?php echo base_url('index.php/Save_ajax/session');?>',
 			data: 'name=' + name + '&val=' + value,
@@ -796,7 +795,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                     }
                     if(file_role == "ref"){
                         $('#txt_add_ref_nrz_projects').css('display', 'inline');
-                        $('#add_ref_nrz_projects_ok').css('display', 'inline');                        
+                        $('#add_ref_nrz_projects_ok').css('display', 'inline');
                     }
                 }
             },
@@ -865,7 +864,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                     // Récupération de l'identifiant projet
                     ref_project_id = result.project_id;
-                    
+
                     //
                     $('#txt_init_nrz_ref_project').css('display', 'inline');
                     $('#init_nrz_ref_project_ok').css('display', 'inline');
@@ -881,7 +880,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 
     function requirements() {
-        
+
         error = false;
         var tab_error = new Array();
 
@@ -923,7 +922,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 tab_error.push('Vous devez sélectionner un fichier référentiel.');
             }
         }
-        
+
         $("#errors").html("");
         if(tab_error.length > 0){
             for (var i = 0; i < tab_error.length; i++) {
@@ -933,7 +932,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             $("#modal_error").modal("show");
         }
         else{
-            return true;            
+            return true;
         }
     }// /requirements()
 
@@ -947,7 +946,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
         var project_name = $("#project_name").val();
         var project_description = $("#project_description").val();
-        
+
         // desactivation du bouton
         $("#bt_new_project").css("display", "none");
 
@@ -985,15 +984,15 @@ function get_normalized_projects_html($id, $normalized_projects)
                         console.log("project_id" + link_project_id);
 
                         var result_save = "";
-                    
+
                         console.log("treatment/save_session_synch");
                         result_save = save_session_sync("link_project_id", link_project_id);
-                        
+
                         // Sauvegarde du projet bdd
                         console.log("treatment/save_project_synch");
                         save_project_sync(link_project_id, 'link');
 
-                        // 
+                        //
                         $('#txt_create_merge_project').css('display', 'inline');
                         $('#create_merge_project_ok').css('display', 'inline');
                     }
@@ -1023,7 +1022,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                         console.log("treatment/save_session_synch");
                         result_save = save_session_sync("src_project_id", src_project_id);
-                        
+
                         // Sauvegarde du projet en base si user authentifié
                         console.log("treatment/save_project_synch");
                         save_project_sync(src_project_id, 'normalize');
@@ -1047,6 +1046,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                 else if(exist_file_src && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("source", src_project_id);
+
+                    $('#send_src_analyse_wait').css('display', 'none');
+                    $('#send_src_analyse_ok').css('display', 'inline-block');
 
                     // Le fichier est déjà uploadé
                     UL_fic_src = true;
@@ -1075,7 +1077,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                         console.log("treatment/save_session_synch");
                         result_save = save_session_sync("ref_project_id", ref_project_id);
-                        
+
                         // Sauvegarde du projet en base si user authentifié
                         console.log("treatment/save_project_synch");
                         save_project_sync(ref_project_id, 'normalize');
@@ -1098,13 +1100,19 @@ function get_normalized_projects_html($id, $normalized_projects)
                 else if(exist_file_ref && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("ref", ref_project_id);
-                    
+
+                    $('#send_ref_analyse_wait').css('display', 'none');
+                    $('#send_ref_analyse_ok').css('display', 'inline-block');
+
                     // Le fichier est déjà uploadé
                     UL_fic_ref = true;
                 }
                 else if(exist_ref && !error){
                     // Ajout du projet de normalisation au projet de link
                     save_id_normalized_project("ref", ref_project_id);
+
+                    $('#send_ref_analyse_wait').css('display', 'none');
+                    $('#send_ref_analyse_ok').css('display', 'inline-block');
 
                     // Le fichier est déjà uploadé
                     UL_fic_ref = true;
@@ -1133,7 +1141,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         if(target){
             $("#" + target + "_project_id").html(project_id);
             $("#" + target + "_project_name").html(project_name);
-            
+
             $("#" + target + "_selection").html(project_name);
         }
 
@@ -1322,7 +1330,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             if(UL_fic_src && UL_fic_ref){
                 console.log('Fin de traitement OK');
                 clearInterval(handle);
-                
+
                 // Affichage du bouton "suivant"
                 $('#bloc_bt_next').css('display', 'inherit');
             }
@@ -1333,7 +1341,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         $(".replace_mvs").attr('title','Etape de traitement des valeurs manquantes.');
         $(".recode_types").attr('title','Etape de traitement des types.');
         $(".concat_with_init").attr('title','Etape finale d\'enrichissement et de téléchargement du fichier normalisé.');
-        $('[data-toggle="tooltip"]').tooltip(); 
+        $('[data-toggle="tooltip"]').tooltip();
 	}); // / Ready
 
 </script>
