@@ -64,16 +64,16 @@
 
 	function get_progress_html($bs_color, $ratio, $step, $project_id){
 
-		$html = '<div 
-					class="progress-bar progress-bar-'.$bs_color.' step '.$step.'" 
-					role="progressbar" 
-					aria-valuenow="25" 
-					aria-valuemin="0" 
-					aria-valuemax="100" 
-					data-toggle="tooltip" 
-					onclick="load_step(\''.$step.'\', \''.$project_id.'\');" 
+		$html = '<div
+					class="progress-bar progress-bar-'.$bs_color.' step '.$step.'"
+					role="progressbar"
+					aria-valuenow="25"
+					aria-valuemin="0"
+					aria-valuemax="100"
+					data-toggle="tooltip"
 					style="width: '.$ratio.'%;">
 				</div>';
+		//onclick="load_step(\''.$step.'\', \''.$project_id.'\');"
 
 		return $html;
 	}// /get_progress_html()
@@ -83,16 +83,16 @@
 
 		if($step_todo){
 			$lib_todo = "Poursuivre";
-										 
-			$html = '<button 
-						class="btn btn-xs btn-warning btn_tdb" 
+
+			$html = '<button
+						class="btn btn-xs btn-warning btn_tdb"
 						onclick="load_step(\''.$step_todo.'\', \''.$project_id.'\', \''.$project_type.'\');">
 						Poursuivre
 					</button>';
 		}
 		else{
-			$html = '<button 
-						class="btn btn-xs btn-success3 btn_tdb" 
+			$html = '<button
+						class="btn btn-xs btn-success3 btn_tdb"
 						onclick="load_step(\'concat_with_init\', \''.$project_id.'\', \''.$project_type.'\');">
 						Rapport
 					</button>';
@@ -119,20 +119,20 @@
 
 <div>
 	<ul class="nav nav-tabs">
-	  <li class="active"><a data-toggle="tab" href="#merge_tab"><h4>Mes projets de jointure</h4></a></li>
+	  <li class="active"><a data-toggle="tab" href="#link_tab"><h4>Mes projets de jointure</h4></a></li>
 	  <li><a data-toggle="tab" href="#normalize_tab"><h4>Mes projets de normalisation</h4></a></li>
 	  <li><a data-toggle="tab" href="#account_tab"><h4>Mon compte</h4></a></li>
-	</ul>	
+	</ul>
 </div>
 
 <div class="tab-content">
-  <div id="merge_tab" class="tab-pane fade in active">
+  <div id="link_tab" class="tab-pane fade in active">
   	<div class="container">
 		<div class="row text-right">
 			<div class="col-xs-12">
-				<button 
-					class="btn btn-xs btn-success" 
-					style="margin-bottom: 8px;" 
+				<button
+					class="btn btn-xs btn-success"
+					style="margin-bottom: 8px;"
 					onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">
 						+&nbsp;Nouveau projet de jointure
 				</button>
@@ -213,9 +213,9 @@
 	<div class="container">
 		<div class="row text-right">
 			<div class="col-xs-12">
-				<button 
-					class="btn btn-xs btn-success" 
-					style="margin-bottom: 8px;" 
+				<button
+					class="btn btn-xs btn-success"
+					style="margin-bottom: 8px;"
 					onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">
 						+&nbsp;Nouveau projet de normalisation
 				</button>
@@ -347,7 +347,7 @@
   						</button>
   					</div>
   				</div>
-  				
+
   			</div><!--/col-md-6-->
   		</div><!--/row-->
   	</div><!-- /container -->
@@ -389,7 +389,7 @@
 		var ret = false;
 
 		// Suppression en base
-		$.ajax({    
+		$.ajax({
             type: 'get',
             url: '<?php echo base_url('index.php/Save_ajax/delete_project/');?>' + project_id,
             async: false,
@@ -416,11 +416,12 @@
 
 		// Suppression su repertoire API
 		if(ret){
-			delete_project_API(project_type, project_id)			
+			delete_project_API(project_type, project_id)
 		}
 
 		// Refresh
-		window.location.reload();
+		// window.location.reload();
+		window.location.href = <?php echo '"'.base_url('index.php/User/dashboard_delete_project/"');?> + project_type;
 	}// /delete_project()
 
 
@@ -431,7 +432,7 @@
 		// else{// link
 		// 	window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + project_type + "/" + project_id;
 		// }
-		
+
 		window.location.href = <?php echo '"'.base_url('index.php/Project/"');?> + project_type + "/" + project_id;
 	}// /load_step()
 
@@ -461,12 +462,12 @@
 			return false;
 		}
 		else{
-			$(".error_box").css("visibility", "hidden");				
+			$(".error_box").css("visibility", "hidden");
 		}
 
 
 		// Modification en base
-		$.ajax({    
+		$.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/modify_password/');?>',
 			data: 'email=' + email + '&password_old=' + password_old.val() + '&password_new=' + password_new.val(),
@@ -506,7 +507,7 @@
 
 	function delete_all() {
 		// Suppression de toutes les informations
-		$.ajax({    
+		$.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/delete_all');?>',
             data: 'user_id=' + <?php echo $_SESSION['user']['id'];?>,
@@ -521,10 +522,10 @@
             }
         });
 	}// /delete_all()
-	
+
 
 	$(function() { // ready
-	
+
 		$("#bt_delete_all").click(function(){
 			if(confirm("Etes vous certains de vouloir supprimer votre compte ? \nTous vos projets seront également supprimés.")){
 				delete_all();
@@ -581,6 +582,15 @@
 			modify_password();
 		});
 
+		// Positionnement sur le bon onglet après suppression d'un project_type
+		<?php
+		$tab = 'link';
+		if(isset($_SESSION['dashboard_tab'])){
+			$tab = $_SESSION['dashboard_tab'];
+		}
+		echo '$("#'.$tab.'_tab").tab("show");';
+		?>
+
 		// Tooltip des étapes
 		$(".add_selected_columns").attr('title','Etape de sélection des colonnes à traiter.');
 		$(".replace_mvs").attr('title','Etape de traitement des valeurs manquantes.');
@@ -594,7 +604,7 @@
 		$('[data-toggle="tooltip"]').tooltip();
 
 		// Hauteur de la page pour mettre le footer en bas
-		var size = set_height('merge_tab');
+		var size = set_height('link_tab');
 		set_height('normalize_tab', size);
 		set_height('account_tab', size);
 	}); // / ready
