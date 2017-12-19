@@ -15,14 +15,14 @@ class Private_functions {
 		$ch = curl_init(BASE_API_URL.'/api/ping');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-		if(curl_exec($ch) === false){
+		if(curl_exec($ch) === FALSE){
 		    echo 'Erreur Curl : ' . curl_error($ch);
 			curl_close($ch);
-		    return false;
+		    return FALSE;
 		}
 		else{
 			curl_close($ch);
-			return true;
+			return TRUE;
 		}
 	}// /test_server_api()
 
@@ -31,16 +31,16 @@ class Private_functions {
 	{
 		# Récupération des métadata d'un projet
 		$curl = curl_init();
-		 
+
 		$url = BASE_API_URL.'/api/metadata/'.$project_type.'/'.$project_id;
 
 		$opts = [
 		    CURLOPT_URL => $url,
 		    CURLOPT_RETURNTRANSFER => true,
 		];
-		 
+
 		curl_setopt_array($curl, $opts);
-		
+
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response['metadata'];
@@ -51,7 +51,7 @@ class Private_functions {
 	{
 		$tab = [];
 		foreach ($log as $filename => $steps) {
-			$t_steps = [];	
+			$t_steps = [];
 			foreach ($steps as $step => $values) {
 				$t_steps[$step] = ($values['completed'] || $values['skipped']);
 			}
@@ -121,9 +121,9 @@ class Private_functions {
 		    CURLOPT_URL => $url,
 		    CURLOPT_RETURNTRANSFER => true,
 		];
-		 
+
 		curl_setopt_array($curl, $opts);
-		 
+
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response;
@@ -139,16 +139,16 @@ class Private_functions {
 		}
 
 		$curl = curl_init();
-		 
+
 		$url = BASE_API_URL.'/api/delete/'.$project_type.'/'.$project_id;
 
 		$opts = [
 		    CURLOPT_URL => $url,
 		    CURLOPT_RETURNTRANSFER => true,
 		];
-		 
+
 		curl_setopt_array($curl, $opts);
-		
+
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response;
