@@ -107,7 +107,7 @@ class Project extends CI_Controller {
 
 		$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);
 
-		$file_name = key($project_api['files']);	
+		$file_name = key($project_api['files']);
 
 		$steps = $project_api['log'][$file_name];
 
@@ -117,7 +117,7 @@ class Project extends CI_Controller {
 		// // Si toutes les étapes du fichier non MINI sont vides, on vérifie le MINI
 		if($project_api['has_mini']){
 			$file_name = 'MINI__'.$file_name;
-		
+
 			$steps = $project_api['log'][$file_name];
 
 			$actual_step_mini = $this->get_step_normalization($steps);
@@ -141,7 +141,7 @@ class Project extends CI_Controller {
 	{
 		if($project_id==''){
 			$this->load_step1_init();
-			return;		
+			return;
 		}
 
 		switch ($step) {
@@ -164,7 +164,7 @@ class Project extends CI_Controller {
 			case 'concat_with_init':
 				$this->concat_with_init($project_id);
 				break;
-			
+
 			default:
 				$this->load_step1_init();
 		}
@@ -176,7 +176,7 @@ class Project extends CI_Controller {
 		# Récupère les projets de normalisation compris dans un projet de link
 		$tab = [];
 
-		// Récupération des metadata du projet de link 
+		// Récupération des metadata du projet de link
 		$tab_metadata_link_project = $this->private_functions->get_metadata_api('link', $project_id);
 
 		// Récupération des 2 ids des projets de normalisation
@@ -213,7 +213,7 @@ class Project extends CI_Controller {
 
 				// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation
 				$this->session->set_userdata('link_project_id', $project_id);
-				
+
 				// si pas fini, redirection vers la normalisation
 				if($step != 'concat_with_init'){
 					//$this->load_step_normalization($step, $normalized_project['project_id']);
@@ -285,7 +285,7 @@ class Project extends CI_Controller {
 				//$this->link_results_analyzer($project_id);
 				$this->es_linker($project_id);
 				break;
-			
+
 			default:
 				$this->load_link_step1_init();
 		}
@@ -355,7 +355,7 @@ class Project extends CI_Controller {
 		return $this->private_functions->is_completed_step($step_name, $steps_by_filename, $project_api['has_mini']);
 	}// /is_done_step()
 
-	
+
 	public function load_link_step1_init()
 	{
 		# Chargement de la vue d'initialisation du projet
@@ -391,7 +391,7 @@ class Project extends CI_Controller {
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /load_link_step1_init()
 
-	
+
 	public function save_step1_init($project_id)
 	{
 		# Sauvegarde de l'initialisation du projet
@@ -421,7 +421,7 @@ class Project extends CI_Controller {
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /load_step1_init()
 
-	
+
 	public function add_selected_columns($id="")
 	{
 		if(isset($id)){
@@ -453,9 +453,9 @@ class Project extends CI_Controller {
 			$this->session->set_userdata('project_id', $id);
 			$this->session->set_userdata('project_type', 'normalize');
 		}
-		
+
 		$this->test_project_id();
-				
+
 		// Chargement des vues
 		$data['title'] = "Normalisation";
 		$this->load->view('lib', $data);
@@ -527,12 +527,19 @@ class Project extends CI_Controller {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
-			if(!$project_api){
-				// Suppression en base
-				$projects_list = $this->Projects_model->delete_project($project['project_id']);
+			// if(!$project_api){
+			// 	// Suppression en base
+			// 	$projects_list = $this->Projects_model->delete_project($project['project_id']);
+			// 	continue;
+			// 	//throw new Exception("An internal synchronization error occurred on our server", 1);
+			// }
 
-				continue;
+			if(!$project_api){
+				// Suppression du projet en base car il n'exise pas sur le serveur data
+				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
+				//$this->Projects_model->delete_project($project['project_id']);
 				//throw new Exception("An internal synchronization error occurred on our server", 1);
+				continue;
 			}
 
 			$project['project_id'] = $project_api["project_id"];
@@ -547,11 +554,11 @@ class Project extends CI_Controller {
 					$project['has_mini'] = $project_api['has_mini'];
 					$project['file'] = key($project_api['files']);
 					$this->normalized_projects[] = $project;
-					
+
 					break;
 				case 'link':
 					$this->linked_projects[] = $project;
-					
+
 					break;
 			}// /switch
 		}// /foreach

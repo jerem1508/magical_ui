@@ -23,8 +23,9 @@ class User extends CI_Controller {
 		}
 
 		// test du serveur API - Affiche une vue d'erreur
-		if($this->private_functions->test_server_API() == false){
-			// TODO : Sauvegarde de l'erreur en BDD
+		if($this->private_functions->test_server_API() === FALSE){
+			// Sauvegarde de l'erreur en BDD
+			$this->log_error('PING false');
 
 			redirect('/Home/error');
 		}
@@ -146,7 +147,7 @@ class User extends CI_Controller {
 						// Chargement du tableau de bord
 						redirect('/Project/link');
 						break;
-					
+
 					default:
 						// Chargement du tableau de bord
 						redirect('/User/dashboard');
@@ -155,7 +156,7 @@ class User extends CI_Controller {
 
 			}
 			else{
-				$this->login("","Mot de passe erroné !");	
+				$this->login("","Mot de passe erroné !");
 			}
 		}
 		else{
@@ -201,6 +202,16 @@ class User extends CI_Controller {
 	}// /dashboard()
 
 
+	public function dashboard_delete_project($tab='link')
+	{
+		// Mise en session de l'onglet en cours (link ou normalize)
+		$this->session->set_userdata('dashboard_tab', $tab);
+
+		// Chargement du tableau de bord
+		$this->dashboard();
+	}// /dashboard_delete_project()
+
+
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
@@ -209,18 +220,18 @@ class User extends CI_Controller {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
-			if($project_api == ""){
-				// Suppression en base
-				$projects_list = $this->Projects_model->delete_project($project['project_id']);
-
-				continue;
-			}
+			// if($project_api == ""){
+			// 	// Suppression en base
+			// 	$projects_list = $this->Projects_model->delete_project($project['project_id']);
+			// 	continue;
+			// }
 
 			if(!$project_api){
 				// Suppression du projet en base car il n'exise pas sur le serveur data
-				$this->load->model('Projects_model');
-				$this->Comments_model->delete_project($project['project_id']);
+				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
+				//$this->Projects_model->delete_project($project['project_id']);
 				//throw new Exception("An internal synchronization error occurred on our server", 1);
+				continue;
 			}
 
 			$project['project_id'] = $project_api['project_id'];
@@ -248,11 +259,11 @@ class User extends CI_Controller {
 
 
 	public function last_written($project_type, $project_id)
-	{	
+	{
 		$params=['before_module'=>'recode_types'];
 
 		$curl = curl_init();
-		 
+
 		$url = BASE_API_URL.'/api/last_written/'.$project_type.'/'.$project_id;
 
 		$opts = [
@@ -265,7 +276,7 @@ class User extends CI_Controller {
 
 
 		curl_setopt_array($curl, $opts);
-		 
+
 		$response = json_decode(curl_exec($curl), true);
 
 		return $response;
