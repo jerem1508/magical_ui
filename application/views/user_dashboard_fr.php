@@ -116,11 +116,10 @@
 <!--
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 -->
-
 <div>
 	<ul class="nav nav-tabs">
-	  <li class="active"><a data-toggle="tab" href="#link_tab"><h4>Mes projets de jointure</h4></a></li>
-	  <li><a data-toggle="tab" href="#normalize_tab"><h4>Mes projets de normalisation</h4></a></li>
+	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link"><h4>Mes projets de jointure</h4></a></li>
+	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize"><h4>Mes projets de normalisation</h4></a></li>
 	  <li><a data-toggle="tab" href="#account_tab"><h4>Mon compte</h4></a></li>
 	</ul>
 </div>
@@ -525,7 +524,6 @@
 
 
 	$(function() { // ready
-
 		$("#bt_delete_all").click(function(){
 			if(confirm("Etes vous certains de vouloir supprimer votre compte ? \nTous vos projets seront également supprimés.")){
 				delete_all();
@@ -588,8 +586,9 @@
 		if(isset($_SESSION['dashboard_tab'])){
 			$tab = $_SESSION['dashboard_tab'];
 		}
-		echo '$("#'.$tab.'_tab").tab("show");';
+		echo '$("#bt_tab_'.$tab.'").tab("show");';
 		?>
+
 
 		// Tooltip des étapes
 		$(".add_selected_columns").attr('title','Etape de sélection des colonnes à traiter.');
