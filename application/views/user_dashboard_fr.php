@@ -118,8 +118,8 @@
 -->
 <div>
 	<ul class="nav nav-tabs">
-	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link"><h4>Mes projets de jointure</h4></a></li>
-	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize"><h4>Mes projets de normalisation</h4></a></li>
+	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link" onclick="show_tabs('link');"><h4>Mes projets de jointure</h4></a></li>
+	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize" onclick="show_tabs('normalize');"><h4>Mes projets de normalisation</h4></a></li>
 	  <li><a data-toggle="tab" href="#account_tab"><h4>Mon compte</h4></a></li>
 	</ul>
 </div>
@@ -419,8 +419,8 @@
 		}
 
 		// Refresh
-		// window.location.reload();
-		window.location.href = <?php echo '"'.base_url('index.php/User/dashboard_delete_project/"');?> + project_type;
+		window.location.reload();
+		//window.location.href = <?php echo '"'.base_url('index.php/User/dashboard_delete_project/"');?> + project_type;
 	}// /delete_project()
 
 
@@ -523,13 +523,48 @@
 	}// /delete_all()
 
 
+	function save_session_sync(name, value) {
+    	$.ajax({
+    		type: 'post',
+    		url: '<?php echo base_url('index.php/Save_ajax/session');?>',
+    		data: 'name=' + name + '&val=' + value,
+    		async: false,
+    		success: function (result) {
+    			console.log(result);
+
+    			if(!result){
+    				console.log("sauvegarde en session KO");
+    				return false;
+    			}
+    			else{
+    				console.log("sauvegarde en session OK");
+    				return true;
+    			}
+    		},
+    		error: function (result, status, error){
+    			console.log(result);
+    			console.log(status);
+    			console.log(error);
+    			return false;
+    		}
+    	});
+    }// /save_session_sync()
+
+
+	function show_tabs(tab) {
+		// Sauvegarde en session de l'onglet en cours
+		save_session_sync("dashboard_tab",tab);
+
+		// Affichage de l'onglet
+		$("#bt_tab_" + tab).tab("show");
+	}// /show_tabs()
+
 	$(function() { // ready
 		$("#bt_delete_all").click(function(){
 			if(confirm("Etes vous certains de vouloir supprimer votre compte ? \nTous vos projets seront également supprimés.")){
 				delete_all();
 			}
 		});
-
 
 		<?php
 		if(count($normalized_projects) > 0){

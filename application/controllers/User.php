@@ -202,14 +202,14 @@ class User extends CI_Controller {
 	}// /dashboard()
 
 
-	public function dashboard_delete_project($tab='link')
-	{
-		// Mise en session de l'onglet en cours (link ou normalize)
-		$this->session->set_userdata('dashboard_tab', $tab);
-
-		// Chargement du tableau de bord
-		$this->dashboard();
-	}// /dashboard_delete_project()
+	// public function dashboard_delete_project($tab='link')
+	// {
+	// 	// Mise en session de l'onglet en cours (link ou normalize)
+	// 	$this->session->set_userdata('dashboard_tab', $tab);
+    //
+	// 	// Chargement du tableau de bord
+	// 	$this->dashboard();
+	// }// /dashboard_delete_project()
 
 
 	public function split_projects($user_id) // Répartition des projets selon leur type
