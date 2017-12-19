@@ -185,7 +185,7 @@
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
 							echo '<tr>';
-							echo '<td>'.$project['display_name'].'</td>';
+							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td>'.$project['file_src'].'</td>';
 							echo '<td>'.$project['file_ref'].'</td>';
@@ -267,7 +267,7 @@
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
 							echo '<tr>';
-							echo '<td>'.$project['display_name'].'</td>';
+							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td class="text-center">'.get_status($project['public']).'</td>';
 							echo '<td>'.$project['file'].'</td>';
