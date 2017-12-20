@@ -41,7 +41,7 @@
 	color: #eee;
 }
 .stat .title{
-	font-weight: bold;	
+	font-weight: bold;
 	display: block;
 }
 .stat .number{
@@ -116,6 +116,7 @@ h2{
 .user_tag{
   color: #000;
   text-decoration: underline;
+  cursor: pointer;
 }
 .user_tag:hover{
   color: #E00612;

@@ -28,7 +28,6 @@
 <div id="tempo" style="min-height: 400px;"></div>
 
 <div class="container-fluid work background_1" style="padding-top: 20px;padding-bottom: 20px;">
-
     <div class="row">
         <div class="col-md-10">
             <div class="row">
@@ -520,13 +519,14 @@ function load_labeller_api(project_id_link) {
     });// /ajax - load_labeller_api
 }// /load_labeller_api()
 
-function disabeled_buttons() {
+
+function disabled_buttons() {
     $("#bt_yes").attr("disabled","disabled");
     $("#bt_no").attr("disabled","disabled");
     $("#bt_previous").attr("disabled","disabled");
     $("#bt_uncertain").attr("disabled","disabled");
     $("#bt_forget").attr("disabled","disabled");
-}// /disabeled_buttons()
+}// /disabled_buttons()
 
 
 function enabeled_buttons() {
@@ -551,7 +551,7 @@ function socket_answer(user_response) {
     // Envoi de la réponse utilisateur
     // Un nouveau message sera reçu par socket_on_message()
 
-    disabeled_buttons();
+    disabled_buttons();
 
     $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
@@ -597,11 +597,10 @@ function socket_update_filters(must, must_not) {
     // Un nouveau message sera reçu par socket_on_message()
     //must = {'NOMEN_LONG': ['ass', 'association', 'sportive', 'foyer'], 'LIBAPET': ['conserverie']}
 
-    disabeled_buttons();
+    disabled_buttons();
 
     var response_to_send = {
         "module_params": {
-            'project_id': project_id_link,
             'must': must,
             'must_not': must_not
         }
@@ -635,18 +634,119 @@ function socket_update_filters(must, must_not) {
 } // / socket_update_filters()
 
 
+function add_user_filters_api(user_filters, num_assoc) {
+    // Envoi de la réponse utilisateur
+    // {"module_params":
+    // {
+    // "search_params": [
+    //     {"values_to_search":["Cabanis"], "columns":["denomination_principale_uai","patronyme_uai"]},
+    //     {"values_to_search":["other", "values"], "columns":["other_column"]}
+    //     ]}
+    // }
+    console.log('add_user_filters_api');
+
+    disabled_buttons();
+
+    var tab_search_params = new Array();
+
+    for(num_assoc in tab_by_num_assoc){
+        var tab_temp = new Array();
+        tab_temp["values_to_search"] = tab_by_num_assoc[num_assoc];
+        tab_temp["columns"] = column_matches[num_assoc].ref;
+        tab_search_params.push(tab_temp)
+    }
+    var _to_send = {"module_params":{"search_params": tab_search_params}};
+
+    console.log(JSON.stringify('data_to_send:'));
+    console.log(JSON.stringify(_to_send));
+
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/add_search/' + project_id_link + '/',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(_to_send),
+        success: function (result) {
+            if(result.error){
+                console.log("API error - add_search");
+                console.dir(result.error);
+            }
+            else{
+                console.log("success - add_search");
+                console.log(result);
+
+                show_new_proposition(JSON.parse(result.result));
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - add_search");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - add_search
+} // / add_user_filters_api()
+
+
+function delete_user_filter_api() {
+    $.ajax({
+        type: 'GET',
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/clear_search/' + project_id_link + '/',
+        success: function (result) {
+            if(result.error){
+                console.log("API error - clear_search");
+                console.log(result.error);
+            }
+            else{
+                console.log("success - clear_search");
+                console.log(result);
+
+                show_new_proposition(JSON.parse(result.result));
+            }
+        },
+        error: function (result, status, error){
+            console.log("error - clear_search");
+            console.log(result);
+            err = true;
+        }
+    });// /ajax - clear_search
+}// /delete_user_filter_api()
+
+
 function show_new_proposition(message) {
     // Affiche les propositions en fonction du fichier column_matches
     console.log('show_new_proposition');
-    console.dir(message);
+    console.log(message);
+
+    // query_ranking = -1 si filtres utilisateur temporaires en cours
+    if(message["query_ranking"] != -1){
+        // Reset visuel des filtres utilisateur temporaires
+        delete_user_filter_html();
+    }
 
     var lines_html = "<table>";
+    // Parcours des associations faites a la page précédente
+    for (var num_assoc = 0; num_assoc < column_matches.length; num_assoc++) {
 
-    for (var i = 0; i < column_matches.length; i++) {
+        // Retours REFERENTIEL
+        // Liste des colonnes associées
+        var ref_list = column_matches[num_assoc].ref;
+        var ref = new Array();
+        var ref_keys = new Array();
+
+        // Récupération de la valeur associée dans le message
+        for (var k = 0; k < ref_list.length; k++) {
+            var key = ref_list[k];
+            var value = message["ref_item"]["_source"][key];
+            ref.push(value);
+            ref_keys.push(key);
+        }
+        // Concatenation des libellés
+        var lib_ref_keys = ref_keys.join(" | ");
+        var lib_ref_values = ref.join(" | ");
+
 
         // Retours SOURCE
         // Liste des colonnes associées
-        var source_list = column_matches[i].source;
+        var source_list = column_matches[num_assoc].source;
         var source = new Array();
         var source_keys = new Array();
 
@@ -654,16 +754,13 @@ function show_new_proposition(message) {
         for (var j = 0; j < source_list.length; j++) {
             var key = source_list[j]; // ex departement
             var value = message["source_item"]["_source"][key];
-
-            //source.push(value);
             source_keys.push(key);
 
             // Séparation sur l'espace pour faire de chaque mot un lien cliquable
             var value_tab = value.split(' ');
             var value_temp = "";
             for (var k = 0; k < value_tab.length; k++) {
-
-                value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\')">' + value_tab[k] + '</a> ';
+                value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\',\'' + num_assoc + '\')">' + value_tab[k] + '</a> ';
             }
             source.push(value_temp);
         }
@@ -677,43 +774,15 @@ function show_new_proposition(message) {
         lines_html += '<td class="title"><i class="fa fa-table" aria-hidden="true"></i> ' + lib_source_keys + ' <i>(source)</i> :</td><td class="message">' + lib_source_values + '</td>';
         lines_html += '</tr>';
 
-        // Retours REFERENTIEL
-        // Liste des colonnes associées
-        var ref_list = column_matches[i].ref;
-
-        var ref = new Array();
-        var ref_keys = new Array();
-        // Récupération de la valeur associée dans le message
-        for (var k = 0; k < ref_list.length; k++) {
-            var key = ref_list[k];
-            var value = message["ref_item"]["_source"][key];
-            ref.push(value);
-            ref_keys.push(key);
-        }
-
-        // Concatenation des libellés
-        var lib_ref_keys = ref_keys.join(" | ");
-        var lib_ref_values = ref.join(" | ");
 
         // Ecriture de la ligne Ref
         lines_html += '<tr>';
         lines_html += '<td class="title"><i class="fa fa-database" aria-hidden="true"></i> ' + lib_ref_keys + ' <i>(referentiel)</i> :</td><td class="message">' + lib_ref_values + '</td>';
         lines_html += '</tr>';
         lines_html += '<tr><td colspan="2" class="hr"></td></tr>';
-
-    }
+    }// Fin de parcours des associations
 
     // Affichage de la proposition
-    /*
-    for (var i = 0; i < source_keys.length; i++) {// 1 itération = 1 ligne Source + 1 ligne REF
-        lines_html += '<tr>';
-        lines_html += '<td class="title">' + source_keys[i] + ' <i>(source)</i> :</td><td class="message">' + source[source_keys[i]] + '</td>';
-        lines_html += '</tr>';
-        lines_html += '<tr>';
-        lines_html += '<td class="title">' + ref_keys[i] + ' <i>(referentiel)</i> :</td><td class="message">' + ref[ref_keys[i]] + '</td>';
-        lines_html += '</tr>';
-    }
-    */
     lines_html += "</table>";
 
     // Affichage
