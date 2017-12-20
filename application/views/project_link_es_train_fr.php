@@ -276,7 +276,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modals -->
 <div class="modal fade" id="modal_filter" tabindex="-1" role="dialog" aria-labelledby="modal_filter_title">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -302,6 +302,32 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Modal error-->
+<div class="modal fade" id="modal_error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #262626">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" style="color: #ddd">Erreur(s) !</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-1">
+                <h2 style="margin-top:0;color: #E00612;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></h2>
+            </div>
+            <div class="col-xs-11" id="errors">
+
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript">
@@ -720,6 +746,11 @@ function show_new_proposition(message) {
     if(message["query_ranking"] != -1){
         // Reset visuel des filtres utilisateur temporaires
         delete_user_filter_html();
+    }
+
+    // test du status
+    if(!test_status(message["status"])){
+        return false;
     }
 
     var lines_html = "<table>";

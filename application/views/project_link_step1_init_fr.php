@@ -521,22 +521,22 @@ function get_normalized_projects_html($id, $normalized_projects)
 
             <hr>
 
-<div class="row" style="padding-top: 20px;padding-bottom: 20px;">
-    <div class="col-md-offset-6 col-md-6">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
-            </label>
-        </div>
-    </div>
-    <div class="col-md-offset-6 col-md-6">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
-            </label>
-        </div>
-    </div>
-</div>
+            <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
+                <div class="col-md-offset-6 col-md-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-offset-6 col-md-6">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>

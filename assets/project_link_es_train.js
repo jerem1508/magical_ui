@@ -66,3 +66,42 @@ function delete_user_filter_html() {
 	$("#bt_user_filters_delete").css("visibility", "hidden");
 	$("#user_filters").html('<i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d\'optimiser la proposition faite.');
 }// /delete_user_filter_html()
+
+
+function test_status(status) {
+    // ACTIVE : Comme d'habitude
+    // NO_QUERIES : Pas de "piste" pour le merge: afficher un message désolé
+    // NO_ITEMS_TO_LABEL : Plus rien à labelliser. Proposer d'aller à l'étape suivante ou changer les filtres
+	console.log('Status: ' + status);
+	status = 'NO_QUERIES';
+    switch (status) {
+        case 'ACTIVE':
+            return true;
+            break;
+        case 'NO_QUERIES':
+            message_status_html(status);
+            return false;
+            break;
+        case 'NO_ITEMS_TO_LABEL':
+            message_status_html(status);
+            return false;
+            break;
+    }
+}// /test_status()
+
+
+function message_status_html(status) {
+	switch (status) {
+		case 'NO_QUERIES':
+			$("#errors").html('Pas de "piste". Désolé');
+			$("#message").html('Pas de "piste". Désolé');
+			break;
+		case 'NO_ITEMS_TO_LABEL':
+			$("#errors").html("Plus rien à labelliser. Vous pouvez accéder à l'étape suivante.");
+			$("#message").html("Plus rien à labelliser. Vous pouvez accéder à l'étape suivante.");
+			break;
+	}
+
+	$("#modal_error").modal("show");
+
+}// /message_status_html()
