@@ -904,11 +904,15 @@ function get_normalized_projects_html($id, $normalized_projects)
         }
 
         if(!new_file_src && !exist_file_src){
-            tab_error.push('Vous devez sélectionner un fichier source.');
+            tab_error.push('Vous devez sélectionner un fichier SOURCE.');
         }
 
         if(!new_file_ref && !exist_file_ref && !exist_ref){
-            tab_error.push('Vous devez sélectionner un fichier référentiel.');
+            tab_error.push('Vous devez sélectionner un fichier REFERENTIEL.');
+        }
+
+        if(new_file_src == new_file_ref || exist_file_src == exist_file_ref){
+            tab_error.push('Le fichier SOURCE et le fichier REFERENTIEL doivent être différents.');
         }
 
         //  test CGU
@@ -921,7 +925,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             // recuperation de l'id du projet
             src_project_id = $("#src_project_id").html();
             if(src_project_id == ''){
-                tab_error.push('Vous devez sélectionner un fichier source.');
+                tab_error.push('Vous devez sélectionner un fichier SOURCE.');
             }
         }
 
