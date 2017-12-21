@@ -911,7 +911,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             tab_error.push('Vous devez sélectionner un fichier REFERENTIEL.');
         }
 
-        if(new_file_src == new_file_ref || exist_file_src == exist_file_ref){
+        if($("#src_selection").html() == $("#ref_selection").html()){
             tab_error.push('Le fichier SOURCE et le fichier REFERENTIEL doivent être différents.');
         }
 
