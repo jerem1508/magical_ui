@@ -756,9 +756,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 				}
 			},
 			error: function (result, status, error){
-				console.log(result);
-				console.log(status);
-				console.log(error);
+				show_api_error(result, "error - save_session");
 				return false;
 			}
 		});
@@ -779,7 +777,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 console.log("Uploaded file ".concat(file_name));
             },
             error: function(er){
-                console.log(er.statusText.concat(" (error ", er.status, ")"));
+                show_api_error(er, "error - upload");
             }
         });
     }// /call_api_upload()
@@ -802,10 +800,8 @@ function get_normalized_projects_html($id, $normalized_projects)
             data: JSON.stringify(tparams),
             async: false,
             success: function (result) {
-
                 if(result.error){
-                    console.log("API error - select_file");
-                    console.log(result.error);
+                    show_api_error(result, "API error - select_file");
                 }
                 else{
                     console.log("success - select_file");
@@ -822,8 +818,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
             },
             error: function (result, status, error){
-                console.log("error - select_file");
-                console.log(result);
+                show_api_error(result, "error - select_file");
                 err = true;
             }
         });// /ajax - select_file
@@ -844,7 +839,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 console.dir(result);
 
                 if(result.error){
-                    console.log("API error");
+                    show_api_error(result, "API error - new normalize project");
                 }
                 else{
                     console.log("success");
@@ -857,9 +852,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
             },
             error: function (result, status, error){
-                console.log(result);
-                console.log(status);
-                console.log(error);
+                show_api_error(result, "error - new normalize project");
             }
         });// /ajax
     }// /add_new_normalize_project_src()
@@ -876,10 +869,8 @@ function get_normalized_projects_html($id, $normalized_projects)
             traditional: true,
             async: false,
             success: function (result) {
-                console.dir(result);
-
                 if(result.error){
-                    console.log("API error");
+                    show_api_error(result, "API error - new normalize project ref");
                 }
                 else{
                     console.log("success");
@@ -887,15 +878,12 @@ function get_normalized_projects_html($id, $normalized_projects)
                     // Récupération de l'identifiant projet
                     ref_project_id = result.project_id;
 
-                    //
                     $('#txt_init_nrz_ref_project').css('display', 'inline');
                     $('#init_nrz_ref_project_ok').css('display', 'inline');
                 }
             },
             error: function (result, status, error){
-                console.log(result);
-                console.log(status);
-                console.log(error);
+                show_api_error(result, "error - new normalize project ref");
             }
         });// /ajax
     }// /add_new_normalize_project_ref()
@@ -995,7 +983,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 async: false,
                 success: function (result) {
                     if(result.error){
-                        console.log("API error - new/link");
+                        show_api_error(result, "API error - new/link");
                     }
                     else{
                         console.log("success - new/link");
@@ -1020,8 +1008,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                     }
                 },
                 error: function (result, status, error){
-                    console.log("error - new/link");
-                    console.log(result);
+                    show_api_error(result, "error - new/link");
                 }
             });// /ajax
 
