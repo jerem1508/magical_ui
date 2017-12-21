@@ -106,18 +106,18 @@
                         </div>
                         <div class="col-md-4">
                             <span class="badge" style="background-color: #ffff80">&nbsp;</span>&nbsp;Catégorie "<strong>identifiants</strong>"
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
                         <div class="col-md-4">
                             <span class="badge" style="background-color: #ff80bf">&nbsp;</span>&nbsp;Catégorie "<strong>date</strong>"
-                        </div>  
+                        </div>
                         <div class="col-md-4">
                             <span class="badge" style="background-color: #66c2ff">&nbsp;</span>&nbsp;Catégorie "<strong>géographie</strong>"
-                        </div>  
+                        </div>
                         <div class="col-md-4">
                             <span class="badge" style="background-color: #b3e6b3">&nbsp;</span>&nbsp;Catégorie "<strong>autres</strong>"
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@
         </div>
         <div class="col-xs-6 center">
             <div class="col-xs-12 text-center" id="blocs"></div>
-            
+
             <div class="col-xs-12 text-right" style="padding-right: 5px;">
                 <button class="btn btn btn-success2" id="bt_add_bloc" data-intro="Ajoutez une nouvelle association de colonnes ici">
                     Ajouter une association&nbsp;
@@ -203,16 +203,14 @@
 
 function get_metadata(project_type, project_id) {
     // Récupere les métadata via API
-
     var metadata = "";
-
     $.ajax({
         type: 'get',
         async: false,
         url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,
         success: function (result) {
             if(result.error){
-                console.log("API error");console.log(result.error);
+                show_api_error(result, "API error - metadata");
             }
             else{
                 console.log("success - metadata");console.dir(result);
@@ -220,9 +218,7 @@ function get_metadata(project_type, project_id) {
             }
         },
         error: function (result, status, error){
-            console.log(result);
-            console.log(status);
-            console.log(error);
+            show_api_error(result, "error - metadata");
             err = true;
         }
     });// /ajax metadata
@@ -252,10 +248,8 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
         data: JSON.stringify(tparams),
         async: false,
         success: function (result) {
-
             if(result.error){
-                console.log("API error - download_config");
-                console.log(result.error);
+                show_api_error(result, "API error - download_config");
             }
             else{
                 console.log("success - download_config");
@@ -265,8 +259,7 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             }
         },
         error: function (result, status, error){
-            console.log("error - download_config");
-            console.log(result);
+            show_api_error(result, "error - download_config");
         }
     });// /ajax - Download config
     return runinfo;
@@ -324,21 +317,16 @@ function add_column_certain_matches_api() {
         data: JSON.stringify(tparams),
         async: false,
         success: function (result) {
-
             if(result.error){
-                console.log("API error - add_column_certain_matches");
-                console.log(result.error);
+                show_api_error(result, "API error - add_column_certain_matches");
             }
             else{
                 console.log("success - add_column_certain_matches");
-                console.dir(result);
-
-                
+                console.log(result);
             }
         },
         error: function (result, status, error){
-            console.log("error - add_column_certain_matches");
-            console.log(result);
+            show_api_error(result, "error - add_column_certain_matches");
         }
     });// /ajax
 }// /add_column_certain_matches_api()
@@ -392,17 +380,15 @@ tparams:
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - add_column_matches");
-                console.log(result.error);
+                show_api_error(result, "API error - add_column_matches");
             }
             else{
                 console.log("success - add_column_matches");
-                console.dir(result);
+                console.log(result);
             }
         },
         error: function (result, status, error){
-            console.log("error - add_column_matches");
-            console.log(result);
+            show_api_error(result, "error - add_column_matches");
         }
     });// /ajax
 }// /add_column_matches_api()
@@ -471,7 +457,7 @@ function set_scroll(cible, ncols, limit) {
 
 
 $(function(){// ready
-    
+
     $("body").css("height", $(window).height()) ;
 
     // Chargement des actions des boutons
@@ -510,7 +496,7 @@ $(function(){// ready
     columns_ref = get_columns(metadata_ref);
 
     // Renseignement des noms de fichiers
-    var src_file_name = get_filename(metadata_src.last_written.file_name); 
+    var src_file_name = get_filename(metadata_src.last_written.file_name);
     var ref_file_name = get_filename(metadata_ref.last_written.file_name);
     $("#src_file_name").html(src_file_name);
     $("#ref_file_name").html(ref_file_name);
