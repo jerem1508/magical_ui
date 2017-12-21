@@ -73,7 +73,6 @@ function test_status(status) {
     // NO_QUERIES : Pas de "piste" pour le merge: afficher un message désolé
     // NO_ITEMS_TO_LABEL : Plus rien à labelliser. Proposer d'aller à l'étape suivante ou changer les filtres
 	console.log('Status: ' + status);
-	status = 'NO_QUERIES';
     switch (status) {
         case 'ACTIVE':
             return true;
@@ -101,7 +100,6 @@ function message_status_html(status) {
 			$("#message").html("Plus rien à labelliser. Vous pouvez accéder à l'étape suivante.");
 			break;
 	}
-
+	disabled_buttons();
 	$("#modal_error").modal("show");
-
 }// /message_status_html()
