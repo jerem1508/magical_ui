@@ -344,7 +344,7 @@ function get_metadata(project_type, project_id) {
         url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,
         success: function (result) {
             if(result.error){
-                console.log("API error");console.log(result.error);
+                show_api_error(result, "API error - metadata");
             }
             else{
                 console.log("success - metadata");console.dir(result);
@@ -352,9 +352,7 @@ function get_metadata(project_type, project_id) {
             }
         },
         error: function (result, status, error){
-            console.log(result);
-            console.log(status);
-            console.log(error);
+            show_api_error(result, "error - metadata");
         }
     });// /ajax metadata
 
@@ -381,8 +379,7 @@ function get_column_matches(project_id) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - download_config");
-                console.log(result.error);
+                show_api_error(result, "API error - download_config");
             }
             else{
                 console.log("success - download_config");
@@ -391,8 +388,7 @@ function get_column_matches(project_id) {
             }
         },
         error: function (result, status, error){
-            console.log("error - download_config");
-            console.log(result);
+            show_api_error(result, "error - download_config");
         }
     });// /ajax - Download config
 
@@ -415,8 +411,7 @@ function create_es_index_api() {
         success: function (result) {
 
             if(result.error){
-                console.log("API error - create_es_index_api");
-                console.dir(result.error);
+                show_api_error(result, "API error - create_es_index");
             }
             else{
                 console.log("success - create_es_index_api");
@@ -442,8 +437,7 @@ function create_es_index_api() {
                             }
                         },
                         error: function (result, status, error){
-                            console.log("error");
-                            console.log(result);
+                            show_api_error(result, "job error");
                             err = true;
                             clearInterval(handle);
                         }
@@ -452,8 +446,7 @@ function create_es_index_api() {
             }
         },
         error: function (result, status, error){
-            console.log("error");
-            console.log(result);
+            show_api_error(result, "error - create_es_index");
             err = true;
         }
     });// /ajax - create_es_labeller
@@ -466,10 +459,8 @@ function create_es_labeller_api() {
         type: 'GET',
         url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_labeller/' + project_id_link + '/',
         success: function (result) {
-
             if(result.error){
-                console.log("API error - create_es_labeller_api");
-                console.dir(result.error);
+                show_api_error(result, "API error - create_es_labeller_api");
             }
             else{
                 console.log("success - create_es_labeller_api");
@@ -501,8 +492,7 @@ function create_es_labeller_api() {
                             }
                         },
                         error: function (result, status, error){
-                            console.log("error");
-                            console.log(result);
+                            show_api_error(result, "job error - create_es_labeller_api");
                             err = true;
                             clearInterval(handle);
                         }
@@ -511,8 +501,7 @@ function create_es_labeller_api() {
             }
         },
         error: function (result, status, error){
-            console.log("error");
-            console.log(result);
+            show_api_error(result, "error - create_es_labeller_api");
             err = true;
         }
     });// /ajax - create_es_labeller
@@ -524,22 +513,18 @@ function load_labeller_api(project_id_link) {
         type: 'GET',
         url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/current/' + project_id_link + '/',
         success: function (result) {
-
             if(result.error){
-                console.log("API error - load_labeller_api");
-                console.dir(result.error);
+                show_api_error(result, "API error - load_labeller_api");
             }
             else{
                 console.log("success - load_labeller_api");
                 console.dir(result);
 
                 show_new_proposition(JSON.parse(result.result));
-
             }
         },
         error: function (result, status, error){
-            console.log("error - load_labeller_api");
-            console.log(result);
+            show_api_error(result, "error - load_labeller_api");
             err = true;
         }
     });// /ajax - load_labeller_api
@@ -599,8 +584,7 @@ function socket_answer(user_response) {
         data: JSON.stringify(response_to_send),
         success: function (result) {
             if(result.error){
-                console.log("API error - update");
-                console.dir(result.error);
+                show_api_error(result, "API error - update");
             }
             else{
                 console.log("success - update");
@@ -610,8 +594,7 @@ function socket_answer(user_response) {
             }
         },
         error: function (result, status, error){
-            console.log("error - update");
-            console.log(result);
+            show_api_error(result, "error - update");
             err = true;
         }
     });// /ajax - update
@@ -640,20 +623,17 @@ function socket_update_filters(must, must_not) {
         success: function (result) {
 
             if(result.error){
-                console.log("API error - update_filters");
-                console.dir(result.error);
+                show_api_error(result, "API error - update_filters");
             }
             else{
                 console.log("success - update_filters");
                 console.dir(result);
 
                 show_new_proposition(JSON.parse(result.result));
-
             }
         },
         error: function (result, status, error){
-            console.log("error - update_filters");
-            console.log(result);
+            show_api_error(result, "error - update_filters");
             err = true;
         }
     });// /ajax - update_filters
@@ -674,16 +654,25 @@ function add_user_filters_api(user_filters, num_assoc) {
     disabled_buttons();
 
     var tab_search_params = new Array();
-
+    //var tab_search_params = {};
     for(num_assoc in tab_by_num_assoc){
-        var tab_temp = new Array();
+        //var tab_temp = new Array();
+        var tab_temp = {};
         tab_temp["values_to_search"] = tab_by_num_assoc[num_assoc];
         tab_temp["columns"] = column_matches[num_assoc].ref;
         tab_search_params.push(tab_temp)
     }
-    var _to_send = {"module_params":{"search_params": tab_search_params}};
 
-    console.log(JSON.stringify('data_to_send:'));
+    console.log(tab_search_params);
+    var _to_send = {
+        "module_params":
+            {
+                "search": tab_search_params
+            }
+        };
+
+    console.log('data_to_send:');
+    console.log(_to_send);
     console.log(JSON.stringify(_to_send));
 
     $.ajax({
@@ -693,19 +682,16 @@ function add_user_filters_api(user_filters, num_assoc) {
         data: JSON.stringify(_to_send),
         success: function (result) {
             if(result.error){
-                console.log("API error - add_search");
-                console.dir(result.error);
+                show_api_error(result.error, "API error - add_search");
             }
             else{
                 console.log("success - add_search");
                 console.log(result);
-
                 show_new_proposition(JSON.parse(result.result));
             }
         },
         error: function (result, status, error){
-            console.log("error - add_search");
-            console.log(result);
+            show_api_error(result, "error - add_search");
             err = true;
         }
     });// /ajax - add_search
@@ -718,19 +704,16 @@ function delete_user_filter_api() {
         url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/clear_search/' + project_id_link + '/',
         success: function (result) {
             if(result.error){
-                console.log("API error - clear_search");
-                console.log(result.error);
+                show_api_error(result.error, "API error - clear_search");
             }
             else{
                 console.log("success - clear_search");
                 console.log(result);
-
                 show_new_proposition(JSON.parse(result.result));
             }
         },
         error: function (result, status, error){
-            console.log("error - clear_search");
-            console.log(result);
+            show_api_error(result, "error - clear_search");
             err = true;
         }
     });// /ajax - clear_search
@@ -858,10 +841,8 @@ function complete_training() {
         type: 'GET',
         url: '<?php echo BASE_API_URL;?>' + '/api/link/labeller/complete_training/' + project_id_link + '/',
         success: function (result) {
-
             if(result.error){
-                console.log("API error - complete_training");
-                console.dir(result.error);
+                show_api_error(result.error, "API error - complete_training");
             }
             else{
                 console.log("success - complete_training");
@@ -872,8 +853,7 @@ function complete_training() {
             }
         },
         error: function (result, status, error){
-            console.log("error - complete_training");
-            console.log(result);
+            show_api_error(result, "error - complete_training");
             err = true;
         }
     });// /ajax - complete_training

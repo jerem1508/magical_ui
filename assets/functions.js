@@ -30,7 +30,7 @@ function set_height(div, size=0) {
 	else{
 		var height = $(window).height();// 955
 		var y_div = $("#" + div).position().top; // 215
-		var h_footer = $("footer").height(); // 180 
+		var h_footer = $("footer").height(); // 180
 
 		var h_div = height - y_div - h_footer;
 
@@ -41,12 +41,23 @@ function set_height(div, size=0) {
 }
 
 
+function show_api_error(error, error_txt) {
+	console.log(error_txt);
+	console.log(error);
+
+	$("#api_error_title").html(error_txt);
+	$("#api_error").html(JSON.stringify(error));
+
+	$("#modal_error_api").modal("show");
+}// /show_api_error()
+
+
 scale_other = {"Anglais" : "#b3e6b3","Article" : "#9fdf9f","Contenu d'article" : "#8cd98c","Corps et Grades" : "#79d279","Domaine de Recherche" : "#66cc66","Education Nationale" : "#53c653","Entité agro" : "#40bf40","Entité biomédicale" : "#39ac39","Entité Géo" : "#339933","Entité MESR" : "#2d862d","Français" : "#267326","Institution" : "#206020","Mention APB" : "#194d19","NIF" : "#133913","Nom d'essai clinique" : "#b3ffcc","Nom" : "#99ffbb","Phyto" : "#80ffaa","Publication" : "#66ff99","Résumé" : "#4dff88","Spécialité médicale" : "#33ff77","Texte" : "#1aff66","Titre de revue" : "#00ff55","TVA" : "#00e64d","Type structuré" : "#00cc44"};
 
 scale_date = {"Année" : "#ff80bf","Date" : "ffb3d9"};
 
 scale_geo = {"Adresse" : "#ccebff","Code Postal" : "#b3e0ff","Code" : "#99d6ff","Commune" : "#80ccff","Département" : "#66c2ff","Pays" : "#4db8ff","Postal" : "#33adff","Région" : "#1aa3ff","Voie" : "#0099ff"};
-   
+
 scale_id =  {"DOI" : "#ffffcc","Email" : "#ffffb3","ID organisation" : "#ffff99","ID personne" : "#ffff80","ID publication" : "#ffff4d","ID" : "#ffff1a","ISSN" : "#ffff00","NIR" : "#e6e600","Numéro National de Structure" : "#cccc00","Numéro UMR" : "#b3b300","SIREN" : "#999900","SIRET" : "#808000","Téléphone" : "#666600","UAI" : "#ffff66","URL" : "#ffff33"};
 
 scale_institution = {"Académie": "#ffcccc","Collaborateur d'essai clinique": "#ffb3b3","Entreprise": "#ff9999","Etablissement d'Enseignement Supérieur": "#ff8080","Etablissement des premier et second degrés": "#ff6666","Etablissement": "#ff4d4d","Institution de recherche": "#ff3333","Partenaire de recherche": "#ff1a1a","Structure de recherche": "#ff0000"};
