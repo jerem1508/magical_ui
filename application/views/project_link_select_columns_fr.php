@@ -361,9 +361,10 @@ tparams:
 
     // Récupération des associations
     var tab_json = new Array();
-
     $(".blocs_analysis").each(function( index ) {
-        tab_json.push($(this).text());
+        if($(this).text() != ""){
+            tab_json.push($(this).text());
+        }
     });
 
     var chaine_json = tab_json.join(); // , par défaut
@@ -371,6 +372,7 @@ tparams:
     var tparams = "{\"column_matches\": ["+chaine_json+"]}";
     console.log('tparams_column_matches:');
     console.log(tparams);
+
     $.ajax({
         type: 'post',
         dataType: "json",
