@@ -16,7 +16,7 @@ class Private_functions {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 		if(curl_exec($ch) === FALSE){
-		    echo 'Erreur Curl : ' . curl_error($ch);
+		    //echo 'Erreur Curl : ' . curl_error($ch);
 			curl_close($ch);
 		    return FALSE;
 		}
