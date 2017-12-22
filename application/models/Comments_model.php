@@ -16,6 +16,30 @@ class Comments_model extends CI_Model {
     }// /insert_comment()
 
 
+    public function insert_log($data_to_write = [])
+    {
+        # Insertion d'un commentaire en base
+        if(!isset($data_to_write['name'])){
+            $data['name'] = 'ADMIN';
+        }
+        if(!isset($data_to_write['email'])){
+            $data['email'] = 'ADMIN';
+        }
+        if(!isset($data_to_write['url'])){
+            $data['url'] = 'ADMIN';
+        }
+        if(!isset($data_to_write['project_id'])){
+            $data['project_id'] = 'ADMIN';
+        }
+        if(!isset($data_to_write['project_type'])){
+            $data['project_type'] = 'ADMIN';
+        }
+        $data['message'] = @$data_to_write['comment'];
+
+        return $this->db->insert('comments', $data);
+    }// /insert_log()
+
+
     public function get_comments()
     {
         //recuperation des données relative a l'email
