@@ -24,7 +24,7 @@
     </div>
     <div class="row" id="stats">
         <div class="col-xs-2">
-            <div class="stat" 
+            <div class="stat"
                 data-toggle="tooltip"
                 title="Nombre de lignes traitées">
                 <span class="title">Lignes traitées</span>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-xs-2">
-            <div class="stat" 
+            <div class="stat"
                 data-toggle="tooltip"
                 title="Pourcentage de lignes traitées">
                 <span class="title">Lignes traitées</span>
@@ -268,7 +268,7 @@ function show_data_html(data, start) {
     html += '</tr>';
     html += '<tr class="table_header">';
     html += '    <td colspan="2"><i class="fa fa-database" aria-hidden="true"></i> (<i>Référentiel</i>)</td>';
-    
+
     for (var i = 0; i < column_matches.length; i++) {
         var ref_list = column_matches[i].ref;
         html += '    <th>' + ref_list + '</th>';
@@ -293,7 +293,7 @@ function show_data_html(data, start) {
         for (var j = 0; j < column_matches.length; j++) {
             var ch = column_matches[j].source.toString();
             var tab_termes = ch.split(",");
-           
+
              var tab_values = new Array();
 
             for (var k = 0; k < tab_termes.length; k++) {
@@ -304,7 +304,7 @@ function show_data_html(data, start) {
             html += '    <td>' + values + '</td>';
         }
 
-        if(confidence == 999 || confidence == 0){ 
+        if(confidence == 999 || confidence == 0){
             html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered">';
             html += '<i class="fa fa-user-circle" aria-hidden="true" title="Labellisation manuelle utiisateur" data-toggle="tooltip"></i>';
             html += '<h4></td>';
@@ -334,7 +334,7 @@ function show_data_html(data, start) {
         for (var j = 0; j < column_matches.length; j++) {
             var ch = column_matches[j].ref.toString();
             var tab_termes = ch.split(",");
-            
+
             var tab_values = new Array();
 
             for (var k = 0; k < tab_termes.length; k++) {
@@ -344,7 +344,7 @@ function show_data_html(data, start) {
             var values = tab_values.join(", ");
             html += '    <td>' + values + '</td>';
         }
-           
+
         html += '</tr>';
     }// /for - parcours data
 
@@ -470,7 +470,7 @@ function delete_line(no_line) {
 
         // Suppression de la ligne API
         // TODO
-        
+
     }
 }// /delete_line()
 
@@ -515,7 +515,7 @@ function create_es_index_api() {
                 console.log("success - create_es_index_api");
                 console.dir(result);
 
-                // Appel 
+                // Appel
                 var handle = setInterval(function(){
                     $.ajax({
                         type: 'get',
@@ -579,7 +579,7 @@ function treatment(project_id_link, learned_setting_json) {
                 console.log("success - es_linker");
                 console.log(result);
 
-                // Appel 
+                // Appel
                 var handle = setInterval(function(){
                     $.ajax({
                         type: 'get',
@@ -698,7 +698,7 @@ function add_buttons() {
                 }
                 else{
                     console.log("success - dl");
-                    console.dir(result_dl);
+                    //console.dir(result_dl); // ! affiche le fichier
 
                     // DL du fichier
                     var blob=new Blob([result_dl]);
@@ -771,10 +771,10 @@ function set_pagination_html(nrows, pas, current_page) {
         html += '      </a>';
         html += '    </li>';
     }
-    
+
     html += '  </ul>';
     html += '</nav>';
-    
+
     var start = (current_page - 1) * pas + 1;
     var end = start + pas -1;
     html += '<div>De ' + start + ' à ' + end + ' sur ' + nrows + ' lignes</div>';
@@ -825,7 +825,7 @@ function get_stats() {
                 console.log("success - link_results_analyzer_api");
                 console.dir(result);
 
-                // Appel 
+                // Appel
                 var handle = setInterval(function(){
                     $.ajax({
                         type: 'get',
