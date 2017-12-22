@@ -60,7 +60,7 @@ scale_geo = {"Adresse" : "#ccebff","Code Postal" : "#b3e0ff","Code" : "#99d6ff",
 
 scale_id =  {"DOI" : "#ffffcc","Email" : "#ffffb3","ID organisation" : "#ffff99","ID personne" : "#ffff80","ID publication" : "#ffff4d","ID" : "#ffff1a","ISSN" : "#ffff00","NIR" : "#e6e600","Numéro National de Structure" : "#cccc00","Numéro UMR" : "#b3b300","SIREN" : "#999900","SIRET" : "#808000","Téléphone" : "#666600","UAI" : "#ffff66","URL" : "#ffff33"};
 
-scale_institution = {"Académie": "#ffcccc","Collaborateur d'essai clinique": "#ffb3b3","Entreprise": "#ff9999","Etablissement d'Enseignement Supérieur": "#ff8080","Etablissement des premier et second degrés": "#ff6666","Etablissement": "#ff4d4d","Institution de recherche": "#ff3333","Partenaire de recherche": "#ff1a1a","Structure de recherche": "#ff0000"};
+scale_institution = {"Académie": "#ffcccc","Nom d'organisation": "#ffcccc","Collaborateur d'essai clinique": "#ffb3b3","Entreprise": "#ff9999","Etablissement d'Enseignement Supérieur": "#ff8080","Etablissement des premier et second degrés": "#ff6666","Etablissement": "#ff4d4d","Institution de recherche": "#ff3333","Partenaire de recherche": "#ff1a1a","Structure de recherche": "#ff0000"};
 
 scale_person = {"Nom de personne" : "#e6ccff","Prénom" : "#cc99ff","Titre" : "#b366ff","Titre de personne" : "#b366ff"};
 
@@ -115,6 +115,7 @@ scale_reverse ={"Anglais" : "scale_other",
 				"UAI" : "scale_id",
 				"URL" : "scale_id",
 				"Académie" : "scale_institution",
+				"Nom d'organisation" : "scale_institution",
 				"Collaborateur d'essai clinique" : "scale_institution",
 				"Entreprise" : "scale_institution",
 				"Etablissement d'Enseignement Supérieur" : "scale_institution",
