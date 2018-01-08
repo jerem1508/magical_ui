@@ -574,7 +574,8 @@ class Project extends CI_Controller {
 		$this->load->model('Comments_model');
 
 		// Insertion
-		$this->Comments_model->insert_comment($data_to_write);
+		//$this->Comments_model->insert_comment($data_to_write);
+		$this->Comments_model->insert_log($data_to_write);
 	}// /log_error()
 
 }// /Class
