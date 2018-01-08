@@ -976,6 +976,29 @@ function add_buttons() {
 
         update_stat();
     });
+    $("#bt_previous").click(function(){
+        // Récupération du dernier pour décompptes
+        if(tab_stat_yes[tab_stat_yes.length - 1]){
+            stat_yes -= 1;
+        }
+        if(tab_stat_no[tab_stat_no.length - 1]){
+            stat_no -= 1;
+        }
+
+        stat_all -= 1;
+
+        // On efface la "colonne" html correspondante
+        $("#yes_" + tab_stat_yes.length).html("");
+        $("#no_" + tab_stat_yes.length).html("");
+
+        // Suppression des dernières valeurs comme "bt back"
+        tab_stat_yes.pop();
+        tab_stat_no.pop();
+
+        // MAJ html
+        update_stat();
+    });
+
 } // / add_buttons()
 
 
@@ -999,8 +1022,8 @@ function update_stat() {
     var first = tab_stat_yes.length - max;
     max = first + max;
     var cpt = 1;
-    for (var i = first; i < max; i++) {
 
+    for (var i = first; i < max; i++) {
         if(tab_stat_yes[i] == 1){
             $("#yes_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');
             $("#no_" + cpt).html('&nbsp;');
@@ -1009,9 +1032,9 @@ function update_stat() {
             $("#no_" + cpt).html('<i class="fa fa-circle" aria-hidden="true"></i>');
             $("#yes_" + cpt).html('&nbsp;');
         }
-
         cpt ++;
     }
+
 }// /update_stat()
 
 

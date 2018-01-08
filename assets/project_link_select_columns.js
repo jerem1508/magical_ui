@@ -40,7 +40,7 @@ function get_columns_html(tab_columns, infer_columns, target) {
 		}
 		else {
 			var tab = scale_reverse[column_type];
-			tab += "['" + column_type + "']";
+			tab += '["' + column_type + '"]';
 			var couleur = eval(tab);
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
@@ -82,7 +82,7 @@ function analysis_bloc(id_bloc) {
 	var source = $("#input_src_" + id_bloc).val();
 	var tab_source = source.split(',');
 	source = JSON.stringify(tab_source);
-	
+
 	var referentiel = $("#input_ref_" + id_bloc).val();
 	var tab_referentiel = referentiel.split(',');
 	referentiel = JSON.stringify(tab_referentiel);
@@ -274,7 +274,7 @@ function add_column(sub_target, column_name) {
 	else{
 		$("#input_" + sub_target + "_" + id_bloc_to_change).val($("#input_" + sub_target + "_" + id_bloc_to_change).val() + "," + column_name);
 	}
-	
+
 	var html_tag = '<span class="badge my_badge">' + column_name + '<a class="cross" onclick="delete_tag(this,\''+sub_target+'\', \''+id_bloc_to_change+'\');">x</a></span>';
 	$("#tags_" + sub_target + "_" + id_bloc_to_change).html($("#tags_" + sub_target + "_" + id_bloc_to_change).html() + html_tag);
 
@@ -312,7 +312,7 @@ function delete_tag(tag, sub_target, id_bloc) {
 
 	// MAJ du champ caché
 	$("#input_" + sub_target + "_" + id_bloc).val(tab_temp.join(','));
-	
+
 	// Actualisation du json
 	analysis_bloc(id_bloc);
 }// /delete_tag()
