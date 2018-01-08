@@ -18,6 +18,12 @@ function write_report_html(modified_columns, cible, auto_scroll)
 }// /write_report_html()
 
 
+function precision_Round(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}// /precision_Round()
+
+
 function go_to(to) {
 	$('html, body').animate( { scrollTop: $("#"+ to).offset().top }, 2000 ); // Go
 }// /go_to()

@@ -194,10 +194,9 @@ function get_thresh(project_id) {
             }
             else{
                 console.log("success - download_config");
-                console.dir(result);
+                console.log(result);
 
                 ret = result.result.best_thresh;
-                //ret = 14;
             }
         },
         error: function (result, status, error){
@@ -247,10 +246,6 @@ function get_data(from, size) {
 
 function show_data_html(data, start) {
     console.log('show_data_html:data');
-    console.log('data:');
-    console.log(data);
-    console.log('start:');
-    console.log(start);
 
     var html = '<table class="table">';
 
@@ -263,7 +258,8 @@ function show_data_html(data, start) {
         html += '    <th>' + source_list + '</th>';
     }
 
-    html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + Math.floor(tresh) + '</i></th>';
+//  html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + Math.floor(tresh) + '</i></th>';
+    html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + precision_Round(thresh,2) + '</i></th>';
     html += '    <th rowspan="2" class="text-center">Correspondances<br>valides</th>';
     html += '</tr>';
     html += '<tr class="table_header">';
@@ -309,12 +305,13 @@ function show_data_html(data, start) {
             html += '<h4></td>';
         }
         else{
-            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + Math.round(confidence) + '<h4></td>';
+//            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + Math.round(confidence) + '<h4></td>';
+            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + precision_Round(confidence,2) + '<h4></td>';
         }
         // Affichage du bouton
         html += '<td rowspan="2" class="text-center padding_0"><h4 class="action_vcentered" style="display: inline;">';
         html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
-        if(confidence >= tresh){
+        if(confidence >= thresh){
             html += ' checked '
         }
         html += '>';
@@ -596,7 +593,7 @@ function treatment(project_id_link, learned_setting_json) {
                                 // TODO
 
                                 // Récupération du seuil
-                                tresh = get_thresh(project_id_link);
+                                thresh = get_thresh(project_id_link);
 
                                 // Création de l'index ElasticSearch + Affichage
                                 create_es_index_api();
