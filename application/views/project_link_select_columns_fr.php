@@ -334,30 +334,6 @@ function add_column_certain_matches_api() {
 
 function add_column_matches_api() {
     // Appel API de MAJ associations
-/*
-tparams:
-{
-  "column_matches": [
-    {
-      "source": [
-        "departement"
-      ],
-      "ref": [
-        "departement"
-      ]
-    },
-    {
-      "source": [
-        "lycees_sources"
-      ],
-      "ref": [
-        "denomination_principale_uai",
-        "patronyme_uai"
-      ]
-    }
-  ]
-}
-*/
 
     // Récupération des associations
     var tab_json = new Array();
@@ -424,15 +400,15 @@ function get_buttons_actions() {
 
         valid_step('<?php echo $_SESSION['link_project_id'];?>');
     });
-/*
-    $("#bt_info_ref").click(function(){
-        $("#info_ref").slideToggle();
-    });
+    /*
+        $("#bt_info_ref").click(function(){
+            $("#info_ref").slideToggle();
+        });
 
-    $("#bt_info_src").click(function(){
-        $("#info_src").slideToggle();
-    });
-*/
+        $("#bt_info_src").click(function(){
+            $("#info_src").slideToggle();
+        });
+    */
     $("#bt_add_bloc").click(function(){
         // Incrementation du numéro de bloc
         cpt_bloc++;

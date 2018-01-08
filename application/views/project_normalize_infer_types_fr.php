@@ -140,7 +140,7 @@
 	</div>
 </div>
 
-<?php 
+<?php
 if(isset($this->session->project_type)){
 	$project_type = $this->session->project_type;
 }
@@ -247,7 +247,7 @@ if(isset($this->session->project_type)){
 
 				    // Chargement de la page suivante (rappel du controller)
 				    location.reload();
-				   
+
 				}
 		    },
 		    error: function (result, status, error){
@@ -293,7 +293,7 @@ if(isset($this->session->project_type)){
 		                "module_params": null
 		            }
 					console.log("appel infer_mvs");
-				
+
 					$.ajax({
 						type: 'post',
 						dataType: "json",
@@ -310,7 +310,7 @@ if(isset($this->session->project_type)){
 							    console.log("success - infer_types");
 							    console.dir(result);
 
-							    // Appel 
+							    // Appel
 							    var handle = setInterval(function(){
 									$.ajax({
 										type: 'get',
@@ -323,15 +323,14 @@ if(isset($this->session->project_type)){
 
 							                    // Arret de l'animation recherche
 							                    $("#wait").css("display","none");
-							                    
+
 							                    write_types(result.result);
-							                    
+
 							                    write_categories_types_modal(result.result.all_types);
 
-							                    tags_modal(result.result.type_tags);
+							                    tags_modal(result.result.type_e);
 
 							                    $("#didacticiel").css("visibility","visible");
-												
 											}
 											else{
 												console.log("success - job en cours");
@@ -434,7 +433,7 @@ if(isset($this->session->project_type)){
 
     function apos_to_underscore(lib) {
     	lib = lib.replaceAll("'", "_");
-    	return lib;	
+    	return lib;
     }// /apos_to_underscore
 
 
@@ -542,7 +541,7 @@ if(isset($this->session->project_type)){
 				}
 				else{
 					// todo: test de l'existence
-					tab_tags[tags[tag][i]].push(tag);	
+					tab_tags[tags[tag][i]].push(tag);
 				}
 			}
 		}
@@ -642,7 +641,7 @@ if(isset($this->session->project_type)){
 				else{
                     console.log("success");
                     console.dir(result);
-					
+
 		            tparams = {
 		            	"data_params": {
 		                	"module_name": result.module_name,
@@ -656,7 +655,7 @@ if(isset($this->session->project_type)){
 		                }
 		            }
 					console.log("appel sample");
-					
+
 					$.ajax({
 						type: 'post',
 						dataType: "json",
@@ -768,7 +767,7 @@ if(isset($this->session->project_type)){
 			    $("#treatment_process").html("");
 			    $('#start_treatment_ok').css('visibility', 'visible');
 
-			    // Appel 
+			    // Appel
 			    var handle = setInterval(function(){
 			    	$("#treatment_process").html($("#treatment_process").html() + "."); // avancement
 					$.ajax({
@@ -828,7 +827,7 @@ if(isset($this->session->project_type)){
 		$('#in_search').on('input',function(e){
 			search_with_tags()
 		});
-    	
+
 		$("#bt_delete_modal").click(function(){
 			delete_td_bt();
 		});
