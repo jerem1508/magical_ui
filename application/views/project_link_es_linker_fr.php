@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-md-12 text-center">
             <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
-            <button class="btn btn-success2" id="dl_file"><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+            <button class="btn btn-success2" id="dl_file" disabled><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
         </div>
     </div>
 </div><!--/container-->
@@ -440,6 +440,9 @@ function show_data_html(data, start) {
         // Affichage du bouton de nouveau traitement
         $("#bt_re_treatment").css("visibility", "visible");
     });
+
+    // Bt de telechargement accessible
+    $("#dl_file").prop('disabled', false);
 }// /show_data_html()
 
 
