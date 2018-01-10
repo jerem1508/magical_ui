@@ -186,7 +186,7 @@ class User extends CI_Controller {
 		}
 		catch(Exception $e){
 			$error = $e->getMessage();
-			$this->log_error($error);
+			//$this->log_error($error);
 		}
 
 		$data['server_error'] = $error;
