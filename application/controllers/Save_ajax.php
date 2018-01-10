@@ -6,7 +6,7 @@ class Save_ajax extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->load->model('Projects_model');
 		$this->load->model('Comments_model');
 		$this->load->model('User_model');
@@ -34,7 +34,7 @@ class Save_ajax extends CI_Controller {
 		}
 		else{
 			print_r($_POST);
-			echo false;	
+			echo false;
 		}
 	}// /session()
 
@@ -89,8 +89,8 @@ class Save_ajax extends CI_Controller {
 		if(!$err){
 			// insertion du projet
 			$ret =  $this->Projects_model->insert_project(	$project_id,
-															$_SESSION['user']['id'], 
-															$public_status, 
+															$_SESSION['user']['id'],
+															$public_status,
 															$project_type);
 		}
 	}// /project()
@@ -152,12 +152,16 @@ class Save_ajax extends CI_Controller {
 		}
 		// Ajout en bdd
 		$ret =  $this->Comments_model->insert_comment(
-										$name, 
-										$email, 
-										$message, 
-										$url, 
-										$project_id, 
+										$name,
+										$email,
+										$message,
+										$url,
+										$project_id,
 										$project_type);
+
+		// Envoi email à l'admin
+		$message_to_send = $name.'/n'.$email.'/n'.$message.'/n'.$url.'/n'.$project_id.'/n'.$project_type;
+		$this->private_functions->send_comment_to_admin_email($message_to_send);
 	}// /comment()
 
 
@@ -178,9 +182,9 @@ class Save_ajax extends CI_Controller {
 		$pwd_ok =  $this->User_model->pwd_ok($email, $password_old);
 
 		if($pwd_ok){
-			$ret =  $this->User_model->update_pwd($email, $password_new);			
+			$ret =  $this->User_model->update_pwd($email, $password_new);
 		}
-		
+
 		return $ret;
 	}// /modify_password()
 

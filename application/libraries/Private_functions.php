@@ -154,4 +154,64 @@ class Private_functions {
 		return $response;
 
 	}// /delete_project_API()
+
+
+	public function send_comment_to_admin_email($message='')
+	{
+		# Prévient l'admin d'un nouveau commentaire
+
+		$ci = &get_instance();
+		$ci->load->library('email');
+
+		$config_email = Array(
+		    'protocol' => 'smtp',
+		    'smtp_host' => 'smtp-relay.sendinblue.com',
+		    'smtp_port' => 587,
+		    'smtp_user' => 'yann.caradec@recherche.gouv.fr',
+		    'smtp_pass' => '',
+		    'mailtype'  => 'html',
+		    'charset'   => 'utf-8'
+		);
+
+		$ci->email->initialize($config_email);
+		$ci->email->set_newline("\r\n");
+
+		// Set to, from, message, etc.
+		$ci->email->from('YOUREMAILHERE@gmail.com', 'YOUREMAILHERE@gmail.com');
+		$ci->email->to('jeremy.peglion@gmail.com');
+		$ci->email->subject('Test email from CI and Gmail');
+		$ci->email->message('This is a test.');
+
+		$result = $ci->email->send();
+
+		// $ci = get_instance();
+		// $ci->load->library('email');
+		// $config['protocol'] = 'smtp';
+		// //$config['smtp_host'] = "ssl://smtp.gmail.com";
+		// $config['smtp_host'] = 'smtp-relay.sendinblue.com';
+		// //$config['smtp_port'] = "465";
+		// $config['smtp_port'] = '587';
+		// $config['smtp_user'] = 'yann.caradec@recherche.gouv.fr';
+		// $config['smtp_pass'] = 'zxk3Tr5WpYqMELfU';
+		// $config['charset'] = 'utf-8';
+		// $config['mailtype'] = 'html';
+		// $config['newline'] = "\r\n";
+        //
+		// $ci->email->initialize($config);
+        //
+		// $ci->email->from('admin@la-machine-a-donnees.com', 'Admin');
+		// $list = ADMIN_EMAIL;
+		// $ci->email->to($list);
+		// //$this->email->reply_to('my-email@gmail.com', 'Explendid Videos');
+		// $ci->email->subject('MAD - Nouveau commentaire');
+		// $ci->email->message($message);
+		// $ci->email->send();
+
+	}// /send_comment_to_admin_email()
+
+
+	public function send_email_to_user($email='', $subject='', $message='')
+	{
+		# code...
+	}// /send_email_to_user()
 }// /Class
