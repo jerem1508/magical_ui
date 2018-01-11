@@ -774,7 +774,31 @@ function show_new_proposition(message) {
             var value_tab = value.split(' ');
             var value_temp = "";
             for (var k = 0; k < value_tab.length; k++) {
-                value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\',\'' + num_assoc + '\')">' + value_tab[k] + '</a> ';
+                // Traitement des guillements
+                value_tab[k] = value_tab[k].replace('"' , '');
+                value_tab[k] = value_tab[k].replace('"' , '');
+
+                if(value_tab[k].indexOf("'") == 1){
+                    // Cas quote après article. Ex : l'enseignement => l' ne sera pas cliquable
+                    var article = value_tab[k].substr(0,2);
+                    var mot_sans_article = value_tab[k].substr(2);
+                    value_temp += article;
+                    value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + mot_sans_article + '\',\'' + num_assoc + '\')">' + mot_sans_article + '</a> ';
+                }
+                else{
+                    if(value_tab[k].indexOf("'") != -1){
+                        // Ex : class'croute => les 2 mots doivent être cliquables
+                        var tab_several_quote = value_tab[k].split("'");
+                        for (var l = 0; l < tab_several_quote.length; l++) {
+                            value_temp += "'";
+                            value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + tab_several_quote[l] + '\',\'' + num_assoc + '\')">' + tab_several_quote[l] + '</a> ';
+                        }
+                    }
+                    else{
+                        // Cas sans quote
+                        value_temp += '<a class="user_tag" onclick="add_user_filter(\'' + key + '\', \'' + value_tab[k] + '\',\'' + num_assoc + '\')">' + value_tab[k] + '</a> ';
+                    }
+                }
             }
             source.push(value_temp);
         }
