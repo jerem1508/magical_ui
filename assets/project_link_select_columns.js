@@ -1,6 +1,5 @@
 function get_columns_html(tab_columns, infer_columns, target) {
 	// Retourne au format HTML l'ensemble des colonnes passées en paramètre
-
 	var html = "";
 	var li = "";
 
@@ -9,7 +8,9 @@ function get_columns_html(tab_columns, infer_columns, target) {
 
 	for (var i = 0; i < tab_columns.length; i++) {
 		var column_type = '';
-		if(typeof infer_columns[tab_columns[i]] === 'undefined'){
+
+		if(typeof infer_columns[tab_columns[i]] === 'undefined'
+			|| typeof infer_columns[tab_columns[i]] === 'function'){
 			tab_types['undefined'].push(tab_columns[i]);
 			column_type = 'Inconnu';
 		}
@@ -17,12 +18,11 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			if(tab_types.indexOf(infer_columns[tab_columns[i]]) == -1){
 				tab_types[infer_columns[tab_columns[i]]] = new Array();
 			}
-
 			tab_types[infer_columns[tab_columns[i]]].push(tab_columns[i]);
 			column_type = infer_columns[tab_columns[i]];
 		}
 
-		if(column_type == 'Inconnu'){
+		if(column_type == 'Inconnu' || column_type == ''){
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-1">';
@@ -30,7 +30,6 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '	</div>';
 			html += '	<div class="col-md-9">';
 			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '</div>';
-			//html += '		<div class="type">Type : ' + column_type + '</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-2">';
 			html += '		<i class="fa fa-plus-circle add" style="font-size: 40px;"></i>';
@@ -39,9 +38,9 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '</div>';
 		}
 		else {
-			var tab = scale_reverse[column_type];
-			tab += '["' + column_type + '"]';
-			var couleur = eval(tab);
+			var searched_tab = scale_reverse[column_type]; // ex: scale_geo
+			var couleur = scale_color[searched_tab][column_type];
+
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
 			html += '	<div class="col-md-1">';

@@ -60,7 +60,7 @@ function show_api_error(error, error_txt) {
 
 scale_other = {"Anglais" : "#b3e6b3","Article" : "#9fdf9f","Contenu d'article" : "#8cd98c","Corps et Grades" : "#79d279","Domaine de Recherche" : "#66cc66","Education Nationale" : "#53c653","Entité agro" : "#40bf40","Entité biomédicale" : "#39ac39","Entité Géo" : "#339933","Entité MESR" : "#2d862d","Français" : "#267326","Institution" : "#206020","Mention APB" : "#194d19","NIF" : "#133913","Nom d'essai clinique" : "#b3ffcc","Nom" : "#99ffbb","Phyto" : "#80ffaa","Publication" : "#66ff99","Résumé" : "#4dff88","Spécialité médicale" : "#33ff77","Texte" : "#1aff66","Titre de revue" : "#00ff55","TVA" : "#00e64d","Type structuré" : "#00cc44"};
 
-scale_date = {"Année" : "#ff80bf","Date" : "ffb3d9"};
+scale_date = {"Année" : "#ff80bf","Date" : "#ffb3d9"};
 
 scale_geo = {"Adresse" : "#ccebff","Code Postal" : "#b3e0ff","Code" : "#99d6ff","Commune" : "#80ccff","Département" : "#66c2ff","Pays" : "#4db8ff","Postal" : "#33adff","Région" : "#1aa3ff","Voie" : "#0099ff"};
 
@@ -69,6 +69,14 @@ scale_id =  {"DOI" : "#ffffcc","Email" : "#ffffb3","ID organisation" : "#ffff99"
 scale_institution = {"Académie": "#ffcccc","Nom d'organisation": "#ffcccc","Collaborateur d'essai clinique": "#ffb3b3","Entreprise": "#ff9999","Etablissement d'Enseignement Supérieur": "#ff8080","Etablissement des premier et second degrés": "#ff6666","Etablissement": "#ff4d4d","Institution de recherche": "#ff3333","Partenaire de recherche": "#ff1a1a","Structure de recherche": "#ff0000"};
 
 scale_person = {"Nom de personne" : "#e6ccff","Prénom" : "#cc99ff","Titre" : "#b366ff","Titre de personne" : "#b366ff"};
+
+scale_color = {
+	scale_other,
+	scale_date,
+	scale_geo,
+	scale_id,
+	scale_institution,
+	scale_person};
 
 scale_reverse ={"Anglais" : "scale_other",
 				"Article" : "scale_other",

@@ -227,9 +227,13 @@ function get_metadata(project_type, project_id) {
 }// /get_metadata()
 
 
-function get_runinfo(project_type, project_id, module_name, file_name) {
+function get_runinfo(project_type, project_id, module_name, file_name, metadata) {
     // Récupere le contenu d'un fichier runInfo via API
     console.log('get_runinfo()');
+
+    console.log("metadata");
+    console.log(metadata);
+
 
     var runinfo = "";
 
@@ -259,7 +263,9 @@ function get_runinfo(project_type, project_id, module_name, file_name) {
             }
         },
         error: function (result, status, error){
-            show_api_error(result, "error - download_config");
+             if(result.status != 404) {
+                 show_api_error(result, "error - download_config");
+             }
         }
     });// /ajax - Download config
     return runinfo;
@@ -436,6 +442,9 @@ function set_scroll(cible, ncols, limit) {
 
 $(function(){// ready
 
+    cpt_bloc = 0; // Compteur de blocs
+    id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
+
     $("body").css("height", $(window).height()) ;
 
     // Chargement des actions des boutons
@@ -491,17 +500,13 @@ $(function(){// ready
     set_scroll("src_columns", columns_src.length, 15);
     set_scroll("ref_columns", columns_ref.length, 15);
 
-    // Récupération des types inférés
-    var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name);
-    var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name);
+    // Récupération des types inférés si existants
+    var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name, metadata_src);
+    var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name, metadata_ref);
 
     // Ajout des colonne à l'interface
     $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
     $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
-
-    cpt_bloc = 0; // Compteur de blocs
-    id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
-
 
 //jQuery("#src_file_name").fitText(0.5);
 
