@@ -38,8 +38,14 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '</div>';
 		}
 		else {
-			var searched_tab = scale_reverse[column_type]; // ex: scale_geo
-			var couleur = scale_color[searched_tab][column_type];
+			
+			try {
+				var searched_tab = scale_reverse[column_type]; // ex: scale_geo
+				var couleur = scale_color[searched_tab][column_type];
+			}
+			catch(error) {
+			  	var couleur = "#aaa";
+			}
 
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
