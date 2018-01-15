@@ -11,11 +11,12 @@
 
 	function is_completed_step($step_name, $project_steps, $has_mini){
 		$filename = str_replace('MINI__', '', key($project_steps));
-
+// print_r($project_steps);
+// print_r('$filename:'.$filename);
+// print_r('$step_name:'.$step_name);
 	    if(@$project_steps[$filename]['concat_with_init']==1){
 	      	return true;
 	    }
-
 		switch ($step_name) {
 			case 'INIT':
 				return true;
@@ -251,6 +252,10 @@
 						$nb_steps = count($tab_steps);
 						$ratio = 100/$nb_steps;
 						foreach ($normalized_projects as $project) {
+							// Si upload incomplet, le projet n'a pas de "file", on ne prend pas en compte
+							if(empty($project['file'])){
+								continue;
+							}
 							$steps_html = '<div class="progress">';
 							$found_step_todo = false;
 							$step_todo = "";

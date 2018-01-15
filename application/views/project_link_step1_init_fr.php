@@ -125,7 +125,10 @@ function get_normalized_projects_html($id, $normalized_projects)
         if($project['public']){
             continue;
         }
-
+        // Si upload incomplet, le projet n'a pas de "file", on ne prend pas en compte
+        if(empty($project['file'])){
+            continue;
+        }
         // Jauge
         $steps_html = '<div class="progress">';
         $found_step_todo = false;
