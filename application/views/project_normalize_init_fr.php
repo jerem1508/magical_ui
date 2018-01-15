@@ -34,18 +34,18 @@
         </div>
         <div class="col-lg-6">
             <div class="row">
-                
+
                 <div class="col-lg-9">
 <!--
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                      
+
                       <ol class="carousel-indicators">
                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                       </ol>
 
-                      
+
                       <div class="carousel-inner" role="listbox">
                         <div class="item active">
                           <img src="..." alt="...">
@@ -62,7 +62,7 @@
                         ...
                       </div>
 
-                      
+
                       <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -106,6 +106,19 @@
                 		<textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
                 	</div>
                 </div>
+                <?php
+                if(@$_SESSION['user']['status'] == '99'){
+                    ?>
+                    <div class="form-group">
+                        <label for="public" class="col-sm-3 control-label">Référentiel public</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" id="chk_public">
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
@@ -116,18 +129,6 @@
                         <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
                     </label>
                 </div>
-                <?php
-                if(@$_SESSION['user']['status'] == '99'){
-                ?>
-                <div class="form-group">
-                    <label for="public" class="col-sm-3 control-label">Référentiel public</label>
-                    <div class="col-sm-9">
-                      <input type="checkbox" id="chk_public">
-                    </div>
-                </div>
-                <?php
-                }
-                ?>
             </div>
         </div>
         <div class="col-md-6">
@@ -161,7 +162,7 @@
                     </div>
                 </div><!-- / row-->
             </div><!-- /well-->
-            
+
         </div>
     </div>
 </div>
@@ -189,7 +190,7 @@
         <div id="report">
             <h2>
                 <i class="fa fa-flag-checkered" aria-hidden="true"></i>
-                Rapport : 
+                Rapport :
             </h2>
             <div class="row">
                 <div class="col-md-3">
@@ -226,7 +227,7 @@
                         <h2 style="display: inline;"><span id="ncols"></span></h2> <i>colonnes</i>
                       </div>
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-info">
@@ -279,7 +280,7 @@
             <div class="col-xs-11">
                 Vous devez valider les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a> afin de pouvoir commencer la création d'un projet.
             </div>
-        </div>  
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -290,7 +291,7 @@
 
 <div id="files" class="files"></div>
 
-<?php 
+<?php
     if(isset($this->session->project_type)){
 		$project_type = $this->session->project_type;
 	}
@@ -322,7 +323,7 @@
 
 
     function save_project_sync(project_id) {
-        $.ajax({    
+        $.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/project');?>',
             data: 'project_id=' + project_id + '&project_type=normalize',
@@ -341,7 +342,7 @@
 
 
     function save_session_sync(name, value) {
-    	$.ajax({	
+    	$.ajax({
     		type: 'post',
     		url: '<?php echo base_url('index.php/Save_ajax/session');?>',
     		data: 'name=' + name + '&val=' + value,
@@ -369,7 +370,7 @@
 
 
     function unset_session(name) {
-        $.ajax({    
+        $.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/unsession');?>',
             data: 'name=' + name,
@@ -422,10 +423,10 @@
                     console.log("project_id" + project_id);
 
                     var result_save = "";
-                
+
                     console.log("treatment/save_session_synch");
                     result_save = save_session_sync("project_id", result.project_id);
-                    
+
                     // Sauvegarde du projet
                     console.log("treatment/save_project_synch");
                     save_project_sync(result.project_id);
@@ -487,7 +488,7 @@
             // TODO : Tester la sélection du fichier
 
         // /Controles ----------------------
-        
+
         $(".fileinput-button").attr("disabled", "disabled");
 
         // Appels API ----------------------
@@ -539,7 +540,7 @@
 
     // Init - Ready
     $(function() {
-        
+
         // Suppression de la variable de session link_project_id si elle existe
         // cette variable est renseignée uniquement lorsque l'on vient d'un projet de LINK
         unset_session("link_project_id");
