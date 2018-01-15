@@ -44,6 +44,22 @@ function get_progress_html($bs_color, $ratio, $step, $project_id)
 }// /get_progress_html()
 
 
+function get_logo_html($name)
+{
+    # Recherche d'un éventuel logo en rapport avec le nom de fichier
+    $html = '';
+    $name = strtolower($name);
+
+    foreach (TAB_LOGO as $key => $value) {
+        if(!empty(strstr($name, $key))){
+            $html = '<img class="logo" src="'.base_url('assets/img/'.$value).'">';
+        }
+    }
+
+    return $html;
+}// / get_logo_html()
+
+
 function get_internal_projects_html($internal_projects)
 {
     # Renvoi un code HTML d'affichage des projets internes (publiques) dans la modale
@@ -52,10 +68,10 @@ function get_internal_projects_html($internal_projects)
 
     // Récupération des informations depuis les métatdata des projets internes
     foreach ($internal_projects as $project){
-
-        // $project['display_name']
-        // $project['description']
-        // $project['project_id']
+        // On test l'existence d'un fichier dans le projet en cas d'upload en erreur
+        if(empty($project['last_written']['file_name'])){
+            continue;
+        }
 
         // Date de création
         $timestamp = $project['timestamp'];
@@ -65,23 +81,25 @@ function get_internal_projects_html($internal_projects)
         $nrows = $project['files'][key($project['files'])]['nrows'];
 
         $html .= '<div class="bloc_project" onclick="select_internal_ref(\''.$project['project_id'].'\',\''.$project['display_name'].'\');">';
+
             $html .= '<div class="row">';
                 $html .= '<div class="col-md-1 chk">';
                 $html .= '<h3><span class="glyphicon glyphicon-ok"></span></h3>';
                 $html .= '</div>';
                 $html .= '<div class="col-md-11">';
-                    // Nom di projet
+                    // Nom du projet
                     $html .= '<div class="row">';
                         $html .= '<div class="col-md-12">';
-                            $html .= '<h4 class="internal_ref_title">'.$project['display_name'].'<h4>';
+                        $logo = get_logo_html($project['display_name']);;
+                        if($logo){
+                            $html .= $logo;
+                        }
+                        else{
+                            $html .= '<h2 class="internal_ref_title" style="display:inline;">'.$project['display_name'].'<h2>';
+                        }
                         $html .= '</div>';
+
                     $html .= '</div>';
-                    // Nom du fichier
-                    // $html .= '<div class="row">';
-                    //     $html .= '<div class="col-md-12">';
-                    //         $html .= $project['file'];
-                    //     $html .= '</div>';
-                    // $html .= '</div>';
                     // Description du projet
                     $html .= '<div class="row">';
                         $html .= '<div class="col-md-12">';
@@ -282,22 +300,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                         <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
                     </div>
                 </div>
-<!--
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-offset-2 col-md-10">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
-                        </label>
-                    </div>
-                </div>
--->
             </form>
         </div> <!-- / col-12-->
     </div><!-- / row -->
@@ -1170,7 +1172,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         $("#ref_project_id").html(project_id);
         $("#ref_internal_project_name").html(project_name);
 
-        $("#" + target + "_selection").html(project_name);
+        $("#ref_selection").html(project_name);
 
         exist_ref = true;
 

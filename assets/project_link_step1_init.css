@@ -27,7 +27,7 @@
     border-right: solid 1px #FFF;
 }
 .progress-bar:last-child {
-    border: none; 
+    border: none;
 }
 .chk{
     visibility: hidden;
@@ -52,4 +52,11 @@
 
 .internal_ref_title{
     color: #25358C;
+}
+
+.bloc_project .logo{
+    width: 100px;
+}
+.bloc_project H2{
+    color: #555;
 }

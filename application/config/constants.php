@@ -85,15 +85,20 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-
-
 // Constantes applicatives
 if($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost'){
-	define('BASE_API_URL', "http://127.0.0.1:5000"); 
+	define('BASE_API_URL', "http://127.0.0.1:5000");
 }
 elseif($_SERVER['HTTP_HOST'] == '51.15.221.77'){
 	define('BASE_API_URL', "http://51.15.221.77:5000");
 }
+
+define('TAB_LOGO', array(
+	'grid'=>'grid.png',
+	'hal'=>'hal.png',
+	'rnsr'=>'rnsr.png',
+	'sirene'=>'sirene.png'
+));
 
 // user
 define('USER_STATUS_ENABLED', "1");
