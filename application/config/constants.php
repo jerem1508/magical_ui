@@ -100,6 +100,9 @@ define('TAB_LOGO', array(
 	'sirene'=>'sirene.png'
 ));
 
+// Taille maxi des noms de fichier dans le tableau de bord
+define('MAX_LIB_FILENAME', 30);
+
 // user
 define('USER_STATUS_ENABLED', "1");
 define('USER_STATUS_DISABLED', "0");

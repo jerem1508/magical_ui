@@ -11,9 +11,7 @@
 
 	function is_completed_step($step_name, $project_steps, $has_mini){
 		$filename = str_replace('MINI__', '', key($project_steps));
-// print_r($project_steps);
-// print_r('$filename:'.$filename);
-// print_r('$step_name:'.$step_name);
+
 	    if(@$project_steps[$filename]['concat_with_init']==1){
 	      	return true;
 	    }
@@ -185,11 +183,26 @@
 								}
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
+
+							if(strlen($project['file_src']) > MAX_LIB_FILENAME){
+								$file_src_maximized = substr($project['file_src'],0,MAX_LIB_FILENAME).'...';
+							}
+							else {
+								$file_src_maximized = $project['file_src'];
+							}
+
+							if(strlen($project['file_ref']) > MAX_LIB_FILENAME){
+								$file_ref_maximized = substr($project['file_ref'],0,MAX_LIB_FILENAME).'...';
+							}
+							else {
+								$file_ref_maximized = $project['file_ref'];
+							}
+
 							echo '<tr>';
 							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
-							echo '<td>'.$project['file_src'].'</td>';
-							echo '<td>'.$project['file_ref'].'</td>';
+							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_src'].'">'.$file_src_maximized.'</span></td>';
+							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_ref'].'">'.$file_ref_maximized.'</span></td>';
 							echo '<td class="text-center">'.$steps_html.'</td>';
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
@@ -271,11 +284,19 @@
 								}
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
+
+							if(strlen($project['file']) > MAX_LIB_FILENAME){
+								$file_maximized = substr($project['file'],0,MAX_LIB_FILENAME).'...';
+							}
+							else {
+								$file_maximized = $project['file'];
+							}
+
 							echo '<tr>';
 							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td class="text-center">'.get_status($project['public']).'</td>';
-							echo '<td>'.$project['file'].'</td>';
+							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file'].'">'.$file_maximized.'</span></td>';
 							echo '<td class="text-center">'.$steps_html.'</td>';
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
