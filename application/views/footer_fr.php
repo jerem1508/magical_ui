@@ -40,7 +40,7 @@
 		background-color: #262626;
 		padding-top: 20px;
 		padding-bottom: 20px;
-		height: 200px;
+		height: 120px;
 	}
 		footer .txt{
 			color: #aaa;
@@ -58,50 +58,31 @@
 			border-left: 3px dotted #333;
 		}
 		footer a,a:hover{
-			color: #aaa;	
-			text-decoration: none;	
+			color: #aaa;
+			text-decoration: none;
 		}
 </style>
 
 <footer class="container-fluid" style="padding-top: 20px;">
     <div class="row">
-		<div class="col-md-4 txt">
+        <div class="col-md-offset-4 col-md-4 txt">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<span class="title">plan du site</span>        			
-				</div>
-			</div>
-		</div>
-        <div class="col-md-4 txt">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<span class="title">partenaires</span>        			
+					<span class="title">partenaires</span>
 				</div>
 			</div><!-- / col-md-4-->
         	<div class="row">
         		<div class="col-md-6 col-left">
 					<ul>
 						<li>
-							<a href="#">Programme EIG</a>
-						</li>
-						<li>
-							<a href="#">MESRI</a>
-						</li>
-						<li>
-							<a href="#">ABES</a>
+							<a href="https://www.etalab.gouv.fr/decouvrez-la-1e-promotion-des-entrepreneurs-dinteret-general" target="_blank">Programme EIG</a>
 						</li>
 					</ul>
         		</div>
         		<div class="col-md-6 col-right">
         			<ul>
 						<li>
-							<a href="#">Agro</a>
-						</li>
-						<li>
-							<a href="#">Etalab</a>
-						</li>
-						<li>
-							<a href="#">...</a>
+							<a href="http://www.enseignementsup-recherche.gouv.fr/" target="_blank">MESRI</a>
 						</li>
 					</ul>
         		</div>
@@ -110,20 +91,14 @@
 		<div class="col-md-4 txt">
 			<ul>
 				<li>
-					<a href="#">A propos</a>
-				</li>
-				<li>
 					<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">Conditions générales d'utilisation</a>
 				</li>
 				<li>
-					<a href="#">API</a>
+					<a href="https://github.com/entrepreneur-interet-general/the-magical-csv-merge-machine" target="_blank">API</a>
 				</li>
-			</ul>
-			<ul>
 				<li>
-					<a href="#">
-						<i class="fa fa-envelope" aria-hidden="true"></i>
-						Contact
+					<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
+						<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
 					</a>
 				</li>
 			</ul>
@@ -182,7 +157,7 @@
 
 <script type="text/javascript">
 	$("#error_box").toggle();
-	
+
 	$("#bt_comment").click(function(){
 		if($('#panel_comment').hasClass("maximised")){
 			panel_minimize();
@@ -261,7 +236,7 @@
 		$("#panel_comment .panel-title").html(ch);
 	}// /panel_minimize()
 
-	
+
 	function panel_maximize() {
 		$('#panel_comment')
 			.removeClass("minimised")
@@ -287,7 +262,7 @@
 		}
 
 		// Envoi du commentaire
-        $.ajax({    
+        $.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/comment');?>',
             data: 'name=' + name + '&email=' + email + '&message=' + message + '&url=' + url + '&project_id=' + project_id + '&project_type=' + project_type,
