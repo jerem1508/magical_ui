@@ -1,4 +1,4 @@
- 
+
 /*
 vert
 #A7CA48
@@ -36,7 +36,7 @@ corail
 
 
 .intro{
-  background-color: rgba(255,255,255,0.7); 
+  background-color: rgba(255,255,255,0.7);
 }
 
 .background_1{
@@ -56,7 +56,7 @@ body{
 
 /* ENTETE ------------------------------*/
 .entete{
-  background-color: #fff; 
+  background-color: #fff;
   padding-bottom: 15px;
   color: #777;
   font-style: italic;
@@ -72,7 +72,7 @@ body{
   margin-top: 5px;
 }
 .entete2{
-  background-color: #262626; 
+  background-color: #262626;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -121,7 +121,7 @@ hr{
   color: #eee;
 }
 #report>h2{
-  color: #eee;  
+  color: #eee;
 }
 #report li{
   list-style: none;
@@ -133,7 +133,7 @@ hr{
   height: 100%;
   /*top: -250px;*/
   left: 0;
-  z-index: -1;  
+  z-index: -1;
 }
 .poudre_pos_home{
   top: 0;
@@ -171,7 +171,7 @@ hr{
   color: #777;
 }
 .steps .accueil{
-  border-radius: 5px 0 0 5px; 
+  border-radius: 5px 0 0 5px;
   border-right: 1px solid #aaa;
   border-bottom: 0;
   width: 170px;
@@ -202,7 +202,7 @@ a{
   color: #25358c;
 }
 a:hover{
-  color: #E00612;  
+  color: #E00612;
 }
 
 .navbar{
@@ -437,10 +437,14 @@ fieldset[disabled] .btn-success2.active {
   background-color: #fff;
 }
 
-
-
-
-
+/* Modals */
+.modal-header{
+    background-color: #262626;
+}
+.modal-header H4{
+    color: #ddd;
+}
+/*/ Modals*/
 
 .breadcrumb {
   text-align: center;
@@ -450,7 +454,7 @@ fieldset[disabled] .btn-success2.active {
   overflow: hidden;
   border-radius: 5px;
   /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
-  counter-reset: flag; 
+  counter-reset: flag;
 }
 
 .breadcrumb a {
@@ -495,12 +499,12 @@ fieldset[disabled] .btn-success2.active {
 .breadcrumb a:after {
   content: '';
   position: absolute;
-  top: 0; 
+  top: 0;
   right: -18px; /*half of square's length*/
   /*same dimension as the line-height of .breadcrumb a */
-  width: 36px; 
+  width: 36px;
   height: 36px;
-  /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's: 
+  /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
   length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
   if diagonal required = 1; length = 1/1.414 = 0.707*/
   transform: scale(0.707) rotate(45deg);
@@ -510,11 +514,11 @@ fieldset[disabled] .btn-success2.active {
   background: #666;
   background: linear-gradient(135deg, #666, #333);
   /*stylish arrow design using box shadow*/
-  box-shadow: 
-    2px -2px 0 2px rgba(0, 0, 0, 0.4), 
+  box-shadow:
+    2px -2px 0 2px rgba(0, 0, 0, 0.4),
     3px -3px 0 2px rgba(255, 255, 255, 0.1);
   /*
-    5px - for rounded arrows and 
+    5px - for rounded arrows and
     50px - to prevent hover glitches on the border created using shadows*/
   border-radius: 0 5px 0 50px;
 }
@@ -566,7 +570,7 @@ fieldset[disabled] .btn-success2.active {
 }
 
 
-.flat a:hover, .flat a.active, 
+.flat a:hover, .flat a.active,
 .flat a:hover:after, .flat a.active:after{
   background: #fff;
 }

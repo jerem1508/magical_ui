@@ -84,21 +84,18 @@ function get_internal_projects_html($internal_projects)
 
             $html .= '<div class="row">';
                 $html .= '<div class="col-md-1 chk">';
-                $html .= '<h3><span class="glyphicon glyphicon-ok"></span></h3>';
+                    $html .= '<h3><span class="glyphicon glyphicon-ok"></span></h3>';
                 $html .= '</div>';
-                $html .= '<div class="col-md-11">';
+                $html .= '<div class="col-md-3">';
+                    // Logo
+                    $html .= get_logo_html($project['display_name']);;
+                $html .= '</div>'; // /col-md-3
+                $html .= '<div class="col-md-8">';
                     // Nom du projet
                     $html .= '<div class="row">';
                         $html .= '<div class="col-md-12">';
-                        $logo = get_logo_html($project['display_name']);;
-                        if($logo){
-                            $html .= $logo;
-                        }
-                        else{
-                            $html .= '<h2 class="internal_ref_title" style="display:inline;">'.$project['display_name'].'<h2>';
-                        }
+                            $html .= '<h3 class="internal_ref_title" style="display:inline;">'.$project['display_name'].'<h3>';
                         $html .= '</div>';
-
                     $html .= '</div>';
                     // Description du projet
                     $html .= '<div class="row">';
@@ -118,7 +115,7 @@ function get_internal_projects_html($internal_projects)
                             $html .= 'Nombre de lignes : '.$nrows;
                         $html .= '</div>';
                     $html .= '</div>';
-                $html .= '</div>'; // /col-md-11
+                $html .= '</div>'; // /col-md-8
             $html .= '</div>'; // /row
             $html .= '<hr>';
         $html .= '</div>';// / bloc_project
@@ -1207,11 +1204,11 @@ function get_normalized_projects_html($id, $normalized_projects)
 
         $(".bloc_project").hover(
             function(){// over
-                $(this).css("background", "#eee");
+                //$(this).css("background", "#eee");
                 $(this).find(".chk").css("visibility", 'visible');
             },
             function(){// out
-                $(this).css("background", "white");
+                //$(this).css("background", "white");
                 $(this).find(".chk").css("visibility", 'hidden');
             }
         );
