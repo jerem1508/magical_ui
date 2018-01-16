@@ -1023,26 +1023,26 @@ function get_normalized_projects_html($id, $normalized_projects)
             // Traitement du fichier SOURCE
                 if(new_file_src && !error){
                     console.log('Creation du projet de normalisation (SOURCE)');
-
                     // Creation du projet de normalisation
-                      var tparams = {
-                            "url": "/api/new/normalize",
-                            "params": {
-                                "display_name": project_name + ' Fichier source',
-                                "description": project_description + '',
-                                "internal": false
-                            }
+                    var file_name_temp = $("#src_selection").html();
+                    var tparams = {
+                        "url": "/api/new/normalize",
+                        "params": {
+                            "display_name": project_name + ' : ' + file_name_temp,
+                            "description": project_description + '',
+                            "internal": false
                         }
-                        add_new_normalize_project_src(tparams);
+                    }
+                    add_new_normalize_project_src(tparams);
 
-                        console.log("treatment/save_session_synch");
-                        result_save = save_session_sync("src_project_id", src_project_id);
+                    console.log("treatment/save_session_synch");
+                    result_save = save_session_sync("src_project_id", src_project_id);
 
-                        // Sauvegarde du projet en base si user authentifié
-                        console.log("treatment/save_project_synch");
-                        save_project_sync(src_project_id, 'normalize');
+                    // Sauvegarde du projet en base si user authentifié
+                    console.log("treatment/save_project_synch");
+                    save_project_sync(src_project_id, 'normalize');
 
-                        //$("#create_project_ok").slideToggle();
+                    //$("#create_project_ok").slideToggle();
 
                     // Upload du fichier
                     url_src = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + src_project_id;
@@ -1078,12 +1078,12 @@ function get_normalized_projects_html($id, $normalized_projects)
             // Traitement du fichier REF
                 if(new_file_ref && !error){
                     console.log('Creation du projet de normalisation (REF)');
-
+                    var file_name_temp = $("#ref_selection").html();
                     // Creation du projet de normalisation
                       var tparams = {
                             "url": "/api/new/normalize",
                             "params": {
-                                "display_name": project_name + ' Fichier référentiel',
+                                "display_name": project_name + ' : ' + file_name_temp,
                                 "description": project_description + '',
                                 "internal": false
                             }
