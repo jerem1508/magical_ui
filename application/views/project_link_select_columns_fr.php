@@ -36,25 +36,9 @@
         </div>
         <div class="col-md-4 text-right">
             <ul class="nav nav-tabs navbar-right" style="margin-top: 5px;margin-right: 5px;">
-            <!--
-                <li>
-                <button class="btn btn btn-success2" id="bt_add_bloc" style="margin-right: 10px" data-intro="Ajoutez une nouvelle association de colonnes ici">
-                    Ajouter une association&nbsp;
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                </li>
-            -->
                 <li class="active"><a data-toggle="tab" href="#home">Informations</a></li>
                 <li><a data-toggle="tab" href="#menu1">Légende</a></li>
             </ul>
-            <!--
-                <h2 style="display: inline-block;">
-                    <button class="btn btn btn-success2" id="bt_add_bloc" style="margin-bottom: 4px" data-intro="Ajoutez une nouvelle association de colonnes ici">
-                        Ajouter un association&nbsp;
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </h2>
-            -->
         </div>
         <div class="col-md-3 text-right">
             <div style="padding-top: 20px;">
@@ -89,8 +73,6 @@
             </div>
         </div>
         <div class="col-xs-6">
-
-
             <div class="tab-content" style="background-color: #262626;color: #eee; padding: 10px;">
                 <div id="home" class="tab-pane fade in active">
                     <strong>Pour associer des colonnes</strong>, vous devez ajouter une nouvelle association puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
@@ -406,15 +388,7 @@ function get_buttons_actions() {
 
         valid_step('<?php echo $_SESSION['link_project_id'];?>');
     });
-    /*
-        $("#bt_info_ref").click(function(){
-            $("#info_ref").slideToggle();
-        });
 
-        $("#bt_info_src").click(function(){
-            $("#info_src").slideToggle();
-        });
-    */
     $("#bt_add_bloc").click(function(){
         // Incrementation du numéro de bloc
         cpt_bloc++;
@@ -441,7 +415,6 @@ function set_scroll(cible, ncols, limit) {
 
 
 $(function(){// ready
-
     cpt_bloc = 0; // Compteur de blocs
     id_bloc_to_change = 0; // Identifiant du bloc en cours pour modification de libellé
 
@@ -449,12 +422,6 @@ $(function(){// ready
 
     // Chargement des actions des boutons
     get_buttons_actions();
-
-    // Valeurs par défaut
-    /*
-    $("#info_ref").toggle();
-    $("#info_src").toggle();
-    */
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
@@ -507,9 +474,6 @@ $(function(){// ready
     // Ajout des colonne à l'interface
     $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
     $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
-
-//jQuery("#src_file_name").fitText(0.5);
-
 
 });//ready
 </script>

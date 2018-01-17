@@ -38,7 +38,7 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '</div>';
 		}
 		else {
-			
+
 			try {
 				var searched_tab = scale_reverse[column_type]; // ex: scale_geo
 				var couleur = scale_color[searched_tab][column_type];
@@ -92,8 +92,10 @@ function analysis_bloc(id_bloc) {
 	var tab_referentiel = referentiel.split(',');
 	referentiel = JSON.stringify(tab_referentiel);
 
-	//var ch = '{"source": [' + tab_src + '],"ref": [' + tab_ref + ']}';
-	var ch = '{"source":' + source + ',"ref":' + referentiel + '}';
+	var exact_only = $('#chk_' + id_bloc).is(':checked');
+
+	// Chain jSon
+	var ch = '{"source":' + source + ',"ref":' + referentiel + ',"exact_only":' + exact_only + '}';
 
 	$("#bloc_analysis_" + id_bloc).html(ch);
 
@@ -218,31 +220,36 @@ function new_bloc(id_bloc) {
 	html += '</div>';
 
 	html += '<div class="row" style="padding-bottom:5px;">';
-	html += '<div class="col-xs-12 text-left">';
-	html += '<div class="checkbox">';
-	html += '	<label>';
-	html += '		<input type="checkbox"> Association parfaite';
-	html += '	</label>';
-	html += '</div>';
-	html += '</div>';
+		html += '<div class="col-xs-6 text-left">';
+			html += '<div class="checkbox" style="margin-top:0;">';
+			html += '	<label>';
+			html += '		<input type="checkbox" id="chk_' + id_bloc + '" onchange="analysis_bloc(' + id_bloc + ');"> Association parfaite';
+			html += '	</label>';
+			html += '</div>';
+		html += '</div>';
+		html += '<div class="col-xs-6 text-right" style="padding-right:30px;">';
+			html += '<a style="cursor:pointer;" id="bt_toggle_json_bloc_' + id_bloc + '" onclick="toggle_json(' + id_bloc + ');">{JSON}</a>';
+		html += '</div>';
 	html += '</div>';
 
 	html += '<div class="row text-left">';
-	html += '	<div class="col-xs-12 text-left blocs_analysis" id="bloc_analysis_' + id_bloc + '"></div>';
+	html += '	<div class="col-xs-12 text-left blocs_analysis" id="bloc_analysis_' + id_bloc + '" style="display:none;"></div>';
 	html += '</div>';
 
 	html += '</div>';
 
 	// Ajout du nouveau bloc
 	$("#blocs").html($("#blocs").html() + html);
-	//$("#input_src_" + id_bloc).tagsInput();
-
-	// Ajout du javascript
-	//add_js_bloc(id_bloc);
 
 	// Définit le bloc association en cours
 	set_current_association(id_bloc);
 }// /new_bloc()
+
+
+function toggle_json(id_bloc) {
+	// Affiche ou cache la chaine json dans chaque bloc
+	$("#bloc_analysis_" + id_bloc).slideToggle();
+}// /toggle_json()
 
 
 function set_current_association(id_bloc) {
