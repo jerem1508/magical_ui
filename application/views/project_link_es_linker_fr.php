@@ -326,6 +326,9 @@ function show_data_html(data, start) {
             }
 
             var values = tab_values.join(", ");
+            if(values == ", "){
+                values = "";
+            }
             html += '    <td>' + values + '</td>';
         }
 
