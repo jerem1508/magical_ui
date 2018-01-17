@@ -72,7 +72,7 @@ function get_metadata(project_type, project_id) {
         url: '<?php echo BASE_API_URL;?>' + '/api/metadata/' + project_type + '/' + project_id,
         success: function (result) {
             if(result.error){
-                console.log("API error");console.log(result.error);
+                show_api_error(result.error, "API error");
             }
             else{
                 console.log("success - metadata");console.dir(result);
@@ -80,9 +80,7 @@ function get_metadata(project_type, project_id) {
             }
         },
         error: function (result, status, error){
-            console.log(result);
-            console.log(status);
-            console.log(error);
+            show_api_error(result, "error - metadata");
         }
     });// /ajax metadata
 
@@ -109,8 +107,7 @@ function get_column_matches(project_id) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - download_config");
-                console.log(result.error);
+                show_api_error(result.error, "API error - download_config");
             }
             else{
                 console.log("success - download_config");
@@ -119,8 +116,7 @@ function get_column_matches(project_id) {
             }
         },
         error: function (result, status, error){
-            console.log("error - download_config");
-            console.log(result);
+            show_api_error(result, "error - download_config");
         }
     });// /ajax - Download config
 
@@ -147,8 +143,7 @@ function get_learned_setting(project_id) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - download_config");
-                console.log(result.error);
+                show_api_error(result.error, "API error - download_config");
             }
             else{
                 console.log("success - download_config");
@@ -157,8 +152,7 @@ function get_learned_setting(project_id) {
             }
         },
         error: function (result, status, error){
-            console.log("error - download_config");
-            console.log(result);
+            show_api_error(result, "error - download_config");
         }
     });// /ajax - Download config
 
@@ -187,10 +181,8 @@ function get_thresh(project_id) {
         data: JSON.stringify(tparams),
         async: false,
         success: function (result) {
-
             if(result.error){
-                console.log("API error - download_config");
-                console.log(result.error);
+                show_api_error(result.error, "API error - download_config");
             }
             else{
                 console.log("success - download_config");
@@ -200,8 +192,7 @@ function get_thresh(project_id) {
             }
         },
         error: function (result, status, error){
-            console.log("error - download_config");
-            console.log(result);
+            show_api_error(result, "error - download_config");
         }
     });// /ajax - Download config
     return ret;
@@ -226,18 +217,16 @@ function get_data(from, size) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - get_data");
-                console.log(result.error);
+                show_api_error(result.error, "API error - get_data");
             }
             else{
                 console.log("success - get_data");
-                console.dir(result);
+                console.log(result);
                 ret = result.responses;
             }
         },
         error: function (result, status, error){
-            console.log("error - get_data");
-            console.log(result);
+            show_api_error(result, "error - get_data");
         }
     });// /ajax
     return ret;
@@ -258,7 +247,6 @@ function show_data_html(data, start) {
         html += '    <th>' + source_list + '</th>';
     }
 
-//  html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + Math.floor(tresh) + '</i></th>';
     html += '    <th rowspan="2" class="text-center">Confiance<br><i>Seuil : ' + precision_Round(thresh,2) + '</i></th>';
     html += '    <th rowspan="2" class="text-center">Correspondances<br>valides</th>';
     html += '</tr>';
@@ -305,7 +293,7 @@ function show_data_html(data, start) {
             html += '<h4></td>';
         }
         else{
-//            html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + Math.round(confidence) + '<h4></td>';
+
             html += '<td rowspan="2" class="text-center"><h4 class="confidence_vcentered" id="confidence_' + no_line + '">' + precision_Round(confidence,2) + '<h4></td>';
         }
         // Affichage du bouton
@@ -505,14 +493,12 @@ function create_es_index_api() {
         url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_index/' + project_id_link + '/',
         data: JSON.stringify(tparams),
         success: function (result) {
-
             if(result.error){
-                console.log("API error - create_es_index_api");
-                console.dir(result.error);
+                show_api_error(result.error, "API error - create_es_index_api");
             }
             else{
                 console.log("success - create_es_index_api");
-                console.dir(result);
+                console.log(result);
 
                 // Appel
                 var handle = setInterval(function(){
@@ -523,7 +509,7 @@ function create_es_index_api() {
                             if(result.completed){
                                 clearInterval(handle);
                                 console.log("success - job");
-                                console.dir(result);
+                                console.log(result);
 
                                 // Récupération des données paginées + affichage
                                 var start = 0;
@@ -536,8 +522,7 @@ function create_es_index_api() {
                             }
                         },
                         error: function (result, status, error){
-                            console.log("error");
-                            console.log(result);
+                            show_api_error(result, "error job create_es_index_api");
                             err = true;
                             clearInterval(handle);
                         }
@@ -546,8 +531,7 @@ function create_es_index_api() {
             }
         },
         error: function (result, status, error){
-            console.log("error");
-            console.log(result);
+            show_api_error(result, "error create_es_index_api");
             err = true;
         }
     });// /ajax - create_es_labeller
@@ -569,10 +553,8 @@ function treatment(project_id_link, learned_setting_json) {
         traditional: true,
         data: JSON.stringify(tparams),
         success: function (result) {
-
             if(result.error){
-                console.log("API error - es_linker");
-                console.log(result.error);
+                show_api_error(result.error, "API error - es_linker");
             }
             else{
                 console.log("success - es_linker");
@@ -611,8 +593,7 @@ function treatment(project_id_link, learned_setting_json) {
                             }
                         },
                         error: function (result, status, error){
-                            console.log("error");
-                            console.log(result);
+                            show_api_error(result, "error job - es_linker");
                             err = true;
                             clearInterval(handle);
                         }
@@ -621,8 +602,7 @@ function treatment(project_id_link, learned_setting_json) {
             }
         },
         error: function (result, status, error){
-            console.log("error schedule");
-            console.log(result);
+            show_api_error(result, "error - es_linker");
             err = true;
         }
     });// /ajax - create_es_labeller
@@ -655,8 +635,7 @@ function get_file_name(project_id) {
         async: false,
         success: function (result) {
             if(result.error){
-                console.log("API error - get_file_name");
-                console.log(result.error);
+                show_api_error(result.error, "API error - get_file_name");
             }
             else{
                 console.log("success - get_file_name");
@@ -666,8 +645,7 @@ function get_file_name(project_id) {
             }// / lastwritten - success
         },
         error: function (result, status, error){
-            console.log("error - get_file_name");
-            console.log(result);
+            show_api_error(result, "error - get_file_name");
             err = true;
         }
     });// /ajax - last_written
@@ -692,12 +670,10 @@ function add_buttons() {
             data: JSON.stringify(tparams),
             success: function (result_dl) {
                 if(result_dl.error){
-                    console.log("API error - dl");
-                    console.dir(result_dl);
+                    show_api_error(result_dl, "API error - dl");
                 }
                 else{
                     console.log("success - dl");
-                    //console.dir(result_dl); // ! affiche le fichier
 
                     // DL du fichier
                     var blob=new Blob([result_dl]);
@@ -708,8 +684,7 @@ function add_buttons() {
                 }
             },
             error: function (result_dl, status, error){
-                console.log("error");
-                console.log(result_dl);
+                show_api_error(result_dl, "error - dl");
                 err = true;
                 clearInterval(handle);
             }
@@ -806,8 +781,6 @@ function get_stats() {
             "file_name": file_name
         }
     }
-    console.log('tparams');
-    console.log(tparams);
 
     $.ajax({
         type: 'POST',
@@ -817,8 +790,7 @@ function get_stats() {
         data: JSON.stringify(tparams),
         success: function (result) {
             if(result.error){
-                console.log("API error - link_results_analyzer_api");
-                console.dir(result.error);
+                show_api_error(result.error, "API error - link_results_analyzer_api");
             }
             else{
                 console.log("success - link_results_analyzer_api");
@@ -843,8 +815,7 @@ function get_stats() {
                             }
                         },
                         error: function (result, status, error){
-                            console.log("error");
-                            console.log(result);
+                            show_api_error(result, "API job error - link_results_analyzer_api");
                             err = true;
                             clearInterval(handle);
                         }
@@ -853,8 +824,7 @@ function get_stats() {
             }
         },
         error: function (result, status, error){
-            console.log("error");
-            console.log(result);
+            show_api_error(result, "error - link_results_analyzer_api");
             err = true;
         }
     });// /ajax - link_results_analyzer

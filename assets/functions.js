@@ -51,8 +51,24 @@ function show_api_error(error, error_txt) {
 	console.log(error_txt);
 	console.log(error);
 
+	var status = 'error.status';
+	switch (error.status) {
+		case 400:
+			status = '400 : La syntaxe de la requête est erronée.';
+			break;
+		case 403:
+			status = '403 : Le serveur a compris la requête, mais refuse de l\'exécuter.';
+			break;
+		case 404:
+			status = '404 : Ressource non trouvée.';
+			break;
+		case 500:
+			status = '500 : Erreur interne du serveur.';
+			break;
+	}
+
 	$("#api_error_title").html(error_txt);
-	$("#api_error").html(JSON.stringify(error));
+	$("#api_error").html(status + "<br>" + JSON.stringify(error));
 
 	$("#modal_error_api").modal("show");
 }// /show_api_error()
