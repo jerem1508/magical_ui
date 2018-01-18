@@ -13,6 +13,10 @@
     <div id="result">
         <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
     </div>
+
+    <div class="row">
+        <div class="col-md-offset-8 col-md-4 text-right" id="pagination2"></div>
+    </div>
     <hr style="border-top: 3px dotted #777;">
     <div class="row">
         <div class="col-md-12">
@@ -516,7 +520,7 @@ function create_es_index_api() {
 
                                 // Récupération des données paginées + affichage
                                 var start = 0;
-                                var data = get_data(start, 20);
+                                var data = get_data(start, pas);
 
                                 show_data_html(data, start);
                             }
@@ -710,7 +714,7 @@ function set_pagination_html(nrows, pas, current_page) {
 
     // Bouton précédent ------------------
     if(current_page == 1){
-        // On desable le bouton précédent
+        // On disable le bouton précédent
         html += '    <li class="disabled">';
         html += '      <a href="#">';
         html += '        <span>&laquo;</span>';
@@ -728,12 +732,12 @@ function set_pagination_html(nrows, pas, current_page) {
 
     if(current_page > 1 && current_page < npages){
         // Milieu
-
+        // TODO ???
     }
 
     // Bouton suivant -------------------------
     if(current_page == npages){
-        // On desable le bouton suivant
+        // On disable le bouton suivant
         html += '    <li class="disabled">';
         html += '      <a href="#">';
         html += '        <span>&raquo;</span>';
@@ -754,9 +758,11 @@ function set_pagination_html(nrows, pas, current_page) {
 
     var start = (current_page - 1) * pas + 1;
     var end = start + pas -1;
-    html += '<div>De ' + start + ' à ' + end + ' sur ' + nrows + ' lignes</div>';
+    var html_1 = html + '<div>De ' + start + ' à ' + end + ' sur ' + nrows + ' lignes</div>';
+    var html_2 = '<div>De ' + start + ' à ' + end + ' sur ' + nrows + ' lignes</div>' + html;
 
-    $("#pagination").html(html);
+    $("#pagination").html(html_1);
+    $("#pagination2").html(html_2);
 }// /set_pagination_html()
 
 
@@ -768,7 +774,11 @@ function load_data(nrows, pas, current_page) {
 
     var data = get_data(start, pas);
 
+    // Affichage des données
     show_data_html(data, start);
+
+    // Scroll-up
+    go_to_speed("pagination", 500);
 
     // MAJ de la pagination
     set_pagination_html(nrows, pas, current_page);
@@ -844,6 +854,7 @@ function set_stats_html(stats) {
 $(function(){// ready
 
     npages = 0;
+    pas = 50;
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
@@ -884,7 +895,6 @@ $(function(){// ready
     // ----------------------------------------------------------------
 
     // Pagination
-    var pas = 20;
     set_pagination_html(src_nrows, pas, 1);
 });//ready
 

@@ -29,6 +29,11 @@ function go_to(to) {
 }// /go_to()
 
 
+function go_to_speed(to, speed) {
+	$('html, body').animate( { scrollTop: $("#"+ to).offset().top }, speed ); // Go
+}// /go_to()
+
+
 function set_height(div, size=0) {
 	if(size != 0){
 		$("#" + div).css('min-height',size);
