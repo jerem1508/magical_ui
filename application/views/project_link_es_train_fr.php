@@ -518,9 +518,9 @@ function load_labeller_api(project_id_link) {
             }
             else{
                 console.log("success - load_labeller_api");
-                console.dir(result);
+                console.log(result);
 
-                show_new_proposition(JSON.parse(result.result));
+                show_new_proposition(JSON.parse(result.result), "load_labeller");
             }
         },
         error: function (result, status, error){
@@ -553,7 +553,7 @@ function socket_on_message() {
     // Message provenant du serveur
 
     socket.on('message', function(data) {
-        show_new_proposition(JSON.parse(data));
+        show_new_proposition(JSON.parse(data), "on_message");
     });// / on
 }// / socket_on_message()
 
@@ -566,10 +566,6 @@ function socket_answer(user_response) {
 
     $("#message").html('<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">');
 
-    // var response_to_send = {
-    //     'project_id': project_id_link,
-    //     'user_input': user_response
-    // }
     var response_to_send = {
         "module_params": {
             "project_id": project_id_link,
@@ -588,9 +584,9 @@ function socket_answer(user_response) {
             }
             else{
                 console.log("success - update");
-                console.dir(result);
+                console.log(result);
 
-                show_new_proposition(JSON.parse(result.result));
+                show_new_proposition(JSON.parse(result.result), "labeller_update");
             }
         },
         error: function (result, status, error){
@@ -627,9 +623,9 @@ function socket_update_filters(must, must_not) {
             }
             else{
                 console.log("success - update_filters");
-                console.dir(result);
+                console.log(result);
 
-                show_new_proposition(JSON.parse(result.result));
+                show_new_proposition(JSON.parse(result.result), "update_filters");
             }
         },
         error: function (result, status, error){
@@ -687,7 +683,7 @@ function add_user_filters_api(user_filters, num_assoc) {
             else{
                 console.log("success - add_search");
                 console.log(result);
-                show_new_proposition(JSON.parse(result.result));
+                show_new_proposition(JSON.parse(result.result), "add_search");
             }
         },
         error: function (result, status, error){
@@ -709,7 +705,7 @@ function delete_user_filter_api() {
             else{
                 console.log("success - clear_search");
                 console.log(result);
-                show_new_proposition(JSON.parse(result.result));
+                show_new_proposition(JSON.parse(result.result), "clear_search");
             }
         },
         error: function (result, status, error){
@@ -720,15 +716,16 @@ function delete_user_filter_api() {
 }// /delete_user_filter_api()
 
 
-function show_new_proposition(message) {
+function show_new_proposition(message, from) {
     // Affiche les propositions en fonction du fichier column_matches
     console.log('show_new_proposition');
     console.log(message);
+    console.log("from:" + from);
 
     // query_ranking = -1 si filtres utilisateur temporaires en cours
     if(message["query_ranking"] != -1){
         // Reset visuel des filtres utilisateur temporaires
-        delete_user_filter_html();
+        delete_user_filter_html(from);
     }
 
     // test du status

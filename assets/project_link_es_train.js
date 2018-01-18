@@ -51,20 +51,41 @@ function add_user_filter_html(tab, num_assoc) {
 
 function delete_user_filter() {
 	// Suppression visuelle
-	delete_user_filter_html();
+	delete_user_filter_html("bt");
 
 	// Suppression dans l'api
 	delete_user_filter_api();
 }// /delete_user_filter()
 
 
-function delete_user_filter_html() {
+function delete_user_filter_html(from) {
 	// Suppression des filtres utilisateur temporaires
 	tab_user_filters = [];
 	tab_by_num_assoc = [];
 
+	// On cache le bouton de suppression des filtres
 	$("#bt_user_filters_delete").css("visibility", "hidden");
-	$("#user_filters").html('<i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d\'optimiser la proposition faite.');
+
+	var msg = '<i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d\'optimiser la proposition faite.';
+
+	if(from == "add_search"){
+		// Si l'on vient de add_search et que query_ranking != -1 alors
+		// cela sig,ifie qu'aucune porposition n'est disponible pour le
+		// filtre sélectionné. On affiche un message à l'utilisateur.
+		$("#user_filters")
+			.html("Aucune proposition pour le filtre sélectionné")
+			.fadeIn("slow", function() {
+		       // Animation complete
+			   setTimeout(function(){
+				   $("#user_filters").fadeOut("slow", function(){
+					   $("#user_filters").html(msg).fadeIn();
+				   });
+			   }, 5000);
+		     });
+	}
+	else{
+		$("#user_filters").html(msg);
+	}
 }// /delete_user_filter_html()
 
 
@@ -77,7 +98,11 @@ function test_status(status) {
         case 'ACTIVE':
             return true;
             break;
-        case 'NO_QUERIES':
+		case 'NO_QUERIES':
+	            message_status_html(status);
+	            return false;
+	            break;
+        case 'NO_MATCHES':
             message_status_html(status);
             return false;
             break;
@@ -98,6 +123,10 @@ function message_status_html(status) {
 		case 'NO_ITEMS_TO_LABEL':
 			$("#errors").html("Plus rien à labelliser. Vous pouvez accéder à l'étape suivante.");
 			$("#message").html("Plus rien à labelliser. Vous pouvez accéder à l'étape suivante.");
+			break;
+		case 'NO_MATCHES':
+			$("#errors").html("Pas de proposition identifiée.");
+			$("#message").html("Pas de proposition identifiée.");
 			break;
 	}
 	disabled_buttons();
