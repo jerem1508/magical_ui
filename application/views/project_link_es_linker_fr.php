@@ -348,7 +348,6 @@ function show_data_html(data, start) {
     // MAJ des boutons on/off (boostrap-toggle)
     for (var i = 0; i < data.length; i++) {
         var no_line = start + i + 1;
-        //$('#chk_' + no_line).bootstrapToggle({
         $('.chk').bootstrapToggle({
           on: 'Vrai',
           off: 'Faux',
@@ -356,7 +355,18 @@ function show_data_html(data, start) {
           offstyle: 'danger',
           size: 'small'
         });
+
+        // Action sur changement de la case a cocher
+        $('#chk_' + no_line).change(function(){
+            // console.log($(this).prop('checked'));
+            // console.log($(this).attr('id_source'));
+            // console.log($(this).attr('id_ref'));
+            update_results_api( $(this).attr('id_source'),
+                                $(this).attr('id_ref'),
+                                $(this).prop('checked'));
+        });
     }// /for
+
 
     // Séparation visuelle des lignes
     $(".line").css("border-top","2px solid #ccc");
@@ -543,6 +553,37 @@ function create_es_index_api() {
         }
     });// /ajax - create_es_labeller
 }// create_es_labeller_api()
+
+
+function update_results_api(source_id, ref_id, is_match) {
+    var tparams = {
+        "module_params": {
+            "labels":  [{'source_id': source_id,  'ref_id': ref_id, 'is_match': is_match}]
+        }
+    }
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/link/update_results/' + project_id_link + "/",
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+            if(result.error){
+                show_api_error(result.error, "API error - update_results");
+            }
+            else{
+                console.log("success - update_results");
+                console.log(result);
+            }// / lastwritten - success
+        },
+        error: function (result, status, error){
+            show_api_error(result, "error - update_results");
+            err = true;
+        }
+    });// /ajax - last_written
+}// /update_results_api()
 
 
 function treatment(project_id_link, learned_setting_json) {
