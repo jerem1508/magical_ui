@@ -12,13 +12,12 @@
 	}
 </style>
 <!-- /Intro -->
-<div class="container-fluid intro" style="color: #262626" id="intro">
+<div class="container-fluid intro" id="intro">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
-			<h1 style="padding-top: 100px;padding-bottom: 100px;">
-				Application web permettant la
-				<br>
-				<span class="title">normalisation</span> et le <span class="title">rapprochement</span>
+			<h1 style="padding: 100px;background-color: rgba(255,255,255,0.7); margin-top:30px; border-radius: 5px;">
+				Application web permettant le
+				<span class="title">rapprochement</span>
 				<br>
 				générique de fichiers <span style="color: #DF1A25">CSV</span>
 
@@ -31,7 +30,7 @@
 							echo "S'enregistrer & ";
 						}
 						?>
-						Commencer un projet de jointure</button>
+						Commencer un projet</button>
 					</div>
 				</div>
 
