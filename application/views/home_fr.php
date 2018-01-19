@@ -8,59 +8,38 @@
 		text-transform: uppercase;
 	}
 	.intro{
-		background-color: rgba(255,255,255,0.5); 
+		background-color: rgba(255,255,255,0.5);
 	}
 </style>
 <!-- /Intro -->
-<div class="container-fluid intro" style="color: #262626">
+<div class="container-fluid intro" style="color: #262626" id="intro">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<h1 style="padding-top: 100px;padding-bottom: 100px;">
-				Application web permettant la 
+				Application web permettant la
 				<br>
 				<span class="title">normalisation</span> et le <span class="title">rapprochement</span>
 				<br>
 				générique de fichiers <span style="color: #DF1A25">CSV</span>
+
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<br>
+						<button class="btn btn-lg btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">
+						<?php
+						if(!isset($_SESSION['user'])){
+							echo "S'enregistrer & ";
+						}
+						?>
+						Commencer un projet de jointure</button>
+					</div>
+				</div>
+
 			</h1>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
 </div><!-- /Intro -->
-
-<!-- Types de projets possibles -->
-
-<div class="container-fluid" style="background-color: #262626;color: #eee;padding-bottom: 25px;border-bottom: 4px dotted #333;">
-	<div class="row">
-		<div class="col-md-offset-2 col-md-3">
-			<h3>Normalisation d'un fichier</h3>
-			<p class="text-justify">
-				La normalisation prend un unique fichier tabulaire (csv, excel) et le nettoie automatiquement en fonction des types de données rencontrées.
-			</p>
-			<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">
-<?php
-if(!isset($_SESSION['user'])){
-	echo "S'enregistrer & ";
-}
-?>
-
-
-			Commencer un projet de normalisation</button>
-		</div>
-		<div class="col-md-offset-2 col-md-3">
-			<h3>Jointure magique de deux fichiers</h3>
-			<p class="text-justify">
-				La jointure magique permet d'apparier automatiquement les fichiers sales (fautes d'ortographe, données sur ou sous renseignées) avec un fichier de référence propre. <a onclick="$('#myModal').modal('show');" style="color: #DF1A25;cursor: pointer">Plus...</a>
-			</p>
-			<button class="btn btn-success" onclick="window.location.href='<?php echo base_url('index.php/Project/link');?>';">
-<?php
-if(!isset($_SESSION['user'])){
-	echo "S'enregistrer & ";
-}
-?>
-			Commencer un projet de jointure</button>
-		</div>
-	</div>
-</div><!-- /Types de projets possibles -->
 
 
 <!-- Modal -->
@@ -84,5 +63,11 @@ if(!isset($_SESSION['user'])){
   </div>
 </div>
 
+
+<script type="text/javascript">
+	$(function(){// ready
+		set_height('intro');
+	});// /ready
+</script>
 </body>
 </html>
