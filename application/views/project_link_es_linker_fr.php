@@ -301,15 +301,18 @@ function show_data_html(data, start) {
         }
         // Affichage du bouton
         html += '<td rowspan="2" class="text-center padding_0"><h4 class="action_vcentered" style="display: inline;">';
-        html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
-        if(confidence >= thresh){
-            html += ' checked '
+
+        if(confidence != null){
+            html += '<input id="chk_' + no_line + '" type="checkbox" class="chk" id_source="' + id_source + '" id_ref="' + id_ref + '"';
+            if(confidence >= thresh){
+                html += ' checked '
+            }
+            html += '>';
+            html += '&nbsp;&nbsp;';
+            html += '<a onclick="delete_line(\'' + no_line + '\');" class="icon" id="del_line_' + no_line + '">';
+            html += '<i class="fa fa-times" aria-hidden="true"></i>';
+            html += '</a></h4>';
         }
-        html += '>';
-        html += '&nbsp;&nbsp;';
-        html += '<a onclick="delete_line(\'' + no_line + '\');" class="icon" id="del_line_' + no_line + '">';
-        html += '<i class="fa fa-times" aria-hidden="true"></i>';
-        html += '</a></h4>';
         html += '</td>';
         html += '</tr>';
 
@@ -347,6 +350,7 @@ function show_data_html(data, start) {
     // MAJ des boutons on/off (boostrap-toggle)
     for (var i = 0; i < data.length; i++) {
         var no_line = start + i + 1;
+
         $('.chk').bootstrapToggle({
           on: 'Vrai',
           off: 'Faux',
