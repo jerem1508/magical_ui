@@ -61,7 +61,6 @@
     </div>
 </div><!--/container-->
 
-
 <script type="text/javascript">
 
 function get_metadata(project_type, project_id) {
@@ -445,6 +444,9 @@ function show_data_html(data, start) {
         // Affichage du bouton de nouveau traitement
         $("#bt_re_treatment").css("visibility", "visible");
     });
+
+    // Boutons de pagination
+    set_pagination_html(src_nrows, pas, 1);
 
     // Bt de telechargement accessible
     $("#dl_file").prop('disabled', false);
@@ -912,6 +914,17 @@ $(function(){// ready
     // Récupération du nom de fichier à DL
     file_name = "";
 
+    // Récupération du nombre total de lignes -------------------------
+    // Id du fichier source
+    project_id_src = metadata_link['files']['source']['project_id'];
+
+    // Récupérartion des métadata du fichier source
+    console.log('Projet de normalisation SOURCE');
+    metadata_src = get_metadata('normalize', project_id_src);
+
+    src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;
+    // ----------------------------------------------------------------
+
     // Récupération du paramétrage
     learned_setting_json = get_learned_setting(project_id_link);
     if(learned_setting_json){
@@ -923,20 +936,6 @@ $(function(){// ready
 
     // Actions des boutons
     add_buttons();
-
-    // Récupération du nombre total de lignes -------------------------
-        // Id du fichier source
-        project_id_src = metadata_link['files']['source']['project_id'];
-
-        // Récupérartion des métadata du fichier source
-        console.log('Projet de normalisation SOURCE');
-        metadata_src = get_metadata('normalize', project_id_src);
-
-        src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;
-    // ----------------------------------------------------------------
-
-    // Pagination
-    set_pagination_html(src_nrows, pas, 1);
 });//ready
 
 </script>
