@@ -275,9 +275,21 @@ function get_filename(filename) {
 function valid_associations() {
     // Teste la validité des associations effectuées
     // cad : au moins un champ de chaque coté
-
-    // TODO
-
+    $(".blocs_analysis").each(function( index ) {
+        var content_text = $(this).text();
+        if(content_text == ""){
+            return false;
+        }
+        else {
+            var content_json = JSON.parse( $(this).text() );
+            if(content_json["ref"][0] === ""){
+                return false;
+            }
+            if(content_json["source"][0] === ""){
+                return false;
+            }
+        }
+    });
     return true;
 }// /valid_associations()
 
@@ -384,9 +396,9 @@ function get_buttons_actions() {
         if(valid_associations()){
             //add_column_certain_matches_api();
             add_column_matches_api();
+            valid_step('<?php echo $_SESSION['link_project_id'];?>');
         }
 
-        valid_step('<?php echo $_SESSION['link_project_id'];?>');
     });
 
     $("#bt_add_bloc").click(function(){
