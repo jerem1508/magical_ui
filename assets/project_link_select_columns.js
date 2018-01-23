@@ -279,12 +279,23 @@ function add_column(sub_target, column_name) {
 	// Id de l'association sélectionnée
 	// id_bloc_to_change
 
+	target = $("#input_" + sub_target + "_" + id_bloc_to_change);
+
 	// Ajout du tagsInput
-	if($("#input_" + sub_target + "_" + id_bloc_to_change).val() == ''){
-		$("#input_" + sub_target + "_" + id_bloc_to_change).val(column_name);
+	if(target.val() == ''){
+		target.val(column_name);
 	}
 	else{
-		$("#input_" + sub_target + "_" + id_bloc_to_change).val($("#input_" + sub_target + "_" + id_bloc_to_change).val() + "," + column_name);
+		// Ajout uniquement si colonne non existante
+		var tab_target = target.val().split(",");
+		for (var i = 0; i < tab_target.length; i++) {
+			if(tab_target[i] == column_name){
+				return false;
+			}
+		}
+
+		// Ajout de la valeur
+		target.val(target.val() + "," + column_name);
 	}
 
 	var html_tag = '<span class="badge my_badge">' + column_name + '<a class="cross" onclick="delete_tag(this,\''+sub_target+'\', \''+id_bloc_to_change+'\');">x</a></span>';
@@ -308,6 +319,7 @@ function delete_tag(tag, sub_target, id_bloc) {
 	// Suppression du tag
 	var column_to_delete = tag.parentNode.innerHTML.substring(0, tag.parentNode.innerHTML.indexOf("<a"));
 
+	// Suppression du tag
 	tag.parentNode.remove()
 
 	// Récupération de toutes les colonnes déjà ajoutées
