@@ -720,69 +720,63 @@ function get_normalized_projects_html($id, $normalized_projects)
     }
 
 
-    function save_project_sync(project_id, project_type) {
+    function save_project(project_id, project_type) {
         $.ajax({
             type: 'post',
             url: '<?php echo base_url('index.php/Save_ajax/project');?>',
             data: 'project_id=' + project_id + '&project_type=' + project_type,
-            async: false,
             success: function (result) {
                 console.log("result : ",result);
             },
             error: function (result, status, error){
-                console.log(result);
-                console.log(status);
-                console.log(error);
-                return false;
+                show_api_error(result, "error API - save_project");
             }
         });
-    }// /save_project_sync()
+    }// /save_project()
 
 
-	function save_session_sync(name, value) {
+	function save_session(name, value) {
 		$.ajax({
 			type: 'post',
 			url: '<?php echo base_url('index.php/Save_ajax/session');?>',
 			data: 'name=' + name + '&val=' + value,
-			//contentType: "application/json; charset=utf-8",
-			//traditional: true,
-			async: false,
 			success: function (result) {
 				if(!result){
 					console.log("sauvegarde en sesion de " + 'name=' + name + '&val=' + value + ':' + result);
-					return false;
+                    show_api_error(result, "error API - save_session");
+                    //return false;
 				}
 				else{
-					console.log("sauvegarde en session de " + 'name=' + name + '&val=' + value + ':' + result);
-					return true;
+					console.log("save_session OK");
+                    //return true;
 				}
 			},
 			error: function (result, status, error){
 				show_api_error(result, "error - save_session");
-				return false;
+				//return false;
 			}
 		});
-	}// /save_session_sync()
+	}// /save_session()
 
 
-    function call_api_upload(form, project_id) {
-        $.ajax({
-            url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,
-            type: "POST",
-            data: form,
-            crossDomain: true,
-            processData: false,
-            contentType: false,
-            async: true, // TODO: check this (to avoid next page before uplload)
-            success: function(result){
-                file_name = form.get('file').name;
-                console.log("Uploaded file ".concat(file_name));
-            },
-            error: function(er){
-                show_api_error(er, "error - upload");
-            }
-        });
-    }// /call_api_upload()
+    // function call_api_upload(form, project_id) {
+    //     $.ajax({
+    //         url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,
+    //         type: "POST",
+    //         data: form,
+    //         crossDomain: true,
+    //         processData: false,
+    //         contentType: false,
+    //         async: true, // TODO: check this (to avoid next page before uplload)
+    //         success: function(result){
+    //             file_name = form.get('file').name;
+    //             console.log("Uploaded file ".concat(file_name));
+    //         },
+    //         error: function(er){
+    //             show_api_error(er, "error - upload");
+    //         }
+    //     });
+    // }// /call_api_upload()
 
 
     function save_id_normalized_project(file_role, project_id) {
@@ -800,7 +794,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             contentType: "application/json; charset=utf-8",
             url: '<?php echo BASE_API_URL;?>' + '/api/link/select_file/' + link_project_id,
             data: JSON.stringify(tparams),
-            async: false,
+            //async: false,
             success: function (result) {
                 if(result.error){
                     show_api_error(result, "API error - select_file");
@@ -836,7 +830,6 @@ function get_normalized_projects_html($id, $normalized_projects)
             data: JSON.stringify(tparams["params"]),
             contentType: "application/json; charset=utf-8",
             traditional: true,
-            //async: false,
             success: function (result) {
                 console.dir(result);
 
@@ -852,12 +845,12 @@ function get_normalized_projects_html($id, $normalized_projects)
                     $('#txt_init_nrz_src_project').css('display', 'inline');
                     $('#init_nrz_src_project_ok').css('display', 'inline');
 
-                    console.log("treatment/save_session_synch");
-                    result_save = save_session_sync("src_project_id", src_project_id);
+                    console.log("treatment/save_session");
+                    save_session("src_project_id", src_project_id);
 
                     // Sauvegarde du projet en base si user authentifié
-                    console.log("treatment/save_project_synch");
-                    save_project_sync(src_project_id, 'normalize');
+                    console.log("treatment/save_project");
+                    save_project(src_project_id, 'normalize');
 
                     // Upload du fichier
                     url_src = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + src_project_id;
@@ -888,7 +881,6 @@ function get_normalized_projects_html($id, $normalized_projects)
             data: JSON.stringify(tparams["params"]),
             contentType: "application/json; charset=utf-8",
             traditional: true,
-            async: false,
             success: function (result) {
                 if(result.error){
                     show_api_error(result, "API error - new normalize project ref");
@@ -902,12 +894,12 @@ function get_normalized_projects_html($id, $normalized_projects)
                     $('#txt_init_nrz_ref_project').css('display', 'inline');
                     $('#init_nrz_ref_project_ok').css('display', 'inline');
 
-                    console.log("treatment/save_session_synch");
-                    result_save = save_session_sync("ref_project_id", ref_project_id);
+                    console.log("treatment/save_session");
+                    save_session("ref_project_id", ref_project_id);
 
                     // Sauvegarde du projet en base si user authentifié
-                    console.log("treatment/save_project_synch");
-                    save_project_sync(ref_project_id, 'normalize');
+                    console.log("treatment/save_project");
+                    save_project(ref_project_id, 'normalize');
 
                     //$("#create_project_ok").slideToggle();
 
@@ -1027,7 +1019,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                 data: JSON.stringify(tparams["params"]),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
-                //async: false,
                 success: function (result) {
                     if(result.error){
                         show_api_error(result, "API error - new/link");
@@ -1042,12 +1033,12 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                         var result_save = "";
 
-                        console.log("treatment/save_session_synch");
-                        result_save = save_session_sync("link_project_id", link_project_id);
+                        console.log("treatment/save_session");
+                        save_session("link_project_id", link_project_id);
 
                         // Sauvegarde du projet bdd
-                        console.log("treatment/save_project_synch");
-                        save_project_sync(link_project_id, 'link');
+                        console.log("treatment/save_project");
+                        save_project(link_project_id, 'link');
 
                         //
                         $('#txt_create_merge_project').css('display', 'inline');
