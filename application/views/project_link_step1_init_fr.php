@@ -836,7 +836,7 @@ function get_normalized_projects_html($id, $normalized_projects)
             data: JSON.stringify(tparams["params"]),
             contentType: "application/json; charset=utf-8",
             traditional: true,
-            async: false,
+            //async: false,
             success: function (result) {
                 console.dir(result);
 
@@ -851,6 +851,25 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                     $('#txt_init_nrz_src_project').css('display', 'inline');
                     $('#init_nrz_src_project_ok').css('display', 'inline');
+
+                    console.log("treatment/save_session_synch");
+                    result_save = save_session_sync("src_project_id", src_project_id);
+
+                    // Sauvegarde du projet en base si user authentifié
+                    console.log("treatment/save_project_synch");
+                    save_project_sync(src_project_id, 'normalize');
+
+                    // Upload du fichier
+                    url_src = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + src_project_id;
+
+                    $('#txt_send_src_file').css('display', 'inline');
+                    $('#fileupload_src').fileupload(
+                        'option',
+                        'url',
+                        url_src
+                    );
+
+                    $("#envoyer_src").click();
                 }
             },
             error: function (result, status, error){
@@ -882,6 +901,28 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                     $('#txt_init_nrz_ref_project').css('display', 'inline');
                     $('#init_nrz_ref_project_ok').css('display', 'inline');
+
+                    console.log("treatment/save_session_synch");
+                    result_save = save_session_sync("ref_project_id", ref_project_id);
+
+                    // Sauvegarde du projet en base si user authentifié
+                    console.log("treatment/save_project_synch");
+                    save_project_sync(ref_project_id, 'normalize');
+
+                    //$("#create_project_ok").slideToggle();
+
+                    // Upload du fichier
+                    url_ref = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + ref_project_id;
+
+                    $('#txt_send_ref_file').css('display', 'inline');
+                    $('#progress_ref').css('display', 'inline-bloc');
+                    $('#fileupload_ref').fileupload(
+                        'option',
+                        'url',
+                        url_ref
+                    );
+
+                    $("#envoyer_ref").click();
                 }
             },
             error: function (result, status, error){
@@ -986,7 +1027,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 data: JSON.stringify(tparams["params"]),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
-                async: false,
+                //async: false,
                 success: function (result) {
                     if(result.error){
                         show_api_error(result, "API error - new/link");
@@ -1011,6 +1052,10 @@ function get_normalized_projects_html($id, $normalized_projects)
                         //
                         $('#txt_create_merge_project').css('display', 'inline');
                         $('#create_merge_project_ok').css('display', 'inline');
+
+                        // Ajout des projets de normalisation
+                        treatment_src();
+                        treatment_ref();
                     }
                 },
                 error: function (result, status, error){
@@ -1018,14 +1063,51 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
             });// /ajax
 
+    }// /treatment
 
-            // Ajout des projets de normalisation
-            // Traitement du fichier SOURCE
-                if(new_file_src && !error){
-                    console.log('Creation du projet de normalisation (SOURCE)');
-                    // Creation du projet de normalisation
-                    var file_name_temp = $("#src_selection").html();
-                    var tparams = {
+
+    function treatment_src() {
+        // Traitement du fichier SOURCE
+            if(new_file_src && !error){
+                console.log('Creation du projet de normalisation (SOURCE)');
+                // Creation du projet de normalisation
+                var file_name_temp = $("#src_selection").html();
+                var tparams = {
+                    "url": "/api/new/normalize",
+                    "params": {
+                        "display_name": project_name + ' : ' + file_name_temp,
+                        "description": project_description + '',
+                        "internal": false
+                    }
+                }
+                add_new_normalize_project_src(tparams);
+            }
+            else if(exist_file_src && !error){
+                // Ajout du projet de normalisation au projet de link
+                save_id_normalized_project("source", src_project_id);
+
+                $('#send_src_analyse_wait').css('display', 'none');
+                $('#send_src_analyse_ok').css('display', 'inline-block');
+
+                // Le fichier est déjà uploadé
+                UL_fic_src = true;
+            }
+            else{
+                error = true;
+                console.log('Pas de sélection de fichier source');
+                alert('Veuillez sélectionner un fichier source');
+            }
+        // /Traitement du fichier SOURCE
+    }// /treatment_src()
+
+
+    function treatment_ref() {
+        // Traitement du fichier REF
+            if(new_file_ref && !error){
+                console.log('Creation du projet de normalisation (REF)');
+                var file_name_temp = $("#ref_selection").html();
+                // Creation du projet de normalisation
+                  var tparams = {
                         "url": "/api/new/normalize",
                         "params": {
                             "display_name": project_name + ' : ' + file_name_temp,
@@ -1033,114 +1115,35 @@ function get_normalized_projects_html($id, $normalized_projects)
                             "internal": false
                         }
                     }
-                    add_new_normalize_project_src(tparams);
+                    add_new_normalize_project_ref(tparams);
+            }
+            else if(exist_file_ref && !error){
+                // Ajout du projet de normalisation au projet de link
+                save_id_normalized_project("ref", ref_project_id);
 
-                    console.log("treatment/save_session_synch");
-                    result_save = save_session_sync("src_project_id", src_project_id);
+                $('#send_ref_analyse_wait').css('display', 'none');
+                $('#send_ref_analyse_ok').css('display', 'inline-block');
 
-                    // Sauvegarde du projet en base si user authentifié
-                    console.log("treatment/save_project_synch");
-                    save_project_sync(src_project_id, 'normalize');
+                // Le fichier est déjà uploadé
+                UL_fic_ref = true;
+            }
+            else if(exist_ref && !error){
+                // Ajout du projet de normalisation au projet de link
+                save_id_normalized_project("ref", ref_project_id);
 
-                    //$("#create_project_ok").slideToggle();
+                $('#send_ref_analyse_wait').css('display', 'none');
+                $('#send_ref_analyse_ok').css('display', 'inline-block');
 
-                    // Upload du fichier
-                    url_src = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + src_project_id;
-
-                    $('#txt_send_src_file').css('display', 'inline');
-                    $('#fileupload_src').fileupload(
-                        'option',
-                        'url',
-                        url_src
-                    );
-
-                    $("#envoyer_src").click();
-
-
-                }
-                else if(exist_file_src && !error){
-                    // Ajout du projet de normalisation au projet de link
-                    save_id_normalized_project("source", src_project_id);
-
-                    $('#send_src_analyse_wait').css('display', 'none');
-                    $('#send_src_analyse_ok').css('display', 'inline-block');
-
-                    // Le fichier est déjà uploadé
-                    UL_fic_src = true;
-                }
-                else{
-                    error = true;
-                    console.log('Pas de sélection de fichier source');
-                    alert('Veuillez sélectionner un fichier source');
-                }
-            // /Traitement du fichier SOURCE
-
-            // Traitement du fichier REF
-                if(new_file_ref && !error){
-                    console.log('Creation du projet de normalisation (REF)');
-                    var file_name_temp = $("#ref_selection").html();
-                    // Creation du projet de normalisation
-                      var tparams = {
-                            "url": "/api/new/normalize",
-                            "params": {
-                                "display_name": project_name + ' : ' + file_name_temp,
-                                "description": project_description + '',
-                                "internal": false
-                            }
-                        }
-                        add_new_normalize_project_ref(tparams);
-
-                        console.log("treatment/save_session_synch");
-                        result_save = save_session_sync("ref_project_id", ref_project_id);
-
-                        // Sauvegarde du projet en base si user authentifié
-                        console.log("treatment/save_project_synch");
-                        save_project_sync(ref_project_id, 'normalize');
-
-                        //$("#create_project_ok").slideToggle();
-
-                    // Upload du fichier
-                    url_ref = '<?php echo BASE_API_URL;?>/api/normalize/upload/' + ref_project_id;
-
-                    $('#txt_send_ref_file').css('display', 'inline');
-                    $('#progress_ref').css('display', 'inline-bloc');
-                    $('#fileupload_ref').fileupload(
-                        'option',
-                        'url',
-                        url_ref
-                    );
-
-                    $("#envoyer_ref").click();
-                }
-                else if(exist_file_ref && !error){
-                    // Ajout du projet de normalisation au projet de link
-                    save_id_normalized_project("ref", ref_project_id);
-
-                    $('#send_ref_analyse_wait').css('display', 'none');
-                    $('#send_ref_analyse_ok').css('display', 'inline-block');
-
-                    // Le fichier est déjà uploadé
-                    UL_fic_ref = true;
-                }
-                else if(exist_ref && !error){
-                    // Ajout du projet de normalisation au projet de link
-                    save_id_normalized_project("ref", ref_project_id);
-
-                    $('#send_ref_analyse_wait').css('display', 'none');
-                    $('#send_ref_analyse_ok').css('display', 'inline-block');
-
-                    // Le fichier est déjà uploadé
-                    UL_fic_ref = true;
-                }
-                else{
-                    error = true;
-                    console.log('Pas de sélection de fichier ref');
-                    alert('Veuillez sélectionner un fichier ref');
-                }
-            // /Traitement du fichier REF
-
-        // /Appels API ----------------------
-    }// /treatment
+                // Le fichier est déjà uploadé
+                UL_fic_ref = true;
+            }
+            else{
+                error = true;
+                console.log('Pas de sélection de fichier ref');
+                alert('Veuillez sélectionner un fichier ref');
+            }
+        // /Traitement du fichier REF
+    }// /treatement_ref()
 
 
     function valid_project(){
