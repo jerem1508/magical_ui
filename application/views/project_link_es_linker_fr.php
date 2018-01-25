@@ -502,10 +502,12 @@ function action(id_source, id_ref, ele) {
 
 
 function create_es_index_api() {
+    console.log('create_es_index_api');
     // Creer pour pouvoir accéder aux données de facon paginée
     var tparams = {
         "module_params": {
-            "for_linking": false
+            "for_linking": false,
+            "force": true
         }
     }
 
@@ -592,14 +594,35 @@ function update_results_api(source_id, ref_id, is_match) {
 }// /update_results_api()
 
 
-function treatment(project_id_link, learned_setting_json) {
+function treatment(project_id_link, learned_setting_json, force) {
+    // Test de l'existence du module ES_LINKER
+    var file_name_src = metadata_link['files']['source']['file_name'];
+    var exist_es_linker = metadata_link['log'][file_name_src]['es_linker']['completed'];
 
+    // Appel du LINKER seulement s'il n'existe pas
+    if(!exist_es_linker || force){
+        es_linker_api(project_id_link, learned_setting_json);
+    }
+    else{// Affichage seul
+        console.log("Pas de Linker ES");
+        var start = 0;
+
+        // Récupération du seuil
+        thresh = get_thresh(project_id_link);
+
+        // Récupération des données paginées
+        var data = get_data(start, pas);
+
+        //affichage
+        show_data_html(data, start);
+    }
+}// /treatment()
+
+
+function es_linker_api(project_id_link, learned_setting_json) {
     var tparams = {
         "module_params": learned_setting_json
     }
-    console.log('tparams:');
-    console.log(tparams);
-
     $.ajax({
         type: 'post',
         url: '<?php echo BASE_API_URL;?>' + '/api/schedule/es_linker/' + project_id_link + '/',
@@ -628,13 +651,10 @@ function treatment(project_id_link, learned_setting_json) {
                                 console.log("success - job");
                                 console.log(result);
 
-                                // Permettre le téléchargement du fichier
-                                // TODO
-
                                 // Récupération du seuil
                                 thresh = get_thresh(project_id_link);
 
-                                // Création de l'index ElasticSearch + Affichage
+                                // Création de l'index
                                 create_es_index_api();
 
                                 file_name = get_file_name(project_id_link);
@@ -659,8 +679,9 @@ function treatment(project_id_link, learned_setting_json) {
             show_api_error(result, "error - es_linker");
             err = true;
         }
-    });// /ajax - create_es_labeller
-}// create_es_labeller_api()
+    });// /ajax - es_linker
+
+}// /es_linker_api()
 
 
 function valid_step() {
@@ -746,7 +767,7 @@ function add_buttons() {
     }); // /dl_file.click()
 
     $("#bt_re_treatment").click(function(){
-        window.reload();
+        treatment(project_id_link, learned_setting_json, true)
     });
 }// /add_buttons()
 
@@ -932,7 +953,7 @@ $(function(){// ready
     // Récupération du paramétrage
     learned_setting_json = get_learned_setting(project_id_link);
     if(learned_setting_json){
-        treatment(project_id_link, learned_setting_json);
+        treatment(project_id_link, learned_setting_json, false)
     }
     else{
         console.log('pas de learned_setting_json');
