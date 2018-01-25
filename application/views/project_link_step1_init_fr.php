@@ -759,26 +759,6 @@ function get_normalized_projects_html($id, $normalized_projects)
 	}// /save_session()
 
 
-    // function call_api_upload(form, project_id) {
-    //     $.ajax({
-    //         url: '<?php echo BASE_API_URL;?>' + '/api/normalize/upload/' + project_id,
-    //         type: "POST",
-    //         data: form,
-    //         crossDomain: true,
-    //         processData: false,
-    //         contentType: false,
-    //         async: true, // TODO: check this (to avoid next page before uplload)
-    //         success: function(result){
-    //             file_name = form.get('file').name;
-    //             console.log("Uploaded file ".concat(file_name));
-    //         },
-    //         error: function(er){
-    //             show_api_error(er, "error - upload");
-    //         }
-    //     });
-    // }// /call_api_upload()
-
-
     function save_id_normalized_project(file_role, project_id) {
         console.log("save_id_normalized_project");
         console.log(file_role+"/"+project_id);
@@ -794,7 +774,6 @@ function get_normalized_projects_html($id, $normalized_projects)
             contentType: "application/json; charset=utf-8",
             url: '<?php echo BASE_API_URL;?>' + '/api/link/select_file/' + link_project_id,
             data: JSON.stringify(tparams),
-            //async: false,
             success: function (result) {
                 if(result.error){
                     show_api_error(result, "API error - select_file");
@@ -1053,7 +1032,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                     show_api_error(result, "error - new/link");
                 }
             });// /ajax
-
     }// /treatment
 
 
