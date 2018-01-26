@@ -199,7 +199,8 @@
 							}
 
 							echo '<tr>';
-							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
+							//echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
+							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['project_id'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_src'].'">'.$file_src_maximized.'</span></td>';
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_ref'].'">'.$file_ref_maximized.'</span></td>';
