@@ -998,6 +998,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 data: JSON.stringify(tparams["params"]),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
+                crossDomain: true,
                 success: function (result) {
                     if(result.error){
                         show_api_error(result, "API error - new/link");
