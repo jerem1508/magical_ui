@@ -598,6 +598,9 @@ function treatment(project_id_link, learned_setting_json, force) {
     var file_name_src = metadata_link['files']['source']['file_name'];
     var exist_es_linker = metadata_link['log'][file_name_src]['es_linker']['completed'];
 
+    // Récupération du nom de fichier à DL
+    file_name = get_file_name(project_id_link);
+
     // Test de l'existence du module ES_LINKER
     // Appel du LINKER seulement s'il n'existe pas
     if(!exist_es_linker || force){
@@ -923,14 +926,12 @@ $(function(){// ready
 
     npages = 0;
     pas = 50;
+    file_name = "";
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
     // Récupération des metadata du projet de link en cours
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
-
-    // Récupération du nom de fichier à DL
-    file_name = get_file_name(project_id_link);
 
     // MAJ du nom du projet
     $("#project_name1").html(metadata_link.display_name);
