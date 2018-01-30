@@ -660,7 +660,7 @@ function es_linker_api(project_id_link, learned_setting_json) {
                                 // Création de l'index
                                 create_es_index_api();
 
-                                //file_name = get_file_name(project_id_link);
+                                file_name = get_file_name(project_id_link);
 
                                 // Statistiques
                                 get_stats();
