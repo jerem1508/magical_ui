@@ -78,7 +78,7 @@ function get_metadata(project_type, project_id) {
                 show_api_error(result.error, "API error");
             }
             else{
-                console.log("success - metadata");console.dir(result);
+                console.log("success - metadata");console.log(result);
                 ret = result.metadata;
             }
         },
@@ -114,7 +114,7 @@ function get_column_matches(project_id) {
             }
             else{
                 console.log("success - download_config");
-                console.dir(result);
+                console.log(result);
                 ret = result.result;
             }
         },
@@ -150,7 +150,7 @@ function get_learned_setting(project_id) {
             }
             else{
                 console.log("success - download_config");
-                console.dir(result);
+                console.log(result);
                 ret = result.result;
             }
         },
@@ -595,10 +595,10 @@ function update_results_api(source_id, ref_id, is_match) {
 
 
 function treatment(project_id_link, learned_setting_json, force) {
-    // Test de l'existence du module ES_LINKER
     var file_name_src = metadata_link['files']['source']['file_name'];
     var exist_es_linker = metadata_link['log'][file_name_src]['es_linker']['completed'];
 
+    // Test de l'existence du module ES_LINKER
     // Appel du LINKER seulement s'il n'existe pas
     if(!exist_es_linker || force){
         es_linker_api(project_id_link, learned_setting_json);
@@ -613,7 +613,7 @@ function treatment(project_id_link, learned_setting_json, force) {
         // Récupération des données paginées
         var data = get_data(start, pas);
 
-        //affichage
+        // Affichage
         show_data_html(data, start);
     }
 }// /treatment()
@@ -657,7 +657,7 @@ function es_linker_api(project_id_link, learned_setting_json) {
                                 // Création de l'index
                                 create_es_index_api();
 
-                                file_name = get_file_name(project_id_link);
+                                //file_name = get_file_name(project_id_link);
 
                                 // Statistiques
                                 get_stats();
@@ -714,7 +714,7 @@ function get_file_name(project_id) {
             }
             else{
                 console.log("success - get_file_name");
-                console.dir(result);
+                console.log(result);
 
                 ret = result.file_name;
             }// / lastwritten - success
@@ -875,7 +875,7 @@ function get_stats() {
             }
             else{
                 console.log("success - link_results_analyzer_api");
-                console.dir(result);
+                console.log(result);
 
                 // Appel
                 var handle = setInterval(function(){
@@ -886,7 +886,7 @@ function get_stats() {
                             if(result.completed){
                                 clearInterval(handle);
                                 console.log("success - job");
-                                console.dir(result);
+                                console.log(result);
 
                                 // Récupération des données + affichage
                                 set_stats_html(result);
@@ -926,9 +926,11 @@ $(function(){// ready
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
-
     // Récupération des metadata du projet de link en cours
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
+
+    // Récupération du nom de fichier à DL
+    file_name = get_file_name(project_id_link);
 
     // MAJ du nom du projet
     $("#project_name1").html(metadata_link.display_name);
@@ -936,12 +938,11 @@ $(function(){// ready
     // Récupération des matches
     column_matches = get_column_matches();
 
-    // Récupération du nom de fichier à DL
-    file_name = "";
 
     // Récupération du nombre total de lignes -------------------------
     // Id du fichier source
     project_id_src = metadata_link['files']['source']['project_id'];
+
 
     // Récupérartion des métadata du fichier source
     console.log('Projet de normalisation SOURCE');
