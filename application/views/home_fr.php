@@ -53,7 +53,7 @@
 
 <div class="row referentials" style="background-color: #fff; padding-top: 20px; padding-bottom: 20px; color: #333">
 	<div class="col-md-12 text-center">
-		<h2 style="font-size: 2.7em;">Référentiels disponnibles</h2>
+		<h2 style="font-size: 2.7em;">Référentiels disponibles</h2>
 		<h4>Afin de faciliter vos mises en correspondance, un ensemble de référentiels est disponible et mis à jour régulièrement</h4>
 		<a class="btn btn-xs btn-success2" href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">En savoir plus</a>
 		<br><br>
