@@ -1045,7 +1045,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 var tparams = {
                     "url": "/api/new/normalize",
                     "params": {
-                        "display_name": project_name + ' : ' + file_name_temp,
+                        "display_name": file_name_temp,
                         "description": project_description + '',
                         "internal": false
                     }
@@ -1080,7 +1080,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                   var tparams = {
                         "url": "/api/new/normalize",
                         "params": {
-                            "display_name": project_name + ' : ' + file_name_temp,
+                            "display_name": file_name_temp,
                             "description": project_description + '',
                             "internal": false
                         }
