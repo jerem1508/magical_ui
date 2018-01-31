@@ -11,7 +11,10 @@
         <div class="col-md-4 text-right" id="pagination"></div>
     </div>
     <div id="result">
-        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+        <div class="row text-center">
+            <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+            <h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>
+        </div>
     </div>
 
     <div class="row">
@@ -598,9 +601,6 @@ function treatment(project_id_link, learned_setting_json, force) {
     var file_name_src = metadata_link['files']['source']['file_name'];
     var exist_es_linker = metadata_link['log'][file_name_src]['es_linker']['completed'];
 
-    // Récupération du nom de fichier à DL
-    file_name = get_file_name(project_id_link);
-
     // Test de l'existence du module ES_LINKER
     // Appel du LINKER seulement s'il n'existe pas
     if(!exist_es_linker || force){
@@ -619,6 +619,9 @@ function treatment(project_id_link, learned_setting_json, force) {
         // Affichage
         show_data_html(data, start);
     }
+
+    // Statistiques
+    get_stats();
 }// /treatment()
 
 
@@ -660,10 +663,8 @@ function es_linker_api(project_id_link, learned_setting_json) {
                                 // Création de l'index
                                 create_es_index_api();
 
-                                file_name = get_file_name(project_id_link);
-
-                                // Statistiques
-                                get_stats();
+                                // // Statistiques
+                                // get_stats();
                             }
                             else{
                                 console.log("es_linker - job en cours");
@@ -694,41 +695,6 @@ function valid_step() {
     // Passage à l'étape suivante
     window.location.href = "<?php echo base_url('index.php/Project/link/');?>" + project_id_link;
 }// / valid_step()
-
-
-function get_file_name(project_id) {
-    console.log('get_file_name()');
-    var ret = "";
-
-    var tparams = {
-        "module-name": "es_linker"
-    }
-
-    $.ajax({
-        type: 'post',
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        url: '<?php echo BASE_API_URL;?>' + '/api/last_written/link/' + project_id,
-        data: JSON.stringify(tparams),
-        async: false,
-        success: function (result) {
-            if(result.error){
-                show_api_error(result.error, "API error - get_file_name");
-            }
-            else{
-                console.log("success - get_file_name");
-                console.log(result);
-
-                ret = result.file_name;
-            }// / lastwritten - success
-        },
-        error: function (result, status, error){
-            show_api_error(result, "error - get_file_name");
-            err = true;
-        }
-    });// /ajax - last_written
-    return ret;
-}// /get_file_name()
 
 
 function add_buttons() {
@@ -926,12 +892,13 @@ $(function(){// ready
 
     npages = 0;
     pas = 50;
-    file_name = "";
 
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
     // Récupération des metadata du projet de link en cours
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
+
+    file_name = metadata_link.files.source.file_name;
 
     // MAJ du nom du projet
     $("#project_name1").html(metadata_link.display_name);
@@ -939,14 +906,11 @@ $(function(){// ready
     // Récupération des matches
     column_matches = get_column_matches();
 
-
     // Récupération du nombre total de lignes -------------------------
     // Id du fichier source
     project_id_src = metadata_link['files']['source']['project_id'];
 
-
     // Récupérartion des métadata du fichier source
-    console.log('Projet de normalisation SOURCE');
     metadata_src = get_metadata('normalize', project_id_src);
 
     src_nrows = metadata_src.files[Object.keys(metadata_src.files)].nrows;
