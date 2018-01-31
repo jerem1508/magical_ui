@@ -119,7 +119,7 @@
 	<ul class="nav nav-tabs">
 	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link" onclick="show_tabs('link');"><h4>Mes projets de jointure</h4></a></li>
 	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize" onclick="show_tabs('normalize');"><h4>Mes projets de normalisation</h4></a></li>
-	  <li><a data-toggle="tab" href="#account_tab"><h4>Mon compte</h4></a></li>
+	  <li><a data-toggle="tab" href="#account_tab" id="bt_tab_account"><h4>Mon compte</h4></a></li>
 	</ul>
 </div>
 

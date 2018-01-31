@@ -30,7 +30,7 @@
 			<span style="display:inline-block;width:10px;"></span>
             <?php
             if(isset($_SESSION['user'])){
-                echo "<a href='".base_url("index.php/User/dashboard")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;".$_SESSION['user']['email']."</a>";
+                echo "<a href='".base_url("index.php/User/dashboard_home")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;".$_SESSION['user']['email']."</a>";
                 echo '<span style="display:inline-block;width:10px;"></span>';
                 echo "<a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a>";
             }

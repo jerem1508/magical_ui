@@ -151,7 +151,8 @@ class User extends CI_Controller {
 
 					default:
 						// Chargement du tableau de bord
-						redirect('/User/dashboard');
+						//redirect('/User/dashboard');
+						redirect('/User/dashboard_home');
 						break;
 				}
 
@@ -202,6 +203,36 @@ class User extends CI_Controller {
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /dashboard()
 
+
+	public function dashboard_home($error='')
+	{
+		if(!isset($_SESSION['user'])){
+			redirect('/Home');
+		}
+
+		try{
+			// Récupération des projets
+			$this-> split_projects($_SESSION['user']['id']);
+		}
+		catch(Exception $e){
+			$error = $e->getMessage();
+			//$this->log_error($error);
+		}
+
+		$data['server_error'] = $error;
+		$data['normalized_projects'] = $this->normalized_projects;
+		$data['linked_projects'] = $this->linked_projects;
+		$data['title'] = "Tableau de bord";
+		$data["nb_projects"] = count($this->linked_projects);
+		$data["nb_files"] = count($this->normalized_projects);
+
+		// Chargement des vue
+		$this->load->view('lib', $data);
+		$this->load->view('user_dashboard_home_specifics');
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('user_dashboard_home_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
+	}// /dashboard_home()
 
 	// public function dashboard_delete_project($tab='link')
 	// {

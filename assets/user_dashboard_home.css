@@ -1,0 +1,36 @@
+
+
+.well{
+	margin-bottom: 20px;
+}
+
+.part_left{
+    padding-right: 20px;
+}
+.part_right{
+    border-left: 4px dotted #aaa;
+}
+
+.bt{
+	display: inline-block;
+	height: 150px;
+    width: 150px;
+	margin-left: 50px;
+}
+
+.bt{
+    margin-bottom: 10px;
+}
+
+.account{
+	display: inline-block;
+	margin-top: 25px;
+}
+
+#main .container{
+	padding-top: 20px;
+}
+
+#bt_tdb_account{
+	cursor: pointer;
+}
