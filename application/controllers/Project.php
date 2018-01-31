@@ -150,7 +150,8 @@ class Project extends CI_Controller {
 				break;
 
 			case 'add_selected_columns':
-				$this->replace_mvs($project_id);
+				$this->recode_types($project_id);
+				//$this->replace_mvs($project_id);
 				break;
 
 			case 'replace_mvs':
