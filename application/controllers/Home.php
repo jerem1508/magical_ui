@@ -30,7 +30,7 @@ class Home extends CI_Controller {
 		$data['title'] = "Accueil";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);
-		$this->load->view('error_'.$_SESSION['language']);		
+		$this->load->view('error_'.$_SESSION['language']);
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
@@ -45,6 +45,31 @@ class Home extends CI_Controller {
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
+
+	public function referentials()
+	{
+		# Affiche la page des référentiels
+		// Récupération des referentiels publics
+		$this->load->library('Private_functions');
+		$data['internal_projects'] = $this->private_functions->get_internal_projects();
+
+		$data['title'] = "Référentiels";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('referentials_'.$_SESSION['language'], $data);
+		$this->load->view('footer_'.$_SESSION['language']);
+	}// /referentials()
+
+
+	public function contact()
+	{
+		# Affiche les conditions générales d'utilisation
+		$data['title'] = "Contact";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('contact');
+		$this->load->view('footer_'.$_SESSION['language']);
+	}
 
 	public function fr()
 	{
