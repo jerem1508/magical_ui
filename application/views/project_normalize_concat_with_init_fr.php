@@ -2,7 +2,19 @@
 if(isset($this->session->project_type)){
 	$project_type = $this->session->project_type;
 }
+
+
+if(isset($_SESSION['link_project_id'])){
 ?>
+<script type="text/javascript">
+	window.location.href = "<?php echo base_url('index.php/Project/link/'.$_SESSION['link_project_id']);?>";
+</script>
+<?php
+}
+?>
+
+
+
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
@@ -46,7 +58,7 @@ if(isset($this->session->project_type)){
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
 			</div>
 		</div>
-		
+
 		<div class="row" id="result">
 			<div class="col-xs-12">
 			<!--
@@ -243,11 +255,11 @@ if(isset($this->session->project_type)){
                     module_name = result.module_name;
                     file_name = result.file_name;
 
-		
+
                     if(metadata.has_mini){
                     	// File_name sans MINI__
                         if(file_name.indexOf("MINI__") >= 0){
-                    	   file_name = file_name.substr(6);                            
+                    	   file_name = file_name.substr(6);
                         }
 
 			            tparams = {
@@ -276,7 +288,7 @@ if(isset($this->session->project_type)){
 								    console.log("success - run_all");
 								    console.dir(result);
 
-								    // Appel 
+								    // Appel
 								    var handle = setInterval(function(){
 										$.ajax({
 											type: 'get',
@@ -289,7 +301,7 @@ if(isset($this->session->project_type)){
 
 								                    // Arret de l'animation recherche
                                                     $("#wait").css("display","none");
-								                    
+
                                                     $("#reports").css("visibility","visible");
 
                                                     write_reports("replace_mvs");
@@ -347,7 +359,7 @@ if(isset($this->session->project_type)){
 								    console.log("success - concat_with_init");
 								    console.dir(result);
 
-								    // Appel 
+								    // Appel
 								    var handle = setInterval(function(){
 										$.ajax({
 											type: 'get',
@@ -360,7 +372,7 @@ if(isset($this->session->project_type)){
 
 								                    // Arret de l'animation recherche
 								                    $("#wait").css("display","none");
-								                    
+
                                                    	$("#reports").css("visibility","visible");
 
                                                     write_reports("replace_mvs");
@@ -410,7 +422,7 @@ if(isset($this->session->project_type)){
 
     }
 
-    function to_tab_html(tab_columns) 
+    function to_tab_html(tab_columns)
     {
     	var html = '<table class="table table-striped table-responsive table-condensed" style="width:100%;">';
     	for (var i = 0; i < tab_columns.length; i++) {
@@ -423,7 +435,7 @@ if(isset($this->session->project_type)){
     }
     function write_report(step) {
     	var container_step = 'report_' + step;
-    	
+
     	switch(step){
     		case 'select_columns':
 				$("#report_original_columns").html(to_tab_html(metadata.column_tracker.original));
@@ -507,7 +519,7 @@ if(isset($this->session->project_type)){
 
     function apos_to_underscore(lib) {
     	lib = lib.replace("'", "_");
-    	return lib;	
+    	return lib;
     }
 
     function normalize(lib) {
@@ -649,11 +661,11 @@ if(isset($this->session->project_type)){
 				else{
                     console.log("success");
                     console.dir(result);
-					
+
 					file_name = result.file_name;
 
                     if(metadata.has_mini){
-                    	file_name = file_name.substr(6);	
+                    	file_name = file_name.substr(6);
                     }
 
 		            tparams = {
@@ -669,7 +681,7 @@ if(isset($this->session->project_type)){
 		                }
 		            }
 					console.log("appel sample");
-					
+
 					$.ajax({
 						type: 'post',
 						dataType: "json",
@@ -862,7 +874,7 @@ if(isset($this->session->project_type)){
 				    $("#treatment_process").html("");
 				    $('#start_treatment_ok').css('visibility', 'visible');
 
-				    // Appel 
+				    // Appel
 				    var handle = setInterval(function(){
 				    	$("#treatment_process").html($("#treatment_process").html() + "."); // avancement
 						$.ajax({
@@ -891,7 +903,7 @@ if(isset($this->session->project_type)){
 
 							                    for (var i = 0; i < modified_columns.length; i++) {
 							                    	var liste_values = result2.result.replace_num.columns[modified_columns[i]];
-							                    	
+
 							                    	console.log(modified_columns[i]);
 
 							                    	var total = 0;
@@ -917,13 +929,13 @@ if(isset($this->session->project_type)){
 							                    html += '</table>';
 							                    $("#tab_report").html(html);
 
-												
+
 											}
 											else{
 												console.log("success - job en cours");
 
 							                }
-				                
+
 				            },
 				            error: function (result2, status, error){
 				                console.log("error");
@@ -934,7 +946,7 @@ if(isset($this->session->project_type)){
 				        });// /ajax - job
 				    }, 1000);
 
-					
+
                 },
                 error: function (result, status, error){
 					console.log("job - recode_types - error");

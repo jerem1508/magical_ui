@@ -152,6 +152,7 @@ class Project extends CI_Controller {
 			case 'add_selected_columns':
 				$this->recode_types($project_id);
 				//$this->replace_mvs($project_id);
+				// TODO : Faire un skip
 				break;
 
 			case 'replace_mvs':
@@ -215,12 +216,13 @@ class Project extends CI_Controller {
 				// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation
 				$this->session->set_userdata('link_project_id', $project_id);
 
-				// si pas fini, redirection vers la normalisation
-				// if($step != 'concat_with_init'){
-				// 	//$this->load_step_normalization($step, $normalized_project['project_id']);
-				// 	$this->session->set_userdata('project_id', $normalized_project['project_id']);
-				// 	redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
-				// }
+				//si pas fini, redirection vers la normalisation
+				//if($step != 'concat_with_init'){
+				if($step != 'recode_types'){
+					//$this->load_step_normalization($step, $normalized_project['project_id']);
+					$this->session->set_userdata('project_id', $normalized_project['project_id']);
+					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
+				}
 			}
 		}
 
