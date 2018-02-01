@@ -618,10 +618,11 @@ function treatment(project_id_link, learned_setting_json, force) {
 
         // Affichage
         show_data_html(data, start);
+
+        // Statistiques
+        get_stats();
     }
 
-    // Statistiques
-    get_stats();
 }// /treatment()
 
 
@@ -663,8 +664,8 @@ function es_linker_api(project_id_link, learned_setting_json) {
                                 // Création de l'index
                                 create_es_index_api();
 
-                                // // Statistiques
-                                // get_stats();
+                                // Statistiques
+                                get_stats();
                             }
                             else{
                                 console.log("es_linker - job en cours");
