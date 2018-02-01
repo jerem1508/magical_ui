@@ -22,7 +22,7 @@
 			</span>
 			</div>
 			<div class="col-sm-4 text-right">
-				<a id="bt_skip" class="btn btn-xs btn-success2">Passer cette étape >></a>
+				<!--<a id="bt_skip" class="btn btn-xs btn-success2">Passer cette étape >></a>-->
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 20px;">
@@ -47,6 +47,7 @@
 		<div class="row">
 			<div class="col-xs-12 text-center" id="wait">
 				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+				<h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>
 			</div>
 		</div>
 </div><!--/container-->
@@ -60,7 +61,8 @@
 				</div>
 				<div class="row" style="padding-top: 20px;">
 					<div class="col-xs-12 text-right">
-						<button class="btn btn btn-success" id="bt_recode_types">Lancer le traitement de l'échantillon</button>
+						<!--<button class="btn btn btn-success" id="bt_recode_types">Lancer le traitement de l'échantillon</button>-->
+						<button class="btn btn btn-success" id="bt_skip">Suivant >></button>
 					</div>
 				</div>
 			</div>
@@ -97,7 +99,7 @@
         </div><!-- /row-->
 	    <div class="row" style="padding-bottom: 20px;">
 	        <div class="col-md-12 text-right">
-	            <button class="btn btn btn-success" id="bt_next" disabled>Etape suivante : Traitement et téléchargement >></button>
+	            <!--<button class="btn btn btn-success" id="bt_next" disabled>Suivant >></button>-->
 	        </div>
 	    </div><!-- /row-->
     </div><!-- /report-->
@@ -239,15 +241,14 @@ if(isset($this->session->project_type)){
 
 				if(result.error){
 					console.log("API error - set_skip");
-					console.dir(result.error);
+					console.log(result.error);
 				}
 				else{
 				    console.log("success - set_skip");
-				    console.dir(result);
+				    console.log(result);
 
 				    // Chargement de la page suivante (rappel du controller)
 				    location.reload();
-
 				}
 		    },
 		    error: function (result, status, error){
@@ -743,7 +744,6 @@ if(isset($this->session->project_type)){
 
     function valid(){
         // Appel de l'étape suivante
-        //window.location.href = "<?php echo base_url('index.php/Project/concat_with_init/'.$_SESSION['project_id']);?>";
         window.location.href = "<?php echo base_url('index.php/Project/normalize/'.$_SESSION['project_id']);?>";
     }// /valid
 
@@ -879,6 +879,9 @@ if(isset($this->session->project_type)){
 
         // Ajout des actions boutons
         add_actions_buttons();
+
+		// Lancement auto de l'inference
+		$("#bt_infer_types").click();
 	});// /Ready
 </script>
 </body>
