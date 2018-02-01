@@ -22,7 +22,7 @@
 			</span>
 			</div>
 			<div class="col-sm-4 text-right">
-				<!--<a id="bt_skip" class="btn btn-xs btn-success2">Passer cette étape >></a>-->
+				<a id="bt_skip_infer" class="btn btn-xs btn-success2">Passer cette étape >></a>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 20px;">
@@ -258,6 +258,55 @@ if(isset($this->session->project_type)){
 		    }
 		});// /ajax - set_skip
 	}// /skip()
+
+
+	function skip_infer() {
+		// Test du filename, on ne doit pas ecrire sur le MINI
+		var file_name_temp = file_name;
+		if(file_name.substr(0,6) === 'MINI__' ){
+			file_name_temp = file_name.substr(6);
+		}
+
+		// Paramètres API
+		tparams = {
+			"data_params": {
+		    	"module_name": "infer_types",
+		    	"file_name": file_name_temp
+		    },
+		    "module_params": {
+		    	"skip_value": true
+		    }
+		}
+		$.ajax({
+			type: 'post',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			url: '<?php echo BASE_API_URL;?>' + '/api/set_skip/normalize/' + project_id,
+			data: JSON.stringify(tparams),
+			success: function (result) {
+
+				if(result.error){
+					console.log("API error - set_skip");
+					console.log(result.error);
+				}
+				else{
+				    console.log("success - set_skip");
+				    console.log(result);
+
+				    // Chargement de la page suivante (rappel du controller)
+				    location.reload();
+				}
+		    },
+		    error: function (result, status, error){
+		        console.log("error - set_skip");
+		        console.log(result);
+		        err = true;
+		    }
+		});// /ajax - set_skip
+
+		// skip bt_recode_types
+		skip();
+	}// /skip_infer()
 
 
 	function treatment_infer_types(err) {
@@ -819,6 +868,10 @@ if(isset($this->session->project_type)){
 		$("#bt_next").click(function(){
 			valid();
 		});
+
+		$("#bt_skip_infer").click(function() {
+		   skip_infer();
+		});// /bt_skip_infer
 
 		$("#bt_skip").click(function() {
 		   skip();
