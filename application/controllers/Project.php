@@ -20,7 +20,6 @@ class Project extends CI_Controller {
 			redirect('/User/new');
 		}
 
-
 		// test de la langue
 		// Francais par defaut
 		if(!isset($_SESSION['language'])){
@@ -65,7 +64,13 @@ class Project extends CI_Controller {
 		elseif($steps['recode_types']['completed'] || $steps['recode_types']['skipped']){
 			return 'recode_types';
 		}
+		elseif($steps['infer_types']['completed'] || $steps['infer_types']['skipped']){
+			return 'recode_types';
+		}
 		elseif($steps['replace_mvs']['completed'] || $steps['replace_mvs']['skipped']){
+			return 'replace_mvs';
+		}
+		elseif($steps['infer_mvs']['completed'] || $steps['infer_mvs']['skipped']){
 			return 'replace_mvs';
 		}
 		elseif($steps['add_selected_columns']['completed'] || $steps['add_selected_columns']['skipped']){
@@ -106,10 +111,10 @@ class Project extends CI_Controller {
 		}
 
 		$project_api = $this->private_functions->get_metadata_api('normalize', $project_id);
-
 		$file_name = key($project_api['files']);
 
 		$steps = $project_api['log'][$file_name];
+
 
 		$actual_step = $this->get_step_normalization($steps);
 		$actual_step_order = $this->get_step_normalization_order($actual_step);
@@ -127,7 +132,6 @@ class Project extends CI_Controller {
 				$actual_step = $actual_step_mini;
 			}
 		}
-
 		if($actual_step){
 			return $actual_step;
 		}
@@ -150,8 +154,7 @@ class Project extends CI_Controller {
 				break;
 
 			case 'add_selected_columns':
-				$this->recode_types($project_id);
-				//$this->replace_mvs($project_id);
+				$this->replace_mvs($project_id);
 				// TODO : Faire un skip
 				break;
 
@@ -218,14 +221,13 @@ class Project extends CI_Controller {
 
 				//si pas fini, redirection vers la normalisation
 				//if($step != 'concat_with_init'){
-				if($step != 'recode_types'){
-					//$this->load_step_normalization($step, $normalized_project['project_id']);
+				if($step != 'concat_with_init'){
+
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
 				}
 			}
 		}
-
 		$this->load_step_linker($link_step, $project_id);
 	}// /link()
 
@@ -450,75 +452,105 @@ class Project extends CI_Controller {
 	}// /add_selected_columns()
 
 
-	public function replace_mvs($id="")
+	public function replace_mvs($project_id="")
 	{
-		if(isset($id)){
-			$this->session->set_userdata('project_id', $id);
+		if(isset($project_id)){
+			$this->session->set_userdata('project_id', $project_id);
 			$this->session->set_userdata('project_type', 'normalize');
 		}
 
 		$this->test_project_id();
 
-		// Chargement des vues
-		$data['title'] = "Normalisation";
-		$this->load->view('lib', $data);
-		$this->load->view('project_normalize_replace_mvs_specifics');
-		$this->load->view('header_'.$_SESSION['language']);
-		if($this->is_done_step('replace_mvs')){// Est ce que cette étape a déjà été lancée ?
-			$this->load->view('project_normalize_replace_mvs_report_'.$_SESSION['language'], $data);
-		}
-		else{
-			$this->load->view('project_normalize_replace_mvs_'.$_SESSION['language'], $data);
-		}
-		$this->load->view('footer_'.$_SESSION['language']);
+					// // Chargement des vues
+					// $data['title'] = "Normalisation";
+					// $this->load->view('lib', $data);
+					// $this->load->view('project_normalize_replace_mvs_specifics');
+					// $this->load->view('header_'.$_SESSION['language']);
+					// if($this->is_done_step('replace_mvs')){// Est ce que cette étape a déjà été lancée ?
+					// 	$this->load->view('project_normalize_replace_mvs_report_'.$_SESSION['language'], $data);
+					// }
+					// else{
+					// 	$this->load->view('project_normalize_replace_mvs_'.$_SESSION['language'], $data);
+					// }
+					// $this->load->view('footer_'.$_SESSION['language']);
+
+		//  Récupération des métatdata
+		$metadata = $this->private_functions->get_metadata_api("normalize", $project_id);
+		$file_name = key($metadata["files"]);
+
+		// Cette étape n'est plus nécessaire, on skipped
+		$this->private_functions->skip_step_api("normalize", $project_id, $file_name, "infer_mvs");
+		$this->private_functions->skip_step_api("normalize", $project_id, $file_name, "replace_mvs");
+
+		// Etape suivante
+		redirect('/Project/link/'.$_SESSION['link_project_id']);
+
 	}// /replace_mvs()
 
 
-	public function recode_types($id="")
+	public function recode_types($project_id="")
 	{
-		if(isset($id)){
-			$this->session->set_userdata('project_id', $id);
+		if(isset($project_id)){
+			$this->session->set_userdata('project_id', $project_id);
 			$this->session->set_userdata('project_type', 'normalize');
 		}
 
 		$this->test_project_id();
+
+		if($this->is_done_step('infer_types')){
+			//  Récupération des métatdata
+			$metadata = $this->private_functions->get_metadata_api("normalize", $project_id);
+			$file_name = key($metadata["files"]);
+
+			// Cette étape n'est plus nécessaire, on skipped
+			$this->private_functions->skip_step_api("normalize", $project_id, $file_name, "recode_types");
+			$this->private_functions->skip_step_api("normalize", $project_id, $file_name, "concat_with_init");
+
+			// Etape suivante
+			redirect('/Project/link/'.$_SESSION['link_project_id']);
+		}
 
 		// Chargement des vues
 		$data['title'] = "Normalisation";
 		$this->load->view('lib', $data);
 		$this->load->view('project_normalize_infer_types_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
-		if($this->is_done_step('infer_types')){// Est ce que cette étape a déjà été lancée ?
-			$this->load->view('project_normalize_infer_types_report_'.$_SESSION['language'], $data);
-		}
-		else{
-			$this->load->view('project_normalize_infer_types_'.$_SESSION['language'], $data);
-		}
+		$this->load->view('project_normalize_infer_types_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /recode_types()
 
 
-	public function concat_with_init($id="")
+	public function concat_with_init($project_id="")
 	{
-		if(isset($id)){
-			$this->session->set_userdata('project_id', $id);
+
+		if(isset($project_id)){
+			$this->session->set_userdata('project_id', $project_id);
 			$this->session->set_userdata('project_type', 'normalize');
 		}
 		$this->test_project_id();
 
+		// // Chargement des vues
+		// $data['title'] = "Normalisation";
+		// $this->load->view('lib', $data);
+		// $this->load->view('project_normalize_concat_with_init_specifics');
+		// $this->load->view('header_'.$_SESSION['language']);
+		// if($this->is_done_step('concat_with_init')){// Est ce que cette étape a déjà été lancée ?
+		// 	$this->load->view('project_normalize_concat_with_init_report_'.$_SESSION['language'], $data);
+		// }
+		// else{
+		// 	$this->load->view('project_normalize_concat_with_init_'.$_SESSION['language'], $data);
+		// }
+		// $this->load->view('footer_'.$_SESSION['language']);
 
-		// Chargement des vues
-		$data['title'] = "Normalisation";
-		$this->load->view('lib', $data);
-		$this->load->view('project_normalize_concat_with_init_specifics');
-		$this->load->view('header_'.$_SESSION['language']);
-		if($this->is_done_step('concat_with_init')){// Est ce que cette étape a déjà été lancée ?
-			$this->load->view('project_normalize_concat_with_init_report_'.$_SESSION['language'], $data);
-		}
-		else{
-			$this->load->view('project_normalize_concat_with_init_'.$_SESSION['language'], $data);
-		}
-		$this->load->view('footer_'.$_SESSION['language']);
+		//  Récupération des métatdata
+		$metadata = $this->private_functions->get_metadata_api("normalize", $project_id);
+		$file_name = key($metadata["files"]);
+
+		// Cette étape n'est plus nécessaire, on skipped
+		$this->private_functions->skip_step_api("normalize", $project_id, $file_name, "concat_with_init");
+
+		// Etape suivante
+		redirect('/Project/link/'.$_SESSION['link_project_id']);
 	}// /concat_with_init()
 
 

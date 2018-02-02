@@ -31,7 +31,6 @@ class Private_functions {
 	{
 		# Récupération des métadata d'un projet
 		$curl = curl_init();
-
 		$url = BASE_API_URL.'/api/metadata/'.$project_type.'/'.$project_id;
 
 		$opts = [
@@ -77,6 +76,53 @@ class Private_functions {
 				return 'Public';
 		}
 	}// /get_status()
+
+
+	public function skip_step_api($project_type, $project_id, $file_name, $module_name)
+	{
+		# Passe a TRUE la variable skipped d'une étape
+
+		// Test du filename, on ne doit pas ecrire sur le MINI
+		$file_name_temp = $file_name;
+		if(substr($file_name,0,6) === 'MINI__' ){
+			$file_name_temp = substr($file_name, 6);
+		}
+
+		// Appel cURL
+		$url = BASE_API_URL.'/api/set_skip/'.$project_type.'/'.$project_id;
+
+		$postfields = array(
+		    'data_params' => array(
+				"module_name" => $module_name,
+		    	"file_name" => $file_name_temp
+			),
+			'module_params' => array(
+				"skip_value" => true
+			)
+		);
+
+		// Transformation json
+		$postfields = json_encode($postfields);
+
+		$curl = curl_init();
+
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_HTTPHEADER,array("Content-Type: application/json; charset=utf-8"));
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $postfields);
+
+		$return = curl_exec($curl);
+		curl_close($curl);
+
+		$response = json_decode($return, true);
+
+		// Test de la reponse
+		if(!empty($response["error"])){
+			return true;
+		}
+		return false;
+	}// /skip_step()
 
 
 	public function is_completed_step($step_name, $project_steps, $has_mini)

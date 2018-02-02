@@ -257,7 +257,55 @@ if(isset($this->session->project_type)){
 		        err = true;
 		    }
 		});// /ajax - set_skip
+
+		skip_concat();
 	}// /skip()
+
+
+	function skip_concat() {
+		// Test du filename, on ne doit pas ecrire sur le MINI
+		var file_name_temp = file_name;
+		if(file_name.substr(0,6) === 'MINI__' ){
+			file_name_temp = file_name.substr(6);
+		}
+
+		// Paramètres API
+		tparams = {
+			"data_params": {
+		    	"module_name": "concat_with_init",
+		    	"file_name": file_name_temp
+		    },
+		    "module_params": {
+		    	"skip_value": true
+		    }
+		}
+		$.ajax({
+			type: 'post',
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+			url: '<?php echo BASE_API_URL;?>' + '/api/set_skip/normalize/' + project_id,
+			data: JSON.stringify(tparams),
+			success: function (result) {
+
+				if(result.error){
+					console.log("API error - set_skip");
+					console.log(result.error);
+				}
+				else{
+				    console.log("success - set_skip");
+				    console.log(result);
+
+				    // Chargement de la page suivante (rappel du controller)
+				    location.reload();
+				}
+		    },
+		    error: function (result, status, error){
+		        console.log("error - set_skip");
+		        console.log(result);
+		        err = true;
+		    }
+		});// /ajax - set_skip
+	}// /skip_concat()
 
 
 	function skip_infer() {
@@ -793,14 +841,12 @@ if(isset($this->session->project_type)){
 
     function valid(){
         // Appel de l'étape suivante
-        window.location.href = "<?php echo base_url('index.php/Project/normalize/'.$_SESSION['project_id']);?>";
+        window.location.href = "<?php echo base_url('index.php/Project/link/'.@$_SESSION['link_project_id']);?>";
     }// /valid
 
 
 	function treatment_recode_types(){
 		var oparams = get_params();
-		console.log("obj_recode_types");
-		console.dir(oparams);
 
 		$.ajax({
 			type: 'post',
@@ -864,7 +910,8 @@ if(isset($this->session->project_type)){
 	}// /treatment_recode_types()
 
 
-    function add_actions_buttons() {
+    function add_actions_buttons()
+	{
 		$("#bt_next").click(function(){
 			valid();
 		});
