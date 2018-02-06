@@ -163,7 +163,20 @@
       </div>
       <div class="modal-body">
           <p class="well">
-              L'association des colonnes va permettre à la machine de chercher et proposer des requêtes pertinentes à l'étape d'apprentissage.<br />
+
+              L'appariement de colonne décrit les colonnes qui partagent des informations qui peuvent servir au matching. Il est possible de spécifier plusieurs colonnes à matcher (par exemple on apparie en utilisant simultanément un champ "NOM_ETABLISSEMENT" et un champ "VILLE"). Par ailleurs, l'appariement de colonnes n'est pas nécessairement 1 à 1 mais peut aussi impliquer plusieurs colonnes de la source ou du référentiel; les différents comportements sont décrits ci-dessous:
+
+              ### Ajout de paires multiples
+              Les appariements sont des indications pour l'algorithme d'apprentissage. L'algorithme va probablement sélectionner un sous-ensemble des paires indiquées pour le matching. Les paires sélectionnées agiront comme un "ET". Ajouter autant de paires que possible pour couvrir toutes les possibilités peut être tentant (peut-être que matcher e-mail et pays peut être utile...), cela risque de rendre les calculs plus lents et lourds pour notre serveur et risque aussi d'ajouter du bruit qui peut nuire à l'apprentissage. L'appariement idéal est généralement l'ensemble minimal de colonnes qui permettrait à un humain de décider si une paire de lignes est un match ou non.
+
+
+              #### Colonnes multiples pour la source dans l'appariement
+              Quand plusieurs colonnes sont sélectionnées pour la source, les valeurs de celles-ci seront concaténées (avec un espace) et le résultat sera recherché comme un tout dans le référentiel. Cela peut être utile quand deux champs de la source correspondent à un champ du référentiel, mais aussi quand les données à matcher se trouvent alternativement dans un champ ou dans l'autre de la source.
+
+              #### Colonnes multiples pour la référence dans l'appariement
+              Quand plusieurs colonnes sont sélectionnée pour la référence, les valeurs de la source seront recherchées dans ces deux colonnes et des résultats seront renvoyées s'il y a un match dans l'une ou dans l'autre des colonnes (agissant comme un "OU").
+
+
           </p>
           <div>
               <h4>Exemples :</h4>
@@ -564,5 +577,7 @@ $(function(){// ready
 
     // Association vide par défaut
     $("#bt_add_bloc").click();
+
+    $("#bt_next").css("visibility", "visible");
 });//ready
 </script>
