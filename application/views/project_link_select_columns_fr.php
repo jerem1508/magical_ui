@@ -1,51 +1,27 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid intro" id="entete">
+<div class="container-fluid background_1" id="work" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
+<!--
     <div class="row">
-        <div class="col-md-12">
-            <h2 style="margin-top: 0;"><span id="project_name1"></span> : <i>Association des colonnes</i></h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="page_explain">
-                Cette étape vous <strong>permet d'associer</strong> des colonnes de votre fichier <strong>source</strong> à des colonne du <strong>référentiel</strong> cible. Une bonne association améliorera considérablement les résultats de la jointure.<br>
-                Pour associer des colonnes, vous devez ajouter une nouvelle association (<button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button>) et glisser/déposer la ou les colonnes souhaitées dans la zone corespondante.
-                <br>
-                Les colonnes possédant une <span class="glyphicon glyphicon-star"></span> sont des colonnes où le type a été détecté lors de la normalisation.
-                <br>
-                <br>
-                Bien que cela soit déconseillé, vous pouvez choisir de passer cette étape.
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <button class="btn btn-success" id="bt_start">Commencer l'association des colonnes</button>
-        </div>
-    </div>
-</div><!--/container-->
-<div id="tempo"></div>
-
-<div class="container-fluid background_1" id="work" style="padding-bottom: 20px;">
-    <div class="row">
-        <div class="col-md-5">
-            <h2 style="display: inline-block;">
-                <span id="project_name2"></span> : <i>Association des colonnes</i>
-            </h2>
-        </div>
-        <div class="col-md-4 text-right">
-            <ul class="nav nav-tabs navbar-right" style="margin-top: 5px;margin-right: 5px;">
-                <li class="active"><a data-toggle="tab" href="#home">Informations</a></li>
-                <li><a data-toggle="tab" href="#menu1">Légende</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 text-right">
+        <div class="col-md-12 text-right">
             <div style="padding-top: 20px;">
                 <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
             </div>
         </div>
     </div>
+-->
+    <div class="row">
+        <div class="col-sm-11">
+            <div class="page_explain">
+                <strong>Pour associer des colonnes</strong>, vous devez ajouter une <button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button> puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
+                Répétez cette opération autant de fois que nécessaire.
+            </div>
+        </div>
+        <div class="col-sm-1 text-right">
+            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
+        </div>
+    </div><!-- /row-->
+
     <div class="row">
         <div class="col-xs-3">
             <h3 style="margin-top: 0;margin-bottom: 0;">
@@ -73,12 +49,8 @@
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="tab-content" style="background-color: #262626;color: #eee; padding: 10px;">
-                <div id="home" class="tab-pane fade in active">
-                    <strong>Pour associer des colonnes</strong>, vous devez ajouter une nouvelle association puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
-                    Répétez cette opération autant de fois que nécessaire.
-                </div>
-                <div id="menu1" class="tab-pane fade">
+                <div style="background-color: #262626;color:#ccc;padding:5px;border-radius:5px;margin-bottom:10px;">
+                    <span style="font-weight:bold;display:inline-block;margin-bottom:5px;">Légende : </span>
                     <div class="row">
                         <div class="col-md-4">
                             <span class="badge" style="background-color: #e6ccff">&nbsp;</span>&nbsp;Catégorie "<strong>personnes</strong>"
@@ -102,7 +74,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="col-xs-3">
             <h3 style="margin-top: 0;margin-bottom: 0;">
@@ -180,6 +151,53 @@
 </div><!-- /.modal -->
 
 
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+          <p class="well">
+              L'association des colonnes va permettre à la machine de chercher et proposer des requêtes pertinentes à l'étape d'apprentissage.<br />
+          </p>
+          <div>
+              <h4>Exemples :</h4>
+          </div>
+          <div>
+              <h4>Association(s) classique(s) :</h4>
+              <span class="keyword">lycees source</span> <span class="exemple">Lycée Jean Moulin</span>
+              <br>
+              avec
+              <br>
+              <span class="keyword">denomination_principale_uai</span> <span class="exemple">LYCEE GENERAL</span> et <span class="keyword">patronyme_uai</span> <span class="exemple">JEAN MOULIN</span>
+          </div>
+          <div>
+              <br>
+              <h4>Association parfaite :</h4>
+              <br>
+              <span class="keyword">Numéro UAI</span> <span class="exemple">0080040A</span>
+              <br>
+              avec
+              <br>
+              <span class="keyword">UAI</span> <span class="exemple">0080040A</span>
+              <br>
+              <br>
+              <i class="fa fa-exclamation-circle"></i> Attention : <span class="exemple">075</span> ne correspond pas à une association parfaite avec <span class="exemple">75</span>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <script type="text/javascript">
 
@@ -211,18 +229,19 @@ function get_metadata(project_type, project_id) {
 
 function get_runinfo(project_type, project_id, module_name, file_name, metadata) {
     // Récupere le contenu d'un fichier runInfo via API
-    console.log('get_runinfo()');
-
-    console.log("metadata");
+    /*
+    console.log('get_runinfo('+project_type+','+project_id+','+module_name+','+file_name+',metadata)');
+    console.log('metadata:');
     console.log(metadata);
-
-
+    */
     var runinfo = "";
 
+    // Parametres
     var tparams = {
         "data_params": {
             "module_name": module_name,
-            "file_name": file_name + "__run_info.json"
+            //"file_name": file_name + "__run_info.json"
+            "file_name": "infered_config.json"
         }
     }
 
@@ -241,7 +260,8 @@ function get_runinfo(project_type, project_id, module_name, file_name, metadata)
                 console.log("success - download_config");
                 console.log(result);
 
-                runinfo = result.result.params.column_types;
+                //runinfo = result.result.params.column_types;
+                runinfo = result.result.column_types;
             }
         },
         error: function (result, status, error){
@@ -381,15 +401,15 @@ function valid_step(link_project_id){
 
 
 function get_buttons_actions() {
-    $("#bt_start").click(function(){
-        $("#entete").css("display", "none");
-        $("#tempo").css("display", "none");
-        $("#bt_next").css("visibility", "visible");
-        $("#work").fadeToggle();
-
-        // Association vide par défaut
-        $("#bt_add_bloc").click();
-    });
+    // $("#bt_start").click(function(){
+    //     $("#entete").css("display", "none");
+    //     $("#tempo").css("display", "none");
+    //     $("#bt_next").css("visibility", "visible");
+    //     $("#work").fadeToggle();
+    //
+    //     // Association vide par défaut
+    //     $("#bt_add_bloc").click();
+    // });
 
     $("#bt_next").click(function(){
         // Appel de l'API pour enregistrer les associations utilisateur
@@ -414,6 +434,12 @@ function get_buttons_actions() {
         // Changement du libellé du bloc en cours
         $("#lib_bloc_" + id_bloc_to_change).html($("#lib_bloc").val());
     });
+
+    $("#bt_help").click(function(){
+        $('#modal_help').modal('show');
+    });
+
+
 }// /get_buttons_actions()
 
 
@@ -424,6 +450,52 @@ function set_scroll(cible, ncols, limit) {
         $("#" + cible).css("overflow", "scroll");
     }
 }// /set_scroll()
+
+
+function get_sample(file_name, project_id){
+    // Récupère un échantillon du fichiers
+    console.log("get_sample(" + file_name + "," + project_id + ")");
+
+    var tparams = {
+        "data_params": {
+            "module_name": "INIT",
+            "file_name": file_name
+        },
+        "module_params":{
+            "sampler_module_name": "standard",
+            "sample_params": {
+                "num_rows": 20
+            }
+        }
+    }
+    var ret = [];
+
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>/api/sample/normalize/' + project_id,
+        data: JSON.stringify(tparams),
+        async: false,
+        success: function (result) {
+
+            if(result.error){
+                show_api_error(result, "API error - get_sample()");
+            }
+            else{
+                // console.log("success sample");
+                // console.log(result.sample);
+                ret = result.sample;
+            }
+        },
+        error: function (result, status, error){
+            show_api_error(result, "Error - get_sample()");
+        }
+    });// /ajax
+
+    return ret;
+
+}// /get_sample()
 
 
 $(function(){// ready
@@ -442,8 +514,7 @@ $(function(){// ready
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
-    $("#project_name1").html(metadata_link.display_name);
-    $("#project_name2").html(metadata_link.display_name);
+    $("#page_title_project_name").html(metadata_link.display_name);
 
     // Récupération des ids des projets de normalisation
     project_id_src = metadata_link['files']['source']['project_id'];
@@ -483,9 +554,15 @@ $(function(){// ready
     var infer_src = get_runinfo('normalize', project_id_src, 'recode_types', src_file_name, metadata_src);
     var infer_ref = get_runinfo('normalize', project_id_ref, 'recode_types', ref_file_name, metadata_ref);
 
-    // Ajout des colonne à l'interface
-    $("#src_columns").html(get_columns_html(columns_src, infer_src, "src"));
-    $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref"));
+    // Récupération des 2 échantillons
+    sample_src = get_sample(src_file_name, project_id_src);
+    sample_ref = get_sample(ref_file_name, project_id_ref);
 
+    // Ajout des colonne à l'interface
+    $("#src_columns").html(get_columns_html(columns_src, infer_src, "src", sample_src));
+    $("#ref_columns").html(get_columns_html(columns_ref, infer_ref, "ref", sample_ref));
+
+    // Association vide par défaut
+    $("#bt_add_bloc").click();
 });//ready
 </script>

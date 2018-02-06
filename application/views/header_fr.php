@@ -25,7 +25,11 @@
 </div>
 <div class="container-fluid entete2">
 	<div class="row">
-		<div class="col-md-12 text-right">
+		<div class="col-md-6 page_title">
+			<span id="page_title_project_name"></span> :
+			<?php echo $title;?>
+		</div>
+		<div class="col-md-6 text-right">
 			<a href="<?php echo base_url("index.php/Home");?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Accueil</a>
 			<span style="display:inline-block;width:10px;"></span>
             <?php

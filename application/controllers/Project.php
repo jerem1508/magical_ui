@@ -197,38 +197,37 @@ class Project extends CI_Controller {
 	}// /get_normalization_projects()
 
 
-	public function link($project_id='', $type_file='')
+	public function link($link_project_id='')
 	{
 		// MAJ du type de projet en session
 		$this->session->set_userdata('project_type', 'link');
 
-		if(isset($project_id)){
-			$this->session->set_userdata('link_project_id', $project_id);
+		if(isset($link_project_id)){
+			$this->session->set_userdata('link_project_id', $link_project_id);
 		}
 
 		// Recherche de l'étape en cours
-		$link_step = $this->get_actual_step_linker($project_id);
-		if($project_id && $link_step == 'INIT'){
+		$link_step = $this->get_actual_step_linker($link_project_id);
+		if($link_project_id && $link_step == 'INIT'){
 			// tests de complétude des projets de normalisation
-			$normalized_projects = $this->get_normalization_projects($project_id);
+			$normalized_projects = $this->get_normalization_projects($link_project_id);
 
 			foreach ($normalized_projects as $normalized_project) {
 				// Rechercher l'étape du projet
 				$step = $this->get_actual_step_normalization($normalized_project['project_id']);
 
 				// Sauvegarde du project_id afin de pouvoir revenir au projet de link apres la normalisation
-				$this->session->set_userdata('link_project_id', $project_id);
+				$this->session->set_userdata('link_project_id', $link_project_id);
 
 				//si pas fini, redirection vers la normalisation
 				//if($step != 'concat_with_init'){
 				if($step != 'concat_with_init'){
-
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
 				}
 			}
 		}
-		$this->load_step_linker($link_step, $project_id);
+		$this->load_step_linker($link_step, $link_project_id);
 	}// /link()
 
 
@@ -301,7 +300,7 @@ class Project extends CI_Controller {
 	{
 		# Mise en relation des colonnes du fichier source avec celles du fichier referentiel
 
-		$data['title'] = "Jointure";
+		$data['title'] = "Association des colonnes";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_select_columns_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
@@ -314,7 +313,7 @@ class Project extends CI_Controller {
 	{
 		# Apprentissage
 
-		$data['title'] = "Jointure";
+		$data['title'] = "Apprentissage";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_es_train_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
@@ -326,7 +325,7 @@ class Project extends CI_Controller {
 	public function es_linker($id='')
 	{
 		# Traitement final
-		$data['title'] = "Jointure";
+		$data['title'] = "Téléchargement";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_es_linker_specifics');
 		$this->load->view('header_'.$_SESSION['language']);

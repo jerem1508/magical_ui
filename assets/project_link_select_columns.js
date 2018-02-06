@@ -1,4 +1,4 @@
-function get_columns_html(tab_columns, infer_columns, target) {
+function get_columns_html(tab_columns, infer_columns, target, sample) {
 	// Retourne au format HTML l'ensemble des colonnes passées en paramètre
 	var html = "";
 	var li = "";
@@ -22,6 +22,16 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			column_type = infer_columns[tab_columns[i]];
 		}
 
+		// Récupération des valeurs échantillon
+		//txt_sample = get_sample_html(tab_columns[i], sample);
+		var tab_sample = [];
+		for (var sample_line in sample) {
+			console.log(sample[sample_line][tab_columns[i]]);
+			tab_sample.push(sample[sample_line][tab_columns[i]]);
+		}
+		txt_sample = tab_sample.join(", ");
+
+		// Création du rendu HTML
 		if(column_type == 'Inconnu' || column_type == ''){
 			html += '<div class="box" onclick="add_column(\'' + target + '\',\'' + tab_columns[i] + '\');">';
 			html += '<div class="row">';
@@ -30,6 +40,7 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '	</div>';
 			html += '	<div class="col-md-9">';
 			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '</div>';
+			html += '		<div class="sample">' + txt_sample + '</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-2">';
 			html += '		<i class="fa fa-plus-circle add" style="font-size: 40px;"></i>';
@@ -53,8 +64,8 @@ function get_columns_html(tab_columns, infer_columns, target) {
 			html += '		<div style="width: 15px;margin:0;padding:0;height:40px;background-color:' + couleur + ';"></div>'
 			html += '	</div>';
 			html += '	<div class="col-md-9">';
-			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '</div>';
-			html += '		<div class="type">Type : ' + column_type + '</div>';
+			html += '		<div class="tag ' + target + '_column"><span class="fa fa-arrow-circle-right" aria-hidden="true"></span>&nbsp;' + tab_columns[i] + '<span class="badge type" style="background-color:' + couleur + ';">' + column_type + '</span></div>';
+			html += '		<div class="sample">' + txt_sample + '</div>';
 			html += '	</div>';
 			html += '	<div class="col-md-2">';
 			html += '		<i class="fa fa-plus-circle add" style="font-size: 40px;""></i>';

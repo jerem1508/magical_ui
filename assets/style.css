@@ -15,13 +15,24 @@ gris clair
 corail
 #FA5D58
 */
-.color_src{
-  color: #D474BB;
+
+#bt_help{
+    margin-top: 5px;
 }
 
-.color_ref{
-  color: #FDDE6C;
+#modal_help .keyword{
+    background-color: #eee;
+    display: inline-inline-block;
+    padding: 5px;
+    color: #E00612;
+    border-radius: 4px;
 }
+#modal_help .exemple{
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 
 .well{
   border-radius: 0;
@@ -34,6 +45,13 @@ corail
   padding-right: 15px;
 }
 
+.page_title{
+    color:#fff;
+    text-transform: uppercase;
+    /*font-weight: bold;*/
+    font-size:20px;
+    font-style: italic;
+}
 
 .intro{
   background-color: rgba(255,255,255,0.7);

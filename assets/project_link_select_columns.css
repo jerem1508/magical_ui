@@ -20,7 +20,7 @@
 	padding-right: 10px;
 }
 #body>.right{
-	border-left: 4px dotted #eee;	
+	border-left: 4px dotted #eee;
 }
 
 .info{
@@ -44,11 +44,21 @@
 .box .tag{
 	font-size: 14px;
 	font-weight: bold;
-	color: 
+	color:
 }
 .box .type{
 	font-style: italic;
 	margin-bottom: 2px;
+	font-size: 10px;
+	color: #000;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.box .sample{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .box .left{
@@ -64,7 +74,7 @@
 
 
 .box .pastille{
-	color:#000; 
+	color:#000;
 	display: inline-block;
 	width: 12px;
 	height: 12px;
@@ -159,11 +169,11 @@
 	font-size: 1.1em;
 	/*color: #777;*/
 }
-
+/*
 #work{
     display: none;
 }
-
+*/
 
 #show_report_ok, #upload_file_ok, #check_file_ok{
     visibility: hidden;
@@ -185,6 +195,7 @@
     border: 1px solid #777;
     border-radius: 0px;
 }
+
 
 .keys{
 	font-style: italic;
