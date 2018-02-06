@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm-11">
             <div class="page_explain">
-                <strong>Pour associer des colonnes</strong>, vous devez ajouter une <button class="btn btn-xs btn-success2">Nouvelle association&nbsp;<span class="glyphicon glyphicon-plus"></span></button> puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
+                <strong>Pour associer des colonnes</strong>, vous devez ajouter une <button class="btn btn-xs btn-success2">Ajouter une association&nbsp;<span class="glyphicon glyphicon-plus"></span></button> puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
                 Répétez cette opération autant de fois que nécessaire.
             </div>
         </div>
@@ -22,6 +22,7 @@
         </div>
     </div><!-- /row-->
 
+<!--
     <div class="row">
         <div class="col-xs-3">
             <h3 style="margin-top: 0;margin-bottom: 0;">
@@ -77,15 +78,26 @@
             </div>
         </div>
     </div>
-
+-->
 
     <div class="row" id="body">
         <div class="col-xs-3 titre left" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
+            <h3>
+                <i class="fa fa-table" aria-hidden="true"></i>
+                &nbsp;
+                Source
+            </h3>
+            <span class="keys"></span><span id="src_file_name" class="filename key_numbers"></span>
+            <hr />
             <div id="src_columns"></div>
         </div>
-        <div class="col-xs-6 center">
-            <div class="col-xs-12 text-center" id="blocs"></div>
 
+
+        <div class="col-xs-6 center">
+
+
+
+            <div class="col-xs-12 text-center" id="blocs"></div>
             <div class="col-xs-12 text-right" style="padding-right: 5px;">
                 <button class="btn btn btn-success2" id="bt_add_bloc" data-intro="Ajoutez une nouvelle association de colonnes ici">
                     Ajouter une association&nbsp;
@@ -93,7 +105,17 @@
                 </button>
             </div>
         </div>
+
+
         <div class="col-xs-3 titre right" data-intro="... puis les colonnes correspondantes du référentiel">
+            <h3 style="margin-top: 0;margin-bottom: 0;">
+                <i class="fa fa-database" aria-hidden="true"></i>
+                &nbsp;
+                Référentiel
+            </h3>
+            <span class="keys"></span><span id="ref_file_name" class="filename key_numbers"></span>
+            <hr />
+
             <div id="ref_columns"></div>
         </div>
     </div>
@@ -138,9 +160,11 @@
         </h4>
       </div>
       <div class="modal-body">
-          <p class="well">
+          <div class="page_explain">
+              <b>
               L'appariement de colonne décrit les colonnes qui partagent des informations qui peuvent servir au matching. Il est possible de spécifier plusieurs colonnes à matcher (par exemple on apparie en utilisant simultanément un champ "NOM_ETABLISSEMENT" et un champ "VILLE"). Par ailleurs, l'appariement de colonnes n'est pas nécessairement 1 à 1 mais peut aussi impliquer plusieurs colonnes de la source ou du référentiel; les différents comportements sont décrits ci-dessous:
-          </p>
+              </b>
+          </div>
           <h4>Ajout de paires multiples</h4>
           Les appariements sont des indications pour l'algorithme d'apprentissage. L'algorithme va probablement sélectionner un sous-ensemble des paires indiquées pour le matching. Les paires sélectionnées agiront comme un "ET". Ajouter autant de paires que possible pour couvrir toutes les possibilités peut être tentant (peut-être que matcher e-mail et pays peut être utile...), cela risque de rendre les calculs plus lents et lourds pour notre serveur et risque aussi d'ajouter du bruit qui peut nuire à l'apprentissage. L'appariement idéal est généralement l'ensemble minimal de colonnes qui permettrait à un humain de décider si une paire de lignes est un match ou non.
 
@@ -155,7 +179,7 @@
               <h4>Exemples :</h4>
           </div>
           <div>
-              <h4>Association(s) classique(s) :</h4>
+              <h5>Association classique :</h5>
               <span class="keyword">lycees source</span> <span class="exemple">Lycée Jean Moulin</span>
               <br>
               avec
@@ -163,8 +187,8 @@
               <span class="keyword">denomination_principale_uai</span> <span class="exemple">LYCEE GENERAL</span> et <span class="keyword">patronyme_uai</span> <span class="exemple">JEAN MOULIN</span>
           </div>
           <div>
-              <h4>Association parfaite :</h4>
               <br>
+              <h5>Association parfaite :</h5>
               <span class="keyword">Numéro UAI</span> <span class="exemple">0080040A</span>
               <br>
               avec
