@@ -1,5 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
+<!--
 <div class="container-fluid intro" id="entete" style="padding-bottom: 20px;">
     <div class="row">
         <div class="col-sm-12">
@@ -24,17 +25,24 @@
             <button class="btn btn-success" id="bt_start">Commencer l'apprentissage</button>
         </div>
     </div>
-</div><!--/container-fluid-->
+</div>
 <div id="tempo" style="min-height: 400px;"></div>
+-->
 
-<div class="container-fluid work background_1" style="padding-top: 20px;padding-bottom: 20px;">
+<div class="container-fluid work background_1" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-11">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 style="margin-top: 0;display: inline-block;">
-                        <span id="project_name2"></span> : <i>Apprentissage</i>
-                    </h2>
+                    <div class="page_explain">
+                        L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
+                        <br><br>
+                        Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.
+                        <br>
+                        Indice de pécision :
+                        <br>
+                        Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier
+                    </div>
                 </div>
             </div><!-- / row-->
             <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
@@ -68,12 +76,8 @@
                 </div>
             </div><!-- / row-->
         </div>
-        <div class="col-md-2 text-right">
-            <div id="didacticiel">
-                <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
-                    <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
-                </span>
-            </div>
+        <div class="col-sm-1 text-right">
+            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
         </div>
     </div>
 
@@ -89,14 +93,6 @@
                 <div class="col-xs-offset-1 col-xs-10 text-justify">
                     <div class="well">
                         La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                        <div style="margin-top: 20px;">
-                            Taux de précision souhaité :
-                            <select>
-                                <option>Tout apparier</option>
-                                <option>Précision élevée (plus de résultats)</option>
-                                <option>Précision 100% (moins de résultats)</option>
-                            </select>
-                        </div>
                     </div><!-- /well-->
                 </div>
             </div><!-- / row-->
@@ -304,6 +300,59 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+          <div class="page_explain">
+              <b>
+                  Dans la labellisation, l'utilisateur doit informer la machine si des paires de lignes (une de la source, une du référentiel) sont censées correspondre. La labellisation peut être utilisée pour deux utilisations:
+                  <ul>
+                      <li>Pour apprendre les paramètres optimaux pour effectuer une jointure automatique</li>
+                      <li>Pour manuellement apparier un fichier entièrement (ce qui peut être beaucoup plus rapide que le "CTRL+F CTRL+C CTRL+V" dans Excel, par exemple).</li>
+                  </ul>
+              </b>
+          </div>
+
+          <h4>Réponses possibles</h4>
+            <ul>
+                <li>
+                    oui: la paire montrée est un match
+                </li>
+                <li>
+                    non: la paire montrée n'est pas un match
+                </li>
+                <li>
+                    uncertain: je ne sais pas si la paire montrée est un match
+                </li>
+                <li>
+                    oublier: cette ligne de la source ne devrait pas être matchée: ne pas la prendre en compte
+                </li>
+            </ul>
+
+
+
+          <h4>Termes obligatoires / à exclure</h4>
+          Ces filtres permettent de restreindre le fichier de référence pour le matching. Les termes obligatoires agissent comme des "ET", c'est à dire que les lignes proposées après le filtrage devront obligatoirement contenir toutes les informations dans les filtres. Les termes à exclure agissent comme des "OU", c'est à dire que les lignes proposées ne contiendront aucun des termes à exclure. Ces filtres peuvent être utiles pour augmenter la précision du matching sur une base beaucoup plus large que ce que l'on recherche. Par exemple, si l'on cherche des lycées dans la base SIRENE, on ajoutera le terme obligatoire "lycee" au champ "NOMEN_LONG"; on pourra aussi exclure le mot "parents" pour ne pas avoir dans les résultats "association de parents du lycée abc", par exemple...
+
+          <h4>Recherche mot par mot. Comment et pourquoi ?</h4>
+          Il est possible de rechercher des termes de la source mot à mot en cliquant dessus. Cette recherche annule temporairement les résultats générés par le labellisateur. Cette fonctionnalité peut être utile pour trouver un match plus rapidement qu’en attendant que le labellisateur le propose. Par ailleurs, si l’on constate qu’il n’y a pas de résultat par la recherche mot à mot et que ce mot, cela indique que les mots recherchés ne sont pas présents dans le référentiel; on peut alors “oublier” la ligne de la source.
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <!-- Modal error-->
 <div class="modal fade" id="modal_error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -430,7 +479,6 @@ function create_es_index_api() {
 
                                 // Chargement du labeller
                                 create_es_labeller_api();
-
                             }
                             else{
                                 console.log("success - job en cours");
@@ -826,6 +874,10 @@ function show_new_proposition(message, from) {
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
 
     enabeled_buttons();
+
+    // Mémorisation de la taille de la DIV pour la fixer
+    h_message = $("#message").height();
+    $("#message").css("height",h_message);
 }// / show_new_proposition()
 
 
@@ -1020,6 +1072,10 @@ function add_buttons() {
         update_stat();
     });
 
+    $("#bt_help").click(function(){
+        $('#modal_help').modal('show');
+    });
+
 } // / add_buttons()
 
 
@@ -1127,8 +1183,11 @@ $(function(){// ready
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
-    $("#project_name1").html(metadata_link.display_name);
-    $("#project_name2").html(metadata_link.display_name);
+    // $("#project_name1").html(metadata_link.display_name);
+    // $("#project_name2").html(metadata_link.display_name);
+
+    // MAJ du nom du projet
+    $("#page_title_project_name").html(metadata_link.display_name);
 
     // Récupération des ids des projets de normalisation
     project_id_src = metadata_link['files']['source']['project_id'];
