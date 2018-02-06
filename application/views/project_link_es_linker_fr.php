@@ -1,11 +1,11 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid background_1" id="entete" style="padding-top: 20px;padding-bottom: 20px;">
+<div class="container-fluid background_1" id="entete" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
     <div class="row">
         <div class="col-md-8">
             <h2>
-                <span class="step_numbers">1</span>
-                &nbsp;Présentation du résultat de la jointure
+                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                &nbsp;Résultat de la jointure
             </h2>
         </div>
         <div class="col-md-4 text-right" id="pagination"></div>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2>
-                <span class="step_numbers">2</span>
+                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Statistiques
             </h2>
         </div>
@@ -51,15 +51,15 @@
     <div class="row">
         <div class="col-md-12">
             <h2>
-                <span class="step_numbers">3</span>
+                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Télechargement
             </h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 text-center">
-            <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
-            <button class="btn btn-success2" id="dl_file" disabled><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+        <div class="col-md-12 text-left">
+            <button class="btn btn-lg btn-success2" id="dl_file" disabled><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
+            <button class="btn btn-lg btn-success" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
         </div>
     </div>
 </div><!--/container-->
@@ -902,7 +902,9 @@ $(function(){// ready
     file_name = metadata_link.files.source.file_name;
 
     // MAJ du nom du projet
-    $("#project_name1").html(metadata_link.display_name);
+    //$("#project_name1").html(metadata_link.display_name);
+    // MAJ du nom du projet
+    $("#page_title_project_name").html(metadata_link.display_name);
 
     // Récupération des matches
     column_matches = get_column_matches();
