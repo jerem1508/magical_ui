@@ -221,63 +221,17 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid intro">
-    <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
-        <div class="col-lg-6">
-            	<h1>Jointure de fichiers</h1>
-                <div class="page_explain">
-                    La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.
-                </div>
-        </div> <!-- / col-12-->
-        <div class="col-lg-6">
-<!--
-            <div class="row">
-                <div class="col-lg-9">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                      <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                      </ol>
-
-                      <div class="carousel-inner" role="listbox">
-                        <div class="item active">
-                          <img src="..." alt="...">
-                          <div class="carousel-caption">
-                            ...
-                          </div>
-                        </div>
-                        <div class="item">
-                          <img src="..." alt="...">
-                          <div class="carousel-caption">
-                            ...
-                          </div>
-                        </div>
-                        ...
-                      </div>
-
-                      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 text-right">
-                    <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
-                        <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
-                    </span>
-                </div>
+<div class="container-fluid background_1 intro" style="margin-left: 20px; margin-right: 20px;">
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="page_explain">
+                La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.
             </div>
--->
+        </div> <!-- / col-12-->
 
-        </div><!-- /col-lg-6-->
     </div><!-- / row -->
 </div>
-<div class="container-fluid background_1" style="margin-top: 0px;">
+<div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <div class="row">
         <div class="col-xs-12">
             <h2 style="display: inline;">
@@ -301,7 +255,7 @@ function get_normalized_projects_html($id, $normalized_projects)
         </div> <!-- / col-12-->
     </div><!-- / row -->
 </div>
-<div class="container-fluid background_1" style="margin-top: 0px;">
+<div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <hr>
     <div class="row">
         <div class="col-xs-12">

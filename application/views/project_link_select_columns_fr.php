@@ -1,15 +1,6 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container-fluid background_1" id="work" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
-<!--
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <div style="padding-top: 20px;">
-                <a href="#" onclick="javascript:introJs().setOption('showBullets', false).start();">Aide</a>
-            </div>
-        </div>
-    </div>
--->
     <div class="row">
         <div class="col-sm-11">
             <div class="page_explain">
@@ -21,64 +12,6 @@
             <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
         </div>
     </div><!-- /row-->
-
-<!--
-    <div class="row">
-        <div class="col-xs-3">
-            <h3 style="margin-top: 0;margin-bottom: 0;">
-                <i class="fa fa-table" aria-hidden="true"></i>
-                &nbsp;
-                Source
-            </h3>
-            <div class="row" style="margin-bottom: 10px;">
-                <div class="col-md-2 text-center">
-                    <i class="fa fa-info-circle info" aria-hidden="true"></i>
-                </div>
-                <div class="col-md-10">
-                    <div id="info_src">
-                        <div>
-                            <span class="keys"></span><span id="src_file_name" class="filename key_numbers"></span>
-                        </div>
-                        <div>
-                            <span class="keys">Nombre de lignes : </span><span id="src_nrows" class="key_numbers"></span>
-                        </div>
-                        <div>
-                            <span class="keys">Nombre de colonnes : </span><span id="src_ncols" class="key_numbers"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6">
-
-        </div>
-        <div class="col-xs-3">
-            <h3 style="margin-top: 0;margin-bottom: 0;">
-                <i class="fa fa-database" aria-hidden="true"></i>
-                &nbsp;
-                Référentiel
-            </h3>
-            <div class="row" style="margin-bottom: 10px;">
-                <div class="col-md-2 text-center">
-                    <i class="fa fa-info-circle info" aria-hidden="true"></i>
-                </div>
-                <div class="col-md-10">
-                    <div id="info_ref">
-                        <div>
-                            <span class="keys"></span><span id="ref_file_name" class="filename key_numbers"></span>
-                        </div>
-                        <div>
-                            <span class="keys">Nombre de lignes : </span><span id="ref_nrows" class="key_numbers"></span>
-                        </div>
-                        <div>
-                            <span class="keys">Nombre de colonnes : </span><span id="ref_ncols" class="key_numbers"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
--->
 
     <div class="row" id="body">
         <div class="col-xs-3 titre left" data-intro="Faites glisser les colonnes de votre source pouvant servir à l'association...">
@@ -92,11 +25,7 @@
             <div id="src_columns"></div>
         </div>
 
-
         <div class="col-xs-6 center">
-
-
-
             <div class="col-xs-12 text-center" id="blocs"></div>
             <div class="col-xs-12 text-right" style="padding-right: 5px;">
                 <button class="btn btn btn-success2" id="bt_add_bloc" data-intro="Ajoutez une nouvelle association de colonnes ici">
@@ -553,7 +482,7 @@ $(function(){// ready
     metadata_link = get_metadata('link', '<?php echo $_SESSION['link_project_id'];?>');
 
     // MAJ du nom du projet
-    $("#page_title_project_name").html(metadata_link.display_name);
+    $("#page_title_project_name").html(metadata_link.display_name + " : ");
 
     // Récupération des ids des projets de normalisation
     project_id_src = metadata_link['files']['source']['project_id'];

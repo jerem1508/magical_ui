@@ -26,7 +26,7 @@
 <div class="container-fluid entete2">
 	<div class="row">
 		<div class="col-md-6 page_title">
-			<span id="page_title_project_name"></span> :
+			<span id="page_title_project_name"></span>
 			<?php echo $title;?>
 		</div>
 		<div class="col-md-6 text-right">

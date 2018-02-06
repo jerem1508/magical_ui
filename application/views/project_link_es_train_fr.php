@@ -48,7 +48,7 @@
             <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
                 <div class="col-xs-12">
                     <h2>
-                        <span class="step_numbers">1</span>
+                        <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                         &nbsp;Filtres sur le référentiel
                     </h2>
                 </div>
@@ -86,7 +86,7 @@
     <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
         <div class="col-xs-12">
             <h2>
-                <span class="step_numbers">2</span>
+                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Labellisation
             </h2>
             <div class="row">
@@ -160,7 +160,7 @@
     <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
         <div class="col-xs-12">
             <h2>
-                <span class="step_numbers">3</span>
+                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Statistiques
             </h2>
         </div>
@@ -1187,7 +1187,7 @@ $(function(){// ready
     // $("#project_name2").html(metadata_link.display_name);
 
     // MAJ du nom du projet
-    $("#page_title_project_name").html(metadata_link.display_name);
+    $("#page_title_project_name").html(metadata_link.display_name + " : ");
 
     // Récupération des ids des projets de normalisation
     project_id_src = metadata_link['files']['source']['project_id'];

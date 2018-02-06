@@ -3,7 +3,7 @@
 <div class="container-fluid background_1" id="entete" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
     <div class="row">
         <div class="col-md-8">
-            <h2>
+            <h2 style="margin-top: 40px;">
                 <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Résultat de la jointure
             </h2>
@@ -358,7 +358,7 @@ function show_data_html(data, start) {
           on: 'Vrai',
           off: 'Faux',
           onstyle: 'success3',
-          offstyle: 'danger',
+          offstyle: 'success',
           size: 'small'
         });
 
@@ -904,7 +904,7 @@ $(function(){// ready
     // MAJ du nom du projet
     //$("#project_name1").html(metadata_link.display_name);
     // MAJ du nom du projet
-    $("#page_title_project_name").html(metadata_link.display_name);
+    $("#page_title_project_name").html(metadata_link.display_name + " : ");
 
     // Récupération des matches
     column_matches = get_column_matches();
