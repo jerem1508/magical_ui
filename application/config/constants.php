@@ -92,6 +92,9 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost')
 elseif($_SERVER['HTTP_HOST'] == '51.15.221.77'){
 	define('BASE_API_URL', "http://51.15.221.77:8080");
 }
+elseif($_SERVER['HTTP_HOST'] == '172.29.84.121'){
+	define('BASE_API_URL', "http://172.29.84.121:8080");
+}
 
 define('TAB_LOGO', array(
 	'grid'=>'grid.png',
