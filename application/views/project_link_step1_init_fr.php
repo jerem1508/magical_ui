@@ -171,43 +171,18 @@ function get_normalized_projects_html($id, $normalized_projects)
         // /dates
 
         $html .= '<div class="bloc_project" onclick="select_project(\''.$project['project_id'].'\',\''.$project['display_name'].'\');">';
-            $html .= '<div class="row">';
+            $html .= '<div class="row row_select_project">';
                 $html .= '<div class="col-md-1 chk">';
-                $html .= '<h3><span class="glyphicon glyphicon-ok"></span></h3>';
+                $html .= '<h4 class="glyphicon glyphicon-ok"></h4>';
                 $html .= '</div>';
-                $html .= '<div class="col-md-11">';
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12">';
-                            $html .= '<h4>'.$project['display_name'].'<h4>';
-                        $html .= '</div>';
+                $html .= '<div class="col-md-9">';
+                    $html .= '<h3 style="margin:0;color: #333"><i class="fa fa-chevron-circle-right"></i>&nbsp;'.$project['display_name'].'</h3>';
+                    $html .= '<div style="font-size:12px;">';
+                        $html .= '<i>'.$project['description'].'</i>';
                     $html .= '</div>';
-
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12" style="height: 5px;">';
-                            $html .= $steps_html;
-                        $html .= '</div>';
-                    $html .= '</div>';
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12">';
-                            $html .= $project['file'];
-                        $html .= '</div>';
-                    $html .= '</div>';
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12">';
-                            $html .= '<i>'.$project['description'].'</i>';
-                        $html .= '</div>';
-                    $html .= '</div>';
-
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12">';
-                            $html .= 'Création : '.$created_date;
-                        $html .= '</div>';
-                    $html .= '</div>';
-                    $html .= '<div class="row">';
-                        $html .= '<div class="col-md-12">';
-                            $html .= 'Dernière modification : '.$modified_date;
-                        $html .= '</div>';
-                    $html .= '</div>';
+                $html .= '</div>';
+                $html .= '<div class="col-md-2 text-right">';
+                    $html .= $created_date;
                 $html .= '</div>';
             $html .= '</div>';
             $html .= '<hr>';
@@ -222,15 +197,276 @@ function get_normalized_projects_html($id, $normalized_projects)
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
 <div class="container-fluid background_1 intro" style="margin-left: 20px; margin-right: 20px;">
-    <div class="row ">
-        <div class="col-lg-12">
+    <div class="row" id="explain">
+        <div class="col-md-11">
             <div class="page_explain">
                 La jointure ou l'appariement de fichiers permet de relier les lignes correspondantes dans 2 fichiers tabulaires.
             </div>
-        </div> <!-- / col-12-->
+        </div> <!-- / col-11-->
+        <div class="col-md-1 text-right">
+            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
+        </div> <!-- / col-1-->
+    </div><!-- / explain -->
 
-    </div><!-- / row -->
-</div>
+    <div class="container-fluid">
+    	<div class="row">
+            <div class="col-md-12 bhoechie-tab-container">
+                <div class="col-md-3 bhoechie-tab-menu">
+                  <div class="list-group">
+                    <a href="#" class="list-group-item active text-center" id="bt_step_source">
+                      <h2>
+                          <i class="fa fa-table" id="src_menu_icon" aria-hidden="true"></i>
+                          <br/>
+                          Sélection de la source
+                          <div class="selected_file" id="src_menu_selected_file">
+                              <span class="title">Sélection : </span>
+                              <span class="file" id="src_selection_menu">Pas de fichier sélectionné</span>
+                          </div>
+                      </h2>
+                    </a>
+                    <a href="#" class="list-group-item text-center" id="bt_step_referential">
+                        <h2>
+                            <i class="fa fa-database" id="ref_menu_icon" aria-hidden="true"></i>
+                            <br/>
+                            Sélection du référentiel
+                            <div class="selected_file" id="ref_menu_selected_file">
+                                <span class="title">Sélection : </span>
+                                <span class="file" id="ref_selection_menu">Pas de fichier sélectionné</span>
+                            </div>
+                        </h2>
+                    </a>
+                    <a href="#" class="list-group-item text-center" id="bt_step_identity">
+                        <h2>
+                            <i class="fa fa-id-card" id="identity_menu_icon" aria-hidden="true"></i>
+                            <br/>
+                            Identité du projet
+                        </h2>
+                    </a>
+                    <a href="#" class="list-group-item text-center" id="bt_step_cgu">
+                        <h2>
+                            <i class="fa fa-check" id="cgu_menu_icon" aria-hidden="true"></i>
+                            <br/>
+                            CGU
+                        </h2>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-9 bhoechie-tab">
+                    <!--Selection de la source-->
+                    <div class="bhoechie-tab-content active">
+                        <div data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)" class="fix_height">
+                            <h2 style="display: inline;">
+                                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                                &nbsp;Sélection de la source
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                            </h2>
+                            <div>
+                                Sélectionnez le fichier "source", c'est à dire le fichier auquel on veut associer des codes de référence.
+                            </div>
+                            <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
+                                <div class="row" style="margin-top: 40px;">
+                                    <div class="col-md-4 text-center">
+                                        <a class="btn btn-xs btn-success2 btn_2_5" id="bt_select_project_src">
+                                            <h4 class="glyphicon glyphicon-list-alt"></h4>
+                                            <h4>Mes fichiers</h4>
+                                        </a>
+                                        <button id="envoyer_src" style="display: none;"></button>
+                                        <div id="src_project_id" style="display: none;"></div>
+                                    </div>
+                                    <div class="col-md-4 text-center" style="border-left: 4px dashed #ddd;">
+                                        <span class="btn btn-success2 btn-xl fileinput-button btn_2_5">
+                                            <h4 class="glyphicon glyphicon-plus"></h4>
+                                            <br>
+                                            <h4>Nouveau</h4>
+                                            <input id="fileupload_src" type="file" name="file">
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 20px;">
+                                    <div class="col-md-12">
+                                        <h3 style="display: inline;">Fichier sélectionné :</h3>
+                                        <i id="src_selection"></i>
+                                        <i id="src_selection_msg">Cliquez sur un des boutons ci-dessus pour sélectioner votre fichier source</i>
+                                        <div id="file_name_src" class="hidden"></div>
+                                        <div id="src_project_name" class="hidden"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="cold-md-12 text-right">
+                                <button onclick="$('#bt_step_referential').click();" class="btn btn-success2">Suivant&nbsp;&nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                            </div>
+                        </div>
+                    </div><!-- /Selection de la source -->
+
+
+
+                    <!--Selection du référentiel-->
+                    <div class="bhoechie-tab-content">
+                        <div data-intro="Choisissez ici votre fichier de référence" class="fix_height">
+                            <h2 style="display: inline;">
+                                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                                &nbsp;Sélection du fichier "référentiel"
+                                <i class="fa fa-database" aria-hidden="true"></i>
+                            </h2>
+                            <div>
+                                Sélectionnez un fichier "référentiel", dans lequel nous chercherons les élements de la source.
+                            </div>
+
+                            <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
+                                    <h3>Référentiels publiques :</h3>
+                                    <div class="row" style="margin-top: 40px;">
+                                        <div class="col-md-4 text-center">
+                                            <a class="btn btn-xs btn-success2 btn_2_5" style="width:240px;" id="bt_modal_ref">
+                                                <h4 class="glyphicon glyphicon-list-alt"></h4>
+                                                <h4>Sélectionner un référentiel</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h3>Fichiers personnels : </h3>
+                                    <div class="row" style="margin-top: 40px;">
+                                        <div class="col-md-4 text-center">
+                                            <a class="btn btn-xs btn-success2 btn_2_5" id="bt_select_project_ref">
+                                                <h4 class="glyphicon glyphicon-list-alt"></h4>
+                                                <h4>Mes fichiers</h4>
+                                            </a>
+                                            <div id="ref_project_id" style="display: none;"></div>
+                                        </div>
+                                        <div class="col-md-4 text-center" style="border-left: 4px dashed #ddd;">
+                                            <span class="btn btn-success2 btn-xl fileinput-button btn_2_5">
+                                                <h4 class="glyphicon glyphicon-plus"></h4>
+                                                <h4>Nouveau</h4>
+                                                <input id="fileupload_ref" type="file" name="file">
+                                            </span>
+                                            <!--<span id="file_name_ref"></span>-->
+                                            <button id="envoyer_ref" style="display: none;"></button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-md-12">
+                                            <h3 style="display: inline;">Fichier sélectionné :</h3>
+                                            <i id="ref_selection"></i>
+                                            <i id="ref_selection_msg">Cliquez sur un des boutons ci-dessus pour choisir voter référentiel</i>
+                                            <div id="file_name_ref" class="hidden"></div>
+                                            <div id="ref_project_name" class="hidden"></div>
+                                            <div id="ref_internal_project_name" class="hidden"></div>
+                                        </div>
+                                    </div>
+
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <div class="cold-md-12 text-right">
+                                <button onclick="$('#bt_step_source').click();" class="btn btn-success2"><i class="fa fa-chevron-circle-left"></i>&nbsp;&nbsp;Précédent</button>
+                                <button onclick="$('#bt_step_identity').click();" class="btn btn-success2">Suivant&nbsp;&nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Identité du projet -->
+                    <div class="bhoechie-tab-content">
+                        <div class="fix_height">
+                            <h2 style="display: inline;">
+                                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                                &nbsp;Identité du projet
+                            </h2>
+                            <br /><br /><br />
+                            <form class="form-horizontal" name="form_project" id="form_project" method="post">
+                                <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
+                                    <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
+                                    </div>
+                                </div>
+                                <div class="form-group" data-intro="Ajoutez une description optionnelle">
+                                    <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="row">
+                            <div class="cold-md-12 text-right">
+                                <button onclick="$('#bt_step_referential').click();" class="btn btn-success2"><i class="fa fa-chevron-circle-left"></i>&nbsp;&nbsp;Précédent</button>
+                                <button onclick="$('#bt_step_cgu').click();$('#identity_menu_icon').css('color', '#A7CA48');" class="btn btn-success2">Suivant&nbsp;&nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CGU -->
+                    <div class="bhoechie-tab-content">
+                        <div class="fix_height">
+                            <h2 style="display: inline;">
+                                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                                &nbsp;Conditions Générales d'Utilisation
+                            </h2>
+                            <br /><br /><br />
+                            <div class="row">
+
+                                <div class="col-md-offset-1 col-md-10" id="txt_cgu" style="overflow-y: auto;height: 400px;">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <br /><br />
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>
+                                    <input type="checkbox" id="chk_cgu" disabled>
+                                    <span id="label_cgu" class="chk_label_disabled"> En cochant cette case vous acceptez les Conditions Générales d'Utilisation</span>
+                                </label>
+                                <br />
+                                <label>
+                                    <input type="checkbox" id="chk_reuse" checked>
+                                    <span class="chk_label_enabled"> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button onclick="$('#bt_step_identity').click();" class="btn btn-success2"><i class="fa fa-chevron-circle-left"></i>&nbsp;&nbsp;Précédent</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+
+    <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
+        </div>
+    </div>
+
+</div><!-- /container-fluid -->
+
+
+
+<!--
 <div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <div class="row">
         <div class="col-xs-12">
@@ -252,9 +488,11 @@ function get_normalized_projects_html($id, $normalized_projects)
                     </div>
                 </div>
             </form>
-        </div> <!-- / col-12-->
-    </div><!-- / row -->
+        </div>
+    </div>
 </div>
+
+
 <div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <hr>
     <div class="row">
@@ -280,8 +518,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 &nbsp;<i id="src_selection">Pas encore de sélection</i>
                                 <div id="file_name_src" class="hidden"></div>
                                 <div id="src_project_name" class="hidden"></div>
-                            </div><!-- /col -->
-                        </div><!-- /row -->
+                            </div>
+                        </div>
                         <hr>
                         <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
                             <div class="row" data-intro="Vous pouvez uploader un nouveau fichier ...">
@@ -306,9 +544,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4>Nouveau</h4>
                                             <input id="fileupload_src" type="file" name="file">
                                         </span>
-                                        <!--
-                                        <div id="file_name_src"></div>
-                                        -->
                                         <button id="envoyer_src" style="display: none;"></button>
                                     </div>
                                 </div>
@@ -343,7 +578,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                                         <h4 class="glyphicon glyphicon-list-alt"></h4>
                                         <h4>Mes fichiers</h4>
                                     </a>
-                                    <!--<div id="src_project_name"></div>-->
                                     <div id="src_project_id" style="display: none;"></div>
                                     <?php
                                     }
@@ -378,8 +612,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                                 <div id="file_name_ref" class="hidden"></div>
                                 <div id="ref_project_name" class="hidden"></div>
                                 <div id="ref_internal_project_name" class="hidden"></div>
-                            </div><!-- /col -->
-                        </div><!-- /row -->
+                            </div>
+                        </div>
                         <hr>
                         <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -403,7 +637,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4>Nouveau</h4>
                                             <input id="fileupload_ref" type="file" name="file">
                                         </span>
-                                        <!--<span id="file_name_ref"></span>-->
                                         <button id="envoyer_ref" style="display: none;"></button>
                                     </div>
                                 </div>
@@ -438,7 +671,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                                         <h4 class="glyphicon glyphicon-list-alt"></h4>
                                         <h4>Mes fichiers</h4>
                                     </a>
-                                    <!--<div id="ref_project_name"></div>-->
                                     <div id="ref_project_id" style="display: none;"></div>
                                     <?php
                                     }
@@ -466,12 +698,12 @@ function get_normalized_projects_html($id, $normalized_projects)
                                             <h4 class="glyphicon glyphicon-list-alt"></h4>
                                             <h4>Sélectionner</h4>
                                         </a>
-                                        <!--<div id="ref_internal_project_name"></div>-->
+
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div><!-- /well-->
+                    </div>
                 </div>
             </div>
 
@@ -498,6 +730,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                     <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
                 </div>
             </div>
+        -->
 
 
 
@@ -642,6 +875,61 @@ function get_normalized_projects_html($id, $normalized_projects)
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+          <h2>Qu’est-ce que ça fait?</h2>
+          Cet outil permet de faire des jointures entre deux fichiers de données tabulaires (csv, excel).
+          <br />
+          Malheureusement, il n'y a rien de magique; plus les données d'entrées sont propres et proches, plus la jointure sera performante. Pour schématiser, si un humain sans connaissances métier est capables de distinguer deux lignes de match et de lignes de non-match dans vos fichiers d'entrée, alors la machine pourra peut-être joindre vos fichiers; sinon, elle n'aura sans doute pas de succès...
+
+          <h3>Prérequis</h3>
+          Il est attendu que les entités du ficher sale soient un sous-ensemble de celles du fichier de référence (càd qu'on doit pouvoir être capable de retrouver toutes les lignes de la source dans la référence).
+          <br />
+          Les lignes à apparier dans la source et la référence doivent avoir des mots en commun (à quelques fautes d'orthographe près). Le matching s'appuie sur le texte et cherche des similarités entre les chaînes de caractères.
+          <br />
+          Aucun savoir sémantique n'est requis. La machine n'a pas de connaissances de type humain et ne sait pas, par exemple, que "Chateau" et "Forteresse" ont un sens proche qui pourrait aider à matcher. Cela étant dit, il y a quelques cas où nous avons inclus un savoir sémantique (par la fonction `synonym` de Elasticsearch): pour les villes il est possible de trouver "Paris" en recherchant "Lutèce". Il est possible d'ajouter vos propres banques de synonymes pour créer de telles équivalences.
+          <br />
+          Aucun savoir extérieur n'est requis. La machine fera les matchs en s'appuyant uniquement sur les données présentes dans la ligne. Elle n'ira pas chercher de données d'une source externe (sauf dans le cas de synonymes, décrits au dessus).
+
+          <h3>Concepts</h3>
+
+          <b>source :</b> Une table de données sales à laquelle on souhaite joindre une référence
+          <br />
+          <b>ref (référentiel) :</b> Une table de données propres dans laquelle nous recherchons des éléments de la source.
+
+          <h3>Données d'entrée</h3>
+          Les entrées sont un fichier source et un fichier de référence...
+
+          <h4>Dois-je nettoyer les données d'entrée</h4>
+          Ça dépend... Nous suggérons d'essayer le matching sans pré-processing. Mais il faut garder en tête que plus les données d'entrées sont propres et proches, plus le matching sera performant. Si les résultats ne sont pas satisfaisants, nous suggérons d'essayer ce qui suit:
+          <ul>
+              <li>Enlever les mots "parasites" qui ne présents que dans un des deux fichiers.</li>
+              <li>Créer des colonnes avec des variables catégorielles pour faciliter la distinction.</li>
+              <li>Utiliser un géocodeur pour normaliser les variables d'adresse.</li>
+              <li>Normaliser les codes (identifiants, numéros de téléphone, ...)</li>
+              <li>Généralement: essayer de rendre la source plus proche du référentiel</li>
+          </ul>
+      </div>
+
+      <div class="modal-footer">
+        <!--
+        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
+        -->
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <script type="text/javascript">
@@ -871,11 +1159,13 @@ function get_normalized_projects_html($id, $normalized_projects)
             tab_error.push('Veuillez renseigner le nom du projet.');
         }
 
-        if(!new_file_src && !exist_file_src){
+        //if(!new_file_src && !exist_file_src){
+        if($("#src_selection").html() == ""){
             tab_error.push('Vous devez sélectionner un fichier SOURCE.');
         }
 
-        if(!new_file_ref && !exist_file_ref && !exist_ref){
+        //if(!new_file_ref && !exist_file_ref && !exist_ref){
+        if($("#ref_selection").html() == ""){
             tab_error.push('Vous devez sélectionner un fichier REFERENTIEL.');
         }
 
@@ -1083,10 +1373,32 @@ function get_normalized_projects_html($id, $normalized_projects)
         if(target){
             $("#" + target + "_project_id").html(project_id);
             $("#" + target + "_project_name").html(project_name);
-
             $("#" + target + "_selection").html(project_name);
-        }
+            $("#" + target + "_selection_msg").html("");
 
+            // Menu
+            $("#" + target + "_selection_menu").html(project_name);
+            $("#" + target + "_menu_selected_file").css("visibility", "visible");
+            $("#" + target + "_menu_icon").css("color", "#A7CA48");
+
+            // Passage à l'étape suivante
+            if(target == "src"){
+                $('#bt_step_referential').click();
+
+                // Fichier source existant
+                new_file_src = false;
+                exist_file_src = true;
+
+            }
+            else{ //ref
+                $('#bt_step_identity').click();
+
+                // Fichier referentiel existant
+                new_file_ref = false;
+                exist_file_ref = true;
+                exist_ref = false;
+            }
+        }
         $("#modal_projects").modal('hide');
     }// /select_project()
 
@@ -1095,10 +1407,22 @@ function get_normalized_projects_html($id, $normalized_projects)
         // Appelé sur validation d'un projet interne dans la modale
         $("#ref_project_id").html(project_id);
         $("#ref_internal_project_name").html(project_name);
-
         $("#ref_selection").html(project_name);
+        $("#ref_selection_msg").html("");
 
+        // Menu
+        $("#ref_selection_menu").html(project_name);
+        $("#ref_menu_selected_file").css("visibility", "visible");
+        $("#ref_menu_icon").css("color", "#A7CA48");
+
+        // Passage à l'étape suivante
+        $('#bt_step_identity').click();
+
+        // Référentiel interne
         exist_ref = true;
+        new_file_ref = false;
+        exist_file_ref = false;
+
 
         $("#modal_ref").modal('hide');
     }// /select_internal_ref()
@@ -1111,6 +1435,26 @@ function get_normalized_projects_html($id, $normalized_projects)
         UL_fic_src = false;
         UL_fic_ref =  false;
         target = ''; // Utilisé pour la sélection d'un projet dans la modale
+
+        // Navigation
+        $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+            e.preventDefault();
+            $(this).siblings('a.active').removeClass("active");
+            $(this).addClass("active");
+            var index = $(this).index();
+            $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+            $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+        });
+
+        // Scroll CGU
+        $("#txt_cgu").scroll(function() {
+           if($("#txt_cgu").scrollTop() >= 260) {
+               $("#chk_cgu").prop("disabled", false);
+               $("#label_cgu").removeClass("chk_label_disabled");
+               $("#label_cgu").addClass("chk_label_enabled");
+           }
+        });
+
 
         $("#bt_new_project").click(function(e){
             console.log("bt_new_project");
@@ -1156,6 +1500,10 @@ function get_normalized_projects_html($id, $normalized_projects)
             valid_project();
         });
 
+        $("#bt_help").click(function(){
+            $('#modal_help').modal('show');
+        });
+
 
         $(".fileinput-button").click(function(){
             $(".fileinput-button").prop("disabled", true);
@@ -1163,6 +1511,14 @@ function get_normalized_projects_html($id, $normalized_projects)
             $("#bt_normalizer").prop("disabled", false);
         });
 
+        $("#chk_cgu").click(function(){
+            if($("#chk_cgu").is(':checked')){
+                $("#cgu_menu_icon").css("color", "#A7CA48");
+            }
+            else{
+                $("#cgu_menu_icon").css("color", "#333");
+            }
+        });
 
         // Upload du fichier SOURCE
         $('#fileupload_src').fileupload({
@@ -1172,6 +1528,19 @@ function get_normalized_projects_html($id, $normalized_projects)
             add: function (e, data) {
                 $('#file_name_src').html(data.files[0].name);
                 $('#src_selection').html(data.files[0].name);
+                $('#src_selection_msg').html("");
+
+                // Menu
+                $('#src_selection_menu').html(data.files[0].name);
+                $("#src_menu_selected_file").css("visibility", "visible");
+                $("#src_menu_icon").css("color", "#A7CA48");
+
+                // Passage a l'étape suivante
+                $('#bt_step_referential').click();
+
+                // Nouveau fichier
+                new_file_src = true;
+                exist_file_src = false;
 
                 data.context = $('#envoyer_src')
                     .click(function (e) {
@@ -1223,6 +1592,21 @@ function get_normalized_projects_html($id, $normalized_projects)
             add: function (e, data) {
                 $('#file_name_ref').html(data.files[0].name);
                 $('#ref_selection').html(data.files[0].name);
+                $('#ref_selection_msg').html("");
+
+                // Menu
+                $('#ref_selection_menu').html(data.files[0].name);
+                $("#ref_menu_selected_file").css("visibility", "visible");
+                $("#ref_menu_icon").css("color", "#A7CA48");
+
+                // Passage à l'étape suivante
+                $('#bt_step_identity').click();
+
+                // Nouveau fichier
+                new_file_ref = true;
+                exist_file_ref = false;
+                exist_ref = false;
+
 
                 data.context = $('#envoyer_ref')
                     .click(function (e) {

@@ -387,7 +387,7 @@ class Project extends CI_Controller {
 		$data['internal_projects'] = $this->private_functions->get_internal_projects();
 
 		// Chargement des vues
-		$data['title'] = "Jointure de fichiers";
+		$data['title'] = "Création d'un projet de jointure";
 		$this->load->view('lib', $data);
 		$this->load->view('project_link_step1_init_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
