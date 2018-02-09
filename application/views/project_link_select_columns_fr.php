@@ -263,22 +263,24 @@ function get_filename(filename) {
 function valid_associations() {
     // Teste la validité des associations effectuées
     // cad : au moins un champ de chaque coté
+    var ret = true;
+
     $(".blocs_analysis").each(function( index ) {
         var content_text = $(this).text();
         if(content_text == ""){
-            return false;
+            ret = false;
         }
         else {
             var content_json = JSON.parse( $(this).text() );
             if(content_json["ref"][0] === ""){
-                return false;
+                ret =  false;
             }
             if(content_json["source"][0] === ""){
-                return false;
+                ret =  false;
             }
         }
     });
-    return true;
+    return ret;
 }// /valid_associations()
 
 
@@ -369,16 +371,6 @@ function valid_step(link_project_id){
 
 
 function get_buttons_actions() {
-    // $("#bt_start").click(function(){
-    //     $("#entete").css("display", "none");
-    //     $("#tempo").css("display", "none");
-    //     $("#bt_next").css("visibility", "visible");
-    //     $("#work").fadeToggle();
-    //
-    //     // Association vide par défaut
-    //     $("#bt_add_bloc").click();
-    // });
-
     $("#bt_next").click(function(){
         // Appel de l'API pour enregistrer les associations utilisateur
         if(valid_associations()){
@@ -386,7 +378,6 @@ function get_buttons_actions() {
             add_column_matches_api();
             valid_step('<?php echo $_SESSION['link_project_id'];?>');
         }
-
     });
 
     $("#bt_add_bloc").click(function(){
