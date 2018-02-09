@@ -30,11 +30,17 @@
 			<?php echo $title;?>
 		</div>
 		<div class="col-md-6 text-right">
+			<?php
+            if(isset($_SESSION['user'])){
+				echo '<span style="color:#ccc;font-style: italic;">'.$_SESSION['user']['email'].'</span>';
+				echo '<span style="display:inline-block;width:20px;"></span>';
+			}
+			?>
 			<a href="<?php echo base_url("index.php/Home");?>"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;&nbsp;Accueil</a>
 			<span style="display:inline-block;width:10px;"></span>
             <?php
             if(isset($_SESSION['user'])){
-                echo "<a href='".base_url("index.php/User/dashboard_home")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;".$_SESSION['user']['email']."</a>";
+                echo "<a href='".base_url("index.php/User/dashboard_home")."'><span class='glyphicon glyphicon-th' aria-hidden='true'></span>&nbsp;&nbsp;Tableau de bord</a>";
                 echo '<span style="display:inline-block;width:10px;"></span>';
                 echo "<a href='".base_url("index.php/User/logout")."'><span class='glyphicon glyphicon-off' aria-hidden='true'></span>&nbsp;&nbsp;Déconnexion</a>";
             }
