@@ -317,17 +317,15 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                             <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
                                 <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
-                                    <h3>Référentiels publiques :</h3>
                                     <div class="row" style="margin-top: 40px;">
                                         <div class="col-md-4 text-center">
                                             <a class="btn btn-xs btn-success2 btn_2_5" style="width:240px;" id="bt_modal_ref">
                                                 <h4 class="glyphicon glyphicon-list-alt"></h4>
-                                                <h4>Sélectionner un référentiel</h4>
+                                                <h4>Référentiels publiques</h4>
                                             </a>
                                         </div>
                                     </div>
                                     <hr>
-                                    <h3>Fichiers personnels : </h3>
                                     <div class="row" style="margin-top: 40px;">
                                         <div class="col-md-4 text-center">
                                             <a class="btn btn-xs btn-success2 btn_2_5" id="bt_select_project_ref">

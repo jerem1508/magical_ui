@@ -1,44 +1,91 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid background_1" id="main">
+<div class="container-fluid background_1" id="main" style="margin-left:20px;margin-right:20px;">
 	<div class="container">
-  		<div class="row">
+		<div class="row" style="margin-top:40px;">
+			<div class="col-md-3 text-center" id="bt_tdb_new_project">
+				<div class="card">
+					<div class="logo">
+						<h2><i class="fa fa-plus"></i></h2>
+					</div>
+					<div class="lib">
+						<h4>Nouveau projet</h4>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 text-center" id="bt_tdb_link">
+				<div class="card">
+					<div class="logo">
+						<h2><?php echo @$nb_projects;?></h2>
+					</div>
+					<div class="lib">
+						<h4>Projets</h4>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 text-center" id="bt_tdb_normalize">
+				<div class="card">
+					<div class="logo">
+						<h2><?php echo @$nb_files;?></h2>
+					</div>
+					<div class="lib">
+						<h4>Fichiers</h4>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 text-center" id="bt_tdb_account">
+				<div class="card">
+					<div class="logo">
+						<h2><i class="fa fa-user"></i></h2>
+					</div>
+					<div class="lib">
+						<h4>Mon compte</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+<!--
+  		<div class="row" style="display:none">
   			<div class="col-md-6 part_left">
 				<h3>Création d'un projet</h3>
 				<div class="well">
                     Vous pouvez commencer un nouveau projet de jointure.
-				</div><!-- /well -->
+				</div>
                 <div class="text-center">
                     <a  href="<?php echo base_url('index.php/Project/link');?>"
 						class="btn btn-lg btn-success bt_width">Nouveau projet</a>
                 </div>
-  			</div><!--/col-md-6-->
+  			</div>
   			<div class="col-md-6 part_right">
 				<div class="row">
 					<div class="col-md-8">
 						<h3>Tableau de bord - Synthèse</h3>
 					</div>
 					<div class="col-md-4 text-right">
-						<a class="account" id="bt_tdb_account">Mon compte</a>
+						<a class="account">Mon compte</a>
 					</div>
 				</div>
 				<div class="well">
 					Accéder à vos projets, fichiers et information de compte en cliquant sur le bouton correspondant
-				</div><!-- /well -->
+				</div>
                 <div class="row text-center">
-					<span class="btn btn-default btn-xl btn_2_3" id="bt_tdb_link">
+					<span class="btn btn-default btn-xl btn_2_3">
 						<h2><?php echo @$nb_projects;?></h2>
 						<h4>Projets</h4>
 						<i>créés</i>
 					</span>
-					<span class="btn btn-default btn-xl btn_2_3" id="bt_tdb_normalize" style="margin-left: 100px;">
+					<span class="btn btn-default btn-xl btn_2_3" style="margin-left: 100px;">
 						<h2><?php echo @$nb_files;?></h2>
 						<h4>Fichiers</h4>
 						<i>en ligne</i>
 					</span>
                 </div>
-  			</div><!--/col-md-6-->
-  		</div><!--/row-->
+  			</div>
+  		</div>
+-->
+
 	</div>
 
 
@@ -84,15 +131,18 @@
 
 
 	function add_buttons() {
-		 $("#bt_tdb_link").click(function(){
-			 show_next("link");
-		 });
-		 $("#bt_tdb_normalize").click(function(){
-			 show_next("normalize");
-		 });
-		 $("#bt_tdb_account").click(function(){
-			 show_next("account");
-		 });
+		$("#bt_tdb_new_project").click(function(){
+			window.location.href='<?php echo base_url('index.php/Project/link');?>';
+		});
+		$("#bt_tdb_link").click(function(){
+			show_next("link");
+		});
+		$("#bt_tdb_normalize").click(function(){
+			show_next("normalize");
+		});
+		$("#bt_tdb_account").click(function(){
+			show_next("account");
+		});
 
 	}// /add_buttons()
 
@@ -103,6 +153,35 @@
 
 		// Ajout des actions des boutons
 		add_buttons();
+
+		// Css survol
+		$("#bt_tdb_new_project").mouseover(function(){
+			$("#bt_tdb_new_project .logo").addClass("bt_selected");
+		});
+		$("#bt_tdb_new_project").mouseout(function(){
+			$("#bt_tdb_new_project .logo").removeClass("bt_selected");
+		});
+
+		$("#bt_tdb_link").mouseover(function(){
+			$("#bt_tdb_link .logo").addClass("bt_selected");
+		});
+		$("#bt_tdb_link").mouseout(function(){
+			$("#bt_tdb_link .logo").removeClass("bt_selected");
+		});
+
+		$("#bt_tdb_normalize").mouseover(function(){
+			$("#bt_tdb_normalize .logo").addClass("bt_selected");
+		});
+		$("#bt_tdb_normalize").mouseout(function(){
+			$("#bt_tdb_normalize .logo").removeClass("bt_selected");
+		});
+
+		$("#bt_tdb_account").mouseover(function(){
+			$("#bt_tdb_account .logo").addClass("bt_selected");
+		});
+		$("#bt_tdb_account").mouseout(function(){
+			$("#bt_tdb_account .logo").removeClass("bt_selected");
+		});
 
 	}); // /ready
 </script>

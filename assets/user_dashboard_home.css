@@ -34,3 +34,38 @@
 #bt_tdb_account{
 	cursor: pointer;
 }
+
+
+.card{
+	width: 220px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #ddd;
+}
+
+.card > .logo{
+	width: 100%;
+	height: 120px;
+	text-align: center;
+	background-color: #ddd;
+}
+.card > .logo > H2{
+	margin-top:0;
+}
+.card > .lib{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-top: 1px solid #aaa;
+	background-color: #fff;
+	background-color: #262626;
+	color: #333;
+	color: #fff;
+}
+.card H2{
+	font-size: 4vw;
+	padding-top: 20px;
+}
+.bt_selected{
+	color: #fff;
+    background-image: radial-gradient(circle at bottom left, #FF4000, #E00612);
+}
