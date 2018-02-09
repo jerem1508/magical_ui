@@ -267,7 +267,7 @@
 <div class="container-fluid background_1" style="padding-bottom: 20px;">
     <div class="row">
         <div class="col-xs-12 text-right">
-            <button class="btn btn-success" id="bt_next">Finir & Lancer le traitement >></button>
+            <button class="btn btn-success" id="bt_next">Finir & Lancer le traitement <i class="fa fa-chevron-circle-right"></i></button>
         </div>
     </div>
 </div>
@@ -877,7 +877,7 @@ function show_new_proposition(message, from) {
 
     // Mémorisation de la taille de la DIV pour la fixer
     h_message = $("#message").height();
-    $("#message").css("height",h_message);
+    $("#message").css("min-height",h_message);
 }// / show_new_proposition()
 
 
