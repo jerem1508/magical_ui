@@ -47,7 +47,7 @@ if(isset($this->session->project_type)){
 <div class="container-fluid background_1" style="padding-top: 20px;padding-bottom: 20px">
     <div class="row">
         <div class="col-md-12 text-right">
-            <button class="btn btn btn-success" id="bt_next">Etape suivante : Détection des valeurs manquantes >></button>
+            <button class="btn btn btn-success" id="bt_next">Suivant <i class="fa fa-chevron-circle-right"></i></button>
         </div>
     </div><!-- /row-->
 </div><!--/container-->

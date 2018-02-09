@@ -1,72 +1,62 @@
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid intro" style="padding-bottom: 20px;">
-<!--
-    <div class="text-center">
-        <div class="breadcrumb flat">
-            <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
-            <a href="<?php echo base_url("index.php/Project/load_step2_select_columns");?>" class="done">Sélection des colonnes</a>
-            <a href="<?php echo base_url("index.php/Project/load_step3_missing_values");?>" class="done">Valeurs manquantes</a>
-            <a href="#" class="active">Détection des types</a>
-            <a href="#" class="todo">Traitement & Téléchargement</a>
-        </div>
-    </div>
--->
-
-		<div class="row" style="padding-top: 20px;">
-			<div class="col-sm-8">
-				<h2 class="page_title"><span id="project_name"></span> : <i>Détection des types</i></h2>
-				<span class="cl_filename">
+<div class="container-fluid background_1" style="margin-left: 20px;margin-right: 20px;">
+	<div class="row">
+		<div class="col-sm-11">
+			<span class="cl_filename">
 				<i class="fa fa-file-text" aria-hidden="true"></i>
 				Traitement du fichier <span id="filename" class="file"></span>
 			</span>
-			</div>
-			<div class="col-sm-4 text-right">
-				<a id="bt_skip_infer" class="btn btn-xs btn-success2">Passer cette étape >></a>
+			<p class="page_explain">
+				Dans cette étape, nous tentons de <strong>détecter automatiquement le type</strong> de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
+			</p>
+		</div>
+		<div class="col-sm-1 text-right">
+			<button type="button" id="bt_help" class="btn btn-success3">Aide</button>
+		</div>
+	</div>
+<!--
+	<div class="row">
+		<div class="col-sm-6">
+		</div>
+		<div class="col-sm-6 text-right">
+			<div id="didacticiel">
+            	<span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
+                	<img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
+	            </span>
 			</div>
 		</div>
-		<div class="row" style="padding-bottom: 20px;">
-			<div class="col-sm-6">
-				<p class="page_explain">
-					Dans cette étape, nous tentons de <strong>détecter automatiquement le type</strong> de valeurs contenu dans les colonnes du fichier pour ensuite proposer un recodage approprié.
-				</p>
-			</div>
-			<div class="col-sm-6 text-right">
-				<div id="didacticiel">
-	            	<span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
-	                	<img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
-		            </span>
-				</div>
-			</div>
+	</div>
+-->
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<button class="btn btn-success" id="bt_infer_types">Lancer la détection des types</button>
 		</div>
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<button class="btn btn-success" id="bt_infer_types">Lancer la détection des types</button>
-			</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 text-center" id="wait" style="padding-bottom: 20px;">
+			<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+			<h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>
+			<a id="bt_skip_infer" class="btn btn-success">Passer cette étape <i class="fa fa-chevron-circle-right"></i></a>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 text-center" id="wait">
-				<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-				<h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>
-			</div>
-		</div>
+	</div>
 </div><!--/container-->
 
-<div class="container-fluid">
-		<div class="row background_1" id="result">
-			<h3>Résultat de la détection</h3>
-			<div class="col-xs-12">
-				<div class="row">
-					<div class="col-xs-12" id="columns" style="overflow-x:scroll"></div>
-				</div>
-				<div class="row" style="padding-top: 20px;">
-					<div class="col-xs-12 text-right">
-						<!--<button class="btn btn btn-success" id="bt_recode_types">Lancer le traitement de l'échantillon</button>-->
-						<button class="btn btn btn-success" id="bt_skip">Suivant >></button>
-					</div>
+<div class="container-fluid" style="margin-left: 20px;margin-right: 20px;">
+	<div class="row background_1" id="result">
+		<h3>Résultat de la détection</h3>
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="col-xs-12" id="columns" style="overflow-x:scroll"></div>
+			</div>
+			<div class="row" style="padding-top: 20px;">
+				<div class="col-xs-12 text-right">
+					<!--<button class="btn btn btn-success" id="bt_recode_types">Lancer le traitement de l'échantillon</button>-->
+					<button class="btn btn btn-success" id="bt_skip">Suivant <i class="fa fa-chevron-circle-right"></i></button>
 				</div>
 			</div>
 		</div>
+	</div>
 </div><!--/container-->
 
 <div class="container-fluid background_2">
@@ -141,6 +131,40 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+          <div class="page_explain">
+              <b>
+                  La détection des types ...
+              </b>
+          </div>
+
+          <h4>Titre 1</h4>
+		  blabla...
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 
 <?php
 if(isset($this->session->project_type)){
@@ -948,10 +972,16 @@ if(isset($this->session->project_type)){
 			// lancement du recodage
 			treatment_recode_types();
 		}); // /bt_recode_types
+
+		$("#bt_help").click(function(){
+			$('#modal_help').modal('show');
+		});
     }// /add_actions_buttons()
 
 	// Init - Ready
 	$(function() {
+		set_height('wait');
+		set_height('result');
 
 		// Globales
 		err = false;
@@ -982,6 +1012,9 @@ if(isset($this->session->project_type)){
 
 		// Lancement auto de l'inference
 		$("#bt_infer_types").click();
+
+
+
 	});// /Ready
 </script>
 </body>

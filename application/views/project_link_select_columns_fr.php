@@ -54,7 +54,7 @@
 <div class="container-fluid" style="margin-top: 20px;min-height: 250px;">
     <div class="row">
         <div class="col-xs-12 text-right">
-            <button class="btn btn-success" id="bt_next">Etape suivante : Apprentissage >></button>
+            <button class="btn btn-success" id="bt_next">Suivant <i class="fa fa-chevron-circle-right"></i></button>
         </div>
     </div>
 </div>

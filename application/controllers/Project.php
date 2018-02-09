@@ -510,7 +510,7 @@ class Project extends CI_Controller {
 		}
 
 		// Chargement des vues
-		$data['title'] = "Normalisation";
+		$data['title'] = "Détection des types";
 		$this->load->view('lib', $data);
 		$this->load->view('project_normalize_infer_types_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
