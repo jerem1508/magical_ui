@@ -1177,6 +1177,8 @@ $(function(){// ready
     // Ajout des boutons
     add_buttons();
 
+    disabled_buttons();
+
     project_id_link = "<?php echo $_SESSION['link_project_id'];?>";
 
     // Récupération des metadata du projet de link en cours
