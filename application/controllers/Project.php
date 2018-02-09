@@ -436,7 +436,7 @@ class Project extends CI_Controller {
 		$this->test_project_id();
 
 		// Chargement des vues
-		$data['title'] = "Normalisation";
+		$data['title'] = "Sélection des colonnes";
 		$this->load->view('lib', $data);
 		$this->load->view('project_normalize_select_columns_specifics');
 		$this->load->view('header_'.$_SESSION['language']);

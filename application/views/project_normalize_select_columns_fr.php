@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($this->session->project_type)){
 	$project_type = $this->session->project_type;
 }
@@ -6,37 +6,19 @@ if(isset($this->session->project_type)){
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
 
-<div class="container-fluid intro">
-<!--
-    <div class="text-center">
-        <div class="breadcrumb flat">
-            <a href="<?php echo base_url("index.php/Project/normalize");?>" class="done">Sélection du fichier</a>
-            <a href="#" class="active">Sélection des colonnes</a>
-            <a href="#" class="todo">Valeurs manquantes</a>
-            <a href="#" class="todo">Détection des types</a>
-            <a href="#" class="todo">Téléchargement</a>
-        </div>
-    </div>
--->
+<div class="container-fluid background_1" style="margin-left:20px;margin-right:20px;">
 	<div class="row">
-		<div class="col-sm-12">
-			<h2 class="page_title"><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>
+		<div class="col-sm-11">
+			<!--<h2 class="page_title"><span id="project_name"></span> : <i>Sélection des colonnes</i></h2>-->
 			<span class="cl_filename">
 				<i class="fa fa-file-text" aria-hidden="true"></i>
 				Traitement du fichier <span id="filename" class="file"></span>
 			</span>
 		</div>
-	</div>
-	<div class="row" style="padding-bottom: 20px;">
-		<div class="col-sm-6">
-			<p class="page_explain">
-		 		Sélectionnez les colonnes à nettoyer. Dans le cadre d'un projet de jointure, nous recommendons fortement de nettoyer toutes les colonnes suceptibles de servir à la jointure de vos fichiers.
-			</p>
-		</div>
-		<div class="col-sm-6 text-right">
-            <span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
-                <img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
-            </span>
+		<div class="col-sm-1 text-right">
+            <button id="bt_help" class="btn btn-success3">
+                Aide
+            </button>
 		</div>
 	</div>
 
@@ -44,11 +26,11 @@ if(isset($this->session->project_type)){
 		<div class="col-xs-9" style="border-right: 3px dotted #aaa;">
 			<div class="row">
 				<div class="col-md-8">
-					<h3>Extrait aléatoire des données</h3>					
+					<h3>Extrait aléatoire des données</h3>
 				</div>
 				<div class="col-md-4 text-right">
 					<h3>
-					<button type="button" class="btn btn-xs btn-success" id="bt_generate_sample"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Regénérer</button>
+					<button type="button" class="btn btn-xs btn-success2" id="bt_generate_sample"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Regénérer</button>
 					</h3>
 				</div>
 			</div>
@@ -69,6 +51,35 @@ if(isset($this->session->project_type)){
         </div>
     </div><!-- /row-->
 </div><!--/container-->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="page_explain">
+              <b>
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
+			  </b>
+      	</div>
+		<h3>sfkjsl skjds</h3>
+		Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <script type="text/javascript">
@@ -171,7 +182,7 @@ if(isset($this->session->project_type)){
 
 				    // Chargement de la page suivante (rappel du controller)
 				    location.reload();
-				   
+
 				}
 		    },
 		    error: function (result, status, error){
@@ -216,7 +227,7 @@ if(isset($this->session->project_type)){
 
 	function treatment() {
 		console.log("treatment");
-		
+
 		//Recupération des colonnes
         columns = metadata.column_tracker.original;
 
@@ -253,7 +264,7 @@ if(isset($this->session->project_type)){
 				else{
 	                console.log("success");
 	                console.dir(result);
-					
+
 	                $("#filename").html(result.file_name);
 
 		            tparams = {
@@ -269,7 +280,7 @@ if(isset($this->session->project_type)){
 		                }
 		            }
 					console.log("appel sample");
-					
+
 					$.ajax({
 						type: 'post',
 						dataType: "json",
@@ -305,7 +316,7 @@ if(isset($this->session->project_type)){
 								ch += "</tbody></table>";
 
 			                    $("#data_all").html(ch);
-			                	
+
 			                    $("#sample_table").DataTable({
 												        "language": {
 												           "paginate": {
@@ -352,6 +363,10 @@ if(isset($this->session->project_type)){
 
 
 	function add_actions_buttons() {
+		$("#bt_help").click(function(){
+	        $('#modal_help').modal('show');
+	    });
+
 		$("#bt_next").click(function(){
 			var columns = select_checked_columns();
 
@@ -373,7 +388,7 @@ if(isset($this->session->project_type)){
 
 					if(result.error){
 						console.log("API error");
-						
+
 					}
 					else{
 		                console.log("success");
