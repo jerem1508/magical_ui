@@ -46,6 +46,14 @@
                 <span class="number" id="stat_pct_nb_lines">0 %</span>
             </div>
         </div>
+        <div class="col-xs-2">
+            <div class="stat"
+                data-toggle="tooltip"
+                title="Pourcentage de lignes traitées">
+                <span class="title">Match problable</span>
+                <span class="number" id="stat_pct_nb_match">0 %</span>
+            </div>
+        </div>
     </div>
     <hr style="border-top: 3px dotted #777;">
     <div class="row">
@@ -885,6 +893,7 @@ function get_stats() {
 function set_stats_html(stats) {
     // MAJ des stats
     $("#stat_pct_nb_lines").html(Math.round(stats.result.perc_match) + " %");
+    $("#stat_pct_nb_match").html(Math.round(stats.result.perc_match_thresh) + " %");
     $("#stat_nb_lines").html(stats.result.num_match);
 }// /set_stats_html()
 
