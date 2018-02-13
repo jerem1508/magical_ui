@@ -16,7 +16,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		# Chargement par défaut
-		$data['title'] = "Accueil";
+		$data['title'] = "";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('home_'.$_SESSION['language']);
@@ -27,7 +27,7 @@ class Home extends CI_Controller {
 	public function error()
 	{
 		# Affiche la page d'erreur
-		$data['title'] = "Accueil";
+		$data['title'] = "";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('error_'.$_SESSION['language']);
