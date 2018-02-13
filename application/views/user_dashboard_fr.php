@@ -118,7 +118,7 @@
 <div>
 	<ul class="nav nav-tabs">
 	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link" onclick="show_tabs('link');"><h4>Mes projets de jointure</h4></a></li>
-	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize" onclick="show_tabs('normalize');"><h4>Mes projets de normalisation</h4></a></li>
+	  <li><a data-toggle="tab" href="#normalize_tab" id="bt_tab_normalize" onclick="show_tabs('normalize');"><h4>Mes fichiers</h4></a></li>
 	  <li><a data-toggle="tab" href="#account_tab" id="bt_tab_account"><h4>Mon compte</h4></a></li>
 	</ul>
 </div>
@@ -231,16 +231,18 @@
 					class="btn btn-xs btn-success"
 					style="margin-bottom: 8px;"
 					onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">
-						+&nbsp;Nouveau projet de normalisation
+						+&nbsp;Ajouter un fichier
 				</button>
 			</div>
 		</div><!--/row-->
 		<div class="row">
 			<div class="col-xs-12">
+				<!--
 				<p class="well">
-					Ci-dessous la liste de vos projets de normalisation. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
+					Ci-dessous la liste de vos fichiers. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
 					L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
 				</p>
+			-->
 			</div>
 		</div>
 		<div class="row">
@@ -251,12 +253,12 @@
 				<table class="table table-responsive table-condensed table-striped" id="normalized_projects">
 					<thead>
 						<tr>
-							<th>Projet</th>
+							<th>Fichiers</th>
 							<th>Date de création</th>
 							<th class="text-center">Statut</th>
-							<th>Fichier</th>
+							<!--<th>Fichier</th>
 							<th>Avancement</th>
-							<th></th>
+							<th></th>-->
 							<th></th>
 						</tr>
 					</thead>
@@ -294,12 +296,15 @@
 							}
 
 							echo '<tr>';
-							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
+							//echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
+							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file'].'">'.$file_maximized.'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td class="text-center">'.get_status($project['public']).'</td>';
+							/*
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file'].'">'.$file_maximized.'</span></td>';
 							echo '<td class="text-center">'.$steps_html.'</td>';
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
+							*/
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
 						} // /foreach $normalized_projects

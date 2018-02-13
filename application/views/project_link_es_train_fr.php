@@ -32,19 +32,17 @@
 <div class="container-fluid work background_1" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
     <div class="row">
         <div class="col-md-11">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page_explain">
-                        L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés,il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
-                        <br><br>
-                        Plusieurs indices vous donneront le taux de réussite estimé du traitement finale.
-                        <br>
-                        Indice de pécision :
-                        <br>
-                        Indice de rappel : Pourcentage de lignes considérée justes par rapport au nombre de lignes totales du fichier
-                    </div>
-                </div>
-            </div><!-- / row-->
+            <div class="page_explain">
+                L'étape d'apprentissage va permettre à la machine de s'adapter au mieux à vos données. Des exemples vont vous être présentés, il vous suffira de répondre par "OUI" ou par "NON" en fonction de leur concordance.
+            </div>
+        </div>
+        <div class="col-md-1 text-right">
+            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9"><!-- Partie principale -->
+
             <div class="row"  data-intro="Les filtres (sur le référentiel) permettent de rendre obligatoires ou d'interdire certains mots. Cela permet d'obtenir de meilleurs résultats sur le match. Cependant, le raffraichissement peut être un peu long.">
                 <div class="col-xs-12">
                     <h2>
@@ -75,198 +73,199 @@
                     </button>
                 </div>
             </div><!-- / row-->
-        </div>
-        <div class="col-sm-1 text-right">
-            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
-        </div>
-    </div>
 
-    <hr style="border-top: 3px dotted #777;">
+            <hr style="border-top: 4px dashed #ddd;">
 
-    <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
-        <div class="col-xs-12">
-            <h2>
-                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
-                &nbsp;Labellisation
-            </h2>
-            <div class="row">
-                <div class="col-xs-offset-1 col-xs-10 text-justify">
-                    <div class="well">
-                        La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                    </div><!-- /well-->
-                </div>
-            </div><!-- / row-->
-            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-                <div class="col-xs-offset-1 col-xs-4 text-justify">
-                    <div style="margin-bottom: 20px;">
-                        <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
-                        <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();">
-                            <i class="fa fa-trash"></i>&nbsp;Effacer
-                        </button>
-                    </div>
+            <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
+                <div class="col-xs-12">
+                    <h2>
+                        <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
+                        &nbsp;Labellisation
+                    </h2>
+                    <div class="row">
+                        <div class="col-xs-offset-1 col-xs-10 text-justify">
+                            <div class="well">
+                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
+                            </div><!-- /well-->
+                        </div>
+                    </div><!-- / row-->
+                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="col-xs-offset-1 col-xs-4 text-justify">
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
+                                <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();">
+                                    <i class="fa fa-trash"></i>&nbsp;Effacer
+                                </button>
+                            </div>
 
-                    <div id="user_filters">
-                        <i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d'optimiser la proposition faite.
-                    </div>
-                </div>
-                <div class="col-xs-7">
-                    <div id="message">
-                        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-                    </div>
-                    <div class="q_label">
-                        Ces informations sont-elles identiques ?
-                    </div>
-                    <div>
-                        <button class="btn btn-default btn-xl btn_icon btn-default"
+                            <div id="user_filters">
+                                <i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d'optimiser la proposition faite.
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div id="message">
+                                <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+                            </div>
+                            <div class="q_label">
+                                Ces informations sont-elles identiques ?
+                            </div>
+                            <div>
+                                <button class="btn btn-default btn-xl btn_icon btn-default"
                                 data-toggle="tooltip"
                                 title="Revenir à la proposition précédente"
                                 onclick="socket_answer('previous');"
                                 id="bt_previous">
-                            <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
-                        </button>
-                        <button class="btn btn-default btn-xl btn_2_3 btn-yes"
-                                onclick="socket_answer('yes');"
-                                id="bt_yes">
+                                <h2><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></h2>
+                            </button>
+                            <button class="btn btn-default btn-xl btn_2_3 btn-yes"
+                            onclick="socket_answer('yes');"
+                            id="bt_yes">
                             <h2>OUI</h2>
                         </button>
                         <button class="btn btn-default btn-xl btn_2_3 btn-no"
-                                onclick="socket_answer('no');"
-                                id="bt_no">
-                            <h2>NON</h2>
-                        </button>
-                        <button class="btn btn-default btn-xl btn_icon btn-default"
-                                data-toggle="tooltip"
-                                title="Je ne sais pas"
-                                onclick="socket_answer('uncertain');"
-                                id="bt_uncertain">
-                            <h2><i class="fa fa-question-circle" aria-hidden="true"></i></h2>
-                        </button>
-                        <button class="btn btn-default btn-xl btn_icon btn-default"
-                                data-toggle="tooltip"
-                                title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
-                                onclick="socket_answer('forget_row');"
-                                id="bt_forget">
-                            <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
-                        </button>
-                    </div>
-                </div>
-            </div><!-- / row-->
-
+                        onclick="socket_answer('no');"
+                        id="bt_no">
+                        <h2>NON</h2>
+                    </button>
+                    <button class="btn btn-default btn-xl btn_icon btn-default"
+                    data-toggle="tooltip"
+                    title="Je ne sais pas"
+                    onclick="socket_answer('uncertain');"
+                    id="bt_uncertain">
+                    <h2><i class="fa fa-question-circle" aria-hidden="true"></i></h2>
+                </button>
+                <button class="btn btn-default btn-xl btn_icon btn-default"
+                data-toggle="tooltip"
+                title="'Oublier' = ne pas tenir compte de cette ligne du fichier source"
+                onclick="socket_answer('forget_row');"
+                id="bt_forget">
+                <h2><i class="fa fa-times" aria-hidden="true"></i></h2>
+            </button>
         </div>
-    </div><!-- / row-->
+    </div>
+</div><!-- / row-->
 
-    <hr style="border-top: 3px dotted #777;">
+</div>
+</div><!-- / row-->
 
-    <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
-        <div class="col-xs-12">
-            <h2>
-                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
-                &nbsp;Statistiques
-            </h2>
-        </div>
-        <div class="row">
-            <div class="col-xs-2">
+        </div><!-- / Partie principale -->
+        <div class="col-md-3"><!-- Partie stats -->
+            <div class="row" data-intro="Suivez ici les performances estimées. Quand celles çi sont satisfaisantes, passez à l'étape suivante">
                 <div class="stat"
                     data-toggle="tooltip"
                     title="Informations sur la précision">
                     <span class="title">Précision estimée</span>
                     <span class="number" id="stat_estimated_precision">0 %</span>
                 </div>
-            </div>
-            <div class="col-xs-2">
+
                 <div class="stat"
                     data-toggle="tooltip"
                     title="Informations sur la couverture">
                     <span class="title">Couverture estimée</span>
                     <span class="number" id="stat_estimated_recall">0 %</span>
                 </div>
-            </div>
-            <div class="col-xs-2">
+
+                <!--
                 <div class="stat"
                     data-toggle="tooltip"
                     title="L'avancement correspond au pourcentage du fichier déjà traité par la labellisation utilisateur.">
                     <span class="title">Avancement</span>
-                    <span class="number" id="stat_real_ratio">0 %</span>
+                    <span class="number" id="stat_real" style="display: inline;"></span>
+                    sur
+                    <span class="number" id="stat_real_nbrows" style="display: inline;"></span>
                 </div>
-            </div>
+                -->
 
-            <div class="col-xs-6">
-                <div class="stat">
-                    <span class="title">Historique des réponses</span>
-                    <div class="history" id="stat_history">
-                        <table class="table">
-                            <tr class="history_yes">
-                                <th class="title">OUI</th>
 
-                                <td id="yes_1"></td>
-                                <td id="yes_2"></td>
-                                <td id="yes_3"></td>
-                                <td id="yes_4"></td>
-                                <td id="yes_5"></td>
-                                <td id="yes_6"></td>
-                                <td id="yes_7"></td>
-                                <td id="yes_8"></td>
-                                <td id="yes_9"></td>
-                                <td id="yes_10"></td>
-                                <td id="yes_11"></td>
-                                <td id="yes_12"></td>
-                                <td id="yes_13"></td>
-                                <td id="yes_14"></td>
-                                <td id="yes_15"></td>
-                                <th class="total" id="stat_yes">0</th>
 
-                                <th rowspan="2" class="history_all" id="stat_all">0</th>
-                            </tr>
-                            <tr class="history_no">
-                                <th class="title">NON</th>
-
-                                <td id="no_1"></td>
-                                <td id="no_2"></td>
-                                <td id="no_3"></td>
-                                <td id="no_4"></td>
-                                <td id="no_5"></td>
-                                <td id="no_6"></td>
-                                <td id="no_7"></td>
-                                <td id="no_8"></td>
-                                <td id="no_9"></td>
-                                <td id="no_10"></td>
-                                <td id="no_11"></td>
-                                <td id="no_12"></td>
-                                <td id="no_13"></td>
-                                <td id="no_14"></td>
-                                <td id="no_15"></td>
-                                <th class="total" id="stat_no">0</th>
-                            </tr>
-                        </table>
+                <div class="row stat">
+                    <div class="col-md-6">
+                        <div class="yes_color" data-toggle="tooltip" title="Nombre de réponses positives">
+                            <span class="title">Nombre de OUI</span>
+                            <span class="number" id="stat_nbyes">0</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="no_color" data-toggle="tooltip" title="Nombre de réponses négatives">
+                            <span class="title">Nombre de NON</span>
+                            <span class="number" id="stat_nbno">0</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-<!--
-            <div class="col-xs-2">
-                <div class="stat">
-                    <span class="title">Labellisation <span class="glyphicon glyphicon-plus"></span></span>
-                    <span class="number" id="stat_yes">0</span>
-                </div>
-            </div>
-            <div class="col-xs-2">
-                <div class="stat">
-                    <span class="title">Labellisation <span class="glyphicon glyphicon-minus"></span></span>
-                    <span class="number" id="stat_no">0</span>
-                </div>
-            </div>
--->
-        </div>
-    </div><!-- / row-->
 
-    <div class="row">
-        <div class="col-xs-12 text-center" id="blocs"></div>
+                        <div class="stat" style="display: none">
+                            <span class="title">Historique des réponses</span>
+                            <div class="history" id="stat_history">
+                                <table class="table">
+                                    <tr class="history_yes">
+                                        <th class="title">OUI</th>
+
+                                        <td id="yes_1"></td>
+                                        <td id="yes_2"></td>
+                                        <td id="yes_3"></td>
+                                        <td id="yes_4"></td>
+                                        <td id="yes_5"></td>
+                                        <td id="yes_6"></td>
+                                        <td id="yes_7"></td>
+                                        <td id="yes_8"></td>
+                                        <td id="yes_9"></td>
+                                        <td id="yes_10"></td>
+                                        <td id="yes_11"></td>
+                                        <td id="yes_12"></td>
+                                        <td id="yes_13"></td>
+                                        <td id="yes_14"></td>
+                                        <td id="yes_15"></td>
+                                        <th class="total" id="stat_yes">0</th>
+
+                                        <th rowspan="2" class="history_all" id="stat_all">0</th>
+                                    </tr>
+                                    <tr class="history_no">
+                                        <th class="title">NON</th>
+
+                                        <td id="no_1"></td>
+                                        <td id="no_2"></td>
+                                        <td id="no_3"></td>
+                                        <td id="no_4"></td>
+                                        <td id="no_5"></td>
+                                        <td id="no_6"></td>
+                                        <td id="no_7"></td>
+                                        <td id="no_8"></td>
+                                        <td id="no_9"></td>
+                                        <td id="no_10"></td>
+                                        <td id="no_11"></td>
+                                        <td id="no_12"></td>
+                                        <td id="no_13"></td>
+                                        <td id="no_14"></td>
+                                        <td id="no_15"></td>
+                                        <th class="total" id="stat_no">0</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                </div>
+            </div><!-- / row-->
+        </div><!-- / Partie stats -->
     </div>
+
+
+    <!--<hr style="border-top: 3px dotted #777;">-->
+
+
+
+
+
 
 </div><!-- container-fluid-->
 
-<div class="container-fluid background_1" style="padding-bottom: 20px;">
+
+<div class="container-fluid background_1" style="margin: 0 20px 0 20px; padding: 20px">
     <div class="row">
-        <div class="col-xs-12 text-right">
+        <div class="col-xs-6">
+            <button class="btn btn-success" id="bt_previous_page"><i class="fa fa-chevron-circle-left"></i> Précédent</button>
+            <button class="btn btn-success2" id="bt_init_page"><span class="glyphicon glyphicon-refresh"></span> Recommencer l'apprentissage</button>
+        </div>
+        <div class="col-xs-6 text-right">
             <button class="btn btn-success" id="bt_next">Finir & Lancer le traitement <i class="fa fa-chevron-circle-right"></i></button>
         </div>
     </div>
@@ -449,7 +448,7 @@ function create_es_index_api() {
 
     var tparams = {
         "module_params": {
-            "force": true
+            "force": false
         }
     }
 
@@ -501,18 +500,28 @@ function create_es_index_api() {
 }// create_es_labeller_api()
 
 
-function create_es_labeller_api() {
+function create_es_labeller_api(force=false) {
+    console.log("create_es_labeller_api");
+    var tparams = {
+        "module_params": {
+            "force": force
+        }
+    }
+
+    console.log(tparams);
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '<?php echo BASE_API_URL;?>' + '/api/schedule/create_es_labeller/' + project_id_link + '/',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(tparams),
         success: function (result) {
             if(result.error){
                 show_api_error(result, "API error - create_es_labeller_api");
             }
             else{
                 console.log("success - create_es_labeller_api");
-                console.dir(result);
+                console.log(result);
 
                 // Appel
                 var handle = setInterval(function(){
@@ -522,8 +531,8 @@ function create_es_labeller_api() {
                         success: function (result) {
                             if(result.completed){
                                 clearInterval(handle);
-                                console.log("success - job");
-                                console.dir(result);
+                                console.log("success - job create_es_labeller_api");
+                                console.log(result);
 
                                 var answer_to_send = {'project_id': project_id_link}
 
@@ -873,6 +882,9 @@ function show_new_proposition(message, from) {
     $("#stat_estimated_precision").html(show_stats(message.estimated_precision));
     $("#stat_estimated_recall").html(show_stats(message.estimated_recall));
 
+    $("#stat_nbyes").html(message.num_pos);
+    $("#stat_nbno").html(message.num_neg);
+
     enabeled_buttons();
 
     // Mémorisation de la taille de la DIV pour la fixer
@@ -1076,7 +1088,64 @@ function add_buttons() {
         $('#modal_help').modal('show');
     });
 
+    $("#bt_previous_page").click(function(){
+        to_previous_page();
+    });
+
+    $("#bt_init_page").click(function(){
+        init_page();
+    });
+
 } // / add_buttons()
+
+
+function init_page() {
+    create_es_labeller_api(true);
+}
+
+
+function to_previous_page() {
+    // Test du filename, on ne doit pas ecrire sur le MINI
+    var file_name_temp = metadata_link['files']['source']['file_name'];
+    if(file_name_temp.substr(0,6) === 'MINI__' ){
+        file_name_temp = file_name.substr(6);
+    }
+
+    // Paramètres API
+    // module_name : INIT,add_selected_columns,upload_es_train,es_linker,link_results_analyzer
+    tparams = {
+        "data_params": {
+            "module_name": "add_selected_columns",
+            "file_name": file_name_temp
+        },
+        "module_params": {
+            "property": "completed",
+            "value": false
+        }
+    }
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/set_log_property/link/' + project_id_link,
+        data: JSON.stringify(tparams),
+        success: function (result) {
+            if(result.error){
+                show_api_error(result.error, "API error - set_log_property");
+            }
+            else{
+                console.log("success - set_log_property");
+                console.log(result);
+
+                // Chargement de la page précédente (rappel du controller)
+                location.reload();
+            }
+        },
+        error: function (result, status, error){
+            show_api_error(result, "error - set_log_property");
+        }
+    });// /ajax - set_log_property
+} // /to_previous_page()
 
 
 function update_stat() {
@@ -1085,10 +1154,18 @@ function update_stat() {
     $("#stat_no").html(stat_no);
     $("#stat_all").html(stat_all);
 
+    /*
+    $("#stat_nbyes").html(stat_yes);
+    $("#stat_nbno").html(stat_no);
+    */
+
     // Avancement
-    var ret = Math.round(stat_all / src_nrows);
-        ret += " %";
-    $("#stat_real_ratio").html(ret);
+    // var ret = Math.round(stat_all / src_nrows);
+    //     ret += " %";
+    // $("#stat_real_ratio").html(ret);
+
+    // $("#stat_real").html(stat_all);
+    // $("#stat_real_nbrows").html(src_nrows);
 
     // Historiques
     // Yes

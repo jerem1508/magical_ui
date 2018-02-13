@@ -32,14 +32,15 @@
 
 /* STATS ------*/
 .stat{
-	border: 1px solid #777;
-	background-color: #262626;
+	border: 1px solid #eee;
+	background-color: #eee;
 	border-radius: 6px;
 	padding: 10px;
 	padding-left: 0;
 	padding-right: 0;
 	text-align: center;
-	color: #eee;
+	color: #333;
+    margin: 20px;
 }
 .stat .title{
 	font-weight: bold;
@@ -82,7 +83,7 @@ h2{
 
 .yes_color{
   background-color: #A0BC5B;
-	background-color: #04B4AE;
+  background-color: #04B4AE;
 }
 .history_yes{
   color: #A0BC5B;
