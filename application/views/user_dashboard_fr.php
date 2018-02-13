@@ -225,6 +225,7 @@
 
   <div id="normalize_tab" class="tab-pane fade">
 	<div class="container">
+		<!--
 		<div class="row text-right">
 			<div class="col-xs-12">
 				<button
@@ -234,7 +235,8 @@
 						+&nbsp;Ajouter un fichier
 				</button>
 			</div>
-		</div><!--/row-->
+		</div>
+		-->
 		<div class="row">
 			<div class="col-xs-12">
 				<!--
