@@ -57,13 +57,13 @@
 		<h4>Afin de faciliter vos mises en correspondance, un ensemble de référentiels est disponible et mis à jour régulièrement</h4>
 		<a class="btn btn-xs btn-success2" href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">En savoir plus</a>
 		<br><br>
-		<div class="col-md-3">
-			<img src="<?php echo base_url('assets/img/rnsr.png');?>" class="" style="width:200px;">
-		</div>
-		<div class="col-md-3">
+		<div class="col-md-2 col-md-offset-3 text-center">
 			<img src="<?php echo base_url('assets/img/sirene.png');?>" class="" style="width:200px;">
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2 text-center">
+			<img src="<?php echo base_url('assets/img/rnsr.png');?>" class="" style="width:200px;">
+		</div>
+		<div class="col-md-2 text-center">
 			<img src="<?php echo base_url('assets/img/grid.png');?>" class="" style="width:200px;">
 		</div>
 	</div>
