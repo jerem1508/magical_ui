@@ -1656,7 +1656,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                 clearInterval(handle);
 
                 // Affichage du bouton "suivant"
-                $('#bloc_bt_next').css('display', 'inherit');
+                //$('#bloc_bt_next').css('display', 'inherit');
+                valid_project();
             }
         }, 1000);
 
