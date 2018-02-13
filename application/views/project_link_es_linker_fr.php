@@ -20,7 +20,8 @@
     <div class="row">
         <div class="col-md-offset-8 col-md-4 text-right" id="pagination2"></div>
     </div>
-    <hr style="border-top: 3px dotted #777;">
+    <hr style="border-top: 4px dashed #ddd;">
+    <!--
     <div class="row">
         <div class="col-md-12">
             <h2>
@@ -29,8 +30,10 @@
             </h2>
         </div>
     </div>
+    -->
+
     <div class="row" id="stats">
-        <div class="col-xs-2">
+        <div class="col-xs-offset-3 col-xs-2">
             <div class="stat"
                 data-toggle="tooltip"
                 title="Nombre de lignes traitées">
@@ -55,7 +58,8 @@
             </div>
         </div>
     </div>
-    <hr style="border-top: 3px dotted #777;">
+    <hr style="border-top: 4px dashed #ddd;">
+    <!--
     <div class="row">
         <div class="col-md-12">
             <h2>
@@ -64,10 +68,14 @@
             </h2>
         </div>
     </div>
+    -->
     <div class="row">
-        <div class="col-md-12 text-left">
-            <button class="btn btn-lg btn-success2" id="dl_file" disabled><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
-            <button class="btn btn-lg btn-success" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
+        <div class="col-md-2">
+            <button class="btn btn-success" id="bt_previous_page"><i class="fa fa-chevron-circle-left"></i> Précédent</button>
+        </div>
+        <div class="col-md-10 text-right">
+            <button class="btn btn-success2" id="bt_re_treatment" style="visibility: hidden"><i class="fa fa-undo" aria-hidden="true"></i>&nbsp;Relancer le traitement</button>
+            <button class="btn btn-success2" id="dl_file" disabled><span class="glyphicon glyphicon-download"></span>&nbsp;Téléchargement du fichier final</button>
         </div>
     </div>
 </div><!--/container-->
@@ -747,6 +755,10 @@ function add_buttons() {
     $("#bt_re_treatment").click(function(){
         treatment(project_id_link, learned_setting_json, true)
     });
+
+    $("#bt_previous_page").click(function(){
+        to_previous_page();
+    });
 }// /add_buttons()
 
 
@@ -896,6 +908,57 @@ function set_stats_html(stats) {
     $("#stat_pct_nb_match").html(Math.round(stats.result.perc_match_thresh) + " %");
     $("#stat_nb_lines").html(stats.result.num_match);
 }// /set_stats_html()
+
+
+function set_log_property_api(module_name) {
+    // Test du filename, on ne doit pas ecrire sur le MINI
+    var file_name_temp = metadata_link['files']['source']['file_name'];
+    if(file_name_temp.substr(0,6) === 'MINI__' ){
+        file_name_temp = file_name.substr(6);
+    }
+
+    // Paramètres API
+    // module_name : INIT,add_selected_columns,upload_es_train,es_linker,link_results_analyzer
+    tparams = {
+        "data_params": {
+            "module_name": module_name,
+            "file_name": file_name_temp
+        },
+        "module_params": {
+            "property": "completed",
+            "value": false
+        }
+    }
+    $.ajax({
+        type: 'post',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: '<?php echo BASE_API_URL;?>' + '/api/set_log_property/link/' + project_id_link,
+        data: JSON.stringify(tparams),
+        success: function (result) {
+            if(result.error){
+                show_api_error(result.error, "API error - set_log_property");
+            }
+            else{
+                console.log("success - set_log_property");
+                console.log(result);
+            }
+        },
+        error: function (result, status, error){
+            show_api_error(result, "error - set_log_property");
+        }
+    });// /ajax - set_log_property
+}
+
+
+function to_previous_page() {
+    set_log_property_api("upload_es_train");
+    set_log_property_api("es_linker");
+    set_log_property_api("link_results_analyzer");
+
+    // Chargement de la page précédente (rappel du controller)
+    location.reload();
+} // /to_previous_page()
 
 
 $(function(){// ready
