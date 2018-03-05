@@ -74,11 +74,15 @@ function delete_user_filter_html(from) {
 		// filtre sélectionné. On affiche un message à l'utilisateur.
 		$("#user_filters")
 			.html("Aucune proposition pour le filtre sélectionné")
+			.css("font-weight", "bold")
+			.css("color", "red")
 			.fadeIn("slow", function() {
 		       // Animation complete
 			   setTimeout(function(){
 				   $("#user_filters").fadeOut("slow", function(){
-					   $("#user_filters").html(msg).fadeIn();
+					   $("#user_filters").html(msg).fadeIn()
+					   .css("font-weight", "normal")
+					   .css("color", "#333333");
 				   });
 			   }, 5000);
 		     });
