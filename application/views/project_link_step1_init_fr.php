@@ -316,7 +316,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                             </div>
 
                             <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
-                                <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
+                                <!--<form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">-->
                                     <div class="row" style="margin-top: 40px;">
                                         <div class="col-md-4 text-center">
                                             <a class="btn btn-xs btn-success2 btn_2_5" style="width:240px;" id="bt_modal_ref">
@@ -1433,6 +1433,14 @@ function get_normalized_projects_html($id, $normalized_projects)
         UL_fic_src = false;
         UL_fic_ref =  false;
         target = ''; // Utilisé pour la sélection d'un projet dans la modale
+
+        // Interdiction de la touche "enter"
+        $(window).keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
 
         // Navigation
         $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
