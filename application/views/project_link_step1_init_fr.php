@@ -1426,6 +1426,28 @@ function get_normalized_projects_html($id, $normalized_projects)
     }// /select_internal_ref()
 
 
+    function test_extentions(file_name) {
+        var ret = false;
+        var ext = ["csv", "xls", "xlx"];
+
+        var file_name_ext = file_name.substr(file_name.lastIndexOf(".") + 1);
+
+        // Parcours des extensions
+        for (var i = 0; i < ext.length; i++) {
+            if(file_name_ext == ext[i]){
+                ret = true;
+            }
+        }
+
+        if(!ret){
+            // Affichage de l'erreur
+            show_api_error("Seules les extensions " + ext.join(", ") + " sont acceptées", "Extension non valide !");
+        }
+
+        return ret;
+    }// /test_extentions()
+
+
     // Init - Ready
     $(function() {
         url_src = '';
@@ -1461,7 +1483,6 @@ function get_normalized_projects_html($id, $normalized_projects)
            }
         });
 
-
         $("#bt_new_project").click(function(e){
             console.log("bt_new_project");
             e.preventDefault();
@@ -1472,7 +1493,6 @@ function get_normalized_projects_html($id, $normalized_projects)
         $("#bt_modal_ref").click(function(){
             $('#modal_ref').modal('show');
         });
-
 
         $("#bt_select_project_src").click(function(){
             target = "src";
@@ -1495,12 +1515,10 @@ function get_normalized_projects_html($id, $normalized_projects)
             $('#modal_projects').modal('show');
         });
 
-
         $("#bt_modal_projects_ref").click(function(){
             target = "ref";
             $('#modal_projects').modal('show');
         });
-
 
         $("#bt_next").click(function(){
             valid_project();
@@ -1509,7 +1527,6 @@ function get_normalized_projects_html($id, $normalized_projects)
         $("#bt_help").click(function(){
             $('#modal_help').modal('show');
         });
-
 
         $(".fileinput-button").click(function(){
             $(".fileinput-button").prop("disabled", true);
@@ -1532,6 +1549,11 @@ function get_normalized_projects_html($id, $normalized_projects)
             type:"POST",
             autoUpload: false,
             add: function (e, data) {
+                // Tests des extentions autorisées
+                if(!test_extentions(data.files[0].name)){
+                    return false;
+                }
+
                 $('#file_name_src').html(data.files[0].name);
                 $('#src_selection').html(data.files[0].name);
                 $('#src_selection_msg').html("");
@@ -1596,6 +1618,11 @@ function get_normalized_projects_html($id, $normalized_projects)
             type:"POST",
             autoUpload: false,
             add: function (e, data) {
+                // Tests des extentions autorisées
+                if(!test_extentions(data.files[0].name)){
+                    return false;
+                }
+
                 $('#file_name_ref').html(data.files[0].name);
                 $('#ref_selection').html(data.files[0].name);
                 $('#ref_selection_msg').html("");
