@@ -1288,7 +1288,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                     "url": "/api/new/normalize",
                     "params": {
                         "display_name": file_name_temp,
-                        "description": project_description + '',
+                        "description": 'Source utilisée dans le projet ' + $("#project_name").val(),
                         "internal": false
                     }
                 }
@@ -1323,7 +1323,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                         "url": "/api/new/normalize",
                         "params": {
                             "display_name": file_name_temp,
-                            "description": project_description + '',
+                            "description": 'Référentiel utilisé dans le projet ' + $("#project_name").val(),
                             "internal": false
                         }
                     }
