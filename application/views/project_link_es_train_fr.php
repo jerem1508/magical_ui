@@ -178,15 +178,18 @@
 
 
 
-                <div class="row stat">
-                    <div class="col-md-6">
-                        <div class="yes_color" data-toggle="tooltip" title="Nombre de réponses positives">
+                <div class="row stat yes_color">
+                    <div class="col-md-12">
+                        <div class="yes_color" style="border-radius: 5px;" data-toggle="tooltip" title="Nombre de réponses positives">
                             <span class="title">Nombre de OUI</span>
                             <span class="number" id="stat_nbyes">0</span>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="no_color" data-toggle="tooltip" title="Nombre de réponses négatives">
+                </div>
+
+                <div class="row stat no_color">
+                    <div class="col-md-12">
+                        <div class="no_color" style="border-radius: 5px;" data-toggle="tooltip" title="Nombre de réponses négatives">
                             <span class="title">Nombre de NON</span>
                             <span class="number" id="stat_nbno">0</span>
                         </div>
@@ -335,8 +338,6 @@
                     oublier: cette ligne de la source ne devrait pas être matchée: ne pas la prendre en compte
                 </li>
             </ul>
-
-
 
           <h4>Termes obligatoires / à exclure</h4>
           Ces filtres permettent de restreindre le fichier de référence pour le matching. Les termes obligatoires agissent comme des "ET", c'est à dire que les lignes proposées après le filtrage devront obligatoirement contenir toutes les informations dans les filtres. Les termes à exclure agissent comme des "OU", c'est à dire que les lignes proposées ne contiendront aucun des termes à exclure. Ces filtres peuvent être utiles pour augmenter la précision du matching sur une base beaucoup plus large que ce que l'on recherche. Par exemple, si l'on cherche des lycées dans la base SIRENE, on ajoutera le terme obligatoire "lycee" au champ "NOMEN_LONG"; on pourra aussi exclure le mot "parents" pour ne pas avoir dans les résultats "association de parents du lycée abc", par exemple...
@@ -644,6 +645,9 @@ function socket_answer(user_response) {
                 console.log(result);
 
                 show_new_proposition(JSON.parse(result.result), "labeller_update");
+
+                // BUG Raffraichissement des Tooltips persistents
+                hide_tooltips();
             }
         },
         error: function (result, status, error){
@@ -1236,6 +1240,12 @@ function get_obj_filters(filter_list) {
     return obj;
 }// / get_obj_filters()
 
+
+function hide_tooltips(){
+    $('#bt_previous').tooltip('hide');
+    $('#bt_uncertain').tooltip('hide');
+    $('#bt_forget').tooltip('hide');
+}// / hide_tooltips()
 
 $(function(){// ready
     // Compteurs
