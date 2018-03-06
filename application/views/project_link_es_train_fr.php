@@ -891,6 +891,12 @@ function show_new_proposition(message, from) {
 
     enabeled_buttons();
 
+    // Disabled du bt previous si pas de précédente proposition
+    if(!message["has_previous"]){
+        $("#bt_previous").attr("disabled","disabled");
+    }
+
+
     // Mémorisation de la taille de la DIV pour la fixer
     h_message = $("#message").height();
     $("#message").css("min-height",h_message);
