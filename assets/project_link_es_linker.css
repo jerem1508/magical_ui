@@ -27,17 +27,18 @@
 
 /* STATS ------*/
 .stat{
-	border: 1px solid #777;
-	background-color: #262626;
+	border: 1px solid #eee;
+	background-color: #eee;
 	border-radius: 6px;
 	padding: 10px;
 	padding-left: 0;
 	padding-right: 0;
 	text-align: center;
-	color: #eee;
+	color: #333;
+	margin: 20px;
 }
 .stat .title{
-	font-weight: bold;	
+	font-weight: bold;
 	display: block;
 }
 .stat .number{
@@ -60,4 +61,3 @@
 	color: #fff;
 	border-color: #303030;
 }
-

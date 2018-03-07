@@ -5,6 +5,7 @@ class Project extends CI_Controller {
 
 	public $normalized_projects = [];
 	public $linked_projects = [];
+	//public $secret_key = "";
 
 	public function __construct()
 	{
@@ -25,6 +26,8 @@ class Project extends CI_Controller {
 		if(!isset($_SESSION['language'])){
 			$this->session->set_userdata('language', 'fr');
 		}
+
+		//$this->secret_key = $this->config->item('secret_key');
 	}// /__construct()
 
 
@@ -41,12 +44,13 @@ class Project extends CI_Controller {
 
 		if(isset($project_id)){
 			$this->session->set_userdata('project_id', $project_id);
+			//$this->session->set_userdata('custom_key', md5($project_id.$this->secret_key));
 		}
 
 		// Si normalisation, on efface l'éventuel lien vers un projet de link
 		//$this->session->unset_userdata('link_project_id');
 
-		// REcherche de l'étape en cours si non passée dans l'URL
+		// Recherche de l'étape en cours si non passée dans l'URL
 		if(!$step){
 			$step = $this->get_actual_step_normalization($_SESSION['project_id']);
 		}
@@ -204,10 +208,17 @@ class Project extends CI_Controller {
 
 		if(isset($link_project_id)){
 			$this->session->set_userdata('link_project_id', $link_project_id);
+			//$this->session->set_userdata('custom_key', md5($link_project_id.$this->secret_key));
 		}
 
 		// Recherche de l'étape en cours
 		$link_step = $this->get_actual_step_linker($link_project_id);
+
+		// project_id inconnu
+		if(!$link_step && $link_project_id != ''){
+			redirect('/Home/undefined');
+		}
+
 		if($link_project_id && $link_step == 'INIT'){
 			// tests de complétude des projets de normalisation
 			$normalized_projects = $this->get_normalization_projects($link_project_id);
@@ -239,6 +250,11 @@ class Project extends CI_Controller {
 
 		// Récupération des métadata
 		$project_api = $this->private_functions->get_metadata_api('link', $project_id);
+
+		// project_id inconnu
+		if(empty($project_api)){
+			return false;
+		}
 
 		$file_name = $project_api['files']['source']['file_name'];
 		$steps = $project_api['log'][$file_name];
@@ -597,6 +613,7 @@ class Project extends CI_Controller {
 			}// /switch
 		}// /foreach
 	}// /split_projects()
+
 
 	public function log_error($comment)
 	{

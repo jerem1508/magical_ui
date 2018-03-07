@@ -1428,7 +1428,7 @@ function get_normalized_projects_html($id, $normalized_projects)
 
     function test_extentions(file_name) {
         var ret = false;
-        var ext = ["csv", "xls", "xlx"];
+        var ext = ["csv", "xls", "xlsx"];
 
         var file_name_ext = file_name.substr(file_name.lastIndexOf(".") + 1);
 

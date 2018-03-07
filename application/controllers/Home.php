@@ -86,4 +86,15 @@ class Home extends CI_Controller {
 		$this->session->set_userdata('language', 'en');
 		redirect("/Home");
 	}
+
+
+	public function undefined()
+	{
+		# Affiche la page 404 personnalisée
+		$data['title'] = "";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('undefined_404');
+		$this->load->view('footer_'.$_SESSION['language']);
+	}
 }

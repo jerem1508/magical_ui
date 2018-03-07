@@ -896,7 +896,6 @@ function show_new_proposition(message, from) {
         $("#bt_previous").attr("disabled","disabled");
     }
 
-
     // Mémorisation de la taille de la DIV pour la fixer
     h_message = $("#message").height();
     $("#message").css("min-height",h_message);
