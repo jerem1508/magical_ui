@@ -737,11 +737,17 @@ function add_buttons() {
                     console.log("success - dl");
 
                     // DL du fichier
-                    var blob=new Blob([result_dl]);
-                    var link=document.createElement('a');
-                    link.href=window.URL.createObjectURL(blob);
-                    link.download=file_name;
+                    var blob = new Blob([result_dl]);
+                    var link = document.createElement('a');
+                    document.body.appendChild(link);
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = file_name;
+
+                    console.log(link);
                     link.click();
+
+
+
                 }
             },
             error: function (result_dl, status, error){
