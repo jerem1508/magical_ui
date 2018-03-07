@@ -130,12 +130,12 @@
   	</div>
     <div class="row">
   		<div class="col-md-12">
-  			<input type="text" class="form-control" placeholder="Votre email" id="email2">
+  			<input type="text" class="form-control" placeholder="Votre email" id="email2" value="<?php echo @$_SESSION['user']['email']; ?>">
   		</div>
   	</div>
     <div class="row">
   		<div class="col-md-12">
-  			<textarea class="form-control" rows="4" placeholder="Votre message" id="message"></textarea>
+  			<textarea class="form-control" rows="4" placeholder="Votre message" id="message_footer"></textarea>
   		</div>
   	</div>
     <div class="row">
@@ -193,7 +193,7 @@
 			}
 			msg +=  "Vous devez renseigner votre email";
 		}
-		if($("#message").val() == ''){
+		if($("#message_footer").val() == ''){
 			if(msg != ""){
 				msg += "<br>";
 			}
@@ -209,7 +209,7 @@
 		}
 
 		// Envoi du commentaire
-		send_comment_ajax($("#name").val(), $("#email2").val(), $("#message").val());
+		send_comment_ajax($("#name").val(), $("#email2").val(), $("#message_footer").val());
 
 		// Suppression de l'alert si existante
 		if($("#error_box").is(":visible")){
@@ -217,7 +217,7 @@
 		}
 
 		// Suppression du message, on garde les autres infos
-		$("#message").val("");
+		$("#message_footer").val("");
 
 		// on replie
 		panel_minimize();
