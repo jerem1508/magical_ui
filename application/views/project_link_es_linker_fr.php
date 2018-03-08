@@ -742,12 +742,7 @@ function add_buttons() {
                     document.body.appendChild(link);
                     link.href = window.URL.createObjectURL(blob);
                     link.download = file_name;
-
-                    console.log(link);
                     link.click();
-
-
-
                 }
             },
             error: function (result_dl, status, error){
@@ -759,7 +754,15 @@ function add_buttons() {
     }); // /dl_file.click()
 
     $("#bt_re_treatment").click(function(){
-        treatment(project_id_link, learned_setting_json, true)
+        // On vide les data actuelles + affichage du wait
+        var html = '<div class="row text-center">';
+        html += '<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">';
+        html += '<h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>';
+        html += '</div>';
+        $("#result").html(html);
+
+        // Lancement du traitement avec force = true
+        treatment(project_id_link, learned_setting_json, true);
     });
 
     $("#bt_previous_page").click(function(){
