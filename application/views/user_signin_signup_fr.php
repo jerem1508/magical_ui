@@ -6,12 +6,12 @@
   			<div class="col-md-6 account_left">
 				<h3>Création du compte</h3>
 				<div class="well">
-					La création de votre compte est obligatoire. Elle ne prend que quelques secondes et vous permettra de retrouver tous vos projets. 
+					La création de votre compte est obligatoire. Elle ne prend que quelques secondes et vous permettra de retrouver tous vos projets.
 					<br>
 					<br>
 					Vous pourrez à tout moment supprimer toutes vos informations.
 				</div><!-- /well -->
-				<?php 
+				<?php
 				if($msg){
 					echo "<div class='alert alert-danger'>".$msg."</div>";
 				}
@@ -41,7 +41,7 @@
 				<div class="well">
 					Si vous possédez déjà un compte, veuillez saisir vos identifiants pour accéder à l'application.
 				</div><!-- /well -->
-				<?php 
+				<?php
 				if($msg){
 					echo "<div class='alert alert-danger'>".$msg."</div>";
 				}
@@ -55,9 +55,18 @@
 				    <label for="pwd">Mot de passe</label>
 				    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe">
 				  </div>
-				  <div class="text-right">
-				  	<input type="hidden" name="next" value="<?php if(isset($next)){echo $next;}?>">
-				  	<button type="submit" class="btn btn-success">S'identifier</button>
+				  <div class="row">
+				  	<div class="col-md-6">
+						<a href="<?php echo base_url("index.php/Home/password_lost");?>">
+							Mot de passe perdu ?
+						</a>
+				  	</div>
+					<div class="col-md-6">
+						<div class="text-right">
+							<input type="hidden" name="next" value="<?php if(isset($next)){echo $next;}?>">
+							<button type="submit" class="btn btn-success">S'identifier</button>
+						</div>
+				  	</div>
 				  </div>
 				</form>
   			</div><!--/col-md-6-->
@@ -75,10 +84,10 @@
 
 		// Controle des informations saisies
 		$("#sign_up").submit(function(){
-			
+
 			$(".error_box").css("visibility","hidden");
 			var msg = "";
-			
+
 			if($("#usr_email").val() == ""){
 				$("#error_msg").html("L'email ne peut pas être vide");
 				$(".error_box").css("visibility","visible");
