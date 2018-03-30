@@ -35,24 +35,23 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		//$this->load->view('home_'.$_SESSION['language']);
 		redirect('/Home');
 	}// /index()
 
 
-	public function new($msg='')
+	public function new($msg='', $msg_info='')
 	{
 		if(isset($_SESSION['user'])){
 			redirect('/Home');
 		}
 
 		$data['msg'] = $msg;
+		$data['msg_info'] = $msg_info;
 		$data['title'] = "Identification";
 
 		$this->load->view('lib', $data);
 		$this->load->view('user_signin_signup_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
-		// $this->load->view('user_new_'.$_SESSION['language'], $data);
 		$this->load->view('user_signin_signup_'.$_SESSION['language'], $data);
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /new()
@@ -69,7 +68,7 @@ class User extends CI_Controller {
 
 			if($exist_user){
 				// email deja existant
-				$this->new("Cet email existe déjà !");
+				$this->new("Cette adresse email existe déjà !");
 			}
 			else{
 				// insertion du user
@@ -94,7 +93,11 @@ class User extends CI_Controller {
 			}
 		}
 
-		redirect('/Home');
+		//redirect('/Home');
+		// Enregistrement en session pour affichage d'un message sur la page d'accueil
+		$msg = 'Afin de valider la création de votre compte, un email vous a été envoyé à l\'adresse suivante : <br />'.$email;
+
+		$this->new('', $msg);
 	}// /new_save()
 
 
@@ -373,9 +376,6 @@ class User extends CI_Controller {
 			->message($body)
 			->send();
 
-
-			// Enregistrement en session pour affichage d'un message sur la page d'accueil
-			 $this->session->set_userdata('message_to_print', 'Afin de valider la création de votre compte, un email vous a été envoyé à l\'adresse suivante : <br />'.$email);
 	}// /send_email_validation()
 
 

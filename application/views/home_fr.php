@@ -101,18 +101,6 @@
 <script type="text/javascript">
 	$(function(){// ready
 		//set_height('intro');
-		var message = "";
-		<?php
-			if(isset($_SESSION['message_to_print'])){
-				echo 'message = '.$_SESSION['message_to_print'];
-				unset($_SESSION['message_to_print']);
-			}
-		?>
-
-		if(message.length > 0){
-			$("#messages_modal .modal").html(message);
-			$("#messages_modal").modal("show");
-		}
 	});// /ready
 </script>
 </body>

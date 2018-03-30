@@ -2,6 +2,18 @@
 
 <div class="container-fluid background_1" id="main">
 	<div class="container" style="padding-top: 20px;">
+			<?php
+			if($msg){
+				echo "<div class='row'>";
+				echo "	<div class='alert alert-danger'>".$msg."</div>";
+				echo "</div>";
+			}
+			elseif($msg_info){
+				echo "<div class='row'>";
+				echo "	<div class='alert alert-info'>".$msg_info."</div>";
+				echo "</div>";
+			}
+			?>
   		<div class="row">
   			<div class="col-md-6 account_left">
 				<h3>Création du compte</h3>
@@ -11,11 +23,6 @@
 					<br>
 					Vous pourrez à tout moment supprimer toutes vos informations.
 				</div><!-- /well -->
-				<?php
-				if($msg){
-					echo "<div class='alert alert-danger'>".$msg."</div>";
-				}
-				?>
 				<form name="sign_up" id="sign_up" method="post" action="<?php echo base_url("index.php/User/new_save");?>">
 				  <div class="form-group">
 				    <label for="usr_email">Adresse email</label>
@@ -41,11 +48,6 @@
 				<div class="well">
 					Si vous possédez déjà un compte, veuillez saisir vos identifiants pour accéder à l'application.
 				</div><!-- /well -->
-				<?php
-				if($msg){
-					echo "<div class='alert alert-danger'>".$msg."</div>";
-				}
-				?>
 				<form name="sign_in" id="sign_in" method="post" action="<?php echo base_url("index.php/User/login_validation");?>">
 				  <div class="form-group">
 				    <label for="email">Adresse email</label>
