@@ -149,13 +149,16 @@ class Home extends CI_Controller {
 		</head>
 		<body>
 		<div>
-		' . $name . '
+		<b>De : </b>' . $name . '
 		</div>
 		<div>
-		' . $email . '
+		<b>Email : </b>' . $email . '
 		</div>
 		<div>
-		' . $message . '
+		<b>Message :</b>
+		</div>
+		<div>
+		<i>' . $message . '</i>
 		</div>
 
 		</body>

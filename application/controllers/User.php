@@ -316,7 +316,6 @@ class User extends CI_Controller {
 		    CURLOPT_POSTFIELDS => json_encode($params)
 		];
 
-
 		curl_setopt_array($curl, $opts);
 
 		$response = json_decode(curl_exec($curl), true);
