@@ -364,7 +364,7 @@ class User extends CI_Controller {
 		<body>
 		' . $message . '
 		<div>
-		<a href="http://127.0.0.1/projets/magical_ui/index.php/User/email_validation/'.$id.'">Je valide mon compte</a>
+		<a href="'.base_url('index.php/User/email_validation/'.$id).'">Je valide mon compte</a>
 		</div>
 		</body>
 		</html>';
