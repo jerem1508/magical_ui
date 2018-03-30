@@ -1,0 +1,9 @@
+{
+    "fields": {
+        "City": "Ville",
+        "Country": "Pays",
+        "ID": "Identifiant GRID de l'enregistrement",
+        "Name": "Libellé",
+        "State": "Etat US"
+    }
+}

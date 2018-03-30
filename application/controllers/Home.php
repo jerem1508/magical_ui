@@ -53,7 +53,7 @@ class Home extends CI_Controller {
 		$this->load->library('Private_functions');
 		$data['internal_projects'] = $this->private_functions->get_internal_projects();
 
-		$data['title'] = "Référentiels";
+		$data['title'] = "Liste des référentiels";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('referentials_'.$_SESSION['language'], $data);
@@ -70,6 +70,106 @@ class Home extends CI_Controller {
 		$this->load->view('contact');
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
+
+
+	public function contact_send_email()
+	{
+		# Envoi d'un email à l'admin
+		$name = trim($_POST['name']);
+		$email = trim($_POST['email']);
+		$message = trim($_POST['message']);
+
+		$err = [];
+		$data["err"] = false;
+
+		if(!empty($name)){
+			$name = $_POST['name'];
+			$data["name"] = $name;
+		}
+		else{
+			$err[] = "Vous devez renseigner votre nom";
+		}
+		if(!empty($email)){
+			$email = $_POST['email'];
+			$data["email"] = $email;
+		}
+		else{
+			$err[] = "Vous devez renseigner votre email";
+		}
+		if(!empty($message)){
+			$message = $_POST['message'];
+			$data["message"] = $message;
+		}
+		else{
+			$err[] = "Vous devez renseigner un message";
+		}
+
+		if(count($err) > 0){
+			$data["err"] = true;
+			$data["message_ret"] = "Tous les champs doivent être renseignés :";
+			foreach ($err as $key => $value) {
+				$data["message_ret"] = $data["message_ret"]."<br>".$value;
+			}
+		}
+		else{
+			$this->send_email_contact($name, $email, $message);
+			$data["message_ret"] = "Votre email à été envoyé";
+		}
+
+		$data['title'] = "Envoyer un message";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('contact', $data);
+		$this->load->view('footer_'.$_SESSION['language']);
+
+	}// /contact_send_email()
+
+
+	public function send_email_contact($name, $email, $message)
+	{
+		# envoi un email via le formulaire de contact
+
+		// Chargement de la bibliothèque
+		$this->load->library('email');
+
+		$subject = '[Machine à données] - Formulaire de contact';
+
+		// Get full html:
+		$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
+			<title>' . html_escape($subject) . '</title>
+			<style type="text/css">
+				body {
+					font-family: Arial, Verdana, Helvetica, sans-serif;
+					font-size: 16px;
+				}
+			</style>
+		</head>
+		<body>
+		<div>
+		' . $name . '
+		</div>
+		<div>
+		' . $email . '
+		</div>
+		<div>
+		' . $message . '
+		</div>
+
+		</body>
+		</html>';
+
+		$result = $this->email
+			->from(EMAIL_FROM)
+			->reply_to(EMAIL_REPLY_TO)
+			->to(EMAIL_FROM)
+			->subject($subject)
+			->message($body)
+			->send();
+	}// /send_email_contact()
+
 
 	public function fr()
 	{
@@ -104,106 +204,12 @@ class Home extends CI_Controller {
 		# Affichage de la vue de perte du mot de passe
 		$data['title'] = "Mot de passe perdu ?";
 		$this->load->view('lib', $data);
+		$this->load->view('password_lost_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('password_lost');
 		$this->load->view('footer_'.$_SESSION['language']);
 	}
 
 
-	public function send_password()
-	{
-		# Envoi du nouveau mot de passe par Email
 
-
-		// Test de l'email
-
-			// KO
-			// Affichage de la vue si email inconnu
-
-
-			// OK
-			// Génération d'un nouveau mot de passe
-
-			// Envoi du mot de passe par email
-
-
-
-			$this->load->library('email');
-
-			$subject = 'This is a test';
-			$message = '<p>This message has been sent for testing purposes.</p>';
-
-			// Get full html:
-			$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-			<html xmlns="http://www.w3.org/1999/xhtml">
-			<head>
-			    <meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
-			    <title>' . html_escape($subject) . '</title>
-			    <style type="text/css">
-			        body {
-			            font-family: Arial, Verdana, Helvetica, sans-serif;
-			            font-size: 16px;
-			        }
-			    </style>
-			</head>
-			<body>
-			' . $message . '
-			</body>
-			</html>';
-			// Also, for getting full html you may use the following internal method:
-			//$body = $this->email->full_html($subject, $message);
-
-			$result = $this->email
-			    ->from('scanr@recherche.gouv.fr')
-			    ->reply_to('scanr@recherche.gouv.fr')
-			    ->to('jeremy.peglion@gmail.com')
-			    ->subject($subject)
-			    ->message($body)
-			    ->send();
-
-			var_dump($result);
-			echo '<br />';
-			echo $this->email->print_debugger();
-
-			exit;
-/*
-code pour envoyer des emails via PHPMailer :
-$mail = new PHPMailer(true); // Passing true enables exceptions
-try {
-//Server settings
-$mail->SMTPDebug = 2; // Enable verbose debug output
-$mail->isSMTP(); // Set mailer to use SMTP
-$mail->Host = 'email-smtp.eu-west-1.amazonaws.com'; // Specify main and backup SMTP servers
-$mail->CharSet = 'UTF-8';
-$mail->SMTPAuth = true; // Enable SMTP authentication
-$mail->Username = 'AKIAJAHUZE5J4VWHGL5Q'; // SMTP username
-$mail->Password = 'AvqgTjAlyN40CO1ofOUMKl3aj0E/io6+Ipfd+/zf4m+k'; // SMTP password
-$mail->SMTPSecure = 'ssl'; // Enable TLS encryption, ssl also accepted
-$mail->Port = 465; // TCP port to connect to
-
-            //Recipients
-            $mail->setFrom('scanr@recherche.gouv.fr', 'scanR');
-            $mail->addAddress('scanr@recherche.gouv.fr', 'scanR');     // Add a recipient
-            $mail->addReplyTo('scanr@recherche.gouv.fr', 'scanR');
-
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = "$Subject";
-            $mail->Body    = "$Body";
-            $mail->AltBody = "$AltBody";
-            if($imp==1)
-            {
-                $mail->Priority = 1;
-                $mail->AddCustomHeader("X-MSMail-Priority: High");
-                $mail->AddCustomHeader("Importance: High");
-            }
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-        }
-*/
-
-	}
 }

@@ -3,9 +3,6 @@
 
 <div class="container-fluid">
 	<div class="well text-justify">
-		<div class="row text-center">
-			<h1 style="color: #25358C">Liste des référentiels</h1>
-		</div>
         <div class="row text-center">
             <ul class="breadcrumb">
             </ul>
@@ -16,7 +13,8 @@
 </div><!--/ container-fluid-->
 <script type="text/javascript">
 
-function get_public_projects() {
+function get_public_projects()
+{
     // Récupere les référentiels publiques via API
     $.ajax({
         type: 'get',
@@ -29,8 +27,10 @@ function get_public_projects() {
                 console.log("success - get_public_projects");
                 console.log(referentials);
 
+				var cpt = 0;
                 for(referential in referentials){
                     var html = "";
+					cpt ++;
 
                     var display_name = referentials[referential]["display_name"];
                     var description = referentials[referential]["description"];
@@ -40,13 +40,13 @@ function get_public_projects() {
                     load_data(".breadcrumb", html, true);
 
                     // Affiche la première partie des données récupérées
-                    show_data_html(referentials);
+                    show_data_html(referentials, cpt);
 
                     // Récupération des données additionnelles via JSON lié
-                    //get_additional_data(display_name);
+                    get_additional_data(cpt, display_name);
 
-                    // Récupération d'un sample
-                    get_sample(display_name, referentials[referential]["project_id"], 20);
+                    // // Récupération d'un sample
+                    get_sample(cpt, referentials[referential]["project_id"], 20);
                 }
             }
         },
@@ -57,23 +57,43 @@ function get_public_projects() {
 }// /get_public_projects()
 
 
-function get_additional_data(display_name) {
+function get_additional_data(id_div, display_name)
+{
     console.log("get_additional_data(" + display_name + ")");
 
     var requestURL = '<?php echo base_url('assets/referentials/');?>' + display_name.toLowerCase() + '.json';
+
     var request = new XMLHttpRequest();
     request.open('GET', requestURL);
     request.responseType = 'json';
     request.send();
     request.onload = function() {
-      var additional_data = request.response;
-      console.log(additional_data);
+		var additional_data = request.response;
+
+		var fields = additional_data['fields'];
+	  	var html = '<table class="table table-condensed table-striped" style="margin-top: 20px;">';
+		for (var field in fields) {
+			html += '		  <tr>';
+			html += '		  	<th>';
+			html += field;
+			html += '			</th>';
+			html += '			<td><i>';
+			html += fields[field];
+			html += '			</i></td>';
+			html += '		  </tr>';
+		}
+		html += '</table>';
+
+		$("#" + id_div + " .fields_description").html(html);
+
+
 
     }
 }// /get_additional_data()
 
 
-function get_sample(display_name, project_id, nb_rows) {
+function get_sample(id_div, project_id, nb_rows)
+{
     //console.log("get_sample(" + project_id + ")");
     var tparams = {
         "module_name": "INIT"
@@ -114,12 +134,12 @@ function get_sample(display_name, project_id, nb_rows) {
                         }
                         else{
                             // Remplissage de la modale
-                            var ch = '<table class="table table-responsive table-condensed table-striped" id="' + display_name + '_sample_table">';
+                            var ch = '<table class="table table-responsive table-condensed table-striped" id="' + id_div + '_sample_table">';
 
                             ch += "<thead><tr>";
                             $.each(result.sample[0], function( column_name, name) {
-                                  ch += '<th>' + column_name + "</th>";
-                                });
+                            	ch += '<th>' + column_name + "</th>";
+                            });
                             ch += "</tr></thead><tbody>";
 
                             var cpt = 0;
@@ -135,9 +155,9 @@ function get_sample(display_name, project_id, nb_rows) {
                             });
                             ch += "</tbody></table>";
 
-                            load_data("#" + display_name + " .exemple", ch, false);
+                            load_data("#" + id_div + " .exemple", ch, false);
 
-                            $("#" + display_name + "_sample_table").DataTable({
+                            $("#" + id_div + "_sample_table").DataTable({
                                                     "language": {
                                                        "paginate": {
                                                             "first":      "Premier",
@@ -166,31 +186,44 @@ function get_sample(display_name, project_id, nb_rows) {
 }// /get_sample()
 
 
-function show_data_html(referentials) {
+function toggle_sample(id)
+{
+	$("#" + id + " .exemple").slideToggle();
+
+}// /toggle_sample()
+
+
+function show_data_html(referentials, cpt)
+{
     //console.log("show_data_html()");
     var display_name = referentials[referential]["display_name"];
     var description = referentials[referential]["description"];
 
     // Restitution HTML
     var html = "";
-    html += '<div class="row" id="' + display_name + '">';
+    html += '<div class="row" id="' + cpt + '">';
     html += '    <div class="col-md-2">';
     html += '        <img src="<?php echo base_url('assets/img/');?>' + display_name.toLowerCase() + '.png" class="" style="width:200px;">';
     html += '    </div>';
-    html += '    <div class="col-md-10" id="grid">';
+    html += '    <div class="col-md-10">';
     html += '        <h2 class="title">' + display_name + '</h2>';
     html += '        <div class="date_dl"></div>';
     html += '        <div class="date_ul"></div>';
     html += '        <div class="short_description">' + description + '</div>';
     html += '        <div class="fields_description"></div>';
-    html += '        <div class="exemple_title"><h3>Echantillon du référentiel :</h3></div>';
-    html += '        <div class="exemple" style="overflow-x:scroll"></div>';
+    html += '        <div class="exemple_title text-right">';
+	html += '			<button onclick="toggle_sample(' + cpt + ')" class="btn btn-success2">Voir un échantillon <i class="fa fa-eye"></i></button>';
+	html += 		'</div>';
+    html += '        <div class="exemple" style="overflow-x:scroll;padding-top: 20px;"></div>';
     html += '    </div>';
     html += '</div>';
     html += '<hr>';
 
     // Chargement des données
     load_data("#referentials", html, true);
+
+	//Repliement de la partie echantillon
+	$("#" + cpt + " .exemple").toggle();
 }// /show_data_html()
 
 

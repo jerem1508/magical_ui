@@ -106,6 +106,10 @@ define('TAB_LOGO', array(
 // Taille maxi des noms de fichier dans le tableau de bord
 define('MAX_LIB_FILENAME', 30);
 
+// Constantes emails
+define('EMAIL_FROM', 'mad.mesri@gmail.com');
+define('EMAIL_REPLY_TO', 'mad.mesri@gmail.com');
+
 // user
 define('USER_STATUS_ENABLED', "1");
 define('USER_STATUS_DISABLED', "0");

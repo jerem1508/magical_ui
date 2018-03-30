@@ -65,15 +65,18 @@ class User extends CI_Controller {
 			$pwd = $this->input->post('usr_pwd');
 
 			// test user existant
-			$ret = $this->User_model->exist_user($email);
+			$exist_user = $this->User_model->exist_user($email);
 
-			if($ret->result_id->num_rows > 0){
+			if($exist_user){
 				// email deja existant
 				$this->new("Cet email existe déjà !");
 			}
 			else{
 				// insertion du user
 				$ret = $this->User_model->insert_user($email, $pwd);
+
+				// envoie d'un email pour validation
+				$this->send_email_validation($email, $ret['id']);
 			}
 			$error = '';
 		}
@@ -92,8 +95,8 @@ class User extends CI_Controller {
 		}
 
 		// Enregistrement en session
-		$user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);
-		$this->session->set_userdata('user', $user);
+		// $user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);
+		// $this->session->set_userdata('user', $user);
 
 		redirect('/Home');
 
@@ -126,36 +129,43 @@ class User extends CI_Controller {
 		$next = $this->input->post('next');
 
 		// test user existant
-		$ret = $this->User_model->get_user($email);
+		$user = $this->User_model->get_user($email);
 
 		// si email trouvé, on compare les mdp
-		if($ret['id'] != 0){
-			$pwd = md5($pwd.$ret['salt']);
-			if ($pwd == $ret['pwd']) {
-				// Sauvegarde en session
-				$user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);
-				$this->session->set_userdata('user', $user);
+		if($user['id'] != 0){
+			$pwd = md5($pwd.$user['salt']);
+			if ($pwd == $user['pwd']) {
 
-				// log
-				$ret = $this->User_model->set_log_users($ret['id']);
-
-				switch ($next) {
-					case 'normalize':
-						// Chargement du tableau de bord
-						redirect('/Project/normalize');
-						break;
-					case 'link':
-						// Chargement du tableau de bord
-						redirect('/Project/link');
-						break;
-
-					default:
-						// Chargement du tableau de bord
-						//redirect('/User/dashboard');
-						redirect('/User/dashboard_home');
-						break;
+				// test du statut
+				if($user['status'] == 0){
+					$this->login("","Vous devez valider votre inscription grâce à l'email que vous avec reçu à l'adresse ".$email." !");
+					//exit;
 				}
+				else{
+					// Sauvegarde en session
+					$user = array('id' => $user['id'], 'email' => $email, 'status' => $user['status']);
+					$this->session->set_userdata('user', $user);
 
+					// log
+					$ret = $this->User_model->set_log_users($user['id']);
+
+					switch ($next) {
+						case 'normalize':
+							// Chargement du tableau de bord
+							redirect('/Project/normalize');
+							break;
+						case 'link':
+							// Chargement du tableau de bord
+							redirect('/Project/link');
+							break;
+
+						default:
+							// Chargement du tableau de bord
+							//redirect('/User/dashboard');
+							redirect('/User/dashboard_home');
+							break;
+					}
+				}
 			}
 			else{
 				$this->login("","Mot de passe erroné !");
@@ -327,4 +337,56 @@ class User extends CI_Controller {
 		// Insertion
 		$this->Comments_model->insert_log($data_to_write);
 	}// /log_error()
+
+
+	public function send_email_validation($email,$id)
+	{
+		# envoi un email de validation de creation d'un nouveau compte
+		// Chargement de la bibliothèque
+		$this->load->library('email');
+		// Envoi du mot de passe par email
+		$subject = '[Machine à données] - Création de votre compte';
+		$message = "Veuillez cliquer sur le lien suivant afin de valider votre compte.";
+
+		// Get full html:
+		$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
+			<title>' . html_escape($subject) . '</title>
+			<style type="text/css">
+				body {
+					font-family: Arial, Verdana, Helvetica, sans-serif;
+					font-size: 16px;
+				}
+			</style>
+		</head>
+		<body>
+		' . $message . '
+		<div>
+		<a href="http://127.0.0.1/projets/magical_ui/index.php/User/email_validation/'.$id.'">Je valide mon compte</a>
+		</div>
+		</body>
+		</html>';
+
+		$result = $this->email
+			->from(EMAIL_FROM)
+			->reply_to(EMAIL_REPLY_TO)
+			->to($email)
+			->subject($subject)
+			->message($body)
+			->send();
+	}// /send_email_validation()
+
+
+	public function email_validation($id='')
+	{
+		# Validation de l'email après clic dans l'email recu par l'utilisateur a l'inscription
+
+		$ret = $this->User_model->update_status($id);
+
+		// Redirection vers page de sign in
+		$this->new();
+
+	}// /email_validation()
 }

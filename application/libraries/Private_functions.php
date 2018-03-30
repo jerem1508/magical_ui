@@ -200,4 +200,12 @@ class Private_functions {
 		return $response;
 
 	}// /delete_project_API()
+
+
+	public function send_emails()
+	{
+		# code...
+
+
+	}// /send_email()
 }// /Class

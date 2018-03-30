@@ -190,4 +190,77 @@ class Save_ajax extends CI_Controller {
 		return $ret;
 	}// /modify_password()
 
+
+	public function get_new_password($length=12)
+	{
+	    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $string = '';
+	    for($i=0; $i<$length; $i++){
+	        $string .= $chars[rand(0, strlen($chars)-1)];
+	    }
+	    return $string;
+	}// /get_new_password
+
+
+	public function send_password()
+	{
+		# Envoi du nouveau mot de passe par Email
+
+		// Chargement de la bibliothèque
+		$this->load->library('email');
+
+
+		// Test de l'email
+		$user =  $this->User_model->exist_user($_POST['email']);
+
+		if($user){
+			// Génération du nouveau mot de passe
+			$password_new = $this->get_new_password();
+
+			// Moification du mot de passe dans la base de données
+			$pwd_is_set =  $this->User_model->update_pwd($_POST['email'], $password_new);
+		}
+		else{
+			// KO
+			// Affichage de la vue si email inconnu
+			echo ("email_ko");
+			exit;
+		}
+
+		// Envoi du mot de passe par email
+		$subject = '[Machine à données] - Initialisation du mot de passe';
+		$message = "Voici votre nouveau mot de passe : ".$password_new;
+
+		// Get full html:
+		$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+		    <meta http-equiv="Content-Type" content="text/html; charset=' . strtolower(config_item('charset')) . '" />
+		    <title>' . html_escape($subject) . '</title>
+		    <style type="text/css">
+		        body {
+		            font-family: Arial, Verdana, Helvetica, sans-serif;
+		            font-size: 16px;
+		        }
+		    </style>
+		</head>
+		<body>
+		' . $message . '
+		<div>
+		<a href="http://127.0.0.1/projets/magical_ui/index.php/User/new">Se connecter</a>
+		</div>
+		</body>
+		</html>';
+
+		$result = $this->email
+		    ->from('scanr@recherche.gouv.fr')
+		    ->reply_to('scanr@recherche.gouv.fr')
+		    ->to($_POST['email'])
+		    ->subject($subject)
+		    ->message($body)
+		    ->send();
+
+		echo "ok";
+}// /send_password()
+
 }

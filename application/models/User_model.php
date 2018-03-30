@@ -1,12 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User_model extends CI_Model {
-    
+
     public $email;
     public $pwd;
     public $salt;
     public $created_tmp;
     public $modified_tmp;
+    public $status;
 
     public function get_user($email)
     {
@@ -20,13 +21,20 @@ class User_model extends CI_Model {
             $row = $query->row_array();
             return $row;
         }
+        else {
+            return false;
+        }
     }// /get_user()
 
 
     public function exist_user($email)
     {
-        $this->db->where('email', $email);
-        return $this->db->get('users');
+        if(!$this->get_user($email)){
+            return false;
+        }
+        else {
+            return true;
+        }
     }// /exist_user()
 
 
@@ -35,26 +43,26 @@ class User_model extends CI_Model {
         $this->email = $email;
         $this->created_tmp = time();
         $this->modified_tmp = time();
+        $this->status = 0;
 
         // MD5
         $this->salt = uniqid();
         $this->pwd = md5($pwd.$this->salt);
 
         $ret = $this->db->insert('users', $this);
-    
-        // retour des inkfos a mettre en session
-        $this->get_user($email);
+
+        // retour des inkos a mettre en session
+        return $this->get_user($email);
     }// /insert_user()
 
 
-    public function update_user()
+    public function update_status($id)
     {
-        $this->title    = $_POST['title'];
-        $this->content  = $_POST['content'];
-        $this->date     = time();
+        $this->db->set('status', 1);
+        $this->db->where('id', $id);
 
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
-    }// /update_user()
+        return $this->db->update('users');
+    }// /update_status()
 
 
     public function set_log_users($id_user)
@@ -63,7 +71,7 @@ class User_model extends CI_Model {
             'user_id' => $id_user
         );
 
-        return $this->db->insert('log_users', $data);            
+        return $this->db->insert('log_users', $data);
     }// /set_log_users()
 
 
@@ -86,15 +94,16 @@ class User_model extends CI_Model {
 
     public function update_pwd($email, $password)
     {# MAJ du mot de passe
-
-        $this->email = $email;
-        $this->modified_tmp = time();
-
         // MD5
-        $this->salt = uniqid();
-        $this->pwd = md5($password.$this->salt);
+        $salt = uniqid();
+        $password = md5($password.$salt);
 
-        $ret = $this->db->update('users', $this);
+        $this->db->set('modified_tmp', time());
+        $this->db->set('salt', $salt);
+        $this->db->set('pwd', $password);
+        $this->db->where('email', $email);
+
+        $ret = $this->db->update('users', $data_to_write);
     }// /update_pwd()
 
 

@@ -115,12 +115,16 @@ function get_internal_projects_html($internal_projects)
                             $html .= 'Nombre de lignes : '.$nrows;
                         $html .= '</div>';
                     $html .= '</div>';
+                    // Lien vers page référentiels
+                    $html .= '<div class="row">';
+                        $html .= '<div class="col-md-12 text-right">';
+                            $html .= '<a class="btn btn-xs btn-success" href="'.base_url("index.php/Home/referentials").'" target="_blank">En savoir plus <i class="fa fa-plus"></i></a>';
+                        $html .= '</div>';
+                    $html .= '</div>';
                 $html .= '</div>'; // /col-md-8
             $html .= '</div>'; // /row
             $html .= '<hr>';
         $html .= '</div>';// / bloc_project
-
-
     }// /foreach
 
     echo $html;
@@ -464,279 +468,13 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 
 
-<!--
 <div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <div class="row">
         <div class="col-xs-12">
-            <h2 style="display: inline;">
-                <span class="step_numbers">1</span>
-                &nbsp;Identité du projet
-            </h2>
-            <form class="form-horizontal" name="form_project" id="form_project" method="post">
-                <div class="form-group" data-intro="Choisissez un nom pour vous y retrouver plus facilement">
-                    <label for="project_name" class="col-sm-2 control-label">Nom du projet *</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Nom du projet" value="Projet_1">
-                    </div>
-                </div>
-                <div class="form-group" data-intro="Ajoutez une description optionnelle">
-                    <label for="project_description" class="col-sm-2 control-label">Description du projet</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="project_description" name="project_description" rows="3"></textarea>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
-    <hr>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-6">
-                    <div data-intro="Choisissez ici votre fichier source (le fichier sale à auquel associer une référence)">
-                        <h2 style="display: inline;">
-                            <span class="step_numbers">2</span>
-                            &nbsp;Sélection du fichier "source"
-                            <i class="fa fa-table" aria-hidden="true"></i>
-                        </h2>
-                        <div>
-                            Sélectionnez le fichier "source", c'est à dire le fichier auquel on veut associer des codes de référence.
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h3>
-                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                    &nbsp;Fichier "Source" sélectionné :
-                                </h3>
-                                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-                                &nbsp;<i id="src_selection">Pas encore de sélection</i>
-                                <div id="file_name_src" class="hidden"></div>
-                                <div id="src_project_name" class="hidden"></div>
-                            </div>
-                        </div>
-                        <hr>
-                        <form class="form-horizontal" name="form_src_file" id="form_src_file" method="post" enctype="multipart/form-data">
-                            <div class="row" data-intro="Vous pouvez uploader un nouveau fichier ...">
-                                <div class="col-xs-1 text-right">
-                                    <h3 class="hover_new_file_src_target">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </h3>
-                                </div>
-                                <div class="col-xs-8 hover_new_file_src" id="bt_new_file_src">
-                                    <div>
-                                        <h3>Nouveau fichier</h3>
-                                        Tout nouveau fichier devra suivre au préalable un processus de normalisation afin de pouvoir être utilisé dans un projet de jointure.
-                                        La normalisation rendra la jointure plus efficace. (<a href="#">Qu'est-ce que la normalisation ?</a>)
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 hover_new_file_src">
-                                    <div class="text-center" style="margin-top: 40px;">
-
-                                        <span class="btn btn-default btn-xl fileinput-button btn_2_3">
-                                            <h4 class="glyphicon glyphicon-plus"></h4>
-                                            <br>
-                                            <h4>Nouveau</h4>
-                                            <input id="fileupload_src" type="file" name="file">
-                                        </span>
-                                        <button id="envoyer_src" style="display: none;"></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row" data-intro="... ou en reprendre un que vous avez déjà uploadé">
-                                <div class="col-xs-1 text-right">
-                                    <h3 class="hover_exist_file_src_target">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </h3>
-                                </div>
-                                <div class="col-xs-8 hover_exist_file_src" id="bt_exist_file_src">
-                                    <div>
-                                        <h3>Fichier déjà normalisé</h3>
-                                        Si vous possédez un compte et que vous avez déjà normalisé le fichier souhaité, vous avez la possibilité de le sélectionner. Seuls les fichiers entièrement normalisés sont disponibles.
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 hover_exist_file_src" style="margin-top: 40px;">
-                                    <div class="text-center">
-                                    <?php
-                                    if(!isset($_SESSION['user'])){
-                                    ?>
-                                    <a href="<?php echo base_url('index.php/User/login/link');?>">
-                                        <span class="glyphicon glyphicon-lock"></span>
-                                        M'identifier
-                                    </a>
-                                    <?php
-                                    }
-                                    else{
-                                    ?>
-                                    <a class="btn btn-xs btn-default btn_2_3" id="bt_select_project_src">
-                                        <h4 class="glyphicon glyphicon-list-alt"></h4>
-                                        <h4>Mes fichiers</h4>
-                                    </a>
-                                    <div id="src_project_id" style="display: none;"></div>
-                                    <?php
-                                    }
-                                    ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-
-                </div>
-                <div class="col-xs-6" style="border-left: 3px dotted #ddd;">
-                    <div data-intro="Choisissez ici votre fichier de référence">
-                        <h2 style="display: inline;">
-                            <span class="step_numbers">3</span>
-                            &nbsp;Sélection du fichier "référentiel"
-                            <i class="fa fa-database" aria-hidden="true"></i>
-                        </h2>
-                        <div>
-                            Sélectionnez un fichier "référentiel", dans lequel nous chercherons les élements de la source.
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h3>
-                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                    &nbsp;Fichier "Référentiel" sélectionné :
-                                </h3>
-                                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-                                &nbsp;<i id="ref_selection">Pas encore de sélection</i>
-                                <div id="file_name_ref" class="hidden"></div>
-                                <div id="ref_project_name" class="hidden"></div>
-                                <div id="ref_internal_project_name" class="hidden"></div>
-                            </div>
-                        </div>
-                        <hr>
-                        <form class="form-horizontal" name="form_ref_file" id="form_ref_file" method="post" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-xs-1">
-                                    <h3 class="hover_new_file_ref_target">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </h3>
-                                </div>
-                                <div class="col-xs-8 hover_new_file_ref" id="bt_new_file_ref">
-                                    <div>
-                                        <h3>Nouveau fichier</h3>
-                                        Tout nouveau fichier devra suivre au préalable un processus de normalisation afin de pouvoir être utilisé dans un projet de jointure.
-                                        La normalisation rendra la jointure plus efficace. (<a href="#">Qu'est-ce que la normalisation ?</a>)
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 hover_new_file_ref">
-                                    <div class="text-center" style="margin-top: 40px;">
-                                        <span class="btn btn-default btn-xl fileinput-button btn_2_3">
-                                            <h4 class="glyphicon glyphicon-plus"></h4>
-                                            <br>
-                                            <h4>Nouveau</h4>
-                                            <input id="fileupload_ref" type="file" name="file">
-                                        </span>
-                                        <button id="envoyer_ref" style="display: none;"></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-1">
-                                    <h3 class="hover_exist_file_ref_target">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </h3>
-                                </div>
-                                <div class="col-xs-8 hover_exist_file_ref" id="bt_exist_file_ref">
-                                    <div>
-                                        <h3>Fichier déjà normalisé</h3>
-                                        Si vous possédez un compte et que vous avez déjà normalisé le fichier souhaité, vous avez la possibilité de le sélectionner. Seuls les fichiers entièrement normalisés sont disponibles.
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 hover_exist_file_ref" style="margin-top: 40px;">
-                                    <div class="text-center">
-                                    <?php
-                                    if(!isset($_SESSION['user'])){
-                                    ?>
-                                    <a href="<?php echo base_url('index.php/User/login/link');?>">
-                                        <span class="glyphicon glyphicon-lock"></span>
-                                        M'identifier
-                                    </a>
-                                    <?php
-                                    }
-                                    else{
-                                    ?>
-                                    <a class="btn btn-xs btn-default btn_2_3" id="bt_select_project_ref">
-                                        <h4 class="glyphicon glyphicon-list-alt"></h4>
-                                        <h4>Mes fichiers</h4>
-                                    </a>
-                                    <div id="ref_project_id" style="display: none;"></div>
-                                    <?php
-                                    }
-                                    ?>
-                                    </div>
-                                </div>
-                             </div>
-                            <div class="row" data-intro="Vous pouvez aussi choisir un référentiel dans notre collection de référentiels publiques">
-                                <div class="col-xs-1">
-                                    <h3 class="hover_exist_ref_target">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </h3>
-                                </div>
-                                <div class="col-xs-8 hover_exist_ref">
-                                    <div>
-                                        <h3>Référentiels publics</h3>
-                                        Vous avez la possibilité d'utiliser des référentiels publiques. Chacun de ces référentiels a déjà été normalisés. Une description de leur contenu est disponible pour chacun d'entre eux.
-                                        <br><br>
-                                        NB: Nous ne nous engageons pas sur la qualité des données.
-                                    </div>
-                                </div>
-                                <div class="col-xs-3 hover_exist_ref">
-                                    <div class="text-center" style="margin-top: 40px;">
-                                        <a class="btn btn-xs btn-default btn_2_3" id="bt_modal_ref">
-                                            <h4 class="glyphicon glyphicon-list-alt"></h4>
-                                            <h4>Sélectionner</h4>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
-                <div class="col-md-offset-6 col-md-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="chk_cgu"> En cochant cette case vous acceptez les <a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">conditions générales d'utilisation</a>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-offset-6 col-md-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="chk_reuse" checked> En cochant cette case vous acceptez que vos données soient utilisées pour l'amélioration de l'application
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="padding-top: 20px;padding-bottom: 20px;">
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-success" id="bt_new_project" style="width: 300px;">Créer le projet >></button>
-                </div>
-            </div>
-        -->
-
-
-
-
             <div class="row background_2">
                 <div class="col-md-12">
                     <div class="row" id="result" style="margin-top: 20px;color: #fff;">
-                        <div id="steps" style="margin-left: 10px;margin-right: 10px;">
+                        <div id="steps" style="padding-left:10px;">
                             <div>
                                 <span id="txt_create_merge_project">Création du projet de jointure</span>
                                 <span id="create_merge_project_ok" class="glyphicon glyphicon-ok check_ok"></span>
@@ -792,7 +530,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                             </div>
                         </div> <!--/steps-->
                     </div>
-
                     <div class="row" id="bloc_bt_next" style="padding-bottom: 20px;">
                         <div class="col-md-12 text-right">
                             <button class="btn btn-success" id="bt_next">Etape suivante : Association des colonnes >></button>
@@ -801,10 +538,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 </div>
             </div>
 
-
-
             <div id="files" class="files"></div>
-
         </div> <!-- / col-12-->
     </div><!-- / row -->
 </div><!--/container-->
@@ -874,6 +608,7 @@ function get_normalized_projects_html($id, $normalized_projects)
   </div>
 </div>
 
+<!-- Modal Aide-->
 <div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -920,9 +655,6 @@ function get_normalized_projects_html($id, $normalized_projects)
       </div>
 
       <div class="modal-footer">
-        <!--
-        <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
-        -->
         <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
       </div>
     </div><!-- /.modal-content -->
@@ -1193,6 +925,37 @@ function get_normalized_projects_html($id, $normalized_projects)
             }
         }
 
+        if(tab_error.length > 0){
+            return tab_error;
+        }
+        else{
+            return true;
+        }
+
+        // $("#errors").html("");
+        // if(tab_error.length > 0){
+        //     for (var i = 0; i < tab_error.length; i++) {
+        //         $("#errors").html($("#errors").html() + tab_error[i] + '<br>');
+        //     }
+        //
+        //     $("#modal_error").modal("show");
+        // }
+        // else{
+        //     return true;
+        // }
+
+
+
+    }// /requirements()
+
+
+    function treatment() {
+
+        var tab_error = requirements();
+        // if(!ret){
+        //     return false;
+        // }
+
         $("#errors").html("");
         if(tab_error.length > 0){
             for (var i = 0; i < tab_error.length; i++) {
@@ -1200,19 +963,10 @@ function get_normalized_projects_html($id, $normalized_projects)
             }
 
             $("#modal_error").modal("show");
-        }
-        else{
-            return true;
-        }
-    }// /requirements()
 
-
-    function treatment() {
-
-        var ret = requirements();
-        if(!ret){
             return false;
         }
+
 
         var project_name = $("#project_name").val();
         var project_description = $("#project_description").val();
@@ -1447,6 +1201,17 @@ function get_normalized_projects_html($id, $normalized_projects)
         return ret;
     }// /test_extentions()
 
+
+    function test_show_bt_new_project() {
+
+        var ret = requirements();
+        if(ret){
+            $("#bt_new_project").prop("disabled", false);
+        }
+        else {
+            $("#bt_new_project").prop("disabled", true);
+        }
+    }// /test_show_bt_new_project()
 
     // Init - Ready
     $(function() {

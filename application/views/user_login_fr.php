@@ -8,11 +8,11 @@
 				<BR>
 				Sinon, veuillez vous inscrire ici <a href='<?php echo base_url("index.php/User/new");?>' class="btn btn-xs btn-success">S'inscrire</a>
 			</div><!-- /well -->
-			
-			<form 
-				class="form-horizontal" 
-				name="my_form" 
-				method="post" 
+
+			<form
+				class="form-horizontal"
+				name="my_form"
+				method="post"
 				action="<?php echo base_url("index.php/User/login_validation");?>"
 				style="margin-top: 20px;">
 
@@ -30,22 +30,29 @@
 					</div>
 				</div>
 
-				<div class="text-right">
-					<div 
-						class="alert alert-danger error_box" 
-						role="alert"
-						style="display: inline; padding-bottom: 9px; padding-top: 7px;	margin-right: 20px;">
-						<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-						<span id="error_msg">
-							<?php 
-							if($msg){
-								echo $msg;
-							}
-							?>
-						</span>
+				<div class="row">
+					<div class="col-sm-offset-3 col-sm-4 text-left">
+						<div
+							class="alert alert-danger error_box"
+							role="alert"
+							style="display: inline; padding-bottom: 9px; padding-top: 7px;	margin-right: 20px;">
+							<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+							<span id="error_msg">
+								<?php
+								if($msg){
+									echo $msg;
+								}
+								?>
+							</span>
+						</div>
 					</div>
-					<input type="hidden" name="next" value="<?php if(isset($next)){echo $next;}?>">
-					<button type="submit" class="btn btn-success">S'identifier</button>
+					<div class="col-sm-5 text-right">
+						<input type="hidden" name="next" value="<?php if(isset($next)){echo $next;}?>">
+						<a href="<?php echo base_url("index.php/Home/password_lost");?>">
+							Mot de passe perdu ?
+						</a>
+						<button type="submit" class="btn btn-success">S'identifier</button>
+					</div>
 				</div>
 
 			</form>

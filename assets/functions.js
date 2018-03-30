@@ -18,23 +18,27 @@ function write_report_html(modified_columns, cible, auto_scroll)
 }// /write_report_html()
 
 
-function precision_Round(number, precision) {
+function precision_Round(number, precision)
+{
   var factor = Math.pow(10, precision);
   return Math.round(number * factor) / factor;
 }// /precision_Round()
 
 
-function go_to(to) {
+function go_to(to)
+{
 	$('html, body').animate( { scrollTop: $("#"+ to).offset().top }, 2000 ); // Go
 }// /go_to()
 
 
-function go_to_speed(to, speed) {
+function go_to_speed(to, speed)
+{
 	$('html, body').animate( { scrollTop: $("#"+ to).offset().top }, speed ); // Go
 }// /go_to()
 
 
-function set_height(div, size=0) {
+function set_height(div, size=0)
+{
 	if(size != 0){
 		$("#" + div).css('min-height',size);
 	}
@@ -52,7 +56,8 @@ function set_height(div, size=0) {
 }
 
 
-function show_api_error(error, error_txt) {
+function show_api_error(error, error_txt)
+{
 	console.log(error_txt);
 	console.log(error);
 
