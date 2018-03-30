@@ -361,13 +361,12 @@ class User extends CI_Controller {
 			</style>
 		</head>
 		<body style="text-align: center;">
-		<div style="margin-top: 40px;">
+		<div  style="margin-top: 40px;font-size: 16px;">
 		' . $message . '
-		</div>
-		<div>
+		<br />
 		<b><a href="'.base_url('index.php/User/email_validation/'.$id).'">Valider mon adresse email</a></b>
 		</div>
-		<div style="margin-top: 40px;text-align: left;font-size: 16px;">
+		<div style="margin-top: 60px;font-size: 16px;">
 		<i>L\'équipe de "La machine à données" vous remercie de votre confiance.</i>
 		</div>
 		</body>
