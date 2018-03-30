@@ -345,7 +345,7 @@ class User extends CI_Controller {
 		$this->load->library('email');
 		// Envoi du mot de passe par email
 		$subject = '[Machine à données] - Création de votre compte';
-		$message = "Veuillez cliquer sur le lien suivant afin de valider votre compte.";
+		$message = "Veuillez cliquer sur le lien suivant afin de finaliser la création de votre compte.";
 
 		// Get full html:
 		$body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -356,14 +356,19 @@ class User extends CI_Controller {
 			<style type="text/css">
 				body {
 					font-family: Arial, Verdana, Helvetica, sans-serif;
-					font-size: 16px;
+					font-size: 20px;
 				}
 			</style>
 		</head>
-		<body>
+		<body style="text-align: center;">
+		<div style="margin-top: 40px;">
 		' . $message . '
+		</div>
 		<div>
-		<a href="'.base_url('index.php/User/email_validation/'.$id).'">Je valide mon compte</a>
+		<b><a href="'.base_url('index.php/User/email_validation/'.$id).'">Valider mon adresse email</a></b>
+		</div>
+		<div style="margin-top: 40px;text-align: left;font-size: 16px;">
+		<i>L\'équipe de "La machine à données" vous remercie de votre confiance.</i>
 		</div>
 		</body>
 		</html>';
