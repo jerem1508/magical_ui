@@ -94,14 +94,7 @@ class User extends CI_Controller {
 			}
 		}
 
-		// Enregistrement en session
-		// $user = array('id' => $ret['id'], 'email' => $email, 'status' => $ret['status']);
-		// $this->session->set_userdata('user', $user);
-
 		redirect('/Home');
-
-		// // Chargement du tableau de bord
-		// $this->dashboard($error);
 	}// /new_save()
 
 
@@ -379,6 +372,10 @@ class User extends CI_Controller {
 			->subject($subject)
 			->message($body)
 			->send();
+
+
+			// Enregistrement en session pour affichage d'un message sur la page d'accueil
+			 $this->session->set_userdata('message_to_print', 'Afin de valider la création de votre compte, un email vous a été envoyé à l\'adresse suivante : <br />'.$email);
 	}// /send_email_validation()
 
 

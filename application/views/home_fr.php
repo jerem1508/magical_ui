@@ -25,11 +25,9 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<h1>
-				Application web permettant le
-				<span class="title">rapprochement</span>
+				Application web permettant le <span class="title">rapprochement</span>
 				<br>
-				générique de fichiers
-				<span>CSV</span>
+				générique de fichiers <span>CSV</span>
 				<!--<img src="<?php echo base_url('assets/img/csv.png');?>" style="width:100px;">-->
 
 				<div class="row">
@@ -84,19 +82,14 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="messages_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Jointure magique de deux fichiers</h4>
+        <h4 class="modal-title" id="myModalLabel">Informations :</h4>
       </div>
-      <div class="modal-body">
-		La jointure magique permet d'apparier automatiquement les fichier sale (fautes d'ortographe, données sur ou sous renseignées) avec un fichier de référence propore. Notre methode va au delà de la jointure par clé ou d'un simple fuzzy match et utilise des faisceaux d'indices pour proposer des matchs pertinents. La jointure s'appuie en partie sur la Normalisation.
-		<br>
-		<br>
-		Actuellement, ce service de jointure se limite à la jointure entre un fichier sale et un fichier de référence, ce dernier ne devant pas contenir de doublons.
-      </div>
+      <div class="modal-body"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
       </div>
@@ -108,6 +101,18 @@
 <script type="text/javascript">
 	$(function(){// ready
 		//set_height('intro');
+		var message = "";
+		<?php
+			if(isset($_SESSION['message_to_print'])){
+				echo 'message = '.$_SESSION['message_to_print'];
+				unset($_SESSION['message_to_print']);
+			}
+		?>
+
+		if(message.length > 0){
+			$("#messages_modal .modal").html(message);
+			$("#messages_modal").modal("show");
+		}
 	});// /ready
 </script>
 </body>
