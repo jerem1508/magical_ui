@@ -287,7 +287,7 @@ function show_data_html(data, start) {
         var id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
 
         var no_line = start + i + 1;
-        html += '<tr class="line ' + no_line + '">';
+        html += '<tr class="line_' + no_line + '" style="border-top: solid #333 2px;">';
         html += '    <td rowspan="2" class="text-center no_line"><h4 class="value_vcentered ' + no_line + '">' + no_line + '</h4></td>';
 
         // Récupération de l'indice de confiance
