@@ -69,11 +69,13 @@
 
 <div class="row git" style="background-color: #121212; padding-top: 20px; padding-bottom: 20px; color: #fff">
 	<div class="col-md-12 text-center">
-		<img src="<?php echo base_url('assets/img/github-ffffff.png');?>" class="" style="width:200px;">
+		<a href="https://github.com" target="_blank" style="color:#fff;font-weight:bold;">
+			<img src="<?php echo base_url('assets/img/github-ffffff.png');?>" class="" style="width:200px;">
+		</a>
 		<br />
-		<h2>Merge-Machine</h2>
+		<h2><a href="https://github.com/entrepreneur-interet-general/Merge-Machine" target="_blank" style="color:#EC150C;font-weight:bold;">Merge-Machine</a></h2>
 		<div  class="text" style="width: 400px; margin-right: auto; margin-left: auto;font-size: 1.1em;">
-			Le projet se trouve sur <a href="https://github.com/entrepreneur-interet-general/the-magical-csv-merge-machine" target="_blank" style="color:#aaa;font-weight:bold;">Github</a> sous licence MIT.
+			Le projet se trouve sur <a href="https://github.com" target="_blank" style="color:#fff;font-weight:bold;">Github</a> sous licence MIT.
 			<br>
 			Vous pouvez l'utiliser et/ou participer à son amélioration.
 		</div>
