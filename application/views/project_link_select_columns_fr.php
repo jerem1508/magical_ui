@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-sm-11">
             <div class="page_explain">
-                <strong>Pour associer des colonnes</strong>, vous devez ajouter une <button class="btn btn-xs btn-success2">Ajouter une association&nbsp;<span class="glyphicon glyphicon-plus"></span></button> puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>source ET du référentiel</strong>.<br>
-                Répétez cette opération autant de fois que nécessaire.
+                <strong>Pour associer des colonnes</strong>, vous devez ajouter une <button class="btn btn-xs btn-success2">Ajouter une association&nbsp;<span class="glyphicon glyphicon-plus"></span></button> puis <strong>cliquer</strong> sur la ou les colonnes souhaitées de la <strong>"source"</strong> ET du <strong>"référentiel"</strong>.<br>
+                Répétez cette opération autant de fois que nécessaire. Vous pouvez ajouter jusqu'à 5 associations maximum.
             </div>
         </div>
         <div class="col-sm-1 text-right">
@@ -21,6 +21,7 @@
                 Source
             </h3>
             <span class="keys"></span><span id="src_file_name" class="filename key_numbers"></span>
+            <button class="btn btn-xs btn-success2" id="bt_show_data_src">Voir <i class="fa fa-eye"></i></button>
             <hr />
             <div id="src_columns"></div>
         </div>
@@ -35,7 +36,6 @@
             </div>
         </div>
 
-
         <div class="col-xs-3 titre right" data-intro="... puis les colonnes correspondantes du référentiel">
             <h3 style="margin-top: 0;margin-bottom: 0;">
                 <i class="fa fa-database" aria-hidden="true"></i>
@@ -43,8 +43,8 @@
                 Référentiel
             </h3>
             <span class="keys"></span><span id="ref_file_name" class="filename key_numbers"></span>
+            <button class="btn btn-xs btn-success2" id="bt_show_data_ref">Voir <i class="fa fa-eye"></i></button>
             <hr />
-
             <div id="ref_columns"></div>
         </div>
     </div>
@@ -157,7 +157,6 @@
               </div>
           </div>
       </div>
-
       <div class="modal-footer">
         <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
@@ -165,6 +164,36 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_src">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Aperçu du fichier "Source"</h4>
+      </div>
+      <div class="modal-body" style="overflow-x:scroll"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /modal_src -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_ref">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Aperçu du fichier "Référentiel"</h4>
+      </div>
+      <div class="modal-body" style="overflow-x:scroll"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /modal_ref -->
 
 
 <script type="text/javascript">
@@ -181,7 +210,8 @@ function get_metadata(project_type, project_id) {
                 show_api_error(result, "API error - metadata");
             }
             else{
-                console.log("success - metadata");console.dir(result);
+                console.log("success - metadata");
+                //console.log(result);
                 metadata = result.metadata;
             }
         },
@@ -197,11 +227,6 @@ function get_metadata(project_type, project_id) {
 
 function get_runinfo(project_type, project_id, module_name, file_name, metadata) {
     // Récupere le contenu d'un fichier runInfo via API
-    /*
-    console.log('get_runinfo('+project_type+','+project_id+','+module_name+','+file_name+',metadata)');
-    console.log('metadata:');
-    console.log(metadata);
-    */
     var runinfo = "";
 
     // Parametres
@@ -226,7 +251,7 @@ function get_runinfo(project_type, project_id, module_name, file_name, metadata)
             }
             else{
                 console.log("success - download_config");
-                console.log(result);
+                //console.log(result);
 
                 //runinfo = result.result.params.column_types;
                 runinfo = result.result.column_types;
@@ -312,7 +337,7 @@ function add_column_certain_matches_api() {
             }
             else{
                 console.log("success - add_column_certain_matches");
-                console.log(result);
+                //console.log(result);
             }
         },
         error: function (result, status, error){
@@ -337,7 +362,7 @@ function add_column_matches_api() {
 
     var tparams = "{\"column_matches\": ["+chaine_json+"]}";
     console.log('tparams_column_matches:');
-    console.log(tparams);
+    //console.log(tparams);
 
     $.ajax({
         type: 'post',
@@ -352,7 +377,7 @@ function add_column_matches_api() {
             }
             else{
                 console.log("success - add_column_matches");
-                console.log(result);
+                //console.log(result);
             }
         },
         error: function (result, status, error){
@@ -411,7 +436,13 @@ function get_buttons_actions() {
         $('#modal_help').modal('show');
     });
 
+    $("#bt_show_data_src").click(function(){
+        $('#modal_src').modal('show');
+    });
 
+    $("#bt_show_data_ref").click(function(){
+        $('#modal_ref').modal('show');
+    });
 }// /get_buttons_actions()
 
 
@@ -436,7 +467,7 @@ function get_sample(file_name, project_id){
         "module_params":{
             "sampler_module_name": "standard",
             "sample_params": {
-                "num_rows": 20
+                "num_rows": 200
             }
         }
     }
@@ -455,8 +486,6 @@ function get_sample(file_name, project_id){
                 show_api_error(result, "API error - get_sample()");
             }
             else{
-                // console.log("success sample");
-                // console.log(result.sample);
                 ret = result.sample;
             }
         },
@@ -468,6 +497,44 @@ function get_sample(file_name, project_id){
     return ret;
 
 }// /get_sample()
+
+
+function show_sample_html(sample, columns, target) {
+    var html = '<table class="table table-responsive table-condensed table-striped" id="sample_table_' + target + '">';
+    html += "<thead><tr>";
+    $.each(columns, function( j, name) {
+          html += '<th>' + name + "</th>";
+        });
+    html += "</tr></thead><tbody>";
+    $.each(sample, function( i, obj) {
+        html += "<tr>";
+        $.each(columns, function( j, name) {
+            html += "<td>" + obj[name] + "</td>";
+        });
+        html += "</tr>";
+    });
+    html += "</tbody></table>";
+
+    return html;
+}// /show_sample_html()
+
+
+function set_dataTable(target) {
+    $("#sample_table_" + target).DataTable({
+                            "language": {
+                               "paginate": {
+                                    "first":      "Premier",
+                                    "last":       "Dernier",
+                                    "next":       "Suivant",
+                                    "previous":   "Précédent"
+                                },
+                                "search":         "Rechercher:",
+                                "lengthMenu":     "Voir _MENU_ enregistrements par page"
+                            },
+                            "lengthMenu": [5,20,"ALL"],
+                            "responsive": true
+                        });
+}// /set_dataTable()
 
 
 $(function(){// ready
@@ -529,6 +596,14 @@ $(function(){// ready
     // Récupération des 2 échantillons
     sample_src = get_sample(src_file_name, project_id_src);
     sample_ref = get_sample(ref_file_name, project_id_ref);
+
+    // Ajout des échantillons aux modales respectives
+    $("#modal_src .modal-body").html(show_sample_html(sample_src, columns_src, "src"));
+    $("#modal_ref .modal-body").html(show_sample_html(sample_ref, columns_ref, "ref"));
+
+    // dataTable aux sample_src
+    set_dataTable("src");
+    set_dataTable("ref");
 
     // Ajout des colonne à l'interface
     $("#src_columns").html(get_columns_html(columns_src, infer_src, "src", sample_src));

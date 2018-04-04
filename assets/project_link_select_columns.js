@@ -26,7 +26,7 @@ function get_columns_html(tab_columns, infer_columns, target, sample) {
 		//txt_sample = get_sample_html(tab_columns[i], sample);
 		var tab_sample = [];
 		for (var sample_line in sample) {
-			console.log(sample[sample_line][tab_columns[i]]);
+			//console.log(sample[sample_line][tab_columns[i]]);
 			tab_sample.push(sample[sample_line][tab_columns[i]]);
 		}
 		txt_sample = tab_sample.join(", ");
