@@ -1,9 +1,9 @@
 {
     "fields": {
-        "City": "Ville",
-        "Country": "Pays",
-        "ID": "Identifiant GRID de l'enregistrement",
-        "Name": "Libellé",
-        "State": "Etat US"
+		"ID": "Identifiant GRID (Global Research Identifier Database).",
+		"Name": "Nom de l'établissement.",
+		"City": "Ville d'implantation de l'établissement.",
+		"State": "État d'implantation de l'établissement.",
+		"Country": "Pays d'implantation de l'établissement."
     }
 }

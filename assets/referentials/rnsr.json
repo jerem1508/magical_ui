@@ -1,9 +1,22 @@
 {
     "fields": {
-        "City": "Ville",
-        "Country": "Pays",
-        "ID": "Identifiant GRID de l'enregistrement",
-        "Name": "Libellé",
-        "State": "Etat US"
+		"Numéro national de structure": "Numéro du Référentiel National des Structures de Recherche." ,
+		"Libellé": "Libéllé de l'organisme." ,
+		"État": "Etat de la structure (active ou non)." ,
+		"Année de création": "Année de création de l'organisme." ,
+		"Année de fermeture": "Année de fermeture de l'organisme." ,
+		"Adresse postale": "Adresse postal de l'organisme." ,
+		"Ville postale": "Ville de l'organisme.",
+		"Code postal": "Code postal de la ville de l'organisme." ,
+		"Date de mise à jour": "Date de la mise à jour de cette ligne de données." ,
+		"Label numéro": "Concaténation de différents labels (code UMR, EA) associés à l'organisme." ,
+		"Libellé établissement tutelle": "Libellé d'établissements tutelles de l'organisme." ,
+		"Sigle établissement tutelle": "Sigles d'établissements tutelles de l'organisme." ,
+		"Responsables": "Noms des responsables de l'organisme." ,
+		"ID EA": "Identifiant EA de l'organisme." ,
+		"ID GDR": "Identifiant GDR de l'organisme." ,
+		"ID UMR": "Identifiant UMR de l'organisme." ,
+		"ID UMRA": "Identifiant UMRA de l'organisme." ,
+		"ID UMRS": "Identifiant UMRS de l'organisme." 
     }
 }
