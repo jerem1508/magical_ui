@@ -31,5 +31,5 @@ Access : http://localhost/phpmyadmin
 ```
 ### First script
 ```
-init.sql
+mysql -u root -p magical_ui < init.sql
 ```
