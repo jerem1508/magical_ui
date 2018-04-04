@@ -230,7 +230,15 @@ class User extends CI_Controller {
 		$data['linked_projects'] = $this->linked_projects;
 		$data['title'] = "Tableau de bord";
 		$data["nb_projects"] = count($this->linked_projects);
-		$data["nb_files"] = count($this->normalized_projects);
+		// Nombre de fichiers de normalisation. On exclu les projets vides
+		$cpt = 0;
+		foreach ($this->normalized_projects as $project) {
+			if(empty($project['file'])){
+				continue;
+			}
+			$cpt++;
+		}
+		$data["nb_files"] = $cpt;
 
 		// Chargement des vue
 		$this->load->view('lib', $data);
