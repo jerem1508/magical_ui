@@ -381,10 +381,23 @@ function get_buttons_actions() {
     });
 
     $("#bt_add_bloc").click(function(){
-        // Incrementation du numéro de bloc
-        cpt_bloc++;
-        // Création du nouveau bloc
-        new_bloc(cpt_bloc);
+
+        // Comptage des associations. 5 maximum
+        var cpt = 0;
+        $(".blocs_analysis").each(function( index ) {
+            cpt ++;
+        });
+
+        if(cpt == 5){
+            show_api_error("", "5 associations maximum");
+        }
+        else {
+            // Incrementation du numéro de bloc
+            cpt_bloc++;
+            // Création du nouveau bloc
+            new_bloc(cpt_bloc);
+        }
+
     });
 
     $("#bt_valid_add_bloc").click(function(){

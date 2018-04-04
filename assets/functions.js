@@ -61,7 +61,7 @@ function show_api_error(error, error_txt)
 	console.log(error_txt);
 	console.log(error);
 
-	var status = 'error.status';
+	var status = '';
 	switch (error.status) {
 		case 400:
 			status = '400 : La syntaxe de la requête est erronée.';
