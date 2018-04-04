@@ -5,8 +5,8 @@ $config['protocol']         = 'smtp';                   // 'mail', 'sendmail', o
 $config['mailpath']         = '/usr/sbin/sendmail';
 
 $config['smtp_host']        = 'smtp.gmail.com';
-$config['smtp_user']        = 'jeremy.peglion@gmail.com';
-$config['smtp_pass']        = 'cerisebanane';
+$config['smtp_user']        = 'mad.mesri@gmail.com';
+$config['smtp_pass']        = '';
 $config['smtp_port']        = 465;
 
 $config['smtp_timeout']     = 30;                       // (in seconds)
