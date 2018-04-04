@@ -74,43 +74,51 @@
                 </div>
             </div><!-- / row-->
 
-            <hr style="border-top: 4px dashed #ddd;">
 
-            <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
-                <div class="col-xs-12">
-                    <h2>
-                        <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
-                        &nbsp;Labellisation
-                    </h2>
-                    <div class="row">
-                        <div class="col-xs-offset-1 col-xs-10 text-justify">
-                            <div class="well">
-                                La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                            </div><!-- /well-->
-                        </div>
-                    </div><!-- / row-->
-                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
-                        <div class="col-xs-offset-1 col-xs-4 text-justify">
-                            <div style="margin-bottom: 20px;">
-                                <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
-                                <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();">
-                                    <i class="fa fa-trash"></i>&nbsp;Effacer
-                                </button>
-                            </div>
+    <hr style="border-top: 3px dotted #777;">
 
-                            <div id="user_filters">
-                                <i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d'optimiser la proposition faite.
-                            </div>
+    <div class="row" data-intro="Indiquez nous si le match proposé est correct. La machine tente d'apprendre de ses erreurs; plus vous labellisez, meilleurs seront les résultats.">
+        <div class="col-xs-12">
+            <h2>
+                <span class="step_numbers">2</span>
+                &nbsp;Labellisation
+            </h2>
+            <div class="row">
+                <div class="col-xs-offset-1 col-xs-10 text-justify">
+                    <div class="well">
+                        La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
+                        <div style="margin-top: 20px;">
+                            Taux de précision souhaité :
+                            <select>
+                                <option>Tout apparier</option>
+                                <option>Précision élevée (plus de résultats)</option>
+                                <option>Précision 100% (moins de résultats)</option>
+                            </select>
                         </div>
-                        <div class="col-xs-7">
-                            <div id="message">
-                                <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-                            </div>
-                            <div class="q_label">
-                                Ces informations sont-elles identiques ?
-                            </div>
-                            <div>
-                                <button class="btn btn-default btn-xl btn_icon btn-default"
+                    </div><!-- /well-->
+                </div>
+            </div><!-- / row-->
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="col-xs-offset-1 col-xs-4 text-justify">
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="margin-top: 0;display: inline;">Filtres utilisateur temporaires :</h4>
+                        <button id="bt_user_filters_delete" style="visibility: hidden;" class="btn btn-xs btn-danger" onclick="delete_user_filter();">
+                            <i class="fa fa-trash"></i>&nbsp;Effacer
+                        </button>
+                    </div>
+                    <div id="user_filters">
+                        <i class="fa fa-info-circle"></i> Pour ajouter un filtre temporaire, vous devez cliquer sur un ou plusieurs termes de la source. Cela à pour but de cibler plus précisément les recherches et donc d'optimiser la proposition faite.
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <div id="message">
+                        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+                    </div>
+                    <div class="q_label">
+                        Ces informations sont-elles identiques ?
+                    </div>
+                    <div>
+                        <button class="btn btn-default btn-xl btn_icon btn-default"
                                 data-toggle="tooltip"
                                 title="Revenir à la proposition précédente"
                                 onclick="socket_answer('previous');"
