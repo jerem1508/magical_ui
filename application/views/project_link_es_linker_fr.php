@@ -972,7 +972,7 @@ function set_stats_html(stats) {
 }// /set_stats_html()
 
 
-function set_log_property_api(module_name) {
+function set_log_property_api(module_name, reload=false) {
     // Test du filename, on ne doit pas ecrire sur le MINI
     var file_name_temp = metadata_link['files']['source']['file_name'];
     if(file_name_temp.substr(0,6) === 'MINI__' ){
@@ -1004,6 +1004,11 @@ function set_log_property_api(module_name) {
             else{
                 console.log("success - set_log_property");
                 console.log(result);
+
+                if(reload){
+                    // Chargement de la page précédente (rappel du controller)
+                    location.reload();
+                }
             }
         },
         error: function (result, status, error){
@@ -1016,10 +1021,7 @@ function set_log_property_api(module_name) {
 function to_previous_page() {
     set_log_property_api("upload_es_train");
     set_log_property_api("es_linker");
-    set_log_property_api("link_results_analyzer");
-
-    // Chargement de la page précédente (rappel du controller)
-    location.reload();
+    set_log_property_api("link_results_analyzer", true);
 } // /to_previous_page()
 
 
