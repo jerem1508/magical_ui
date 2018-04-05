@@ -208,7 +208,7 @@
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
-						} // /foreach $normalized_projects
+						} // /foreach $linked_projects
 						?>
 					</tbody>
 				</table>

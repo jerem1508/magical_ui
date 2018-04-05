@@ -2,13 +2,24 @@
 
 <div class="container-fluid background_1" id="entete" style="padding-bottom: 20px;margin-left:20px;margin-right:20px;">
     <div class="row">
-        <div class="col-md-8">
-            <h2 style="margin-top: 40px;">
+        <div class="col-md-11">
+            <h2 style="margin-top: 5px;">
                 <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
                 &nbsp;Résultat de la jointure
             </h2>
         </div>
-        <div class="col-md-4 text-right" id="pagination"></div>
+        <div class="col-md-1 text-right">
+            <button type="button" id="bt_help" class="btn btn-success3">AIDE</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11">
+            Les résultats sont affichés dans l'ordre du fichier source. Pour chaque ligne on montre les éléments de la source (pour les colonnes qui servent au match) ainsi que les éléments de la ligne de la référence qui sont proposées comme match. Le score indique la confiance de la machine dans le match et le bouton Vrai/Faux indique si la machine pense que la ligne montrée est effectivement un match (en fonction du score).
+            <br />
+            <br />
+            Toutes les modifications seront prises en compte dans le fichier téléchargeable.
+        </div>
+        <div class="col-md-1 text-right" id="pagination"></div>
     </div>
     <div id="result">
         <div class="row text-center">
@@ -20,17 +31,8 @@
     <div class="row">
         <div class="col-md-offset-8 col-md-4 text-right" id="pagination2"></div>
     </div>
+
     <hr style="border-top: 4px dashed #ddd;">
-    <!--
-    <div class="row">
-        <div class="col-md-12">
-            <h2>
-                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
-                &nbsp;Statistiques
-            </h2>
-        </div>
-    </div>
-    -->
 
     <div class="row" id="stats">
         <div class="col-xs-offset-3 col-xs-2">
@@ -58,17 +60,9 @@
             </div>
         </div>
     </div>
+
     <hr style="border-top: 4px dashed #ddd;">
-    <!--
-    <div class="row">
-        <div class="col-md-12">
-            <h2>
-                <span class="step_numbers"><i class="fa fa-chevron-circle-right"></i></span>
-                &nbsp;Télechargement
-            </h2>
-        </div>
-    </div>
-    -->
+
     <div class="row">
         <div class="col-md-2">
             <button class="btn btn-success" id="bt_previous_page"><i class="fa fa-chevron-circle-left"></i> Précédent</button>
@@ -79,6 +73,58 @@
         </div>
     </div>
 </div><!--/container-->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_help">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Aide
+        </h4>
+      </div>
+      <div class="modal-body">
+          <h4>Comment lire ?</h4>
+            On affiche les lignes dans l'ordre du fichier source. Pour chaque ligne on montre les éléments de la source (pour les colonnes qui servent au match) ainsi que les éléments de la ligne de la référence qui sont proposées comme match. Le score indique la confiance de la machine dans le match et le bouton Vrai/Faux indique si la machine pense que la ligne montrée est effectivement un match (en fonction du score).
+
+          <h4>Score et seuil</h4>
+            Les résultats sont renvoyés avec un score correspondant au score Elasticsearch. Le seuil détermine le score à partir duquel la machine estime qu'une paire de lignes est un match
+
+          <h4>Vrai / Faux</h4>
+            Les boutons indiquent par défaut si la machine suppose que la paire montrée est un match (quand la machine ne trouve pas de match, elle peut renvoyer ce qu'elle considère comme le meilleur candidat). L'utilisateur peut modifier la valeur Vrai/Faux pour indiquer qu'une paire est effectivement un match (Vrai) ou non (Faux). Cela se retrouvera lors du téléchargement du fichier...
+
+          <h4>Le fichier de sortie</h4>
+            Le fichier de sortie présente autant de lignes que votre fichier source. Toutes les colonnes du fichier source sont présentes. Par ailleurs, les colonnes du référentiel sont aussi présentes sous leur nom original suivi du suffix “__REF” (par exemple: “adresse_REF”); pour chaque ligne, lorsqu’un match a été trouvé, les valeurs correspondantes du référentiel se trouvent dans ces colonnes. Par ailleurs nous créons les colonnes suivantes:
+          <ul>
+              <li>
+                <strong>__CONFIDENCE</strong>: La confiance que nous accordons au match présenté. Dans notre machine, les résultats avec une confiance au dessus de 1 sont considérés comme des matchs. Les lignes pour lesquelles la confiance vaut 999 correspondent à des lignes labellisées comme étant des matchs par l’utilisateur.
+              </li>
+              <li>
+                <strong>__IS_MATCH</strong>: Vaut 1 si la machine pense que la paire présentée est une match valide. Si elle vaut 0, c’est que c’est que les valeurs trouvées pour la référence sont les meilleurs à proposer mais que la machine ne pense pas que le match est valide.
+              </li>
+              <li>
+                <strong>__ID_REF</strong>: Identifiant interne associé à la ligne de la référence. Peut être utile pour des jointures croisées de 2 fichiers sales.
+              </li>
+              <li>
+                <strong>__ID_QUERY</strong>: L’identifiant de la methode utilisée pour le match (spécifique à chaque projet de jointure). Peut être utile pour faire des distinctions de cas si vous observez des performances fluctuantes selon cette variable.
+              </li>
+              <li>
+                <strong>__ES_SCORE</strong>: Le score original de la requête Elasticsearch avec la méthode (<strong>__ID_QUERY</strong>) choisie pour la ligne en question.
+              </li>
+              <li>
+                <strong>__THRESH</strong>: Le seuil (relatif au score <strong>__ES_SCORE</strong>) pour la méthode (<strong>__ID_QUERY</strong>) utilisé pour la machine pour déterminer la confiance (<strong>__CONFIDENCE</strong>) et si le match est valide (<strong>__IS_MATCH</strong>)
+              </li>
+          </ul>
+      </div>
+
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-success3" data-dismiss="modal" onclick="javascript:introJs().setOption('showBullets', false).start();">Lancer le didacticiel</button> -->
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Fermer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <script type="text/javascript">
 
@@ -767,6 +813,10 @@ function add_buttons() {
 
     $("#bt_previous_page").click(function(){
         to_previous_page();
+    });
+
+    $("#bt_help").click(function(){
+        $('#modal_help').modal('show');
     });
 }// /add_buttons()
 
