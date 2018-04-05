@@ -328,6 +328,9 @@ function show_data_html(data, start) {
     html += '</tr>';
 
     for (var i = 0; i < data.length; i++) {
+        if(data[i].hits.hits.length == 0){
+            continue;
+        }
         // Récupération id_source/id_ref
         var id_source = data[i].hits.hits[0]['_id'];
         var id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
