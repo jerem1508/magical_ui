@@ -87,14 +87,14 @@
                 <div class="col-xs-offset-1 col-xs-10 text-justify">
                     <div class="well">
                         La labellisation permet à la machine d'apprendre comment apparier les lignes entre elles. Vous devez indiquer si les paires proposées concordent (OUI) ou diffèrent (NON), ou si la ligne de la source n'a pas besoin d'être cherchée dans le référentiel (Oublier cette ligne (source)). La machine propose alternativemement les matchs les plus probables et des matchs qu'elle voit comme faux.
-                        <div style="margin-top: 20px;">
+                        <!-- <div style="margin-top: 20px;">
                             Taux de précision souhaité :
                             <select>
                                 <option>Tout apparier</option>
                                 <option>Précision élevée (plus de résultats)</option>
                                 <option>Précision 100% (moins de résultats)</option>
                             </select>
-                        </div>
+                        </div> -->
                     </div><!-- /well-->
                 </div>
             </div><!-- / row-->
