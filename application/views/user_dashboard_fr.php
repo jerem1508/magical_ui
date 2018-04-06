@@ -211,25 +211,26 @@
 						foreach ($linked_projects as $project) {
 
 							// Barre d'avancement
-							$steps_html = "";
-							if(!get_error_file($project['file_src'], $project['file_ref'])){
-								$steps_html = '<div class="progress">';
-								$found_step_todo = false;
-								$step_todo = "";
-								foreach ($tab_steps as $step) {
-									$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
-									$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
+							$steps_html = '<div class="progress">';
+							$found_step_todo = false;
+							$step_todo = "";
+							foreach ($tab_steps as $step) {
+								$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
+								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
 
-									if(!$found_step_todo){
-										if(!is_completed_link_step($step, $project['steps_by_filename'])){
-											$step_todo = $step;
-											$found_step_todo = true;
-										}
+								if(!$found_step_todo){
+									if(!is_completed_link_step($step, $project['steps_by_filename'])){
+										$step_todo = $step;
+										$found_step_todo = true;
 									}
-								}// /foreach tab_steps
-								$steps_html.= '</div>';
-							}
+								}
+							}// /foreach tab_steps
+							$steps_html.= '</div>';
 
+							if(!get_error_file($project['file_src'], $project['file_ref'])){
+								$steps_html = "";
+							}
+							
 							// Traitemnt des nom de fichiers
 							$file_src_maximized = trt_file_names($project['file_src']);
 							$file_ref_maximized = trt_file_names($project['file_ref']);
