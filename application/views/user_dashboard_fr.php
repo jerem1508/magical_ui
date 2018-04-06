@@ -227,10 +227,10 @@
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
 
-							if(!get_error_file($project['file_src'], $project['file_ref'])){
+							if(get_error_file($project['file_src'], $project['file_ref'])){
 								$steps_html = "";
 							}
-							
+
 							// Traitemnt des nom de fichiers
 							$file_src_maximized = trt_file_names($project['file_src']);
 							$file_ref_maximized = trt_file_names($project['file_ref']);
