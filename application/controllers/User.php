@@ -266,6 +266,10 @@ class User extends CI_Controller {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
+			if($project_api == 404){
+				continue;
+			}
+
 			// if($project_api == ""){
 			// 	// Suppression en base
 			// 	$projects_list = $this->Projects_model->delete_project($project['project_id']);
@@ -273,10 +277,7 @@ class User extends CI_Controller {
 			// }
 
 			if(!$project_api){
-				// Suppression du projet en base car il n'exise pas sur le serveur data
 				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
-				//$this->Projects_model->delete_project($project['project_id']);
-				//throw new Exception("An internal synchronization error occurred on our server", 1);
 				continue;
 			}
 
@@ -295,8 +296,26 @@ class User extends CI_Controller {
 				$this->normalized_projects[] = $project;
 			}
 			else{
-				$project['file_src'] = $project_api['files']['source']['file_name'];
-				$project['file_ref'] = $project_api['files']['ref']['file_name'];
+				$src_id = $project_api['files']['source']['project_id'];
+				$ref_id = $project_api['files']['ref']['project_id'];
+
+				// test des projets de normalisation - erreur 404 si non trouvé (suppression par exemple)
+				$test_src = $this->private_functions->get_metadata_api('normalize', $src_id);
+				$test_ref = $this->private_functions->get_metadata_api('normalize', $ref_id);
+
+				if($test_src == 404){
+					$project['file_src'] = 404;
+				}
+				else{
+					$project['file_src'] = $project_api['files']['source']['file_name'];
+				}
+
+				if($test_ref == 404){
+					$project['file_ref'] = 404;
+				}
+				else{
+					$project['file_ref'] = $project_api['files']['ref']['file_name'];
+				}
 
 				$this->linked_projects[] = $project;
 			}

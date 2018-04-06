@@ -15,19 +15,6 @@
 			<button type="button" id="bt_help" class="btn btn-success3">Aide</button>
 		</div>
 	</div>
-<!--
-	<div class="row">
-		<div class="col-sm-6">
-		</div>
-		<div class="col-sm-6 text-right">
-			<div id="didacticiel">
-            	<span class="btn btn-default btn-xl fileinput-button btn_2_3" onclick="javascript:introJs().setOption('showBullets', false).start();">
-                	<img src="<?php echo base_url('assets/img/laptop.svg');?>"><br>Aide
-	            </span>
-			</div>
-		</div>
-	</div>
--->
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<button class="btn btn-success" id="bt_infer_types">Lancer la détection des types</button>
@@ -36,7 +23,10 @@
 	<div class="row">
 		<div class="col-xs-12 text-center" id="wait" style="padding-bottom: 20px;">
 			<img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
-			<h3>Le traitement peut prendre quelques minutes, veuillez patienter ...</h3>
+			<h3>
+				Le traitement est en cours et peut prendre quelques minutes
+				<br />Vous pouvez passer cette étape
+			</h3>
 			<a id="bt_skip_infer" class="btn btn-success">Passer cette étape <i class="fa fa-chevron-circle-right"></i></a>
 		</div>
 	</div>

@@ -1,10 +1,10 @@
 <?php
 	function get_status($public=0){
 		if($public){
-			return '<i class="fa fa-unlock"></i>';
+			return '<i class="fa fa-unlock" data-toggle="tooltip" data-placement="right" title="Fichier public"></i>';
 		}
 		else{
-			return '<i class="fa fa-lock"></i>';
+			return '<i class="fa fa-lock" data-toggle="tooltip" data-placement="right" title="Fichier privé"></i>';
 		}
 	}// /get_status()
 
@@ -53,8 +53,8 @@
 			case 'upload_es_train':
 			case 'es_linker':
 				return @$project_steps[$filename][$step_name];
-
 				break;
+
 			default :
 				return false;
 		}
@@ -78,28 +78,39 @@
 	}// /get_progress_html()
 
 
-	function get_lien_html($step_todo, $project_id, $project_type){
+	function get_lien_html($step_todo, $project, $project_type){
+		if(get_error_file($project['file_src'], $project['file_ref'])){
+			return "";
+		}
 
 		if($step_todo){
-			$lib_todo = "Poursuivre";
-
 			$html = '<button
 						class="btn btn-xs btn-warning btn_tdb"
-						onclick="load_step(\''.$step_todo.'\', \''.$project_id.'\', \''.$project_type.'\');">
+						onclick="load_step(\''.$step_todo.'\', \''.$project['project_id'].'\', \''.$project_type.'\');">
 						Poursuivre
 					</button>';
 		}
 		else{
 			$html = '<button
 						class="btn btn-xs btn-success3 btn_tdb"
-						onclick="load_step(\'concat_with_init\', \''.$project_id.'\', \''.$project_type.'\');">
+						onclick="load_step(\'concat_with_init\', \''.$project['project_id'].'\', \''.$project_type.'\');">
 						Rapport
 					</button>';
 		}
-
-
 		return $html;
 	} // /get_lien_html()
+
+
+	function get_lien_dl_html($step_todo, $project_id, $file_name){
+		$html = "";
+		if(!$step_todo){
+			$html = '<a onclick="dl_file(\''.$project_id.'\', \''.$file_name.'\');">
+						<i class="fa fa-download"></i>
+					 </a>';
+		}
+
+		return $html;
+	} // /get_lien_dl_html()
 
 
 	function get_lien_supp_html($project_type, $project_id){
@@ -111,10 +122,39 @@
 				</a>';
 		return $html;
 	}// /get_lien_supp_html()
+
+
+	function trt_file_names($name){
+		if($name == 404){
+			return '<i style="color: red;">Fichier inconnu</i>';
+		}
+
+		if(strlen($name) > MAX_LIB_FILENAME){
+			return substr($name,0,MAX_LIB_FILENAME).'...';
+		}
+		else {
+			return $name;
+		}
+	}
+
+
+	function get_error_file_html($file_src, $file_ref){
+		$html = "";
+		if(get_error_file($file_src, $file_ref)){
+			$html = '<i class="fa fa-times" style="color: red;"></i>';
+		}
+		return $html;
+	}// /get_error_file_html()
+
+
+	function get_error_file($file_src, $file_ref){
+		if($file_src == 404 || $file_ref == 404){
+			return true;
+		}
+		return false;
+	}// /get_error_file()
 ?>
-<!--
-<img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
--->
+
 <div>
 	<ul class="nav nav-tabs">
 	  <li class="active"><a data-toggle="tab" href="#link_tab" id="bt_tab_link" onclick="show_tabs('link');"><h4>Mes projets de jointure</h4></a></li>
@@ -152,6 +192,7 @@
 				<table class="table table-responsive table-condensed table-striped" id="linked_projects">
 					<thead>
 						<tr>
+							<th></th>
 							<th>Projet</th>
 							<th>Date de création</th>
 							<th>Source</th>
@@ -159,14 +200,15 @@
 							<th>Avancement</th>
 							<th></th>
 							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker', 'link_results_analyzer'];
 						$tab_steps = ['add_selected_columns', 'upload_es_train', 'es_linker'];
 						$nb_steps = count($tab_steps);
 						$ratio = 100/$nb_steps;
+
 						foreach ($linked_projects as $project) {
 							$steps_html = '<div class="progress">';
 							$found_step_todo = false;
@@ -184,28 +226,21 @@
 							}// /foreach tab_steps
 							$steps_html.= '</div>';
 
-							if(strlen($project['file_src']) > MAX_LIB_FILENAME){
-								$file_src_maximized = substr($project['file_src'],0,MAX_LIB_FILENAME).'...';
-							}
-							else {
-								$file_src_maximized = $project['file_src'];
-							}
+							// Traitemnt des nom de fichiers
+							$file_src_maximized = trt_file_names($project['file_src']);
+							$file_ref_maximized = trt_file_names($project['file_ref']);
 
-							if(strlen($project['file_ref']) > MAX_LIB_FILENAME){
-								$file_ref_maximized = substr($project['file_ref'],0,MAX_LIB_FILENAME).'...';
-							}
-							else {
-								$file_ref_maximized = $project['file_ref'];
-							}
+							$error_file = get_error_file_html($project['file_src'],$project['file_ref']);
 
 							echo '<tr>';
-							//echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
-							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['project_id'].'">'.$project['display_name'].'</span></td>';
+							echo '<td>'.$error_file.'</td>';
+							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_src'].'">'.$file_src_maximized.'</span></td>';
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_ref'].'">'.$file_ref_maximized.'</span></td>';
 							echo '<td class="text-center">'.$steps_html.'</td>';
-							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'],'link').'</td>';
+							echo '<td class="text-center">'.get_lien_html($step_todo, $project,'link').'</td>';
+							echo '<td class="text-center">'.get_lien_dl_html($step_todo, $project['project_id'],$project['file_src']).'</td>';
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
 						} // /foreach $linked_projects
@@ -225,28 +260,6 @@
 
   <div id="normalize_tab" class="tab-pane fade">
 	<div class="container">
-		<!--
-		<div class="row text-right">
-			<div class="col-xs-12">
-				<button
-					class="btn btn-xs btn-success"
-					style="margin-bottom: 8px;"
-					onclick="window.location.href='<?php echo base_url('index.php/Project/normalize');?>';">
-						+&nbsp;Ajouter un fichier
-				</button>
-			</div>
-		</div>
-		-->
-		<div class="row">
-			<div class="col-xs-12">
-				<!--
-				<p class="well">
-					Ci-dessous la liste de vos fichiers. Vous pouvez reprendre la où vous vous êtes arrêté sur chaque projet. Si un projet est terminé, vous pouvez afficher son rapport.
-					L'îcone <span class="glyphicon glyphicon-trash"></span> vous permet de supprimer le projet.
-				</p>
-			-->
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-xs-12">
 				<?php
@@ -258,9 +271,6 @@
 							<th>Fichiers</th>
 							<th>Date de création</th>
 							<th class="text-center">Statut</th>
-							<!--<th>Fichier</th>
-							<th>Avancement</th>
-							<th></th>-->
 							<th></th>
 						</tr>
 					</thead>
@@ -298,15 +308,9 @@
 							}
 
 							echo '<tr>';
-							//echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file'].'">'.$file_maximized.'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
 							echo '<td class="text-center">'.get_status($project['public']).'</td>';
-							/*
-							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file'].'">'.$file_maximized.'</span></td>';
-							echo '<td class="text-center">'.$steps_html.'</td>';
-							echo '<td class="text-center">'.get_lien_html($step_todo, $project['project_id'], 'normalize').'</td>';
-							*/
 							echo '<td class="text-center">'.get_lien_supp_html('normalize', $project['project_id']).'</td>';
 							echo '</tr>';
 						} // /foreach $normalized_projects
@@ -354,12 +358,10 @@
 					  </div>
 					  <div class="form-group">
 					    <div class="col-sm-12 text-right">
-
 							<div class="alert alert-danger error_box" role="alert">
 								<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
 								<span id="error_msg"></span>
 							</div>
-
 							<button type="submit" class="btn btn-success2">
 								<span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier
 							</button>
@@ -593,6 +595,49 @@
 		$("#bt_tab_" + tab).tab("show");
 	}// /show_tabs()
 
+
+	function dl_file(project_id, file_name) {
+		console.log("get_lien_dl_html");
+		console.log(project_id);
+		console.log(file_name);
+
+        tparams = {
+            "data_params": {
+                "module_name": "es_linker",
+                "file_name": file_name
+            }
+        }
+
+        $.ajax({
+            type: 'post',
+            url: '<?php echo BASE_API_URL;?>' + '/api/download/link/' + project_id,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(tparams),
+            success: function (result_dl) {
+                if(result_dl.error){
+                    // show_api_error(result_dl, "API error - dl");
+					console.log("API error - dl file");
+                }
+                else{
+                    console.log("success - dl file");
+
+                    // DL du fichier
+                    var blob = new Blob([result_dl]);
+                    var link = document.createElement('a');
+                    document.body.appendChild(link);
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = file_name;
+                    link.click();
+                }
+            },
+            error: function (result_dl, status, error){
+                show_api_error(result_dl, "error - dl file");
+                err = true;
+                clearInterval(handle);
+            }
+        });// /ajax
+	}// /dl_file()
+
 	$(function() { // ready
 		$("#bt_delete_all").click(function(){
 			if(confirm("Etes vous certains de vouloir supprimer votre compte ? \nTous vos projets seront également supprimés.")){
@@ -615,7 +660,8 @@
 									"lengthMenu":     "Voir _MENU_ enregistrements par page"
 							    },
 							    "lengthMenu": [10],
-							    "responsive": true
+							    "responsive": true,
+								"order": [1, 'desc']
 							});
 		<?php
 		}
@@ -634,8 +680,11 @@
 									"lengthMenu":     "Voir _MENU_ enregistrements par page"
 							    },
 							    "lengthMenu": [10],
-							    "responsive": true
+							    "responsive": true,
+								"order": [2, 'desc']
 							});
+
+		//$("#linked_projects").order([3, 'asc']);
 		<?php
 		}
 		?>

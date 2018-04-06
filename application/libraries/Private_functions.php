@@ -41,6 +41,11 @@ class Private_functions {
 		curl_setopt_array($curl, $opts);
 
 		$response = json_decode(curl_exec($curl), true);
+		$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+		if($httpcode == 404){
+			return 404;
+		}
 
 		return $response['metadata'];
 	}// /get_metadata_api()
