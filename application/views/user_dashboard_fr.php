@@ -126,15 +126,14 @@
 
 	function trt_file_names($name){
 		if($name == 404){
-			return '<i style="color: red;">Fichier inconnu</i>';
+			return '<i style="color: red;" data-toggle="tooltip" data-placement="top" title="Fichier supprimé par l\'utilisateur ou erreur de traitement. Si votre projet est terminé, vous pouvez télécharger votre fichier final.">Fichier introuvable</i>';
 		}
 
 		if(strlen($name) > MAX_LIB_FILENAME){
-			return substr($name,0,MAX_LIB_FILENAME).'...';
+			//return substr($name,0,MAX_LIB_FILENAME).'...';
+			$name = substr($name,0,MAX_LIB_FILENAME).'...';
 		}
-		else {
-			return $name;
-		}
+		return '<span data-toggle="tooltip" data-placement="top" title="'.$name.'">'.$name.'</span>';
 	}
 
 
@@ -210,21 +209,26 @@
 						$ratio = 100/$nb_steps;
 
 						foreach ($linked_projects as $project) {
-							$steps_html = '<div class="progress">';
-							$found_step_todo = false;
-							$step_todo = "";
-							foreach ($tab_steps as $step) {
-								$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
-								$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
 
-								if(!$found_step_todo){
-									if(!is_completed_link_step($step, $project['steps_by_filename'])){
-										$step_todo = $step;
-										$found_step_todo = true;
+							// Barre d'avancement
+							$steps_html = "";
+							if(!get_error_file($project['file_src'], $project['file_ref'])){
+								$steps_html = '<div class="progress">';
+								$found_step_todo = false;
+								$step_todo = "";
+								foreach ($tab_steps as $step) {
+									$bs_color = (is_completed_link_step($step, $project['steps_by_filename']))?"success2":"warning";
+									$steps_html.= get_progress_html($bs_color, $ratio, $step, $project['project_id']);
+
+									if(!$found_step_todo){
+										if(!is_completed_link_step($step, $project['steps_by_filename'])){
+											$step_todo = $step;
+											$found_step_todo = true;
+										}
 									}
-								}
-							}// /foreach tab_steps
-							$steps_html.= '</div>';
+								}// /foreach tab_steps
+								$steps_html.= '</div>';
+							}
 
 							// Traitemnt des nom de fichiers
 							$file_src_maximized = trt_file_names($project['file_src']);
@@ -234,10 +238,10 @@
 
 							echo '<tr>';
 							echo '<td>'.$error_file.'</td>';
-							echo '<td><span data-toggle="tooltip" data-placement="right" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
+							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['description'].'">'.$project['display_name'].'</span></td>';
 							echo '<td>'.$project['created_tmp'].'</td>';
-							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_src'].'">'.$file_src_maximized.'</span></td>';
-							echo '<td><span data-toggle="tooltip" data-placement="top" title="'.$project['file_ref'].'">'.$file_ref_maximized.'</span></td>';
+							echo '<td>'.$file_src_maximized.'</td>';
+							echo '<td>'.$file_ref_maximized.'</td>';
 							echo '<td class="text-center">'.$steps_html.'</td>';
 							echo '<td class="text-center">'.get_lien_html($step_todo, $project,'link').'</td>';
 							echo '<td class="text-center">'.get_lien_dl_html($step_todo, $project['project_id'],$project['file_src']).'</td>';
