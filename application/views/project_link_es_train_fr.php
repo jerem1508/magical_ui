@@ -56,7 +56,7 @@
                     Termes obligatoires
                 </div>
                 <div class="col-xs-9">
-                    <input type="text" id="filter_plus" data-role="tagsinput" value="">
+                    <input type="text" id="filter_plus" data-role="tagsinput" value="" onchange="alert('change');">
                     <button class="btn btn-default" id="bt_add_filter_plus">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
@@ -1012,6 +1012,12 @@ function add_filter() {
 
     // Ajout au tagsInput
     $("#filter_" + sens).tagsinput('add', input_text);
+
+    // Ajout d'un listener
+    $("#filter_" + sens).on('itemRemoved', function(event) {
+        console.log("tag changé");
+        valid_filters();
+    });
 
     // Fermeture de la modale
     $('#modal_filter').modal('hide');
