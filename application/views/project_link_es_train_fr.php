@@ -56,7 +56,7 @@
                     Termes obligatoires
                 </div>
                 <div class="col-xs-9">
-                    <input type="text" id="filter_plus" data-role="tagsinput" value="" onchange="alert('change');">
+                    <input type="text" id="filter_plus" data-role="tagsinput" value="">
                     <button class="btn btn-default" id="bt_add_filter_plus">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
@@ -586,7 +586,14 @@ function load_labeller_api(project_id_link) {
                 console.log("success - load_labeller_api");
                 console.log(result);
 
-                show_new_proposition(JSON.parse(result.result), "load_labeller");
+                // Parsing
+                const result_parsed = JSON.parse(result.result);
+
+                // MAJ des filtres si existants
+                set_filters_html(result_parsed.must_filters, result_parsed.must_not_filters);
+
+                // Affichage de la proposition
+                show_new_proposition(result_parsed, "load_labeller");
             }
         },
         error: function (result, status, error){
@@ -1001,23 +1008,15 @@ function add_filter() {
     var filter = $("#text_filter").val();
 
     // Ajout dans le bon tagsinput en fonction du bt cliqué initial (plus/minus)
+    var target = "minus";
     if(modal_filter_sens == "oblig"){
-        sens = "plus";
-    }
-    else{
-        sens = "minus";
+        target = "plus";
     }
 
     var input_text = column + ":" + filter;
 
     // Ajout au tagsInput
-    $("#filter_" + sens).tagsinput('add', input_text);
-
-    // Ajout d'un listener
-    $("#filter_" + sens).on('itemRemoved', function(event) {
-        console.log("tag changé");
-        valid_filters();
-    });
+    add_tag_html(input_text, target)
 
     // Fermeture de la modale
     $('#modal_filter').modal('hide');
@@ -1025,6 +1024,36 @@ function add_filter() {
     // Validation des filtres
     valid_filters();
 }// /add_filter()
+
+
+function add_tag_html(input_text, target) {
+    // Ajout au tagsInput
+    $("#filter_" + target).tagsinput('add', input_text);
+
+    // Ajout d'un listener
+    $("#filter_" + target).on('itemRemoved', function(event) {
+        valid_filters();
+    });
+}// /add_tag_html()
+
+
+function set_filters_html(must, must_not) {
+    // Traitement des must(plus)
+    for (let column in must) {
+        for (filter of must[column]) {
+            const input_text = column + ":" + filter;
+            add_tag_html(input_text, "plus")
+        }
+    }
+
+    // Traitement des must_not(minus)
+    for (let column in must_not) {
+        for (filter of must_not[column]) {
+            const input_text = column + ":" + filter;
+            add_tag_html(input_text, "minus")
+        }
+    }
+}// /set_filters_html()
 
 
 function add_buttons() {
