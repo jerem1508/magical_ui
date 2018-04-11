@@ -238,6 +238,11 @@ class Project extends CI_Controller {
 				}
 			}
 		}
+
+// print_r($link_step);
+// print_r($link_project_id);
+// die("fin");
+
 		$this->load_step_linker($link_step, $link_project_id);
 	}// /link()
 
@@ -569,6 +574,46 @@ class Project extends CI_Controller {
 	}// /concat_with_init()
 
 
+	// public function split_projects($user_id) // Répartition des projets selon leur type
+	// {
+	// 	$projects_list = $this->Projects_model->get_projects($user_id);
+	//
+	// 	foreach ($projects_list as $project) {
+	// 		// Appel de l'API pour récupérer les infos de chaque projet
+	// 		$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
+	//
+	//
+	//
+	//
+	//
+	// 		if(!$project_api){
+	// 			$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
+	// 			continue;
+	// 		}
+	//
+	// 		$project['project_id'] = $project_api["project_id"];
+	// 		$project['display_name'] = $project_api['display_name'];
+	// 		$project['description'] = $project_api['description'];
+	// 		$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;
+	//
+	// 		$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
+	//
+	// 		switch ($project['project_type']) {
+	// 			case 'normalize':
+	// 				$project['has_mini'] = $project_api['has_mini'];
+	// 				$project['file'] = key($project_api['files']);
+	//
+	// 				$this->normalized_projects[] = $project;
+	//
+	// 				break;
+	// 			case 'link':
+	// 				$this->linked_projects[] = $project;
+	//
+	// 				break;
+	// 		}// /switch
+	// 	}// /foreach
+	// }// /split_projects()
+
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
@@ -577,40 +622,53 @@ class Project extends CI_Controller {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
-			// if(!$project_api){
-			// 	// Suppression en base
-			// 	$projects_list = $this->Projects_model->delete_project($project['project_id']);
-			// 	continue;
-			// 	//throw new Exception("An internal synchronization error occurred on our server", 1);
-			// }
-
-			if(!$project_api){
-				// Suppression du projet en base car il n'exise pas sur le serveur data
-				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
-				//$this->Projects_model->delete_project($project['project_id']);
-				//throw new Exception("An internal synchronization error occurred on our server", 1);
+			if($project_api == 404){
 				continue;
 			}
 
-			$project['project_id'] = $project_api["project_id"];
+			if(!$project_api){
+				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
+				continue;
+			}
+
+			$project['project_id'] = $project_api['project_id'];
 			$project['display_name'] = $project_api['display_name'];
 			$project['description'] = $project_api['description'];
-			$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;
+			$project['project_type'] = $project_api['project_type'];
 
 			$project['steps_by_filename'] = $this->private_functions->set_tab_steps_by_filename($project_api['log']);
 
-			switch ($project['project_type']) {
-				case 'normalize':
-					$project['has_mini'] = $project_api['has_mini'];
-					$project['file'] = key($project_api['files']);
-					$this->normalized_projects[] = $project;
+			if($project_api['project_type'] == 'normalize'){
+				$project['has_mini'] = @$project_api['has_mini'];
+				$project['file'] = @key($project_api['files']);
+				$project['public'] = (isset($project_api['public'])) ? $project_api['public'] : false;
 
-					break;
-				case 'link':
-					$this->linked_projects[] = $project;
+				$this->normalized_projects[] = $project;
+			}
+			else{
+				$src_id = $project_api['files']['source']['project_id'];
+				$ref_id = $project_api['files']['ref']['project_id'];
 
-					break;
-			}// /switch
+				// test des projets de normalisation - erreur 404 si non trouvé (suppression par exemple)
+				$test_src = $this->private_functions->get_metadata_api('normalize', $src_id);
+				$test_ref = $this->private_functions->get_metadata_api('normalize', $ref_id);
+
+				if($test_src == 404){
+					$project['file_src'] = 404;
+				}
+				else{
+					$project['file_src'] = $project_api['files']['source']['file_name'];
+				}
+
+				if($test_ref == 404){
+					$project['file_ref'] = 404;
+				}
+				else{
+					$project['file_ref'] = $project_api['files']['ref']['file_name'];
+				}
+
+				$this->linked_projects[] = $project;
+			}
 		}// /foreach
 	}// /split_projects()
 

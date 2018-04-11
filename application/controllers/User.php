@@ -261,20 +261,14 @@ class User extends CI_Controller {
 	public function split_projects($user_id) // Répartition des projets selon leur type
 	{
 		$projects_list = $this->Projects_model->get_projects($user_id);
-		foreach ($projects_list as $project) {
 
+		foreach ($projects_list as $project) {
 			// Appel de l'API pour récupérer les infos de chaque projet
 			$project_api = $this->private_functions->get_metadata_api($project['project_type'], $project['project_id']);
 
 			if($project_api == 404){
 				continue;
 			}
-
-			// if($project_api == ""){
-			// 	// Suppression en base
-			// 	$projects_list = $this->Projects_model->delete_project($project['project_id']);
-			// 	continue;
-			// }
 
 			if(!$project_api){
 				$this->log_error('Projet non trouvé dans API :'.$project['project_id']);
