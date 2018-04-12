@@ -47,9 +47,8 @@
             <hr />
             <div id="ref_columns"></div>
         </div>
-    </div>
-
-</div>
+    </div><!-- /body -->
+</div><!-- /container-fluid -->
 
 <div class="container-fluid" style="margin-top: 20px;min-height: 250px;">
     <div class="row">
@@ -293,7 +292,9 @@ function valid_associations() {
     $(".blocs_analysis").each(function( index ) {
         var content_text = $(this).text();
         if(content_text == ""){
-            ret = false;
+            //ret = false;
+            // Suppression d'une éventuelle association vide
+            $(this).parent().parent().remove();
         }
         else {
             var content_json = JSON.parse( $(this).text() );
