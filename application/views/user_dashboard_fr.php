@@ -394,6 +394,28 @@
   </div><!-- /tab-pane -->
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_dl">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">
+            <i class="fa fa-question-circle"></i>
+            Téléchargement du fichier
+        </h4>
+      </div>
+      <div class="modal-body text-center">
+        <h3>
+            Votre fichier est en cours de téléchargement<br />
+            Veuillez patienter
+        </h3>
+        <img src="<?php echo base_url('assets/img/wait.gif');?>" style="width: 50px;">
+        <h4>Cette fenêtre se fermera automatiquement à la fin du téléchargement</h4>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script type="text/javascript">
 	function delete_project_API(project_type, project_id) {
 	    // Suppression d'un projet
@@ -602,9 +624,8 @@
 
 
 	function dl_file(project_id, file_name) {
-		console.log("get_lien_dl_html");
-		console.log(project_id);
-		console.log(file_name);
+
+		$('#modal_dl').modal('show');
 
         tparams = {
             "data_params": {
@@ -633,6 +654,8 @@
                     link.href = window.URL.createObjectURL(blob);
                     link.download = file_name;
                     link.click();
+
+					$('#modal_dl').modal('hide');
                 }
             },
             error: function (result_dl, status, error){
