@@ -18,6 +18,22 @@
             <br />
             <br />
             Toutes les modifications seront prises en compte dans le fichier téléchargeable.
+            <div class="row">
+                <div class="col-md-1 text-right">
+                    <div style="padding-top:5px;">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        Trié par :
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="cb_order">
+                        <option value="id_asc">ID croissant</option>
+                        <option value="id_desc">ID décroissant</option>
+                        <option value="confidence_asc">Confiance croissante</option>
+                        <option value="confidence_desc">Confiance décroissante</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="col-md-1 text-right" id="pagination"></div>
     </div>
@@ -290,12 +306,15 @@ function get_thresh(project_id) {
 } // /get_thresh()
 
 
-function get_data(from, size) {
+function get_data(from, size, field='_id', order='desc') {
     var ret = "get_data()";
-    var tparams = {
+
+    const tparams = {
         "module_params": {
             "size": size,
-            "from": from
+            "from": from,
+            "field": field,
+            "order": order
         }
     }
 
@@ -303,7 +322,8 @@ function get_data(from, size) {
         type: 'post',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        url: '<?php echo BASE_API_URL;?>' + '/api/es_fetch_by_id/link/' + project_id_link,
+        // url: '<?php echo BASE_API_URL;?>' + '/api/es_fetch_by_id/link/' + project_id_link,
+        url: '<?php echo BASE_API_URL;?>' + '/api/es_fetch/link/' + project_id_link,
         data: JSON.stringify(tparams),
         async: false,
         success: function (result) {
@@ -325,8 +345,6 @@ function get_data(from, size) {
 
 
 function show_data_html(data, start) {
-    console.log('show_data_html:data');
-
     var html = '<table class="table">';
 
     // Entete
@@ -355,15 +373,16 @@ function show_data_html(data, start) {
             continue;
         }
         // Récupération id_source/id_ref
-        var id_source = data[i].hits.hits[0]['_id'];
-        var id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
+        const id_source = data[i].hits.hits[0]['_id'];
+        const id_ref = data[i].hits.hits[0]['_source']["__ID_REF"];
 
-        var no_line = start + i + 1;
+        // var no_line = start + i + 1;
+        const no_line = parseInt(id_source) + 1;
         html += '<tr class="line_' + no_line + '" style="border-top: solid #333 2px;">';
         html += '    <td rowspan="2" class="text-center no_line"><h4 class="value_vcentered ' + no_line + '">' + no_line + '</h4></td>';
 
         // Récupération de l'indice de confiance
-        var confidence = data[i].hits.hits[0]['_source']['__CONFIDENCE'];
+        const confidence = data[i].hits.hits[0]['_source']['__CONFIDENCE'];
         html += '    <td><i class="fa fa-table" aria-hidden="true"></i></td>';
 
         // Parcours des termes SOURCE ---------------------------------------------
@@ -440,7 +459,9 @@ function show_data_html(data, start) {
 
     // MAJ des boutons on/off (boostrap-toggle)
     for (var i = 0; i < data.length; i++) {
-        var no_line = start + i + 1;
+        const id_source = data[i].hits.hits[0]['_id'];
+        const no_line = parseInt(id_source) + 1;
+        // var no_line = start + i + 1;
 
         $('.chk').bootstrapToggle({
           on: 'Vrai',
@@ -452,9 +473,6 @@ function show_data_html(data, start) {
 
         // Action sur changement de la case a cocher
         $('#chk_' + no_line).change(function(){
-            // console.log($(this).prop('checked'));
-            // console.log($(this).attr('id_source'));
-            // console.log($(this).attr('id_ref'));
             update_results_api( $(this).attr('id_source'),
                                 $(this).attr('id_ref'),
                                 $(this).prop('checked'));
@@ -847,6 +865,35 @@ function add_buttons() {
 
     $("#bt_help").click(function(){
         $('#modal_help').modal('show');
+    });
+
+    $("#cb_order").change(function(){
+        const val = $( this ).val();
+        let field = '_id';
+        let order = 'desc';
+
+        switch (val) {
+            case 'id_asc':
+                field = '_id';
+                order = 'asc';
+                break;
+            case 'id_desc':
+                field = '_id';
+                order = 'desc';
+                break;
+            case 'confidence_asc':
+                field = '__CONFIDENCE';
+                order = 'asc';
+                break;
+            case 'confidence_desc':
+                field = '__CONFIDENCE';
+                order = 'desc';
+                break;
+        }
+
+        // Chargement des données
+        const data = get_data(0, 50, field, order);
+        show_data_html(data, 0);
     });
 }// /add_buttons()
 
