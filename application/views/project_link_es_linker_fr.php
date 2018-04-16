@@ -306,7 +306,7 @@ function get_thresh(project_id) {
 } // /get_thresh()
 
 
-function get_data(from, size, field='_id', order='desc') {
+function get_data(from, size, field='_id', order='asc') {
     var ret = "get_data()";
 
     const tparams = {
