@@ -1407,9 +1407,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
             },
             fail: function (e, data) {
-                console.log("upload src fail");
-                console.log(e);
-                console.log(data);
+                show_api_error(e, "error - upload src fail");
                 $('#progress .progress-bar').css('background-color', 'red');
             }
         }).prop('disabled', !$.support.fileInput)
@@ -1478,10 +1476,8 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
             },
             fail: function (e, data) {
+                show_api_error(e, "error - upload  fail");
                 $('#progress_ref .progress-bar').css('background-color', 'red');
-                console.log("upload ref fail");
-                console.log(e);
-                console.log(data);
             }
         }).prop('disabled', !$.support.fileInput)
           .parent().addClass($.support.fileInput ? undefined : 'disabled');
