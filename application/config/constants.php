@@ -107,8 +107,10 @@ define('TAB_LOGO', array(
 define('MAX_LIB_FILENAME', 30);
 
 // Constantes emails
-define('EMAIL_FROM', 'mad.mesri@gmail.com');
-define('EMAIL_REPLY_TO', 'mad.mesri@gmail.com');
+// define('EMAIL_FROM', 'mad.mesri@gmail.com');
+// define('EMAIL_REPLY_TO', 'mad.mesri@gmail.com');
+define('EMAIL_FROM', 'lamachineadonnees@recherche.gouv.fr');
+define('EMAIL_REPLY_TO', 'lamachineadonnees@recherche.gouv.fr');
 
 // user
 define('USER_STATUS_ENABLED', "1");
