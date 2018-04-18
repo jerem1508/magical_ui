@@ -63,6 +63,86 @@
 		}
 </style>
 
+<footer class="container-fluid" style="background-color: #262626;padding-top: 20px;">
+		<div class="row" style="background-color: #262626;color:#fff;">
+			<div class="col-md-offset-1 col-md-5">
+				<img src="https://dataesr.enseignementsup-recherche.pro/images/dataESR.svg" alt="Logo dataESR" class="logo_dataesr" style="height:60px;">
+				<br>
+				<br>
+				<span itemprop="name">
+					<a target="_blank" href="http://www.enseignementsup-recherche.gouv.fr/" itemprop="url">
+						Ministère de l'Enseignement supérieur, de la Recherche et de l'Innovation
+					</a>
+				</span>
+				<br>
+				<br>
+				<p itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+					<span itemprop="streetAddress">1 rue Descartes</span><br>
+					<span itemprop="postalCode">75231</span> <span itemprop="addressLocality">Paris</span> <span itemprop="postOfficeBoxNumber">cedex 05</span><br> <span itemprop="addressCountry">France</span><br>
+					<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
+						<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
+					</a>
+				</p>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<br>
+				<strong>Plan du site :</strong>
+				<br>
+				<br>
+				<ul>
+					<li>
+						<a href="<?php echo base_url("index.php/Home");?>" target="_blank">
+						Accueil
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url("index.php/Home/new");?>" target="_blank">
+						Identification
+						</a>
+					</li>
+					<li	>
+						<a href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">
+						Référentiels à disposition
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">
+						Mentions légales
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url("index.php/Home/about");?>" target="_blank">
+						A propos
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
+							<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
+						</a>
+					</li>
+				</ul>
+				<hr style="border-top-color: #333;">
+				<form action="" class="form-inline">
+
+					<input type="text" class="form-control" placeholder="Abonnez-vous à la newsletter" style="width: 70%;"/>
+					<button type="button" name="button" class="btn btn-success2">S'inscrire</button>
+				</form>
+				<br>
+			</div>
+		</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<br>
+			<strong style="color: #ccc;">Les sites publics :</strong>
+			<a target="_blank" href="http://www.service-public.fr" title="Accèder au site service-public.fr (nouvelle fenêtre)" style="color: #777674;">service-public.fr</a>
+			| <a target="_blank" href="http://legifrance.gouv.fr/" title="Accèder au site legifrance.gouv.fr (nouvelle fenêtre)" style="color: #777674;">legifrance.gouv.fr</a>
+			| <a target="_blank" href="http://www.gouvernement.fr/" title="Accèder au site gouvernement.fr (nouvelle fenêtre)" style="color: #777674;">gouvernement.fr</a>
+			| <a target="_blank" href="http://data.gouv.fr/" title="Accèder au site data.gouv.fr (nouvelle fenêtre)" style="color: #777674;">data.gouv.fr</a>
+			| <a target="_blank" href="http://france.fr/" title="Accèder au site france.fr (nouvelle fenêtre)" style="color: #777674;">france.fr</a>
+		</div>
+	</div>
+</footer>
+<!--
 <footer class="container-fluid" style="padding-top: 20px;">
     <div class="row">
         <div class="col-md-offset-4 col-md-4 txt">
@@ -70,7 +150,7 @@
 				<div class="col-md-12 text-center">
 					<span class="title">partenaires</span>
 				</div>
-			</div><!-- / col-md-4-->
+			</div>
         	<div class="row">
         		<div class="col-md-6 col-left">
 					<ul>
@@ -87,7 +167,7 @@
 					</ul>
         		</div>
         	</div>
-        </div><!-- / col-md-4-->
+        </div>
 		<div class="col-md-4 txt">
 			<ul>
 				<li>
@@ -102,9 +182,9 @@
 					</a>
 				</li>
 			</ul>
-		</div><!-- / col-md-4-->
-    </div><!-- / row -->
-</footer>
+		</div>
+    </div>
+</footer> -->
 
 
 
