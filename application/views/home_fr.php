@@ -49,7 +49,7 @@
 	</div>
 </div><!-- /Intro -->
 
-<div class="row referentials" style="background-color: #fff; padding-top: 20px; padding-bottom: 20px; color: #333">
+<div class="row referentials" style="background-color: #fff; padding-top: 20px; padding-bottom: 20px; color: #333;margin-left:0;margin-right:0;">
 	<div class="col-md-12 text-center">
 		<h2 style="font-size: 2.7em;">Référentiels disponibles</h2>
 		<h4>Afin de faciliter vos mises en correspondance, un ensemble de référentiels est disponible et mis à jour régulièrement</h4>
@@ -67,7 +67,7 @@
 	</div>
 </div>
 
-<div class="row git" style="background-color: #121212; padding-top: 20px; padding-bottom: 20px; color: #fff">
+<div class="row git" style="background-color: #121212; padding-top: 20px; padding-bottom: 20px; color: #fff;margin-left:0;margin-right:0;">
 	<div class="col-md-12 text-center">
 		<a href="https://github.com" target="_blank" style="color:#fff;font-weight:bold;">
 			<img src="<?php echo base_url('assets/img/github-ffffff.png');?>" class="" style="width:200px;">
