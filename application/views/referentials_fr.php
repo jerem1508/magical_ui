@@ -195,7 +195,6 @@ function toggle_sample(id)
 
 function show_data_html(referentials, cpt)
 {
-    //console.log("show_data_html()");
     var display_name = referentials[referential]["display_name"];
     var description = referentials[referential]["description"];
 
@@ -217,6 +216,7 @@ function show_data_html(referentials, cpt)
 
     // Restitution HTML
     var html = "";
+	html += '<div id="' + display_name.toLowerCase() + '"></div>';
     html += '<div class="row" id="' + cpt + '">';
     html += '    <div class="col-md-2">';
 
@@ -248,8 +248,6 @@ function show_data_html(referentials, cpt)
 
 
 function load_data(target, value, is_incremental) {
-    //console.log("load_data(" + target + "," + value + "," + is_incremental +")");
-
     // Chargement des données dans une balise
     if(is_incremental){
         $(target).html($(target).html() + value);
