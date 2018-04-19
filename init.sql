@@ -70,6 +70,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- --------------------------------------------------------
+--
+-- `newsletter`
+--
+DROP TABLE IF EXISTS `newsletter`;
+CREATE TABLE `newsletter` (
+  `email` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Index `comments`
 --

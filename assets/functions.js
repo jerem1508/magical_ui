@@ -201,6 +201,7 @@ $(document).ready(function(){
     var cookie_avert   = readCookie("cookie_avert"),
         g_analytics_id = "xxxxxx-x", // Id unique google analytics
         domain_name    = "www.domain-name.fr"; // nom de domaine du site
+		host = "";
 
     if(cookie_avert === null) { // si le cookie n'existe pas
         banner_text = 'En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies à des fins de mesure d\'audience. <button class="btn btn-success btn-gradient btn-sm" id="accept-cookie">J\'accepte</button> <button class="btn btn-danger btn-gradient btn-sm" id="deny-cookie">Je refuse</button>';

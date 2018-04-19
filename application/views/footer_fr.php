@@ -64,72 +64,77 @@
 </style>
 
 <footer class="container-fluid" style="background-color: #262626;padding-top: 20px;">
-		<div class="row" style="background-color: #262626;color:#fff;">
-			<div class="col-md-offset-1 col-md-5">
-				<img src="https://dataesr.enseignementsup-recherche.pro/images/dataESR.svg" alt="Logo dataESR" class="logo_dataesr" style="height:60px;">
-				<br>
-				<br>
-				<span itemprop="name">
-					<a target="_blank" href="http://www.enseignementsup-recherche.gouv.fr/" itemprop="url">
-						Ministère de l'Enseignement supérieur, de la Recherche et de l'Innovation
+	<div class="row" style="background-color: #262626;color:#fff;">
+		<div class="col-md-offset-1 col-md-5">
+			<img src="https://dataesr.enseignementsup-recherche.pro/images/dataESR.svg" alt="Logo dataESR" class="logo_dataesr" style="height:60px;">
+			<br>
+			<br>
+			<span itemprop="name">
+				<a target="_blank" href="http://www.enseignementsup-recherche.gouv.fr/" itemprop="url">
+					Ministère de l'Enseignement supérieur, de la Recherche et de l'Innovation
+				</a>
+			</span>
+			<br>
+			<br>
+			<p itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+				<span itemprop="streetAddress">1 rue Descartes</span><br>
+				<span itemprop="postalCode">75231</span> <span itemprop="addressLocality">Paris</span> <span itemprop="postOfficeBoxNumber">cedex 05</span><br> <span itemprop="addressCountry">France</span><br>
+				<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
+					<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
+				</a>
+			</p>
+		</div>
+		<div class="col-md-offset-1 col-md-5">
+			<br>
+			<strong>Plan du site :</strong>
+			<br>
+			<br>
+			<ul>
+				<li>
+					<a href="<?php echo base_url("index.php/Home");?>" target="_blank">
+					Accueil
 					</a>
-				</span>
-				<br>
-				<br>
-				<p itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
-					<span itemprop="streetAddress">1 rue Descartes</span><br>
-					<span itemprop="postalCode">75231</span> <span itemprop="addressLocality">Paris</span> <span itemprop="postOfficeBoxNumber">cedex 05</span><br> <span itemprop="addressCountry">France</span><br>
+				</li>
+				<li>
+					<a href="<?php echo base_url("index.php/Home/new");?>" target="_blank">
+					Identification
+					</a>
+				</li>
+				<li	>
+					<a href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">
+					Référentiels à disposition
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">
+					Mentions légales
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo base_url("index.php/Home/about");?>" target="_blank">
+					A propos
+					</a>
+				</li>
+				<li>
 					<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
 						<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
 					</a>
-				</p>
+				</li>
+			</ul>
+			<hr style="border-top-color: #333;">
+			<div class="alert alert-success alert-dismissible fade in" style="display:none" id="alert_newsletter">
+			  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			  Adresse enregistrée avec succès !
 			</div>
-			<div class="col-md-offset-1 col-md-5">
-				<br>
-				<strong>Plan du site :</strong>
-				<br>
-				<br>
-				<ul>
-					<li>
-						<a href="<?php echo base_url("index.php/Home");?>" target="_blank">
-						Accueil
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url("index.php/Home/new");?>" target="_blank">
-						Identification
-						</a>
-					</li>
-					<li	>
-						<a href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">
-						Référentiels à disposition
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">
-						Mentions légales
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url("index.php/Home/about");?>" target="_blank">
-						A propos
-						</a>
-					</li>
-					<li>
-						<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
-							<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
-						</a>
-					</li>
-				</ul>
-				<hr style="border-top-color: #333;">
-				<form action="" class="form-inline">
-
-					<input type="text" class="form-control" placeholder="Abonnez-vous à la newsletter" style="width: 70%;"/>
-					<button type="button" name="button" class="btn btn-success2">S'inscrire</button>
+			<div id="input_newsletter">
+				<form class="form-inline">
+					<input type="email" class="form-control" id="email_newsletter" placeholder="Abonnez-vous à la newsletter" style="width: 70%;"/>
+					<button type="button" id="bt_newsletter" class="btn btn-success2">S'inscrire</button>
 				</form>
 				<br>
 			</div>
 		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-12 text-center">
 			<br>
@@ -142,51 +147,6 @@
 		</div>
 	</div>
 </footer>
-<!--
-<footer class="container-fluid" style="padding-top: 20px;">
-    <div class="row">
-        <div class="col-md-offset-4 col-md-4 txt">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<span class="title">partenaires</span>
-				</div>
-			</div>
-        	<div class="row">
-        		<div class="col-md-6 col-left">
-					<ul>
-						<li>
-							<a href="https://www.etalab.gouv.fr/decouvrez-la-1e-promotion-des-entrepreneurs-dinteret-general" target="_blank">Programme EIG</a>
-						</li>
-					</ul>
-        		</div>
-        		<div class="col-md-6 col-right">
-        			<ul>
-						<li>
-							<a href="http://www.enseignementsup-recherche.gouv.fr/" target="_blank">MESRI</a>
-						</li>
-					</ul>
-        		</div>
-        	</div>
-        </div>
-		<div class="col-md-4 txt">
-			<ul>
-				<li>
-					<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">Conditions générales d'utilisation</a>
-				</li>
-				<li>
-					<a href="https://github.com/entrepreneur-interet-general/the-magical-csv-merge-machine" target="_blank">API</a>
-				</li>
-				<li>
-					<a href="<?php echo base_url("index.php/Home/contact");?>" target="_blank">
-						<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
-					</a>
-				</li>
-			</ul>
-		</div>
-    </div>
-</footer> -->
-
-
 
 <div class="panel panel-default" id="panel_comment">
   <div class="panel-heading" id="bt_comment">
@@ -248,10 +208,54 @@
 		}
 	});
 
+
 	$("#bt_submit").click(function(e){
 		e.preventDefault();
 		send_comment();
 	});
+
+
+	$("#bt_newsletter").click(function(e){
+		e.preventDefault();
+
+		email_newsletter();
+	});
+
+
+	function email_newsletter() {
+		const email = $("#email_newsletter").val();
+
+		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if(!re.test(String(email).toLowerCase())){
+			$("#email_newsletter").val("");
+			return false;
+		}
+
+		// Envoi du commentaire
+		$.ajax({
+			type: 'post',
+			url: '<?php echo base_url('index.php/Save_ajax/save_email_newsletter');?>',
+			data: '&email=' + email,
+			success: function (result) {
+				console.log('Adresse enregistrée');
+				$("#email_newsletter").val("");
+
+				$("#alert_newsletter").css("display", "inherit");
+				$("#input_newsletter").css("display", "none");
+
+				setTimeout(function(){
+					$("#alert_newsletter").css("display", "none");
+					$("#input_newsletter").css("display", "inherit");
+
+				}, 2000);
+
+			},
+			error: function (result, status, error){
+				console.log('save_email_newsletter_ajax - ERREUR :');
+			}
+		});
+	}// /email_newsletter()
+
 
 	function delete_errors() {
 		// Suppression des erreurs
@@ -259,6 +263,7 @@
 			$("#error_box").slideToggle();
 		}
 	}// /delete_errors()
+
 
 	function send_comment() {
 		// Test des champs

@@ -10,6 +10,7 @@ class Save_ajax extends CI_Controller {
 		$this->load->model('Projects_model');
 		$this->load->model('Comments_model');
 		$this->load->model('User_model');
+		$this->load->model('Newsletter_model');
 
 		$this->load->library('Private_functions');
 	}
@@ -165,6 +166,18 @@ class Save_ajax extends CI_Controller {
 										$project_id,
 										$project_type);
 	}// /comment()
+
+
+	public function save_email_newsletter()
+	{
+		# Insertion d'une adresse email dans la newsletter
+		if(isset($_POST['email'])){
+			return  $this->Newsletter_model->insert_email($_POST['email']);
+		}
+		else {
+			return false;
+		}
+	}// /save_email_newsletter()
 
 
 	public function modify_password()
