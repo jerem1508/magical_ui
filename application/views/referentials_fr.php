@@ -199,12 +199,32 @@ function show_data_html(referentials, cpt)
     var display_name = referentials[referential]["display_name"];
     var description = referentials[referential]["description"];
 
+	// test du logo
+	let logo_exist = false;
+	$.ajax({
+		url:'<?php echo base_url('assets/img/');?>' + display_name.toLowerCase() + '.png',
+		type:'HEAD',
+		async: false,
+		error: function()
+		{
+			logo_exist = false;
+		},
+		success: function()
+		{
+			logo_exist = true;
+		}
+	});
+
     // Restitution HTML
     var html = "";
     html += '<div class="row" id="' + cpt + '">';
     html += '    <div class="col-md-2">';
-    html += '        <img src="<?php echo base_url('assets/img/');?>' + display_name.toLowerCase() + '.png" class="" style="width:200px;">';
-    html += '    </div>';
+
+	if(logo_exist){
+		html += '        <img src="<?php echo base_url('assets/img/');?>' + display_name.toLowerCase() + '.png" class="" style="width:200px;">';
+	}
+
+	html += '    </div>';
     html += '    <div class="col-md-10">';
     html += '        <h2 class="title">' + display_name + '</h2>';
     html += '        <div class="date_dl"></div>';
