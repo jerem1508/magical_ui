@@ -29,7 +29,9 @@ function get_public_projects()
 
 				var cpt = 0;
                 for(referential in referentials){
+					console.log(referentials[referential]['last_written']['file_name'] );
 					if(referentials[referential]['last_written']['file_name'] == ''){
+						console.log("next");
 						continue;
 					}
 
