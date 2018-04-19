@@ -1,0 +1,21 @@
+{
+    "fields": {
+        "CODE_POSTAL": "Code postal",
+        "VILLE": "Ville",
+        "COM_CODE": "Code de la commune",
+        "COM_NOM_MAJ": "Libellé de la commune en majuscule non accentué",
+        "COM_NOM": "Libellé de la commune",
+        "UU_ID": "Code de l’unité urbaine",
+        "UUCR_ID": "Code de l’unité urbaine ou de la commune rurale",
+        "UUCR_NOM": "Libellé de l’unité urbaine ou de la commune rurale",
+        "DEP_CODE": "Code du département",
+        "DEP_ID": "Identifiant du département",
+        "DEP_NOM": "Libellé du département",
+        "ACA_CODE": "Code de l'académie",
+        "ACA_ID": "Identifiant de l'académie",
+        "ACA_NOM": "Libellé de l'académie",
+        "REG_CODE": "Code de la région",
+        "REG_ID": "Identifiant de la région",
+        "REG_NOM": "Libellé de la région"
+    }
+}
