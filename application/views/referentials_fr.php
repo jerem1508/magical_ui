@@ -29,9 +29,9 @@ function get_public_projects()
 
 				var cpt = 0;
                 for(referential in referentials){
-					if(typeof referentials[referential]['last_written']['file_name'] == 'undefined'){
-						continue;
-					}
+					// if(typeof referentials[referential]['last_written']['file_name'] == 'undefined'){
+					// 	continue;
+					// }
 
                     var html = "";
 					cpt ++;
