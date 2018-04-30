@@ -106,6 +106,14 @@ define('TAB_LOGO', array(
 // Taille maxi des noms de fichier dans le tableau de bord
 define('MAX_LIB_FILENAME', 30);
 
+// stats piwik
+if($_SERVER['HTTP_HOST'] == '127.0.0.1' || $_SERVER['HTTP_HOST'] == 'localhost'){
+	define('ID_SITE_PIWIK',24);
+}
+else {
+	define('ID_SITE_PIWIK',25);
+}
+
 // Constantes emails
 // define('EMAIL_FROM', 'mad.mesri@gmail.com');
 // define('EMAIL_REPLY_TO', 'mad.mesri@gmail.com');

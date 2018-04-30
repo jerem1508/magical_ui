@@ -16,7 +16,6 @@
 		color: #fff;
 		cursor: pointer;
 	}
-
 	#panel_comment .title_comment{
 		font-weight: bolder;
 		display: inline-block;
@@ -195,6 +194,7 @@
   </div>
 </div>
 
+
 <script type="text/javascript">
 	$("#error_box").toggle();
 
@@ -366,3 +366,35 @@
         });
 	}
 </script>
+
+<!-- stats -->
+<noscript><img src="https://piwik.enseignementsup-recherche.pro/piwik.php?idsite=24&rec=1" style="border:0;" alt="" /></noscript>
+<script type="text/javascript">
+	<!--
+	xtnv = document;
+	xtsd = "https://logs4";
+	xtsite = "124090";
+	xtn2 = "";
+	xtpage = "75";
+	xtdi = "";
+	xt_multc = "";
+	xt_an = "";
+	xt_ac = "";
+
+	if (window.xtparam!=null){
+		window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;
+	}
+	else{
+		window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;
+	}
+	-->
+</script>
+
+<script type="text/javascript" src="<?php echo base_url("assets/xtcore.js");?>"></script>
+
+<noscript>
+	<img width="1" height="1" alt="" src="https://logs4.xiti.com/hit.xiti?s=124090&s2=&p=75&di=&an=&ac=" >
+</noscript>
+
+</body>
+</html>

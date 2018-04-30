@@ -105,5 +105,3 @@
 		//set_height('intro');
 	});// /ready
 </script>
-</body>
-</html>
