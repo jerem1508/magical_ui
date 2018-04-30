@@ -100,6 +100,7 @@ define('TAB_LOGO', array(
 	'grid'=>'grid.png',
 	'hal'=>'hal.png',
 	'rnsr'=>'rnsr.png',
+	'rna'=>'rna.png',
 	'sirene'=>'sirene.png'
 ));
 
