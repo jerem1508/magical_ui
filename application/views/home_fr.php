@@ -53,7 +53,7 @@
 	<div class="col-md-12 text-center">
 		<h2 style="font-size: 2.7em;">Référentiels disponibles</h2>
 		<h4>Afin de faciliter vos mises en correspondance, un ensemble de référentiels est disponible et mis à jour régulièrement</h4>
-		<a class="btn btn-xs btn-success" href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">En savoir plus <i class="fa fa-plus"></i></a>
+		<a class="btn btn-xs btn-success" href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">En savoir <i class="fa fa-plus"></i></a>
 		<br><br>
 		<div class="col-md-2 col-md-offset-3 text-center">
 			<img src="<?php echo base_url('assets/img/sirene.png');?>" class="" style="width:200px;">

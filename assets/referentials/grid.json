@@ -1,4 +1,5 @@
 {
+    "url": "https://grid.ac/",
     "fields": {
 		"ID": "Identifiant GRID (Global Research Identifier Database).",
 		"Name": "Nom de l'établissement.",

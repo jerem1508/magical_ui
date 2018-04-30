@@ -1,4 +1,5 @@
 {
+    "url": "https://appliweb.dgri.education.fr/rnsr/",
     "fields": {
 		"Numéro national de structure": "Numéro du Référentiel National des Structures de Recherche." ,
 		"Libellé": "Libéllé de l'organisme." ,
@@ -17,6 +18,6 @@
 		"ID GDR": "Identifiant GDR de l'organisme." ,
 		"ID UMR": "Identifiant UMR de l'organisme." ,
 		"ID UMRA": "Identifiant UMRA de l'organisme." ,
-		"ID UMRS": "Identifiant UMRS de l'organisme." 
+		"ID UMRS": "Identifiant UMRS de l'organisme."
     }
 }

@@ -1,4 +1,5 @@
 {
+    "url": "https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/",
     "fields": {
 		"SIREN": "Le numéro SIREN est le numéro unique d'identification attribué à chaque entreprise par l'INSEE. (NB: SIRET=SIREN+NIC)",
 		"NIC":  "Le NIC est un Numéro Interne de Classement qui permet de distinguer les établissements d'une même entreprise. Il est composé de 5 chiffres (inclus dans les organismes) (NB: SIRET=SIREN+NIC)",

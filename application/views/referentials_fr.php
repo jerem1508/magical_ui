@@ -73,9 +73,14 @@ function get_additional_data(id_div, display_name)
     request.send();
     request.onload = function() {
 		var additional_data = request.response;
-
 		var fields = additional_data['fields'];
-	  	var html = '<table class="table table-condensed table-striped" style="margin-top: 20px;">';
+		var html = "";
+
+		if(additional_data['url'] != ""){
+			html = 'URL : <a href="' + additional_data['url'] + '" target="_blank"><i>' + additional_data['url'] + '</i></a>';
+		}
+
+	  	html += '<table class="table table-condensed table-striped" style="margin-top: 20px;">';
 		for (var field in fields) {
 			html += '		  <tr>';
 			html += '		  	<th>';
