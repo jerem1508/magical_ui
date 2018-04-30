@@ -36,7 +36,7 @@
 	}
 
 	footer{
-		background-color: #262626;
+		background-color: #182023;
 		padding-top: 20px;
 		padding-bottom: 20px;
 		height: 120px;
@@ -106,12 +106,12 @@
 				</li>
 				<li>
 					<a href="<?php echo base_url("index.php/Home/cgu");?>" target="_blank">
-					Mentions légales
+					Conditions Générales d'Utilisation
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url("index.php/Home/about");?>" target="_blank">
-					A propos
+					<a href="<?php echo base_url("index.php/Home/faq");?>" target="_blank">
+					Foire Aux Questions
 					</a>
 				</li>
 				<li>

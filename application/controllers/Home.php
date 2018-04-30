@@ -46,6 +46,17 @@ class Home extends CI_Controller {
 	}
 
 
+	public function faq()
+	{
+		# Affiche les conditions générales d'utilisation
+		$data['title'] = "F.A.Q.";
+		$this->load->view('lib', $data);
+		$this->load->view('header_'.$_SESSION['language']);
+		$this->load->view('faq_'.$_SESSION['language']);
+		$this->load->view('footer_'.$_SESSION['language']);
+	}
+
+
 	public function referentials()
 	{
 		# Affiche la page des référentiels
