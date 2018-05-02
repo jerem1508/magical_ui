@@ -75,7 +75,7 @@ class Home extends CI_Controller {
 	public function contact()
 	{
 		# Affiche les conditions générales d'utilisation
-		$data['title'] = "Envoyer un message";
+		$data['title'] = "Contact & Lettre d'informations";
 		$this->load->view('lib', $data);
 		$this->load->view('header_'.$_SESSION['language']);
 		$this->load->view('contact');

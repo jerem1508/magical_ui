@@ -120,7 +120,8 @@
 					</a>
 				</li>
 			</ul>
-			<hr style="border-top-color: #333;">
+
+			<!-- <hr style="border-top-color: #333;">
 			<div class="alert alert-success alert-dismissible fade in" style="display:none" id="alert_newsletter">
 			  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			  Adresse enregistrée avec succès !
@@ -131,7 +132,8 @@
 					<button type="button" id="bt_newsletter" class="btn btn-success2">S'inscrire</button>
 				</form>
 				<br>
-			</div>
+			</div> -->
+
 		</div>
 	</div>
 	<div class="row">
