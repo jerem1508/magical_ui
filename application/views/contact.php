@@ -73,13 +73,25 @@
 							</div>
 						</div>
 					</form>
+					<div>
+						<i>
+							Les données personnelles recueillies dans le cadre de la machine à données sont transmises et conservées selon des protocoles sécurisés ; elles ne sont pas conservées au-delà de la durée nécessaire pour vous répondre.
+						</i>
+					</div>
 				</div>
 				<!-- /Partie gauche -->
 
 				<!-- Partie droite : lettre d'information-->
 				<div class="col-md-6">
 					<h2>S'incrire à la lettre d'informations :</h2>
-					<iframe width="100%" height="300px%" src="https://my.sendinblue.com/users/subscribe/js_id/2x5o1/id/21" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;"></iframe>
+					<iframe width="100%" height="200px%" src="https://my.sendinblue.com/users/subscribe/js_id/2x5o1/id/21" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;"></iframe>
+					<div>
+						<i>
+						 Vous disposez d'un droit d'accès, de modification, de rectification et de suppression des données qui vous concernent (art. 34 de la loi "Informatique et Libertés" du 6 janvier 1978).
+						 <br />
+						 Vous pouvez, à tout moment demander que vos coordonnées soient supprimées, soit via l'url présente dans chaque lettre d'information, soit via le formulaire de contact ci-contre
+						 </i>
+					</div>
 				</div>
 				<!-- /Partie droite -->
 			</div>

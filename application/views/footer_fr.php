@@ -110,6 +110,11 @@
 					</a>
 				</li>
 				<li>
+					<a href="<?php echo base_url("index.php/Home/about");?>" target="_blank">
+					A propos
+					</a>
+				</li>
+				<li>
 					<a href="<?php echo base_url("index.php/Home/faq");?>" target="_blank">
 					Foire Aux Questions
 					</a>
