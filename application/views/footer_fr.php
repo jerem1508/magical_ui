@@ -95,7 +95,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url("index.php/Home/new");?>" target="_blank">
+					<a href="<?php echo base_url("index.php/User/new");?>" target="_blank">
 					Identification
 					</a>
 				</li>
