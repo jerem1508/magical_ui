@@ -100,6 +100,11 @@
 					</a>
 				</li>
 				<li	>
+					<a href="<?php echo base_url("index.php/Home/tutorial");?>" target="_blank">
+					Tutoriel
+					</a>
+				</li>
+				<li	>
 					<a href="<?php echo base_url("index.php/Home/referentials");?>" target="_blank">
 					Référentiels à disposition
 					</a>
