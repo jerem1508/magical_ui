@@ -40,6 +40,10 @@
 						}
 						?>
 						Commencer un projet</button>
+
+						<a class="btn btn-lg btn-success3" href="<?php echo base_url('index.php/Home/tutorial');?>" target="_blank">
+							Voir le tutoriel
+						</a>
 					</div>
 				</div>
 
