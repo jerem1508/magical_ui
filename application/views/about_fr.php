@@ -52,7 +52,7 @@
 			<li>Sabine Darrigade et Séverine Le Brun (INPI),</li>
 			<li>Martin Gross et l’ensemble de la promotion 2017 des entrepreneurs d’intérêt général,</li>
 			<li>Mathilde Bras, Paul Schmitt, Paul-Antoine Chevallier et toute l’équipe d’Etalab</li>
-			<li>Christine Ballian (DINSIC) et Claire-Marie Foulquier-Gazagnes (Google)</li>
+			<li>Christine Balian (DINSIC) et Claire-Marie Foulquier-Gazagnes (Google)</li>
 			<li>Adnene Trojette (Cour des comptes) et l’équipe du Liberté Living Lab</li>
 			<li>Théo-Paul Haezebrouck (ACTA, API Agro)</li>
 			<li>Laurent Le Prieur et Grégoire de la Direction du numérique pour l’éducation (DNE, Ministère de l’enseignement supérieur, de la recherche et de l’innovation et ministère de l’Education nationale).</li>
