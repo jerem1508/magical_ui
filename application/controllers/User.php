@@ -407,7 +407,7 @@ class User extends CI_Controller {
 		$ret = $this->User_model->update_status($id);
 
 		// Redirection vers page de sign in
-		$this->new('', 'Votre adresse email a été validé !');
+		$this->new('', 'Votre adresse email a été validé. Vous pouvez vous identifier.');
 
 	}// /email_validation()
 }
