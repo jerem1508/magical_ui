@@ -591,7 +591,7 @@ function get_normalized_projects_html($id, $normalized_projects)
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Sélection d'un projet de normalisation</h4>
+        <h4 class="modal-title" id="myModalLabel">Sélection du fichier</h4>
       </div>
       <div class="modal-body" id="modal_projects_body">
         <?php

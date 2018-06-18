@@ -65,7 +65,8 @@
 <footer class="container-fluid" style="background-color: #262626;padding-top: 20px;">
 	<div class="row" style="background-color: #262626;color:#fff;">
 		<div class="col-md-offset-1 col-md-5">
-			<img src="https://dataesr.enseignementsup-recherche.pro/images/dataESR.svg" alt="Logo dataESR" class="logo_dataesr" style="height:60px;">
+			La machine à données est un produit de
+			<img src="https://dataesr.enseignementsup-recherche.pro/images/dataESR.svg" alt="Logo dataESR" class="logo_dataesr" style="margin-bottom: 8px;height:60px;">
 			<br>
 			<br>
 			<span itemprop="name">
