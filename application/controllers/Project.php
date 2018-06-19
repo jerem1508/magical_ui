@@ -231,18 +231,12 @@ class Project extends CI_Controller {
 				$this->session->set_userdata('link_project_id', $link_project_id);
 
 				//si pas fini, redirection vers la normalisation
-				//if($step != 'concat_with_init'){
 				if($step != 'concat_with_init'){
 					$this->session->set_userdata('project_id', $normalized_project['project_id']);
 					redirect('/Project/load_step_normalization/'.$step.'/'.$normalized_project['project_id']);
 				}
 			}
 		}
-
-// print_r($link_step);
-// print_r($link_project_id);
-// die("fin");
-
 		$this->load_step_linker($link_step, $link_project_id);
 	}// /link()
 
@@ -462,12 +456,12 @@ class Project extends CI_Controller {
 		$this->load->view('project_normalize_select_columns_specifics');
 		$this->load->view('header_'.$_SESSION['language']);
 		// Est ce que cette étape a déjà été lancée ?
-		if($this->is_done_step('add_selected_columns')){
-			$this->load->view('project_normalize_select_columns_report_'.$_SESSION['language'], $data);
-		}
-		else{
+		// if($this->is_done_step('add_selected_columns')){
+			//$this->load->view('project_normalize_select_columns_report_'.$_SESSION['language'], $data);
+		// }
+		// else{
 			$this->load->view('project_normalize_select_columns_'.$_SESSION['language'], $data);
-		}
+		// }
 		$this->load->view('footer_'.$_SESSION['language']);
 	}// /add_selected_columns()
 
