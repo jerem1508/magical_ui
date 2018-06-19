@@ -148,7 +148,8 @@ class Project extends CI_Controller {
 	public function load_step_normalization($step, $project_id='')
 	{
 		if($project_id==''){
-			$this->load_step1_init();
+			//$this->load_step1_init();
+			$this->load->view('error_'.$_SESSION['language']);
 			return;
 		}
 
