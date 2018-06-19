@@ -176,7 +176,8 @@ class Project extends CI_Controller {
 				break;
 
 			default:
-				$this->load_step1_init();
+				$this->load->view('error_'.$_SESSION['language']);
+				return;
 		}
 	}// /load_step_normalization()
 
