@@ -195,7 +195,6 @@ function get_normalized_projects_html($id, $normalized_projects)
 
     echo $html;
 }// /get_normalized_projects_html()
-
 ?>
 
 <img src="<?php echo base_url('assets/img/poudre.png');?>" class="poudre poudre_pos_home">
@@ -508,8 +507,6 @@ function get_normalized_projects_html($id, $normalized_projects)
 
 </div><!-- /container-fluid -->
 
-
-
 <div class="container-fluid background_1" style="margin-left: 20px; margin-right: 20px;">
     <div class="row">
         <div class="col-xs-12">
@@ -572,11 +569,11 @@ function get_normalized_projects_html($id, $normalized_projects)
                             </div>
                         </div> <!--/steps-->
                     </div>
-                    <div class="row" id="bloc_bt_next" style="padding-bottom: 20px;">
+                    <!-- <div class="row" id="bloc_bt_next" style="padding-bottom: 20px;">
                         <div class="col-md-12 text-right">
                             <button class="btn btn-success" id="bt_next">Etape suivante : Association des colonnes >></button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -856,6 +853,9 @@ function get_normalized_projects_html($id, $normalized_projects)
                     );
 
                     $("#envoyer_src").click();
+
+
+
                 }
             },
             error: function (result, status, error){
@@ -1045,7 +1045,6 @@ function get_normalized_projects_html($id, $normalized_projects)
                         console.log("success - new/link");
 
                         // Récupération de l'identifiant projet
-                        //project_id = result.project_id;
                         link_project_id = result.project_id;
                         console.log("project_id" + link_project_id);
 
@@ -1090,7 +1089,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 }
                 add_new_normalize_project_src(tparams);
             }
-            else if(exist_file_src && !error){
+            else if(exist_file_src && !error && src_project_id){
                 // Ajout du projet de normalisation au projet de link
                 save_id_normalized_project("source", src_project_id);
 
@@ -1125,7 +1124,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                     }
                     add_new_normalize_project_ref(tparams);
             }
-            else if(exist_file_ref && !error){
+            else if(exist_file_ref && !error && ref_project_id){
                 // Ajout du projet de normalisation au projet de link
                 save_id_normalized_project("ref", ref_project_id);
 
@@ -1135,7 +1134,7 @@ function get_normalized_projects_html($id, $normalized_projects)
                 // Le fichier est déjà uploadé
                 UL_fic_ref = true;
             }
-            else if(exist_ref && !error){
+            else if(exist_ref && !error && ref_project_id){
                 // Ajout du projet de normalisation au projet de link
                 save_id_normalized_project("ref", ref_project_id);
 
@@ -1327,9 +1326,9 @@ function get_normalized_projects_html($id, $normalized_projects)
             $('#modal_projects').modal('show');
         });
 
-        $("#bt_next").click(function(){
-            valid_project();
-        });
+        // $("#bt_next").click(function(){
+        //     valid_project();
+        // });
 
         $("#bt_help").click(function(){
             $('#modal_help').modal('show');
@@ -1495,7 +1494,16 @@ function get_normalized_projects_html($id, $normalized_projects)
 
                 // Affichage du bouton "suivant"
                 //$('#bloc_bt_next').css('display', 'inherit');
-                valid_project();
+                // Suite si tout OK
+                if(link_project_id && src_project_id && ref_project_id){
+                  valid_project();
+                }
+                else{
+                  var msg = "Récupération d'identifiant impossible. Cela est surement dû à la lenteur du réseau. <br /><br />";
+                  msg += '<button class="btn btn-success" onclick="window.location.reload();">Réessayer</button>'
+                  $("#errors").html($("#errors").html() + msg);
+                  $("#modal_error").modal("show");
+                }
             }
         }, 1000);
 
