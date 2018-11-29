@@ -95,6 +95,9 @@ elseif($_SERVER['HTTP_HOST'] == '51.15.221.77'){
 elseif($_SERVER['HTTP_HOST'] == '172.29.84.121'){
 	define('BASE_API_URL', "http://172.29.84.121:8080");
 }
+elseif($_SERVER['HTTP_HOST'] == '193.51.147.140'){
+	define('BASE_API_URL', "https://mad-api.phm.education.gouv.f");
+}
 
 define('TAB_LOGO', array(
 	'grid'=>'grid.png',
